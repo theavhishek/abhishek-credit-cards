@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#eef1f3">
   <meta name="description" content="Abhishek's searchable index of 50 active credit cards managed across 22 banks in India.">
   <title>Abhishek — Card Stack</title>
-
   <script>
     (() => {
       const saved = localStorage.getItem("abhishek-card-stack-theme");
@@ -14,32 +13,24 @@
       document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
     })();
   </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;650;700&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/responsive.css">
-  <link rel="stylesheet" href="assets/v28.css">
 </head>
-
 <body>
   <a class="skip-link" href="#collection">Skip to card collection</a>
-
   <header class="topbar">
     <div class="shell topbar-inner">
       <a class="wordmark" href="#top" aria-label="Abhishek card stack, home">
         <span class="wordmark-mark" aria-hidden="true">A</span>
-        <span class="wordmark-text">
-          <strong>Abhishek</strong>
-          <span>Card stack</span>
-        </span>
+        <span class="wordmark-text"><strong>Abhishek</strong><span>Card stack</span></span>
       </a>
-
       <div class="topbar-actions">
         <a href="#collection" class="collection-link">Collection</a>
-        <a href="support.html" class="collection-link support-nav-link">Bank support</a>
+        <a href="support.html" class="collection-link">Support</a>
         <label class="plane-switch" title="Switch day / night mode">
           <span class="sr-only">Day / night mode</span>
           <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
@@ -47,23 +38,17 @@
             <span class="street-middle"></span>
             <span class="cloud"></span>
             <span class="cloud two"></span>
-            <div>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/>
-              </svg>
-            </div>
+            <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
           </div>
         </label>
       </div>
     </div>
   </header>
-
   <main id="top">
     <section class="shell hero">
       <div class="hero-copy">
         <h1>Cards I manage,<br><span>kept in one stack.</span></h1>
         <p>A searchable record of my active credit-card portfolio, including partner cards I applied for and continue to manage.</p>
-
         <div class="hero-meta" aria-label="Portfolio summary">
           <div><strong id="statCards">50</strong><span>cards</span></div>
           <div><strong id="statBanks">22</strong><span>banks</span></div>
@@ -71,99 +56,28 @@
           <div><strong id="statPartner">11</strong><span>partner</span></div>
         </div>
       </div>
-
       <aside class="manager-plate" aria-label="Portfolio manager">
         <img src="assets/abhishek-v13.webp" alt="Abhishek" width="720" height="900">
-        <div class="manager-copy">
-          <span>Managed by</span>
-          <strong>Abhishek</strong>
-          <small id="updatedText">Updated Sep 2026</small>
-        </div>
+        <div class="manager-copy"><span>Managed by</span><strong>Abhishek</strong><small id="updatedText">Updated Sep 2026</small></div>
       </aside>
     </section>
-
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="shell collection-head">
-        <div>
-          <h2 id="collection-title">The card stack</h2>
-          <p>Cards are grouped by bank so every change of issuer is immediately visible.</p>
-        </div>
+        <div><h2 id="collection-title">The card stack</h2><p>Cards are grouped by bank so every change of issuer is immediately visible.</p></div>
         <div class="collection-count" id="resultCount" role="status" aria-live="polite">50 cards</div>
       </div>
-
-      <div class="filters-wrap">
-        <div class="shell filter-panel">
-          <label class="search-control" for="searchInput">
-            <span class="sr-only">Search cards or banks</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.5 20.5-4.1-4.1m1.7-5.2a6.9 6.9 0 1 1-13.8 0 6.9 6.9 0 0 1 13.8 0Z"></path></svg>
-            <input id="searchInput" type="search" name="search" placeholder="Search card, bank or use case" autocomplete="off">
-          </label>
-
-          <div class="select-row">
-            <label>
-              <span class="sr-only">Filter by bank</span>
-              <select id="bankFilter" name="bank">
-                <option value="all">All banks</option>
-              </select>
-            </label>
-            <label>
-              <span class="sr-only">Filter by network</span>
-              <select id="networkFilter" name="network">
-                <option value="all">All networks</option>
-                <option value="RuPay">RuPay</option>
-                <option value="Visa">Visa</option>
-                <option value="Mastercard">Mastercard</option>
-                <option value="Amex">Amex</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="quick-row" aria-label="Quick filters">
-            <button class="quick active" data-quick="all" type="button" aria-pressed="true">All</button>
-            <button class="quick" data-quick="ltf" type="button" aria-pressed="false">LTF</button>
-            <button class="quick" data-quick="rupay" type="button" aria-pressed="false">RuPay</button>
-            <button class="quick" data-quick="partner" type="button" aria-pressed="false">Partner</button>
-            <button class="quick" data-quick="cashback" type="button" aria-pressed="false">Cashback</button>
-            <button class="reset-button" id="clearFilters" type="button">Reset</button>
-          </div>
-        </div>
-      </div>
-
+      <div class="filters-wrap"><div class="shell filter-panel">
+        <label class="search-control" for="searchInput"><span class="sr-only">Search cards or banks</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.5 20.5-4.1-4.1m1.7-5.2a6.9 6.9 0 1 1-13.8 0 6.9 6.9 0 0 1 13.8 0Z"></path></svg><input id="searchInput" type="search" name="search" placeholder="Search card, bank or use case" autocomplete="off"></label>
+        <div class="select-row"><label><span class="sr-only">Filter by bank</span><select id="bankFilter" name="bank"><option value="all">All banks</option></select></label><label><span class="sr-only">Filter by network</span><select id="networkFilter" name="network"><option value="all">All networks</option><option value="RuPay">RuPay</option><option value="Visa">Visa</option><option value="Mastercard">Mastercard</option><option value="Amex">Amex</option></select></label></div>
+        <div class="quick-row" aria-label="Quick filters"><button class="quick active" data-quick="all" type="button" aria-pressed="true">All</button><button class="quick" data-quick="ltf" type="button" aria-pressed="false">LTF</button><button class="quick" data-quick="rupay" type="button" aria-pressed="false">RuPay</button><button class="quick" data-quick="partner" type="button" aria-pressed="false">Partner</button><button class="quick" data-quick="cashback" type="button" aria-pressed="false">Cashback</button><button class="reset-button" id="clearFilters" type="button">Reset</button></div>
+      </div></div>
       <div class="shell stack-board" id="stackBoard" aria-label="Credit card stack"></div>
-
-      <div class="shell empty-state" id="emptyState" hidden>
-        <strong>No cards match this filter.</strong>
-        <p>Clear the search or filters to bring the full stack back.</p>
-        <button id="emptyReset" type="button">Show all cards</button>
-      </div>
-
-      <div class="shell legend" aria-label="Card status legend">
-        <div class="legend-title">Fee key</div>
-        <div class="legend-items">
-          <span><b class="fee-pill fee-ltf">LTF</b> Lifetime free</span>
-          <span><b class="fee-pill fee-waiver">Waiver</b> Fee waiver available</span>
-          <span><b class="fee-pill fee-paid">Paid</b> Annual fee applicable</span>
-          <span><b class="fee-pill fee-unknown">—</b> Fee not specified</span>
-          <span><b class="mini-tag partner-tag">Partner</b> Partner card managed by me</span>
-        </div>
-      </div>
+      <div class="shell empty-state" id="emptyState" hidden><strong>No cards match this filter.</strong><p>Clear the search or filters to bring the full stack back.</p><button id="emptyReset" type="button">Show all cards</button></div>
+      <div class="shell legend" aria-label="Card status legend"><div class="legend-title">Fee key</div><div class="legend-items"><span><b class="fee-pill fee-ltf">LTF</b> Lifetime free</span><span><b class="fee-pill fee-waiver">Waiver</b> Fee waiver available</span><span><b class="fee-pill fee-paid">Paid</b> Annual fee applicable</span><span><b class="fee-pill fee-unknown">—</b> Fee not specified</span><span><b class="mini-tag partner-tag">Partner</b> Partner card managed by me</span></div></div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <span>© <span id="year"></span> Abhishek</span>
-      <span>Personal credit-card index · India</span>
-    </div>
-  </footer>
-
-  <dialog class="details-dialog" id="cardDialog" aria-labelledby="dialogTitle">
-    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close card details">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-    </button>
-    <div id="dialogContent"></div>
-  </dialog>
-
+  <footer class="site-footer"><div class="shell footer-inner"><span>© <span id="year"></span> Abhishek</span><span>Personal credit-card index · India</span></div></footer>
+  <dialog class="details-dialog" id="cardDialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close card details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><div id="dialogContent"></div></dialog>
   <script src="assets/data.js"></script>
   <script src="assets/app.js"></script>
 </body>
