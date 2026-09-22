@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f3f5f6">
+  <meta name="description" content="Bank credit-card helpline numbers and escalation email directory for India.">
+  <title>Bank Support Directory — Abhishek</title>
+  <script>
+    (() => {
+      const saved = localStorage.getItem("abhishek-card-stack-theme");
+      const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/support.css">
+</head>
+<body>
+  <a class="skip-link" href="#support">Skip to support directory</a>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="wordmark" href="index.html" aria-label="Abhishek card stack, home">
+        <span class="wordmark-mark" aria-hidden="true">A</span>
+        <span class="wordmark-text"><strong>Abhishek</strong><span>Card stack</span></span>
+      </a>
+      <div class="topbar-actions">
+        <a href="index.html#collection" class="collection-link">Cards</a>
+        <span class="support-nav-current">Bank support</span>
+        <label class="plane-switch" title="Switch day / night mode">
+          <span class="sr-only">Day / night mode</span>
+          <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
+          <div aria-hidden="true">
+            <span class="street-middle"></span><span class="cloud"></span><span class="cloud two"></span>
+            <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main id="support" class="support-page">
+    <section class="shell support-hero">
+      <a class="back-link" href="index.html">← Back to card stack</a>
+      <h1>Bank support<br><span>without the hunting.</span></h1>
+      <p>Helpline numbers and escalation email IDs in one clean directory. Search a bank, then call or email directly.</p>
+    </section>
+
+    <section class="shell support-table-card" aria-labelledby="directory-title">
+      <div class="support-card-header">
+        <div>
+          <div class="support-title-row">
+            <h2 id="directory-title">Support directory</h2>
+            <span class="support-count-badge" id="supportCount"></span>
+          </div>
+          <p>Level 1 → Level 2 / Nodal Officer → Level 3 / Principal Nodal Officer.</p>
+        </div>
+        <label class="support-search-wrap" for="supportSearch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.5 20.5-4.1-4.1m1.7-5.2a6.9 6.9 0 1 1-13.8 0 6.9 6.9 0 0 1 13.8 0Z"></path></svg>
+          <span class="sr-only">Search bank support directory</span>
+          <input id="supportSearch" type="search" placeholder="Search bank, email or number" autocomplete="off">
+        </label>
+      </div>
+      <div class="support-table-scroll" tabindex="0" aria-label="Scrollable bank support directory">
+        <table class="support-table">
+          <thead><tr>
+            <th scope="col">Bank</th>
+            <th scope="col">Helpline</th>
+            <th scope="col">Level 1 support</th>
+            <th scope="col">Level 2 support</th>
+            <th scope="col">Level 3 support</th>
+          </tr></thead>
+          <tbody id="supportRows"></tbody>
+        </table>
+      </div>
+      <div class="support-no-results" id="supportEmpty" hidden>No matching bank found.</div>
+      <div class="support-footnote">Contact details can change. Verify critical details on the issuer’s official website before sharing sensitive information.</div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>© <span id="year"></span> Abhishek</span><span>Bank support directory · India</span></div></footer>
+  <script src="assets/support.js"></script>
+</body>
+</html>
