@@ -129,14 +129,16 @@
   }
   function splitGroups(groups) {
     if (groups.length < 2) return [groups, []];
-    const total = groups.reduce((sum,g)=>sum+g.cards.length,0), half = total/2;
-    let running=0,best=1,distance=Infinity;
-    for (let i=1;i<groups.length;i++) {
-      running += groups[i-1].cards.length;
-      const d = Math.abs(running-half);
-      if (d<distance) {distance=d;best=i;}
+    const heights = groups.map(g => 75 + g.cards.length * 62);
+    const totalHeight = heights.reduce((a, b) => a + b, 0);
+    const half = totalHeight / 2;
+    let running = 0, best = 1, distance = Infinity;
+    for (let i = 1; i < groups.length; i++) {
+      running += heights[i - 1];
+      const d = Math.abs(running - half);
+      if (d < distance) { distance = d; best = i; }
     }
-    return [groups.slice(0,best),groups.slice(best)];
+    return [groups.slice(0, best), groups.slice(best)];
   }
   function cardRow(card) {
     const fee = feeInfo(card);
