@@ -1,4 +1,6 @@
-body{font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px}.support-page{padding:0 0 88px}.support-hero{padding:58px 0 30px}.support-hero h1{margin:0;font-size:clamp(48px,6.4vw,78px);line-height:.96;letter-spacing:-.055em;font-weight:650}
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap');
+html body,#support *,.topbar *,.site-footer *{font-family:'Satoshi',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif!important}
+body{font-family:'Satoshi',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px}.support-page{padding:0 0 88px}.support-hero{padding:58px 0 30px}.support-hero h1{margin:0;font-size:clamp(48px,6.4vw,78px);line-height:.96;letter-spacing:-.055em;font-weight:650}
 /* Magic UI AnimatedShinyText Pill */
 .shiny-pill-link{display:inline-flex;align-items:center;margin-bottom:18px;padding:5px 14px;border-radius:9999px;border:1px solid color-mix(in srgb,var(--line-strong) 70%,transparent);background:var(--surface);box-shadow:0 2px 10px rgba(0,0,0,.04);text-decoration:none;transition:all 200ms cubic-bezier(.16,1,.3,1)}
 .shiny-pill-link:hover{background:var(--surface-soft);border-color:var(--line-strong);transform:translateY(-1px)}
