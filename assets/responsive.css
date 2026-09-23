@@ -1,5 +1,4 @@
-/* v28 typography, logo reliability and mobile polish */
-body{font-family:'Outfit','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:15px}
+body{font-family:'Mona Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px}
 .collection-link{font-size:12px}.wordmark-text strong{font-size:13px}.wordmark-text span{font-size:10px}
 .hero{grid-template-columns:minmax(0,1fr) 340px!important;gap:48px!important}.hero-copy>p{font-size:15.5px!important;line-height:1.6!important}.hero-meta span{font-size:11px!important}
 .manager-plate{padding:12px!important;grid-template-columns:124px minmax(0,1fr)!important;gap:18px!important;border-radius:16px!important}.manager-plate img{width:124px!important;height:154px!important;object-fit:cover!important;object-position:50% 38%!important;border-radius:12px!important}.manager-copy span{font-size:11px!important}.manager-copy strong{font-size:23px!important}.manager-copy small{font-size:11px!important}

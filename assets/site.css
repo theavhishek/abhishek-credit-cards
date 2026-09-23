@@ -1,7 +1,8 @@
+@import url('font.css');
 :root{color-scheme:light;--page:#f5f5f7;--surface:#ffffff;--surface-soft:#fbfbfd;--surface-muted:#f2f2f7;--text:#1d1d1f;--muted:#6e6e73;--soft:#86868b;--line:rgba(0,0,0,.08);--line-strong:rgba(0,0,0,.15);--focus:#0066cc;--header:rgba(245,245,247,.78);--shadow:0 8px 30px rgba(0,0,0,.04),0 1px 3px rgba(0,0,0,.02);--shadow-dialog:0 30px 90px rgba(0,0,0,.18);--shell:1160px;--ease:cubic-bezier(.25,1,.5,1);--fs-xs:11px;--fs-sm:13px;--fs-base:15px;--fs-md:18px;--fs-lg:24px;--fs-xl:32px;--fs-display:48px;--radius-full:980px;--radius-lg:20px;--radius-md:12px;--radius-sm:8px}
 html[data-theme="dark"]{color-scheme:dark;--page:#000000;--surface:#1c1c1e;--surface-soft:#2c2c2e;--surface-muted:#3a3a3c;--text:#f5f5f7;--muted:#86868b;--soft:#6e6e73;--line:rgba(255,255,255,.12);--line-strong:rgba(255,255,255,.22);--focus:#2997ff;--header:rgba(22,22,23,.78);--shadow:0 12px 36px rgba(0,0,0,.45);--shadow-dialog:0 30px 96px rgba(0,0,0,.65)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.47059;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--page);color:var(--text);font-family:"Mona Sans",-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",sans-serif;line-height:1.47059;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 button,input,select{font:inherit}button{color:inherit}a{color:inherit;text-decoration:none}img{max-width:100%}
 .shell{width:min(var(--shell),calc(100% - 40px));margin-inline:auto}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
