@@ -28,7 +28,7 @@
 .portrait-home .poster-content { width:100%; max-width:1440px; min-height:max(900px,100svh); margin-inline:auto; padding:168px 5.5% 36px; }
 .portrait-home .poster-headline-group { width:47%; max-width:620px; animation:none; margin-bottom:0; }
 .portrait-home .poster-title { font-size:clamp(72px,6.85vw,106px); line-height:.94; letter-spacing:-.065em; font-weight:800; animation:portrait-in .55s both; }
-.portrait-home .poster-gold-line { white-space:nowrap; background:linear-gradient(110deg,#704609 0%,#916313 36%,#a77723 55%,#72490b 85%); -webkit-background-clip:text; background-clip:text; filter:none; padding-block:4px 8px; }
+.portrait-home .poster-gold-line { white-space:nowrap; background:linear-gradient(110deg,#704609 0%,#916313 36%,#a77723 55%,#72490b 85%); -webkit-background-clip:text; background-clip:text; filter:none; padding-block:4px 8px; padding-inline-end:.12em; }
 .portrait-home .poster-dark-line { color:var(--hero-ink); padding:0; margin:0; }
 .portrait-home .poster-subline { max-width:440px; margin:28px 0 0; color:#3f3a31; font-size:23px; line-height:1.45; animation:portrait-in .55s .1s both; }
 .portrait-home .poster-actions { gap:12px; margin-top:30px; flex-wrap:nowrap; animation:portrait-in .55s .18s both; }
