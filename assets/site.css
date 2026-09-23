@@ -7,8 +7,17 @@ button,input,select{font:inherit}button{color:inherit}a{color:inherit;text-decor
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:fixed;z-index:1000;inset-block-start:10px;inset-inline-start:10px;transform:translateY(-150%);padding:10px 14px;border-radius:980px;background:var(--text);color:var(--page);font-size:13px;font-weight:600}
 .skip-link:focus{transform:none}:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
-.topbar{position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line);background:var(--header);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
-.topbar-inner{height:62px;display:flex;align-items:center;justify-content:space-between}
+/* Framer Nova Glow Floating Navigation Navbar */
+.topbar{position:sticky;top:12px;z-index:90;padding-inline:16px;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0}
+.topbar-shell{position:relative;max-width:var(--shell);margin-inline:auto;border-radius:980px;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 8px 32px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;isolation:isolate}
+html[data-theme="dark"] .topbar-shell{background:rgba(22,22,24,.82);box-shadow:0 8px 36px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.12)}
+.topbar-shell::before{content:"";position:absolute;inset:-150%;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 280deg,#0066cc 310deg,#2997ff 330deg,#a855f7 345deg,#ec4899 355deg,transparent 360deg);animation:nova-glow-spin 4s linear infinite;z-index:-2;pointer-events:none}
+html[data-theme="dark"] .topbar-shell::before{background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 260deg,#38bdf8 290deg,#818cf8 320deg,#c084fc 345deg,#f472b6 355deg,transparent 360deg)}
+.topbar-shell::after{content:"";position:absolute;inset:1.5px;border-radius:980px;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);z-index:-1;pointer-events:none}
+html[data-theme="dark"] .topbar-shell::after{background:rgba(22,22,24,.88)}
+@keyframes nova-glow-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.topbar-shell::before{animation:none!important}}
+.topbar-inner{height:56px;padding-inline:20px;display:flex;align-items:center;justify-content:space-between}
 .wordmark{display:flex;align-items:center;gap:10px}
 .wordmark-mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--text);color:var(--page);font-size:11px;font-weight:700}
 .wordmark-text{display:flex;flex-direction:column;line-height:1.05}
