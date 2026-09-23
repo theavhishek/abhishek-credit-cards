@@ -459,7 +459,7 @@ window.SUPPORT_CONTACTS = {
     </div>`;
   }
   function emptyValue() {
-    return '<span class="support-empty-value">Not listed</span>';
+    return '<span class="support-empty-value" aria-label="Not listed">—</span>';
   }
   function helplineCell(entry) {
     const parts = [block(entry.care,"phone")];
