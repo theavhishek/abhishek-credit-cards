@@ -149,20 +149,23 @@
   }
   function splitGroups(groups) {
     if (groups.length < 2) return [groups, []];
-    const heights = groups.map(g => 75 + g.cards.length * 62);
-    const totalHeight = heights.reduce((a, b) => a + b, 0);
-    const half = totalHeight / 2;
-    let running = 0, best = 1, distance = Infinity;
-    for (let i = 1; i < groups.length; i++) {
-      running += heights[i - 1];
-      const d = Math.abs(running - half);
-      if (d < distance) { distance = d; best = i; }
-    }
-    return [groups.slice(0, best), groups.slice(best)];
+    const left = [], right = [];
+    let leftH = 0, rightH = 0;
+    groups.forEach(g => {
+      const h = 75 + g.cards.length * 62;
+      if (leftH <= rightH) {
+        left.push(g);
+        leftH += h;
+      } else {
+        right.push(g);
+        rightH += h;
+      }
+    });
+    return [left, right];
   }
   function cardRow(card) {
     const fee = feeInfo(card);
-    return `<button class="card-row" type="button" data-card-index="${cards.indexOf(card)}"><span class="card-copy"><span class="card-title-line"><strong class="card-name">${esc(card.card)}</strong>${card.network?`<span class="network">${esc(card.network)}</span>`:""}</span><span class="card-meta-line"><span>${esc(card.rewardType||"Rewards")}</span>${tags(card)}</span></span><span class="fee-pill ${fee.cls}">${fee.label}</span></button>`;
+    return `<button class="card-row" type="button" data-card-index="${cards.indexOf(card)}"><span class="card-copy"><span class="card-title-line"><strong class="card-name">${esc(card.card)}</strong>${card.network?`<span class="network">${esc(card.network)}</span>`:""}</span><span class="card-meta-line"><span>${esc(card.rewardType||"Rewards")}</span>${tags(card)}</span></span><span class="fee-pill ${fee.cls}">${fee.label}</span><svg class="card-chevron" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>`;
   }
   function bankGroup(group) {
     const short = bankShort[group.bank] || group.bank;
