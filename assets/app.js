@@ -95,10 +95,10 @@
 
   const meta = source.meta || {};
   const setText = (id, value) => { const el = $(id); if (el) el.textContent = value; };
-  setText("#statCards", meta.cardCount || cards.length);
-  setText("#statBanks", meta.issuerCount || new Set(cards.map(c => c.bank)).size);
-  setText("#statRupay", meta.rupayCount || cards.filter(c => c.network === "RuPay").length);
-  setText("#statPartner", meta.favoriteCount || cards.filter(c => c.tag === "❤️").length);
+  setText("#statCards", cards.length);
+  setText("#statBanks", new Set(cards.map(c => c.bank)).size);
+  setText("#statRupay", cards.filter(c => c.network === "RuPay").length);
+  setText("#statPartner", cards.filter(c => c.tag === "❤️").length);
   setText("#updatedText", `Updated ${(meta.updated || "September 2026").replace("September","Sep")}`);
   setText("#year", new Date().getFullYear());
 
