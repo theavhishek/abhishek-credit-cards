@@ -135,15 +135,18 @@ html[data-theme="dark"] .secured-tag{background:#332c21;color:#d9bd82}
 
 /* Magic UI ShimmerButton for Footer Social Links - Apple Polish */
 .shimmer-button{position:relative;display:inline-flex;align-items:center;justify-content:center;height:36px;min-height:36px;padding:0 14px;border-radius:980px;background:#000000;color:#ffffff!important;font-size:12.5px;font-weight:500;letter-spacing:-.011em;text-decoration:none!important;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 4px 18px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.8);transition:transform .25s cubic-bezier(.25,1,.5,1),box-shadow .25s cubic-bezier(.25,1,.5,1);isolation:isolate;flex-shrink:0;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.shimmer-button.icon-only{width:38px;min-width:38px;height:38px;min-height:38px;padding:0;border-radius:50%}
+.shimmer-button.icon-only::after{border-radius:50%}
 html[data-theme="dark"] .shimmer-button{background:#1c1c1e;border-color:rgba(255,255,255,.24);box-shadow:0 4px 20px rgba(0,0,0,.5)}
-.shimmer-button:hover{transform:scale(1.03);box-shadow:0 6px 24px rgba(0,0,0,.32)}
-.shimmer-button:active{transform:scale(.97)}
+.shimmer-button:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(0,0,0,.32)}
+.shimmer-button:active{transform:scale(.95)}
 .shimmer-button::before{content:"";position:absolute;inset:-150%;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 320deg,#ffffff 345deg,rgba(255,255,255,.85) 355deg,transparent 360deg);animation:shimmer-spin 3.5s linear infinite;z-index:-2;pointer-events:none}
 .shimmer-button::after{content:"";position:absolute;inset:1.25px;border-radius:980px;background:#000000;z-index:-1;pointer-events:none}
 html[data-theme="dark"] .shimmer-button::after{background:#1c1c1e}
 .shimmer-button-text{position:relative;z-index:2;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:100%;color:#ffffff;font-size:12px;font-weight:500;line-height:1;white-space:nowrap}
-.x-logo-icon{width:14px;height:14px;fill:currentColor;flex-shrink:0;display:block}
-.desidime-logo-icon,.technofino-logo-icon{width:15px;height:15px;border-radius:4px;object-fit:contain;flex-shrink:0;display:block}
+.shimmer-button.icon-only .shimmer-button-text{gap:0}
+.x-logo-icon{width:15px;height:15px;fill:currentColor;flex-shrink:0;display:block}
+.desidime-logo-icon,.technofino-logo-icon{width:17px;height:17px;border-radius:4px;object-fit:contain;flex-shrink:0;display:block}
 @keyframes shimmer-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.shimmer-button::before{animation:none!important}}
 
