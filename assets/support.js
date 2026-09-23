@@ -506,4 +506,24 @@ window.SUPPORT_CONTACTS = {
 
   search?.addEventListener("input", render);
   render();
+
+  const navbarShell = document.querySelector("#navbarShell") || document.querySelector(".topbar-shell");
+  if (navbarShell) {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 20) {
+            navbarShell.classList.add("scrolled");
+          } else {
+            navbarShell.classList.remove("scrolled");
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
 })();
