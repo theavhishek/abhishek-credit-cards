@@ -46,80 +46,44 @@
     </div>
   </header>
   <main id="top">
-    <section class="shell hero">
-      <div class="hero-copy">
-        <h1>Credit Cards<br><span class="hero-accent-text">I actually hold.</span></h1>
-        <p>Every card, fee, reward, and lounge perk — from 22 banks across India, tracked in real time.</p>
-        <div class="hero-meta" aria-label="Portfolio summary">
-          <div><strong id="statCards">50</strong><span>cards</span></div>
-          <div><strong id="statBanks">22</strong><span>banks</span></div>
-          <div><strong id="statRupay">24</strong><span>RuPay</span></div>
-          <div><strong id="statPartner">11</strong><span>partner</span></div>
+    <section class="shell hero-poster-stage" aria-label="Hero section">
+      <div class="poster-bg-wrap">
+        <img src="assets/abhishek-hero-full.jpg" alt="Abhishek Meena" class="poster-bg-img" loading="eager" width="800" height="1000">
+        <div class="poster-gradient-overlay"></div>
+      </div>
+      
+      <div class="poster-content">
+        <div class="poster-headline-group">
+          <h1 class="poster-title">
+            <span class="poster-gold-line">Credit Cards</span>
+            <span class="poster-dark-line">I Actually Hold.</span>
+          </h1>
+          <p class="poster-subline">Every card, fee, reward, and lounge perk — from 22 banks across India, tracked in real time.</p>
         </div>
-        <div class="hero-actions">
-          <a href="#collection" class="hero-cta-primary">
-            <span>Explore Card Stack</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-          </a>
-          <a href="support.html" class="hero-cta-secondary">
-            <span>Bank Directory</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
-          </a>
+
+        <div class="poster-footer-row">
+          <div class="poster-stats-pill" aria-label="Portfolio summary">
+            <div><strong id="statCards">50</strong><span>cards</span></div>
+            <span class="stat-divider">•</span>
+            <div><strong id="statBanks">22</strong><span>banks</span></div>
+            <span class="stat-divider">•</span>
+            <div><strong id="statRupay">24</strong><span>RuPay</span></div>
+            <span class="stat-divider">•</span>
+            <div><strong id="statPartner">11</strong><span>partner</span></div>
+          </div>
+
+          <div class="poster-actions">
+            <a href="#collection" class="hero-cta-primary">
+              <span>Explore Card Stack</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </a>
+            <a href="support.html" class="hero-cta-secondary">
+              <span>Bank Directory</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+            </a>
+          </div>
         </div>
       </div>
-      <aside class="hero-card-showcase" id="heroCardholder" aria-label="Portfolio cardholder">
-        <div class="cardholder-titanium">
-          <div class="cardholder-top">
-            <div class="cardholder-chip" aria-hidden="true">
-              <svg viewBox="0 0 40 30" width="38" height="28" fill="none">
-                <rect width="40" height="30" rx="5" fill="url(#chipGold)"/>
-                <path d="M0 10h40M0 20h40M13 10v10M27 10v10M13 0v10M27 0v10M13 20v10M27 20v10" stroke="#7a5410" stroke-width="1.2" opacity="0.6"/>
-                <defs>
-                  <linearGradient id="chipGold" x1="0" y1="0" x2="40" y2="30" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#f5d77f"/>
-                    <stop offset="0.5" stop-color="#dfaa35"/>
-                    <stop offset="1" stop-color="#b8861e"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <div class="cardholder-nfc" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <path d="M8.5 7.5a6 6 0 0 1 0 9M12 4.5a10.5 10.5 0 0 1 0 15M15.5 1.5a15 15 0 0 1 0 21"/>
-              </svg>
-            </div>
-          </div>
-          <div class="cardholder-portrait-wrap">
-            <img
-              src="assets/abhishek-face.jpg"
-              srcset="assets/abhishek-face.jpg 800w"
-              sizes="(max-width: 720px) 288px, 288px"
-              alt="Abhishek Meena"
-              class="cardholder-face-img"
-              width="800"
-              height="1000"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-            >
-            <div class="cardholder-portrait-overlay"></div>
-          </div>
-          <div class="cardholder-bottom">
-            <div class="cardholder-identity">
-              <strong class="cardholder-name">ABHISHEK MEENA</strong>
-              <span class="cardholder-tier">50 Cards · 22 Banks</span>
-            </div>
-            <div class="cardholder-status">
-              <span class="status-pulse-dot" aria-hidden="true"></span>
-              <span class="status-text" id="updatedText">Active 2026</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-floating-tag tag-ltf" aria-hidden="true">
-          <span class="floating-icon">⚡</span>
-          <span><strong>76%</strong> Lifetime Free</span>
-        </div>
-      </aside>
     </section>
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="shell collection-head">
