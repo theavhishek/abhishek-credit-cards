@@ -147,3 +147,16 @@ body {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Hero Poster Stage Responsive Overrides */
+@media (max-width: 720px) {
+  .hero-poster-stage { min-height: 540px !important; border-radius: 20px !important; margin-top: 10px !important; }
+  .poster-content { padding: 32px 16px 24px !important; min-height: 540px !important; }
+  .poster-title { font-size: clamp(36px, 9.5vw, 52px) !important; }
+  .poster-subline { font-size: 13.5px !important; padding: 6px 12px !important; max-width: 100% !important; }
+  .poster-footer-row { flex-direction: column !important; align-items: center !important; gap: 14px !important; }
+  .poster-stats-pill { width: 100% !important; justify-content: center !important; gap: 10px !important; padding: 8px 12px !important; }
+  .poster-stats-pill strong { font-size: 15px !important; }
+  .poster-stats-pill span { font-size: 9.5px !important; }
+  .poster-actions { width: 100% !important; justify-content: center !important; }
+}
