@@ -23,6 +23,26 @@
   setTheme(root.dataset.theme || "light", false);
   themeSwitch?.addEventListener("change", () => setTheme(themeSwitch.checked ? "light" : "dark"));
 
+  const navbarShell = $("#navbarShell") || document.querySelector(".topbar-shell");
+  if (navbarShell) {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 20) {
+            navbarShell.classList.add("scrolled");
+          } else {
+            navbarShell.classList.remove("scrolled");
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
   const bankDomains = {
     "Axis Bank":"axis.bank.in","Kotak Mahindra Bank":"kotak.com","SBI Card":"sbicard.com",
     "IDFC FIRST Bank":"idfcfirstbank.com","ICICI Bank":"icicibank.com","BOBCARD":"bobcard.co.in",
