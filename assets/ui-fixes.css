@@ -1,0 +1,80 @@
+/* Shared visual fixes: stable hero badges + neutral navbar outline */
+.topbar-shell,
+html[data-theme="dark"] .topbar-shell{
+  animation:none!important;
+}
+
+.topbar-shell::before,
+html[data-theme="dark"] .topbar-shell::before{
+  background:rgba(142,142,147,.48)!important;
+  animation:none!important;
+  opacity:1!important;
+  padding:1px!important;
+}
+
+.topbar-shell:hover::before{
+  opacity:1!important;
+  padding:1px!important;
+}
+
+.topbar-shell{
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 -1px 1px rgba(0,0,0,.04),0 10px 28px rgba(0,0,0,.07)!important;
+}
+
+html[data-theme="dark"] .topbar-shell{
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.16),inset 0 -1px 1px rgba(0,0,0,.38),0 12px 30px rgba(0,0,0,.42)!important;
+}
+
+body .hero-card-showcase .hero-floating-tag{
+  min-height:36px;
+  padding:0 14px;
+  align-items:center;
+  white-space:nowrap;
+  animation:none!important;
+}
+
+body .hero-card-showcase .tag-ltf{
+  top:-16px!important;
+  right:12px!important;
+}
+
+body .hero-card-showcase .tag-rupay{
+  left:12px!important;
+  bottom:-38px!important;
+}
+
+body .hero-card-showcase{
+  margin-bottom:38px!important;
+}
+
+@media(max-width:720px){
+  body .hero-card-showcase{
+    margin:10px auto 42px!important;
+  }
+
+  body .hero-card-showcase .tag-ltf{
+    top:-14px!important;
+    right:8px!important;
+  }
+
+  body .hero-card-showcase .tag-rupay{
+    left:8px!important;
+    bottom:-38px!important;
+  }
+}
+
+@media(max-width:400px){
+  body .hero-card-showcase .hero-floating-tag{
+    min-height:34px;
+    padding-inline:12px;
+    font-size:10px;
+  }
+
+  body .hero-card-showcase .tag-rupay{
+    left:6px!important;
+  }
+
+  body .hero-card-showcase .tag-ltf{
+    right:6px!important;
+  }
+}
