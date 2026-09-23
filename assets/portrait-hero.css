@@ -133,3 +133,9 @@ html[data-theme="dark"] .portrait-home .hero-cta-secondary { background:#29261ed
 }
 
 html[data-theme="dark"] .portrait-home .brand-dot { background:none; color:#6898ff; -webkit-text-fill-color:currentColor; }
+
+/* Desktop: full-width photograph and readable word spacing. Mobile is unchanged. */
+@media (min-width:901px) {
+  .portrait-home .hero-poster-stage.shell { max-width:none; }
+  .portrait-home .poster-title { letter-spacing:-.045em; word-spacing:.045em; }
+}
