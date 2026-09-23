@@ -7,23 +7,20 @@ button,input,select{font:inherit}button{color:inherit}a{color:inherit;text-decor
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:fixed;z-index:1000;inset-block-start:10px;inset-inline-start:10px;transform:translateY(-150%);padding:10px 14px;border-radius:980px;background:var(--text);color:var(--page);font-size:13px;font-weight:600}
 .skip-link:focus{transform:none}:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
-/* Aceternity UI Resizable Floating Navbar */
-.topbar{position:sticky;top:12px;z-index:90;padding-inline:16px;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0}
-.topbar-shell{position:relative;max-width:var(--shell);margin-inline:auto;border-radius:980px;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);box-shadow:0 8px 32px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;isolation:isolate;transition:max-width 0.45s cubic-bezier(0.16,1,0.3,1),box-shadow 0.45s cubic-bezier(0.16,1,0.3,1),background-color 0.45s cubic-bezier(0.16,1,0.3,1),transform 0.45s cubic-bezier(0.16,1,0.3,1)}
-.topbar-shell.scrolled{max-width:640px;box-shadow:0 16px 48px rgba(0,0,0,.14),0 0 0 1px rgba(0,0,0,.08);background:rgba(255,255,255,.92)}
-html[data-theme="dark"] .topbar-shell{background:rgba(22,22,24,.82);box-shadow:0 8px 36px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.12)}
-html[data-theme="dark"] .topbar-shell.scrolled{background:rgba(22,22,24,.92);box-shadow:0 16px 52px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.18)}
-.topbar-shell::before{content:"";position:absolute;inset:-150%;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 280deg,#0066cc 310deg,#2997ff 330deg,#a855f7 345deg,#ec4899 355deg,transparent 360deg);animation:nova-glow-spin 4s linear infinite;z-index:-2;pointer-events:none}
-html[data-theme="dark"] .topbar-shell::before{background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 260deg,#38bdf8 290deg,#818cf8 320deg,#c084fc 345deg,#f472b6 355deg,transparent 360deg)}
-.topbar-shell::after{content:"";position:absolute;inset:1.5px;border-radius:980px;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);z-index:-1;pointer-events:none}
-html[data-theme="dark"] .topbar-shell::after{background:rgba(22,22,24,.88)}
-@keyframes nova-glow-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.topbar-shell::before{animation:none!important}}
+/* Aceternity UI Resizable Floating Navbar - Ambient Light Rim */
+.topbar{position:sticky;top:14px;z-index:90;padding-inline:16px;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0}
+.topbar-shell{position:relative;max-width:var(--shell);margin-inline:auto;border-radius:980px;background:rgba(255,255,255,.84);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 30px rgba(0,0,0,.06),0 0 20px rgba(0,102,204,.08);isolation:isolate;transition:max-width 0.45s cubic-bezier(0.16,1,0.3,1),box-shadow 0.45s cubic-bezier(0.16,1,0.3,1),background-color 0.45s cubic-bezier(0.16,1,0.3,1),border-color 0.45s cubic-bezier(0.16,1,0.3,1)}
+.topbar-shell.scrolled{max-width:640px;background:rgba(255,255,255,.94);border-color:rgba(0,102,204,.2);box-shadow:0 16px 40px rgba(0,0,0,.12),0 0 28px rgba(0,102,204,.14)}
+html[data-theme="dark"] .topbar-shell{background:rgba(22,22,24,.84);border-color:rgba(255,255,255,.14);box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 24px rgba(56,189,248,.12)}
+html[data-theme="dark"] .topbar-shell.scrolled{background:rgba(22,22,24,.94);border-color:rgba(56,189,248,.35);box-shadow:0 18px 48px rgba(0,0,0,.8),0 0 32px rgba(129,140,248,.22)}
+.topbar-shell::before{content:"";position:absolute;inset:0;border-radius:980px;padding:1px;background:linear-gradient(135deg,rgba(41,151,255,.35),transparent 45%,transparent 55%,rgba(168,85,247,.35));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:2;transition:opacity 0.4s ease}
+html[data-theme="dark"] .topbar-shell::before{background:linear-gradient(135deg,rgba(56,189,248,.45),transparent 45%,transparent 55%,rgba(192,132,252,.45))}
 .topbar-inner{height:54px;padding-inline:20px;display:flex;align-items:center;justify-content:space-between;transition:padding 0.45s ease}
-.wordmark{display:flex;align-items:center;gap:10px}
-.wordmark-mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--text);color:var(--page);font-size:12px;font-weight:800}
-.wordmark-text{display:flex;align-items:center}
-.wordmark-text strong{font-size:15px;font-weight:750;letter-spacing:-.035em;color:var(--text)}
+.wordmark{display:inline-flex;align-items:center;text-decoration:none;transition:transform 0.2s ease,opacity 0.2s ease}
+.wordmark:hover{transform:translateY(-0.5px);opacity:0.92}
+.wordmark-brand{font-family:'Outfit','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;font-size:20px;font-weight:800;letter-spacing:-.045em;color:var(--text);line-height:1;display:inline-flex;align-items:baseline}
+.brand-dot{font-family:'Outfit',sans-serif;font-weight:900;margin-left:1px;background:linear-gradient(135deg,#0066cc,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+html[data-theme="dark"] .brand-dot{background:linear-gradient(135deg,#38bdf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .topbar-actions{display:flex;align-items:center;gap:10px}
 .collection-link,.support-nav-current{display:inline-flex;align-items:center;padding:6px 14px;border-radius:980px;font-size:12px;font-weight:550;color:var(--muted);transition:background-color 0.2s ease,color 0.2s ease,transform 0.2s ease}
 .collection-link:hover{background:rgba(0,0,0,.06);color:var(--text);transform:translateY(-1px)}
