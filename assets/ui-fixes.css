@@ -1,4 +1,19 @@
 /* Shared visual fixes: stable hero badges + neutral navbar outline */
+
+/* Keep the second hero line visible in every browser/theme. The base hero rule uses
+   transparent text fill for gradient text, which can disappear when the gradient
+   clipping path is not painted correctly. */
+.hero h1 .hero-accent-text{
+  display:inline-block!important;
+  background:none!important;
+  color:var(--text)!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  -webkit-text-fill-color:var(--text)!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
 .topbar-shell,
 html[data-theme="dark"] .topbar-shell{
   animation:none!important;
