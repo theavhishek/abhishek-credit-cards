@@ -144,3 +144,66 @@ body .hero-card-showcase{
     right:6px!important;
   }
 }
+
+/* Hero photo location label. This is CSS UI only; the photograph and portfolio data remain untouched. */
+.portrait-home .hero-poster-stage::after{
+  content:"Taj Fateh Prakash Palace, Udaipur";
+  position:absolute;
+  z-index:6;
+  right:clamp(20px,4.5vw,72px);
+  bottom:148px;
+  max-width:calc(100% - 40px);
+  padding:9px 13px;
+  border:1px solid rgba(255,255,255,.52);
+  border-radius:999px;
+  background:rgba(35,27,17,.34);
+  color:#fff8ec;
+  font-family:"Instrument Sans",Arial,sans-serif;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.2;
+  letter-spacing:.01em;
+  white-space:nowrap;
+  text-shadow:0 1px 4px rgba(0,0,0,.28);
+  box-shadow:0 6px 20px rgba(24,16,7,.10),inset 0 1px 0 rgba(255,255,255,.12);
+  backdrop-filter:blur(12px) saturate(115%);
+  -webkit-backdrop-filter:blur(12px) saturate(115%);
+  pointer-events:none;
+}
+html[data-theme="dark"] .portrait-home .hero-poster-stage::after{
+  background:rgba(14,13,11,.50);
+  border-color:rgba(255,255,255,.24);
+  color:#fff4e3;
+}
+@media(max-width:900px){
+  .portrait-home .hero-poster-stage::after{
+    top:57%;
+    right:24px;
+    bottom:auto;
+    font-size:11px;
+    padding:8px 12px;
+  }
+}
+@media(max-width:600px){
+  .portrait-home .hero-poster-stage::after{
+    top:59%;
+    right:14px;
+    max-width:calc(100% - 28px);
+    font-size:10.5px;
+    padding:7px 10px;
+  }
+}
+@media(max-width:389px){
+  .portrait-home .hero-poster-stage::after{
+    top:60%;
+    right:10px;
+    font-size:10px;
+  }
+}
+@media(prefers-reduced-transparency:reduce){
+  .portrait-home .hero-poster-stage::after{
+    background:rgba(35,27,17,.72);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+}
