@@ -191,7 +191,49 @@
   });
   close?.addEventListener("click",()=>dialog?.close());
   dialog?.addEventListener("click",e=>{if(e.target===dialog)dialog.close();});
-  dialog?.addEventListener("close",()=>lastTrigger?.focus());
+  function initHeadlineTextAnimate() {
+    const h1 = document.querySelector(".hero-copy h1");
+    if (!h1 || h1.dataset.textAnimateBound) return;
+    h1.dataset.textAnimateBound = "1";
+    const plainText = h1.textContent.replace(/\s+/g, " ").trim();
+    h1.setAttribute("aria-label", plainText);
 
+    let charIndex = 0;
+    function processNode(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent;
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          const span = document.createElement("span");
+          span.className = "text-animate-char";
+          span.style.setProperty("--char-index", charIndex++);
+          span.textContent = ch === " " ? "\u00A0" : ch;
+          frag.appendChild(span);
+        }
+        return frag;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === "BR") {
+          return node.cloneNode(true);
+        }
+        const clone = node.cloneNode(false);
+        Array.from(node.childNodes).forEach(child => {
+          clone.appendChild(processNode(child));
+        });
+        return clone;
+      }
+      return node.cloneNode(true);
+    }
+
+    const fragment = document.createDocumentFragment();
+    Array.from(h1.childNodes).forEach(child => {
+      fragment.appendChild(processNode(child));
+    });
+
+    h1.replaceChildren(fragment);
+    h1.classList.add("text-animate-ready");
+  }
+
+  initHeadlineTextAnimate();
   render();
 })();
