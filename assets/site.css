@@ -11,7 +11,7 @@ html[data-theme="dark"] .shimmer-button{background:#09090b;border-color:rgba(255
 html[data-theme="dark"] .shimmer-button::after{background:#09090b}
 .shimmer-button-text{position:relative;z-index:2;display:inline-flex;align-items:center;gap:7px;color:#ffffff;font-size:12.5px;font-weight:500;line-height:1;white-space:nowrap}
 .x-logo-icon{width:14px;height:14px;fill:currentColor;flex-shrink:0}
-.desidime-logo-icon{width:16px;height:16px;border-radius:4px;object-fit:contain;flex-shrink:0}
+.desidime-logo-icon,.technofino-logo-icon{width:16px;height:16px;border-radius:4px;object-fit:contain;flex-shrink:0}
 @keyframes shimmer-spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.shimmer-button::before{animation:none!important}}
 
