@@ -29,6 +29,38 @@
 
   window.BANK_LOGO_PNG = pngByDomain;
 
+  // Keep current portfolio data in sync before app.js renders it.
+  const portfolio = window.PORTFOLIO_DATA;
+  if (portfolio?.cards) {
+    const rblIcon = portfolio.cards.find((card) => card.id === "rbl-bank-icon-40");
+    if (rblIcon) rblIcon.annualFee = "LTF";
+
+    const xciteUltra = portfolio.cards.find((card) => card.id === "au-small-finance-bank-xcite-ultra-44");
+    if (xciteUltra) xciteUltra.annualFee = "LTF";
+
+    const hasAirPlus = portfolio.cards.some((card) => card.bank === "Kotak Mahindra Bank" && card.card === "Air+");
+    if (!hasAirPlus) {
+      const lastKotakIndex = portfolio.cards.reduce((last, card, index) => card.bank === "Kotak Mahindra Bank" ? index : last, -1);
+      const airPlus = {
+        id: "kotak-mahindra-bank-air-plus-51",
+        bank: "Kotak Mahindra Bank",
+        card: "Air+",
+        network: null,
+        status: "Active",
+        annualFee: "LTF",
+        rewardType: "Reward Points",
+        tag: null,
+        bestFor: ["Rewards"]
+      };
+      portfolio.cards.splice(lastKotakIndex >= 0 ? lastKotakIndex + 1 : portfolio.cards.length, 0, airPlus);
+    }
+
+    if (portfolio.meta) {
+      portfolio.meta.cardCount = portfolio.cards.length;
+      portfolio.meta.ltfCount = portfolio.cards.filter((card) => card.annualFee === "LTF").length;
+    }
+  }
+
   const descriptor = Object.getOwnPropertyDescriptor(Element.prototype, "innerHTML");
   if (!descriptor?.get || !descriptor?.set) return;
 
