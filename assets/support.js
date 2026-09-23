@@ -497,6 +497,13 @@ window.SUPPORT_CONTACTS = {
     if (table) table.hidden = filtered.length === 0;
   }
 
+  const refreshBtn = $("#refreshDirectory");
+  refreshBtn?.addEventListener("click", () => {
+    refreshBtn.style.opacity = "0.7";
+    refreshBtn.style.pointerEvents = "none";
+    window.location.href = window.location.pathname + "?t=" + Date.now();
+  });
+
   search?.addEventListener("input", render);
   render();
 })();
