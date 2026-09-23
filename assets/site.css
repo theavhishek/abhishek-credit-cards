@@ -147,9 +147,9 @@ html[data-theme="dark"] .cardholder-status{color:#34d399;background:rgba(16,185,
 html[data-theme="dark"] .partner-tag{background:#30223f;color:#cbb0ec}
 .secured-tag{background:#eee7dc;color:#745725}
 html[data-theme="dark"] .secured-tag{background:#332c21;color:#d9bd82}
-.fee-pill{display:inline-flex;align-items:center;justify-content:center;min-width:54px;height:25px;padding-inline:9px;border-radius:var(--radius-full);color:#fff;font-size:var(--fs-xs);font-weight:700;line-height:1;white-space:nowrap}
-.fee-ltf{background:#0b8d63}
-.fee-waiver{background:#2868c7}
+.fee-pill{display:inline-flex;align-items:center;justify-content:center;min-width:54px;height:25px;padding-inline:9px;border-radius:var(--radius-full);color:#fff;font-size:var(--fs-xs);font-weight:700;line-height:1;white-space:nowrap;transition:transform 0.15s ease,box-shadow 0.15s ease}
+.fee-ltf{background:linear-gradient(135deg,#059669 0%,#10b981 100%);box-shadow:0 2px 10px rgba(16,185,129,0.38),inset 0 1px 0 rgba(255,255,255,0.3)}
+.fee-waiver{background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 100%);box-shadow:0 2px 10px rgba(59,130,246,0.38),inset 0 1px 0 rgba(255,255,255,0.3)}
 .fee-paid{background:#42494f}
 .fee-unknown{background:#8b9297}
 .legend{margin-block:12px 10px;padding:12px 16px;display:grid;grid-template-columns:75px minmax(0,1fr);gap:14px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface)}
