@@ -90,7 +90,18 @@
             </div>
           </div>
           <div class="cardholder-portrait-wrap">
-            <img src="assets/abhishek-face.jpg" alt="Abhishek - Cardholder" class="cardholder-face-img" width="360" height="450" loading="eager">
+            <img
+              src="assets/abhishek-face.jpg"
+              srcset="assets/abhishek-face.jpg 800w"
+              sizes="(max-width: 720px) 288px, 288px"
+              alt="Abhishek Meena"
+              class="cardholder-face-img"
+              width="800"
+              height="1000"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            >
             <div class="cardholder-portrait-overlay"></div>
           </div>
           <div class="cardholder-bottom">
