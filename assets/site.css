@@ -56,9 +56,9 @@ html[data-theme="dark"] .collection-link:hover{background:rgba(255,255,255,.14);
 @keyframes clouds2{97%{transform:translateX(-72px);visibility:visible}98%,100%{visibility:hidden}99%{transform:translateX(-72px)}100%{transform:translateX(0)}}
 /* Hero Section Enhancements */
 .hero{padding-block:50px 40px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px;align-items:center}
-.hero h1{font-family:'Outfit','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;max-width:760px;margin:0;font-size:clamp(42px,5.6vw,72px);line-height:0.98;letter-spacing:-.045em;font-weight:800;color:var(--text);text-wrap:balance}
-.hero h1 span{background:linear-gradient(135deg,#0066cc,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-html[data-theme="dark"] .hero h1 span{background:linear-gradient(135deg,#38bdf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1{font-family:'Outfit','Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;max-width:760px;margin:0;font-size:clamp(44px,6vw,76px);line-height:1.12;letter-spacing:-.04em;font-weight:800;color:var(--text);padding-block:4px}
+.hero-accent-text{background:linear-gradient(135deg,#0066cc 0%,#2563eb 50%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;padding-block:4px;margin-block:-4px}
+html[data-theme="dark"] .hero-accent-text{background:linear-gradient(135deg,#38bdf8 0%,#60a5fa 50%,#c084fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-copy>p{max-width:580px;margin:20px 0 0;color:var(--muted);font-size:16px;line-height:1.6;text-wrap:pretty}
 .hero-meta{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
 .hero-meta div{display:flex;align-items:baseline;gap:7px}
