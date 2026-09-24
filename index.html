@@ -18,11 +18,6 @@
   <link rel="stylesheet" href="assets/responsive.css">
   <link rel="stylesheet" href="assets/portrait-hero.css">
   <link rel="preload" as="image" href="assets/abhishek-portrait-original.jpg">
-  <style>
-    .card-row{cursor:default!important;pointer-events:none!important;transform:none!important;grid-template-columns:minmax(0,1fr) auto!important}
-    .card-row:active{transform:none!important}
-    .card-chevron{display:none!important}
-  </style>
 </head>
 <body class="portrait-home">
   <a class="skip-link" href="#collection">Skip to card collection</a>
@@ -35,19 +30,9 @@
         <div class="topbar-actions">
           <a href="#collection" class="collection-link">Collection</a>
           <a href="support.html" class="collection-link">Support</a>
-          <label class="plane-switch" title="Switch day / night mode">
-            <span class="sr-only">Day / night mode</span>
+          <label class="appearance-switch">
             <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
-            <div aria-hidden="true">
-              <span class="street-middle"></span>
-              <span class="cloud"></span>
-              <span class="cloud two"></span>
-              <div>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/>
-                </svg>
-              </div>
-            </div>
+            <span class="appearance-track" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 15.5A9 9 0 0 1 8.5 4 9 9 0 1 0 20 15.5Z"/></svg></span>
           </label>
         </div>
       </nav>
@@ -62,6 +47,10 @@
         <div class="poster-gradient-overlay"></div>
       </div>
       
+      <div class="poster-location" aria-label="Photo location">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Taj Fateh Prakash Palace, Udaipur</span>
+      </div>
       <div class="poster-content">
         <div class="poster-headline-group">
           <h1 class="poster-title" id="hero-title">
@@ -166,7 +155,7 @@
               <rect width="24" height="24" rx="6" fill="#0f172a"/>
               <path d="M5 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8z" fill="#1e293b" stroke="#00d4b6" stroke-width="1.2"/>
               <path d="M8 9h8v2H13v5h-2v-5H8V9z" fill="#00d4b6"/>
-              <path d="M13.5 12h3.5v2H13.5v-2z" fill="#00d4b6"/>
+              <path d="M13.5 12h3.5v2h-3.5v-2z" fill="#00d4b6"/>
             </svg>
           </span>
         </a>
@@ -174,8 +163,9 @@
       <span>Personal credit-card index · India</span>
     </div>
   </footer>
+  <dialog class="details-dialog" id="cardDialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close card details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><div id="dialogContent"></div></dialog>
   <script src="assets/data.js"></script>
   <script src="assets/logo-png.js"></script>
-  <script src="assets/app.js?v=20260924-2"></script>
+  <script src="assets/app.js"></script>
 </body>
 </html>
