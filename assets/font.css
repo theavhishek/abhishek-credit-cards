@@ -1,17 +1,45 @@
 @font-face{
-  font-family:"Lil Grotesk";
-  src:url("https://cdn.jsdelivr.net/gh/noirblancrouge/LilGrotesk@master/fonts/webfonts/LilGrotesk%5Bwght%5D.woff2") format("woff2");
+  font-family:"Metropolis";
+  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Regular.woff2") format("woff2");
   font-style:normal;
-  font-weight:100 900;
+  font-weight:400;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Metropolis";
+  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Medium.woff2") format("woff2");
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Metropolis";
+  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-SemiBold.woff2") format("woff2");
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Metropolis";
+  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Bold.woff2") format("woff2");
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Metropolis";
+  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-ExtraBold.woff2") format("woff2");
+  font-style:normal;
+  font-weight:800;
   font-display:swap;
 }
 
 :root{
-  --site-font:"Lil Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --site-font:"Metropolis",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* Force Lil Grotesk across the complete site. These selectors intentionally
-   outrank older page-specific Instrument Sans / Mona Sans !important rules. */
+/* Metropolis across the complete site. The stronger selectors intentionally
+   override older page-specific Instrument Sans / Mona Sans declarations. */
 html,
 html body,
 html body *,
@@ -33,4 +61,130 @@ html body.portrait-home .hero-poster-stage *,
 html body.portrait-home .hero-poster-stage::before,
 html body.portrait-home .hero-poster-stage::after{
   font-family:var(--site-font)!important;
+}
+
+/* Metropolis is geometric and already tightly drawn. Remove the old aggressive
+   tracking that was tuned for other typefaces, then selectively tighten only
+   the large display text. */
+html body{
+  letter-spacing:0!important;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1,"liga" 1;
+  text-rendering:optimizeLegibility;
+}
+
+html body .wordmark-brand{
+  letter-spacing:-.018em!important;
+  line-height:1.04!important;
+}
+html body .collection-link,
+html body .support-nav-current,
+html body .hero-cta-primary,
+html body .hero-cta-secondary,
+html body button{
+  letter-spacing:-.004em!important;
+}
+
+html body .poster-title{
+  letter-spacing:-.030em!important;
+  line-height:.965!important;
+}
+html body .poster-subline{
+  letter-spacing:-.004em!important;
+  line-height:1.54!important;
+  word-spacing:.012em!important;
+}
+html body .stat-meta strong{
+  letter-spacing:-.024em!important;
+  line-height:1!important;
+}
+html body .stat-meta span{
+  letter-spacing:0!important;
+  line-height:1.28!important;
+}
+
+html body .collection-head h2{
+  letter-spacing:-.022em!important;
+  line-height:1.08!important;
+}
+html body .collection-head p{
+  letter-spacing:-.003em!important;
+  line-height:1.62!important;
+  word-spacing:.01em!important;
+}
+html body .collection-count{
+  letter-spacing:-.008em!important;
+}
+html body .bank-heading-copy strong{
+  letter-spacing:-.008em!important;
+  line-height:1.20!important;
+}
+html body .bank-short{
+  letter-spacing:.025em!important;
+}
+html body .card-name{
+  letter-spacing:-.004em!important;
+  line-height:1.26!important;
+}
+html body .card-meta-line,
+html body .network{
+  letter-spacing:0!important;
+  line-height:1.40!important;
+}
+html body .quick,
+html body .reset-button,
+html body .fee-pill,
+html body .mini-tag{
+  letter-spacing:.002em!important;
+}
+
+html body .support-hero h1{
+  letter-spacing:-.028em!important;
+  line-height:1.02!important;
+}
+html body .support-hero p{
+  letter-spacing:-.003em!important;
+  line-height:1.68!important;
+  word-spacing:.012em!important;
+}
+html body .support-title-row h2{
+  letter-spacing:-.018em!important;
+  line-height:1.24!important;
+}
+html body .support-card-header p,
+html body .support-footnote{
+  letter-spacing:0!important;
+  line-height:1.58!important;
+  word-spacing:.008em!important;
+}
+html body .support-table thead th{
+  letter-spacing:.004em!important;
+  line-height:1.30!important;
+}
+html body .support-bank-copy strong{
+  letter-spacing:-.004em!important;
+  line-height:1.28!important;
+}
+html body .support-link-value{
+  letter-spacing:0!important;
+  line-height:1.46!important;
+}
+html body input,
+html body select,
+html body textarea{
+  letter-spacing:0!important;
+}
+
+@media(max-width:720px){
+  html body .poster-title{
+    letter-spacing:-.024em!important;
+    line-height:.98!important;
+  }
+  html body .poster-subline{
+    line-height:1.56!important;
+  }
+  html body .support-hero h1{
+    letter-spacing:-.022em!important;
+    line-height:1.035!important;
+  }
 }
