@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="assets/responsive.css">
   <link rel="stylesheet" href="assets/portrait-hero.css">
   <link rel="preload" as="image" href="assets/abhishek-portrait-original.jpg">
+  <style>
+    .card-row{cursor:default!important;pointer-events:none!important;transform:none!important;grid-template-columns:minmax(0,1fr) auto!important}
+    .card-row:active{transform:none!important}
+    .card-chevron{display:none!important}
+  </style>
 </head>
 <body class="portrait-home">
   <a class="skip-link" href="#collection">Skip to card collection</a>
@@ -159,10 +164,8 @@
       <span>Personal credit-card index · India</span>
     </div>
   </footer>
-  <dialog class="details-dialog" id="cardDialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close card details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><div id="dialogContent"></div></dialog>
   <script src="assets/data.js"></script>
   <script src="assets/logo-png.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=20260924-2"></script>
 </body>
 </html>
-
