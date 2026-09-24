@@ -1,0 +1,64 @@
+/* Expandable bank directory */
+.support-page{padding-top:46px}
+.support-directory.shell{width:min(1440px,calc(100% - 48px));border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);overflow:hidden;box-shadow:var(--shadow)}
+.support-directory .support-card-header{padding:30px 32px}
+.support-directory .support-title-row h1{margin:0;font-size:clamp(24px,2vw,32px);line-height:1.15;letter-spacing:-.04em;font-weight:700}
+.support-directory .support-count-badge{font-size:12px}
+.support-directory .shiny-pill-link{padding:7px 12px;background:transparent;cursor:pointer}
+.support-directory .animated-shiny-text,.support-directory .animated-shiny-text .sparkle{animation:none;background:none;-webkit-text-fill-color:currentColor;color:var(--muted)}
+.support-directory .support-search-wrap{flex:0 1 360px;height:48px}
+.support-directory .support-search-wrap:focus-within{border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 16%,transparent)}
+.support-bank-list{display:grid;gap:12px;padding:24px}
+.support-bank-card{min-width:0;border:1px solid var(--line-strong);border-radius:20px;background:var(--surface);overflow:hidden}
+.support-bank-card[open]{border-color:#a9873aa8;box-shadow:0 0 0 1px #a9873a29}
+.support-bank-summary{display:flex;align-items:center;gap:16px;min-height:88px;padding:15px 21px;cursor:pointer;list-style:none}
+.support-bank-summary::-webkit-details-marker{display:none}
+.support-bank-summary::marker{content:''}
+.support-bank-summary:hover{background:var(--surface-soft)}
+.support-bank-summary:focus-visible{outline:2px solid var(--focus);outline-offset:-3px}
+.support-bank-summary .support-bank-logo{width:54px;height:54px;flex:none;display:grid;place-items:center;padding:8px;overflow:hidden;background:#fff;border:1px solid #e2e2e2;border-radius:14px}
+.support-bank-summary .support-bank-img{display:block;width:100%;height:100%;object-fit:contain}
+.support-bank-summary .support-bank-fallback{display:grid;place-items:center;width:100%;height:100%;color:#555;font-size:15px;font-weight:800}
+.support-bank-summary .support-bank-fallback[hidden],.support-bank-summary .support-bank-img[hidden]{display:none}
+.support-bank-summary .support-bank-copy{min-width:0;display:grid;gap:3px}
+.support-bank-summary .support-bank-copy strong{font-size:17px;line-height:1.25;font-weight:700;white-space:normal}
+.support-bank-summary .support-bank-copy span{font-size:12px;color:var(--muted)}
+.support-chevron{width:20px;height:20px;flex:none;margin-left:auto;color:#bc9133;transition:transform .2s ease}
+.support-bank-card[open] .support-chevron{transform:rotate(180deg)}
+.support-bank-content{display:grid;gap:22px;padding:22px 22px 26px;border-top:1px solid var(--line)}
+.support-contact-section{min-width:0}
+.support-contact-section h4{margin:0 0 12px;padding-left:12px;border-left:2px solid #bc9133;color:var(--muted);font-size:12px;line-height:1.4;letter-spacing:.04em;font-weight:700}
+.support-contact-group+.support-contact-group{margin-top:12px}
+.support-group-label{display:block;margin:0 0 7px 12px;color:var(--muted);font-size:11px;font-weight:650}
+.support-chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.support-contact-chip{max-width:100%;min-height:39px;display:inline-flex;align-items:center;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface-soft)}
+.support-contact-chip a{display:flex;align-items:center;min-height:39px;min-width:0;padding:7px 4px 7px 14px;color:var(--focus);font-size:13px;font-weight:650;overflow-wrap:anywhere}
+.support-contact-chip a:hover{text-decoration:underline;text-underline-offset:3px}
+.support-copy{width:36px;height:37px;flex:none;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--muted);cursor:pointer}
+.support-copy svg{width:17px;height:17px}
+.support-copy:hover,.support-copy.copied{color:var(--focus);background:color-mix(in srgb,var(--focus) 11%,transparent)}
+.support-unlisted{padding-left:14px;color:var(--muted);font-size:13px}
+.support-directory .support-footnote{padding:15px 28px;background:transparent}
+html[data-theme="dark"] .support-bank-card{background:#1d1d1f}
+html[data-theme="dark"] .support-bank-card[open]{border-color:#8d7133}
+html[data-theme="dark"] .support-contact-chip{background:#2b2b2e}
+@media(max-width:720px){
+.support-page{padding-top:26px}
+.site-footer .footer-inner{flex-direction:column;justify-content:center;text-align:center;gap:14px;padding-block:24px}
+.site-footer .footer-inner>span{white-space:normal}
+.support-directory.shell{width:calc(100% - 24px);border-radius:22px}
+.support-directory .support-card-header{padding:22px 18px}
+.support-directory .support-title-row h1{font-size:23px}
+.support-directory .support-search-wrap{width:100%;height:46px}
+.support-bank-list{gap:10px;padding:12px}
+.support-bank-card{border-radius:16px}
+.support-bank-summary{gap:12px;min-height:76px;padding:12px}
+.support-bank-summary .support-bank-logo{width:48px;height:48px;border-radius:12px}
+.support-bank-summary .support-bank-copy strong{font-size:15px}
+.support-bank-content{gap:20px;padding:18px 14px 22px}
+.support-contact-chip{border-radius:16px}
+.support-contact-chip a{font-size:12px}
+.support-directory .support-footnote{padding:16px 18px}
+}
+@media(prefers-reduced-motion:reduce){.support-chevron{transition:none}}
+@media(max-width:389px){.support-home-nav .topbar .topbar-inner{padding-inline:7px}.support-home-nav .topbar .wordmark-brand{font-size:19px}.support-home-nav .topbar .collection-link{font-size:11px}.support-home-nav .topbar .topbar-actions{gap:2px}}

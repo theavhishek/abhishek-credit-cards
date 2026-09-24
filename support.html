@@ -19,6 +19,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/support.css">
+  <link rel="stylesheet" href="assets/support-cards.css">
   <style>
     /* Match the homepage navbar treatment while keeping the support-page plane toggle. */
     .support-home-nav .topbar{
@@ -133,16 +134,11 @@
   </header>
 
   <main id="support" class="support-page">
-    <section class="shell support-hero">
-      <h1>Bank support<br><span>without the hunting.</span></h1>
-      <p>Helpline numbers and escalation email IDs in one clean directory. Search a bank, then call or email directly.</p>
-    </section>
-
-    <section class="shell support-table-card" aria-labelledby="directory-title">
+    <section class="shell support-directory" aria-labelledby="directory-title">
       <div class="support-card-header">
         <div>
           <div class="support-title-row">
-            <h2 id="directory-title">Support directory</h2>
+            <h1 id="directory-title">Support directory</h1>
             <span class="support-count-badge" id="supportCount"></span>
             <button class="shiny-pill-link" id="refreshDirectory" type="button" aria-label="Refresh support directory data">
               <span class="animated-shiny-text">
@@ -159,19 +155,8 @@
           <input id="supportSearch" type="search" placeholder="Search bank, email or number" autocomplete="off">
         </label>
       </div>
-      <div class="support-table-scroll" tabindex="0" aria-label="Scrollable bank support directory">
-        <table class="support-table">
-          <thead><tr>
-            <th scope="col">Bank</th>
-            <th scope="col">Helpline</th>
-            <th scope="col">Level 1 support</th>
-            <th scope="col">Level 2 support</th>
-            <th scope="col">Level 3 support</th>
-          </tr></thead>
-          <tbody id="supportRows"></tbody>
-        </table>
-      </div>
-      <div class="support-no-results" id="supportEmpty" hidden>No matching bank found.</div>
+      <div class="support-bank-list" id="supportCards"></div>
+      <div class="support-no-results" id="supportEmpty" hidden>No matching bank or contact found.</div>
       <div class="support-footnote">Contact details can change. Verify critical details on the issuer’s official website before sharing sensitive information.</div>
     </section>
   </main>
@@ -205,5 +190,6 @@
   </footer>
   <script src="assets/logo-png.js"></script>
   <script src="assets/support.js"></script>
+  <script src="assets/support-cards.js"></script>
 </body>
 </html>
