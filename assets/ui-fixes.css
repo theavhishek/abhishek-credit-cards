@@ -207,3 +207,17 @@ html[data-theme="dark"] .portrait-home .hero-poster-stage::after{
     -webkit-backdrop-filter:none;
   }
 }
+
+/* Card collection rows are display-only: no chevron and no click/tap interaction. */
+.card-row{
+  cursor:default!important;
+  pointer-events:none!important;
+  transform:none!important;
+  transition:background-color 160ms var(--ease)!important;
+}
+.card-row:active{
+  transform:none!important;
+}
+.card-chevron{
+  display:none!important;
+}
