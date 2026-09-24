@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/responsive.css">
   <link rel="stylesheet" href="assets/portrait-hero.css">
+  <link rel="stylesheet" href="assets/plane-switch-home.css">
   <link rel="preload" as="image" href="assets/abhishek-portrait-original.jpg">
 </head>
 <body class="portrait-home">
@@ -30,9 +31,19 @@
         <div class="topbar-actions">
           <a href="#collection" class="collection-link">Collection</a>
           <a href="support.html" class="collection-link">Support</a>
-          <label class="appearance-switch">
+          <label class="plane-switch" title="Switch day / night mode">
+            <span class="sr-only">Day / night mode</span>
             <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
-            <span class="appearance-track" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 15.5A9 9 0 0 1 8.5 4 9 9 0 1 0 20 15.5Z"/></svg></span>
+            <div aria-hidden="true">
+              <span class="street-middle"></span>
+              <span class="cloud"></span>
+              <span class="cloud two"></span>
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
           </label>
         </div>
       </nav>
