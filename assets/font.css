@@ -6,18 +6,31 @@
   font-display:swap;
 }
 
+:root{
+  --site-font:"Lil Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+/* Force Lil Grotesk across the complete site. These selectors intentionally
+   outrank older page-specific Instrument Sans / Mona Sans !important rules. */
 html,
-body,
-body *,
-button,
-input,
-select,
-textarea,
-dialog,
-.portrait-home .topbar,
-.portrait-home .hero-poster-stage,
-.portrait-home .topbar *,
-.portrait-home .hero-poster-stage *,
-.portrait-home .hero-poster-stage::after{
-  font-family:"Lil Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+html body,
+html body *,
+html body button,
+html body input,
+html body select,
+html body textarea,
+html body dialog,
+html body .topbar,
+html body .topbar *,
+html body .site-footer,
+html body .site-footer *,
+html body #support,
+html body #support *,
+html body.portrait-home .topbar,
+html body.portrait-home .topbar *,
+html body.portrait-home .hero-poster-stage,
+html body.portrait-home .hero-poster-stage *,
+html body.portrait-home .hero-poster-stage::before,
+html body.portrait-home .hero-poster-stage::after{
+  font-family:var(--site-font)!important;
 }
