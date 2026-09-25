@@ -59,7 +59,7 @@
   }
   function section(label, blocks) {
     const content = blocks.filter(Boolean).join("");
-    return `<section class="support-contact-section"><h4>${label}</h4>
+    return `<section class="support-contact-section"><h2>${label}</h2>
       ${content || '<span class="support-unlisted">Not listed</span>'}</section>`;
   }
   function bankCard(bank, open) {
