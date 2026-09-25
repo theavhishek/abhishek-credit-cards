@@ -20,6 +20,19 @@
   if (contacts["ICICI Bank"]) {
     contacts["ICICI Bank"].l1Email = ["customer.care@icici.bank.in"];
     contacts["ICICI Bank"].l3Email = ["pno@icici.bank.in"];
+    contacts["ICICI Bank"].extras = (contacts["ICICI Bank"].extras || [])
+      .map(group => ({
+        ...group,
+        emails: (group.emails || []).filter(email => email.toLowerCase() !== "pno@icicibank.com")
+      }))
+      .filter(group => group.emails.length);
+  }
+
+  // Current BOBCARD escalation contacts.
+  if (contacts["BOBCARD"]) {
+    contacts["BOBCARD"].l1Email = ["crm@bobcard.co.in", "escalations@bobcard.co.in"];
+    contacts["BOBCARD"].l2Email = ["nodal@bobcard.co.in"];
+    contacts["BOBCARD"].l3Email = ["pno@bobcard.co.in"];
   }
 
   const list = document.querySelector("#supportCards");
@@ -64,9 +77,14 @@
     return `${numbers} ${numbers === 1 ? "number" : "numbers"} · ${emails} ${emails === 1 ? "email" : "emails"}`;
   }
 
+  const emailHrefOverrides = {
+    "nodal@bobcard.co.in":"nodal@bobfinancial.com",
+    "pno@bobcard.co.in":"pno@bobfinancial.com"
+  };
   const copyIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
   function chip(value, kind) {
-    const href = kind === "phone" ? `tel:${String(value).replace(/[^\d+]/g, "")}` : `mailto:${value}`;
+    const target = kind === "email" ? (emailHrefOverrides[value] || value) : value;
+    const href = kind === "phone" ? `tel:${String(value).replace(/[^\d+]/g, "")}` : `mailto:${target}`;
     return `<span class="support-contact-chip">
       <a href="${esc(href)}">${esc(value)}</a>
       <button class="support-copy" type="button" data-copy="${esc(value)}" aria-label="Copy ${kind === "phone" ? "phone number" : "email address"} ${esc(value)}" title="Copy ${esc(value)}">${copyIcon}</button>
