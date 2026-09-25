@@ -16,6 +16,12 @@
     contacts["IDFC FIRST Bank"].l2Email = ["RNO@idfcfirstbank.com"];
   }
 
+  // Current ICICI Bank escalation contacts.
+  if (contacts["ICICI Bank"]) {
+    contacts["ICICI Bank"].l1Email = ["customer.care@icici.bank.in"];
+    contacts["ICICI Bank"].l3Email = ["pno@icici.bank.in"];
+  }
+
   const list = document.querySelector("#supportCards");
   const search = document.querySelector("#supportSearch");
   const empty = document.querySelector("#supportEmpty");
