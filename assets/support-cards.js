@@ -1,5 +1,16 @@
 (() => {
   const contacts = window.SUPPORT_CONTACTS || {};
+
+  // Current Axis Bank escalation contacts.
+  if (contacts["Axis Bank"]) {
+    contacts["Axis Bank"].l1Email = (contacts["Axis Bank"].l1Email || []).map(email =>
+      email === "customer.services@axisbank.com" ? "email.services@axis.bank.in" : email
+    );
+    contacts["Axis Bank"].l3Email = (contacts["Axis Bank"].l3Email || []).map(email =>
+      email.toLowerCase() === "pno@axisbank.com" ? "PNO@axis.bank.in" : email
+    );
+  }
+
   const list = document.querySelector("#supportCards");
   const search = document.querySelector("#supportSearch");
   const empty = document.querySelector("#supportEmpty");
