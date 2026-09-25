@@ -11,6 +11,11 @@
     );
   }
 
+  // Current IDFC FIRST Bank regional nodal contact.
+  if (contacts["IDFC FIRST Bank"]) {
+    contacts["IDFC FIRST Bank"].l2Email = ["RNO@idfcfirstbank.com"];
+  }
+
   const list = document.querySelector("#supportCards");
   const search = document.querySelector("#supportSearch");
   const empty = document.querySelector("#supportEmpty");
@@ -77,6 +82,7 @@
     const entry = contacts[bank] || {};
     const phone = [group(entry.care, "phone"), ...arr(entry.helplineExtras).map(item => group(item.values, "phone", item.label))];
     const level1 = [group(entry.l1Email, "email"), ...arr(entry.l1Extras).map(item => group(item.emails, "email", item.label))];
+    const level2Label = bank === "IDFC FIRST Bank" ? "Level 2 · Regional Nodal Officer" : "Level 2 · Nodal officer";
     const level3 = [group(entry.l3Email, "email"), ...arr(entry.extras).map(item => group(item.emails, "email", item.label))];
     return `<details class="support-bank-card" data-bank="${esc(bank)}" ${open ? "open" : ""}>
       <summary class="support-bank-summary">
@@ -87,7 +93,7 @@
       <div class="support-bank-content">
         ${section("Helpline", phone)}
         ${section("Level 1 · Customer care", level1)}
-        ${section("Level 2 · Nodal officer", [group(entry.l2Email, "email")])}
+        ${section(level2Label, [group(entry.l2Email, "email")])}
         ${section("Level 3 · Principal nodal officer", level3)}
       </div>
     </details>`;
