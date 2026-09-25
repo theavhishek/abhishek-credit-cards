@@ -78,8 +78,8 @@
   }
 
   const emailHrefOverrides = {
-    "nodal@bobcard.co.in":"nodal@bobfinancial.com",
-    "pno@bobcard.co.in":"pno@bobfinancial.com"
+    "nodal@bobcard.co.in":"nodal@bobcard.co.in",
+    "pno@bobcard.co.in":"pno@bobcard.co.in"
   };
   const copyIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
   function chip(value, kind) {
