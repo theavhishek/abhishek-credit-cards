@@ -351,10 +351,10 @@ window.SUPPORT_CONTACTS = {
       "yestouch@yesbank.in"
     ],
     "l2Email": [
-      "head.grievanceredressal@yesbank.in"
+      "head.grievanceredressal@yes.bank.in"
     ],
     "l3Email": [
-      "principal.nodalofficer@yesbank.in"
+      "principal.nodalofficer@yes.bank.in"
     ]
   },
   "DBS Bank": {
