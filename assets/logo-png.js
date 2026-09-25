@@ -20,7 +20,7 @@
     "hsbc.co.in":"https://www.google.com/s2/favicons?domain=www.hsbc.co.in&sz=256",
     "americanexpress.com":"https://www.google.com/s2/favicons?domain=americanexpress.com&sz=256",
     "sbmbank.co.in":"https://www.google.com/s2/favicons?domain=www.sbmbank.co.in&sz=256",
-    "theunitybank.com":"assets/bank-logos/unity-custom.svg",
+    "theunitybank.com":"assets/bank-logos/unity-custom.png",
     "csb.co.in":"https://raw.githubusercontent.com/praveenpuglia/indian-banks/main/assets/logos/csbk/logo.png",
     "federalbank.co.in":"https://raw.githubusercontent.com/praveenpuglia/indian-banks/main/assets/logos/fdrl/logo.png",
     "sc.com":"https://raw.githubusercontent.com/praveenpuglia/indian-banks/main/assets/logos/scbl/logo.png",
