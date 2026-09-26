@@ -307,6 +307,21 @@ window.SUPPORT_CONTACTS = {
       }
     ]
   },
+  "SBM Bank India": {
+    "care": [
+      "1800-103-3817",
+      "1800-209-9370"
+    ],
+    "l1Email": [
+      "customercare@sbmbank.co.in"
+    ],
+    "l2Email": [
+      "nodal.officer@sbmbank.co.in"
+    ],
+    "l3Email": [
+      "principalnodalofficer@sbmbank.co.in"
+    ]
+  },
   "Standard Chartered Bank": {
     "care": [
       "1800-267-3456",
