@@ -37,10 +37,18 @@ html[data-theme="dark"] .support-directory.shell{--support-accent:#8fa0ff;--supp
 .support-contact-chip{flex:0 1 auto;min-width:210px;max-width:100%;min-height:38px;display:flex;align-items:center;border:1px solid var(--line-strong);border-radius:var(--support-radius-control);background:var(--surface-soft);transition:border-color .18s ease,background-color .18s ease}
 .support-contact-chip a{display:flex;align-items:center;flex:1;min-height:38px;min-width:0;padding:6px 8px 6px 12px;color:var(--focus);font-size:13px;font-weight:650;overflow-wrap:anywhere}
 .support-contact-chip a:hover{text-decoration:underline;text-underline-offset:3px}
-.support-copy{width:34px;height:34px;flex:none;display:grid;place-items:center;margin-right:2px;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;transition:opacity .16s ease,color .16s ease,background-color .16s ease}
-.support-copy svg{width:16px;height:16px}
-.support-copy:hover,.support-copy.copied{color:var(--focus);background:color-mix(in srgb,var(--focus) 11%,transparent)}
-.support-copy:focus-visible{opacity:1;outline:2px solid var(--focus);outline-offset:-2px}
+/* UI Arc Shadcn Copy Button Micro-interaction */
+.support-copy{position:relative;width:32px;height:32px;flex:none;display:inline-flex;align-items:center;justify-content:center;margin-right:3px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;transition:all .2s cubic-bezier(.16,1,.3,1);outline:none}
+.support-copy:hover{color:var(--focus);background:color-mix(in srgb,var(--focus) 12%,transparent);border-color:color-mix(in srgb,var(--focus) 24%,transparent)}
+.support-copy:active{transform:scale(.92)}
+.support-copy:focus-visible{opacity:1;outline:2px solid var(--focus);outline-offset:1px}
+.copy-icon-wrap{position:relative;width:15px;height:15px;display:flex;align-items:center;justify-content:center}
+.copy-icon-wrap svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .22s cubic-bezier(.34,1.56,.64,1),opacity .18s ease}
+.copy-icon-wrap .icon-copy{opacity:1;transform:scale(1) rotate(0deg)}
+.copy-icon-wrap .icon-check{opacity:0;transform:scale(.4) rotate(-20deg);color:#10b981}
+.support-copy.copied{color:#10b981!important;background:rgba(16,185,129,.14)!important;border-color:rgba(16,185,129,.35)!important;box-shadow:0 0 10px rgba(16,185,129,.2)}
+.support-copy.copied .icon-copy{opacity:0;transform:scale(.4) rotate(20deg)}
+.support-copy.copied .icon-check{opacity:1;transform:scale(1) rotate(0deg)}
 .support-unlisted{padding-left:14px;color:var(--muted);font-size:13px}
 .support-directory .support-footnote{padding:15px 28px;background:transparent}
 html[data-theme="dark"] .support-bank-card{background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),#1d1d1f}

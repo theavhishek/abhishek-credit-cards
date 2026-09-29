@@ -81,13 +81,13 @@
     "nodal@bobcard.co.in":"nodal@bobcard.co.in",
     "pno@bobcard.co.in":"pno@bobcard.co.in"
   };
-  const copyIcon = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+  const copyMarkup = `<span class="copy-icon-wrap" aria-hidden="true"><svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>`;
   function chip(value, kind) {
     const target = kind === "email" ? (emailHrefOverrides[value] || value) : value;
     const href = kind === "phone" ? `tel:${String(value).replace(/[^\d+]/g, "")}` : `mailto:${target}`;
     return `<span class="support-contact-chip">
       <a href="${esc(href)}">${esc(value)}</a>
-      <button class="support-copy" type="button" data-copy="${esc(value)}" aria-label="Copy ${kind === "phone" ? "phone number" : "email address"} ${esc(value)}" title="Copy ${esc(value)}">${copyIcon}</button>
+      <button class="support-copy" type="button" data-copy="${esc(value)}" aria-label="Copy ${kind === "phone" ? "phone number" : "email address"} ${esc(value)}" title="Copy ${esc(value)}">${copyMarkup}</button>
     </span>`;
   }
 
