@@ -171,6 +171,15 @@ body {
   .stat-icon-circle svg { width: 15px; height: 15px; }
   .stat-meta strong { font-size: 18px; }
   .stat-meta span { font-size: 11px; }
+
+  /* Mobile Disclaimer & Footer Adjustments */
+  .site-disclaimer-card { margin-top: 24px; margin-bottom: 18px; }
+  .disclaimer-content { padding: 14px 16px; border-radius: 14px; }
+  .disclaimer-badge { font-size: 10.5px; padding: 4px 9px; border-radius: 8px; gap: 5px; margin-bottom: 8px; }
+  .disclaimer-badge svg { width: 13px; height: 13px; }
+  .disclaimer-content p { font-size: 11.5px; line-height: 1.55; }
+  .footer-inner { flex-direction: column; justify-content: center; text-align: center; gap: 12px; padding-block: 20px; }
+  .footer-inner > span { white-space: normal; }
 }
 
 @media (max-width: 430px) {
@@ -181,6 +190,12 @@ body {
   .poster-subline { font-size: 14.5px; line-height: 1.45; }
   .poster-actions { flex-direction: column; width: 100%; gap: 10px; }
   .hero-cta-primary, .hero-cta-secondary { width: 100%; justify-content: center; }
+
+  /* Compact Mobile Disclaimer */
+  .site-disclaimer-card { margin-top: 18px; margin-bottom: 14px; }
+  .disclaimer-content { padding: 12px 14px; border-radius: 12px; }
+  .disclaimer-badge { font-size: 10px; padding: 3px 8px; border-radius: 6px; }
+  .disclaimer-content p { font-size: 11px; line-height: 1.5; }
 }
 
 @media (max-width: 390px) {
