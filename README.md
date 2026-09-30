@@ -1,51 +1,101 @@
-# Abhishek — Credit Card Portfolio & Bank Support Directory
+# Abhishek — Card Stack
 
-> A searchable, editorial index of **51 active credit cards** across **22 Indian banks** — featuring real-time perks, fee breakdowns, and a dedicated bank support & escalation directory.
+An independent personal credit-card portfolio and bank-support reference directory maintained by Abhishek Meena.
 
-[![Live Site](https://img.shields.io/badge/Website-abhishek--credit--cards.vercel.app-0066ff?style=for-the-badge&logo=vercel)](https://abhishek-credit-cards.vercel.app/)
-[![License](https://img.shields.io/badge/License-MIT-gold?style=for-the-badge)](LICENSE)
+[![Live website](https://img.shields.io/badge/Live_Website-Open-111111?style=for-the-badge&logo=vercel)](https://abhishek-credit-cards.vercel.app/)
+[![License](https://img.shields.io/badge/License-MIT-c79232?style=for-the-badge)](LICENSE)
 
----
+## Website overview
 
-## 🌟 Overview
+The website contains two connected resources:
 
-**Abhishek — Card Stack** is a personal portfolio showcasing 51 credit cards managed across 22 major Indian banks. Designed with a luxury editorial aesthetic, it provides full transparency into fee structures, reward types, UPI availability, and escalation channels for Indian credit cardholders.
+1. **Card Stack** — a searchable record of credit cards that Abhishek actively manages, including partner cards.
+2. **Support Directory** — bank helplines and grievance-escalation email addresses organised by support level.
 
----
+### Current portfolio
 
-## ✨ Key Features
+- **50 active credit cards**
+- **22 banks and issuers**
+- **24 RuPay cards**
+- **11 partner cards**
+- Updated September 2026
 
-- 💳 **51 Active Credit Cards**: Real-time record of active cards, annual fee waivers, and lifetime free (LTF) statuses.
-- 🏛️ **22 Indian Banks Supported**: Coverage spanning Axis, HDFC, ICICI, SBI Card, Kotak, IDFC FIRST, BOBCARD, YES Bank, IndusInd, RBL, AU Small Finance Bank, OneCard, HSBC, Amex, SBM, Unity, CSB, PNB, Indian Bank, Bank of India, Canara Bank, and Federal Bank.
-- ⚡ **RuPay & UPI Card Integration**: Instant filtering for 24+ RuPay credit cards enabled for UPI transactions.
-- 📞 **Comprehensive Support Directory**: Direct access to Level 1 customer care, Level 2 Nodal Officers, and Level 3 Principal Nodal Officers for all major Indian credit card issuers.
-- 🎨 **Luxury Editorial UI**: High-definition photographic hero backdrop, warm gold metallic typography, pill-shaped floating glass controls, and seamless day/night theme switching.
-- 🚀 **Ultra-Fast Performance**: Zero heavy JavaScript frameworks, mobile-first responsive architecture, and instant Vercel edge deployment.
+Portfolio statistics are generated from the website data rather than maintained separately in the interface.
 
----
+## Card collection
 
-## 🏛️ Covered Issuers & Networks
+Cards are grouped by issuer and display the information currently stored by the website:
 
-| Category | Details |
-| :--- | :--- |
-| **Major Private Banks** | HDFC Bank, ICICI Bank, Axis Bank, Kotak Mahindra Bank, IDFC FIRST Bank, IndusInd Bank, RBL Bank, YES Bank |
-| **Public Sector Banks** | SBI Card, BOBCARD (Bank of Baroda), Punjab National Bank, Bank of India, Indian Bank, Canara Bank |
-| **Small Finance & Co-branded** | AU Small Finance Bank, Equitas SFB, Unity SFB, CSB Bank, Federal Bank, SBM Bank India |
-| **International & Special** | American Express, HSBC India, OneCard |
-| **Networks** | RuPay, Visa, Mastercard, American Express |
+- Card name
+- Payment network
+- Reward type
+- Fee indicator
+- Partner or secured-card indicator, where applicable
 
----
+The collection can be searched and filtered by:
 
-## 🛠️ Tech Stack
+- Bank or issuer
+- Payment network
+- Lifetime-free cards
+- RuPay cards
+- Partner cards
+- Cashback cards
 
-- **Markup & Styling**: Semantic HTML5, Custom CSS3 Variables, Instrument Sans & Mona Sans Typography, Glassmorphism.
-- **JavaScript**: Modular ES6+ JavaScript (`app.js`, `support.js`, `logo-png.js`).
-- **Deployment**: [Vercel](https://vercel.com/) Edge Hosting with clean URLs and custom headers.
+## Bank support directory
 
----
+The separate support page covers **26 banks and issuers** and provides the contact details currently listed for each institution.
 
-## 👤 Author
+Available interactions include:
+
+- Search by bank, email address or phone number
+- Expandable bank sections
+- Tap-to-call phone numbers
+- Tap-to-email addresses
+- Copy buttons for contact details
+- Customer-care and escalation levels
+- Verification-pending placeholders where details are not currently listed
+
+Contact information is compiled from public sources and should be verified on the relevant bank's official website before use.
+
+## Interface
+
+- Responsive desktop and mobile layouts
+- Shared navigation across all pages
+- Light and dark themes
+- First visit follows the operating-system theme
+- Selected theme is remembered in the browser
+- Metropolis typography
+- Keyboard-visible focus states and skip links
+- Reduced-motion support where applicable
+
+## Pages
+
+| Page | Purpose |
+| --- | --- |
+| [Home / Collection](https://abhishek-credit-cards.vercel.app/) | Portfolio overview, statistics, search and filters |
+| [Support](https://abhishek-credit-cards.vercel.app/support) | Searchable bank contact and escalation directory |
+| [Disclaimer](https://abhishek-credit-cards.vercel.app/disclaimer) | Independence, non-affiliation, privacy and accuracy notices |
+
+## Technology
+
+- Semantic HTML
+- Custom responsive CSS
+- Vanilla JavaScript
+- Static structured data files
+- Vercel deployment
+
+No frontend framework, login system, registration form or payment flow is used.
+
+## Disclaimer
+
+This is an independent personal portfolio and reference directory. It is not affiliated with, endorsed by, sponsored by or officially connected with any bank, card issuer, financial institution or payment network shown on the website.
+
+Bank names, card names, logos and trademarks belong to their respective owners. Credit-card terms and support contacts can change; always confirm important information through official bank channels.
+
+## Author
 
 **Abhishek Meena**
-- GitHub: [@theavhishek](https://github.com/theavhishek)
-- Website: [abhishek-credit-cards.vercel.app](https://abhishek-credit-cards.vercel.app/)
+
+- [GitHub](https://github.com/theavhishek)
+- [Website](https://abhishek-credit-cards.vercel.app/)
+- [X / Twitter](https://x.com/the_avhishek)
