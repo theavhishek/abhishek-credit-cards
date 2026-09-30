@@ -44,7 +44,7 @@
 .unified-navbar .topbar-inner {
   height: 76px !important;
   padding-inline: 30px !important;
-  font-family: "Instrument Sans", Arial, sans-serif !important;
+  font-family: var(--site-font) !important;
 }
 
 .unified-navbar .topbar-inner * {
