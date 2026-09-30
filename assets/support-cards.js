@@ -180,21 +180,29 @@
       img.nextElementSibling.hidden = false;
     }, { once: true }));
   }
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialQuery = urlParams.get("q") || sessionStorage.getItem("support_search_query") || "";
-  if (initialQuery && search) {
-    search.value = initialQuery;
+  function readQueryFromUrl() {
+    return new URLSearchParams(window.location.search).get("q") || "";
   }
 
+  function writeQueryToUrl(value) {
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set("q", value);
+    else url.searchParams.delete("q");
+    history.replaceState({ supportQuery: value }, "", url);
+  }
+
+  if (search) search.value = readQueryFromUrl();
+
   search?.addEventListener("input", () => {
-    const val = (search.value || "").trim();
-    if (val) {
-      sessionStorage.setItem("support_search_query", val);
-    } else {
-      sessionStorage.removeItem("support_search_query");
-    }
+    writeQueryToUrl(search.value.trim());
     render();
   });
+
+  window.addEventListener("popstate", () => {
+    if (search) search.value = readQueryFromUrl();
+    render();
+  });
+
   render();
 
   const announcement = document.createElement("div");

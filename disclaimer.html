@@ -10,7 +10,7 @@
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
   <meta name="description" content="Official Disclaimer & Non-Affiliation Statement for Abhishek Meena's personal credit card index portfolio.">
-  <title>Disclaimer &amp; Privacy Policy — Abhishek Personal Portfolio</title>
+  <title>Disclaimer &amp; Non-Affiliation Policy — Abhishek Personal Portfolio</title>
   <script>
     (() => {
       const saved = localStorage.getItem("abhishek-card-stack-theme");
@@ -21,6 +21,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/responsive.css">
+  <link rel="stylesheet" href="assets/plane-switch-home.css">
   <style>
     .legal-page { padding: 48px 0 80px; max-width: 820px; margin: 0 auto; }
     .legal-card { padding: 32px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow); }
@@ -28,7 +29,9 @@
     .legal-card h2 { font-size: 20px; margin: 28px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
     .legal-card p, .legal-card li { font-size: 14px; line-height: 1.7; color: var(--muted); }
     .legal-card ul { padding-left: 20px; }
-    .legal-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 980px; background: color-mix(in srgb,var(--focus) 12%,transparent); color: var(--focus); font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .legal-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 980px; background: color-mix(in srgb,#c79232 14%,transparent); color: color-mix(in srgb,#a86f12 88%,var(--text)); font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .legal-page .collection-link[aria-current="page"] { font-weight: 700; }
+    html[data-theme="dark"] .legal-badge { color: #efc86f; }
     @media (max-width: 600px) {
       .legal-page { padding: 24px 0 60px; }
       .legal-card { padding: 20px 16px; border-radius: 14px; }
@@ -47,6 +50,15 @@
         <div class="topbar-actions">
           <a href="index.html#collection" class="collection-link">Collection</a>
           <a href="support.html" class="collection-link">Support</a>
+          <a href="disclaimer.html" class="collection-link" aria-current="page">Disclaimer</a>
+          <label class="plane-switch" title="Switch day / night mode">
+            <span class="sr-only">Day / night mode</span>
+            <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
+            <div aria-hidden="true">
+              <span class="street-middle"></span><span class="cloud"></span><span class="cloud two"></span>
+              <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
+            </div>
+          </label>
         </div>
       </nav>
     </div>
@@ -88,5 +100,27 @@
       <span>Personal credit-card index · India</span>
     </div>
   </footer>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeSwitch = document.querySelector("#themeSwitch");
+      const applyTheme = (theme, persist = true) => {
+        const dark = theme === "dark";
+        root.dataset.theme = theme;
+        if (themeSwitch) {
+          themeSwitch.checked = !dark;
+          themeSwitch.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
+        }
+        document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+          meta.setAttribute("content", dark ? "#000000" : "#eef1f3");
+        });
+        if (persist) localStorage.setItem("abhishek-card-stack-theme", theme);
+      };
+      applyTheme(root.dataset.theme || "light", false);
+      themeSwitch?.addEventListener("change", () => applyTheme(themeSwitch.checked ? "light" : "dark"));
+      const year = document.querySelector("#year");
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>

@@ -104,71 +104,10 @@
   setText("#updatedText", `Updated ${formatUpdatedDate(meta.updated || "September 2026")}`);
   setText("#year", new Date().getFullYear());
 
-  const statTargets = {
-    "#statCards": cards.length,
-    "#statBanks": new Set(cards.map(c => c.bank)).size,
-    "#statRupay": cards.filter(c => c.network === "RuPay").length,
-    "#statPartner": cards.filter(c => c.tag === "❤️").length
-  };
-
-  function initStatCountUp() {
-    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      Object.entries(statTargets).forEach(([sel, val]) => setText(sel, val));
-      return;
-    }
-
-    const statPanel = document.querySelector(".poster-stats-panel") || document.querySelector(".hero-poster-stage");
-    if (!statPanel) {
-      Object.entries(statTargets).forEach(([sel, val]) => setText(sel, val));
-      return;
-    }
-
-    let animated = false;
-    const animateAll = () => {
-      if (animated) return;
-      animated = true;
-      const duration = 1000;
-      let startTime = null;
-
-      function step(now) {
-        if (!startTime) startTime = now;
-        const progress = Math.min((now - startTime) / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-
-        Object.entries(statTargets).forEach(([sel, targetVal]) => {
-          const el = $(sel);
-          if (el) {
-            el.textContent = Math.round(easeOut * targetVal);
-          }
-        });
-
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else {
-          Object.entries(statTargets).forEach(([sel, targetVal]) => setText(sel, targetVal));
-        }
-      }
-
-      Object.entries(statTargets).forEach(([sel]) => setText(sel, 0));
-      requestAnimationFrame(step);
-    };
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animateAll();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.2 });
-      observer.observe(statPanel);
-    } else {
-      animateAll();
-    }
-  }
-  initStatCountUp();
+  setText("#statCards", cards.length);
+  setText("#statBanks", new Set(cards.map(c => c.bank)).size);
+  setText("#statRupay", cards.filter(c => c.network === "RuPay").length);
+  setText("#statPartner", cards.filter(c => c.tag === "❤️").length);
 
   const bankFilter = $("#bankFilter");
   const networkFilter = $("#networkFilter");
@@ -206,10 +145,22 @@
     return true;
   }
 
+  const bankAliases = {
+    "Punjab National Bank":["pnb"],
+    "SBI Card":["sbi"],
+    "BOBCARD":["bob","bank of baroda"],
+    "American Express":["amex"],
+    "Standard Chartered Bank":["scb"],
+    "IDFC FIRST Bank":["idfc"],
+    "AU Small Finance Bank":["au","au sfb"],
+    "Bank of India":["boi"],
+    "State Bank of India":["sbi"]
+  };
+
   function filteredCards() {
     const q = (search?.value || "").trim().toLowerCase();
     return cards.filter(card => {
-      const haystack = [card.bank,card.card,card.network,card.rewardType,card.annualFee,card.tag,...(card.bestFor||[])].filter(Boolean).join(" ").toLowerCase();
+      const haystack = [card.bank,...(bankAliases[card.bank] || []),card.card,card.network,card.rewardType,card.annualFee,card.tag,...(card.bestFor||[])].filter(Boolean).join(" ").toLowerCase();
       return (!q || haystack.includes(q)) &&
         (!bankFilter || bankFilter.value === "all" || card.bank === bankFilter.value) &&
         (!networkFilter || networkFilter.value === "all" || card.network === networkFilter.value) &&
@@ -266,6 +217,10 @@
     if (empty) empty.hidden = list.length > 0;
     const updatedSuffix = meta.updated ? ` · Updated ${formatUpdatedDate(meta.updated)}` : "";
     if (count) count.textContent = `${list.length} card${list.length===1?"":"s"}${updatedSuffix}`;
+    const clearFilters = $("#clearFilters");
+    if (clearFilters) {
+      clearFilters.disabled = !((search?.value || "").trim() || bankFilter?.value !== "all" || networkFilter?.value !== "all" || quick !== "all");
+    }
   }
 
   function reset() {
