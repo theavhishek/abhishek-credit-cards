@@ -257,3 +257,24 @@ html[data-theme="dark"] .disclaimer-content strong{color:#f8fafc}
 .disclaimer-link{color:var(--focus);font-weight:650;text-decoration:underline;text-underline-offset:3px;transition:color .15s ease}
 html[data-theme="dark"] .disclaimer-link{color:#60a5fa}
 .disclaimer-link:hover{color:var(--text)}
+
+/* Aceternity UI Images Badge Component */
+.aceternity-images-badge{display:inline-flex;align-items:center;gap:10px;padding:5px 16px 5px 8px;margin-bottom:14px;border-radius:9999px;background:var(--surface);border:1px solid color-mix(in srgb,var(--line-strong) 80%,transparent);box-shadow:0 4px 18px rgba(0,0,0,.04),inset 0 1px 1px rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;isolation:isolate;text-decoration:none}
+html[data-theme="dark"] .aceternity-images-badge{background:rgba(30,32,40,.75);border-color:rgba(255,255,255,.15);box-shadow:0 6px 24px rgba(0,0,0,.3),inset 0 1px 1px rgba(255,255,255,.1)}
+.aceternity-images-badge::before{content:"";position:absolute;inset:-100%;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 280deg,var(--focus) 340deg,transparent 360deg);opacity:0;transition:opacity .4s ease;animation:shimmer-spin 4s linear infinite;z-index:-2;pointer-events:none}
+.aceternity-images-badge:hover::before{opacity:.6}
+.aceternity-images-badge::after{content:"";position:absolute;inset:1px;border-radius:9999px;background:var(--surface);z-index:-1}
+html[data-theme="dark"] .aceternity-images-badge::after{background:rgba(26,28,35,.92)}
+.aceternity-images-badge:hover{transform:translateY(-2px) scale(1.02);border-color:var(--focus);box-shadow:0 8px 28px rgba(0,0,0,.1),0 0 0 1px var(--focus)}
+.images-badge-stack{display:flex;align-items:center;margin-inline-start:2px}
+.images-badge-avatar{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#ffffff;padding:3.5px;border:1.5px solid var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.12);margin-left:-8px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),margin .35s ease;position:relative;z-index:calc(10 - var(--i, 0))}
+.images-badge-avatar:first-child{margin-left:0}
+.aceternity-images-badge:hover .images-badge-avatar{margin-left:-2px;transform:translateY(-1px) scale(1.12)}
+.aceternity-images-badge:hover .images-badge-avatar:nth-child(1){transform:translateY(-1px) rotate(-6deg) scale(1.12)}
+.aceternity-images-badge:hover .images-badge-avatar:nth-child(2){transform:translateY(-2px) rotate(-3deg) scale(1.14)}
+.aceternity-images-badge:hover .images-badge-avatar:nth-child(3){transform:translateY(-3px) rotate(0deg) scale(1.16)}
+.aceternity-images-badge:hover .images-badge-avatar:nth-child(4){transform:translateY(-2px) rotate(3deg) scale(1.14)}
+.aceternity-images-badge:hover .images-badge-avatar:nth-child(5){transform:translateY(-1px) rotate(6deg) scale(1.12)}
+.images-badge-label{font-size:12px;font-weight:650;letter-spacing:-.01em;color:var(--text);margin-left:2px}
+.images-badge-sparkle{font-size:12px;display:inline-block;transition:transform .3s ease}
+.aceternity-images-badge:hover .images-badge-sparkle{transform:rotate(20deg) scale(1.25)}
