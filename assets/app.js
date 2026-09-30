@@ -223,5 +223,18 @@
     render();
   }));
 
+  const folderIcon = $("#folderIcon");
+  if (folderIcon) {
+    folderIcon.addEventListener("click", () => {
+      folderIcon.classList.toggle("is-open");
+    });
+    folderIcon.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        folderIcon.classList.toggle("is-open");
+      }
+    });
+  }
+
   render();
 })();
