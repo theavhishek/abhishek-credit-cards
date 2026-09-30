@@ -35,6 +35,12 @@
     contacts["BOBCARD"].l3Email = ["pno@bobcard.co.in"];
   }
 
+  // Current SBI Card escalation contacts.
+  if (contacts["SBI Card"]) {
+    contacts["SBI Card"].l4Email = ["CustomerServiceHead@sbicard.com"];
+    delete contacts["SBI Card"].extras;
+  }
+
   const list = document.querySelector("#supportCards");
   const search = document.querySelector("#supportSearch");
   const empty = document.querySelector("#supportEmpty");
@@ -70,10 +76,21 @@
       <span class="support-bank-fallback" ${src ? 'hidden' : ""} aria-hidden="true">${esc(initials(bank))}</span></span>`;
   }
 
-  function contactCount(entry) {
+  function getCounts(entry) {
     const numbers = arr(entry.care).length + arr(entry.helplineExtras).reduce((total, group) => total + arr(group.values).length, 0);
-    const emails = [entry.l1Email, entry.l2Email, entry.l3Email].reduce((total, values) => total + arr(values).length, 0)
+    const emails = [entry.l1Email, entry.l2Email, entry.l3Email, entry.l4Email].reduce((total, values) => total + arr(values).length, 0)
       + [...arr(entry.l1Extras), ...arr(entry.extras)].reduce((total, group) => total + arr(group.emails).length, 0);
+    return { numbers, emails };
+  }
+
+  function contactCount(entry) {
+    const { numbers, emails } = getCounts(entry);
+    if (numbers > 0 && emails === 0) {
+      return `${numbers} ${numbers === 1 ? "number" : "numbers"}`;
+    }
+    if (numbers === 0 && emails > 0) {
+      return `${emails} ${emails === 1 ? "email" : "emails"}`;
+    }
     return `${numbers} ${numbers === 1 ? "number" : "numbers"} · ${emails} ${emails === 1 ? "email" : "emails"}`;
   }
 
@@ -85,8 +102,10 @@
   function chip(value, kind) {
     const target = kind === "email" ? (emailHrefOverrides[value] || value) : value;
     const href = kind === "phone" ? `tel:${String(value).replace(/[^\d+]/g, "")}` : `mailto:${target}`;
+    const titleAttr = kind === "email" ? ` title="${esc(value)}"` : "";
+    const displayText = kind === "email" ? esc(value).replace(/@/g, "@<wbr>").replace(/\./g, ".<wbr>") : esc(value);
     return `<span class="support-contact-chip">
-      <a href="${esc(href)}">${esc(value)}</a>
+      <a href="${esc(href)}"${titleAttr}>${displayText}</a>
       <button class="support-copy" type="button" data-copy="${esc(value)}" aria-label="Copy ${kind === "phone" ? "phone number" : "email address"} ${esc(value)}" title="Copy ${esc(value)}">${copyMarkup}</button>
     </span>`;
   }
@@ -104,10 +123,32 @@
   }
   function bankCard(bank, open) {
     const entry = contacts[bank] || {};
-    const phone = [group(entry.care, "phone"), ...arr(entry.helplineExtras).map(item => group(item.values, "phone", item.label))];
-    const level1 = [group(entry.l1Email, "email"), ...arr(entry.l1Extras).map(item => group(item.emails, "email", item.label))];
-    const level2Label = bank === "IDFC FIRST Bank" ? "Level 2 · Regional Nodal Officer" : "Level 2 · Nodal officer";
-    const level3 = [group(entry.l3Email, "email"), ...arr(entry.extras).map(item => group(item.emails, "email", item.label))];
+    const { numbers, emails } = getCounts(entry);
+
+    let content = "";
+    if (numbers === 0 && emails === 0) {
+      content = `<div class="support-empty-placeholder">Details being verified — check back soon.</div>`;
+    } else {
+      const sections = [];
+      const phone = [group(entry.care, "phone"), ...arr(entry.helplineExtras).map(item => group(item.values, "phone", item.label))];
+      if (numbers > 0) {
+        sections.push(section("Helpline", phone));
+      }
+      if (emails > 0) {
+        const level1 = [group(entry.l1Email, "email"), ...arr(entry.l1Extras).map(item => group(item.emails, "email", item.label))];
+        const level2Label = bank === "IDFC FIRST Bank" ? "Level 2 · Regional Nodal Officer" : "Level 2 · Nodal officer";
+        const level3 = [group(entry.l3Email, "email"), ...arr(entry.extras).map(item => group(item.emails, "email", item.label))];
+        sections.push(section("Level 1 · Customer care", level1));
+        sections.push(section(level2Label, [group(entry.l2Email, "email")]));
+        sections.push(section("Level 3 · Principal nodal officer", level3));
+        if (arr(entry.l4Email).length) {
+          const level4Label = bank === "SBI Card" ? "Level 4 · Customer service head" : "Level 4";
+          sections.push(section(level4Label, [group(entry.l4Email, "email")]));
+        }
+      }
+      content = sections.join("");
+    }
+
     return `<details class="support-bank-card" data-bank="${esc(bank)}" ${open ? "open" : ""}>
       <summary class="support-bank-summary">
         ${logo(bank)}
@@ -115,10 +156,7 @@
         <svg class="support-chevron" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </summary>
       <div class="support-bank-content">
-        ${section("Helpline", phone)}
-        ${section("Level 1 · Customer care", level1)}
-        ${section(level2Label, [group(entry.l2Email, "email")])}
-        ${section("Level 3 · Principal nodal officer", level3)}
+        ${content}
       </div>
     </details>`;
   }
@@ -142,7 +180,21 @@
       img.nextElementSibling.hidden = false;
     }, { once: true }));
   }
-  search?.addEventListener("input", render);
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get("q") || sessionStorage.getItem("support_search_query") || "";
+  if (initialQuery && search) {
+    search.value = initialQuery;
+  }
+
+  search?.addEventListener("input", () => {
+    const val = (search.value || "").trim();
+    if (val) {
+      sessionStorage.setItem("support_search_query", val);
+    } else {
+      sessionStorage.removeItem("support_search_query");
+    }
+    render();
+  });
   render();
 
   const announcement = document.createElement("div");

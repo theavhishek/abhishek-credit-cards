@@ -8,7 +8,6 @@
 
   const root = document.documentElement;
   const themeSwitch = $("#themeSwitch");
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
 
   function setTheme(theme, persist = true) {
     const dark = theme === "dark";
@@ -17,7 +16,9 @@
       themeSwitch.checked = !dark;
       themeSwitch.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
     }
-    themeMeta?.setAttribute("content", dark ? "#101214" : "#f3f5f6");
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => {
+      m.setAttribute("content", dark ? "#000000" : "#eef1f3");
+    });
     if (persist) localStorage.setItem("abhishek-card-stack-theme", theme);
   }
   setTheme(root.dataset.theme || "light", false);
@@ -90,13 +91,84 @@
   }
 
   const meta = source.meta || {};
+  function formatUpdatedDate(str) {
+    if (!str) return "Sep 2026";
+    const months = {
+      January:"Jan", February:"Feb", March:"Mar", April:"Apr", May:"May", June:"Jun",
+      July:"Jul", August:"Aug", September:"Sep", October:"Oct", November:"Nov", December:"Dec"
+    };
+    return str.replace(/^[A-Za-z]+/, m => months[m] || m);
+  }
+
   const setText = (id, value) => { const el = $(id); if (el) el.textContent = value; };
-  setText("#statCards", cards.length);
-  setText("#statBanks", new Set(cards.map(c => c.bank)).size);
-  setText("#statRupay", cards.filter(c => c.network === "RuPay").length);
-  setText("#statPartner", cards.filter(c => c.tag === "❤️").length);
-  setText("#updatedText", `Updated ${(meta.updated || "September 2026").replace("September","Sep")}`);
+  setText("#updatedText", `Updated ${formatUpdatedDate(meta.updated || "September 2026")}`);
   setText("#year", new Date().getFullYear());
+
+  const statTargets = {
+    "#statCards": cards.length,
+    "#statBanks": new Set(cards.map(c => c.bank)).size,
+    "#statRupay": cards.filter(c => c.network === "RuPay").length,
+    "#statPartner": cards.filter(c => c.tag === "❤️").length
+  };
+
+  function initStatCountUp() {
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      Object.entries(statTargets).forEach(([sel, val]) => setText(sel, val));
+      return;
+    }
+
+    const statPanel = document.querySelector(".poster-stats-panel") || document.querySelector(".hero-poster-stage");
+    if (!statPanel) {
+      Object.entries(statTargets).forEach(([sel, val]) => setText(sel, val));
+      return;
+    }
+
+    let animated = false;
+    const animateAll = () => {
+      if (animated) return;
+      animated = true;
+      const duration = 1000;
+      let startTime = null;
+
+      function step(now) {
+        if (!startTime) startTime = now;
+        const progress = Math.min((now - startTime) / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+
+        Object.entries(statTargets).forEach(([sel, targetVal]) => {
+          const el = $(sel);
+          if (el) {
+            el.textContent = Math.round(easeOut * targetVal);
+          }
+        });
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          Object.entries(statTargets).forEach(([sel, targetVal]) => setText(sel, targetVal));
+        }
+      }
+
+      Object.entries(statTargets).forEach(([sel]) => setText(sel, 0));
+      requestAnimationFrame(step);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateAll();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(statPanel);
+    } else {
+      animateAll();
+    }
+  }
+  initStatCountUp();
 
   const bankFilter = $("#bankFilter");
   const networkFilter = $("#networkFilter");
@@ -192,7 +264,8 @@
       installLogoFallbacks(board);
     }
     if (empty) empty.hidden = list.length > 0;
-    if (count) count.textContent = `${list.length} card${list.length===1?"":"s"}`;
+    const updatedSuffix = meta.updated ? ` · Updated ${formatUpdatedDate(meta.updated)}` : "";
+    if (count) count.textContent = `${list.length} card${list.length===1?"":"s"}${updatedSuffix}`;
   }
 
   function reset() {
@@ -222,19 +295,6 @@
     });
     render();
   }));
-
-  const folderIcon = $("#folderIcon");
-  if (folderIcon) {
-    folderIcon.addEventListener("click", () => {
-      folderIcon.classList.toggle("is-open");
-    });
-    folderIcon.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        folderIcon.classList.toggle("is-open");
-      }
-    });
-  }
 
   render();
 })();

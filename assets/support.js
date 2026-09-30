@@ -298,13 +298,8 @@ window.SUPPORT_CONTACTS = {
     "l3Email": [
       "PrincipalNodalOfficer@sbicard.com"
     ],
-    "extras": [
-      {
-        "label": "L4",
-        "emails": [
-          "CustomerServiceHead@sbicard.com"
-        ]
-      }
+    "l4Email": [
+      "CustomerServiceHead@sbicard.com"
     ]
   },
   "SBM Bank India": {
@@ -429,7 +424,9 @@ window.SUPPORT_CONTACTS = {
       themeSwitch.checked = !dark;
       themeSwitch.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
     }
-    themeMeta?.setAttribute("content", dark ? "#101214" : "#f3f5f6");
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => {
+      m.setAttribute("content", dark ? "#000000" : "#eef1f3");
+    });
     if (persist) localStorage.setItem("abhishek-card-stack-theme", theme);
   }
   setTheme(document.documentElement.dataset.theme || "light", false);
@@ -512,11 +509,30 @@ window.SUPPORT_CONTACTS = {
     if (table) table.hidden = filtered.length === 0;
   }
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get("q") || sessionStorage.getItem("support_search_query") || "";
+  if (initialQuery && search) {
+    search.value = initialQuery;
+  }
+
   const refreshBtn = $("#refreshDirectory");
   refreshBtn?.addEventListener("click", () => {
     refreshBtn.style.opacity = "0.7";
     refreshBtn.style.pointerEvents = "none";
-    window.location.href = window.location.pathname + "?t=" + Date.now();
+    const q = (search?.value || "").trim();
+    if (q) {
+      sessionStorage.setItem("support_search_query", q);
+    } else {
+      sessionStorage.removeItem("support_search_query");
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("t", Date.now());
+    if (q) {
+      url.searchParams.set("q", q);
+    } else {
+      url.searchParams.delete("q");
+    }
+    window.location.href = url.toString();
   });
 
   search?.addEventListener("input", render);
