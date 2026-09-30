@@ -103,7 +103,14 @@
     const target = kind === "email" ? (emailHrefOverrides[value] || value) : value;
     const href = kind === "phone" ? `tel:${String(value).replace(/[^\d+]/g, "")}` : `mailto:${target}`;
     const titleAttr = kind === "email" ? ` title="${esc(value)}"` : "";
-    const displayText = kind === "email" ? esc(value).replace(/@/g, "@<wbr>").replace(/\./g, ".<wbr>") : esc(value);
+    const displayText = kind === "email"
+      ? (() => {
+          const [localPart = "", ...domainParts] = String(value).split("@");
+          const domain = domainParts.join("@");
+          const wrappedLocal = esc(localPart).replace(/([.-])/g, "$1<wbr>");
+          return domain ? `${wrappedLocal}@<wbr>${esc(domain)}` : wrappedLocal;
+        })()
+      : esc(value);
     return `<span class="support-contact-chip">
       <a href="${esc(href)}"${titleAttr}>${displayText}</a>
       <button class="support-copy" type="button" data-copy="${esc(value)}" aria-label="Copy ${kind === "phone" ? "phone number" : "email address"} ${esc(value)}" title="Copy ${esc(value)}">${copyMarkup}</button>
