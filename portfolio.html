@@ -23,7 +23,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/responsive.css">
-  <link rel="stylesheet" href="assets/portrait-hero.css">
+  <link rel="stylesheet" href="assets/portrait-hero.css">\n  <link rel="stylesheet" href="assets/cinematic-text.css?v=1">
   <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
   <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
   <link rel="preload" as="image" href="assets/abhishek-portrait-original.jpg">
@@ -74,9 +74,22 @@
       </div>
       <div class="poster-content">
         <div class="poster-headline-group">
-          <h1 class="poster-title" id="hero-title">
-            <span class="poster-gold-line">Credit Cards</span>
-            <span class="poster-dark-line">I Actually<br>Manage.</span>
+          <h1 class="poster-title" id="hero-title" aria-label="Credit Cards I Actually Manage.">
+            <span class="poster-gold-line cinematic-text" aria-hidden="true">
+              <span class="cinematic-line">
+                <span class="cinematic-word" style="--cinematic-index:0">Credit</span>
+                <span class="cinematic-word" style="--cinematic-index:1">Cards</span>
+              </span>
+            </span>
+            <span class="poster-dark-line cinematic-text" aria-hidden="true">
+              <span class="cinematic-line">
+                <span class="cinematic-word" style="--cinematic-index:2">I</span>
+                <span class="cinematic-word" style="--cinematic-index:3">Actually</span>
+              </span>
+              <span class="cinematic-line">
+                <span class="cinematic-word" style="--cinematic-index:4">Manage.</span>
+              </span>
+            </span>
           </h1>
           <p class="poster-subline">A searchable record of my active credit-card portfolio across Indian banks, including partner cards I manage.</p>
 
