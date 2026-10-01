@@ -1,0 +1,108 @@
+.global-footer{
+  margin-top:auto;
+  border-top:1px solid var(--line,rgba(21,22,24,.16));
+  background:var(--page,#f1f2f4);
+  color:var(--text,#151618);
+  font-family:var(--site-font);
+}
+.global-footer__inner{
+  width:min(1100px,calc(100% - 48px));
+  margin-inline:auto;
+  padding:42px 0 22px;
+}
+.global-footer__top{
+  display:grid;
+  grid-template-columns:minmax(220px,1fr) auto auto;
+  align-items:start;
+  gap:28px 52px;
+}
+.global-footer__identity{
+  display:grid;
+  gap:8px;
+  max-width:330px;
+}
+.global-footer__brand{
+  width:max-content;
+  color:inherit;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.035em;
+  line-height:1;
+  text-decoration:none;
+}
+.global-footer__brand span{color:var(--focus,var(--accent,#b87c17))}
+.global-footer__identity p{
+  margin:0;
+  color:var(--muted,#686b70);
+  font-size:13px;
+  line-height:1.55;
+}
+.global-footer__nav,
+.global-footer__social{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px 24px;
+}
+.global-footer__nav{max-width:390px}
+.global-footer a:not(.global-footer__brand){
+  position:relative;
+  color:var(--muted,#686b70);
+  font-size:13px;
+  font-weight:600;
+  line-height:1.4;
+  text-decoration:none;
+  transition:color .16s ease;
+}
+.global-footer a:not(.global-footer__brand):hover,
+.global-footer a[aria-current="page"]{color:var(--text,#151618)}
+.global-footer a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-6px;
+  left:0;
+  height:1px;
+  background:currentColor;
+}
+.global-footer a:focus-visible{
+  outline:2px solid var(--focus,var(--accent,#b87c17));
+  outline-offset:5px;
+  border-radius:2px;
+}
+.global-footer__social{justify-content:flex-end}
+.global-footer__bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin-top:34px;
+  padding-top:18px;
+  border-top:1px solid var(--line,rgba(21,22,24,.16));
+  color:var(--soft,var(--muted,#686b70));
+  font-size:11px;
+  line-height:1.5;
+}
+@media(max-width:760px){
+  .global-footer__inner{
+    width:calc(100% - 32px);
+    padding:32px 0 20px;
+  }
+  .global-footer__top{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  .global-footer__nav,
+  .global-footer__social{
+    justify-content:flex-start;
+    gap:12px 22px;
+  }
+  .global-footer__bottom{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:4px;
+    margin-top:28px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .global-footer a{transition:none!important}
+}
