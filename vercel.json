@@ -1,6 +1,19 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.avhishek.in"
+        }
+      ],
+      "destination": "https://avhishek.in/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/bank-support", "destination": "/support.html" }
   ],
