@@ -3,379 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8f9fb">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090a0f">
+  <meta name="theme-color" content="#090a0f">
   <meta name="author" content="Abhishek Meena">
   <meta name="publisher" content="Abhishek Meena">
   <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
-  <meta name="description" content="Exciting new tools, smart reward calculators, and reference utilities coming soon for India's credit card community and everyone else by Abhishek Meena.">
-  <title>Avhishek — Coming Soon · More Useful Tools On The Way</title>
+  <meta name="description" content="Avhishek is Abhishek Meena's independent home for a personal credit-card portfolio, Indian bank support contacts, and practical reference tools.">
+  <title>Avhishek — Cards, Support &amp; Reference Tools</title>
   <link rel="canonical" href="https://avhishek.in/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script>
     (() => {
       const saved = localStorage.getItem("abhishek-card-stack-theme");
       const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
+      const theme = saved || (systemDark ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
     })();
   </script>
   <link rel="stylesheet" href="assets/font.css?v=3">
-  <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
-  <link rel="stylesheet" href="assets/coming-soon.css?v=2">
-  <link rel="stylesheet" href="assets/footer.css?v=2">
+  <link rel="stylesheet" href="assets/cinematic-home.css?v=1">
 </head>
 <body>
-  <div class="cs-ambient-canvas" aria-hidden="true"></div>
-  <div class="cs-ambient-grid" aria-hidden="true"></div>
+  <a class="skip-link" href="#home-content">Skip to content</a>
 
-  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main class="cinematic-home" id="home-content">
+    <div class="home-aurora" aria-hidden="true"></div>
+    <div class="home-grid" aria-hidden="true"></div>
+    <div class="home-grain" aria-hidden="true"></div>
+    <div class="home-giant-text" aria-hidden="true">AVHISHEK</div>
 
-  <!-- Header Navigation -->
-  <header class="cs-header">
-    <a class="cs-wordmark" href="https://avhishek.in/" aria-label="Avhishek home">
-      Avhishek<span>.</span>
-    </a>
+    <header class="home-header">
+      <a class="home-wordmark" href="https://avhishek.in/" aria-label="Avhishek home">Avhishek<span>.</span></a>
+      <button class="theme-button magnetic" id="themeButton" type="button" aria-label="Switch to light mode">
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
+      </button>
+    </header>
 
-    <nav class="cs-header-nav" aria-label="Main navigation">
-      <a class="cs-header-link" href="https://cards.avhishek.in/">Cards Stack</a>
-      <a class="cs-header-link" href="/bank-support">Bank Support</a>
-      <a class="cs-header-link" href="/disclaimer">Disclaimer</a>
-    </nav>
-
-    <div class="cs-header-actions">
-      <label class="plane-switch" title="Switch day / night mode">
-        <span class="sr-only">Day / night mode</span>
-        <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
-        <div aria-hidden="true">
-          <span class="street-middle"></span>
-          <span class="cloud"></span>
-          <span class="cloud two"></span>
-          <div>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/>
-            </svg>
-          </div>
+    <div class="home-marquee" aria-label="Website highlights">
+      <div class="home-marquee-track">
+        <div class="home-marquee-set">
+          <span>51 Cards</span><i>✦</i><span>22 Banks</span><i>✦</i><span>24 RuPay Cards</span><i>✦</i><span>Bank Support Directory</span><i>✦</i><span>Independent Reference</span><i>✦</i>
         </div>
-      </label>
+        <div class="home-marquee-set" aria-hidden="true">
+          <span>51 Cards</span><i>✦</i><span>22 Banks</span><i>✦</i><span>24 RuPay Cards</span><i>✦</i><span>Bank Support Directory</span><i>✦</i><span>Independent Reference</span><i>✦</i>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <!-- Main Hero Stage -->
-  <main class="cs-main" id="main-content">
-    <section class="cs-hero" aria-labelledby="hero-title">
-      <div class="cs-status-badge">
-        <span class="cs-pulse-dot" aria-hidden="true"></span>
-        <span>Coming Soon · In Active Development</span>
+    <section class="home-center" aria-labelledby="home-title">
+      <p class="home-eyebrow">Abhishek Meena · Independent Personal Website</p>
+      <h1 class="home-title" id="home-title">Everything<br><span>in one stack.</span></h1>
+      <p class="home-intro">My active credit-card portfolio and direct bank support contacts—kept simple, searchable, and independent.</p>
+
+      <div class="home-primary-links" aria-label="Featured destinations">
+        <a class="glass-pill primary-pill magnetic" href="https://cards.avhishek.in/">
+          <span class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="3"></rect><path d="M2.5 10h19"></path></svg></span>
+          <span><small>Personal portfolio</small><strong>Explore 51 cards</strong></span>
+          <svg class="pill-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <a class="glass-pill primary-pill magnetic" href="/bank-support">
+          <span class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16M5 10v8M9 10v8M15 10v8M19 10v8M3 18h18M12 3l9 5H3l9-5Z"></path></svg></span>
+          <span><small>26-bank directory</small><strong>Find bank support</strong></span>
+          <svg class="pill-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
       </div>
 
-      <h1 class="cs-hero-title" id="hero-title">
-        More exciting &amp; useful tools<br>
-        <span class="gradient-gold">are on the way.</span>
-      </h1>
-
-      <p class="cs-hero-subline">
-        Building the next generation of intuitive platforms, calculators, and reference indexes for India’s credit card community — and lightweight, zero-bloat digital utilities for everyone else. Stay tuned, more details are on the way.
-      </p>
-
-      <div class="cs-hero-actions">
-        <a class="cs-btn-primary" href="https://cards.avhishek.in/">
-          <span>Explore Card Stack</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-
-        <a class="cs-btn-secondary" href="/bank-support">
-          <span>Bank Support Directory</span>
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-          </svg>
-        </a>
-
-        <button class="cs-btn-ghost" id="shareBtn" type="button" aria-label="Copy website link to clipboard">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-          </svg>
-          <span>Share</span>
-        </button>
-      </div>
+      <nav class="home-secondary-links" aria-label="More links">
+        <a class="glass-pill small-pill magnetic" href="/disclaimer">Disclaimer</a>
+        <a class="glass-pill small-pill magnetic" href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        <a class="glass-pill small-pill magnetic" href="https://desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer">DesiDime</a>
+        <a class="glass-pill small-pill magnetic" href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer">TechnoFino</a>
+      </nav>
     </section>
 
-    <!-- Pipeline Teasers Section -->
-    <section class="cs-section" aria-labelledby="pipeline-heading">
-      <div class="cs-section-header">
-        <span class="cs-section-tag">What’s In The Works</span>
-        <h2 class="cs-section-title" id="pipeline-heading">Crafted for enthusiasts &amp; everyday users</h2>
-        <p class="cs-section-desc">A preview of the modules, trackers, and utilities currently being engineered.</p>
-      </div>
-
-      <div class="cs-pipeline-grid">
-        <!-- Teaser 1 -->
-        <article class="cs-pipeline-card">
-          <div class="cs-card-badge-row">
-            <div class="cs-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="5" width="20" height="14" rx="3"/>
-                <line x1="2" y1="10" x2="22" y2="10"/>
-                <path d="M7 15h2"/>
-              </svg>
-            </div>
-            <span class="cs-card-status">Credit Card Community</span>
-          </div>
-          <div class="cs-card-content">
-            <h3 class="cs-card-title">Reward &amp; Fee Optimizers</h3>
-            <p class="cs-card-desc">
-              Precision milestone spend calculators, reward point valuation matrices, and fee-waiver trackers tailored specifically for Indian credit cardholders.
-            </p>
-          </div>
-        </article>
-
-        <!-- Teaser 2 -->
-        <article class="cs-pipeline-card">
-          <div class="cs-card-badge-row">
-            <div class="cs-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
-            </div>
-            <span class="cs-card-status">Everyday Utilities</span>
-          </div>
-          <div class="cs-card-content">
-            <h3 class="cs-card-title">Zero-Bloat Digital Tools</h3>
-            <p class="cs-card-desc">
-              Fast, distraction-free utilities and reference tools built for everyday financial workflows, featuring instant loading and zero intrusive ads.
-            </p>
-          </div>
-        </article>
-
-        <!-- Teaser 3 -->
-        <article class="cs-pipeline-card">
-          <div class="cs-card-badge-row">
-            <div class="cs-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <span class="cs-card-status">100% Independent</span>
-          </div>
-          <div class="cs-card-content">
-            <h3 class="cs-card-title">Privacy-First &amp; No Bias</h3>
-            <p class="cs-card-desc">
-              Zero mandatory logins, zero trackers, and zero affiliate distortion. Pure community-driven utility built with obsessive engineering quality.
-            </p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Live Tools Showcase Section -->
-    <section class="cs-section" aria-labelledby="live-heading">
-      <div class="cs-section-header">
-        <span class="cs-section-tag">Active &amp; Available Now</span>
-        <h2 class="cs-section-title" id="live-heading">Explore the platforms live today</h2>
-        <p class="cs-section-desc">You don’t have to wait to start using our live portfolio and support directories.</p>
-      </div>
-
-      <div class="cs-live-grid">
-        <!-- Live Tool 1 -->
-        <a class="cs-live-card" href="https://cards.avhishek.in/">
-          <div class="cs-live-head">
-            <span class="cs-live-pill">● Live Now</span>
-            <h3 class="cs-live-title">The Credit Card Stack</h3>
-            <p class="cs-live-desc">
-              An editorial, real-time searchable index of 50 active cards managed across 22 banks, complete with LTF badges, RuPay UPI tags, and fee breakdowns.
-            </p>
-          </div>
-
-          <div class="cs-live-stats">
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">50</span>
-              <span class="cs-stat-label">Active Cards</span>
-            </div>
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">22</span>
-              <span class="cs-stat-label">Banks</span>
-            </div>
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">24</span>
-              <span class="cs-stat-label">RuPay UPI</span>
-            </div>
-          </div>
-
-          <span class="cs-live-action">
-            <span>Open card collection</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </a>
-
-        <!-- Live Tool 2 -->
-        <a class="cs-live-card" href="/bank-support">
-          <div class="cs-live-head">
-            <span class="cs-live-pill">● Live Now</span>
-            <h3 class="cs-live-title">Bank Support Directory</h3>
-            <p class="cs-live-desc">
-              Comprehensive grievance redressal matrix covering 26 major Indian issuers with direct Level 1 customer care, Level 2 Nodal, and Level 3/4 Principal Nodal contacts.
-            </p>
-          </div>
-
-          <div class="cs-live-stats">
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">26</span>
-              <span class="cs-stat-label">Issuers</span>
-            </div>
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">4</span>
-              <span class="cs-stat-label">Escalation Levels</span>
-            </div>
-            <div class="cs-stat-entry">
-              <span class="cs-stat-value">100%</span>
-              <span class="cs-stat-label">Verified</span>
-            </div>
-          </div>
-
-          <span class="cs-live-action">
-            <span>Open support directory</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Stay Connected Banner -->
-    <section class="cs-connect-banner" aria-labelledby="connect-heading">
-      <div class="cs-connect-content">
-        <h2 class="cs-connect-title" id="connect-heading">Stay tuned for early updates</h2>
-        <p class="cs-connect-desc">
-          Follow Abhishek across community channels to get first-look previews, release notes, and credit card strategy insights as new tools go live.
-        </p>
-      </div>
-
-      <div class="cs-connect-socials">
-        <a class="cs-social-pill" href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer" aria-label="Follow Abhishek on X (opens in new tab)">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-          <span>X / Twitter</span>
-        </a>
-
-        <a class="cs-social-pill" href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer" aria-label="Connect on TechnoFino (opens in new tab)">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span>TechnoFino</span>
-        </a>
-
-        <a class="cs-social-pill" href="https://www.desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer" aria-label="Connect on DesiDime (opens in new tab)">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-          <span>DesiDime</span>
-        </a>
-      </div>
-    </section>
+    <footer class="home-footer">
+      <p>© 2026 Abhishek Meena</p>
+      <div class="independent-badge glass-pill"><span class="status-dot" aria-hidden="true"></span>Independent · Personal · No affiliation</div>
+      <p class="home-footer-note">Built for useful reference.</p>
+    </footer>
   </main>
 
-  <!-- Interactive Toast Notification -->
-  <div class="cs-toast" id="toast" role="status" aria-live="polite">Link copied to clipboard!</div>
-
-  <!-- Shared Global Footer -->
-  <footer class="global-footer">
-    <div class="global-footer__inner">
-      <div class="global-footer__top">
-        <div class="global-footer__identity">
-          <a class="global-footer__brand" href="https://avhishek.in/" aria-current="page">Avhishek<span>.</span></a>
-          <p>Personal projects, reference tools, and community utilities.</p>
-        </div>
-        <nav class="global-footer__nav" aria-label="Footer navigation">
-          <a href="https://avhishek.in/" aria-current="page">Home</a>
-          <a href="https://cards.avhishek.in/">Cards Stack</a>
-          <a href="/bank-support">Bank Support</a>
-          <a href="/disclaimer">Disclaimer</a>
-        </nav>
-        <div class="global-footer__social" aria-label="Social profiles">
-          <a href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer">X</a>
-          <a href="https://www.desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer">DesiDime</a>
-          <a href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer">TechnoFino</a>
-        </div>
-      </div>
-      <div class="global-footer__bottom">
-        <span>© <span id="year">2026</span> Abhishek Meena</span>
-        <span>Independent personal website &amp; community index.</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    (() => {
-      // Theme switching logic
-      const root = document.documentElement;
-      const themeSwitch = document.querySelector("#themeSwitch");
-      
-      const applyTheme = (theme, persist = true) => {
-        const dark = theme === "dark";
-        root.dataset.theme = theme;
-        if (themeSwitch) {
-          themeSwitch.checked = !dark;
-          themeSwitch.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
-        }
-        document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
-          meta.setAttribute("content", dark ? "#090a0f" : "#f8f9fb");
-        });
-        if (persist) {
-          localStorage.setItem("abhishek-card-stack-theme", theme);
-        }
-      };
-
-      const initialTheme = root.dataset.theme || (window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      applyTheme(initialTheme, false);
-
-      themeSwitch?.addEventListener("change", () => {
-        applyTheme(themeSwitch.checked ? "light" : "dark");
-      });
-
-      // Year update
-      const yearEl = document.querySelector("#year");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
-
-      // Share / Copy Link button
-      const shareBtn = document.querySelector("#shareBtn");
-      const toast = document.querySelector("#toast");
-      let toastTimer = null;
-
-      shareBtn?.addEventListener("click", async () => {
-        const url = "https://avhishek.in/";
-        try {
-          if (navigator.clipboard?.writeText) {
-            await navigator.clipboard.writeText(url);
-          } else {
-            const ta = document.createElement("textarea");
-            ta.value = url;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-          }
-          if (toast) {
-            toast.classList.add("visible");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-              toast.classList.remove("visible");
-            }, 2500);
-          }
-        } catch (e) {
-          console.warn("Unable to copy to clipboard", e);
-        }
-      });
-    })();
-  </script>
+  <script src="assets/cinematic-home.js?v=1"></script>
 </body>
 </html>
