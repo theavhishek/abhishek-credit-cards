@@ -2,7 +2,7 @@
 
 An independent personal credit-card portfolio and bank-support reference directory maintained by Abhishek Meena.
 
-[![Live website](https://img.shields.io/badge/Live_Website-Open-111111?style=for-the-badge&logo=vercel)](https://abhishek-credit-cards.vercel.app/)
+[![Live website](https://img.shields.io/badge/Live_Website-Open-111111?style=for-the-badge&logo=vercel)](https://cards.avhishek.in/)
 [![License](https://img.shields.io/badge/License-MIT-c79232?style=for-the-badge)](LICENSE)
 
 ## Website overview
@@ -72,9 +72,9 @@ Contact information is compiled from public sources and should be verified on th
 
 | Page | Purpose |
 | --- | --- |
-| [Home / Collection](https://abhishek-credit-cards.vercel.app/) | Portfolio overview, statistics, search and filters |
-| [Support](https://abhishek-credit-cards.vercel.app/support) | Searchable bank contact and escalation directory |
-| [Disclaimer](https://abhishek-credit-cards.vercel.app/disclaimer) | Independence, non-affiliation, privacy and accuracy notices |
+| [Home / Collection](https://cards.avhishek.in/) | Portfolio overview, statistics, search and filters |
+| [Support](https://avhishek.in/bank-support) | Searchable bank contact and escalation directory |
+| [Disclaimer](https://cards.avhishek.in/disclaimer.html) | Independence, non-affiliation, privacy and accuracy notices |
 
 ## Technology
 
@@ -95,7 +95,7 @@ Bank names, card names, logos and trademarks belong to their respective owners. 
 ## Author
 
 **Abhishek Meena**
-
 - [GitHub](https://github.com/theavhishek)
-- [Website](https://abhishek-credit-cards.vercel.app/)
+- [Website](https://cards.avhishek.in/)
+- [Bank Support](https://avhishek.in/bank-support)
 - [X / Twitter](https://x.com/the_avhishek)
