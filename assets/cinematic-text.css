@@ -1,5 +1,6 @@
 /* Static adaptation of the Planes Cinematic Text component for the portfolio hero. */
-.poster-headline-group{animation:none}
+.poster-headline-group,
+.portrait-home .poster-title{animation:none!important}
 
 .cinematic-text{
   display:block;
@@ -24,22 +25,25 @@
 
 .poster-gold-line.cinematic-text{
   background:none;
-  -webkit-text-fill-color:initial;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  -webkit-text-fill-color:currentColor;
 }
 
 .poster-gold-line .cinematic-word{
-  color:transparent;
-  background:linear-gradient(110deg,#6f4700 0%,#b78212 34%,#e0b84c 54%,#8b5900 78%,#513100 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:#9a680f;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  -webkit-text-fill-color:currentColor;
 }
 
 html[data-theme="dark"] .poster-gold-line .cinematic-word{
-  background:linear-gradient(110deg,#fef08a 0%,#eab308 42%,#ca8a04 78%,#a16207 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:#e3bb74;
+  background:none;
+  -webkit-background-clip:border-box;
+  background-clip:border-box;
+  -webkit-text-fill-color:currentColor;
 }
 
 @keyframes cinematic-word-settle{
