@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef1f3">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <meta name="author" content="Abhishek Meena">
+  <meta name="publisher" content="Abhishek Meena">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="classification" content="Personal Portfolio & Reference Index">
+  <meta name="description" content="Independent personal credit-card portfolio and reference directory by Abhishek Meena. Not affiliated with any bank.">
+  <title>Abhishek — Card Stack (Personal Portfolio)</title>
+  <script>
+    (() => {
+      const saved = localStorage.getItem("abhishek-card-stack-theme");
+      const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (systemDark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://cards.avhishek.in/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/responsive.css">
+  <link rel="stylesheet" href="assets/portrait-hero.css">
+  <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
+  <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
+  <link rel="preload" as="image" href="assets/abhishek-portrait-original.jpg">
+</head>
+<body class="portrait-home unified-navbar">
+  <a class="skip-link" href="#collection">Skip to card collection</a>
+  <header class="topbar">
+    <div class="topbar-shell" id="navbarShell">
+      <nav class="topbar-inner" aria-label="Main navigation">
+        <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
+          <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
+        </a>
+        <div class="topbar-actions">
+          <a href="#collection" class="collection-link">Collection</a>
+          <a href="https://avhishek.in/bank-support" class="collection-link">Support</a>
+          <a href="https://avhishek.in/disclaimer" class="collection-link">Disclaimer</a>
+          <label class="plane-switch" title="Switch day / night mode">
+            <span class="sr-only">Day / night mode</span>
+            <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
+            <div aria-hidden="true">
+              <span class="street-middle"></span>
+              <span class="cloud"></span>
+              <span class="cloud two"></span>
+              <div>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </label>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="shell hero-poster-stage" aria-labelledby="hero-title">
+      <div class="poster-bg-wrap">
+        <img src="assets/abhishek-portrait-original.jpg" alt="Abhishek Meena standing in a sunlit courtyard beneath a tree" class="poster-bg-img" loading="eager" fetchpriority="high" decoding="async" width="1536" height="2048">
+        <div class="poster-warm-wash"></div>
+        <div class="poster-radial-glow"></div>
+        <div class="poster-gradient-overlay"></div>
+      </div>
+      
+      <div class="poster-location" aria-label="Photo location">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Taj Fateh Prakash Palace, Udaipur</span>
+      </div>
+      <div class="poster-content">
+        <div class="poster-headline-group">
+          <h1 class="poster-title" id="hero-title">
+            <span class="poster-gold-line">Credit Cards</span>
+            <span class="poster-dark-line">I Actually<br>Manage.</span>
+          </h1>
+          <p class="poster-subline">A searchable record of my active credit-card portfolio across Indian banks, including partner cards I manage.</p>
+
+          <div class="poster-actions">
+            <a href="#collection" class="hero-cta-primary">
+              <span>Explore Collection</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://avhishek.in/bank-support" class="hero-cta-secondary">
+              <span>Support Directory</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="poster-stats-panel" aria-label="Portfolio summary">
+          <div class="stat-item">
+            <div class="stat-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+            <div class="stat-meta">
+              <strong id="statCards">50</strong>
+              <span>cards</span>
+            </div>
+          </div>
+
+          <div class="stat-divider-v" aria-hidden="true"></div>
+
+          <div class="stat-item">
+            <div class="stat-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 3L2 10h20L12 3z"/></svg>
+            </div>
+            <div class="stat-meta">
+              <strong id="statBanks">22</strong>
+              <span>banks</span>
+            </div>
+          </div>
+
+          <div class="stat-divider-v" aria-hidden="true"></div>
+
+          <div class="stat-item">
+            <div class="stat-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M7 15l3-6 3 6M9 12h3"/></svg>
+            </div>
+            <div class="stat-meta">
+              <strong id="statRupay">24</strong>
+              <span>RuPay cards</span>
+            </div>
+          </div>
+
+          <div class="stat-divider-v" aria-hidden="true"></div>
+
+          <div class="stat-item">
+            <div class="stat-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-meta">
+              <strong id="statPartner">11</strong>
+              <span>partner cards</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="shell collection-head">
+        <div>
+          <h2 id="collection-title">The card stack</h2>
+          <p>Cards are grouped by bank so every change of issuer is immediately visible.</p>
+        </div>
+        <div class="collection-count" id="resultCount" role="status" aria-live="polite">50 cards · Updated Sep 2026</div>
+      </div>
+      <div class="filters-wrap"><div class="shell filter-panel">
+        <label class="search-control" for="searchInput"><span class="sr-only">Search cards or banks</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.5 20.5-4.1-4.1m1.7-5.2a6.9 6.9 0 1 1-13.8 0 6.9 6.9 0 0 1 13.8 0Z"></path></svg><input id="searchInput" type="search" name="search" placeholder="Search card, bank or use case" autocomplete="off"></label>
+        <div class="select-row"><label><span class="sr-only">Filter by bank</span><select id="bankFilter" name="bank"><option value="all">All banks</option></select></label><label><span class="sr-only">Filter by network</span><select id="networkFilter" name="network"><option value="all">All networks</option><option value="RuPay">RuPay</option><option value="Visa">Visa</option><option value="Mastercard">Mastercard</option><option value="Amex">Amex</option></select></label></div>
+        <div class="quick-row" aria-label="Quick filters"><button class="quick active" data-quick="all" type="button" aria-pressed="true">All</button><button class="quick" data-quick="ltf" type="button" aria-pressed="false">LTF</button><button class="quick" data-quick="rupay" type="button" aria-pressed="false">RuPay</button><button class="quick" data-quick="partner" type="button" aria-pressed="false">Partner</button><button class="quick" data-quick="cashback" type="button" aria-pressed="false">Cashback</button><button class="reset-button" id="clearFilters" type="button">Reset</button></div>
+      </div></div>
+      <div class="shell legend" aria-label="Card status legend"><div class="legend-title">Fee key</div><div class="legend-items"><span><b class="fee-pill fee-ltf">LTF</b> Lifetime free</span><span><b class="fee-pill fee-waiver">Waiver</b> Fee waiver available</span><span><b class="fee-pill fee-paid">Paid</b> Annual fee applicable</span><span><b class="fee-pill fee-unknown">—</b> Fee not specified</span><span><b class="mini-tag partner-tag">Partner</b> Partner card managed by me</span></div></div>
+      <div class="shell stack-board" id="stackBoard" aria-label="Credit card stack"></div>
+      <div class="shell empty-state" id="emptyState" hidden><strong>No cards match this filter.</strong><p>Clear the search or filters to bring the full stack back.</p><button id="emptyReset" type="button">Show all cards</button></div>
+    </section>
+    <section class="shell site-disclaimer-card" aria-label="Disclaimer and Non-Affiliation Notice">
+      <div class="disclaimer-content">
+        <div class="disclaimer-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Independent Personal Portfolio &amp; Reference Index</span>
+        </div>
+        <p><strong>Disclaimer:</strong> This website is an independent personal portfolio created and maintained by Abhishek Meena for informational reference. It is not affiliated with, endorsed by, authorized by, or in any way officially connected with any bank, financial institution, or credit card issuer mentioned herein. All trademarks, bank names, and logos belong to their respective owners. Card details and perks are compiled for reference purposes only; users should verify terms directly on official bank websites. Read our full <a href="https://avhishek.in/disclaimer" class="disclaimer-link">Disclaimer &amp; Non-Affiliation Policy &rarr;</a></p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>© <span id="year"></span> Abhishek</span>
+      <div class="footer-links">
+        <a href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer" class="shimmer-button icon-only" aria-label="Follow Abhishek on X" title="Follow on X">
+          <span class="shimmer-button-text">
+            <svg class="x-logo-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
+          </span>
+        </a>
+        <a href="https://www.desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer" class="shimmer-button icon-only" aria-label="Follow Abhishek on DesiDime" title="Follow on DesiDime">
+          <span class="shimmer-button-text">
+            <img src="https://www.google.com/s2/favicons?domain=desidime.com&sz=128" alt="DesiDime" class="desidime-logo-icon" width="18" height="18">
+          </span>
+        </a>
+        <a href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer" class="shimmer-button icon-only" aria-label="Follow Abhishek on TechnoFino" title="Follow on TechnoFino">
+          <span class="shimmer-button-text">
+            <svg class="technofino-logo-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6" fill="#0f172a"/>
+              <path d="M5 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8z" fill="#1e293b" stroke="#00d4b6" stroke-width="1.2"/>
+              <path d="M8 9h8v2H13v5h-2v-5H8V9z" fill="#00d4b6"/>
+              <path d="M13.5 12h3.5v2h-3.5v-2z" fill="#00d4b6"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <span>Personal credit-card index · India</span>
+    </div>
+  </footer>
+  <dialog class="details-dialog" id="cardDialog" aria-labelledby="dialogTitle"><button class="dialog-close" id="dialogClose" type="button" aria-label="Close card details"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><div id="dialogContent"></div></dialog>
+  <script src="assets/data.js"></script>
+  <script src="assets/logo-png.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
