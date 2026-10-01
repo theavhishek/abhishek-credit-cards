@@ -1,0 +1,112 @@
+:root{
+  color-scheme:light;
+  --page:#f1f2f4;
+  --text:#151618;
+  --muted:#686b70;
+  --line:rgba(21,22,24,.18);
+  --accent:#b87c17;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --page:#0d0e10;
+    --text:#f2f2f0;
+    --muted:#9b9da2;
+    --line:rgba(255,255,255,.18);
+    --accent:#dfb15a;
+  }
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--page)}
+body{
+  min-height:100svh;
+  margin:0;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  background:var(--page);
+  color:var(--text);
+  font-family:var(--site-font);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.soon-header,
+.soon-main,
+.soon-footer{
+  width:min(1120px,calc(100% - 48px));
+  margin-inline:auto;
+}
+.soon-header{
+  display:flex;
+  align-items:center;
+  min-height:104px;
+}
+.soon-wordmark{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+.soon-wordmark span,
+.soon-copy h1 span{color:var(--accent)}
+.soon-main{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:54px;
+  padding-block:72px;
+}
+.soon-copy{max-width:780px}
+.soon-copy h1{
+  margin:0;
+  font-size:clamp(68px,11vw,154px);
+  font-weight:700;
+  line-height:.88;
+  letter-spacing:-.065em;
+}
+.soon-copy p{
+  max-width:570px;
+  margin:30px 0 0;
+  color:var(--muted);
+  font-size:clamp(16px,1.7vw,20px);
+  line-height:1.65;
+}
+.soon-links{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+.soon-links a{
+  padding-block:8px;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+  font-weight:600;
+  transition:border-color .18s ease,color .18s ease;
+}
+.soon-links a:hover{
+  color:var(--accent);
+  border-color:currentColor;
+}
+.soon-footer{
+  min-height:86px;
+  display:flex;
+  align-items:center;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+}
+@media(max-width:640px){
+  .soon-header,
+  .soon-main,
+  .soon-footer{width:calc(100% - 32px)}
+  .soon-header{min-height:82px}
+  .soon-main{gap:40px;padding-block:48px}
+  .soon-copy h1{font-size:clamp(58px,21vw,94px)}
+  .soon-copy p{margin-top:24px;font-size:15px}
+  .soon-links{gap:22px}
+  .soon-footer{min-height:72px}
+}
+@media(prefers-reduced-motion:reduce){
+  .soon-links a{transition:none}
+}

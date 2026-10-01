@@ -2,17 +2,19 @@
 
 An independent personal credit-card portfolio and bank-support reference directory maintained by Abhishek Meena.
 
-[![Live website](https://img.shields.io/badge/Live_Website-Open-111111?style=for-the-badge&logo=vercel)](https://cards.avhishek.in/)
+[![Card portfolio](https://img.shields.io/badge/Card_Portfolio-Open-111111?style=for-the-badge&logo=vercel)](https://cards.avhishek.in/)
 [![License](https://img.shields.io/badge/License-MIT-c79232?style=for-the-badge)](LICENSE)
 
-## Website overview
+## Website structure
 
-The website contains two connected resources:
+| Address | Purpose |
+| --- | --- |
+| [avhishek.in](https://avhishek.in/) | Main personal homepage; currently a minimal coming-soon page |
+| [cards.avhishek.in](https://cards.avhishek.in/) | Credit-card portfolio, statistics, search and filters |
+| [avhishek.in/bank-support](https://avhishek.in/bank-support) | Searchable bank contact and escalation directory |
+| [avhishek.in/disclaimer](https://avhishek.in/disclaimer) | Independence, non-affiliation, privacy and accuracy notices |
 
-1. **Card Stack** — a searchable record of credit cards that Abhishek actively manages, including partner cards.
-2. **Support Directory** — bank helplines and grievance-escalation email addresses organised by support level.
-
-### Current portfolio
+## Current portfolio
 
 - **50 active credit cards**
 - **22 banks and issuers**
@@ -24,33 +26,19 @@ Portfolio statistics are generated from the website data rather than maintained 
 
 ## Card collection
 
-Cards are grouped by issuer and display the information currently stored by the website:
+Cards are grouped by issuer and show the card name, payment network, reward type, fee indicator and partner or secured-card indicator where applicable.
 
-- Card name
-- Payment network
-- Reward type
-- Fee indicator
-- Partner or secured-card indicator, where applicable
-
-The collection can be searched and filtered by:
-
-- Bank or issuer
-- Payment network
-- Lifetime-free cards
-- RuPay cards
-- Partner cards
-- Cashback cards
+The collection can be searched and filtered by bank, network, lifetime-free status, RuPay, partner ownership and cashback type.
 
 ## Bank support directory
 
-The separate support page covers **26 banks and issuers** and provides the contact details currently listed for each institution.
+The support directory covers **26 banks and issuers** and provides the contact details currently listed for each institution.
 
 Available interactions include:
 
 - Search by bank, email address or phone number
 - Expandable bank sections
-- Tap-to-call phone numbers
-- Tap-to-email addresses
+- Tap-to-call and tap-to-email links
 - Copy buttons for contact details
 - Customer-care and escalation levels
 - Verification-pending placeholders where details are not currently listed
@@ -60,21 +48,13 @@ Contact information is compiled from public sources and should be verified on th
 ## Interface
 
 - Responsive desktop and mobile layouts
-- Shared navigation across all pages
-- Light and dark themes
+- Shared navigation across the portfolio, support and disclaimer pages
+- Light and dark themes on the functional pages
 - First visit follows the operating-system theme
 - Selected theme is remembered in the browser
 - Metropolis typography
 - Keyboard-visible focus states and skip links
 - Reduced-motion support where applicable
-
-## Pages
-
-| Page | Purpose |
-| --- | --- |
-| [Home / Collection](https://cards.avhishek.in/) | Portfolio overview, statistics, search and filters |
-| [Support](https://avhishek.in/bank-support) | Searchable bank contact and escalation directory |
-| [Disclaimer](https://cards.avhishek.in/disclaimer.html) | Independence, non-affiliation, privacy and accuracy notices |
 
 ## Technology
 
@@ -95,7 +75,9 @@ Bank names, card names, logos and trademarks belong to their respective owners. 
 ## Author
 
 **Abhishek Meena**
+
+- [Main website](https://avhishek.in/)
+- [Card portfolio](https://cards.avhishek.in/)
+- [Bank support](https://avhishek.in/bank-support)
 - [GitHub](https://github.com/theavhishek)
-- [Website](https://cards.avhishek.in/)
-- [Bank Support](https://avhishek.in/bank-support)
 - [X / Twitter](https://x.com/the_avhishek)

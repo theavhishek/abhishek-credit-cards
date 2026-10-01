@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -15,15 +16,41 @@
     }
   ],
   "rewrites": [
-    { "source": "/bank-support", "destination": "/support.html" }
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "avhishek.in"
+        }
+      ],
+      "destination": "/coming-soon.html"
+    },
+    {
+      "source": "/bank-support",
+      "destination": "/support.html"
+    },
+    {
+      "source": "/disclaimer",
+      "destination": "/disclaimer.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {"key":"X-Content-Type-Options","value":"nosniff"},
-        {"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
-        {"key":"X-Frame-Options","value":"SAMEORIGIN"}
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
   ]
