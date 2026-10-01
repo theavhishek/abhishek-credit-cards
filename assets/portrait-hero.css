@@ -140,5 +140,5 @@ html[data-theme="dark"] .portrait-home .brand-dot { background:none; color:#6898
 /* Desktop: full-width photograph and readable word spacing. Mobile is unchanged. */
 @media (min-width:901px) {
   .portrait-home .hero-poster-stage.shell { max-width:none; }
-  .portrait-home .poster-title { letter-spacing:-.045em; word-spacing:.045em; }
+  .portrait-home .poster-title { word-spacing:normal; }
 }

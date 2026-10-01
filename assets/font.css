@@ -55,8 +55,8 @@ html body .support-hero h1,
 html body .legal-card h1,
 html body .error-code{
   font-weight:700!important;
-  letter-spacing:-.042em!important;
-  line-height:.96!important;
+  letter-spacing:-.026em!important;
+  line-height:.985!important;
 }
 
 html body .wordmark-brand,
@@ -64,7 +64,7 @@ html body .cs-wordmark,
 html body .footer-brand,
 html body .stat-meta strong{
   font-weight:700!important;
-  letter-spacing:-.025em!important;
+  letter-spacing:-.016em!important;
 }
 
 html body .collection-head h2,
@@ -73,8 +73,8 @@ html body .legal-card h2,
 html body .cs-section-title,
 html body .cs-feature-title{
   font-weight:650!important;
-  letter-spacing:-.024em!important;
-  line-height:1.08!important;
+  letter-spacing:-.014em!important;
+  line-height:1.12!important;
 }
 
 /* Running copy stays deliberately lighter than headings. */
@@ -95,7 +95,7 @@ html body .footer-tagline{
 
 html body .poster-subline{
   line-height:1.52!important;
-  word-spacing:.01em!important;
+  word-spacing:normal!important;
 }
 
 html body .collection-head p,
@@ -118,7 +118,7 @@ html body button,
 html body .shimmer-button,
 html body .shimmer-button-text{
   font-weight:600!important;
-  letter-spacing:-.006em!important;
+  letter-spacing:0!important;
 }
 
 /* Dense directory and card UI uses the text/micro optical cuts automatically. */
@@ -127,8 +127,8 @@ html body .card-name,
 html body .support-bank-copy strong,
 html body .feature-meta strong{
   font-weight:600!important;
-  letter-spacing:-.008em!important;
-  line-height:1.24!important;
+  letter-spacing:-.003em!important;
+  line-height:1.28!important;
 }
 
 html body .bank-short,
@@ -154,7 +154,7 @@ html body .disclaimer-badge,
 html body .legal-badge,
 html body .cs-status-badge{
   font-weight:600!important;
-  letter-spacing:.002em!important;
+  letter-spacing:.008em!important;
 }
 
 @media(max-width:720px){
@@ -162,7 +162,7 @@ html body .cs-status-badge{
   html body .cs-hero-title,
   html body .support-intro-title,
   html body .support-hero h1{
-    letter-spacing:-.035em!important;
-    line-height:.98!important;
+    letter-spacing:-.02em!important;
+    line-height:1!important;
   }
 }
