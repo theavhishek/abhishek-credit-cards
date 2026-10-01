@@ -42,7 +42,7 @@ html[data-theme="dark"] .topbar-shell.scrolled{
 }
 .topbar-inner{height:76px;padding-inline:30px}
 .wordmark-brand{
-  font-family:"Instrument Sans","Mona Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family:var(--site-font);
   font-size:28px;
   font-weight:800;
   letter-spacing:-.055em;
@@ -61,7 +61,7 @@ html[data-theme="dark"] .brand-dot{color:#7f91ff;background:none!important;-webk
   padding-inline:4px;
   border-radius:0;
   color:color-mix(in srgb,var(--text) 68%,transparent);
-  font-family:"Instrument Sans","Mona Sans",sans-serif;
+  font-family:var(--site-font);
   font-size:15px;
   font-weight:650;
   letter-spacing:-.025em;
@@ -156,7 +156,7 @@ html[data-theme="dark"] .poster-gradient-overlay{
   max-width:920px;
   margin:0;
   display:block!important;
-  font-family:"Instrument Sans","Mona Sans",-apple-system,BlinkMacSystemFont,sans-serif!important;
+  font-family:var(--site-font)!important;
   font-size:clamp(72px,8vw,130px)!important;
   line-height:.90!important;
   letter-spacing:-.078em!important;
@@ -199,7 +199,7 @@ html[data-theme="dark"] .poster-dark-line{color:#f4eee5!important}
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
   color:rgba(29,25,20,.78)!important;
-  font-family:"Instrument Sans","Mona Sans",sans-serif;
+  font-family:var(--site-font);
   font-size:clamp(20px,1.8vw,26px)!important;
   line-height:1.42!important;
   letter-spacing:-.027em;
@@ -228,7 +228,7 @@ html[data-theme="dark"] .poster-subline{color:rgba(245,239,230,.80)!important}
   justify-content:center;
   gap:14px!important;
   border-radius:999px!important;
-  font-family:"Instrument Sans","Mona Sans",sans-serif;
+  font-family:var(--site-font);
   font-size:18px!important;
   font-weight:700!important;
   letter-spacing:-.03em;
@@ -309,7 +309,7 @@ html[data-theme="dark"] .stat-icon-circle{background:rgba(255,255,255,.07)!impor
 .stat-meta strong{
   display:block;
   color:#9f7008!important;
-  font-family:"Instrument Sans","Mona Sans",sans-serif;
+  font-family:var(--site-font);
   font-size:clamp(28px,2.6vw,40px)!important;
   line-height:.92!important;
   letter-spacing:-.05em;

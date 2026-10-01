@@ -1,45 +1,17 @@
 @font-face{
-  font-family:"Metropolis";
-  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Regular.woff2") format("woff2");
+  font-family:"Cal Sans";
+  src:url("cal-sans-vf.woff2") format("woff2");
   font-style:normal;
-  font-weight:400;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Metropolis";
-  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Medium.woff2") format("woff2");
-  font-style:normal;
-  font-weight:500;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Metropolis";
-  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-SemiBold.woff2") format("woff2");
-  font-style:normal;
-  font-weight:600;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Metropolis";
-  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-Bold.woff2") format("woff2");
-  font-style:normal;
-  font-weight:700;
-  font-display:swap;
-}
-@font-face{
-  font-family:"Metropolis";
-  src:url("https://cdn.jsdelivr.net/gh/njugunagathere/Metropolis@738e74cea1b5bcef8b3c4fc8f4441829c102867f/Webfonts/WOFF2/Metropolis-ExtraBold.woff2") format("woff2");
-  font-style:normal;
-  font-weight:800;
+  font-weight:400 700;
   font-display:swap;
 }
 
 :root{
-  --site-font:"Metropolis",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --site-font:"Cal Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
-/* Metropolis across the complete site. The stronger selectors intentionally
-   override older page-specific Instrument Sans / Mona Sans declarations. */
+/* One variable typeface across every page and component. Cal Sans v2 uses
+   optical sizing to adapt the same file for display, text and micro UI. */
 html,
 html body,
 html body *,
@@ -53,138 +25,144 @@ html body .topbar *,
 html body .site-footer,
 html body .site-footer *,
 html body #support,
-html body #support *,
-html body.portrait-home .topbar,
-html body.portrait-home .topbar *,
-html body.portrait-home .hero-poster-stage,
-html body.portrait-home .hero-poster-stage *,
-html body.portrait-home .hero-poster-stage::before,
-html body.portrait-home .hero-poster-stage::after{
+html body #support *{
   font-family:var(--site-font)!important;
+  font-optical-sizing:auto;
 }
 
-/* Metropolis is geometric and already tightly drawn. Remove the old aggressive
-   tracking that was tuned for other typefaces, then selectively tighten only
-   the large display text. */
 html body{
+  font-weight:450;
   letter-spacing:0!important;
   font-kerning:normal;
   font-feature-settings:"kern" 1,"liga" 1;
+  font-synthesis:none;
   text-rendering:optimizeLegibility;
 }
 
-html body .wordmark-brand{
-  letter-spacing:-.018em!important;
-  line-height:1.04!important;
+html body button,
+html body input,
+html body select,
+html body textarea{
+  font:inherit;
 }
+
+/* Display hierarchy: confident, compact and limited to the font's real
+   700-weight maximum so browsers never manufacture fake extra-bold shapes. */
+html body .poster-title,
+html body .cs-hero-title,
+html body .support-intro-title,
+html body .support-hero h1,
+html body .legal-card h1,
+html body .error-code{
+  font-weight:700!important;
+  letter-spacing:-.042em!important;
+  line-height:.96!important;
+}
+
+html body .wordmark-brand,
+html body .cs-wordmark,
+html body .footer-brand,
+html body .stat-meta strong{
+  font-weight:700!important;
+  letter-spacing:-.025em!important;
+}
+
+html body .collection-head h2,
+html body .support-title-row h2,
+html body .legal-card h2,
+html body .cs-section-title,
+html body .cs-feature-title{
+  font-weight:650!important;
+  letter-spacing:-.024em!important;
+  line-height:1.08!important;
+}
+
+/* Running copy stays deliberately lighter than headings. */
+html body p,
+html body li,
+html body .poster-subline,
+html body .support-hero p,
+html body .support-intro-subline,
+html body .collection-head p,
+html body .legal-card p,
+html body .legal-card li,
+html body .cs-hero-subline,
+html body .cs-feature-description,
+html body .footer-tagline{
+  font-weight:450!important;
+  letter-spacing:0!important;
+}
+
+html body .poster-subline{
+  line-height:1.52!important;
+  word-spacing:.01em!important;
+}
+
+html body .collection-head p,
+html body .support-hero p,
+html body .support-intro-subline,
+html body .legal-card p,
+html body .legal-card li{
+  line-height:1.66!important;
+}
+
+/* Navigation and actions need enough weight to remain clear at small sizes. */
 html body .collection-link,
 html body .support-nav-current,
 html body .hero-cta-primary,
 html body .hero-cta-secondary,
-html body button{
-  letter-spacing:-.004em!important;
+html body .cs-header-link,
+html body .cs-primary-cta,
+html body .cs-secondary-cta,
+html body button,
+html body .shimmer-button,
+html body .shimmer-button-text{
+  font-weight:600!important;
+  letter-spacing:-.006em!important;
 }
 
-html body .poster-title{
-  letter-spacing:-.030em!important;
-  line-height:.965!important;
-}
-html body .poster-subline{
-  letter-spacing:-.004em!important;
-  line-height:1.54!important;
-  word-spacing:.012em!important;
-}
-html body .stat-meta strong{
-  letter-spacing:-.024em!important;
-  line-height:1!important;
-}
-html body .stat-meta span{
-  letter-spacing:0!important;
-  line-height:1.28!important;
+/* Dense directory and card UI uses the text/micro optical cuts automatically. */
+html body .bank-heading-copy strong,
+html body .card-name,
+html body .support-bank-copy strong,
+html body .feature-meta strong{
+  font-weight:600!important;
+  letter-spacing:-.008em!important;
+  line-height:1.24!important;
 }
 
-html body .collection-head h2{
-  letter-spacing:-.022em!important;
-  line-height:1.08!important;
-}
-html body .collection-head p{
-  letter-spacing:-.003em!important;
-  line-height:1.62!important;
-  word-spacing:.01em!important;
-}
-html body .collection-count{
-  letter-spacing:-.008em!important;
-}
-html body .bank-heading-copy strong{
-  letter-spacing:-.008em!important;
-  line-height:1.20!important;
-}
-html body .bank-short{
-  letter-spacing:.025em!important;
-}
-html body .card-name{
-  letter-spacing:-.004em!important;
-  line-height:1.26!important;
-}
+html body .bank-short,
 html body .card-meta-line,
-html body .network{
+html body .network,
+html body .support-card-header p,
+html body .support-footnote,
+html body .support-link-value,
+html body .stat-meta span,
+html body .collection-count{
+  font-weight:450!important;
   letter-spacing:0!important;
-  line-height:1.40!important;
 }
+
 html body .quick,
 html body .reset-button,
 html body .fee-pill,
-html body .mini-tag{
+html body .mini-tag,
+html body .support-count-badge,
+html body .support-group-label,
+html body .support-contact-section h2,
+html body .disclaimer-badge,
+html body .legal-badge,
+html body .cs-status-badge{
+  font-weight:600!important;
   letter-spacing:.002em!important;
 }
 
-html body .support-hero h1{
-  letter-spacing:-.028em!important;
-  line-height:1.02!important;
-}
-html body .support-hero p{
-  letter-spacing:-.003em!important;
-  line-height:1.68!important;
-  word-spacing:.012em!important;
-}
-html body .support-title-row h2{
-  letter-spacing:-.018em!important;
-  line-height:1.24!important;
-}
-html body .support-card-header p,
-html body .support-footnote{
-  letter-spacing:0!important;
-  line-height:1.58!important;
-  word-spacing:.008em!important;
-}
-html body .support-table thead th{
-  letter-spacing:.004em!important;
-  line-height:1.30!important;
-}
-html body .support-bank-copy strong{
-  letter-spacing:-.004em!important;
-  line-height:1.28!important;
-}
-html body .support-link-value{
-  letter-spacing:0!important;
-  line-height:1.46!important;
-}
-html body input,
-html body select,
-html body textarea{
-  letter-spacing:0!important;
-}
-
 @media(max-width:720px){
-  html body .poster-title{
-    letter-spacing:-.024em!important;
-    line-height:.98!important;
-  }
-  html body .poster-subline{
-    line-height:1.56!important;
-  }
+  html body .poster-title,
+  html body .cs-hero-title,
+  html body .support-intro-title,
   html body .support-hero h1{
-    letter-spacing:-.022em!important;
-    line-height:1.035!important;
+    letter-spacing:-.035em!important;
+    line-height:.98!important;
   }
 }

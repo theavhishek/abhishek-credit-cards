@@ -52,7 +52,7 @@ Contact information is compiled from public sources and should be verified on th
 - Light and dark themes on the functional pages
 - First visit follows the operating-system theme
 - Selected theme is remembered in the browser
-- Metropolis typography
+- Cal Sans variable typography
 - Keyboard-visible focus states and skip links
 - Reduced-motion support where applicable
 
