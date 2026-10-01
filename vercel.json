@@ -7,8 +7,7 @@
       "source": "/:path*",
       "has": [
         {
-          "type": "header",
-          "key": "host",
+          "type": "host",
           "value": "www\\.avhishek\\.in"
         }
       ],
@@ -21,11 +20,14 @@
       "source": "/",
       "has": [
         {
-          "type": "header",
-          "key": "host",
-          "value": "avhishek\\.in"
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
         }
       ],
+      "destination": "/portfolio"
+    },
+    {
+      "source": "/",
       "destination": "/coming-soon"
     },
     {
