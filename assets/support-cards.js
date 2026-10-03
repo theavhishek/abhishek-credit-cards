@@ -125,7 +125,7 @@
   }
   function section(label, blocks) {
     const content = blocks.filter(Boolean).join("");
-    return `<section class="support-contact-section"><h2>${label}</h2>
+    return `<section class="support-contact-section"><h3>${label}</h3>
       ${content || '<span class="support-unlisted">Not listed</span>'}</section>`;
   }
   function bankCard(bank, open) {
@@ -176,16 +176,26 @@
     else expanded.delete(card.dataset.bank);
   }, true);
 
-  function render() {
+  function attachImgErrors(scope = list) {
+    scope.querySelectorAll(".support-bank-img").forEach(img => img.addEventListener("error", () => {
+      img.hidden = true;
+      if (img.nextElementSibling) img.nextElementSibling.hidden = false;
+    }, { once: true }));
+  }
+
+  function render(isInitial = false) {
     const query = (search?.value || "").trim().toLowerCase();
+    if (isInitial && !query && list && list.children.length > 0) {
+      count.textContent = `${banks.length} banks`;
+      empty.hidden = true;
+      attachImgErrors(list);
+      return;
+    }
     const filtered = banks.filter(bank => !query || bank.toLowerCase().includes(query) || JSON.stringify(contacts[bank] || {}).toLowerCase().includes(query));
     list.innerHTML = filtered.map(bank => bankCard(bank, !!query || expanded.has(bank))).join("");
     count.textContent = query ? `${filtered.length} of ${banks.length} banks` : `${banks.length} banks`;
     empty.hidden = filtered.length > 0;
-    list.querySelectorAll(".support-bank-img").forEach(img => img.addEventListener("error", () => {
-      img.hidden = true;
-      img.nextElementSibling.hidden = false;
-    }, { once: true }));
+    attachImgErrors(list);
   }
   function readQueryFromUrl() {
     return new URLSearchParams(window.location.search).get("q") || "";
@@ -210,7 +220,7 @@
     render();
   });
 
-  render();
+  render(true);
 
   const announcement = document.createElement("div");
   announcement.className = "sr-only";

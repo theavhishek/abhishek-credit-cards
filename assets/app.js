@@ -205,7 +205,13 @@
     return `<section class="bank-group"><div class="bank-group-head"><span class="bank-logo-wrap">${logoMarkup(group.bank)}</span><span class="bank-heading-copy"><strong>${esc(group.bank)}</strong><span>${group.cards.length} ${group.cards.length===1?"card":"cards"}</span></span><span class="bank-short">${esc(short)}</span></div><div class="bank-cards">${group.cards.map(cardRow).join("")}</div></section>`;
   }
 
-  function render() {
+  function render(isInitial = false) {
+    if (isInitial && board && board.children.length > 0 && !(search?.value || "").trim() && (!bankFilter || bankFilter.value === "all") && (!networkFilter || networkFilter.value === "all") && quick === "all") {
+      installLogoFallbacks(board);
+      const updatedSuffix = meta.updated ? ` · Updated ${formatUpdatedDate(meta.updated)}` : "";
+      if (count) count.textContent = `${cards.length} cards${updatedSuffix}`;
+      return;
+    }
     const list = filteredCards();
     const groups = groupCards(list);
     const [left,right] = splitGroups(groups);
@@ -251,5 +257,5 @@
     render();
   }));
 
-  render();
+  render(true);
 })();
