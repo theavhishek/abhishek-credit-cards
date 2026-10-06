@@ -13,6 +13,7 @@ An independent personal website by **Abhishek Meena**, bringing together a credi
 | --- | --- |
 | [avhishek.in](https://avhishek.in/) | Main homepage and gateway to the live projects |
 | [cards.avhishek.in](https://cards.avhishek.in/) | Searchable personal credit-card portfolio |
+| [avhishek.in/card-reviews](https://avhishek.in/card-reviews) | Independent credit-card review library |
 | [avhishek.in/bank-support](https://avhishek.in/bank-support) | Bank contact and escalation directory |
 | [avhishek.in/disclaimer](https://avhishek.in/disclaimer) | Independence, accuracy and non-affiliation notice |
 
