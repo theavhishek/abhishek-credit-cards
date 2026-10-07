@@ -42,6 +42,10 @@
   font-family: inherit;
 }
 
+#card-reviews-root > section {
+  scroll-margin-top: 104px;
+}
+
 #card-reviews-root a:focus-visible,
 #card-reviews-root button:focus-visible {
   outline: 2px solid var(--foreground);
