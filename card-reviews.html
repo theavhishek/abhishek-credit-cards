@@ -91,7 +91,7 @@
   <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
   <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
   <link rel="stylesheet" href="assets/footer.css?v=1">
-  <link rel="stylesheet" href="assets/card-reviews.css?v=3">
+  <link rel="stylesheet" href="assets/card-reviews.css?v=4">
 </head>
 <body class="reviews-page unified-navbar">
   <a class="skip-link" href="#reviews">Skip to reviews</a>
@@ -202,29 +202,34 @@
       <div class="reviews-section-heading">
         <div>
           <p class="reviews-section-index">The review desk</p>
-          <h2 id="library-title">Long-form reviews are on the way.</h2>
+          <h2 id="library-title">Card reviews.</h2>
         </div>
-        <span class="reviews-count-badge" aria-label="Zero reviews published">
-          <strong>0</strong> published
+        <span class="reviews-count-badge" aria-label="One review published">
+          <strong>1</strong> published
         </span>
       </div>
 
-      <div class="reviews-empty-panel">
-        <div class="reviews-empty-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="5" width="20" height="14" rx="3"></rect>
-            <path d="M2 10h20"></path>
-            <path d="M7 15h2"></path>
-          </svg>
-        </div>
-        <div class="reviews-empty-text">
-          <h3>No filler reviews. No borrowed scores.</h3>
-          <p>The library will open with original, properly tested reviews. Until then, explore the cards currently in my portfolio.</p>
-        </div>
-        <a class="reviews-empty-action" href="https://cards.avhishek.in/">
-          <span>Explore the portfolio</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="review-library-grid">
+        <article class="library-review-card" data-review-card>
+          <button class="library-review-trigger" type="button" data-review-open aria-haspopup="dialog" aria-controls="hsbc-review-dialog">
+            <span class="library-review-media">
+              <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" loading="lazy" referrerpolicy="no-referrer">
+              <span class="library-review-verdict">Best for food and grocery</span>
+            </span>
+            <span class="library-review-content">
+              <span class="library-review-type">Cashback card review</span>
+              <span class="library-review-title">HSBC Live+ Credit Card</span>
+              <span class="library-review-description">A high-return lifestyle card when dining, food delivery and grocery spends are large enough to use the monthly cashback cap.</span>
+              <span class="library-review-footer">
+                <span class="library-review-byline">
+                  <span class="library-review-avatar" aria-hidden="true">A</span>
+                  <span><strong>Reviewed by Abhishek</strong><small>Updated October 2026</small></span>
+                </span>
+                <span class="library-review-action">Quick look <span aria-hidden="true">↗</span></span>
+              </span>
+            </span>
+          </button>
+        </article>
       </div>
     </section>
 
@@ -292,6 +297,41 @@
     </section>
   </main>
 
+
+  <dialog class="review-dialog" id="hsbc-review-dialog" aria-labelledby="hsbc-review-title">
+    <div class="review-dialog-shell">
+      <button class="review-dialog-close" type="button" data-review-close aria-label="Close review">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="review-dialog-media">
+        <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" referrerpolicy="no-referrer">
+      </div>
+      <div class="review-dialog-content">
+        <p class="review-dialog-type">Cashback card review</p>
+        <h2 id="hsbc-review-title">HSBC Live+ Credit Card</h2>
+        <p class="review-dialog-lede">A strong lifestyle cashback card for people who consistently spend on dining, food delivery and groceries—but the accelerated return has a monthly ceiling.</p>
+
+        <div class="review-dialog-snapshot" aria-label="Card snapshot">
+          <div><span>Accelerated cashback</span><strong>10%</strong><small>Up to ₹1,200 monthly</small></div>
+          <div><span>Base cashback</span><strong>1.5%</strong><small>On most other eligible spends</small></div>
+          <div><span>Annual fee</span><strong>₹999</strong><small>Waived above ₹2 lakh yearly spend</small></div>
+        </div>
+
+        <div class="review-dialog-details">
+          <section><h3>Why it works</h3><p>The accelerated categories make it easy to recover the annual fee if food and grocery spends are already part of your monthly routine.</p></section>
+          <section><h3>Watch the cap</h3><p>The 10% bucket is capped at ₹1,200 each month. Once it is exhausted, the headline return no longer tells the full story.</p></section>
+          <section><h3>Best suited for</h3><p>Cardholders who can concentrate eligible dining, food-delivery and grocery transactions on one card without forcing extra spending.</p></section>
+          <section><h3>Quick verdict</h3><p>Keep it for the accelerated lifestyle categories; pair it with another card for excluded categories and spends beyond the cap.</p></section>
+        </div>
+
+        <div class="review-dialog-footer">
+          <span>Independent review · Verify current terms before applying</span>
+          <a href="https://www.hsbc.bank.in/credit-cards/products/live-plus/" target="_blank" rel="noopener noreferrer">View official product page</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <footer class="global-footer">
     <div class="global-footer__inner">
       <div class="global-footer__top">
@@ -319,6 +359,6 @@
     </div>
   </footer>
 
-  <script src="assets/card-reviews.js?v=2"></script>
+  <script src="assets/card-reviews.js?v=3"></script>
 </body>
 </html>

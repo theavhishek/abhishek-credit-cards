@@ -24,4 +24,37 @@
     window.addEventListener("scroll", updateNavbar, { passive: true });
     updateNavbar();
   }
+
+  const reviewDialog = document.querySelector("#hsbc-review-dialog");
+  const reviewOpen = document.querySelector("[data-review-open]");
+  const reviewClose = reviewDialog?.querySelector("[data-review-close]");
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  let lastReviewTrigger = null;
+
+  const closeReview = () => {
+    if (!reviewDialog?.open) return;
+    if (reducedMotion) {
+      reviewDialog.close();
+      return;
+    }
+    reviewDialog.classList.add("is-closing");
+    window.setTimeout(() => reviewDialog.close(), 220);
+  };
+
+  reviewOpen?.addEventListener("click", () => {
+    lastReviewTrigger = reviewOpen;
+    reviewDialog?.showModal();
+  });
+  reviewClose?.addEventListener("click", closeReview);
+  reviewDialog?.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeReview();
+  });
+  reviewDialog?.addEventListener("click", (event) => {
+    if (event.target === reviewDialog) closeReview();
+  });
+  reviewDialog?.addEventListener("close", () => {
+    reviewDialog.classList.remove("is-closing");
+    lastReviewTrigger?.focus();
+  });
 })();
