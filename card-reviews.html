@@ -3,82 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6f7">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef1f3">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
   <meta name="author" content="Abhishek Meena">
   <meta name="publisher" content="Abhishek Meena">
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
   <meta name="description" content="Independent credit-card reviews by Abhishek Meena, focused on real-world rewards, fees, exclusions and practical use in India.">
-  <meta property="og:site_name" content="Avhishek">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Credit Card Reviews — Avhishek">
   <meta property="og:description" content="Independent credit-card reviews focused on value, fine print and real-world use.">
   <meta property="og:url" content="https://avhishek.in/card-reviews">
-  <meta property="og:image" content="https://cards.avhishek.in/assets/abhishek-hero-full.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Independent Credit Card Reviews by Abhishek Meena">
-  <meta property="og:locale" content="en_IN">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@the_avhishek">
-  <meta name="twitter:creator" content="@the_avhishek">
-  <meta name="twitter:title" content="Credit Card Reviews — Avhishek">
-  <meta name="twitter:description" content="Independent credit-card reviews focused on value, fine print and real-world use.">
-  <meta name="twitter:image" content="https://cards.avhishek.in/assets/abhishek-hero-full.jpg">
   <title>Credit Card Reviews — Avhishek</title>
   <link rel="canonical" href="https://avhishek.in/card-reviews">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://avhishek.in/card-reviews#breadcrumbs",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://avhishek.in/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Card Reviews",
-            "item": "https://avhishek.in/card-reviews"
-          }
-        ]
-      },
-      {
-        "@type": "CollectionPage",
-        "@id": "https://avhishek.in/card-reviews#webpage",
-        "url": "https://avhishek.in/card-reviews",
-        "name": "Credit Card Reviews — Avhishek",
-        "description": "Independent credit-card reviews by Abhishek Meena, focused on real-world rewards, fees, exclusions and practical use in India.",
-        "isPartOf": {
-          "@type": "WebSite",
-          "@id": "https://avhishek.in/#website",
-          "url": "https://avhishek.in/",
-          "name": "Avhishek"
-        },
-        "breadcrumb": { "@id": "https://avhishek.in/card-reviews#breadcrumbs" },
-        "author": {
-          "@type": "Person",
-          "@id": "https://avhishek.in/#author",
-          "name": "Abhishek Meena",
-          "url": "https://avhishek.in/",
-          "sameAs": [
-            "https://x.com/the_avhishek",
-            "https://whatsapp.com/channel/0029VbDBLDNL7UVPt9IYC914",
-            "https://desidime.com/profile/the.avhishek",
-            "https://technofino.in/community/members/the-avhishek.6612/#recent-content"
-          ]
-        }
-      }
-    ]
-  }
-  </script>
   <script>
     (() => {
       const saved = localStorage.getItem("abhishek-card-stack-theme");
@@ -91,16 +28,15 @@
   <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
   <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
   <link rel="stylesheet" href="assets/footer.css?v=1">
-  <link rel="stylesheet" href="assets/card-reviews.css?v=5">
+  <link rel="stylesheet" href="assets/card-reviews.css?v=4">
+  <link rel="stylesheet" href="assets/card-reviews-react.css?v=1">
 </head>
 <body class="reviews-page unified-navbar">
   <a class="skip-link" href="#reviews">Skip to reviews</a>
   <header class="topbar">
     <div class="topbar-shell" id="navbarShell">
       <nav class="topbar-inner" aria-label="Main navigation">
-        <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
-          <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
-        </a>
+        <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website"><span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span></a>
         <div class="topbar-actions">
           <a href="https://cards.avhishek.in/" class="collection-link">Cards</a>
           <a href="https://avhishek.in/card-reviews" class="collection-link" aria-current="page">Reviews</a>
@@ -108,144 +44,32 @@
           <label class="plane-switch" title="Switch day / night mode">
             <span class="sr-only">Day / night mode</span>
             <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
-            <div aria-hidden="true">
-              <span class="street-middle"></span><span class="cloud"></span><span class="cloud two"></span>
-              <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
-            </div>
+            <div aria-hidden="true"><span class="street-middle"></span><span class="cloud"></span><span class="cloud two"></span><div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div></div>
           </label>
         </div>
       </nav>
     </div>
   </header>
 
-  <main class="review-journal">
-    <section class="review-index shell" id="reviews" data-review-index aria-labelledby="reviews-title">
-      <header class="journal-heading">
-        <div>
-          <h1 id="reviews-title">Card reviews.</h1>
-          <p>Independent notes on rewards, fees and the fine print that decides whether a card deserves space in your wallet.</p>
-        </div>
-        <span class="journal-count" aria-label="One review published">1 review</span>
-      </header>
-
-      <div class="journal-rule" aria-hidden="true"></div>
-
-      <article class="featured-review">
-        <button class="featured-review__trigger" type="button" data-review-open aria-controls="hsbc-review-reader" aria-expanded="false">
-          <span class="featured-review__media">
-            <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" loading="eager" referrerpolicy="no-referrer">
-          </span>
-          <span class="featured-review__body">
-            <span class="review-meta"><span>Cashback</span><time datetime="2026-10-07">Oct 7, 2026</time></span>
-            <span class="featured-review__title">HSBC Live+ Credit Card</span>
-            <span class="featured-review__excerpt">A high-return lifestyle card when dining, food delivery and grocery spends are large enough to use the monthly cashback cap.</span>
-            <span class="featured-review__byline">
-              <span class="featured-review__avatar" aria-hidden="true">A</span>
-              <span><strong>Abhishek Meena</strong><small>5 min read</small></span>
-            </span>
-            <span class="featured-review__read">Read review <span aria-hidden="true">↗</span></span>
-          </span>
-        </button>
-      </article>
-    </section>
-
-    <article class="review-reader shell" id="hsbc-review-reader" data-review-reader aria-labelledby="hsbc-review-title" hidden>
-      <button class="reader-back" type="button" data-review-close>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        All reviews
-      </button>
-
-      <header class="reader-heading">
-        <p class="review-meta"><span>Cashback</span><time datetime="2026-10-07">Oct 7, 2026</time><span>5 min read</span></p>
-        <h1 id="hsbc-review-title">HSBC Live+ Credit Card</h1>
-        <div class="reader-byline">
-          <span class="featured-review__avatar" aria-hidden="true">A</span>
-          <span><strong>Reviewed by Abhishek Meena</strong><small>Independent card analysis</small></span>
-        </div>
-      </header>
-
-      <figure class="reader-hero">
-        <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" referrerpolicy="no-referrer">
-      </figure>
-
-      <div class="reader-content">
-        <p class="reader-lede">A strong lifestyle cashback card for people who consistently spend on dining, food delivery and groceries—but the accelerated return has a monthly ceiling.</p>
-
-        <dl class="reader-facts" aria-label="Card snapshot">
-          <div><dt>Accelerated cashback</dt><dd>10%</dd><span>Up to ₹1,200 monthly</span></div>
-          <div><dt>Base cashback</dt><dd>1.5%</dd><span>On most other eligible spends</span></div>
-          <div><dt>Annual fee</dt><dd>₹999</dd><span>Waived above ₹2 lakh yearly spend</span></div>
-        </dl>
-
-        <div class="reader-copy">
-          <section>
-            <h2>Why it works</h2>
-            <p>The accelerated categories make it easy to recover the annual fee if food and grocery spends are already part of your monthly routine.</p>
-          </section>
-          <section>
-            <h2>Watch the cap</h2>
-            <p>The 10% bucket is capped at ₹1,200 each month. Once it is exhausted, the headline return no longer tells the full story.</p>
-          </section>
-          <section>
-            <h2>Best suited for</h2>
-            <p>Cardholders who can concentrate eligible dining, food-delivery and grocery transactions on one card without forcing extra spending.</p>
-          </section>
-          <section>
-            <h2>Quick verdict</h2>
-            <p>Keep it for the accelerated lifestyle categories; pair it with another card for excluded categories and spends beyond the cap.</p>
-          </section>
-        </div>
-
-        <footer class="reader-footer">
-          <p>Card features and eligibility can change. Verify the latest terms with HSBC before applying.</p>
-          <a href="https://www.hsbc.bank.in/credit-cards/products/live-plus/" target="_blank" rel="noopener noreferrer">Official product page <span aria-hidden="true">↗</span></a>
-        </footer>
-      </div>
-    </article>
-
-    <section class="review-standard shell" data-index-extra aria-labelledby="standard-title">
-      <h2 id="standard-title">What every review checks</h2>
-      <div class="standard-list">
-        <div><span>Rewards</span><p>Effective value after caps and exclusions.</p></div>
-        <div><span>Cost</span><p>Fees, waiver targets and ownership value.</p></div>
-        <div><span>Fit</span><p>Where the card belongs in a real wallet.</p></div>
-        <div><span>Verdict</span><p>Who should apply, keep or skip it.</p></div>
-      </div>
-    </section>
-
-    <section class="review-note shell" data-index-extra aria-label="Review disclaimer">
-      <p><strong>Independent reference.</strong> Reviews reflect personal analysis and experience. Card features, fees and eligibility can change.</p>
-      <a href="https://avhishek.in/disclaimer">Read disclaimer</a>
-    </section>
+  <main id="reviews">
+    <div id="card-reviews-root"></div>
+    <noscript class="reviews-noscript">Enable JavaScript to browse card reviews.</noscript>
   </main>
 
   <footer class="global-footer">
     <div class="global-footer__inner">
       <div class="global-footer__top">
-        <div class="global-footer__identity">
-          <a class="global-footer__brand" href="https://avhishek.in/">Avhishek<span>.</span></a>
-          <p>Personal projects and reference tools.</p>
-        </div>
+        <div class="global-footer__identity"><a class="global-footer__brand" href="https://avhishek.in/">Avhishek<span>.</span></a><p>Personal projects and reference tools.</p></div>
         <nav class="global-footer__nav" aria-label="Footer navigation">
-          <a href="https://avhishek.in/">Home</a>
-          <a href="https://cards.avhishek.in/">Cards</a>
-          <a href="https://avhishek.in/card-reviews" aria-current="page">Reviews</a>
-          <a href="https://avhishek.in/bank-support">Bank support</a>
-          <a href="https://avhishek.in/disclaimer">Disclaimer</a>
+          <a href="https://avhishek.in/">Home</a><a href="https://cards.avhishek.in/">Cards</a><a href="https://avhishek.in/card-reviews" aria-current="page">Reviews</a><a href="https://avhishek.in/bank-support">Bank support</a><a href="https://avhishek.in/disclaimer">Disclaimer</a>
         </nav>
-        <div class="global-footer__social" aria-label="Elsewhere">
-          <a href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer">X</a>
-          <a href="https://www.desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer">DesiDime</a>
-          <a href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer">TechnoFino</a>
-        </div>
+        <div class="global-footer__social" aria-label="Elsewhere"><a href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer">X</a><a href="https://www.desidime.com/profile/the.avhishek" target="_blank" rel="noopener noreferrer">DesiDime</a><a href="https://technofino.in/community/members/the-avhishek.6612/#recent-content" target="_blank" rel="noopener noreferrer">TechnoFino</a></div>
       </div>
-      <div class="global-footer__bottom">
-        <span>© 2026 Abhishek Meena</span>
-        <span>Independent personal website.</span>
-      </div>
+      <div class="global-footer__bottom"><span>© 2026 Abhishek Meena</span><span>Independent personal website.</span></div>
     </div>
   </footer>
 
-  <script src="assets/card-reviews.js?v=4"></script>
+  <script src="assets/card-reviews.js?v=3"></script>
+  <script type="module" src="assets/card-reviews-react.js?v=1"></script>
 </body>
 </html>
