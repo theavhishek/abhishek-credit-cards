@@ -112,12 +112,18 @@ export function BlogGrid({
   const reduced = useReducedMotion();
   const uid = useId();
   const rootRef = useRef<HTMLElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
   const [category, setCategoryState] = useControllable(categoryProp, defaultCategory, onCategoryChange);
   const [page, setPageState] = useControllable(pageProp, defaultPage, onPageChange);
   const [direction, setDirection] = useState(0);
   const [reading, setReading] = useState<BlogPost | null>(null);
   const [returning, setReturning] = useState<string | null>(null);
   const lastOpened = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!reading) return;
+    requestAnimationFrame(() => backRef.current?.focus({ preventScroll: true }));
+  }, [reading]);
 
   const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
   const filtered = category === "All" ? sorted : sorted.filter(post => post.category === category);
@@ -192,7 +198,7 @@ export function BlogGrid({
       <div className={styles.inner}>
         <AnimatePresence mode="popLayout" initial={false}>
           {reading ? <motion.article key="reader" className={styles.reader} exit={{ opacity: 0, transition: { duration: motionTokens.duration.exit, ease: standard } }} aria-labelledby={`${uid}-reader-title`}>
-            <motion.button type="button" className={styles.back} onClick={close} autoFocus {...enterFade(true)}><ArrowLeft aria-hidden="true" />All reviews</motion.button>
+            <motion.button ref={backRef} type="button" className={styles.back} onClick={close} {...enterFade(true)}><ArrowLeft aria-hidden="true" />All reviews</motion.button>
             <motion.header className={styles.readerHead} {...enterFade(true)}>
               <Meta post={reading} />
               <h2 id={`${uid}-reader-title`} className={styles.readerTitle}>{reading.title}</h2>
