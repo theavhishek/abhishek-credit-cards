@@ -10,12 +10,75 @@
   <meta name="robots" content="index, follow">
   <meta name="googlebot" content="index, follow">
   <meta name="description" content="Independent credit-card reviews by Abhishek Meena, focused on real-world rewards, fees, exclusions and practical use in India.">
+  <meta property="og:site_name" content="Avhishek">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Credit Card Reviews — Avhishek">
   <meta property="og:description" content="Independent credit-card reviews focused on value, fine print and real-world use.">
   <meta property="og:url" content="https://avhishek.in/card-reviews">
+  <meta property="og:image" content="https://cards.avhishek.in/assets/abhishek-hero-full.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Independent Credit Card Reviews by Abhishek Meena">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@the_avhishek">
+  <meta name="twitter:creator" content="@the_avhishek">
+  <meta name="twitter:title" content="Credit Card Reviews — Avhishek">
+  <meta name="twitter:description" content="Independent credit-card reviews focused on value, fine print and real-world use.">
+  <meta name="twitter:image" content="https://cards.avhishek.in/assets/abhishek-hero-full.jpg">
   <title>Credit Card Reviews — Avhishek</title>
   <link rel="canonical" href="https://avhishek.in/card-reviews">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://avhishek.in/card-reviews#breadcrumbs",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://avhishek.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Card Reviews",
+            "item": "https://avhishek.in/card-reviews"
+          }
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://avhishek.in/card-reviews#webpage",
+        "url": "https://avhishek.in/card-reviews",
+        "name": "Credit Card Reviews — Avhishek",
+        "description": "Independent credit-card reviews by Abhishek Meena, focused on real-world rewards, fees, exclusions and practical use in India.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://avhishek.in/#website",
+          "url": "https://avhishek.in/",
+          "name": "Avhishek"
+        },
+        "breadcrumb": { "@id": "https://avhishek.in/card-reviews#breadcrumbs" },
+        "author": {
+          "@type": "Person",
+          "@id": "https://avhishek.in/#author",
+          "name": "Abhishek Meena",
+          "url": "https://avhishek.in/",
+          "sameAs": [
+            "https://x.com/the_avhishek",
+            "https://whatsapp.com/channel/0029VbDBLDNL7UVPt9IYC914",
+            "https://desidime.com/profile/the.avhishek",
+            "https://technofino.in/community/members/the-avhishek.6612/#recent-content"
+          ]
+        }
+      }
+    ]
+  }
+  </script>
   <script>
     (() => {
       const saved = localStorage.getItem("abhishek-card-stack-theme");
@@ -28,7 +91,7 @@
   <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
   <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
   <link rel="stylesheet" href="assets/footer.css?v=1">
-  <link rel="stylesheet" href="assets/card-reviews.css?v=2">
+  <link rel="stylesheet" href="assets/card-reviews.css?v=3">
 </head>
 <body class="reviews-page unified-navbar">
   <a class="skip-link" href="#reviews">Skip to reviews</a>
@@ -58,27 +121,79 @@
   <main>
     <section class="reviews-hero shell" aria-labelledby="reviews-title">
       <div class="reviews-hero-copy">
-        <p class="reviews-kicker"><span aria-hidden="true"></span>Independent reviews for Indian cardholders</p>
-        <h1 id="reviews-title">Credit cards,<br>reviewed for real life.</h1>
-        <p class="reviews-lede">Clear verdicts built around reward value, ownership cost, restrictions and the way a card actually fits into your wallet.</p>
+        <div class="reviews-intro-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          <span>Independent reviews for Indian cardholders</span>
+        </div>
+        <h1 id="reviews-title" class="reviews-intro-title">
+          Credit cards,<br>
+          <span class="reviews-intro-gradient">reviewed for real life.</span>
+        </h1>
+        <p class="reviews-intro-desc">
+          Clear verdicts built around reward value, ownership cost, restrictions and the way a card actually fits into your wallet.
+        </p>
         <div class="reviews-actions">
-          <a class="reviews-primary-action" href="#reviews">Browse reviews</a>
-          <a class="reviews-secondary-action" href="#method">How cards are reviewed</a>
+          <a class="reviews-primary-action" href="#reviews">
+            <span>Browse reviews</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a class="reviews-secondary-action" href="#method">
+            <span>How cards are reviewed</span>
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </a>
         </div>
       </div>
 
-      <div class="review-object" aria-label="An example of the review framework">
-        <div class="review-object-back" aria-hidden="true"></div>
-        <div class="review-sheet">
-          <div class="review-sheet-top">
-            <div><span>Review desk</span><small>Independent card analysis</small></div>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg>
+      <div class="review-specimen-card" aria-label="An example of the review framework">
+        <div class="specimen-card-glow" aria-hidden="true"></div>
+        <div class="specimen-card-inner">
+          <div class="specimen-card-header">
+            <div class="specimen-header-meta">
+              <span class="specimen-badge">
+                <span class="specimen-badge-dot" aria-hidden="true"></span>
+                Review desk
+              </span>
+              <small class="specimen-subhead">Independent card analysis</small>
+            </div>
+            <div class="specimen-card-chip" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><circle cx="7" cy="15" r="1"/></svg>
+            </div>
           </div>
-          <p class="review-sheet-question">Does this card earn its place?</p>
-          <div class="review-sheet-line"><span>Rewards</span><strong>Return after caps</strong></div>
-          <div class="review-sheet-line"><span>Ownership</span><strong>Fee and waiver math</strong></div>
-          <div class="review-sheet-line"><span>Reality check</span><strong>Limits and exclusions</strong></div>
-          <div class="review-sheet-verdict"><span>Final word</span><strong>Apply, keep or skip</strong></div>
+
+          <div class="specimen-question-wrap">
+            <p class="specimen-question">Does this card earn its place?</p>
+          </div>
+
+          <div class="specimen-metrics-list">
+            <div class="specimen-metric-row">
+              <span class="specimen-metric-label">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Rewards
+              </span>
+              <strong class="specimen-metric-value">Return after caps</strong>
+            </div>
+            <div class="specimen-metric-row">
+              <span class="specimen-metric-label">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                Ownership
+              </span>
+              <strong class="specimen-metric-value">Fee and waiver math</strong>
+            </div>
+            <div class="specimen-metric-row">
+              <span class="specimen-metric-label">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Reality check
+              </span>
+              <strong class="specimen-metric-value">Limits and exclusions</strong>
+            </div>
+          </div>
+
+          <div class="specimen-verdict-bar">
+            <span class="specimen-verdict-label">Final word</span>
+            <strong class="specimen-verdict-value">Apply, keep or skip</strong>
+          </div>
         </div>
       </div>
     </section>
@@ -89,16 +204,27 @@
           <p class="reviews-section-index">The review desk</p>
           <h2 id="library-title">Long-form reviews are on the way.</h2>
         </div>
-        <span class="reviews-count" aria-label="Zero reviews published"><strong>0</strong> published</span>
+        <span class="reviews-count-badge" aria-label="Zero reviews published">
+          <strong>0</strong> published
+        </span>
       </div>
 
-      <div class="reviews-empty-state">
-        <div class="reviews-empty-mark" aria-hidden="true"><span></span></div>
-        <div>
+      <div class="reviews-empty-panel">
+        <div class="reviews-empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="3"></rect>
+            <path d="M2 10h20"></path>
+            <path d="M7 15h2"></path>
+          </svg>
+        </div>
+        <div class="reviews-empty-text">
           <h3>No filler reviews. No borrowed scores.</h3>
           <p>The library will open with original, properly tested reviews. Until then, explore the cards currently in my portfolio.</p>
         </div>
-        <a href="https://cards.avhishek.in/">Explore the portfolio</a>
+        <a class="reviews-empty-action" href="https://cards.avhishek.in/">
+          <span>Explore the portfolio</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
 
@@ -106,20 +232,63 @@
       <div class="review-method-intro">
         <p class="reviews-section-index">The standard</p>
         <h2 id="method-title">Four questions behind every verdict.</h2>
-        <p>Each card is assessed with the same practical lens, so the conclusion stays useful after the launch campaign ends.</p>
+        <p class="review-method-subline">Each card is assessed with the same practical lens, so the conclusion stays useful after the launch campaign ends.</p>
       </div>
       <div class="review-method-grid">
-        <article><span class="method-mark" aria-hidden="true"></span><h3>What does it really return?</h3><p>Effective value after monthly caps, redemption rules and restricted categories.</p></article>
-        <article><span class="method-mark" aria-hidden="true"></span><h3>What does it cost to keep?</h3><p>Joining fee, annual fee, waiver target and whether the card earns its place.</p></article>
-        <article><span class="method-mark" aria-hidden="true"></span><h3>Where does it fit?</h3><p>The spends where the card works well, and the situations where another card wins.</p></article>
-        <article><span class="method-mark" aria-hidden="true"></span><h3>Who should skip it?</h3><p>A direct view of who should consider the card, who should keep it and who should move on.</p></article>
+        <article class="method-card">
+          <div class="method-card-head">
+            <span class="method-step-pill" aria-hidden="true">01</span>
+            <div class="method-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <h3>What does it really return?</h3>
+          <p>Effective value after monthly caps, redemption rules and restricted categories.</p>
+        </article>
+
+        <article class="method-card">
+          <div class="method-card-head">
+            <span class="method-step-pill" aria-hidden="true">02</span>
+            <div class="method-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+          </div>
+          <h3>What does it cost to keep?</h3>
+          <p>Joining fee, annual fee, waiver target and whether the card earns its place.</p>
+        </article>
+
+        <article class="method-card">
+          <div class="method-card-head">
+            <span class="method-step-pill" aria-hidden="true">03</span>
+            <div class="method-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+          </div>
+          <h3>Where does it fit?</h3>
+          <p>The spends where the card works well, and the situations where another card wins.</p>
+        </article>
+
+        <article class="method-card">
+          <div class="method-card-head">
+            <span class="method-step-pill" aria-hidden="true">04</span>
+            <div class="method-icon-circle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+          </div>
+          <h3>Who should skip it?</h3>
+          <p>A direct view of who should consider the card, who should keep it and who should move on.</p>
+        </article>
       </div>
     </section>
 
-    <section class="shell reviews-disclaimer" aria-label="Review disclaimer">
-      <strong>Independent reference</strong>
-      <p>Reviews reflect personal analysis and experience. Card features, fees and eligibility can change; verify current terms on the issuer’s official website before applying.</p>
-      <a href="https://avhishek.in/disclaimer">Read the full disclaimer</a>
+    <section class="shell site-disclaimer-card" aria-label="Review disclaimer">
+      <div class="disclaimer-content">
+        <div class="disclaimer-badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Independent Reference</span>
+        </div>
+        <p><strong>Independent reference:</strong> Reviews reflect personal analysis and experience. Card features, fees and eligibility can change; verify current terms on the issuer’s official website before applying. Read our full <a href="https://avhishek.in/disclaimer" class="disclaimer-link">Disclaimer &amp; Non-Affiliation Policy &rarr;</a></p>
+      </div>
     </section>
   </main>
 
@@ -150,6 +319,6 @@
     </div>
   </footer>
 
-  <script src="assets/card-reviews.js?v=1"></script>
+  <script src="assets/card-reviews.js?v=2"></script>
 </body>
 </html>
