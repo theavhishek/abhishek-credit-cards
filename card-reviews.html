@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eef1f3">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
   <meta name="author" content="Abhishek Meena">
   <meta name="publisher" content="Abhishek Meena">
@@ -91,7 +91,7 @@
   <link rel="stylesheet" href="assets/plane-switch-home.css?v=3">
   <link rel="stylesheet" href="assets/unified-navbar.css?v=2">
   <link rel="stylesheet" href="assets/footer.css?v=1">
-  <link rel="stylesheet" href="assets/card-reviews.css?v=4">
+  <link rel="stylesheet" href="assets/card-reviews.css?v=5">
 </head>
 <body class="reviews-page unified-navbar">
   <a class="skip-link" href="#reviews">Skip to reviews</a>
@@ -118,219 +118,106 @@
     </div>
   </header>
 
-  <main>
-    <section class="reviews-hero shell" aria-labelledby="reviews-title">
-      <div class="reviews-hero-copy">
-        <div class="reviews-intro-badge">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span>Independent reviews for Indian cardholders</span>
-        </div>
-        <h1 id="reviews-title" class="reviews-intro-title">
-          Credit cards,<br>
-          <span class="reviews-intro-gradient">reviewed for real life.</span>
-        </h1>
-        <p class="reviews-intro-desc">
-          Clear verdicts built around reward value, ownership cost, restrictions and the way a card actually fits into your wallet.
-        </p>
-        <div class="reviews-actions">
-          <a class="reviews-primary-action" href="#reviews">
-            <span>Browse reviews</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a class="reviews-secondary-action" href="#method">
-            <span>How cards are reviewed</span>
-            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="review-specimen-card" aria-label="An example of the review framework">
-        <div class="specimen-card-glow" aria-hidden="true"></div>
-        <div class="specimen-card-inner">
-          <div class="specimen-card-header">
-            <div class="specimen-header-meta">
-              <span class="specimen-badge">
-                <span class="specimen-badge-dot" aria-hidden="true"></span>
-                Review desk
-              </span>
-              <small class="specimen-subhead">Independent card analysis</small>
-            </div>
-            <div class="specimen-card-chip" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><circle cx="7" cy="15" r="1"/></svg>
-            </div>
-          </div>
-
-          <div class="specimen-question-wrap">
-            <p class="specimen-question">Does this card earn its place?</p>
-          </div>
-
-          <div class="specimen-metrics-list">
-            <div class="specimen-metric-row">
-              <span class="specimen-metric-label">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                Rewards
-              </span>
-              <strong class="specimen-metric-value">Return after caps</strong>
-            </div>
-            <div class="specimen-metric-row">
-              <span class="specimen-metric-label">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                Ownership
-              </span>
-              <strong class="specimen-metric-value">Fee and waiver math</strong>
-            </div>
-            <div class="specimen-metric-row">
-              <span class="specimen-metric-label">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                Reality check
-              </span>
-              <strong class="specimen-metric-value">Limits and exclusions</strong>
-            </div>
-          </div>
-
-          <div class="specimen-verdict-bar">
-            <span class="specimen-verdict-label">Final word</span>
-            <strong class="specimen-verdict-value">Apply, keep or skip</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="reviews-library shell" id="reviews" aria-labelledby="library-title">
-      <div class="reviews-section-heading">
+  <main class="review-journal">
+    <section class="review-index shell" id="reviews" data-review-index aria-labelledby="reviews-title">
+      <header class="journal-heading">
         <div>
-          <p class="reviews-section-index">The review desk</p>
-          <h2 id="library-title">Card reviews.</h2>
+          <h1 id="reviews-title">Card reviews.</h1>
+          <p>Independent notes on rewards, fees and the fine print that decides whether a card deserves space in your wallet.</p>
         </div>
-        <span class="reviews-count-badge" aria-label="One review published">
-          <strong>1</strong> published
-        </span>
-      </div>
+        <span class="journal-count" aria-label="One review published">1 review</span>
+      </header>
 
-      <div class="review-library-grid">
-        <article class="library-review-card" data-review-card>
-          <button class="library-review-trigger" type="button" data-review-open aria-haspopup="dialog" aria-controls="hsbc-review-dialog">
-            <span class="library-review-media">
-              <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" loading="lazy" referrerpolicy="no-referrer">
-              <span class="library-review-verdict">Best for food and grocery</span>
+      <div class="journal-rule" aria-hidden="true"></div>
+
+      <article class="featured-review">
+        <button class="featured-review__trigger" type="button" data-review-open aria-controls="hsbc-review-reader" aria-expanded="false">
+          <span class="featured-review__media">
+            <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" loading="eager" referrerpolicy="no-referrer">
+          </span>
+          <span class="featured-review__body">
+            <span class="review-meta"><span>Cashback</span><time datetime="2026-10-07">Oct 7, 2026</time></span>
+            <span class="featured-review__title">HSBC Live+ Credit Card</span>
+            <span class="featured-review__excerpt">A high-return lifestyle card when dining, food delivery and grocery spends are large enough to use the monthly cashback cap.</span>
+            <span class="featured-review__byline">
+              <span class="featured-review__avatar" aria-hidden="true">A</span>
+              <span><strong>Abhishek Meena</strong><small>5 min read</small></span>
             </span>
-            <span class="library-review-content">
-              <span class="library-review-type">Cashback card review</span>
-              <span class="library-review-title">HSBC Live+ Credit Card</span>
-              <span class="library-review-description">A high-return lifestyle card when dining, food delivery and grocery spends are large enough to use the monthly cashback cap.</span>
-              <span class="library-review-footer">
-                <span class="library-review-byline">
-                  <span class="library-review-avatar" aria-hidden="true">A</span>
-                  <span><strong>Reviewed by Abhishek</strong><small>Updated October 2026</small></span>
-                </span>
-                <span class="library-review-action">Quick look <span aria-hidden="true">↗</span></span>
-              </span>
-            </span>
-          </button>
-        </article>
+            <span class="featured-review__read">Read review <span aria-hidden="true">↗</span></span>
+          </span>
+        </button>
+      </article>
+    </section>
+
+    <article class="review-reader shell" id="hsbc-review-reader" data-review-reader aria-labelledby="hsbc-review-title" hidden>
+      <button class="reader-back" type="button" data-review-close>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All reviews
+      </button>
+
+      <header class="reader-heading">
+        <p class="review-meta"><span>Cashback</span><time datetime="2026-10-07">Oct 7, 2026</time><span>5 min read</span></p>
+        <h1 id="hsbc-review-title">HSBC Live+ Credit Card</h1>
+        <div class="reader-byline">
+          <span class="featured-review__avatar" aria-hidden="true">A</span>
+          <span><strong>Reviewed by Abhishek Meena</strong><small>Independent card analysis</small></span>
+        </div>
+      </header>
+
+      <figure class="reader-hero">
+        <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" referrerpolicy="no-referrer">
+      </figure>
+
+      <div class="reader-content">
+        <p class="reader-lede">A strong lifestyle cashback card for people who consistently spend on dining, food delivery and groceries—but the accelerated return has a monthly ceiling.</p>
+
+        <dl class="reader-facts" aria-label="Card snapshot">
+          <div><dt>Accelerated cashback</dt><dd>10%</dd><span>Up to ₹1,200 monthly</span></div>
+          <div><dt>Base cashback</dt><dd>1.5%</dd><span>On most other eligible spends</span></div>
+          <div><dt>Annual fee</dt><dd>₹999</dd><span>Waived above ₹2 lakh yearly spend</span></div>
+        </dl>
+
+        <div class="reader-copy">
+          <section>
+            <h2>Why it works</h2>
+            <p>The accelerated categories make it easy to recover the annual fee if food and grocery spends are already part of your monthly routine.</p>
+          </section>
+          <section>
+            <h2>Watch the cap</h2>
+            <p>The 10% bucket is capped at ₹1,200 each month. Once it is exhausted, the headline return no longer tells the full story.</p>
+          </section>
+          <section>
+            <h2>Best suited for</h2>
+            <p>Cardholders who can concentrate eligible dining, food-delivery and grocery transactions on one card without forcing extra spending.</p>
+          </section>
+          <section>
+            <h2>Quick verdict</h2>
+            <p>Keep it for the accelerated lifestyle categories; pair it with another card for excluded categories and spends beyond the cap.</p>
+          </section>
+        </div>
+
+        <footer class="reader-footer">
+          <p>Card features and eligibility can change. Verify the latest terms with HSBC before applying.</p>
+          <a href="https://www.hsbc.bank.in/credit-cards/products/live-plus/" target="_blank" rel="noopener noreferrer">Official product page <span aria-hidden="true">↗</span></a>
+        </footer>
+      </div>
+    </article>
+
+    <section class="review-standard shell" data-index-extra aria-labelledby="standard-title">
+      <h2 id="standard-title">What every review checks</h2>
+      <div class="standard-list">
+        <div><span>Rewards</span><p>Effective value after caps and exclusions.</p></div>
+        <div><span>Cost</span><p>Fees, waiver targets and ownership value.</p></div>
+        <div><span>Fit</span><p>Where the card belongs in a real wallet.</p></div>
+        <div><span>Verdict</span><p>Who should apply, keep or skip it.</p></div>
       </div>
     </section>
 
-    <section class="review-method shell" id="method" aria-labelledby="method-title">
-      <div class="review-method-intro">
-        <p class="reviews-section-index">The standard</p>
-        <h2 id="method-title">Four questions behind every verdict.</h2>
-        <p class="review-method-subline">Each card is assessed with the same practical lens, so the conclusion stays useful after the launch campaign ends.</p>
-      </div>
-      <div class="review-method-grid">
-        <article class="method-card">
-          <div class="method-card-head">
-            <span class="method-step-pill" aria-hidden="true">01</span>
-            <div class="method-icon-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-          </div>
-          <h3>What does it really return?</h3>
-          <p>Effective value after monthly caps, redemption rules and restricted categories.</p>
-        </article>
-
-        <article class="method-card">
-          <div class="method-card-head">
-            <span class="method-step-pill" aria-hidden="true">02</span>
-            <div class="method-icon-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-          </div>
-          <h3>What does it cost to keep?</h3>
-          <p>Joining fee, annual fee, waiver target and whether the card earns its place.</p>
-        </article>
-
-        <article class="method-card">
-          <div class="method-card-head">
-            <span class="method-step-pill" aria-hidden="true">03</span>
-            <div class="method-icon-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            </div>
-          </div>
-          <h3>Where does it fit?</h3>
-          <p>The spends where the card works well, and the situations where another card wins.</p>
-        </article>
-
-        <article class="method-card">
-          <div class="method-card-head">
-            <span class="method-step-pill" aria-hidden="true">04</span>
-            <div class="method-icon-circle" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
-          </div>
-          <h3>Who should skip it?</h3>
-          <p>A direct view of who should consider the card, who should keep it and who should move on.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="shell site-disclaimer-card" aria-label="Review disclaimer">
-      <div class="disclaimer-content">
-        <div class="disclaimer-badge">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Independent Reference</span>
-        </div>
-        <p><strong>Independent reference:</strong> Reviews reflect personal analysis and experience. Card features, fees and eligibility can change; verify current terms on the issuer’s official website before applying. Read our full <a href="https://avhishek.in/disclaimer" class="disclaimer-link">Disclaimer &amp; Non-Affiliation Policy &rarr;</a></p>
-      </div>
+    <section class="review-note shell" data-index-extra aria-label="Review disclaimer">
+      <p><strong>Independent reference.</strong> Reviews reflect personal analysis and experience. Card features, fees and eligibility can change.</p>
+      <a href="https://avhishek.in/disclaimer">Read disclaimer</a>
     </section>
   </main>
-
-
-  <dialog class="review-dialog" id="hsbc-review-dialog" aria-labelledby="hsbc-review-title">
-    <div class="review-dialog-shell">
-      <button class="review-dialog-close" type="button" data-review-close aria-label="Close review">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-      </button>
-      <div class="review-dialog-media">
-        <img src="https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg" alt="HSBC Live+ Visa Infinite credit card" width="1280" height="720" referrerpolicy="no-referrer">
-      </div>
-      <div class="review-dialog-content">
-        <p class="review-dialog-type">Cashback card review</p>
-        <h2 id="hsbc-review-title">HSBC Live+ Credit Card</h2>
-        <p class="review-dialog-lede">A strong lifestyle cashback card for people who consistently spend on dining, food delivery and groceries—but the accelerated return has a monthly ceiling.</p>
-
-        <div class="review-dialog-snapshot" aria-label="Card snapshot">
-          <div><span>Accelerated cashback</span><strong>10%</strong><small>Up to ₹1,200 monthly</small></div>
-          <div><span>Base cashback</span><strong>1.5%</strong><small>On most other eligible spends</small></div>
-          <div><span>Annual fee</span><strong>₹999</strong><small>Waived above ₹2 lakh yearly spend</small></div>
-        </div>
-
-        <div class="review-dialog-details">
-          <section><h3>Why it works</h3><p>The accelerated categories make it easy to recover the annual fee if food and grocery spends are already part of your monthly routine.</p></section>
-          <section><h3>Watch the cap</h3><p>The 10% bucket is capped at ₹1,200 each month. Once it is exhausted, the headline return no longer tells the full story.</p></section>
-          <section><h3>Best suited for</h3><p>Cardholders who can concentrate eligible dining, food-delivery and grocery transactions on one card without forcing extra spending.</p></section>
-          <section><h3>Quick verdict</h3><p>Keep it for the accelerated lifestyle categories; pair it with another card for excluded categories and spends beyond the cap.</p></section>
-        </div>
-
-        <div class="review-dialog-footer">
-          <span>Independent review · Verify current terms before applying</span>
-          <a href="https://www.hsbc.bank.in/credit-cards/products/live-plus/" target="_blank" rel="noopener noreferrer">View official product page</a>
-        </div>
-      </div>
-    </div>
-  </dialog>
 
   <footer class="global-footer">
     <div class="global-footer__inner">
@@ -359,6 +246,6 @@
     </div>
   </footer>
 
-  <script src="assets/card-reviews.js?v=3"></script>
+  <script src="assets/card-reviews.js?v=4"></script>
 </body>
 </html>
