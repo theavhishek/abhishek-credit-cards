@@ -754,3 +754,91 @@ html[data-theme="dark"] .method-icon-circle {
     transform: none !important;
   }
 }
+
+
+/* ==========================================================================
+   7. REVIEW LIBRARY CARD AND QUICK LOOK
+   ========================================================================== */
+.review-library-grid{display:grid;grid-template-columns:minmax(0,720px);gap:24px}
+.library-review-card{overflow:hidden;border:1px solid var(--line-strong);border-radius:26px;background:var(--surface);box-shadow:0 18px 54px rgba(26,20,11,.07);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s cubic-bezier(.16,1,.3,1)}
+.library-review-card:hover{transform:translateY(-3px);box-shadow:0 26px 68px rgba(26,20,11,.12)}
+.library-review-trigger{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.library-review-trigger:focus-visible{outline:3px solid var(--reviews-accent);outline-offset:-3px;border-radius:24px}
+.library-review-media{position:relative;display:block;overflow:hidden;aspect-ratio:16/8.2;background:#5d1c34}
+.library-review-media::after{position:absolute;inset:0;content:"";background:linear-gradient(180deg,transparent 48%,rgba(27,8,14,.26))}
+.library-review-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.library-review-card:hover .library-review-media img{transform:scale(1.035)}
+.library-review-verdict{position:absolute;z-index:1;right:20px;bottom:18px;padding:8px 12px;border:1px solid rgba(255,255,255,.32);border-radius:999px;background:rgba(20,11,16,.58);color:#fff;font-size:11px;font-weight:650;line-height:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.library-review-content{display:block;padding:25px 27px 24px}
+.library-review-type{display:block;color:var(--reviews-accent);font-size:12px;font-weight:650}
+.library-review-title{display:block;margin-top:8px;font-size:clamp(28px,3.5vw,40px);font-weight:700;line-height:1.08;letter-spacing:-.03em}
+.library-review-description{display:block;max-width:620px;margin-top:13px;color:var(--muted);font-size:15px;line-height:1.58;letter-spacing:-.006em}
+.library-review-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:25px;padding-top:19px;border-top:1px solid var(--line)}
+.library-review-byline{display:flex;align-items:center;gap:10px;min-width:0}
+.library-review-avatar{display:grid;width:36px;height:36px;place-items:center;flex:none;border-radius:50%;background:var(--text);color:var(--page);font-size:13px;font-weight:700}
+.library-review-byline>span:last-child{display:grid;gap:1px;min-width:0}
+.library-review-byline strong{font-size:12px;font-weight:650}
+.library-review-byline small{color:var(--muted);font-size:10px}
+.library-review-action{flex:none;color:var(--text);font-size:12px;font-weight:680}
+.library-review-action span{display:inline-block;margin-left:4px;transition:transform .2s ease}
+.library-review-card:hover .library-review-action span{transform:translate(2px,-2px)}
+
+.review-dialog{width:min(980px,calc(100% - 32px));max-height:min(880px,calc(100dvh - 32px));padding:0;overflow:auto;border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);color:var(--text);font-family:var(--site-font);box-shadow:0 36px 120px rgba(0,0,0,.28);opacity:0;transform:translateY(10px) scale(.985);transition:opacity .22s ease,transform .34s cubic-bezier(.16,1,.3,1),display .22s allow-discrete,overlay .22s allow-discrete}
+.review-dialog[open]{opacity:1;transform:none}
+.review-dialog[open].is-closing{opacity:0;transform:translateY(8px) scale(.985)}
+@starting-style{.review-dialog[open]{opacity:0;transform:translateY(14px) scale(.975)}}
+.review-dialog::backdrop{background:rgba(13,12,11,.58);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity .22s ease,display .22s allow-discrete,overlay .22s allow-discrete}
+.review-dialog[open]::backdrop{opacity:1}
+.review-dialog[open].is-closing::backdrop{opacity:0}
+@starting-style{.review-dialog[open]::backdrop{opacity:0}}
+.review-dialog-shell{position:relative}
+.review-dialog-close{position:absolute;z-index:4;top:16px;right:16px;display:grid;width:42px;height:42px;padding:0;place-items:center;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(20,11,16,.58);color:#fff;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.review-dialog-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.review-dialog-close:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.review-dialog-media{overflow:hidden;aspect-ratio:16/7.2;background:#5d1c34}
+.review-dialog-media img{display:block;width:100%;height:100%;object-fit:cover}
+.review-dialog-content{padding:32px 36px 34px}
+.review-dialog-type{margin:0;color:var(--reviews-accent);font-size:12px;font-weight:650}
+.review-dialog h2{margin:8px 0 0;font-size:clamp(38px,5vw,60px);font-weight:700;line-height:1;letter-spacing:-.034em}
+.review-dialog-lede{max-width:780px;margin:19px 0 0;color:var(--muted);font-size:17px;line-height:1.6;letter-spacing:-.008em}
+.review-dialog-snapshot{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.review-dialog-snapshot>div{display:grid;gap:3px;padding:21px 20px;border-right:1px solid var(--line-strong)}
+.review-dialog-snapshot>div:first-child{padding-left:0}
+.review-dialog-snapshot>div:last-child{padding-right:0;border-right:0}
+.review-dialog-snapshot span{color:var(--muted);font-size:11px}
+.review-dialog-snapshot strong{font-size:27px;font-weight:690;letter-spacing:-.025em}
+.review-dialog-snapshot small{color:var(--muted);font-size:10px;line-height:1.45}
+.review-dialog-details{display:grid;grid-template-columns:1fr 1fr;gap:0 36px;margin-top:13px}
+.review-dialog-details section{padding:23px 0;border-bottom:1px solid var(--line)}
+.review-dialog-details h3{margin:0;font-size:16px;font-weight:680;letter-spacing:-.015em}
+.review-dialog-details p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.62}
+.review-dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:27px;color:var(--muted);font-size:11px}
+.review-dialog-footer a{padding-bottom:3px;border-bottom:1px solid currentColor;color:var(--reviews-accent);font-weight:680;white-space:nowrap}
+body:has(.review-dialog[open]){overflow:hidden}
+html[data-theme="dark"] .library-review-card{background:rgba(26,28,35,.88);box-shadow:0 22px 66px rgba(0,0,0,.4)}
+
+@media(max-width:720px){
+  .library-review-card{border-radius:21px}
+  .library-review-trigger:focus-visible{border-radius:19px}
+  .library-review-media{aspect-ratio:16/10}
+  .library-review-verdict{right:14px;bottom:13px;font-size:10px}
+  .library-review-content{padding:21px 20px 20px}
+  .library-review-title{font-size:30px;line-height:1.1}
+  .library-review-description{font-size:14px}
+  .library-review-footer{align-items:flex-start;flex-direction:column;gap:14px}
+  .library-review-action{align-self:flex-end}
+  .review-dialog{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:22px}
+  .review-dialog-media{aspect-ratio:16/10}
+  .review-dialog-content{padding:24px 20px 26px}
+  .review-dialog h2{font-size:38px}
+  .review-dialog-lede{font-size:15px}
+  .review-dialog-snapshot{grid-template-columns:1fr}
+  .review-dialog-snapshot>div,.review-dialog-snapshot>div:first-child,.review-dialog-snapshot>div:last-child{padding:16px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .review-dialog-snapshot>div:last-child{border-bottom:0}
+  .review-dialog-details{grid-template-columns:1fr}
+  .review-dialog-footer{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  .library-review-card,.library-review-media img,.library-review-action span,.review-dialog,.review-dialog::backdrop{transition:none!important}
+  .library-review-card:hover,.library-review-card:hover .library-review-media img{transform:none!important}
+}
