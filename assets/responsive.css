@@ -53,8 +53,8 @@ body {
 
   .hero { padding-block: 38px 24px !important; display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 28px !important; }
   .hero-copy { width: 100%; min-width: 0; }
-  .hero h1 { max-width: 340px; margin: 0; font-family: var(--site-font) !important; font-size: clamp(31px, 8.7vw, 36px) !important; font-weight: 700 !important; line-height: 1.035 !important; letter-spacing: -.042em !important; text-wrap: balance; }
-  .hero-copy > p { max-width: 340px; margin-top: 16px !important; font-size: 13px !important; line-height: 1.55 !important; letter-spacing: -.012em; }
+  .hero h1 { max-width: 340px; margin: 0; font-family: var(--site-font) !important; font-size: clamp(31px, 8.7vw, 36px) !important; font-weight: 600 !important; line-height: 1.04 !important; letter-spacing: -.036em !important; text-wrap: balance; }
+  .hero-copy > p { max-width: 340px; margin-top: 16px !important; font-size: 13px !important; font-weight: 400 !important; line-height: 1.58 !important; letter-spacing: -.008em; }
   .hero-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
   .hero-meta > div { min-width: 0; padding-right: 6px; }
   .hero-meta strong { display: block; font-size: 21px; line-height: 1; letter-spacing: -.035em; }
