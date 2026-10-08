@@ -135,7 +135,7 @@ export function BlogGrid({
 
   function scrollToTop() {
     const node = rootRef.current;
-    if (node && node.getBoundingClientRect().top < 0) node.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    node?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
   function setCategory(next: string) {
     if (next === category) return;
