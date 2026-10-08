@@ -89,16 +89,26 @@
 </head>
 <body class="portrait-home unified-navbar">
   <a class="skip-link" href="#collection">Skip to card collection</a>
-  <header class="topbar">
-    <div class="topbar-shell" id="navbarShell">
+  <header class="topbar tweenly-topbar">
+    <div class="topbar-shell tweenly-navbar" id="navbarShell">
       <nav class="topbar-inner" aria-label="Main navigation">
-        <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
-          <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
-        </a>
-        <div class="topbar-actions">
-          <a href="#collection" class="collection-link" aria-current="page">Cards</a>
-          <a href="https://avhishek.in/card-reviews" class="collection-link">Reviews</a>
-          <a href="https://avhishek.in/bank-support" class="collection-link">Support</a>
+        <div class="tweenly-logo">
+          <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
+            <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
+          </a>
+        </div>
+        <ul class="tweenly-capsule-links" role="list">
+          <li>
+            <a href="#collection" class="tweenly-link" aria-current="page" data-nav="cards">Cards</a>
+          </li>
+          <li>
+            <a href="https://avhishek.in/card-reviews" class="tweenly-link" data-nav="reviews">Reviews</a>
+          </li>
+          <li>
+            <a href="https://avhishek.in/bank-support" class="tweenly-link" data-nav="support">Support</a>
+          </li>
+        </ul>
+        <div class="tweenly-nav-actions">
           <label class="plane-switch" title="Switch day / night mode">
             <span class="sr-only">Day / night mode</span>
             <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
@@ -113,8 +123,36 @@
               </div>
             </div>
           </label>
+          <button class="tweenly-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileSheet">
+            <span class="tweenly-burger-box" aria-hidden="true">
+              <span class="tweenly-burger-line line-1"></span>
+              <span class="tweenly-burger-line line-2"></span>
+            </span>
+          </button>
         </div>
       </nav>
+      <div id="mobileSheet" class="tweenly-mobile-sheet" hidden aria-hidden="true">
+        <ul class="tweenly-mobile-list" role="list">
+          <li>
+            <a href="#collection" class="tweenly-mobile-link" aria-current="page" data-nav="cards">
+              <span>Cards</span>
+              <span class="tweenly-active-indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://avhishek.in/card-reviews" class="tweenly-mobile-link" data-nav="reviews">
+              <span>Reviews</span>
+              <span class="tweenly-active-indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a href="https://avhishek.in/bank-support" class="tweenly-mobile-link" data-nav="support">
+              <span>Support</span>
+              <span class="tweenly-active-indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </header>
   <main id="top">
@@ -272,5 +310,6 @@
   <script src="assets/data.js"></script>
   <script src="assets/logo-png.js"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/unified-navbar.js" defer></script>
 </body>
 </html>
