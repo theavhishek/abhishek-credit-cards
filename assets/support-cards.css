@@ -16,10 +16,10 @@ html[data-theme="dark"] .support-home-nav .topbar{background:rgba(18,18,22,.88);
 .support-intro-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:999px;background:rgba(199,146,50,.11);border:1px solid rgba(199,146,50,.30);color:#c79232;font-size:12px;font-weight:700;margin-bottom:18px;letter-spacing:-.01em}
 html[data-theme="dark"] .support-intro-badge{background:rgba(216,170,81,.14);border-color:rgba(216,170,81,.34);color:#f0cf8a}
 .support-intro-badge svg{flex-shrink:0}
-.support-intro-title{font-size:clamp(36px,4.5vw,58px);line-height:1.06;letter-spacing:-.045em;font-weight:800;margin:0 0 16px;color:var(--text)}
+.support-intro-title{font-size:clamp(46px,5.8vw,78px);line-height:0.98;letter-spacing:-.045em;font-weight:800;margin:0 0 18px;color:var(--text);text-wrap:balance}
 .support-intro-gradient{background:linear-gradient(135deg,#c79232 0%,#e9bd67 50%,#f1d8a3 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block}
 html[data-theme="dark"] .support-intro-gradient{background:linear-gradient(135deg,#d9ae57 0%,#e9bd67 50%,#f7e6c1 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.support-intro-desc{max-width:680px;font-size:14.5px;line-height:1.6;color:var(--muted);margin:0 0 26px}
+.support-intro-desc{max-width:720px;font-size:15.5px;line-height:1.62;color:var(--muted);margin:0 0 26px}
 .support-intro-features{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .support-feature-pill{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 10px;border-radius:14px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:0 4px 14px rgba(0,0,0,.03);transition:transform .2s ease,border-color .2s ease}
 html[data-theme="dark"] .support-feature-pill{background:rgba(26,28,35,.85);border-color:rgba(255,255,255,.10);box-shadow:0 4px 16px rgba(0,0,0,.3)}
@@ -32,8 +32,8 @@ html[data-theme="dark"] .feature-icon-circle{background:rgba(216,170,81,.17);col
   .support-home-nav .topbar{padding-inline:14px}
   .support-home-nav .topbar-shell,.support-home-nav .topbar-shell.scrolled{width:calc(100% - 20px)!important}
   .support-hero-intro{padding:22px 0 18px}
-  .support-intro-title{font-size:clamp(30px,8vw,42px)}
-  .support-intro-desc{font-size:13.5px;margin-bottom:18px}
+  .support-intro-title{font-size:clamp(34px,8.6vw,46px);line-height:1.02}
+  .support-intro-desc{font-size:14px;line-height:1.58;margin-bottom:20px}
   .support-intro-features{gap:10px}
   .support-feature-pill{flex:1 1 calc(50% - 10px);min-width:140px}
 }
