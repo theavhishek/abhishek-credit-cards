@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useId, useRef, useState } from "react"
 import {
   AnimatePresence,
@@ -11,7 +9,7 @@ import {
   type Transition,
 } from "motion/react"
 import { ArrowUpRight } from "lucide-react"
-import { cn } from "../../lib/utils"
+import { cn } from "@/lib/utils"
 
 export type NavbarVariant = "pill" | "morph" | "underline" | "island" | "overlay"
 
@@ -50,7 +48,6 @@ export interface NavbarProps {
   /** Called when a link is clicked. Call `e.preventDefault()` to route yourself. */
   onNavigate?: (href: string, e: React.MouseEvent<HTMLAnchorElement>) => void
   className?: string
-  /** Additional items on the right (like day/night theme switch) */
   rightSlot?: React.ReactNode
 }
 
@@ -77,7 +74,7 @@ const SOFT: Transition = { type: "spring", stiffness: 260, damping: 30 }
 const INSTANT: Transition = { duration: 0 }
 const EASE = [0.76, 0, 0.24, 1] as const
 
-const HOME = "https://avhishek.in/"
+const HOME = "/"
 const focusRing = "outline-none focus-visible:ring-2 focus-visible:ring-ring"
 
 export function Navbar({
@@ -90,7 +87,7 @@ export function Navbar({
   hideOnScroll = true,
   scroller,
   position = "sticky",
-  accentColor = "#c79232",
+  accentColor,
   onNavigate,
   className,
   rightSlot,
@@ -131,11 +128,12 @@ function DefaultLogo({ onNavigate }: { onNavigate?: NavbarProps["onNavigate"] })
   return (
     <a
       href={HOME}
-      aria-label="Avhishek main website"
+      aria-label="Home"
       onClick={(e) => onNavigate?.(HOME, e)}
-      className={cn("flex items-center gap-1 rounded-md text-[18px] font-bold tracking-tight text-foreground", focusRing)}
+      className={cn("flex items-center gap-2 rounded-md text-[15px] font-semibold tracking-tight", focusRing)}
     >
-      Abhishek<span className="text-[#c79232]">.</span>
+      <span aria-hidden className="size-3 rotate-45 rounded-[3px] bg-current" />
+      acme
     </a>
   )
 }
@@ -687,6 +685,7 @@ function OverlayNav({ s, className }: { s: Shared; className?: string }) {
   const clipPath = useMotionTemplate`circle(${r}px at ${x}px ${y}px)`
   const { reduced } = s
 
+  // Grow the circle from the burger to the farthest corner of the overlay
   useEffect(() => {
     const b = burgerRef.current?.getBoundingClientRect()
     const o = overlayRef.current?.getBoundingClientRect()
@@ -713,6 +712,7 @@ function OverlayNav({ s, className }: { s: Shared; className?: string }) {
       >
         <div className="flex shrink-0 items-center">{s.logo}</div>
         <div className="flex items-center gap-1">
+          {s.rightSlot}
           <span aria-hidden className="relative h-5 overflow-hidden text-sm">
             <motion.span
               className="flex flex-col"

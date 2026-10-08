@@ -1,10 +1,16 @@
 /* ==========================================================================
-   Tweenly Morph Navbar (@tweenly/navbar)
-   Shared across portfolio, reviews, support and legal pages.
+   Tweenly Navbar (@tweenly/navbar)
+   Shared across portfolio (cards.avhishek.in), reviews, support, and legal pages.
+   Supports both pre-rendered HTML fallback and hydrated React Motion component.
    The avhishek.in coming-soon homepage intentionally does not load this file.
    ========================================================================== */
 
-.unified-navbar .topbar {
+#navbar-root {
+  display: contents;
+}
+
+.unified-navbar .topbar,
+#navbar-root header.topbar {
   position: sticky;
   top: 0;
   left: 0;
@@ -25,17 +31,20 @@
   transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.unified-navbar.portrait-home .topbar {
+.unified-navbar.portrait-home .topbar,
+.unified-navbar.portrait-home #navbar-root header.topbar {
   position: sticky;
   top: 0;
 }
 
-.unified-navbar .topbar.tweenly-nav-hidden {
+.unified-navbar .topbar.tweenly-nav-hidden,
+#navbar-root header.topbar.tweenly-nav-hidden {
   transform: translateY(-110%);
 }
 
 /* Full-width at the top; morphs into a floating glass pill after 50px. */
-.unified-navbar .topbar-shell {
+.unified-navbar .topbar-shell,
+#navbar-root nav[aria-label="Main"] {
   display: flex !important;
   align-items: center !important;
   width: 100% !important;
@@ -65,7 +74,8 @@
     border-color 0.3s ease !important;
 }
 
-.unified-navbar .topbar-shell.scrolled {
+.unified-navbar .topbar-shell.scrolled,
+#navbar-root nav[aria-label="Main"].scrolled {
   width: min(calc(100% - 24px), 672px) !important;
   max-width: 672px !important;
   height: 48px !important;
@@ -86,7 +96,8 @@
   display: none !important;
 }
 
-html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
+html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled,
+html[data-theme="dark"] #navbar-root nav[aria-label="Main"].scrolled {
   border-color: rgba(255, 255, 255, 0.14) !important;
   background: rgba(20, 20, 24, 0.90) !important;
   box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6) !important;
@@ -105,7 +116,8 @@ html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
 }
 
 /* 1. Brand Logo / Wordmark */
-.unified-navbar .tweenly-logo {
+.unified-navbar .tweenly-logo,
+#navbar-root nav[aria-label="Main"] > div:first-child {
   display: flex;
   align-items: center;
   justify-self: start;
@@ -113,14 +125,16 @@ html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
   flex-shrink: 0;
 }
 
-.unified-navbar .tweenly-logo .wordmark {
+.unified-navbar .tweenly-logo .wordmark,
+#navbar-root .wordmark {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   outline: none;
 }
 
-.unified-navbar .tweenly-logo .wordmark-brand {
+.unified-navbar .tweenly-logo .wordmark-brand,
+#navbar-root .wordmark-brand {
   font-family: var(--site-font) !important;
   font-size: 17px !important;
   font-weight: 750 !important;
@@ -129,42 +143,47 @@ html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
   line-height: 1;
 }
 
-.unified-navbar .tweenly-logo .brand-dot {
+.unified-navbar .tweenly-logo .brand-dot,
+#navbar-root .brand-dot {
   font-family: var(--site-font);
   font-weight: 800;
   color: #c79232;
   margin-left: 1px;
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot {
+html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot,
+html[data-theme="dark"] #navbar-root .brand-dot {
   color: #efc86f;
 }
 
 /* 2. Desktop Capsule Links (Tweenly CapsuleLinks) */
-.unified-navbar .tweenly-capsule-links {
-  display: flex;
-  align-items: center;
-  gap: 2px;
+.unified-navbar .tweenly-capsule-links,
+#navbar-root nav[aria-label="Main"] > ul {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
   justify-self: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: relative;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  position: relative !important;
 }
 
-.unified-navbar .tweenly-capsule-links li {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
+.unified-navbar .tweenly-capsule-links li,
+#navbar-root nav[aria-label="Main"] > ul li {
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.unified-navbar .tweenly-link {
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.unified-navbar .tweenly-link,
+#navbar-root nav[aria-label="Main"] > ul a {
+  position: relative !important;
+  isolation: isolate !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   padding: 6px 14px !important;
   border-radius: 9999px !important;
   font-family: var(--site-font) !important;
@@ -173,7 +192,7 @@ html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot {
   color: var(--muted, #626262) !important;
   text-decoration: none !important;
   letter-spacing: -0.012em !important;
-  transition: color 0.18s ease;
+  transition: color 0.18s ease !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -184,17 +203,20 @@ html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot {
 }
 
 .unified-navbar .tweenly-link:hover,
-.unified-navbar .tweenly-link:focus-visible {
+.unified-navbar .tweenly-link:focus-visible,
+#navbar-root nav[aria-label="Main"] > ul a:hover,
+#navbar-root nav[aria-label="Main"] > ul a:focus-visible {
   color: var(--text) !important;
   text-decoration: none !important;
 }
 
-.unified-navbar .tweenly-link[aria-current="page"] {
+.unified-navbar .tweenly-link[aria-current="page"],
+#navbar-root nav[aria-label="Main"] > ul a[aria-current="page"] {
   color: var(--text) !important;
   font-weight: 600 !important;
 }
 
-/* Tweenly active indicator dot */
+/* Tweenly active indicator dot (fallback HTML) */
 .unified-navbar .tweenly-link[aria-current="page"]::after {
   content: "" !important;
   position: absolute !important;
@@ -230,42 +252,50 @@ html[data-theme="dark"] .unified-navbar .tweenly-capsule-hl {
 }
 
 /* 3. Action Cluster (Airplane Theme Switch + Animated Burger) */
-.unified-navbar .tweenly-nav-actions {
-  display: flex;
-  align-items: center;
+.unified-navbar .tweenly-nav-actions,
+#navbar-root nav[aria-label="Main"] > div:last-child {
+  display: flex !important;
+  align-items: center !important;
   justify-self: end;
-  gap: 6px;
-  margin-left: 0;
+  gap: 6px !important;
+  margin-left: 0 !important;
 }
 
-.unified-navbar .tweenly-nav-actions .plane-switch {
-  margin: 0;
+.unified-navbar .tweenly-nav-actions .plane-switch,
+#navbar-root .plane-switch {
+  margin: 0 !important;
 }
 
 /* 4. Animated Burger Button (Tweenly Burger) */
-.unified-navbar .tweenly-burger {
-  display: none;
-  position: relative;
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  color: var(--text);
-  padding: 0;
-  transition: background-color 0.15s ease;
-  -webkit-tap-highlight-color: transparent;
+.unified-navbar .tweenly-burger,
+#navbar-root button[aria-label*="menu"],
+#navbar-root button[aria-label*="Menu"] {
+  display: none !important;
+  position: relative !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--text) !important;
+  padding: 0 !important;
+  transition: background-color 0.15s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
-.unified-navbar .tweenly-burger:hover {
-  background: rgba(0, 0, 0, 0.06);
+.unified-navbar .tweenly-burger:hover,
+#navbar-root button[aria-label*="menu"]:hover,
+#navbar-root button[aria-label*="Menu"]:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-burger:hover {
-  background: rgba(255, 255, 255, 0.12);
+html[data-theme="dark"] .unified-navbar .tweenly-burger:hover,
+html[data-theme="dark"] #navbar-root button[aria-label*="menu"]:hover,
+html[data-theme="dark"] #navbar-root button[aria-label*="Menu"]:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
 }
 
 .unified-navbar .tweenly-burger-box {
@@ -303,35 +333,37 @@ html[data-theme="dark"] .unified-navbar .tweenly-burger:hover {
 }
 
 /* 5. Mobile Dropdown Sheet (Tweenly MobileSheet) */
-.unified-navbar .tweenly-mobile-sheet {
+.unified-navbar .tweenly-mobile-sheet,
+#navbar-root header > div[id] {
   display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  right: 0;
-  width: min(calc(100vw - 32px), 320px);
-  margin: 0 auto;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.88);
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: min(calc(100vw - 32px), 320px) !important;
+  margin: 0 auto !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
-  padding: 8px;
-  pointer-events: auto;
-  transform-origin: top;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  padding: 8px !important;
+  pointer-events: auto !important;
+  transform-origin: top !important;
   animation: tweenly-sheet-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
-  z-index: 101;
+  z-index: 101 !important;
 }
 
 .unified-navbar .tweenly-mobile-sheet.is-open {
-  display: block;
+  display: block !important;
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-sheet {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(24, 24, 28, 0.94);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6);
+html[data-theme="dark"] .unified-navbar .tweenly-mobile-sheet,
+html[data-theme="dark"] #navbar-root header > div[id] {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(24, 24, 28, 0.94) !important;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6) !important;
 }
 
 @keyframes tweenly-sheet-in {
@@ -339,77 +371,102 @@ html[data-theme="dark"] .unified-navbar .tweenly-mobile-sheet {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.unified-navbar .tweenly-mobile-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.unified-navbar .tweenly-mobile-list,
+#navbar-root header > div[id] ul {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
 
-.unified-navbar .tweenly-mobile-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-family: var(--site-font);
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--text);
-  text-decoration: none;
-  transition: background-color 0.15s ease;
+.unified-navbar .tweenly-mobile-link,
+#navbar-root header > div[id] a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  border-radius: 14px !important;
+  font-family: var(--site-font) !important;
+  font-size: 14.5px !important;
+  font-weight: 500 !important;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease !important;
 }
 
-.unified-navbar .tweenly-mobile-link:hover {
-  background: rgba(0, 0, 0, 0.05);
-  text-decoration: none;
+.unified-navbar .tweenly-mobile-link:hover,
+#navbar-root header > div[id] a:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  text-decoration: none !important;
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-link:hover {
-  background: rgba(255, 255, 255, 0.08);
+html[data-theme="dark"] .unified-navbar .tweenly-mobile-link:hover,
+html[data-theme="dark"] #navbar-root header > div[id] a:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
-.unified-navbar .tweenly-mobile-link[aria-current="page"] {
-  font-weight: 600;
+.unified-navbar .tweenly-mobile-link[aria-current="page"],
+#navbar-root header > div[id] a[aria-current="page"] {
+  font-weight: 600 !important;
 }
 
-.unified-navbar .tweenly-mobile-link .tweenly-active-indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 9999px;
-  background: transparent;
+.unified-navbar .tweenly-mobile-link .tweenly-active-indicator,
+#navbar-root header > div[id] a span.rounded-full {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 9999px !important;
+  background: #c79232 !important;
 }
 
-.unified-navbar .tweenly-mobile-link[aria-current="page"] .tweenly-active-indicator {
-  background: #c79232;
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-link[aria-current="page"] .tweenly-active-indicator {
-  background: #efc86f;
+html[data-theme="dark"] .unified-navbar .tweenly-mobile-link .tweenly-active-indicator,
+html[data-theme="dark"] #navbar-root header > div[id] a span.rounded-full {
+  background: #efc86f !important;
 }
 
 /* 6. Responsive Rules */
 @media (max-width: 680px) {
-  .unified-navbar .tweenly-capsule-links {
+  .unified-navbar .tweenly-capsule-links,
+  #navbar-root nav[aria-label="Main"] > ul {
     display: none !important;
   }
-  .unified-navbar .tweenly-burger {
+  .unified-navbar .tweenly-burger,
+  #navbar-root button[aria-label*="menu"],
+  #navbar-root button[aria-label*="Menu"] {
     display: inline-flex !important;
   }
   .unified-navbar .topbar-shell {
     padding: 0 16px !important;
   }
-  .unified-navbar .topbar-shell.scrolled {
+  .unified-navbar .topbar-shell.scrolled,
+  #navbar-root nav[aria-label="Main"].scrolled {
     width: calc(100% - 24px) !important;
     padding: 0 5px 0 14px !important;
   }
-  .unified-navbar .tweenly-logo {
+  .unified-navbar .tweenly-logo,
+  #navbar-root nav[aria-label="Main"] > div:first-child {
     margin-right: 0 !important;
   }
-  .unified-navbar .tweenly-logo .wordmark-brand {
+  .unified-navbar .tweenly-logo .wordmark-brand,
+  #navbar-root .wordmark-brand {
     font-size: 16px !important;
+  }
+}
+
+@media (min-width: 681px) {
+  .unified-navbar .tweenly-capsule-links,
+  #navbar-root nav[aria-label="Main"] > ul {
+    display: flex !important;
+  }
+  .unified-navbar .tweenly-burger,
+  #navbar-root button[aria-label*="menu"],
+  #navbar-root button[aria-label*="Menu"] {
+    display: none !important;
+  }
+  .unified-navbar .tweenly-mobile-sheet,
+  #navbar-root header > div[id] {
+    display: none !important;
   }
 }
 
@@ -419,7 +476,8 @@ html[data-theme="dark"] .unified-navbar .tweenly-mobile-link[aria-current="page"
   .unified-navbar .tweenly-link,
   .unified-navbar .tweenly-capsule-hl,
   .unified-navbar .tweenly-burger-line,
-  .unified-navbar .tweenly-mobile-sheet {
+  .unified-navbar .tweenly-mobile-sheet,
+  #navbar-root nav[aria-label="Main"] {
     transition: none !important;
     animation: none !important;
   }

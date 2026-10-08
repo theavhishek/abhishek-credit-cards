@@ -1,9 +1,12 @@
 {
   "name": "avhishek-credit-cards",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "node preview-server.mjs",
-    "build:reviews": "esbuild src/card-reviews-entry.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=assets/card-reviews-react.js"
+    "build": "npm run build:reviews && npm run build:navbar",
+    "build:reviews": "esbuild src/card-reviews-entry.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=assets/card-reviews-react.js",
+    "build:navbar": "esbuild src/navbar-entry.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=assets/navbar-react.js"
   },
   "dependencies": {
     "lucide-react": "^0.545.0",

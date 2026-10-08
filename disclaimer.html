@@ -104,68 +104,70 @@
   <link rel="stylesheet" href="assets/footer.css?v=1">
 </head>
 <body class="unified-navbar">
+  <div id="navbar-root">
     <header class="topbar tweenly-topbar">
-    <div class="topbar-shell tweenly-navbar" id="navbarShell">
-      <nav class="topbar-inner" aria-label="Main navigation">
-        <div class="tweenly-logo">
-          <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
-            <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
-          </a>
+      <div class="topbar-shell tweenly-navbar" id="navbarShell">
+        <nav class="topbar-inner" aria-label="Main navigation">
+          <div class="tweenly-logo">
+            <a class="wordmark" href="https://avhishek.in/" aria-label="Avhishek main website">
+              <span class="wordmark-brand">Abhishek<span class="brand-dot">.</span></span>
+            </a>
+          </div>
+          <ul class="tweenly-capsule-links" role="list">
+            <li>
+              <a href="https://cards.avhishek.in/" class="tweenly-link" data-nav="cards">Cards</a>
+            </li>
+            <li>
+              <a href="https://avhishek.in/card-reviews" class="tweenly-link" data-nav="reviews">Reviews</a>
+            </li>
+            <li>
+              <a href="https://avhishek.in/bank-support" class="tweenly-link" data-nav="support">Support</a>
+            </li>
+          </ul>
+          <div class="tweenly-nav-actions">
+            <label class="plane-switch" title="Switch day / night mode">
+              <span class="sr-only">Day / night mode</span>
+              <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
+              <div aria-hidden="true">
+                <span class="street-middle"></span>
+                <span class="cloud"></span>
+                <span class="cloud two"></span>
+                <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
+              </div>
+            </label>
+            <button class="tweenly-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileSheet">
+              <span class="tweenly-burger-box" aria-hidden="true">
+                <span class="tweenly-burger-line line-1"></span>
+                <span class="tweenly-burger-line line-2"></span>
+              </span>
+            </button>
+          </div>
+        </nav>
+        <div id="mobileSheet" class="tweenly-mobile-sheet" hidden aria-hidden="true">
+          <ul class="tweenly-mobile-list" role="list">
+            <li>
+              <a href="https://cards.avhishek.in/" class="tweenly-mobile-link" data-nav="cards">
+                <span>Cards</span>
+                <span class="tweenly-active-indicator" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://avhishek.in/card-reviews" class="tweenly-mobile-link" data-nav="reviews">
+                <span>Reviews</span>
+                <span class="tweenly-active-indicator" aria-hidden="true"></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://avhishek.in/bank-support" class="tweenly-mobile-link" data-nav="support">
+                <span>Support</span>
+                <span class="tweenly-active-indicator" aria-hidden="true"></span>
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="tweenly-capsule-links" role="list">
-          <li>
-            <a href="https://cards.avhishek.in/" class="tweenly-link" data-nav="cards">Cards</a>
-          </li>
-          <li>
-            <a href="https://avhishek.in/card-reviews" class="tweenly-link" data-nav="reviews">Reviews</a>
-          </li>
-          <li>
-            <a href="https://avhishek.in/bank-support" class="tweenly-link" data-nav="support">Support</a>
-          </li>
-        </ul>
-        <div class="tweenly-nav-actions">
-          <label class="plane-switch" title="Switch day / night mode">
-            <span class="sr-only">Day / night mode</span>
-            <input id="themeSwitch" type="checkbox" role="switch" aria-label="Switch to night mode">
-            <div aria-hidden="true">
-              <span class="street-middle"></span>
-              <span class="cloud"></span>
-              <span class="cloud two"></span>
-              <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.1 14 7.4V3.6c0-.9-.7-1.6-1.6-1.6s-1.6.7-1.6 1.6v3.8l-7.4 3.7c-.5.2-.8.7-.8 1.3v1.2l8.2-2.2v4.8l-2.4 1.6v1.1l4-1 4 1v-1.1L14 16.2v-4.8l8.2 2.2v-1.2c0-.6-.3-1.1-.8-1.3Z" fill="currentColor"/></svg></div>
-            </div>
-          </label>
-          <button class="tweenly-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileSheet">
-            <span class="tweenly-burger-box" aria-hidden="true">
-              <span class="tweenly-burger-line line-1"></span>
-              <span class="tweenly-burger-line line-2"></span>
-            </span>
-          </button>
-        </div>
-      </nav>
-      <div id="mobileSheet" class="tweenly-mobile-sheet" hidden aria-hidden="true">
-        <ul class="tweenly-mobile-list" role="list">
-          <li>
-            <a href="https://cards.avhishek.in/" class="tweenly-mobile-link" data-nav="cards">
-              <span>Cards</span>
-              <span class="tweenly-active-indicator" aria-hidden="true"></span>
-            </a>
-          </li>
-          <li>
-            <a href="https://avhishek.in/card-reviews" class="tweenly-mobile-link" data-nav="reviews">
-              <span>Reviews</span>
-              <span class="tweenly-active-indicator" aria-hidden="true"></span>
-            </a>
-          </li>
-          <li>
-            <a href="https://avhishek.in/bank-support" class="tweenly-mobile-link" data-nav="support">
-              <span>Support</span>
-              <span class="tweenly-active-indicator" aria-hidden="true"></span>
-            </a>
-          </li>
-        </ul>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
   <main class="shell legal-page">
     <article class="legal-card">
       <div class="legal-badge">
@@ -240,6 +242,7 @@
       if (year) year.textContent = new Date().getFullYear();
     })();
   </script>
+  <script type="module" src="assets/navbar-react.js" defer></script>
   <script src="assets/unified-navbar.js" defer></script>
 </body>
 </html>
