@@ -99,9 +99,11 @@ html[data-theme="dark"] .portrait-home .hero-cta-secondary { background:#29261ed
  .appearance-track::before { width:24px; height:24px; top:3px; left:3px; transform:translateX(22px); }
  .appearance-track svg { width:17px; height:17px; }
  .portrait-home .poster-content { padding:110px 22px 20px; }
- .portrait-home .poster-title { font-size:clamp(48px,13.5vw,72px); line-height:.96; letter-spacing:-.06em; }
+ .portrait-home .poster-title { display:flex; flex-direction:column; align-items:flex-start; gap:3px; max-width:100%; overflow:visible; font-size:clamp(46px,12.6vw,64px); line-height:1; letter-spacing:-.038em; }
+ .portrait-home .poster-gold-line { display:inline-block; max-width:100%; padding:4px .14em 9px .02em; line-height:1; overflow:visible; }
+ .portrait-home .poster-dark-line { display:block; max-width:100%; padding:.015em .08em .055em .01em; line-height:1.01; letter-spacing:-.035em; overflow:visible; }
  .portrait-home .poster-dark-line br { display:block; }
- .portrait-home .poster-subline { font-size:18px; margin-top:20px; max-width:340px; }
+ .portrait-home .poster-subline { font-size:18px; margin-top:22px; max-width:340px; }
  .portrait-home .poster-bg-wrap { top:310px; }
  .portrait-home .poster-location { right:22px; bottom:290px; font-size:11px; }
  .portrait-home .poster-bg-img { --portrait-overscan:180px; height:calc(100% + var(--portrait-overscan)); margin-top:calc(-1 * var(--portrait-overscan)); object-position:50% 58%; }
@@ -120,6 +122,8 @@ html[data-theme="dark"] .portrait-home .hero-cta-secondary { background:#29261ed
  .portrait-home .topbar-actions { gap:3px; }
  .portrait-home .wordmark-brand { font-size:20px; }
  .portrait-home .poster-content { padding-inline:18px; }
+ .portrait-home .poster-title { font-size:clamp(43px,12.2vw,50px); letter-spacing:-.032em; gap:2px; }
+ .portrait-home .poster-dark-line { letter-spacing:-.03em; }
  .portrait-home .poster-stats-panel { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 0; padding:18px 12px; }
  .portrait-home .stat-item { flex-direction:row; gap:12px; }
  .portrait-home .stat-meta { align-items:flex-start; }
