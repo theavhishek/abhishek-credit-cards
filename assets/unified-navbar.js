@@ -1,8 +1,42 @@
-// Tweenly Navbar Interactive Behavior (Spring hover capsule highlight & mobile sheet)
+// Tweenly morph navbar behavior: hover capsule, scroll morph and mobile sheet.
 (() => {
   function initTweenlyNavbar() {
     const navbar = document.querySelector(".tweenly-navbar");
     if (!navbar) return;
+
+    const topbar = navbar.closest(".tweenly-topbar");
+    const scrollThreshold = 50;
+    let lastScrollY = Math.max(window.scrollY, 0);
+    let navHidden = false;
+    let scrollFrame = 0;
+
+    const updateMorph = () => {
+      const scrollY = Math.max(window.scrollY, 0);
+      const delta = scrollY - lastScrollY;
+      const menuOpen = navbar.querySelector(".tweenly-mobile-sheet")?.classList.contains("is-open");
+
+      navbar.classList.toggle("scrolled", scrollY > scrollThreshold);
+
+      if (scrollY <= scrollThreshold + 80 || menuOpen) {
+        navHidden = false;
+      } else if (delta > 8) {
+        navHidden = true;
+      } else if (delta < -4) {
+        navHidden = false;
+      }
+
+      topbar?.classList.toggle("tweenly-nav-hidden", navHidden);
+      lastScrollY = scrollY;
+      scrollFrame = 0;
+    };
+
+    const onScroll = () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(updateMorph);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateMorph();
 
     // 1. Sliding capsule highlight for desktop links
     const linksContainer = navbar.querySelector(".tweenly-capsule-links");
@@ -37,6 +71,8 @@
         burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
         burger.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
         if (isOpen) {
+          navHidden = false;
+          topbar?.classList.remove("tweenly-nav-hidden");
           sheet.classList.add("is-open");
           sheet.removeAttribute("hidden");
           sheet.setAttribute("aria-hidden", "false");

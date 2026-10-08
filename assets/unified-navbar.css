@@ -1,54 +1,83 @@
 /* ==========================================================================
-   Tweenly Glass Pill Navbar (@tweenly/navbar)
-   Shared across all pages: portfolio (cards.avhishek.in), reviews, support, legal
+   Tweenly Morph Navbar (@tweenly/navbar)
+   Shared across portfolio, reviews, support and legal pages.
+   The avhishek.in coming-soon homepage intentionally does not load this file.
    ========================================================================== */
 
 .unified-navbar .topbar {
   position: sticky;
-  top: 14px;
+  top: 0;
   left: 0;
   right: 0;
   width: 100%;
+  height: 72px;
   z-index: 100;
   display: flex;
   justify-content: center;
-  padding: 0 16px;
+  padding: 0;
   pointer-events: none;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  transform: translateY(0);
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .unified-navbar.portrait-home .topbar {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  width: 100%;
+  position: sticky;
+  top: 0;
 }
 
-/* Floating Glass Pill Container */
-.unified-navbar .topbar-shell,
-.unified-navbar .topbar-shell.scrolled {
+.unified-navbar .topbar.tweenly-nav-hidden {
+  transform: translateY(-110%);
+}
+
+/* Full-width at the top; morphs into a floating glass pill after 50px. */
+.unified-navbar .topbar-shell {
   display: flex !important;
   align-items: center !important;
-  width: max-content !important;
-  max-width: min(calc(100vw - 28px), 740px) !important;
+  width: 100% !important;
+  max-width: none !important;
   margin-inline: auto !important;
-  height: auto !important;
-  min-height: 48px !important;
-  padding: 5px 8px 5px 16px !important;
-  border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.75) !important;
-  background: rgba(255, 255, 255, 0.76) !important;
-  backdrop-filter: blur(24px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  height: 72px !important;
+  min-height: 72px !important;
+  padding: 0 24px !important;
+  border-radius: 0 !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
   pointer-events: auto !important;
   position: relative !important;
   animation: none !important;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+  transition:
+    width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    min-height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+.unified-navbar .topbar-shell.scrolled {
+  width: min(calc(100% - 24px), 672px) !important;
+  max-width: 672px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  margin-top: 12px !important;
+  padding: 0 6px 0 16px !important;
+  border-radius: 24px !important;
+  border-color: rgba(255, 255, 255, 0.75) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .unified-navbar .topbar-shell::before,
@@ -57,29 +86,18 @@
   display: none !important;
 }
 
-html[data-theme="dark"] .unified-navbar .topbar-shell,
 html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
   border-color: rgba(255, 255, 255, 0.14) !important;
-  background: rgba(22, 22, 26, 0.78) !important;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Subtle elevation when scrolled */
-.unified-navbar .topbar-shell.scrolled {
-  background: rgba(255, 255, 255, 0.88) !important;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
-}
-
-html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
   background: rgba(20, 20, 24, 0.90) !important;
   box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6) !important;
 }
 
 .unified-navbar .topbar-inner {
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center !important;
   gap: 8px !important;
-  height: auto !important;
+  height: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
   width: 100% !important;
@@ -90,7 +108,8 @@ html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
 .unified-navbar .tweenly-logo {
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  justify-self: start;
+  margin-right: 0;
   flex-shrink: 0;
 }
 
@@ -126,6 +145,7 @@ html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot {
   display: flex;
   align-items: center;
   gap: 2px;
+  justify-self: center;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -213,8 +233,9 @@ html[data-theme="dark"] .unified-navbar .tweenly-capsule-hl {
 .unified-navbar .tweenly-nav-actions {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 6px;
-  margin-left: 10px;
+  margin-left: 0;
 }
 
 .unified-navbar .tweenly-nav-actions .plane-switch {
@@ -377,13 +398,15 @@ html[data-theme="dark"] .unified-navbar .tweenly-mobile-link[aria-current="page"
   .unified-navbar .tweenly-burger {
     display: inline-flex !important;
   }
-  .unified-navbar .topbar-shell,
+  .unified-navbar .topbar-shell {
+    padding: 0 16px !important;
+  }
   .unified-navbar .topbar-shell.scrolled {
-    padding: 5px 8px 5px 14px !important;
-    gap: 4px !important;
+    width: calc(100% - 24px) !important;
+    padding: 0 5px 0 14px !important;
   }
   .unified-navbar .tweenly-logo {
-    margin-right: 6px !important;
+    margin-right: 0 !important;
   }
   .unified-navbar .tweenly-logo .wordmark-brand {
     font-size: 16px !important;
@@ -392,6 +415,7 @@ html[data-theme="dark"] .unified-navbar .tweenly-mobile-link[aria-current="page"
 
 @media (prefers-reduced-motion: reduce) {
   .unified-navbar .topbar-shell,
+  .unified-navbar .topbar,
   .unified-navbar .tweenly-link,
   .unified-navbar .tweenly-capsule-hl,
   .unified-navbar .tweenly-burger-line,
