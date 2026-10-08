@@ -1,136 +1,148 @@
-@font-face {
-  font-family: "Cal Sans";
-  src: url("cal-sans-vf.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
+@font-face{
+  font-family:"Cal Sans";
+  src:url("cal-sans-vf.woff2") format("woff2");
+  font-style:normal;
+  font-weight:400 700;
+  font-display:swap;
 }
 
-/* Codex typography roles, expressed through the site's Cal Sans identity. */
-:root {
-  --site-font: "Cal Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-family-base: var(--site-font);
-  --font-family-serif: var(--site-font);
-  --font-family-monospace: "Menlo", "Consolas", "Liberation Mono", "Fira Code", "Courier New", monospace;
-  --font-size-small: .875rem;
-  --font-size-medium: 1rem;
-  --font-size-large: 1.125rem;
-  --font-size-x-large: 1.25rem;
-  --font-size-xx-large: 1.5rem;
-  --font-size-xxx-large: 1.75rem;
-  --font-weight-normal: 400;
-  --font-weight-bold: 700;
-  --line-height-small: 1.375rem;
-  --line-height-medium: 1.625rem;
-  --line-height-large: 1.75rem;
-  --line-height-x-large: 1.875rem;
-  --line-height-xx-large: 2.125rem;
-  --line-height-xxx-large: 2.375rem;
+:root{
+  --site-font:"Cal Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
+/* One variable typeface across every page and component. Cal Sans v2 uses
+   optical sizing to adapt the same file for display, text and micro UI. */
+html,
 html body,
+html body *,
 html body button,
 html body input,
 html body select,
 html body textarea,
-html body dialog {
-  font-family: var(--font-family-base) !important;
-  font-optical-sizing: auto;
-  font-kerning: normal;
-  font-feature-settings: "kern" 1, "liga" 1;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+html body dialog,
+html body .topbar,
+html body .topbar *,
+html body .site-footer,
+html body .site-footer *,
+html body #support,
+html body #support *{
+  font-family:var(--site-font)!important;
+  font-optical-sizing:auto;
 }
 
-/* Heading 1 */
-html body h1,
-html body .type-h1,
+html body{
+  font-weight:450;
+  letter-spacing:0!important;
+  font-kerning:normal;
+  font-feature-settings:"kern" 1,"liga" 1;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+}
+
+html body button,
+html body input,
+html body select,
+html body textarea{
+  font:inherit;
+}
+
+/* Display hierarchy: confident, compact and limited to the font's real
+   700-weight maximum so browsers never manufacture fake extra-bold shapes. */
 html body .poster-title,
-html body .home-title,
+html body .cs-hero-title,
 html body .support-intro-title,
-html body .error-code {
-  font-family: var(--font-family-serif) !important;
-  font-size: var(--font-size-xxx-large) !important;
-  font-weight: var(--font-weight-normal) !important;
-  line-height: var(--line-height-xxx-large) !important;
-  letter-spacing: 0 !important;
+html body .support-hero h1,
+html body .legal-card h1,
+html body .error-code{
+  font-weight:700!important;
+  letter-spacing:-.026em!important;
+  line-height:.985!important;
 }
 
-/* Heading 2 */
-html body h2,
-html body .type-h2,
+html body .wordmark-brand,
+html body .cs-wordmark,
+html body .footer-brand,
+html body .stat-meta strong{
+  font-weight:700!important;
+  letter-spacing:-.016em!important;
+}
+
 html body .collection-head h2,
 html body .support-title-row h2,
-html body .cs-section-title {
-  font-family: var(--font-family-serif) !important;
-  font-size: var(--font-size-xx-large) !important;
-  font-weight: var(--font-weight-normal) !important;
-  line-height: var(--line-height-xx-large) !important;
-  letter-spacing: 0 !important;
+html body .legal-card h2,
+html body .cs-section-title,
+html body .cs-feature-title{
+  font-weight:650!important;
+  letter-spacing:-.014em!important;
+  line-height:1.12!important;
 }
 
-/* Heading 3 */
-html body h3,
-html body .type-h3,
-html body .wordmark-brand,
-html body .home-wordmark,
-html body .global-footer__brand,
-html body .stat-meta strong,
-html body .dialog-title {
-  font-family: var(--font-family-base) !important;
-  font-size: var(--font-size-x-large) !important;
-  font-weight: var(--font-weight-bold) !important;
-  line-height: var(--line-height-x-large) !important;
-  letter-spacing: 0 !important;
+/* Running copy stays deliberately lighter than headings. */
+html body p,
+html body li,
+html body .poster-subline,
+html body .support-hero p,
+html body .support-intro-subline,
+html body .collection-head p,
+html body .legal-card p,
+html body .legal-card li,
+html body .cs-hero-subline,
+html body .cs-feature-description,
+html body .footer-tagline{
+  font-weight:450!important;
+  letter-spacing:0!important;
 }
 
-/* Heading 4 */
-html body h4,
-html body .type-h4,
+html body .poster-subline{
+  line-height:1.52!important;
+  word-spacing:normal!important;
+}
+
+html body .collection-head p,
+html body .support-hero p,
+html body .support-intro-subline,
+html body .legal-card p,
+html body .legal-card li{
+  line-height:1.66!important;
+}
+
+/* Navigation and actions need enough weight to remain clear at small sizes. */
+html body .collection-link,
+html body .support-nav-current,
+html body .hero-cta-primary,
+html body .hero-cta-secondary,
+html body .cs-header-link,
+html body .cs-primary-cta,
+html body .cs-secondary-cta,
+html body button,
+html body .shimmer-button,
+html body .shimmer-button-text{
+  font-weight:600!important;
+  letter-spacing:0!important;
+}
+
+/* Dense directory and card UI uses the text/micro optical cuts automatically. */
 html body .bank-heading-copy strong,
 html body .card-name,
 html body .support-bank-copy strong,
-html body .feature-meta strong,
-html body .primary-pill strong,
-html body .detail strong {
-  font-family: var(--font-family-base) !important;
-  font-size: var(--font-size-large) !important;
-  font-weight: var(--font-weight-bold) !important;
-  line-height: var(--line-height-large) !important;
-  letter-spacing: 0 !important;
+html body .feature-meta strong{
+  font-weight:600!important;
+  letter-spacing:-.003em!important;
+  line-height:1.28!important;
 }
 
-/* Body */
-html body p,
-html body li,
-html body .type-body,
-html body .poster-subline,
-html body .home-intro,
-html body .support-intro-desc,
-html body .support-escalation-guide,
-html body .hero-cta-primary,
-html body .hero-cta-secondary,
-html body .empty-state strong,
-html body .empty-state button {
-  font-family: var(--font-family-base) !important;
-  font-size: var(--font-size-medium) !important;
-  font-weight: var(--font-weight-normal) !important;
-  line-height: var(--line-height-medium) !important;
-  letter-spacing: 0 !important;
+html body .bank-short,
+html body .card-meta-line,
+html body .network,
+html body .support-card-header p,
+html body .support-footnote,
+html body .support-link-value,
+html body .stat-meta span,
+html body .collection-count{
+  font-weight:450!important;
+  letter-spacing:0!important;
 }
 
-/* Small, figure-caption and cite roles. */
-html body small,
-html body figcaption,
-html body cite,
-html body .type-small,
-html body .collection-link,
-html body .support-nav-current,
-html body .home-marquee-set,
-html body .home-eyebrow,
-html body .small-pill,
-html body .home-footer,
-html body .crafted-badge,
 html body .quick,
 html body .reset-button,
 html body .fee-pill,
@@ -138,62 +150,19 @@ html body .mini-tag,
 html body .support-count-badge,
 html body .support-group-label,
 html body .support-contact-section h2,
-html body .support-contact-chip a,
-html body .support-link-value,
-html body .support-footnote,
-html body .bank-heading-copy span,
-html body .bank-short,
-html body .network,
-html body .card-meta-line,
-html body .collection-count,
-html body .cardholder-label,
-html body .cardholder-tier,
-html body .cardholder-status,
-html body .hero-floating-tag,
-html body .legend-title,
-html body .legend-items > span,
-html body .dialog-bank,
-html body .detail span,
-html body .use-tag,
 html body .disclaimer-badge,
 html body .legal-badge,
-html body .global-footer a:not(.global-footer__brand),
-html body .global-footer__bottom {
-  font-family: var(--font-family-base) !important;
-  font-size: var(--font-size-small) !important;
-  font-weight: var(--font-weight-normal) !important;
-  line-height: var(--line-height-small) !important;
-  letter-spacing: 0 !important;
+html body .cs-status-badge{
+  font-weight:600!important;
+  letter-spacing:.008em!important;
 }
 
-html body blockquote {
-  font-family: var(--font-family-serif) !important;
-  font-size: var(--font-size-medium) !important;
-  font-weight: var(--font-weight-normal) !important;
-  line-height: var(--line-height-medium) !important;
-}
-
-html body code,
-html body kbd,
-html body samp,
-html body pre {
-  font-family: var(--font-family-monospace) !important;
-}
-
-/* Keep prose at the Codex-recommended readable measure. */
-html body .poster-subline,
-html body .home-intro,
-html body .support-intro-desc,
-html body .legal-card p,
-html body .legal-card li,
-html body .collection-head p,
-html body .disclaimer-content p {
-  max-inline-size: 75ch;
-}
-
-@media (max-width: 720px) {
-  :root {
-    --font-size-xxx-large: 1.625rem;
-    --line-height-xxx-large: 2.25rem;
+@media(max-width:720px){
+  html body .poster-title,
+  html body .cs-hero-title,
+  html body .support-intro-title,
+  html body .support-hero h1{
+    letter-spacing:-.02em!important;
+    line-height:1!important;
   }
 }
