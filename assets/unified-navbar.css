@@ -52,8 +52,10 @@
 }
 
 .unified-navbar .wordmark-brand {
-  font-size: 28px !important;
-  font-weight: 800;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-x-large) !important;
+  font-weight: var(--font-weight-bold) !important;
+  line-height: var(--line-height-x-large) !important;
   color: var(--text);
 }
 
@@ -68,8 +70,10 @@
   border-radius: 0;
   background: transparent !important;
   color: var(--text) !important;
-  font-size: 15px !important;
-  font-weight: 600;
+  font-family: var(--font-family-base) !important;
+  font-size: var(--font-size-small) !important;
+  font-weight: var(--font-weight-normal) !important;
+  line-height: var(--line-height-small) !important;
   box-shadow: none !important;
   transform: none !important;
   backdrop-filter: none !important;
@@ -84,7 +88,7 @@
 
 .unified-navbar .collection-link[aria-current="page"] {
   color: var(--text) !important;
-  font-weight: 750 !important;
+  font-weight: var(--font-weight-normal) !important;
 }
 
 .unified-navbar .collection-link[aria-current="page"]::after {
@@ -116,9 +120,9 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
     height: 66px !important;
     padding-inline: 22px !important;
   }
-  .unified-navbar .wordmark-brand { font-size: 24px !important; }
+  .unified-navbar .wordmark-brand { font-size: var(--font-size-x-large) !important; }
   .unified-navbar .topbar-actions { gap: 12px !important; }
-  .unified-navbar .collection-link { height: 40px !important; font-size: 14px !important; }
+  .unified-navbar .collection-link { height: 40px !important; font-size: var(--font-size-small) !important; }
 }
 
 @media (max-width: 720px) {
@@ -131,12 +135,12 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
     height: 58px !important;
     padding-inline: 17px !important;
   }
-  .unified-navbar .wordmark-brand { font-size: 22px !important; }
+  .unified-navbar .wordmark-brand { font-size: var(--font-size-x-large) !important; }
   .unified-navbar .topbar-actions { gap: 7px !important; }
   .unified-navbar .collection-link {
     height: 34px !important;
     padding-inline: 4px !important;
-    font-size: 12px !important;
+    font-size: var(--font-size-small) !important;
   }
 }
 
@@ -144,11 +148,11 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
   .unified-navbar .topbar,
   .unified-navbar.portrait-home .topbar { padding-inline: 10px; }
   .unified-navbar .topbar-inner { padding-inline: 12px !important; }
-  .unified-navbar .wordmark-brand { font-size: 20px !important; }
+  .unified-navbar .wordmark-brand { font-size: var(--font-size-x-large) !important; }
   .unified-navbar .topbar-actions { gap: 3px !important; }
   .unified-navbar .collection-link {
     padding-inline: 3px !important;
-    font-size: 10.5px !important;
+    font-size: var(--font-size-small) !important;
   }
 }
 
@@ -159,8 +163,10 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
   .unified-navbar .wordmark-brand { font-size: 0 !important; }
   .unified-navbar .wordmark-brand::before {
     content: "A.";
-    font-size: 20px;
-    line-height: 1;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-x-large);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-x-large);
   }
   .unified-navbar .collection-link:nth-of-type(1) {
     display: inline-flex !important;
@@ -168,7 +174,7 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
   .unified-navbar .topbar-actions { gap: 1px !important; }
   .unified-navbar .collection-link {
     padding-inline: 2px !important;
-    font-size: 10px !important;
+    font-size: var(--font-size-small) !important;
   }
 }
 

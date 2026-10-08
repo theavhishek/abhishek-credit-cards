@@ -13,6 +13,12 @@
       "skillPath": "skills/better-interface/SKILL.md",
       "computedHash": "c7a2c30c0b13709b2fa7e4210eef55907d8887017c15ea43478752db4f935fbf"
     },
+    "codex-typography": {
+      "source": "wikimedia/ProtoWiki",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/codex-typography/SKILL.md",
+      "computedHash": "806cf2d9343482565cc03d850f817001d51bff0c756ebcc2b604b8c2bbac82bb"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
