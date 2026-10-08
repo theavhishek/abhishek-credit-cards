@@ -1,93 +1,38 @@
-/* ==========================================================================
-   Tweenly Navbar (@tweenly/navbar)
-   Shared across portfolio (cards.avhishek.in), reviews, support, and legal pages.
-   Supports both pre-rendered HTML fallback and hydrated React Motion component.
-   The avhishek.in coming-soon homepage intentionally does not load this file.
-   ========================================================================== */
-
-#navbar-root {
-  display: contents;
-}
-
-.unified-navbar .topbar,
-#navbar-root header.topbar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 72px;
+/* One navbar system shared by the collection, support and policy pages. */
+.unified-navbar .topbar {
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  pointer-events: none;
+  padding-inline: 5%;
   background: transparent !important;
-  border: none !important;
+  border: 0 !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  transform: translateY(0);
-  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.unified-navbar.portrait-home .topbar,
-.unified-navbar.portrait-home #navbar-root header.topbar {
+.unified-navbar:not(.portrait-home) .topbar {
   position: sticky;
-  top: 0;
+  top: 14px;
 }
 
-.unified-navbar .topbar.tweenly-nav-hidden,
-#navbar-root header.topbar.tweenly-nav-hidden {
-  transform: translateY(-110%);
+.unified-navbar.portrait-home .topbar {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  width: 100%;
 }
 
-/* Full-width at the top; morphs into a floating glass pill after 50px. */
 .unified-navbar .topbar-shell,
-#navbar-root nav[aria-label="Main"] {
-  display: flex !important;
-  align-items: center !important;
+.unified-navbar .topbar-shell.scrolled {
   width: 100% !important;
-  max-width: none !important;
+  max-width: 1280px !important;
   margin-inline: auto !important;
-  height: 72px !important;
-  min-height: 72px !important;
-  padding: 0 24px !important;
-  border-radius: 0 !important;
-  border: 1px solid transparent !important;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  pointer-events: auto !important;
-  position: relative !important;
+  border: 1px solid rgba(255,255,255,.70) !important;
+  border-radius: 980px !important;
+  background: rgba(255,255,255,.76) !important;
+  box-shadow: 0 8px 24px rgba(44,36,18,.05) !important;
+  backdrop-filter: blur(22px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(130%) !important;
   animation: none !important;
-  transition:
-    width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    min-height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    margin 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    padding 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease,
-    background-color 0.3s ease,
-    border-color 0.3s ease !important;
-}
-
-.unified-navbar .topbar-shell.scrolled,
-#navbar-root nav[aria-label="Main"].scrolled {
-  width: min(calc(100% - 24px), 672px) !important;
-  max-width: 672px !important;
-  height: 48px !important;
-  min-height: 48px !important;
-  margin-top: 12px !important;
-  padding: 0 6px 0 16px !important;
-  border-radius: 24px !important;
-  border-color: rgba(255, 255, 255, 0.75) !important;
-  background: rgba(255, 255, 255, 0.76) !important;
-  backdrop-filter: blur(24px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.10), 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 .unified-navbar .topbar-shell::before,
@@ -96,389 +41,138 @@
   display: none !important;
 }
 
-html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled,
-html[data-theme="dark"] #navbar-root nav[aria-label="Main"].scrolled {
-  border-color: rgba(255, 255, 255, 0.14) !important;
-  background: rgba(20, 20, 24, 0.90) !important;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6) !important;
-}
-
 .unified-navbar .topbar-inner {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center !important;
-  gap: 8px !important;
-  height: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
+  height: 76px !important;
+  padding-inline: 30px !important;
   font-family: var(--site-font) !important;
 }
 
-/* 1. Brand Logo / Wordmark */
-.unified-navbar .tweenly-logo,
-#navbar-root nav[aria-label="Main"] > div:first-child {
-  display: flex;
-  align-items: center;
-  justify-self: start;
-  margin-right: 0;
-  flex-shrink: 0;
+.unified-navbar .topbar-inner * {
+  font-family: inherit !important;
 }
 
-.unified-navbar .tweenly-logo .wordmark,
-#navbar-root .wordmark {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  outline: none;
-}
-
-.unified-navbar .tweenly-logo .wordmark-brand,
-#navbar-root .wordmark-brand {
-  font-family: var(--site-font) !important;
-  font-size: 17px !important;
-  font-weight: 750 !important;
-  letter-spacing: -0.035em !important;
-  color: var(--text) !important;
-  line-height: 1;
-}
-
-.unified-navbar .tweenly-logo .brand-dot,
-#navbar-root .brand-dot {
-  font-family: var(--site-font);
+.unified-navbar .wordmark-brand {
+  font-size: 28px !important;
   font-weight: 800;
-  color: #c79232;
-  margin-left: 1px;
+  color: var(--text);
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-logo .brand-dot,
-html[data-theme="dark"] #navbar-root .brand-dot {
-  color: #efc86f;
+.unified-navbar .topbar-actions {
+  gap: 18px !important;
 }
 
-/* 2. Desktop Capsule Links (Tweenly CapsuleLinks) */
-.unified-navbar .tweenly-capsule-links,
-#navbar-root nav[aria-label="Main"] > ul {
-  display: flex !important;
-  align-items: center !important;
-  gap: 2px !important;
-  justify-self: center;
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-  position: relative !important;
-}
-
-.unified-navbar .tweenly-capsule-links li,
-#navbar-root nav[aria-label="Main"] > ul li {
-  display: flex !important;
-  align-items: center !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.unified-navbar .tweenly-link,
-#navbar-root nav[aria-label="Main"] > ul a {
-  position: relative !important;
-  isolation: isolate !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 6px 14px !important;
-  border-radius: 9999px !important;
-  font-family: var(--site-font) !important;
-  font-size: 13.5px !important;
-  font-weight: 500 !important;
-  color: var(--muted, #626262) !important;
-  text-decoration: none !important;
-  letter-spacing: -0.012em !important;
-  transition: color 0.18s ease !important;
+.unified-navbar .collection-link {
+  position: relative;
+  height: 44px !important;
+  padding-inline: 8px !important;
+  border-radius: 0;
   background: transparent !important;
-  border: none !important;
+  color: var(--text) !important;
+  font-size: 15px !important;
+  font-weight: 600;
   box-shadow: none !important;
   transform: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  -webkit-tap-highlight-color: transparent;
 }
 
-.unified-navbar .tweenly-link:hover,
-.unified-navbar .tweenly-link:focus-visible,
-#navbar-root nav[aria-label="Main"] > ul a:hover,
-#navbar-root nav[aria-label="Main"] > ul a:focus-visible {
+.unified-navbar .collection-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+}
+
+.unified-navbar .collection-link[aria-current="page"] {
   color: var(--text) !important;
-  text-decoration: none !important;
+  font-weight: 750 !important;
 }
 
-.unified-navbar .tweenly-link[aria-current="page"],
-#navbar-root nav[aria-label="Main"] > ul a[aria-current="page"] {
-  color: var(--text) !important;
-  font-weight: 600 !important;
-}
-
-/* Tweenly active indicator dot (fallback HTML) */
-.unified-navbar .tweenly-link[aria-current="page"]::after {
-  content: "" !important;
-  position: absolute !important;
-  bottom: 2px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 4px !important;
-  height: 4px !important;
-  border-radius: 9999px !important;
-  background: #c79232 !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-link[aria-current="page"]::after {
-  background: #efc86f !important;
-}
-
-/* Tweenly sliding capsule hover highlight */
-.unified-navbar .tweenly-capsule-hl {
+.unified-navbar .collection-link[aria-current="page"]::after {
+  content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  border-radius: 9999px;
-  background: rgba(0, 0, 0, 0.055);
-  pointer-events: none;
-  z-index: -1;
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.15s ease;
-  opacity: 0;
+  left: 8px;
+  right: 8px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: #c79232;
 }
 
-html[data-theme="dark"] .unified-navbar .tweenly-capsule-hl {
-  background: rgba(255, 255, 255, 0.1);
+html[data-theme="dark"] .unified-navbar .topbar-shell,
+html[data-theme="dark"] .unified-navbar .topbar-shell.scrolled {
+  border-color: rgba(255,255,255,.19) !important;
+  background: rgba(34,31,24,.83) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
 }
 
-/* 3. Action Cluster (Airplane Theme Switch + Animated Burger) */
-.unified-navbar .tweenly-nav-actions,
-#navbar-root nav[aria-label="Main"] > div:last-child {
-  display: flex !important;
-  align-items: center !important;
-  justify-self: end;
-  gap: 6px !important;
-  margin-left: 0 !important;
+html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::after {
+  background: #efc86f;
 }
 
-.unified-navbar .tweenly-nav-actions .plane-switch,
-#navbar-root .plane-switch {
-  margin: 0 !important;
-}
-
-/* 4. Animated Burger Button (Tweenly Burger) */
-.unified-navbar .tweenly-burger,
-#navbar-root button[aria-label*="menu"],
-#navbar-root button[aria-label*="Menu"] {
-  display: none !important;
-  position: relative !important;
-  width: 34px !important;
-  height: 34px !important;
-  border-radius: 9999px !important;
-  border: none !important;
-  background: transparent !important;
-  cursor: pointer !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: var(--text) !important;
-  padding: 0 !important;
-  transition: background-color 0.15s ease !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-.unified-navbar .tweenly-burger:hover,
-#navbar-root button[aria-label*="menu"]:hover,
-#navbar-root button[aria-label*="Menu"]:hover {
-  background: rgba(0, 0, 0, 0.06) !important;
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-burger:hover,
-html[data-theme="dark"] #navbar-root button[aria-label*="menu"]:hover,
-html[data-theme="dark"] #navbar-root button[aria-label*="Menu"]:hover {
-  background: rgba(255, 255, 255, 0.12) !important;
-}
-
-.unified-navbar .tweenly-burger-box {
-  position: relative;
-  display: block;
-  width: 16px;
-  height: 12px;
-}
-
-.unified-navbar .tweenly-burger-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1.5px;
-  background: currentColor;
-  border-radius: 9999px;
-  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.unified-navbar .tweenly-burger-line.line-1 {
-  transform: translateY(-3.5px);
-}
-
-.unified-navbar .tweenly-burger-line.line-2 {
-  transform: translateY(3.5px);
-}
-
-.unified-navbar .tweenly-burger[aria-expanded="true"] .tweenly-burger-line.line-1 {
-  transform: translateY(0) rotate(45deg);
-}
-
-.unified-navbar .tweenly-burger[aria-expanded="true"] .tweenly-burger-line.line-2 {
-  transform: translateY(0) rotate(-45deg);
-}
-
-/* 5. Mobile Dropdown Sheet (Tweenly MobileSheet) */
-.unified-navbar .tweenly-mobile-sheet,
-#navbar-root header > div[id] {
-  display: none;
-  position: absolute !important;
-  top: calc(100% + 8px) !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: min(calc(100vw - 32px), 320px) !important;
-  margin: 0 auto !important;
-  border-radius: 20px !important;
-  border: 1px solid rgba(255, 255, 255, 0.8) !important;
-  background: rgba(255, 255, 255, 0.88) !important;
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
-  padding: 8px !important;
-  pointer-events: auto !important;
-  transform-origin: top !important;
-  animation: tweenly-sheet-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
-  z-index: 101 !important;
-}
-
-.unified-navbar .tweenly-mobile-sheet.is-open {
-  display: block !important;
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-sheet,
-html[data-theme="dark"] #navbar-root header > div[id] {
-  border-color: rgba(255, 255, 255, 0.14) !important;
-  background: rgba(24, 24, 28, 0.94) !important;
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.6) !important;
-}
-
-@keyframes tweenly-sheet-in {
-  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.unified-navbar .tweenly-mobile-list,
-#navbar-root header > div[id] ul {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 2px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
-
-.unified-navbar .tweenly-mobile-link,
-#navbar-root header > div[id] a {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 10px 14px !important;
-  border-radius: 14px !important;
-  font-family: var(--site-font) !important;
-  font-size: 14.5px !important;
-  font-weight: 500 !important;
-  color: var(--text) !important;
-  text-decoration: none !important;
-  transition: background-color 0.15s ease !important;
-}
-
-.unified-navbar .tweenly-mobile-link:hover,
-#navbar-root header > div[id] a:hover {
-  background: rgba(0, 0, 0, 0.05) !important;
-  text-decoration: none !important;
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-link:hover,
-html[data-theme="dark"] #navbar-root header > div[id] a:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-}
-
-.unified-navbar .tweenly-mobile-link[aria-current="page"],
-#navbar-root header > div[id] a[aria-current="page"] {
-  font-weight: 600 !important;
-}
-
-.unified-navbar .tweenly-mobile-link .tweenly-active-indicator,
-#navbar-root header > div[id] a span.rounded-full {
-  width: 6px !important;
-  height: 6px !important;
-  border-radius: 9999px !important;
-  background: #c79232 !important;
-}
-
-html[data-theme="dark"] .unified-navbar .tweenly-mobile-link .tweenly-active-indicator,
-html[data-theme="dark"] #navbar-root header > div[id] a span.rounded-full {
-  background: #efc86f !important;
-}
-
-/* 6. Responsive Rules */
-@media (max-width: 680px) {
-  .unified-navbar .tweenly-capsule-links,
-  #navbar-root nav[aria-label="Main"] > ul {
-    display: none !important;
+@media (max-width: 1024px) {
+  .unified-navbar .topbar { padding-inline: 24px; }
+  .unified-navbar.portrait-home .topbar { top: 18px; }
+  .unified-navbar .topbar-inner {
+    height: 66px !important;
+    padding-inline: 22px !important;
   }
-  .unified-navbar .tweenly-burger,
-  #navbar-root button[aria-label*="menu"],
-  #navbar-root button[aria-label*="Menu"] {
+  .unified-navbar .wordmark-brand { font-size: 24px !important; }
+  .unified-navbar .topbar-actions { gap: 12px !important; }
+  .unified-navbar .collection-link { height: 40px !important; font-size: 14px !important; }
+}
+
+@media (max-width: 720px) {
+  .unified-navbar .topbar,
+  .unified-navbar.portrait-home .topbar {
+    top: 14px;
+    padding-inline: 14px;
+  }
+  .unified-navbar .topbar-inner {
+    height: 58px !important;
+    padding-inline: 17px !important;
+  }
+  .unified-navbar .wordmark-brand { font-size: 22px !important; }
+  .unified-navbar .topbar-actions { gap: 7px !important; }
+  .unified-navbar .collection-link {
+    height: 34px !important;
+    padding-inline: 4px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .unified-navbar .topbar,
+  .unified-navbar.portrait-home .topbar { padding-inline: 10px; }
+  .unified-navbar .topbar-inner { padding-inline: 12px !important; }
+  .unified-navbar .wordmark-brand { font-size: 20px !important; }
+  .unified-navbar .topbar-actions { gap: 3px !important; }
+  .unified-navbar .collection-link {
+    padding-inline: 3px !important;
+    font-size: 10.5px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .unified-navbar .topbar,
+  .unified-navbar.portrait-home .topbar { padding-inline: 8px; }
+  .unified-navbar .topbar-inner { padding-inline: 10px !important; }
+  .unified-navbar .wordmark-brand { font-size: 0 !important; }
+  .unified-navbar .wordmark-brand::before {
+    content: "A.";
+    font-size: 20px;
+    line-height: 1;
+  }
+  .unified-navbar .collection-link:nth-of-type(1) {
     display: inline-flex !important;
   }
-  .unified-navbar .topbar-shell {
-    padding: 0 16px !important;
-  }
-  .unified-navbar .topbar-shell.scrolled,
-  #navbar-root nav[aria-label="Main"].scrolled {
-    width: calc(100% - 24px) !important;
-    padding: 0 5px 0 14px !important;
-  }
-  .unified-navbar .tweenly-logo,
-  #navbar-root nav[aria-label="Main"] > div:first-child {
-    margin-right: 0 !important;
-  }
-  .unified-navbar .tweenly-logo .wordmark-brand,
-  #navbar-root .wordmark-brand {
-    font-size: 16px !important;
-  }
-}
-
-@media (min-width: 681px) {
-  .unified-navbar .tweenly-capsule-links,
-  #navbar-root nav[aria-label="Main"] > ul {
-    display: flex !important;
-  }
-  .unified-navbar .tweenly-burger,
-  #navbar-root button[aria-label*="menu"],
-  #navbar-root button[aria-label*="Menu"] {
-    display: none !important;
-  }
-  .unified-navbar .tweenly-mobile-sheet,
-  #navbar-root header > div[id] {
-    display: none !important;
+  .unified-navbar .topbar-actions { gap: 1px !important; }
+  .unified-navbar .collection-link {
+    padding-inline: 2px !important;
+    font-size: 10px !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .unified-navbar .topbar-shell,
-  .unified-navbar .topbar,
-  .unified-navbar .tweenly-link,
-  .unified-navbar .tweenly-capsule-hl,
-  .unified-navbar .tweenly-burger-line,
-  .unified-navbar .tweenly-mobile-sheet,
-  #navbar-root nav[aria-label="Main"] {
-    transition: none !important;
-    animation: none !important;
-  }
+  .unified-navbar .collection-link { transition: none !important; }
 }
