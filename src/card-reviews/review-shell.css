@@ -4,9 +4,9 @@
   --text-secondary: var(--muted, #626262);
   --text-muted: color-mix(in srgb, var(--muted, #626262) 78%, transparent);
   --surface-muted: color-mix(in srgb, var(--foreground) 6%, var(--background));
-  --border: var(--line, rgba(23, 23, 23, .12));
-  --font-body: "Cal Sans", "Inter", system-ui, sans-serif;
-  --font-display: "Cal Sans", "Inter", system-ui, sans-serif;
+  --font-body: var(--site-font, "Geist", -apple-system, sans-serif);
+  --font-display: var(--site-font, "Geist", -apple-system, sans-serif);
+  --font-mono: var(--site-mono, "Geist Mono", monospace);
   --tracking-body: -.012em;
   --tracking-display: -.035em;
   --leading-body: 1.55;

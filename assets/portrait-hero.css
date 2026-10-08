@@ -1,8 +1,8 @@
 /* Scoped portrait composition. The original photograph is never filtered or edited.
    Tune --portrait-x / --portrait-y below; face is near (51%, 47%) in the source. */
 .portrait-home { --hero-ink:#11100d; --hero-paper:#f8f3e9; --hero-gold:#835811; }
-.portrait-home .topbar, .portrait-home .hero-poster-stage { font-family:var(--site-font)!important; }
-.portrait-home .topbar *, .portrait-home .hero-poster-stage * { font-family:inherit!important; }
+.portrait-home .topbar, .portrait-home .hero-poster-stage { font-family:var(--site-font); }
+.portrait-home .stat-meta strong { font-family:var(--site-mono); font-variant-numeric:tabular-nums; }
 .portrait-home .topbar { position:absolute; top:24px; left:0; width:100%; padding:0 5%; }
 .portrait-home .topbar-shell, .portrait-home .topbar-shell.scrolled { max-width:1280px; background:rgba(255,255,255,.76); border:1px solid rgba(255,255,255,.7); box-shadow:0 8px 24px #2c24120a; backdrop-filter:blur(22px) saturate(130%); -webkit-backdrop-filter:blur(22px) saturate(130%); animation:portrait-nav-in .5s both; }
 .portrait-home .topbar-shell::before,.portrait-home .topbar-shell::after { content:none; }

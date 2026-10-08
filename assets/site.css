@@ -89,7 +89,7 @@ html[data-theme="dark"] .poster-stats-panel{background:rgba(24,23,20,0.78);borde
 .stat-icon-circle{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;color:#b78212;box-shadow:0 4px 12px rgba(0,0,0,0.04);flex-shrink:0}
 html[data-theme="dark"] .stat-icon-circle{background:rgba(45,42,35,0.8);border-color:rgba(255,255,255,0.12);color:#eab308}
 .stat-meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1}
-.stat-meta strong{font-size:24px;font-weight:700;color:#11100D;font-family:var(--site-font)}
+.stat-meta strong{font-size:24px;font-weight:700;color:#11100D;font-family:var(--site-mono);font-variant-numeric:tabular-nums}
 html[data-theme="dark"] .stat-meta strong{color:#ffffff}
 .stat-meta span{font-size:13px;font-weight:600;color:rgba(17,16,13,0.65);text-transform:lowercase;margin-top:2px}
 html[data-theme="dark"] .stat-meta span{color:rgba(255,255,255,0.65)}
@@ -202,10 +202,10 @@ html[data-theme="dark"] .secured-tag{background:#332c21;color:#d9bd82}
 .dialog-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
 .detail{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft)}
-.detail span{display:block;color:var(--soft);font-size:8px}
-.detail strong{display:block;margin-top:4px;font-size:11px;font-weight:650;overflow-wrap:anywhere}
+.detail span{display:block;color:var(--soft);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.detail strong{display:block;margin-top:4px;font-size:13px;font-weight:600;font-family:var(--site-mono);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .best-for{margin-top:15px;padding-top:15px;border-top:1px solid var(--line)}
-.best-for>span{display:block;color:var(--soft);font-size:8px}
+.best-for>span{display:block;color:var(--soft);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .best-for div{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .use-tag{display:inline-flex;align-items:center;min-height:26px;padding-inline:9px;border-radius:980px;background:var(--surface-muted);color:var(--muted);font-size:9px;font-weight:500}
 
