@@ -12,6 +12,7 @@ if (root) {
       categories={["Cashback"]}
       pageSize={6}
       showFeatured
+      getHref={(post) => `/card-reviews/${post.id}`}
     />,
   );
 }
