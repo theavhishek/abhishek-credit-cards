@@ -99,7 +99,7 @@ html[data-theme="dark"] .portrait-home .hero-cta-secondary { background:#29261ed
  .appearance-track::before { width:24px; height:24px; top:3px; left:3px; transform:translateX(22px); }
  .appearance-track svg { width:17px; height:17px; }
  .portrait-home .poster-content { padding:108px 20px 22px; }
- .portrait-home .poster-title { display:flex; flex-direction:column; align-items:flex-start; gap:4px; max-width:100%; overflow:visible; font-size:clamp(54px,14.6vw,66px); font-weight:700; line-height:.96; letter-spacing:-.04em; }
+ .portrait-home .poster-title { display:flex; flex-direction:column; align-items:flex-start; gap:4px; max-width:100%; overflow:visible; font-size:clamp(60px,16vw,72px); font-weight:700; line-height:.94; letter-spacing:-.042em; }
  .portrait-home .poster-gold-line { display:inline-block; max-width:100%; padding:2px .1em 8px 0; line-height:.96; overflow:visible; }
  .portrait-home .poster-dark-line { display:block; max-width:100%; padding:0 .06em .04em 0; line-height:.97; letter-spacing:-.038em; overflow:visible; }
  .portrait-home .poster-dark-line br { display:block; }
@@ -122,7 +122,7 @@ html[data-theme="dark"] .portrait-home .hero-cta-secondary { background:#29261ed
  .portrait-home .topbar-actions { gap:3px; }
  .portrait-home .wordmark-brand { font-size:20px; }
  .portrait-home .poster-content { padding-inline:16px; }
- .portrait-home .poster-title { font-size:clamp(52px,14.8vw,56px); line-height:.96; letter-spacing:-.038em; gap:4px; }
+ .portrait-home .poster-title { font-size:clamp(57px,16vw,62px); line-height:.94; letter-spacing:-.04em; gap:4px; }
  .portrait-home .poster-dark-line { letter-spacing:-.034em; }
  .portrait-home .poster-stats-panel { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 0; padding:18px 12px; }
  .portrait-home .stat-item { flex-direction:row; gap:12px; }
