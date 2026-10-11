@@ -21,7 +21,7 @@ export const blogPosts: BlogPost[] = [
     featured: true,
     category: "Cashback",
     date: "2026-10-12",
-    readTime: 20,
+    readTime: 6,
     author: {
       name: "Abhishek Meena",
       role: "Independent card reviewer",
