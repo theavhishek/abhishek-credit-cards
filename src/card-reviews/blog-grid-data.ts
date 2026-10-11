@@ -20,15 +20,15 @@ export const blogPosts: BlogPost[] = [
     id: "hsbc-live-plus",
     featured: true,
     category: "Cashback",
-    date: "2026-10-07",
-    readTime: 5,
+    date: "2026-10-12",
+    readTime: 20,
     author: {
       name: "Abhishek Meena",
       role: "Independent card reviewer",
       avatar: "/assets/abhishek-face.jpg",
     },
     title: "HSBC Live+ Credit Card",
-    excerpt: "A high-return lifestyle card when dining, food delivery and grocery spends are large enough to use the monthly cashback cap.",
+    excerpt: "A detailed 2026 review of its 10% everyday cashback, ₹1,200 shared cap, MCC exclusions, fees and lounge privileges.",
     image: {
       src: "https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg",
       alt: "HSBC Live+ Visa Infinite credit card",
