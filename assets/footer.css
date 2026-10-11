@@ -109,7 +109,7 @@
 
 .global-footer__columns{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:36px;
 }
 
@@ -251,9 +251,6 @@ html[data-theme="dark"] .global-footer__social:is(:hover,:focus,:active){
   .global-footer__columns{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:30px 24px;
-  }
-  .global-footer__column:last-child{
-    grid-column:1 / -1;
   }
   .global-footer__identity p{
     font-size:13.5px;
