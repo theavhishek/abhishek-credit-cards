@@ -53,13 +53,13 @@ body {
 
   .hero { padding-block: 38px 24px !important; display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 28px !important; }
   .hero-copy { width: 100%; min-width: 0; }
-  .hero h1 { max-width: 340px; margin: 0; font-family: var(--site-font) !important; font-size: clamp(31px, 8.7vw, 36px) !important; font-weight: 600 !important; line-height: 1.04 !important; letter-spacing: -.036em !important; text-wrap: balance; }
-  .hero-copy > p { max-width: 340px; margin-top: 16px !important; font-size: 13px !important; font-weight: 400 !important; line-height: 1.58 !important; letter-spacing: -.008em; }
-  .hero-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .hero h1 { max-width: 380px; margin: 0; font-family: var(--site-font) !important; font-size: clamp(36px, 9.8vw, 43px) !important; font-weight: 600 !important; line-height: 1.075 !important; letter-spacing: -.032em !important; text-wrap: balance; }
+  .hero-copy > p { max-width: 355px; margin-top: 20px !important; font-size: 14px !important; font-weight: 400 !important; line-height: 1.62 !important; letter-spacing: -.006em; }
+  .hero-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
   .hero-meta > div { min-width: 0; padding-right: 6px; }
   .hero-meta strong { display: block; font-size: 21px; line-height: 1; letter-spacing: -.035em; }
   .hero-meta span { display: block; margin-top: 5px; font-size: 8.5px !important; white-space: nowrap; }
-  .hero-actions { display: grid !important; grid-template-columns: minmax(0, 1.18fr) minmax(0, .92fr); gap: 8px !important; margin-top: 20px !important; }
+  .hero-actions { display: grid !important; grid-template-columns: minmax(0, 1.18fr) minmax(0, .92fr); gap: 10px !important; margin-top: 24px !important; }
   .hero-cta-primary, .hero-cta-secondary { min-width: 0; min-height: 48px !important; padding: 0 14px !important; justify-content: center; gap: 8px !important; border-radius: 999px !important; font-size: 13px !important; white-space: nowrap; }
   .hero-cta-primary svg, .hero-cta-secondary svg { width: 14px; height: 14px; flex: 0 0 auto; }
   .hero-card-showcase { width: 100% !important; max-width: 292px !important; margin: 10px auto 0 !important; }
@@ -113,8 +113,8 @@ body {
   .wordmark-brand { font-size: 17px; }
   .collection-link, .support-nav-current { padding-inline: 7px; font-size: 10px !important; }
   .hero { padding-block-start: 32px !important; gap: 24px !important; }
-  .hero h1 { max-width: 315px; font-size: clamp(30px, 8.3vw, 34px) !important; }
-  .hero-copy > p { max-width: 315px; font-size: 12.75px !important; }
+  .hero h1 { max-width: 360px; font-size: clamp(36px, 10.2vw, 42px) !important; }
+  .hero-copy > p { max-width: 345px; font-size: 14px !important; }
   .hero-meta strong { font-size: 20px; }
   .hero-meta span { font-size: 8px !important; }
   .hero-actions { grid-template-columns: 1fr 1fr; }
@@ -132,7 +132,7 @@ body {
 
 @media (max-width: 360px) {
   .collection-link:nth-of-type(1) { display: none !important; }
-  .hero h1 { max-width: 290px; font-size: 29px !important; }
+  .hero h1 { max-width: 320px; font-size: 35px !important; }
   .hero-actions { grid-template-columns: 1fr; }
   .hero-cta-primary, .hero-cta-secondary { width: 100%; }
   .hero-meta strong { font-size: 19px; }
