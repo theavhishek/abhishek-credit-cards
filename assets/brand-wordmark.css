@@ -1,0 +1,55 @@
+/* abhishek. brand wordmark — shared across light and dark themes.
+   Normaliq Semi Bold is a licensed typeface: supply a properly licensed
+   webfont to load it for all visitors. Geist remains a safe fallback. */
+:root {
+  --brand-wordmark-font: "Normaliq", "Geist", "Segoe UI", sans-serif;
+  --brand-wordmark-accent: #fc6e20;
+}
+.wordmark-brand,
+.home-wordmark,
+.global-footer__brand {
+  font-family: var(--brand-wordmark-font) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.035em;
+  text-transform: none;
+}
+.unified-navbar .topbar-inner .wordmark-brand,
+.unified-navbar .topbar-inner .wordmark-brand .brand-dot {
+  font-family: var(--brand-wordmark-font) !important;
+  font-weight: 600 !important;
+}
+.wordmark-brand,
+.global-footer__brand {
+  color: var(--text, #1d1d1f) !important;
+}
+html[data-theme="dark"] .wordmark-brand,
+html[data-theme="dark"] .global-footer__brand {
+  color: #ffffff !important;
+}
+.home-wordmark {
+  color: var(--home-text, #15140f) !important;
+}
+html[data-theme="dark"] .home-wordmark {
+  color: #ffffff !important;
+}
+.brand-dot,
+.home-wordmark span,
+.global-footer__brand span {
+  color: var(--brand-wordmark-accent) !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: var(--brand-wordmark-accent) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+.unified-navbar .wordmark-brand::before {
+  content: none !important;
+}
+@media (max-width: 360px) {
+  .unified-navbar .topbar-inner .wordmark-brand {
+    font-size: 16px !important;
+  }
+}
+/* Use the single wordmark, without the legacy boxed "A." footer symbol. */
+.global-footer__brandline { gap: 0 !important; }
+.global-footer__brandmark { display: none !important; }
