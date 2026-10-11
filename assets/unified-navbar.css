@@ -58,30 +58,13 @@
     0 2px 4px rgba(15,23,42,.06) !important;
 }
 
+/* One glass navbar surface only. The old ::before / ::after decorative
+   surfaces layered over the navbar and looked like another bar. They must
+   also override the legacy .topbar-shell::after styling in site.css. */
 .unified-navbar .topbar-shell::before,
 .unified-navbar .topbar-shell::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-.unified-navbar .topbar-shell::before {
-  z-index: 0;
-  inset: 1px 8% auto;
-  height: 58%;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.64), rgba(255,255,255,.18) 46%, transparent 74%);
-  opacity: .9;
-}
-
-.unified-navbar .topbar-shell::after {
-  z-index: 0;
-  inset: 0;
-  border: 1px solid rgba(255,255,255,.22);
-  box-shadow:
-    inset 10px 0 24px rgba(255,255,255,.08),
-    inset -10px 0 24px rgba(255,255,255,.05);
+  content: none !important;
+  display: none !important;
 }
 
 .unified-navbar .topbar-inner {
