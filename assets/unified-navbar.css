@@ -109,6 +109,31 @@ html[data-theme="dark"] .unified-navbar .collection-link[aria-current="page"]::a
   background: #efc86f;
 }
 
+
+/* Inner pages use a neutral glass navbar. The warm/gold treatment is reserved
+   for the portrait credit-card homepage, where it belongs to the photograph. */
+.unified-navbar:not(.portrait-home) .topbar-shell,
+.unified-navbar:not(.portrait-home) .topbar-shell.scrolled {
+  border-color: rgba(15, 23, 42, .10) !important;
+  background: rgba(255, 255, 255, .88) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, .06) !important;
+}
+
+.unified-navbar:not(.portrait-home) .collection-link[aria-current="page"]::after {
+  background: #2563eb;
+}
+
+html[data-theme="dark"] .unified-navbar:not(.portrait-home) .topbar-shell,
+html[data-theme="dark"] .unified-navbar:not(.portrait-home) .topbar-shell.scrolled {
+  border-color: rgba(255, 255, 255, .14) !important;
+  background: rgba(24, 24, 27, .88) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .24) !important;
+}
+
+html[data-theme="dark"] .unified-navbar:not(.portrait-home) .collection-link[aria-current="page"]::after {
+  background: #60a5fa;
+}
+
 @media (max-width: 1024px) {
   .unified-navbar .topbar { padding-inline: 24px; }
   .unified-navbar.portrait-home .topbar { top: 18px; }
