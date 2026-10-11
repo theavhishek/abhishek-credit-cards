@@ -65,6 +65,29 @@ html[data-theme="dark"] .bank-group { box-shadow: none; }
 .plane-switch input + div:after,
 .plane-switch input + div span.cloud { animation-duration: 8s; }
 
+/* Portrait layouts keep the full second phrase together. */
+@media (max-width: 900px) {
+  .portrait-home .poster-dark-line { white-space: nowrap; }
+  .portrait-home .poster-dark-line .cinematic-line { display: inline; }
+}
+
+/* Small tablets and wide phones need a calm area for the subtitle before
+   the portrait begins. */
+@media (min-width: 600px) and (max-width: 900px) {
+  .portrait-home .poster-title {
+    font-size: clamp(44px, 7.5vw, 58px);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -.04em;
+  }
+  .portrait-home .poster-subline {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+  .portrait-home .poster-bg-wrap { top: clamp(320px, 37vw, 350px); }
+}
+
 @media (max-width: 720px) {
   .collection-head { align-items: start; flex-direction: column; gap: 6px; }
   .collection-head p { max-width: 36ch; font-size: 13px !important; }
@@ -111,7 +134,7 @@ html[data-theme="dark"] .bank-group { box-shadow: none; }
   }
   .portrait-home .poster-dark-line { line-height: 1.04; letter-spacing: -.03em; }
   .portrait-home .poster-subline { font-size: 15.5px; line-height: 1.5; margin-top: 16px; }
-  .portrait-home .poster-bg-wrap { top: 278px; }
+  .portrait-home .poster-bg-wrap { top: clamp(278px, 50vw, 310px); }
   .portrait-home .poster-actions { margin-top: clamp(280px, 80vw, 340px); }
   .portrait-home .hero-cta-primary,
   .portrait-home .hero-cta-secondary { min-height: 50px; padding-block: 12px; font-size: 14px; }
