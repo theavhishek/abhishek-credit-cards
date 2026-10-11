@@ -3,8 +3,9 @@
    All other website typography remains unchanged. */
 .brand-logo-svg {
   display: block;
-  width: auto;
+  width: 4.54em;
   height: 0.86em;
+  aspect-ratio: 4131 / 783;
   max-width: 100%;
   flex: 0 0 auto;
   overflow: visible;
