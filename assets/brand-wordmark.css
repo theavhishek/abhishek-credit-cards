@@ -1,22 +1,21 @@
-/* abhishek. brand wordmark — shared across light and dark themes.
-   Normaliq Semi Bold is a licensed typeface: supply a properly licensed
-   webfont to load it for all visitors. Geist remains a safe fallback. */
-:root {
-  --brand-wordmark-font: "Normaliq", "Geist", "Segoe UI", sans-serif;
-  --brand-wordmark-accent: #fc6e20;
+/* Exact Normaliq SemiBold outlines for the "abhishek." brand logo.
+   The outline preserves the supplied lettering without shipping the font file.
+   All other website typography remains unchanged. */
+.brand-logo-svg {
+  display: block;
+  width: auto;
+  height: 0.86em;
+  max-width: 100%;
+  flex: 0 0 auto;
+  overflow: visible;
+  color: inherit;
 }
 .wordmark-brand,
-.home-wordmark,
-.global-footer__brand {
-  font-family: var(--brand-wordmark-font) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.035em;
-  text-transform: none;
-}
-.unified-navbar .topbar-inner .wordmark-brand,
-.unified-navbar .topbar-inner .wordmark-brand .brand-dot {
-  font-family: var(--brand-wordmark-font) !important;
-  font-weight: 600 !important;
+.global-footer__brand,
+.home-wordmark {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 .wordmark-brand,
 .global-footer__brand {
@@ -26,30 +25,11 @@ html[data-theme="dark"] .wordmark-brand,
 html[data-theme="dark"] .global-footer__brand {
   color: #ffffff !important;
 }
-.home-wordmark {
-  color: var(--home-text, #15140f) !important;
-}
-html[data-theme="dark"] .home-wordmark {
-  color: #ffffff !important;
-}
-.brand-dot,
-.home-wordmark span,
-.global-footer__brand span {
-  color: var(--brand-wordmark-accent) !important;
-  background: none !important;
-  -webkit-background-clip: border-box !important;
-  -webkit-text-fill-color: var(--brand-wordmark-accent) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0 !important;
-}
-.unified-navbar .wordmark-brand::before {
-  content: none !important;
-}
+.home-wordmark { color: var(--home-text, #15140f) !important; }
+html[data-theme="dark"] .home-wordmark { color: #ffffff !important; }
+.unified-navbar .wordmark-brand::before { content: none !important; }
 @media (max-width: 360px) {
-  .unified-navbar .topbar-inner .wordmark-brand {
-    font-size: 16px !important;
-  }
+  .unified-navbar .topbar-inner .wordmark-brand { font-size: 16px !important; }
 }
-/* Use the single wordmark, without the legacy boxed "A." footer symbol. */
 .global-footer__brandline { gap: 0 !important; }
 .global-footer__brandmark { display: none !important; }
