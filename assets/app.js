@@ -40,15 +40,19 @@
     handleScroll();
   }
 
-  const bankDomains = {
-    "Axis Bank":"axis.bank.in","Kotak Mahindra Bank":"kotak.com","SBI Card":"sbicard.com",
-    "IDFC FIRST Bank":"idfcfirstbank.com","ICICI Bank":"icicibank.com","BOBCARD":"bobcard.co.in",
-    "YES BANK":"yesbank.in","HDFC Bank":"hdfcbank.com","Punjab National Bank":"pnbindia.in",
-    "Indian Bank":"indianbank.in","Bank of India":"bankofindia.co.in","Canara Bank":"canarabank.com",
-    "OneCard":"getonecard.app","RBL Bank":"rblbank.com","IndusInd Bank":"indusind.com",
-    "Equitas Small Finance Bank":"equitasbank.com","AU Small Finance Bank":"aubank.in",
-    "HSBC India":"hsbc.co.in","American Express":"americanexpress.com","SBM Bank India":"sbmbank.co.in",
-    "Unity Small Finance Bank":"theunitybank.com","CSB Bank":"csb.co.in"
+  const bankLogoFiles = {
+    "Axis Bank":"utib.svg","Kotak Mahindra Bank":"kkbk.svg","SBI Card":"sbin.svg",
+    "IDFC FIRST Bank":"idfb.svg","ICICI Bank":"icic.svg","BOBCARD":"barb.svg",
+    "YES BANK":"yesb.svg","HDFC Bank":"hdfc.svg","Punjab National Bank":"punb.svg",
+    "Indian Bank":"idib.svg","Bank of India":"bkid.svg","Canara Bank":"cnrb.svg",
+    "OneCard":"onecard.svg","RBL Bank":"ratn.svg","IndusInd Bank":"indb.svg",
+    "AU Small Finance Bank":"aubl.svg","HSBC India":"hsbc.svg",
+    "American Express":"americanexpress.svg","Unity Small Finance Bank":"unity-custom.png",
+    "CSB Bank":"csbk.svg"
+  };
+  const remainingLogoSources = {
+    "Equitas Small Finance Bank":"https://www.equitasbank.com/strapi-dev/uploads/Group_2_cad9c29024.svg",
+    "SBM Bank India":"https://www.google.com/s2/favicons?domain=www.sbmbank.co.in&sz=256"
   };
   const bankShort = {
     "Axis Bank":"AXIS","Kotak Mahindra Bank":"KOTAK","SBI Card":"SBI CARD","IDFC FIRST Bank":"IDFC FIRST",
@@ -60,10 +64,12 @@
   };
 
   function logoMarkup(bankName) {
-    const domain = bankDomains[bankName];
+    const src = bankLogoFiles[bankName]
+      ? `assets/bank-logos/${bankLogoFiles[bankName]}`
+      : remainingLogoSources[bankName];
     const fallback = (bankShort[bankName] || bankName).replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase();
-    if (!domain) return `<span class="logo-fallback" style="display:grid">${esc(fallback)}</span>`;
-    return `<img class="bank-logo" alt="" data-domain="${esc(domain)}" data-logo-stage="0" src="https://${esc(domain)}/apple-touch-icon.png" loading="lazy" referrerpolicy="no-referrer"><span class="logo-fallback">${esc(fallback)}</span>`;
+    if (!src) return `<span class="logo-fallback" style="display:grid">${esc(fallback)}</span>`;
+    return `<img class="bank-logo" alt="" src="${esc(src)}" loading="lazy" decoding="async"><span class="logo-fallback">${esc(fallback)}</span>`;
   }
 
   function installLogoFallbacks(scope = document) {
@@ -71,22 +77,11 @@
       if (img.dataset.logoBound) return;
       img.dataset.logoBound = "1";
       img.addEventListener("error", () => {
-        const domain = img.dataset.domain;
-        const stage = Number(img.dataset.logoStage || "0");
-        if (stage === 0) {
-          img.dataset.logoStage = "1";
-          img.src = `https://${domain}/favicon.ico`;
-          return;
-        }
-        if (stage === 1) {
-          img.dataset.logoStage = "2";
-          img.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=256`;
-          return;
-        }
         img.hidden = true;
         const fallback = img.nextElementSibling;
         if (fallback) fallback.style.display = "grid";
       });
+      if (img.complete && img.naturalWidth === 0) img.dispatchEvent(new Event("error"));
     });
   }
 

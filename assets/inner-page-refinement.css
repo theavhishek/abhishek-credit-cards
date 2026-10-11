@@ -1,0 +1,132 @@
+/* Targeted refinements for the portfolio and inner pages. Brand assets, copy,
+   routes, and the coming-soon homepage are intentionally outside this sheet. */
+
+/* Keep the portrait as the focal point without letting display type dominate it. */
+.portrait-home .poster-title {
+  font-weight: 650;
+  letter-spacing: -.052em;
+}
+.portrait-home .poster-subline {
+  font-weight: 400;
+}
+.portrait-home .poster-stats-panel {
+  box-shadow: 0 8px 28px rgba(35, 25, 10, .10);
+}
+
+/* The portfolio is an index: names and useful details should lead, with status
+   colors acting as a quick scan aid. */
+.collection-head p { font-size: 14px; line-height: 1.5; }
+.collection-count { font-size: 12px; }
+.bank-group { box-shadow: 0 3px 16px rgba(0, 0, 0, .035); }
+html[data-theme="dark"] .bank-group { box-shadow: none; }
+.bank-group-head { background: var(--surface); }
+.card-row { min-height: 66px; }
+.card-name { font-size: 16px !important; font-weight: 600; }
+.network { font-size: 12px !important; }
+.card-meta-line { font-size: 12px !important; color: var(--muted); }
+.mini-tag { font-size: 11px !important; }
+.fee-pill { min-width: 62px !important; height: 28px !important; font-size: 11px !important; box-shadow: none; }
+.legend .fee-pill { height: 24px !important; }
+.legend-items > span { font-size: 12px; }
+
+/* Keep every quick action visible; the final Reset action should never be
+   hidden beyond a horizontal scroll row. */
+.quick-row { flex-wrap: wrap; overflow: visible; padding-inline-end: 0; }
+.quick-row::-webkit-scrollbar { display: initial; }
+
+/* Reviews use the same type family but need a shorter path to the first story. */
+#card-reviews-root { padding-top: 56px; }
+#card-reviews-root h1 { font-weight: 600; }
+#card-reviews-root h1 + p { max-width: 62ch; }
+
+/* The support directory is the task; its intro remains, with less competition
+   from decorative summary panels. */
+.support-hero-intro { padding-top: 20px; padding-bottom: 22px; animation-duration: .42s; }
+.support-intro-title { font-weight: 650; }
+.support-intro-badge { margin-bottom: 12px; }
+.support-intro-desc { margin-bottom: 18px; }
+.support-feature-pill { box-shadow: none; }
+.support-directory .support-card-header { padding-block: 20px; }
+.support-contact-chip a { font-size: 14px; }
+.support-contact-section h2,
+.support-contact-section h3 { font-size: 14px; }
+
+/* Legal copy is long-form reading, not card metadata. */
+.legal-card p,
+.legal-card li { font-size: 16px; line-height: 1.7; color: var(--text); opacity: .82; }
+.legal-card h2 { margin-top: 34px; padding-bottom: 10px; }
+
+/* Motion communicates arrival and state while staying brief. */
+.cinematic-word { filter: none; transform: translate3d(0, 10px, 0); animation-duration: .48s; animation-delay: calc(40ms + var(--cinematic-index, 0) * 55ms); }
+@keyframes cinematic-word-settle {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.plane-switch input + div:after,
+.plane-switch input + div span.cloud { animation-duration: 8s; }
+
+@media (max-width: 720px) {
+  .collection-head { align-items: start; flex-direction: column; gap: 6px; }
+  .collection-head p { max-width: 36ch; font-size: 13px !important; }
+  .collection-count { font-size: 12px !important; }
+  .select-row { grid-template-columns: 1fr; }
+  .filter-panel { gap: 10px; padding: 10px; }
+  .quick-row { gap: 8px; }
+  .quick, .reset-button { min-height: 40px; font-size: 12px !important; }
+  .bank-group-head { background: var(--surface) !important; }
+  .bank-heading-copy span { font-size: 11px !important; }
+  .card-row { min-height: 70px; grid-template-columns: minmax(0, 1fr) auto; padding-block: 12px; }
+  .card-name { font-size: 15px !important; }
+  .network { font-size: 11px !important; }
+  .card-meta-line { font-size: 12px !important; }
+  .fee-pill { min-width: 62px !important; height: 29px !important; font-size: 11px !important; }
+  .legend-items > span { font-size: 11px; }
+
+  #card-reviews-root { padding-top: 56px; }
+  #card-reviews-root h1 { font-size: clamp(29px, 7.5vw, 38px); }
+
+  .support-hero-intro { padding-top: 14px; padding-bottom: 16px; }
+  .support-intro-title { font-size: clamp(30px, 8vw, 38px); }
+  .support-intro-desc { font-size: 15px; }
+  .support-intro-features { gap: 8px; }
+  .support-feature-pill { flex: 1 1 calc(50% - 8px); min-width: 0; padding: 7px 9px; gap: 8px; }
+  .feature-icon-circle { width: 30px; height: 30px; flex: 0 0 30px; }
+  .feature-meta strong { font-size: 12px; }
+  .feature-meta span { font-size: 10px; }
+  .support-directory .support-card-header { padding: 17px 18px; }
+  .support-contact-chip a { font-size: 14px; }
+
+  .legal-card p,
+  .legal-card li { font-size: 15px; line-height: 1.72; }
+  .legal-card h2 { font-size: 18px; }
+}
+
+@media (max-width: 600px) {
+  .portrait-home .poster-content { padding-top: 106px; }
+  .portrait-home .poster-title {
+    font-size: clamp(34px, 9.5vw, 42px);
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.04;
+  }
+  .portrait-home .poster-dark-line { line-height: 1.04; letter-spacing: -.03em; }
+  .portrait-home .poster-subline { font-size: 15.5px; line-height: 1.5; margin-top: 16px; }
+  .portrait-home .poster-bg-wrap { top: 278px; }
+  .portrait-home .poster-actions { margin-top: clamp(280px, 80vw, 340px); }
+  .portrait-home .hero-cta-primary,
+  .portrait-home .hero-cta-secondary { min-height: 50px; padding-block: 12px; font-size: 14px; }
+  .portrait-home .poster-location { bottom: 330px; }
+  .portrait-home .poster-stats-panel { margin-top: 12px; }
+}
+
+@media (max-width: 390px) {
+  .portrait-home .poster-title { font-size: clamp(33px, 9.4vw, 37px); }
+  .portrait-home .poster-location { bottom: 340px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-word,
+  .support-hero-intro,
+  .plane-switch input + div:after,
+  .plane-switch input + div span.cloud { animation: none !important; opacity: 1; transform: none; filter: none; }
+}
