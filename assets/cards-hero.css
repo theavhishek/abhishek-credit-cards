@@ -108,7 +108,7 @@ html[data-theme="dark"] .ch-ambient { opacity: 0.38; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgb(0 0 0 / 0.38) 0%, transparent 24%),
+    radial-gradient(120% 34% at 50% 0%, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.22) 55%, transparent 100%),
     linear-gradient(0deg, rgb(8 10 16 / 0.72) 0%, rgb(8 10 16 / 0.2) 24%, transparent 40%);
 }
 .ch-card-top {
@@ -123,13 +123,12 @@ html[data-theme="dark"] .ch-ambient { opacity: 0.38; }
   display: block;
   width: auto;
   height: calc(var(--cw) * 0.06);
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.55)) drop-shadow(0 0 6px rgb(0 0 0 / 0.45));
 }
 .ch-contactless {
   width: calc(var(--cw) * 0.08);
   height: calc(var(--cw) * 0.08);
-  opacity: 0.92;
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.55)) drop-shadow(0 0 6px rgb(0 0 0 / 0.45));
 }
 .ch-chip {
   position: absolute;
@@ -194,6 +193,30 @@ html[data-theme="dark"] .ch-ambient { opacity: 0.38; }
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
+.ch-title > span { display: block; }
+/* Second line takes the gold-card foil: a metallic vertical gradient,
+   plus one light band that sweeps across during the load moment. */
+.ch-title-foil {
+  --foil-top: #a8741b;     /* 3.7:1 on the light page */
+  --foil-bottom: #6f4610;  /* 7.5:1 */
+  --foil-band: rgb(255 236 190 / 0.75);
+  padding-bottom: 0.06em;  /* room for descenders under background-clip */
+  background:
+    linear-gradient(100deg, transparent 40%, var(--foil-band) 50%, transparent 60%) 100% 0 / 300% 100% no-repeat,
+    linear-gradient(180deg, var(--foil-top) 0%, var(--foil-bottom) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+html[data-theme="dark"] .ch-title-foil {
+  --foil-top: #f3d99a;
+  --foil-bottom: #b88a3e;
+  --foil-band: rgb(255 250 235 / 0.8);
+}
+@media (forced-colors: active) {
+  .ch-title-foil { background: none; color: CanvasText; }
+}
+
 .ch-lead {
   max-width: 40ch;
   margin: 20px 0 0;
@@ -275,8 +298,10 @@ html[data-theme="dark"] .ch-ambient { opacity: 0.38; }
 /* ---------- Phones ---------- */
 @media (max-width: 559px) {
   .ch-hero { gap: 32px; padding-block: 16px 56px; }
-  .ch-back-gold { rotate: -6deg; translate: -9% 1%; }
-  .ch-back-graphite { rotate: 5deg; translate: 8% 2%; }
+  .ch-stage { --cw: min(262px, (100vw - 2 * var(--ch-gutter)) * 0.74); }
+  .ch-back { transform-origin: 50% 50%; }
+  .ch-back-gold { rotate: -5deg; translate: -10% 1.5%; }
+  .ch-back-graphite { rotate: 4.5deg; translate: 9.5% 2.5%; }
   .ch-actions .ch-btn { flex: 1 1 100%; }
   .ch-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 12px; }
   .ch-stats dt { font-size: 0.75rem; }
@@ -289,6 +314,11 @@ html[data-theme="dark"] .ch-ambient { opacity: 0.38; }
   .ch-card { animation: ch-rise 700ms var(--ch-ease) both; }
   .ch-card:not(.is-tracking) { transition: transform 500ms var(--ch-ease); }
   .ch-btn:active { scale: 0.96; }
+  .ch-title-foil { animation: ch-foil 1400ms ease-out 650ms both; }
+}
+@keyframes ch-foil {
+  from { background-position: 100% 0, 0 0; }
+  to   { background-position: 0% 0, 0 0; }
 }
 @keyframes ch-fan {
   from { rotate: 0deg; translate: 0 0; }
