@@ -63,6 +63,20 @@ html[data-theme="dark"] .wa-follow {
   text-wrap: pretty;
 }
 
+/* Privacy reassurance under the description. */
+.wa-follow p.wa-follow-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+}
+.wa-follow-privacy svg { flex: none; margin-top: 1px; color: #128c7e; }
+html[data-theme="dark"] .wa-follow-privacy svg { color: var(--wa-green); }
+
 /* ---------- The button ---------- */
 .wa-follow-btn {
   grid-area: action;
