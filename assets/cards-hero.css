@@ -222,7 +222,7 @@ html[data-theme] .ch-ambient.is-swapping { opacity: 0; }
   transition-duration: 300ms;
   transition-timing-function: var(--ch-ease);
 }
-.ch-dots span.is-active { width: 18px; background: var(--text); }
+.ch-dots span.is-active { width: 18px; background: #fc6e20; }
 
 /* ---------- Copy ---------- */
 .ch-copy { min-width: 0; }

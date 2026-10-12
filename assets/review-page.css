@@ -3,7 +3,8 @@
    The only accent is the brand orange from the wordmark, used for the cap meter. */
 
 :root {
-  --rv-accent: #c2410c;          /* 4.8:1 on --page, 5.2:1 on white */
+  --rv-brand: #fc6e20;           /* wordmark orange: fills, markers, underlines (non-text) */
+  --rv-accent: #c2410c;          /* text in orange: 4.8:1 on --page, 5.2:1 on white */
   --rv-accent-soft: #fff1e8;
   --rv-measure: 68ch;
   --rv-gutter: 20px;
@@ -320,7 +321,7 @@ html { scroll-padding-top: 112px; }
 }
 .rv-meter-earn {
   inset-inline-start: 0;
-  background: var(--rv-accent);
+  background: var(--rv-brand);
 }
 .rv-meter-over {
   background: repeating-linear-gradient(
@@ -438,7 +439,7 @@ html { scroll-padding-top: 112px; }
 .rv-toc a[aria-current="true"] {
   color: var(--text);
   font-weight: 600;
-  border-inline-start-color: var(--rv-accent);
+  border-inline-start-color: var(--rv-brand);
   border-radius: 0 8px 8px 0;
 }
 @media (hover: hover) {
@@ -480,7 +481,7 @@ html { scroll-padding-top: 112px; }
   text-decoration: underline;
   text-decoration-thickness: from-font;
   text-underline-offset: 3px;
-  text-decoration-color: var(--rv-accent);
+  text-decoration-color: var(--rv-brand);
 }
 @media (hover: hover) {
   .rv-article a:not(.rv-btn):hover { text-decoration-thickness: 2px; }
