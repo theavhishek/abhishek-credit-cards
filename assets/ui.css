@@ -1,0 +1,177 @@
+/* ==========================================================================
+   UI fixes layer: focus visibility, hit areas, touch hover, small components.
+   Loaded last on home, cards, bank support, reviews index, disclaimer, 404.
+   ========================================================================== */
+
+/* ---------- Focus: every control shows where the keyboard is ---------- */
+/* Cards page search: the input removes its own outline, so ring the field. */
+html body .search-control:focus-within {
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent) !important;
+}
+html body .search-control input:focus-visible { outline: none; }
+
+/* Native selects on the cards page had no visible focus state. */
+html body .select-row select:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+  border-color: var(--focus) !important;
+}
+
+/* Focus rings should appear at once, not fade in with `transition: all`. */
+html body :focus-visible { transition-property: none !important; }
+
+/* Skip link on pages that load site.css */
+html body .skip-link:focus-visible { transform: none; }
+
+/* ---------- Hit areas ---------- */
+/* Footer text links were 20px tall; give them a 24px+ target. */
+html body .global-footer__column nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+}
+html body .global-footer__column nav { row-gap: 4px; }
+
+/* ---------- Touch: hover effects must not stick after a tap ---------- */
+@media (hover: none) {
+  html body .unified-navbar .collection-link:hover,
+  html body.unified-navbar .collection-link:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  html body .hero-cta-primary:hover,
+  html body .hero-cta-secondary:hover,
+  html body .stat-item:hover,
+  html body .support-feature-pill:hover,
+  html body .global-footer__social:hover,
+  html body .wordmark:hover {
+    transform: none !important;
+  }
+  html body .hero-cta-primary:hover svg,
+  html body .hero-cta-secondary:hover svg,
+  html body .primary-pill:hover .pill-arrow {
+    transform: none !important;
+  }
+  html body .card-row:hover { background: transparent !important; }
+}
+
+/* ---------- Reviews index: inactive filter must read as a control ---------- */
+html body #card-reviews-root button[aria-pressed="false"] {
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+html body #card-reviews-root :has(> button[aria-pressed]) { gap: 8px; }
+
+/* ---------- 404 page ---------- */
+.not-found-page main.not-found {
+  width: min(640px, 100% - 40px);
+  min-height: calc(100svh - 120px);
+  margin-inline: auto;
+  padding-block: 160px 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.not-found-page main.not-found:focus { outline: none; }
+.not-found-code {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.not-found-page main.not-found h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.not-found-lead {
+  max-width: 46ch;
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.not-found-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding-inline: 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  transition-property: scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+.not-found-btn-primary {
+  border-color: transparent;
+  background: var(--text);
+  color: var(--page);
+}
+@media (hover: hover) {
+  .not-found-btn:hover { border-color: var(--muted); }
+  .not-found-btn-primary:hover { background: color-mix(in oklab, var(--text) 86%, var(--page)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .not-found-btn:active { scale: 0.96; }
+}
+@media (max-width: 560px) {
+  .not-found-page main.not-found { padding-block: 128px 72px; }
+  .not-found-actions .not-found-btn { flex: 1 1 100%; }
+}
+
+/* ---------- Cards: fee pills and labels meet text contrast (4.5:1) ---------- */
+/* White 12px text was 2.5:1 on the light end of the green and blue gradients
+   and 3.2:1 on the grey "not specified" pill. */
+html body .fee-pill.fee-ltf { background: linear-gradient(135deg, #036c4e 0%, #047857 100%) !important; }
+html body .fee-pill.fee-waiver { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%) !important; }
+html body .fee-pill.fee-unknown { background: #5f6670 !important; }
+/* Issuer short code sat at 3.4:1; use the muted text token. */
+html body .bank-short { color: var(--muted) !important; }
+
+/* ---------- Text contrast fixes (measured below 4.5:1) ---------- */
+html body .global-footer__bottom { color: var(--muted, #6e6e73) !important; }
+html body .bank-heading-copy span { color: var(--muted) !important; }
+html body .home-marquee-set { color: #4b4a44 !important; }
+html[data-theme="dark"] body .home-marquee-set { color: #b9b7b1 !important; }
+html body .support-intro-badge { color: #8a5a0a !important; }
+html[data-theme="dark"] body .support-intro-badge { color: #f0cf8a !important; }
+html[data-theme] body .support-directory .support-count-badge,
+html[data-theme] body .support-count-badge { color: var(--muted) !important; }
+html[data-theme="dark"] body .support-directory .support-count-badge,
+html[data-theme="dark"] body .support-count-badge { color: #a1a1a6 !important; }
+
+/* Bank support headline: the light end of the gold gradient fell to 1.4:1 on
+   the light page. Keep the gold, but stay above 3:1 for large text. */
+html[data-theme="light"] body .support-intro-gradient,
+html:not([data-theme="dark"]) body .support-intro-gradient {
+  background: linear-gradient(135deg, #8a5a0a 0%, #a86f12 55%, #9a6614 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Home "Soon." in light mode: lightest stop was about 2.3:1 on the cream page. */
+html[data-theme="light"] body .home-title span {
+  background: linear-gradient(115deg, #69400c 4%, #8f5a12 43%, #a86f12 66%, #6d4110 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
