@@ -1,0 +1,99 @@
+/* WhatsApp channel follow panel (end of reviews, reviews index). */
+.wa-follow {
+  --wa-green: #25d366;
+  --wa-ink: #06281a;            /* 9.6:1 on --wa-green */
+  --wa-icon: #128c7e;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon copy"
+    "icon action";
+  gap: 6px 16px;
+  align-items: start;
+  padding: 22px 22px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+html[data-theme="dark"] .wa-follow { --wa-icon: var(--wa-green); }
+.wa-follow-icon {
+  grid-area: icon;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border-radius: 50%;
+  color: var(--wa-icon);
+  background: color-mix(in srgb, var(--wa-green) 14%, transparent);
+}
+.wa-follow-copy { grid-area: copy; min-width: 0; }
+.wa-follow h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.wa-follow p {
+  max-width: 52ch;
+  margin: 6px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.wa-follow-btn {
+  grid-area: action;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 10px;
+  padding-inline: 20px;
+  border-radius: 999px;
+  background: var(--wa-green);
+  color: var(--wa-ink);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none !important;
+  transition-property: scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.wa-follow-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+@media (hover: hover) {
+  .wa-follow-btn:hover { background: color-mix(in srgb, var(--wa-green) 88%, #000); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wa-follow-btn:active { scale: 0.96; }
+}
+@media (min-width: 720px) {
+  .wa-follow {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "icon copy action";
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+  }
+  .wa-follow-btn { margin-top: 0; }
+}
+
+/* Placement */
+.rv-article .rv-follow { margin-top: 56px; }
+.rv-article .rv-follow h2 { font-size: 1.25rem; }
+.reviews-follow {
+  width: min(1180px, 100% - 32px);
+  margin: 8px auto 88px;
+  box-sizing: border-box;
+}
+@media (min-width: 900px) {
+  .reviews-follow { width: min(1132px, 100% - 148px); }
+}
+/* Beat the review page's article link styling. */
+.rv-article a.wa-follow-btn,
+.wa-follow a.wa-follow-btn { color: var(--wa-ink); text-decoration: none; }
