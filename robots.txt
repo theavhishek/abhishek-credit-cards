@@ -2,4 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://avhishek.in/sitemap.xml
-Sitemap: https://cards.avhishek.in/sitemap.xml

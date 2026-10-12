@@ -80,8 +80,7 @@ body {
 button,
 input,
 select,
-textarea,
-dialog {
+textarea {
   font-family: var(--site-font);
 }
 
@@ -129,8 +128,7 @@ h3,
 .support-bank-copy strong,
 .feature-meta strong,
 .method-card h3,
-.reviews-empty-text h3,
-.dialog-title {
+.reviews-empty-text h3 {
   font-family: var(--site-font);
   font-weight: 600;
   letter-spacing: var(--tracking-snug);

@@ -27,9 +27,6 @@ body {
 .card-meta-line { font-size: 9.5px !important; }
 .mini-tag { font-size: 8.5px !important; }
 .fee-pill { font-size: 9.5px !important; min-width: 58px !important; height: 27px !important; }
-.dialog-title { font-size: 34px !important; }
-.detail span { font-size: 9px !important; }
-.detail strong { font-size: 12px !important; }
 
 @media (max-width: 960px) {
   .hero { grid-template-columns: minmax(0, 1fr) 310px !important; gap: 28px !important; }
@@ -99,11 +96,6 @@ body {
   .legend { grid-template-columns: 1fr; gap: 9px; margin-top: 14px; padding: 13px; }
   .legend-items { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; }
   .legend-items > span { font-size: 9px; }
-  .details-dialog { width: calc(100% - 12px); max-height: 92dvh; margin-block-end: 6px; border-radius: 14px; }
-  .details-dialog[open] { position: fixed; inset: auto 6px 6px 6px; }
-  .dialog-body { padding: 22px 16px 16px; }
-  .dialog-title { font-size: 30px !important; }
-  .detail-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 430px) {

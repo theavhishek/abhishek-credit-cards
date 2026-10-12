@@ -4,6 +4,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/sitemap.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/sitemap.xml",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {

@@ -48,11 +48,7 @@
     "OneCard":"onecard.svg","RBL Bank":"ratn.svg","IndusInd Bank":"indb.svg",
     "AU Small Finance Bank":"aubl.svg","HSBC India":"hsbc.svg",
     "American Express":"americanexpress.svg","Unity Small Finance Bank":"unity-custom.png",
-    "CSB Bank":"csbk.svg"
-  };
-  const remainingLogoSources = {
-    "Equitas Small Finance Bank":"https://www.equitasbank.com/strapi-dev/uploads/Group_2_cad9c29024.svg",
-    "SBM Bank India":"https://www.google.com/s2/favicons?domain=www.sbmbank.co.in&sz=256"
+    "CSB Bank":"csbk.svg","Equitas Small Finance Bank":"esfb.svg","SBM Bank India":"sbm.png"
   };
   const bankShort = {
     "Axis Bank":"AXIS","Kotak Mahindra Bank":"KOTAK","SBI Card":"SBI CARD","IDFC FIRST Bank":"IDFC FIRST",
@@ -64,9 +60,7 @@
   };
 
   function logoMarkup(bankName) {
-    const src = bankLogoFiles[bankName]
-      ? `assets/bank-logos/${bankLogoFiles[bankName]}`
-      : remainingLogoSources[bankName];
+    const src = bankLogoFiles[bankName] ? `assets/bank-logos/${bankLogoFiles[bankName]}` : "";
     const fallback = (bankShort[bankName] || bankName).replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase();
     if (!src) return `<span class="logo-fallback" style="display:grid">${esc(fallback)}</span>`;
     return `<img class="bank-logo" alt="" src="${esc(src)}" loading="lazy" decoding="async"><span class="logo-fallback">${esc(fallback)}</span>`;

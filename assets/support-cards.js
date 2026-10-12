@@ -56,11 +56,8 @@
     "Indian Bank":"idib", "Bank of India":"bkid", "Canara Bank":"cnrb",
     "RBL Bank":"ratn", "IndusInd Bank":"indb", "AU Small Finance Bank":"aubl",
     "HSBC India":"hsbc", "American Express":"americanexpress", "CSB Bank":"csbk",
-    "Federal Bank":"fdrl", "Standard Chartered Bank":"scbl", "Union Bank of India":"ubin", "DBS Bank":"dbs", "OneCard":"onecard"
-  };
-  const remoteMarks = {
-    "Equitas Small Finance Bank":"equitasbank.com",
-    "SBM Bank India":"sbmbank.co.in", "Unity Small Finance Bank":"theunitybank.com"
+    "Federal Bank":"fdrl", "Standard Chartered Bank":"scbl", "Union Bank of India":"ubin", "DBS Bank":"dbs", "OneCard":"onecard",
+    "Equitas Small Finance Bank":"esfb.svg", "SBM Bank India":"sbm.png", "Unity Small Finance Bank":"unity-custom.png"
   };
   const esc = (value = "") => String(value).replace(/[&<>"']/g, char => ({
     "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
@@ -69,9 +66,8 @@
   const initials = name => name.replace(/Small Finance Bank/gi, "SFB").replace(/Bank/gi, "").trim().split(/\s+/).map(part => part[0]).join("").slice(0, 2).toUpperCase();
 
   function logo(bank) {
-    const local = marks[bank] ? `assets/bank-logos/${marks[bank]}.svg` : "";
-    const remote = bank === "Equitas Small Finance Bank" ? "https://www.equitasbank.com/strapi-dev/uploads/Group_2_cad9c29024.svg" : window.BANK_LOGO_PNG?.[remoteMarks[bank]] || "";
-    const src = local || remote;
+    const file = marks[bank] ? (/\.(svg|png)$/.test(marks[bank]) ? marks[bank] : `${marks[bank]}.svg`) : "";
+    const src = file ? `assets/bank-logos/${file}` : "";
     return `<span class="support-bank-logo">${src ? `<img class="support-bank-img" src="${esc(src)}" alt="" loading="lazy" decoding="async">` : ""}
       <span class="support-bank-fallback" ${src ? 'hidden' : ""} aria-hidden="true">${esc(initials(bank))}</span></span>`;
   }
@@ -149,7 +145,11 @@
         sections.push(section(level2Label, [group(entry.l2Email, "email")]));
         sections.push(section("Level 3 · Principal nodal officer", level3));
         if (arr(entry.l4Email).length) {
-          const level4Label = bank === "SBI Card" ? "Level 4 · Customer service head" : "Level 4";
+          const level4Labels = {
+            "SBI Card":"Level 4 · Customer service head",
+            "American Express":"Level 4 · Nodal officer"
+          };
+          const level4Label = level4Labels[bank] || "Level 4";
           sections.push(section(level4Label, [group(entry.l4Email, "email")]));
         }
       }
