@@ -248,6 +248,23 @@ html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
   }
   html[data-theme] body.unified-navbar .topbar-links .collection-link[aria-current] { font-weight: 650 !important; }
   html[data-theme] body.unified-navbar .nav-icon { display: block; width: 22px; height: 22px; }
+
+  /* Cards page: fit the photo hero into the screen above the tab bar.
+     The fixed gap above the buttons becomes flexible, and the decorative
+     stat icons are dropped, so the stats panel ends above the bar. */
+  html[data-theme] body.unified-navbar.portrait-home .hero-poster-stage.shell {
+    min-height: calc(100svh - 88px - env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html[data-theme] body.unified-navbar.portrait-home .poster-content {
+    min-height: calc(100svh - 88px - env(safe-area-inset-bottom, 0px)) !important;
+    padding-block: 84px 12px !important;
+  }
+  html[data-theme] body.unified-navbar.portrait-home .poster-subline { margin-bottom: 140px !important; }
+  html[data-theme] body.unified-navbar.portrait-home .poster-actions { margin-top: auto !important; }
+  html[data-theme] body.unified-navbar.portrait-home .poster-stats-panel .stat-icon-circle { display: none !important; }
+}
+@media (max-width: 640px) and (max-height: 700px) {
+  html[data-theme] body.unified-navbar.portrait-home .poster-subline { margin-bottom: 56px !important; }
 }
 @media (max-width: 340px) {
   html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 78px !important; }
