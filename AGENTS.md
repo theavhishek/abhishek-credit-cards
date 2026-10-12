@@ -12,3 +12,7 @@
 - Do not include the card network, issuer, category, or other facts in the byline.
 - Keep structured article metadata (such as `dateModified`) consistent with the visible update date.
 - Do not repeat the author portrait, name, bio, or “Read more reviews” in a separate author block at the bottom of review articles; keep author attribution in the top byline only.
+
+## Affiliate Links
+- Every affiliate link must use `rel="sponsored noopener noreferrer"` and show the visible label `<span class="aff-tag">Affiliate link</span>` next to it (styled in `assets/header.css`).
+- The disclaimer page promises that links without this label earn nothing, so never add an unlabelled affiliate link.
