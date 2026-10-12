@@ -274,3 +274,23 @@ html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
 
 /* Selected text picks up the brand orange (text colour is unchanged). */
 html[data-theme] body.unified-navbar ::selection { background: rgb(252 110 32 / 0.26); }
+
+/* Affiliate label: put <span class="aff-tag">Affiliate link</span> next to any
+   affiliate link, and give the link rel="sponsored noopener noreferrer". */
+.aff-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, #fc6e20 45%, transparent);
+  background: color-mix(in srgb, #fc6e20 10%, transparent);
+  color: #c2410c;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+html[data-theme="dark"] .aff-tag { color: #ff9a5c; }
