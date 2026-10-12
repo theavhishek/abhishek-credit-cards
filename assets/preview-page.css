@@ -37,7 +37,7 @@ html[data-theme="dark"] {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--rv-accent);
+  background: var(--rv-brand);
 }
 @media (prefers-reduced-motion: no-preference) {
   .pv-status-dot::after {
@@ -45,7 +45,7 @@ html[data-theme="dark"] {
     position: absolute;
     inset: -4px;
     border-radius: 50%;
-    border: 2px solid var(--rv-accent);
+    border: 2px solid var(--rv-brand);
     opacity: 0;
     animation: pv-pulse 2.4s ease-out infinite;
   }
@@ -112,7 +112,7 @@ html[data-theme="dark"] {
 .pv-benefits .pv-value-muted { color: var(--muted); font-weight: 500; }
 
 /* ---------- Discount estimator ---------- */
-.pv-calc .rv-meter-earn { background: var(--rv-accent); }
+.pv-calc .rv-meter-earn { background: var(--rv-brand); }
 .pv-calc .rv-meter { padding-block-start: 14px; }
 .pv-calc .rv-meter-track { height: 12px; border-radius: 999px; }
 .pv-assume {
@@ -190,7 +190,7 @@ html[data-theme="dark"] {
 }
 .pv-timeline li:last-child { padding-block-end: 0; }
 .pv-timeline li:last-child::after { display: none; }
-.pv-timeline li.pv-now::before { border-color: var(--rv-accent); background: var(--rv-accent); }
+.pv-timeline li.pv-now::before { border-color: var(--rv-brand); background: var(--rv-brand); }
 .pv-timeline time {
   font-size: var(--rv-fs-small);
   font-weight: 600;
