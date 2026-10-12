@@ -1,30 +1,50 @@
 /* WhatsApp channel follow panel (end of reviews, reviews index). */
 .wa-follow {
   --wa-green: #25d366;
+  --wa-green-deep: #1ebe5d;
   --wa-ink: #06281a;            /* 9.6:1 on --wa-green */
-  --wa-icon: #128c7e;
+  --wa-glow: rgb(37 211 102 / 0.45);
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   grid-template-areas:
     "icon copy"
-    "icon action";
-  gap: 6px 16px;
-  align-items: start;
-  padding: 22px 22px 24px;
-  border-radius: 20px;
-  border: 1px solid var(--line);
-  background: var(--surface);
+    "action action";
+  gap: 16px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid color-mix(in srgb, var(--wa-green) 26%, var(--line));
+  background:
+    radial-gradient(120% 160% at 0% 0%, color-mix(in srgb, var(--wa-green) 13%, transparent) 0%, transparent 60%),
+    var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 30px -12px rgb(37 211 102 / 0.25);
 }
-html[data-theme="dark"] .wa-follow { --wa-icon: var(--wa-green); }
+html[data-theme="dark"] .wa-follow {
+  --wa-glow: rgb(37 211 102 / 0.38);
+  border-color: color-mix(in srgb, var(--wa-green) 30%, transparent);
+  background:
+    radial-gradient(120% 160% at 0% 0%, color-mix(in srgb, var(--wa-green) 16%, transparent) 0%, transparent 60%),
+    var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -14px rgb(37 211 102 / 0.3);
+}
+
+/* App-icon style logo: white glyph on a green tile. */
 .wa-follow-icon {
   grid-area: icon;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  border-radius: 50%;
-  color: var(--wa-icon);
-  background: color-mix(in srgb, var(--wa-green) 14%, transparent);
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #5ce68a 0%, var(--wa-green) 45%, var(--wa-green-deep) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    0 6px 16px -4px rgb(30 190 93 / 0.55);
+  color: #fff;
 }
+.wa-follow-icon svg { display: block; width: 32px; height: 32px; }
+
 .wa-follow-copy { grid-area: copy; min-width: 0; }
 .wa-follow h2 {
   margin: 0;
@@ -42,45 +62,111 @@ html[data-theme="dark"] .wa-follow { --wa-icon: var(--wa-green); }
   color: var(--muted);
   text-wrap: pretty;
 }
+
+/* Privacy reassurance under the description. */
+.wa-follow p.wa-follow-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text);
+}
+.wa-follow-privacy svg { flex: none; margin-top: 1px; color: #128c7e; }
+html[data-theme="dark"] .wa-follow-privacy svg { color: var(--wa-green); }
+
+/* ---------- The button ---------- */
 .wa-follow-btn {
   grid-area: action;
-  justify-self: start;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  margin-top: 10px;
-  padding-inline: 20px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding-inline: 22px 24px;
   border-radius: 999px;
-  background: var(--wa-green);
+  border: 1px solid transparent;
+  /* Light sweep sits on top of the green; it rests off to the right. */
+  background:
+    linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.55) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
+    linear-gradient(180deg, #3ddc7a 0%, var(--wa-green) 55%, var(--wa-green-deep) 100%);
   color: var(--wa-ink);
-  font-size: 0.9375rem;
-  font-weight: 650;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.005em;
   text-decoration: none !important;
-  transition-property: scale;
-  transition-duration: 150ms;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.35),
+    0 0 0 1px rgb(37 211 102 / 0.35),
+    0 8px 24px -6px var(--wa-glow);
+  transition-property: box-shadow, scale;
+  transition-duration: 200ms;
   transition-timing-function: ease-out;
   -webkit-tap-highlight-color: transparent;
 }
+.wa-follow-btn svg { flex: none; width: 22px; height: 22px; }
 .wa-follow-btn:focus-visible {
   outline: 2px solid var(--focus);
-  outline-offset: 3px;
+  outline-offset: 4px;
+}
+/* Pulse ring, drawn outside the button. */
+.wa-follow-btn::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
 }
 @media (hover: hover) {
-  .wa-follow-btn:hover { background: color-mix(in srgb, var(--wa-green) 88%, #000); }
+  .wa-follow-btn:hover {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.4),
+      0 0 0 1px rgb(37 211 102 / 0.5),
+      0 10px 32px -4px rgb(37 211 102 / 0.65);
+  }
 }
 @media (prefers-reduced-motion: no-preference) {
   .wa-follow-btn:active { scale: 0.96; }
+  /* Plays three times when the panel first scrolls into view (follow.js). */
+  .wa-follow.is-seen .wa-follow-btn {
+    animation: wa-sheen 2.4s ease-out 0.4s 3;
+  }
+  .wa-follow.is-seen .wa-follow-btn::after {
+    animation: wa-ring 2.4s ease-out 0.4s 3;
+  }
 }
+@keyframes wa-sheen {
+  0%   { background-position: 160% 0, 0 0; }
+  45%, 100% { background-position: -60% 0, 0 0; }
+}
+@keyframes wa-ring {
+  0%   { opacity: 1; box-shadow: 0 0 0 0 rgb(37 211 102 / 0.55); }
+  70%, 100% { opacity: 0; box-shadow: 0 0 0 14px rgb(37 211 102 / 0); }
+}
+
 @media (min-width: 720px) {
   .wa-follow {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas: "icon copy action";
-    align-items: center;
-    gap: 20px;
-    padding: 24px 28px;
+    gap: 22px;
+    padding: 26px 28px;
   }
-  .wa-follow-btn { margin-top: 0; }
+}
+@media (max-width: 719px) {
+  .wa-follow { align-items: start; }
+  .wa-follow-icon { width: 52px; height: 52px; border-radius: 15px; }
+  .wa-follow-btn { width: 100%; }
+}
+@media (forced-colors: active) {
+  .wa-follow-btn { border-color: ButtonText; }
 }
 
 /* Placement */
