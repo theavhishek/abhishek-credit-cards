@@ -62,7 +62,7 @@ html[data-theme="dark"] {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  background: #161513;
+  background: #e2dfda;
 }
 .pv-art-note {
   padding: 10px 20px 0;
