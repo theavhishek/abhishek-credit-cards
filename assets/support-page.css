@@ -1,13 +1,14 @@
 /* ==========================================================================
    Bank support page (avhishek.in/bank-support)
-   Built on the site tokens from site.css. The one accent is the gold foil
-   shared with the cards page, used for the headline and the RBI step.
+   Built on the site tokens from site.css. The headline uses the gold foil
+   shared with the cards page; the accent is the brand orange from the
+   wordmark dot (#fc6e20), used for the RBI step, link underlines and the
+   jump highlight.
    ========================================================================== */
 
 .sp {
   --sp-gutter: 20px;
-  --sp-gold: #a8741b;           /* 3.7:1 on --page, large text and marks only */
-  --sp-gold-ink: #6f4610;       /* 7.5:1 */
+  --sp-accent: #fc6e20;         /* brand orange; dark ink on it is 7.6:1 */
   --sp-ok: #15803d;
   --sp-bar-top: 74px;           /* bottom edge of the pinned site header */
   width: min(1180px, 100% - 2 * var(--sp-gutter));
@@ -15,8 +16,6 @@
   padding-block: 32px 96px;
 }
 html[data-theme="dark"] .sp {
-  --sp-gold: #e2b866;
-  --sp-gold-ink: #f3d99a;
   --sp-ok: #4ade80;
 }
 .sp:focus { outline: none; }
@@ -85,7 +84,7 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: var(--sp-gold);
+  text-decoration-color: var(--sp-accent);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
 }
@@ -202,7 +201,7 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   font-weight: 650;
   font-variant-numeric: tabular-nums;
 }
-.sp-guide-rbi .sp-guide-num { background: var(--sp-gold); color: #1a1206; }
+.sp-guide-rbi .sp-guide-num { background: var(--sp-accent); color: #1a1206; }
 .sp-guide-steps h3 { margin-top: 6px !important; font-size: 1.0625rem; font-weight: 650; line-height: 1.3; }
 .sp-guide-steps p {
   margin-top: 6px !important;
@@ -216,7 +215,7 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   color: var(--text);
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: var(--sp-gold);
+  text-decoration-color: var(--sp-accent);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
@@ -294,7 +293,7 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
 }
 .sp-bank.is-flash { animation: sp-flash 1400ms ease-out; }
 @keyframes sp-flash {
-  0%, 30% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sp-gold) 55%, transparent); }
+  0%, 30% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sp-accent) 55%, transparent); }
   100% { box-shadow: 0 0 0 3px transparent; }
 }
 .sp-bank-summary {
@@ -441,7 +440,7 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   font-weight: 650;
   font-variant-numeric: tabular-nums;
 }
-.sp-step-rbi .sp-step-num { border-color: transparent; background: var(--sp-gold); color: #1a1206; }
+.sp-step-rbi .sp-step-num { border-color: transparent; background: var(--sp-accent); color: #1a1206; }
 .sp-step-body { min-width: 0; }
 .sp-step-title { margin: 3px 0 8px !important; font-size: 0.9375rem; font-weight: 650; line-height: 1.35; }
 .sp-step-note { color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
@@ -505,21 +504,14 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   .sp-hero { gap: 28px; }
   .sp-picker-wrap { margin-inline: -4px; padding: 16px 0 12px; border-radius: 24px; }
   .sp-picker-title { padding-inline: 16px; }
-  /* two rows that scroll sideways, with the next column peeking */
+  /* a plain grid that grows downwards: 4 banks per row */
   .sp-picker {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(2, auto);
-    grid-auto-columns: 74px;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scroll-snap-type: x proximity;
-    scroll-padding-inline: 12px;
-    padding-inline: 12px;
-    scrollbar-width: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    padding-inline: 8px;
   }
-  .sp-picker::-webkit-scrollbar { display: none; }
-  .sp-picker li { scroll-snap-align: start; }
+  .sp-pick { min-height: 84px; padding: 10px 2px 8px; gap: 6px; }
+  .sp-pick-name { font-size: 0.75rem; }
   .sp-guide { margin-top: 48px; padding-top: 32px; }
   .sp-directory { margin-top: 56px; }
   .sp-search { flex-basis: 100%; max-width: none; margin-inline-start: 0; }
