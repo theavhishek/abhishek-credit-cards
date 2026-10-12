@@ -24,11 +24,6 @@
       ],
       "destination": "https://avhishek.in/:path*",
       "permanent": true
-    },
-    {
-      "source": "/reviews/eternal-sbi-card",
-      "destination": "/card-reviews/eternal-sbi-card",
-      "permanent": false
     }
   ],
   "rewrites": [
