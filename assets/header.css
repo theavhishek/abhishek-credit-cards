@@ -13,7 +13,7 @@ html[data-theme] body.unified-navbar {
   --hd-top: 12px;
   --hd-height: 60px;
   --hd-max: 1180px;
-  --hd-surface: color-mix(in srgb, var(--page, #f5f5f7) 80%, transparent);
+  --hd-surface: color-mix(in srgb, var(--page, #f5f5f7) 88%, transparent);
   --hd-surface-solid: var(--page, #f5f5f7);
   --hd-edge: color-mix(in srgb, var(--text, #1d1d1f) 9%, transparent);
   --hd-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06);
@@ -24,7 +24,7 @@ html[data-theme] body.unified-navbar {
   scroll-padding-top: calc(var(--hd-top) + var(--hd-height) + 16px);
 }
 html[data-theme="dark"] body.unified-navbar {
-  --hd-surface: color-mix(in srgb, #141416 78%, transparent);
+  --hd-surface: color-mix(in srgb, #141416 86%, transparent);
   --hd-surface-solid: #141416;
   --hd-edge: rgb(255 255 255 / 0.1);
   --hd-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
@@ -248,11 +248,6 @@ html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
   }
   html[data-theme] body.unified-navbar .topbar-links .collection-link[aria-current] { font-weight: 650 !important; }
   html[data-theme] body.unified-navbar .nav-icon { display: block; width: 22px; height: 22px; }
-  /* Cards page: its full-height photo ends with a stats panel; keep that
-     panel above the tab bar. */
-  html[data-theme] body.unified-navbar.portrait-home .poster-content {
-    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
-  }
 }
 @media (max-width: 340px) {
   html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 78px !important; }
