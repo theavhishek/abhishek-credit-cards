@@ -4,7 +4,8 @@
   const money = (value) => inr.format(Math.round(value));
 
   /* ---------- Cap calculator ---------- */
-  const calc = document.querySelector(".rv-calc");
+  // Pages with their own calculator mark it with data-calc and load their own script.
+  const calc = document.querySelector(".rv-calc:not([data-calc])");
   if (calc) {
     const rate = 0.1;
     const cap = 1200;
