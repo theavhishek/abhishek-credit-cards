@@ -1,0 +1,288 @@
+/* ==========================================================================
+   Site header: one system for every page except the home page.
+   Loaded last, so it replaces the older navbar rules in site.css,
+   responsive.css, portrait-hero.css, unified-navbar.css and typography.css.
+
+   Wide screens: a pinned bar with the wordmark, three links and the theme switch.
+   Phones (≤ 640px): the bar keeps the wordmark and switch; the three links move
+   to a floating tab bar at the bottom of the screen, within thumb reach.
+   ========================================================================== */
+
+html[data-theme] body.unified-navbar {
+  --hd-gutter: 20px;
+  --hd-top: 12px;
+  --hd-height: 60px;
+  --hd-max: 1180px;
+  --hd-surface: color-mix(in srgb, var(--page, #f5f5f7) 88%, transparent);
+  --hd-surface-solid: var(--page, #f5f5f7);
+  --hd-edge: color-mix(in srgb, var(--text, #1d1d1f) 9%, transparent);
+  --hd-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06);
+  --hd-shadow-raised: 0 1px 2px rgb(0 0 0 / 0.05), 0 10px 30px rgb(0 0 0 / 0.09);
+  --hd-link: color-mix(in srgb, var(--text, #1d1d1f) 72%, var(--page, #fff));
+  --hd-fill: color-mix(in srgb, var(--text, #1d1d1f) 7%, transparent);
+  --hd-fill-hover: color-mix(in srgb, var(--text, #1d1d1f) 5%, transparent);
+  scroll-padding-top: calc(var(--hd-top) + var(--hd-height) + 16px);
+}
+html[data-theme="dark"] body.unified-navbar {
+  --hd-surface: color-mix(in srgb, #141416 86%, transparent);
+  --hd-surface-solid: #141416;
+  --hd-edge: rgb(255 255 255 / 0.1);
+  --hd-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
+  --hd-shadow-raised: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.5);
+  --hd-link: color-mix(in srgb, var(--text, #f5f5f7) 76%, #000);
+  --hd-fill: rgb(255 255 255 / 0.1);
+  --hd-fill-hover: rgb(255 255 255 / 0.06);
+}
+@media (min-width: 720px) {
+  html[data-theme] body.unified-navbar { --hd-gutter: 32px; }
+}
+
+/* ---------- Bar position: pinned on every page ---------- */
+html[data-theme] body.unified-navbar .topbar {
+  position: sticky !important;
+  top: var(--hd-top) !important;
+  left: auto !important;
+  z-index: 100 !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* The cards page opens on a full-bleed photo, so its bar floats over it. */
+html[data-theme] body.unified-navbar.portrait-home .topbar {
+  position: fixed !important;
+  inset-inline: 0 !important;
+}
+
+/* ---------- The bar surface ---------- */
+html[data-theme] body.unified-navbar .topbar-shell,
+html[data-theme] body.unified-navbar .topbar-shell.scrolled {
+  position: relative !important;
+  isolation: isolate;
+  overflow: visible !important;
+  width: min(var(--hd-max), 100% - 2 * var(--hd-gutter)) !important;
+  max-width: none !important;
+  margin-inline: auto !important;
+  border: 1px solid var(--hd-edge) !important;
+  border-radius: 999px !important;
+  background: var(--hd-surface) !important;
+  box-shadow: var(--hd-shadow) !important;
+  /* The blur lives on ::before so the shell never becomes the containing
+     block for the fixed tab bar inside it. */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  animation: none !important;
+  transition-property: box-shadow !important;
+  transition-duration: 200ms !important;
+  transition-timing-function: ease-out !important;
+}
+html[data-theme] body.unified-navbar .topbar-shell.scrolled { box-shadow: var(--hd-shadow-raised) !important; }
+html[data-theme] body.unified-navbar .topbar-shell::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  border-radius: inherit !important;
+  background: none !important;
+  opacity: 1 !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+}
+html[data-theme] body.unified-navbar .topbar-shell::after { content: none !important; display: none !important; }
+@media (hover: hover) {
+  html[data-theme] body.unified-navbar .topbar-shell:hover { border-color: var(--hd-edge) !important; }
+}
+
+html[data-theme] body.unified-navbar .topbar-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  height: var(--hd-height) !important;
+  padding-block: 0 !important;
+  padding-inline: 22px 10px !important;
+  transition: none !important;
+}
+
+/* ---------- Wordmark ---------- */
+html[data-theme] body.unified-navbar .wordmark {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 44px;
+  transform: none !important;
+  opacity: 1 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme] body.unified-navbar .wordmark-brand { font-size: 0 !important; line-height: 0 !important; }
+html[data-theme] body.unified-navbar .wordmark-brand::before { content: none !important; }
+html[data-theme] body.unified-navbar .wordmark .brand-logo-svg {
+  display: block;
+  width: auto !important;
+  height: 24px !important;
+}
+
+/* ---------- Actions: links + switch ---------- */
+html[data-theme] body.unified-navbar .topbar-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+html[data-theme] body.unified-navbar .topbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+html[data-theme] body.unified-navbar .topbar-links .collection-link {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 40px !important;
+  min-width: 0 !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--hd-link) !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transform: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition-property: background-color, color !important;
+  transition-duration: 150ms !important;
+  transition-timing-function: ease-out !important;
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme] body.unified-navbar .topbar-links .collection-link::after { content: none !important; display: none !important; }
+html[data-theme] body.unified-navbar .topbar-links .collection-link[aria-current] {
+  background: var(--hd-fill) !important;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+}
+@media (hover: hover) {
+  html[data-theme] body.unified-navbar .topbar-links .collection-link:not([aria-current]):hover {
+    background: var(--hd-fill-hover) !important;
+    color: var(--text) !important;
+  }
+}
+html[data-theme] body.unified-navbar .topbar-links .collection-link:focus-visible {
+  outline: 2px solid var(--focus, #075cff) !important;
+  outline-offset: 2px !important;
+}
+html[data-theme] body.unified-navbar .nav-icon { display: none; flex: none; }
+
+/* Theme switch: hairline divider before it, 44px tap area around it. */
+html[data-theme] body.unified-navbar .topbar-actions .plane-switch {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin-inline-start: 13px;
+  padding-inline: 8px;
+}
+html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -6px;
+  inset-block: 12px;
+  width: 1px;
+  background: var(--hd-edge);
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+  html[data-theme] body.unified-navbar .topbar-links .collection-link { padding: 0 13px !important; font-size: 14px !important; }
+}
+
+/* ---------- Phones: links move to a bottom tab bar ---------- */
+@media (max-width: 640px) {
+  html[data-theme] body.unified-navbar {
+    --hd-top: 10px;
+    --hd-height: 56px;
+    --hd-gutter: 12px;
+    padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+  html[data-theme] body.unified-navbar .topbar-inner { padding-inline: 18px 6px !important; }
+  html[data-theme] body.unified-navbar .wordmark .brand-logo-svg { height: 21px !important; }
+  html[data-theme] body.unified-navbar .topbar-actions .plane-switch { margin-inline-start: 0; }
+  html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before { content: none; }
+
+  html[data-theme] body.unified-navbar .topbar-links {
+    position: fixed;
+    z-index: 101;
+    inset-inline: 0;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    width: max-content;
+    margin-inline: auto;
+    gap: 4px;
+    padding: 5px;
+    border: 1px solid var(--hd-edge);
+    border-radius: 999px;
+    background: var(--hd-surface);
+    box-shadow: var(--hd-shadow-raised);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+  html[data-theme] body.unified-navbar .topbar-links .collection-link {
+    flex-direction: column !important;
+    gap: 3px !important;
+    width: 84px !important;
+    height: 52px !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+  }
+  html[data-theme] body.unified-navbar .topbar-links .collection-link[aria-current] { font-weight: 650 !important; }
+  html[data-theme] body.unified-navbar .nav-icon { display: block; width: 22px; height: 22px; }
+
+  /* Cards page: fit the photo hero into the screen above the tab bar.
+     The fixed gap above the buttons becomes flexible, and the decorative
+     stat icons are dropped, so the stats panel ends above the bar. */
+  html[data-theme] body.unified-navbar.portrait-home .hero-poster-stage.shell {
+    min-height: calc(100svh - 88px - env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html[data-theme] body.unified-navbar.portrait-home .poster-content {
+    min-height: calc(100svh - 88px - env(safe-area-inset-bottom, 0px)) !important;
+    padding-block: 84px 12px !important;
+  }
+  html[data-theme] body.unified-navbar.portrait-home .poster-subline { margin-bottom: 140px !important; }
+  html[data-theme] body.unified-navbar.portrait-home .poster-actions { margin-top: auto !important; }
+  html[data-theme] body.unified-navbar.portrait-home .poster-stats-panel .stat-icon-circle { display: none !important; }
+}
+@media (max-width: 640px) and (max-height: 700px) {
+  html[data-theme] body.unified-navbar.portrait-home .poster-subline { margin-bottom: 56px !important; }
+}
+@media (max-width: 340px) {
+  html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 78px !important; }
+}
+
+/* ---------- Press feedback and preferences ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme] body.unified-navbar .topbar-links .collection-link {
+    transition-property: background-color, color, scale !important;
+  }
+  html[data-theme] body.unified-navbar .topbar-links .collection-link:active { scale: 0.96; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme] body.unified-navbar .topbar-shell,
+  html[data-theme] body.unified-navbar .topbar-shell.scrolled { background: var(--hd-surface-solid) !important; }
+  html[data-theme] body.unified-navbar .topbar-shell::before { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  html[data-theme] body.unified-navbar .topbar-links { background: var(--hd-surface-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media print {
+  html[data-theme] body.unified-navbar .topbar-links { display: none; }
+}
