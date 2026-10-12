@@ -22,23 +22,6 @@ html body :where(h1, h2, h3) { text-wrap: balance; }
 html body :where(p, li, dd, figcaption) { text-wrap: pretty; }
 html body :where(a) { text-underline-offset: 0.18em; }
 
-/* ---------- Shared: navigation ---------- */
-@media (max-width: 430px) {
-  html body.unified-navbar .collection-link {
-    font-size: 12px !important;
-    letter-spacing: 0 !important;
-    padding-inline: 4px !important;
-  }
-  html body.unified-navbar .topbar-actions { gap: 4px !important; }
-}
-@media (max-width: 360px) {
-  html body.unified-navbar .collection-link {
-    font-size: 11px !important;
-    padding-inline: 2px !important;
-  }
-  html body.unified-navbar .topbar-actions { gap: 2px !important; }
-}
-
 /* ---------- Shared: footer ---------- */
 html body .global-footer__column h2 {
   font-size: 12px !important;
