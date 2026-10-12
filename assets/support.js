@@ -44,13 +44,8 @@ window.SUPPORT_CONTACTS = {
     "l3Email": [
       "Head-Customerservicesindia@aexp.com"
     ],
-    "extras": [
-      {
-        "label": "L4",
-        "emails": [
-          "AEBCNodalOfficer@aexp.com"
-        ]
-      }
+    "l4Email": [
+      "AEBCNodalOfficer@aexp.com"
     ]
   },
   "BOBCARD": {
@@ -263,24 +258,33 @@ window.SUPPORT_CONTACTS = {
       "creditcardpnb@pnb.co.in"
     ],
     "l2Email": [
-      "pno@pnb.co.in"
+      "creditcardho@pnb.co.in"
     ],
-    "l3Email": []
+    "l3Email": [
+      "pno@pnb.bank.in"
+    ]
   },
   "RBL Bank": {
     "care": [
       "+91-22-6232-7777",
-      "7119-0900",
       "+91-22-6115-6300"
     ],
+    "helplineExtras": [
+      {
+        "label": "Bajaj Finserv SuperCard",
+        "values": [
+          "+91-22-7119-0900"
+        ]
+      }
+    ],
     "l1Email": [
-      "cardservices@rblbank.com"
+      "cardservices@rbl.bank.in"
     ],
     "l2Email": [
-      "headcardservice@rblbank.com"
+      "headcardservice@rbl.bank.in"
     ],
     "l3Email": [
-      "principalnodalofficer@rblbank.com"
+      "principalnodalofficer@rbl.bank.in"
     ]
   },
   "SBI Card": {
@@ -319,8 +323,8 @@ window.SUPPORT_CONTACTS = {
   },
   "Standard Chartered Bank": {
     "care": [
-      "1800-267-3456",
-      "1800-121-2208"
+      "080-4924-8444",
+      "044-4762-8444"
     ],
     "l1Email": [
       "customer.care@sc.com"
@@ -381,6 +385,80 @@ window.SUPPORT_CONTACTS = {
           "1860-267-6789"
         ]
       }
+    ]
+  },
+  "Indian Bank": {
+    "care": [
+      "1800-1700"
+    ],
+    "l1Email": [
+      "creditcard@indianbank.bank.in"
+    ],
+    "l2Email": [
+      "nodalofficer@indianbank.bank.in"
+    ],
+    "l3Email": []
+  },
+  "Canara Bank": {
+    "care": [
+      "1800-1030"
+    ],
+    "l1Email": [],
+    "l2Email": [
+      "hocss1@canarabank.com"
+    ],
+    "l3Email": []
+  },
+  "Equitas Small Finance Bank": {
+    "care": [
+      "1800-103-2977"
+    ],
+    "l1Email": [
+      "customerservice@equitasbank.com"
+    ],
+    "l2Email": [
+      "nodalofficer@equitasbank.com"
+    ],
+    "l3Email": [
+      "pno@equitasbank.com"
+    ]
+  },
+  "Unity Small Finance Bank": {
+    "care": [
+      "1800-209-1122"
+    ],
+    "l1Email": [
+      "care@unitybank.co.in"
+    ],
+    "l2Email": [
+      "level2escalation@unitybank.co.in"
+    ],
+    "l3Email": [
+      "level3escalation@unitybank.co.in"
+    ]
+  },
+  "CSB Bank": {
+    "care": [
+      "1800-266-9090"
+    ],
+    "helplineExtras": [
+      {
+        "label": "Edge+ (Jupiter)",
+        "values": [
+          "86550-55086"
+        ]
+      }
+    ],
+    "l1Email": [
+      "Edge-csb-support@jupiter.money",
+      "customercare@csb.bank.in"
+    ],
+    "l2Email": [
+      "csb.grievance@jupiter.money",
+      "csb.nodalofficer@jupiter.money"
+    ],
+    "l3Email": [
+      "pno@csb.co.in"
     ]
   },
   "OneCard": {
