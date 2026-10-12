@@ -11,3 +11,4 @@
 - The date must match the article's actual last-update date, and the reading time should fit that article.
 - Do not include the card network, issuer, category, or other facts in the byline.
 - Keep structured article metadata (such as `dateModified`) consistent with the visible update date.
+- Do not repeat the author portrait, name, bio, or “Read more reviews” in a separate author block at the bottom of review articles; keep author attribution in the top byline only.
