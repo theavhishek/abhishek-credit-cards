@@ -29,6 +29,11 @@
       "source": "/coming-soon",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/pay-bill",
+      "destination": "/pay-credit-card-bill",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -117,7 +117,8 @@
         <section class="sp-write" aria-label="Complaint emails for ${esc(bank)}">
           <h3 class="sp-col-title">Write, in this order</h3>
           <ol class="sp-steps">${steps.join("")}</ol>
-        </section>`;
+        </section>
+        <p class="sp-paylink"><a href="/pay-credit-card-bill#${slug(bank)}">Ways to pay your ${esc(shortNames[bank] || bank)} card bill</a></p>`;
     }
     return `<details class="sp-bank" id="${slug(bank)}" data-bank="${esc(bank)}">
       <summary class="sp-bank-summary">

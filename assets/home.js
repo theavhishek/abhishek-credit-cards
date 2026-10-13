@@ -3,13 +3,15 @@
   const cards = window.PORTFOLIO_DATA?.cards || [];
   const contacts = window.SUPPORT_CONTACTS || {};
   const supportBanks = Object.keys(contacts);
+  const payMethods = window.PAY_METHODS || {};
 
   /* ---------- Live counts ---------- */
   const counts = {
     "cards": cards.length,
     "card-banks": new Set(cards.map(card => card.bank)).size,
     "support-banks": supportBanks.length,
-    "support-banks-rest": Math.max(supportBanks.length - 7, 0)
+    "support-banks-rest": Math.max(supportBanks.length - 7, 0),
+    "pay-banks": Object.keys(payMethods).length
   };
   document.querySelectorAll("[data-count]").forEach(el => {
     const value = counts[el.dataset.count];
@@ -48,6 +50,7 @@
   // Tools
   [
     { title: "Bank support directory", sub: "Helplines and complaint emails for every bank", href: "https://avhishek.in/bank-support", words: "support helpline customer care complaint grievance nodal email directory" },
+    { title: "Pay your credit card bill", sub: "NEFT, IMPS and UPI details for every bank", href: "https://avhishek.in/pay-credit-card-bill", words: "pay payment bill neft imps rtgs upi ifsc billdesk bbps bharat connect transfer" },
     { title: "Complaint escalation guide", sub: "Customer care, nodal officer, principal nodal officer, RBI", href: "https://avhishek.in/bank-support#how-to-escalate", words: "escalate escalation complaint rbi ombudsman cms nodal principal" }
   ].forEach(tool => items.push({ group: "Tools", ...tool, hay: `${tool.title} ${tool.words}`.toLowerCase() }));
 
@@ -82,6 +85,23 @@
     });
   });
 
+  // Bill payment details
+  Object.entries(payMethods).forEach(([bank, entry]) => {
+    const fields = (entry.methods || []).flatMap(m => m.fields || []);
+    const ifsc = fields.find(f => f.label === "IFSC");
+    const upi = fields.find(f => f.label === "UPI ID");
+    const upiText = upi ? upi.pattern.map(p => typeof p === "string" ? p : "…").join("").replace(/…+/g, "…") : "";
+    const sub = ifsc ? `IFSC ${ifsc.value}${upi ? ` · UPI ${upiText}` : ""}` : upi ? `UPI ${upiText}` : "How to pay";
+    items.push({
+      group: "Pay bill",
+      title: bank,
+      sub,
+      href: `https://avhishek.in/pay-credit-card-bill#${slug(bank)}`,
+      logo: marks[bank] ? `assets/bank-logos/${marks[bank]}` : "",
+      hay: `${bank} ${shortNames[bank] || ""} pay payment bill neft imps upi ifsc ${fields.map(f => f.value || "").join(" ")} ${upiText}`.toLowerCase()
+    });
+  });
+
   // Cards in the collection
   cards.forEach(card => {
     const label = card.bank === "BOBCARD" ? "BOBCARD" : (shortNames[card.bank] || card.bank.replace(/ Bank$/, ""));
@@ -97,7 +117,7 @@
     });
   });
 
-  const groupOrder = ["Bank support", "My cards", "Reviews", "Tools", "Pages"];
+  const groupOrder = ["Bank support", "Pay bill", "My cards", "Reviews", "Tools", "Pages"];
   const perGroup = 4;
 
   function search(query) {

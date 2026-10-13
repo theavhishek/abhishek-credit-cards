@@ -383,6 +383,61 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
   70%, 100% { scale: 1.6; opacity: 0; }
 }
 
+
+/* Bill payment tile: a small, real example of the transfer details */
+.hm-paymock {
+  display: grid;
+  gap: 6px;
+  max-width: 360px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+.hm-paymock-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 2px 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.hm-paymock-head img { width: 20px; height: 20px; padding: 2px; border-radius: 6px; background: #fff; border: 1px solid rgb(0 0 0 / 0.08); }
+.hm-paymock-time {
+  margin-inline-start: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #15803d 12%, transparent);
+  color: #166534;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+html[data-theme="dark"] .hm-paymock-time { background: color-mix(in srgb, #4ade80 16%, transparent); color: #86efac; }
+.hm-paymock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 0.8125rem;
+}
+.hm-paymock-row > span { color: var(--muted); }
+.hm-paymock-row b { font-family: var(--site-mono); font-size: 0.8125rem; font-weight: 650; letter-spacing: 0.02em; }
+.hm-paymock-row i {
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px dashed var(--line-strong);
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-family: var(--site-font, inherit);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 /* Latest reviews */
 .hm-reviews { display: grid; gap: 28px; margin-top: 28px !important; }
 .hm-review {
@@ -490,7 +545,8 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
 /* ---------- Layouts ---------- */
 @media (min-width: 640px) {
   .hm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hm-tile-support { grid-column: 1 / -1; }
+  .hm-tile-support,
+  .hm-tile-soon { grid-column: 1 / -1; }
   .hm-reviews { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .hm-reviews > li:nth-child(3):last-child { display: none; }
 }
@@ -502,11 +558,12 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
   .hm-reviews > li:nth-child(3):last-child { display: list-item; }
   .hm-tile-support { grid-column: span 7; }
   .hm-tile-escalate { grid-column: span 5; }
-  .hm-tile-soon { grid-column: 1 / -1; }
-  .hm-tile-soon .hm-tile-link { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+  .hm-tile-pay { grid-column: span 7; }
+  .hm-tile-soon { grid-column: span 5; }
   .hm-tile-link { padding: 30px; min-height: 260px; }
   .hm-tile-support .hm-tile-link,
   .hm-tile-escalate .hm-tile-link { min-height: 340px; }
+  .hm-tile-pay .hm-tile-link { min-height: 320px; }
   .hm-tile-support .hm-logos { grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 7px; }
   .hm-about { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: 64px; }
   .hm-about { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
