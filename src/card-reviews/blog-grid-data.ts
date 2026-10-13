@@ -66,7 +66,7 @@ export const blogPosts: BlogPost[] = [
     title: "HSBC Live+ Credit Card",
     excerpt: "A detailed 2026 review of its 10% everyday cashback, ₹1,200 shared cap, MCC exclusions, fees and lounge privileges.",
     image: {
-      src: "https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg",
+      src: "/assets/reviews/hsbc-live-plus.jpg",
       alt: "HSBC Live+ Visa Infinite credit card",
     },
     body: [
