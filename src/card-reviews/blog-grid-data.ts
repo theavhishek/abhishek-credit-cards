@@ -13,9 +13,45 @@ export type BlogPost = {
   featured?: boolean;
 };
 
-export const blogCategories = ["Cashback"];
+export const blogCategories = ["Cashback", "Pre-launch"];
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: "slice-business-credit-card",
+    featured: false,
+    category: "Pre-launch",
+    date: "2026-10-13",
+    readTime: 4,
+    author: {
+      name: "Abhishek Meena",
+      role: "Independent card reviewer",
+      avatar: "/assets/abhishek-face.jpg",
+    },
+    title: "Slice Business Credit Card",
+    excerpt: "Launching in December 2026: lifetime free, up to 2% cashback and zero forex markup for sole proprietors. What’s confirmed, and what isn’t yet.",
+    image: {
+      src: "/assets/reviews/slice-business-credit-card.jpg",
+      alt: "Slice Business credit cards on Visa and RuPay",
+    },
+  },
+  {
+    id: "eternal-sbi-card",
+    featured: false,
+    category: "Pre-launch",
+    date: "2026-10-13",
+    readTime: 3,
+    author: {
+      name: "Abhishek Meena",
+      role: "Independent card reviewer",
+      avatar: "/assets/abhishek-face.jpg",
+    },
+    title: "Eternal SBI Credit Card",
+    excerpt: "Reported 10% off on Zomato, Blinkit and District, the rumoured ₹499 fee, and what isn’t confirmed yet.",
+    image: {
+      src: "/assets/reviews/eternal-sbi-card.jpg",
+      alt: "Eternal SBI Card, black card design",
+    },
+  },
   {
     id: "hsbc-live-plus",
     featured: true,
@@ -30,7 +66,7 @@ export const blogPosts: BlogPost[] = [
     title: "HSBC Live+ Credit Card",
     excerpt: "A detailed 2026 review of its 10% everyday cashback, ₹1,200 shared cap, MCC exclusions, fees and lounge privileges.",
     image: {
-      src: "https://www.hsbc.bank.in/content/dam/hsbc/in/images/16-9/21398-live-plus-visa-infinite-2000X1125.jpg/jcr:content/renditions/cq5dam.web.1680.1000.jpeg",
+      src: "/assets/reviews/hsbc-live-plus.jpg",
       alt: "HSBC Live+ Visa Infinite credit card",
     },
     body: [
