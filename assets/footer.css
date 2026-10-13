@@ -134,12 +134,13 @@ html[data-theme="dark"] .gf-social[data-brand="whatsapp"] { --gf-brand: #25d366;
   padding: 1px 8px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--gf-orange) 14%, transparent);
-  color: var(--gf-orange-text);
+  color: #b13a0a;          /* 4.8:1 on the tinted tag; --gf-orange-text is 4.1:1 here */
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.5;
   white-space: nowrap;
 }
+html[data-theme="dark"] .gf-tag { color: var(--gf-orange-text); }
 
 /* ---------- Bottom line ---------- */
 .gf-bottom {

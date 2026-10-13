@@ -87,7 +87,7 @@
     return `<li class="py-method py-kind-${esc(m.kind)}${wide}">
       <div class="py-method-head">
         <span class="py-kind" aria-hidden="true">${kindIcon[m.kind] || kindIcon.other}</span>
-        <h4 class="py-method-title">${esc(m.title)}</h4>
+        <h3 class="py-method-title">${esc(m.title)}</h3>
       </div>
       ${m.how ? `<p class="py-how">${esc(m.how)}</p>` : ""}
       ${fields}

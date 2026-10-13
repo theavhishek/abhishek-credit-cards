@@ -285,7 +285,7 @@ html[data-theme] body.unified-navbar ::selection { background: rgb(252 110 32 / 
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, #fc6e20 45%, transparent);
   background: color-mix(in srgb, #fc6e20 10%, transparent);
-  color: #c2410c;
+  color: #b13a0a;
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.5;
