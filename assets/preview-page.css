@@ -8,6 +8,8 @@
   --pv-reported-bg: #fff7ed;
   --pv-rumoured: #6b21a8;        /* on #faf5ff: 8.3:1 */
   --pv-rumoured-bg: #faf5ff;
+  --pv-confirmed: #166534;       /* on #f0fdf4: 6.9:1 */
+  --pv-confirmed-bg: #f0fdf4;
   --pv-unknown: var(--muted);
 }
 html[data-theme="dark"] {
@@ -15,6 +17,8 @@ html[data-theme="dark"] {
   --pv-reported-bg: #2a1508;
   --pv-rumoured: #d8b4fe;        /* on #1f1029: 10:1 */
   --pv-rumoured-bg: #1f1029;
+  --pv-confirmed: #86efac;       /* on #0b2414: 11:1 */
+  --pv-confirmed-bg: #0b2414;
 }
 
 /* ---------- Hero status ---------- */
@@ -92,6 +96,7 @@ html[data-theme="dark"] {
 }
 .pv-chip-reported { color: var(--pv-reported); background: var(--pv-reported-bg); }
 .pv-chip-rumoured { color: var(--pv-rumoured); background: var(--pv-rumoured-bg); }
+.pv-chip-confirmed { color: var(--pv-confirmed); background: var(--pv-confirmed-bg); }
 .pv-chip-unknown {
   color: var(--pv-unknown);
   box-shadow: inset 0 0 0 1px var(--line-strong);

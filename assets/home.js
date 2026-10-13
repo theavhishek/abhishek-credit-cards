@@ -60,7 +60,7 @@
 
   // Reviews
   [
-    { title: "Slice Business Credit Card", sub: "Pre-launch preview, waitlist open", href: "https://avhishek.in/card-reviews/slice-business-credit-card", words: "slice business sole proprietor cashback forex lifetime free visa rupay" },
+    { title: "Slice Business Credit Card", sub: "Launching December 2026, waitlist open", href: "https://avhishek.in/card-reviews/slice-business-credit-card", words: "slice business sole proprietor cashback forex lifetime free visa rupay" },
     { title: "Eternal SBI Credit Card", sub: "Pre-launch preview", href: "https://avhishek.in/card-reviews/eternal-sbi-card", words: "eternal sbi zomato blinkit district" },
     { title: "HSBC Live+ Credit Card", sub: "Review: 10% cashback, ₹1,200 cap", href: "https://avhishek.in/card-reviews/hsbc-live-plus", words: "hsbc live plus live+ cashback" }
   ].forEach(review => items.push({ group: "Reviews", ...review, hay: `${review.title} ${review.words}`.toLowerCase() }));
