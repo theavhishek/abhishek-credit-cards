@@ -466,6 +466,19 @@ html[data-theme="dark"] .sp-title-foil { background-image: linear-gradient(180de
   line-height: 1.55;
 }
 
+.sp-paylink { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.875rem; }
+.sp-paylink a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--sp-accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
 /* ---------- Layout steps ---------- */
 @media (min-width: 640px) {
   .sp-guide-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }

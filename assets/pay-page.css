@@ -1,0 +1,243 @@
+/* ==========================================================================
+   Credit card bill payment page (avhishek.in/pay-credit-card-bill)
+   Extends support-page.css: same hero, picker, sticky search and bank cards.
+   Adds the safety strip, payment method cards and the BBPS explainer.
+   ========================================================================== */
+
+.py {
+  --py-fast: #15803d;
+  --py-mid: #a16207;
+  --py-slow: #c2410c;
+  --py-caution-bg: color-mix(in srgb, #fc6e20 9%, var(--surface));
+  --py-caution-line: color-mix(in srgb, #fc6e20 40%, var(--line));
+  --py-caution-ink: #9a3412;
+}
+html[data-theme="dark"] .py {
+  --py-fast: #4ade80;
+  --py-mid: #facc15;
+  --py-slow: #ff9a5c;
+  --py-caution-ink: #ffb27f;
+}
+
+/* ---------- Before you pay ---------- */
+.py-safety {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+.py-safety-head { display: grid; gap: 10px; max-width: 60ch; }
+.py-safety-head h2,
+.py-bbps h2 {
+  font-size: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.py-safety-head p { color: var(--muted); font-size: 1rem; line-height: 1.55; text-wrap: pretty; }
+.py-tips {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px !important;
+}
+.py-tip {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  align-content: start;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.py-tip-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--surface-muted);
+  color: var(--text);
+}
+.py-tip.is-key { border-color: var(--py-caution-line); background: var(--py-caution-bg); }
+.py-tip.is-key .py-tip-icon { background: #fc6e20; color: #1a1206; }
+.py-tip h3 { font-size: 1rem; font-weight: 650; line-height: 1.35; }
+.py-tip p { margin-top: 4px !important; color: var(--muted); font-size: 0.9375rem; line-height: 1.55; text-wrap: pretty; }
+
+/* ---------- Bank card body ---------- */
+.sp-bank-body.py-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.py-callout {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.py-callout svg { margin-top: 2px; color: var(--muted); }
+.py-callout.is-caution {
+  border: 1px solid var(--py-caution-line);
+  background: var(--py-caution-bg);
+  color: var(--text);
+  font-weight: 500;
+}
+.py-callout.is-caution svg { color: var(--py-caution-ink); }
+.py-older { color: var(--muted); font-size: 0.8125rem; line-height: 1.5; }
+
+.py-methods { display: grid; gap: 10px; }
+.py-method {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+.py-method-head { display: flex; align-items: center; gap: 10px; }
+.py-kind {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+.py-kind-upi .py-kind,
+.py-kind-imps .py-kind,
+.py-kind-neft .py-kind { background: var(--text); border-color: transparent; color: var(--page); }
+.py-method-title { font-size: 1rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em; }
+.py-how { color: var(--muted); font-size: 0.9375rem; line-height: 1.55; text-wrap: pretty; }
+
+.py-fields { display: grid; gap: 2px; margin: 0; }
+.py-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.py-field dt { color: var(--muted); font-size: 0.8125rem; font-weight: 500; line-height: 1.35; }
+.py-field dd { margin: 0; min-width: 0; font-size: 0.9375rem; line-height: 1.45; }
+.py-value-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-block: -6px -8px; margin-inline-end: -8px; }
+.py-value { font-weight: 650; overflow-wrap: anywhere; }
+.py-mono { font-family: var(--site-mono); font-size: 0.9375em; letter-spacing: 0.02em; }
+.py-text { font-weight: 500; text-wrap: pretty; }
+.py-pattern {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding-block: 2px;
+}
+.py-lit {
+  font-family: var(--site-mono);
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+.py-ph {
+  padding: 2px 9px;
+  border-radius: 8px;
+  border: 1px dashed var(--line-strong);
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.py-example { display: block; margin-top: 4px; color: var(--muted); font-size: 0.8125rem; line-height: 1.45; overflow-wrap: anywhere; }
+.py-example .py-mono { color: var(--text); }
+
+.py-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.py-time svg { flex: none; }
+.py-time.is-fast { color: var(--text); }
+.py-time.is-fast svg { color: var(--py-fast); }
+.py-time.is-mid svg { color: var(--py-mid); }
+.py-time.is-slow svg { color: var(--py-slow); }
+
+.py-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.py-source { color: var(--muted); font-size: 0.8125rem; line-height: 1.6; }
+.py-source a,
+.py-help,
+.py-bbps a,
+.py-fine a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: #fc6e20;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.py-source a { display: inline-flex; align-items: center; gap: 2px; margin-inline-end: 10px; }
+.py-help { display: inline-flex; align-items: center; min-height: 40px; font-size: 0.875rem; }
+
+/* ---------- BBPS ---------- */
+.py-bbps {
+  display: grid;
+  gap: 14px;
+  max-width: 68ch;
+  margin-top: 72px;
+}
+.py-bbps p { color: var(--muted); font-size: 1rem; line-height: 1.6; text-wrap: pretty; }
+.py-bbps strong { color: var(--text); font-weight: 600; }
+.py-fine { max-width: 70ch; margin-top: 40px !important; color: var(--muted); font-size: 0.8125rem; line-height: 1.6; }
+
+/* ---------- Layout ---------- */
+@media (min-width: 720px) {
+  .py-tips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .py-field { grid-template-columns: 9.5em minmax(0, 1fr); align-items: center; gap: 12px; }
+}
+@media (min-width: 900px) {
+  .py-methods { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .py-method.is-wide { grid-column: 1 / -1; }
+  .sp-bank-body.py-body { padding: 22px 22px 18px; }
+}
+@media (min-width: 1100px) {
+  .py-tips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .py-tip { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .py-safety { margin-top: 48px; padding-top: 32px; }
+  .py-method { padding: 14px 12px; }
+  .py-bbps { margin-top: 56px; }
+}
+@media print {
+  .py-copy, .py-help { display: none; }
+}
