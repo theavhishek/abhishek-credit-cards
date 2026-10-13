@@ -13,7 +13,9 @@
   };
   document.querySelectorAll("[data-count]").forEach(el => {
     const value = counts[el.dataset.count];
-    if (value) el.textContent = String(value);
+    if (value) el.textContent = el.dataset.countFormat === "tens-plus" && value >= 10
+      ? `${Math.floor(value / 10) * 10}+`
+      : String(value);
   });
 
   /* ---------- Search index ---------- */
