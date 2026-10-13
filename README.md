@@ -104,7 +104,7 @@ cd abhishek-credit-cards
 pnpm dev        # or: node preview-server.mjs
 ```
 
-It runs on [localhost:3000](http://localhost:3000). Locally, `/` opens the card portfolio and the homepage is at [`/home`](http://localhost:3000/home); production routing and headers from `vercel.json` are not applied.
+It runs at `http://localhost:3000`. Locally, `/` opens the card portfolio and the homepage is at `/home`; production routing and headers from `vercel.json` are not applied.
 
 Only changes to the reviews grid in `src/` need dependencies and a rebuild:
 
