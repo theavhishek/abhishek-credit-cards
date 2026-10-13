@@ -26,6 +26,94 @@
       "permanent": true
     },
     {
+      "source": "/home",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/",
+      "permanent": true
+    },
+    {
+      "source": "/support",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/bank-support",
+      "permanent": true
+    },
+    {
+      "source": "/bank-support",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/bank-support",
+      "permanent": true
+    },
+    {
+      "source": "/card-reviews",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/card-reviews",
+      "permanent": true
+    },
+    {
+      "source": "/card-reviews/:slug",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/card-reviews/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/pay-credit-card-bill",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/pay-credit-card-bill",
+      "permanent": true
+    },
+    {
+      "source": "/pay-bill",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/pay-credit-card-bill",
+      "permanent": true
+    },
+    {
+      "source": "/disclaimer",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/disclaimer",
+      "permanent": true
+    },
+    {
       "source": "/coming-soon",
       "destination": "/",
       "permanent": true
@@ -33,6 +121,21 @@
     {
       "source": "/pay-bill",
       "destination": "/pay-credit-card-bill",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/support",
+      "destination": "/bank-support",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "https://cards.avhishek.in/",
       "permanent": true
     }
   ],
@@ -63,6 +166,24 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)\\.woff2",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)\\.(jpg|jpeg|png|webp|svg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
         }
       ]
     },
