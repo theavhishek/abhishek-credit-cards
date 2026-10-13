@@ -211,3 +211,8 @@ html[data-theme="dark"] {
   .pv-benefits td:last-child { padding-inline-end: 14px; }
   .pv-chip { padding-inline: 7px; }
 }
+
+/* ---------- Plain bullet list ---------- */
+.rv-list { display: grid; gap: 8px; padding-inline-start: 1.25em; line-height: 1.6; }
+.rv-list li { text-wrap: pretty; }
+.rv-list li::marker { color: var(--muted); }
