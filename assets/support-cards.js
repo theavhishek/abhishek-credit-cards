@@ -1,52 +1,6 @@
 (() => {
   const contacts = window.SUPPORT_CONTACTS || {};
 
-  // Current Axis Bank escalation contacts.
-  if (contacts["Axis Bank"]) {
-    contacts["Axis Bank"].l1Email = (contacts["Axis Bank"].l1Email || []).map(email =>
-      email === "customer.services@axisbank.com" ? "email.services@axis.bank.in" : email
-    );
-    contacts["Axis Bank"].l3Email = (contacts["Axis Bank"].l3Email || []).map(email =>
-      email.toLowerCase() === "pno@axisbank.com" ? "PNO@axis.bank.in" : email
-    );
-  }
-
-  // Current IDFC FIRST Bank regional nodal contact.
-  if (contacts["IDFC FIRST Bank"]) {
-    contacts["IDFC FIRST Bank"].l2Email = ["RNO@idfcfirstbank.com"];
-  }
-
-  // Current ICICI Bank escalation contacts.
-  if (contacts["ICICI Bank"]) {
-    contacts["ICICI Bank"].l1Email = ["customer.care@icici.bank.in"];
-    contacts["ICICI Bank"].l3Email = ["pno@icici.bank.in"];
-    contacts["ICICI Bank"].extras = (contacts["ICICI Bank"].extras || [])
-      .map(group => ({
-        ...group,
-        emails: (group.emails || []).filter(email => email.toLowerCase() !== "pno@icicibank.com")
-      }))
-      .filter(group => group.emails.length);
-  }
-
-  // Current BOBCARD escalation contacts.
-  if (contacts["BOBCARD"]) {
-    contacts["BOBCARD"].l1Email = ["crm@bobcard.co.in", "escalations@bobcard.co.in"];
-    contacts["BOBCARD"].l2Email = ["nodal@bobcard.co.in"];
-    contacts["BOBCARD"].l3Email = ["pno@bobcard.co.in"];
-  }
-
-  // Current SBI Card escalation contacts.
-  if (contacts["SBI Card"]) {
-    contacts["SBI Card"].l4Email = ["CustomerServiceHead@sbicard.com"];
-    delete contacts["SBI Card"].extras;
-  }
-
-
-  /* ==========================================================================
-     Bank support page: logo picker, search, and one card per bank.
-     Each card lists helplines to call and the complaint emails in the order
-     to use them, ending at the RBI Ombudsman.
-     ========================================================================== */
   const list = document.querySelector("#supportCards");
   const picker = document.querySelector("#supportPicker");
   const search = document.querySelector("#supportSearch");

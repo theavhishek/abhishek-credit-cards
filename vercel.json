@@ -24,6 +24,11 @@
       ],
       "destination": "https://avhishek.in/:path*",
       "permanent": true
+    },
+    {
+      "source": "/coming-soon",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -39,7 +44,7 @@
     },
     {
       "source": "/",
-      "destination": "/coming-soon"
+      "destination": "/home"
     },
     {
       "source": "/bank-support",

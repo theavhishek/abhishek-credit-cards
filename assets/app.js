@@ -101,6 +101,9 @@
   const bankFilter = $("#bankFilter");
   const networkFilter = $("#networkFilter");
   const search = $("#searchInput");
+  // A search started elsewhere (for example the homepage) arrives as ?q=.
+  const initialQuery = (new URLSearchParams(window.location.search).get("q") || "").trim();
+  if (search && initialQuery) search.value = initialQuery;
   const board = $("#stackBoard");
   const empty = $("#emptyState");
   const count = $("#resultCount");
@@ -247,4 +250,7 @@
   }));
 
   render(true);
+  if (initialQuery) {
+    requestAnimationFrame(() => document.querySelector("#collection")?.scrollIntoView({ block: "start" }));
+  }
 })();
