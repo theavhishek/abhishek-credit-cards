@@ -54,6 +54,22 @@ html[data-theme="dark"] .wa-follow {
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
+/* Headline shimmer: the button's light sweep, clipped to the text.
+   Runs with the button's sheen (follow.js adds .is-seen), then rests on
+   the plain text colour. */
+.wa-follow h2 { --wa-text-band: #128c7e; }
+html[data-theme="dark"] .wa-follow h2 { --wa-text-band: var(--wa-green); }
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .wa-follow.is-seen h2 {
+    background:
+      linear-gradient(105deg, transparent 38%, var(--wa-text-band) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
+      linear-gradient(var(--text), var(--text));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: wa-sheen 2.4s ease-out 0.4s 3;
+  }
+}
 .wa-follow p {
   max-width: 52ch;
   margin: 6px 0 0;
