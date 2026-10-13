@@ -162,6 +162,12 @@ html[data-theme="dark"] .py {
 }
 .py-example { display: block; margin-top: 4px; color: var(--muted); font-size: 0.8125rem; line-height: 1.45; overflow-wrap: anywhere; }
 .py-example .py-mono { color: var(--text); }
+.py-keys { display: grid; gap: 6px; margin-top: 10px !important; padding-top: 10px; border-top: 1px dashed var(--line); }
+.py-keys li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; color: var(--muted); font-size: 0.8125rem; line-height: 1.45; text-wrap: pretty; }
+.py-keys .py-ph { flex: none; padding: 0 7px; font-size: 0.75rem; }
+.py-method .py-callout { padding: 12px 14px; border-radius: 14px; font-size: 0.875rem; }
+.py-method .py-source a { overflow-wrap: anywhere; }
+.py-safety > .py-callout { margin-top: 24px !important; max-width: 78ch; font-size: 1rem; }
 
 .py-time {
   display: inline-flex;

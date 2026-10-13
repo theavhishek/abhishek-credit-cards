@@ -16,6 +16,12 @@ window.PAY_METHODS = {
           { label: "Beneficiary name", text: "Your name as embossed on the card" },
           { label: "Bank", text: "Axis Bank" }
         ], time: "Time not stated", speed: "" },
+      { kind: "upi", title: "Pay to a UPI ID",
+        fields: [{ label: "UPI ID", pattern: ["cc.91", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@axisbank"],
+          keys: [["registered mobile number", "Your 10-digit registered mobile number, typed straight after cc.91."], ["last 4 card digits", "The last 4 digits of your credit card number."]] }],
+        note: "Axis Bank publishes this UPI ID in the terms of its October 2020 pay-by-UPI offer. Its current payment help page doesn’t list a UPI ID, so check that your UPI app shows Axis Bank as the payee.",
+        verify: true, time: "Time not stated", speed: "",
+        src: { label: "Axis Bank pay-by-UPI terms (PDF)", url: "https://www.axisbank.com/docs/default-source/default-document-library/tncs-pay-credit-card-bills-via-upi.pdf" } },
       { kind: "app", title: "Axis Mobile app", how: "Pay Last Bill, then Pay Now.", time: "Same day with Pay Now", speed: "fast" },
       { kind: "app", title: "Axis internet banking", how: "Accounts › My Credit Cards › Pay Bill." },
       { kind: "other", title: "Axis ATM, branch or cheque", how: "Cash at a branch costs ₹100 + tax. Cheques go in Axis drop boxes and can’t be post-dated.", time: "ATM and cash same day, cheque 1 working day", speed: "mid" }
@@ -56,8 +62,10 @@ window.PAY_METHODS = {
         ], time: "SBI Card says it reflects instantly", speed: "fast" },
       { kind: "upi", title: "UPI",
         how: "Use Paynet › UPI or QR code on the SBI Card website or app. In BHIM SBI Pay, you can also pay to this UPI ID:",
-        fields: [{ label: "UPI ID", pattern: ["Sbicard.", { ph: "16-digit card number" }, "@SBI"] }],
-        time: "Instant", speed: "fast" },
+        fields: [{ label: "UPI ID", pattern: ["Sbicard.", { ph: "16-digit card number" }, "@SBI"], keys: [["16-digit card number", "Your full 16-digit credit card number, with no spaces."]] }],
+        note: "SBI Card documents this UPI ID in its BHIM SBI Pay steps. If you use another UPI app, check that the app accepts it and shows SBI Card as the payee.",
+        verify: true, time: "SBI Card says it posts instantly", speed: "fast",
+        src: { label: "SBI Card, Pay your bill", url: "https://www.sbicard.com/en/personal/pay.page" } },
       { kind: "bbps", title: "SBI UNIPAY (BBPS)", how: "Pick SBI Card under Bill Pay and enter the last 4 card digits and your registered mobile number.", time: "Real time", speed: "fast" },
       { kind: "app", title: "SBI Card app, YONO or Paynet", how: "Paynet works with net banking from 50+ banks and with debit cards.", time: "Instant", speed: "fast" },
       { kind: "other", title: "Cheque, branch or SBI ATM", how: "Cheque payments cost ₹200 + taxes since 15 Sep 2025. Senior citizens are exempt.", time: "Branch and ATM 2 working days, cheque 4", speed: "slow" }
@@ -67,10 +75,11 @@ window.PAY_METHODS = {
 
   "IDFC FIRST Bank": {
     methods: [
-      { kind: "upi", title: "UPI from any app",
-        how: "In your UPI app, choose Send Money and pay to:",
-        fields: [{ label: "UPI ID", pattern: [{ ph: "16-digit card number" }, ".cc@idfcbank"] }],
-        time: "Time not stated", speed: "" },
+      { kind: "upi", title: "Pay to a UPI ID",
+        how: "In a UPI-enabled banking app or the BHIM app, go to UPI › Send Money and pay to:",
+        fields: [{ label: "UPI ID", pattern: [{ ph: "16-digit card number" }, ".cc@idfcbank"], keys: [["16-digit card number", "Your full 16-digit credit card number, with no spaces."]] }],
+        verify: true, time: "Time not stated", speed: "",
+        src: { label: "IDFC FIRST, Credit card bill payment", url: "https://www.idfcfirst.bank.in/personal-banking/payments/cc-bill-payment" } },
       { kind: "imps", title: "IMPS or NEFT from another bank",
         fields: [
           { label: "IFSC", value: "IDFB0010225", copy: true },
@@ -86,10 +95,11 @@ window.PAY_METHODS = {
 
   "ICICI Bank": {
     methods: [
-      { kind: "upi", title: "UPI from any app",
+      { kind: "upi", title: "Pay to a UPI ID",
         how: "Pay to this UPI ID, or scan ICICI’s Scan to Pay QR. You don’t need an ICICI account.",
-        fields: [{ label: "UPI ID", pattern: ["ccpay.", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@icici"], example: "ccpay.98765432101234@icici" }],
-        time: "Usually within a few hours, up to 1 working day", speed: "mid" },
+        fields: [{ label: "UPI ID", pattern: ["ccpay.", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@icici"], example: "ccpay.98765432101234@icici", keys: [["registered mobile number", "The 10-digit mobile number registered with your card."], ["last 4 card digits", "The last 4 digits of your credit card number."]] }],
+        verify: true, time: "Usually within a few hours, up to 1 working day", speed: "mid",
+        src: { label: "ICICI Bank, Credit card bill payment", url: "https://www.icici.bank.in/personal-banking/payments/credit-card-bill-payment" } },
       { kind: "neft", title: "NEFT from another bank",
         fields: [
           { label: "IFSC", value: "ICIC0000004", copy: true },
@@ -257,9 +267,11 @@ window.PAY_METHODS = {
 
   "AU Small Finance Bank": {
     methods: [
-      { kind: "upi", title: "UPI from any app",
-        fields: [{ label: "UPI ID", pattern: ["AUCC.", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@AUBANK"], example: "AUCC.98765432101234@AUBANK" }],
-        time: "Time not stated", speed: "" },
+      { kind: "upi", title: "Pay to a UPI ID",
+        how: "In your UPI app, choose Pay to UPI ID and enter:",
+        fields: [{ label: "UPI ID", pattern: ["AUCC.", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@AUBANK"], example: "AUCC.98765432101234@AUBANK", keys: [["registered mobile number", "The 10-digit mobile number registered with your card."], ["last 4 card digits", "The last 4 digits of your credit card number."]] }],
+        verify: true, time: "Time not stated", speed: "",
+        src: { label: "AU Bank, Credit card bill payment", url: "https://www.au.bank.in/credit-cards-bill-payment" } },
       { kind: "app", title: "AU 0101 app or net banking", how: "Select the card, then Pay bill. You can also turn on Auto Pay here." },
       { kind: "other", title: "Cheque at an AU branch", how: "Write your 16-digit card number as the payee and deposit it at least 2 days before the due date." }
     ],
@@ -283,9 +295,13 @@ window.PAY_METHODS = {
   "American Express": {
     caution: "Amex only accepts payments from a bank account in the primary Cardmember’s name.",
     methods: [
-      { kind: "upi", title: "UPI from any app",
-        fields: [{ label: "UPI ID", pattern: ["AEBC", { ph: "15-digit card number" }, "@SC"], example: "AEBC3XXXXXXXXXXXXXX@SC" }],
-        time: "Before 5 pm: credited next day", speed: "mid" },
+      { kind: "upi", title: "Pay to a UPI ID",
+        how: "In a UPI-enabled mobile banking app, pay to:",
+        fields: [{ label: "UPI ID", pattern: ["AEBC", { ph: "15-digit card number" }, "@SC"], example: "AEBC3XXXXXXXXXXXXXX@SC",
+          keys: [["15-digit card number", "Your full 15-digit Amex card number, starting 34 or 37, with no spaces."]] }],
+        note: "Pay only from an eligible bank account in the primary Cardmember’s name. Non-residents of India must pay from an NRE or NRO account in the primary Cardmember’s name.",
+        verify: true, time: "Before 5 pm: credited next day, except Sundays and bank holidays", speed: "mid",
+        src: { label: "American Express India, Making a payment", url: "https://www.americanexpress.com/in/customer-service/payments-statements-and-balance/making-a-payment.html" } },
       { kind: "neft", title: "NEFT, RTGS or IMPS from another bank",
         fields: [
           { label: "IFSC", value: "SCBL0036020", copy: true },
