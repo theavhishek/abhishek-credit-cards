@@ -43,14 +43,20 @@
   const digits = value => String(value).replace(/\D/g, "");
 
   const items = [];
-  // Tools and pages
+  // Tools
   [
     { title: "Bank support directory", sub: "Helplines and complaint emails for every bank", href: "https://avhishek.in/bank-support", words: "support helpline customer care complaint grievance nodal email directory" },
     { title: "Complaint escalation guide", sub: "Customer care, nodal officer, principal nodal officer, RBI", href: "https://avhishek.in/bank-support#how-to-escalate", words: "escalate escalation complaint rbi ombudsman cms nodal principal" },
+    { title: "HSBC Live+ cashback cap calculator", sub: "Where the ₹1,200 monthly cap kicks in", href: "https://avhishek.in/card-reviews/hsbc-live-plus#calculator", words: "calculator calculate cashback cap hsbc live plus live+" },
+    { title: "Eternal SBI savings estimator", sub: "What 10% off could save you in a year", href: "https://avhishek.in/card-reviews/eternal-sbi-card#calculator", words: "calculator calculate estimator savings discount eternal sbi zomato blinkit district" }
+  ].forEach(tool => items.push({ group: "Tools", ...tool, hay: `${tool.title} ${tool.words}`.toLowerCase() }));
+
+  // Pages
+  [
     { title: "My card collection", sub: "Every card Abhishek holds, grouped by bank", href: "https://cards.avhishek.in/", words: "cards collection portfolio stack ltf lifetime free" },
     { title: "Card reviews", sub: "All reviews", href: "https://avhishek.in/card-reviews", words: "reviews review" },
     { title: "Disclaimer and affiliate disclosure", sub: "How this site makes money", href: "https://avhishek.in/disclaimer", words: "disclaimer affiliate privacy disclosure" }
-  ].forEach(tool => items.push({ group: "Tools", ...tool, hay: `${tool.title} ${tool.words}`.toLowerCase() }));
+  ].forEach(page => items.push({ group: "Pages", ...page, hay: `${page.title} ${page.words}`.toLowerCase() }));
 
   // Reviews
   [
@@ -90,7 +96,7 @@
     });
   });
 
-  const groupOrder = ["Bank support", "My cards", "Reviews", "Tools"];
+  const groupOrder = ["Bank support", "My cards", "Reviews", "Tools", "Pages"];
   const perGroup = 4;
 
   function search(query) {
@@ -128,6 +134,7 @@
   let active = -1;
   const icon = {
     "Tools": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>',
+    "Pages": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
     "Reviews": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>'
   };
 
