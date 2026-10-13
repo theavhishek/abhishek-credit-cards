@@ -266,6 +266,38 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 }
 
 /* Tile visuals */
+.hm-ladder { display: grid; gap: 6px; padding: 0; counter-reset: none; }
+.hm-ladder > span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.hm-ladder > span:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 13.5px;
+  inset-block-start: 28px;
+  width: 1px;
+  height: 6px;
+  background: var(--line-strong);
+}
+.hm-ladder b {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+.hm-ladder .is-rbi { font-weight: 650; }
+.hm-ladder .is-rbi b { background: var(--hm-orange); color: #1a1206; }
 .hm-logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 8px; }
 .hm-logos img,
 .hm-logos-more {
@@ -292,16 +324,16 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 .hm-fan {
   position: relative;
   display: block;
-  height: 200px;
+  height: 300px;
 }
 .hm-fan img {
   position: absolute;
   inset-block-start: 6px;
   inset-inline-start: 50%;
-  width: 112px;
+  width: 168px;
   height: auto;
   aspect-ratio: 54 / 85.6;
-  border-radius: 9px;
+  border-radius: 13px;
   object-fit: cover;
   box-shadow: 0 1px 1px rgb(0 0 0 / 0.08), 0 12px 24px -10px rgb(0 0 0 / 0.4);
   transform-origin: 50% 90%;
@@ -311,32 +343,9 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 .hm-fan img:nth-child(2) { translate: -14% 2px; rotate: 9deg; filter: brightness(0.86); }
 .hm-fan img:nth-child(3) { translate: -50% 0; rotate: 0deg; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .hm-tile-link:hover .hm-fan img:nth-child(1) { translate: -96% 6px; rotate: -14deg; }
-  .hm-tile-link:hover .hm-fan img:nth-child(2) { translate: -4% 4px; rotate: 13deg; }
+  .hm-about-fan:hover .hm-fan img:nth-child(1) { translate: -96% 6px; rotate: -14deg; }
+  .hm-about-fan:hover .hm-fan img:nth-child(2) { translate: -4% 4px; rotate: 13deg; }
 }
-.hm-steps { position: relative; display: flex; justify-content: space-between; max-width: 260px; }
-.hm-steps::before {
-  content: "";
-  position: absolute;
-  inset-inline: 18px;
-  inset-block-start: 50%;
-  height: 1px;
-  background: var(--line-strong);
-}
-.hm-steps span {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--text);
-  color: var(--page);
-  font-size: 0.875rem;
-  font-weight: 650;
-}
-.hm-steps span.is-rbi { background: var(--hm-orange); color: #1a1206; }
-
 .hm-tile-soon .hm-tile-link {
   border: 1.5px dashed color-mix(in srgb, var(--hm-orange) 50%, var(--line));
   background: color-mix(in srgb, var(--hm-orange) 4%, var(--surface));
@@ -372,18 +381,6 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 @keyframes hm-pulse {
   0% { scale: 0.6; opacity: 0.7; }
   70%, 100% { scale: 1.6; opacity: 0; }
-}
-
-.hm-thumbs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.hm-thumbs img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
-  border-radius: 12px;
-  object-fit: cover;
-  outline: 1px solid oklch(0 0 0 / 0.08);
-  outline-offset: -1px;
 }
 
 /* Latest reviews */
@@ -433,18 +430,29 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
 
 /* About */
 .hm-about { display: grid; gap: 28px; align-items: center; }
-.hm-about-photo { width: min(300px, 70%); }
-.hm-about-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
-  border-radius: 28px;
-  object-fit: cover;
-  object-position: 50% 42%;
-  outline: 1px solid oklch(0 0 0 / 0.08);
-  outline-offset: -1px;
+.hm-about-fan { display: block; max-width: 420px; }
+.hm-about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  margin-top: 24px;
+  padding-inline: 22px 18px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  transition: scale 150ms ease-out;
 }
+.hm-about-cta svg { transition: translate 200ms var(--hm-ease); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hm-about-cta:hover svg { translate: 3px 0; }
+}
+.hm-about-cta:active { scale: 0.97; }
+.hm-about-cta + p { margin-top: 24px !important; }
 .hm-about-copy { max-width: 58ch; }
 .hm-about-copy p {
   margin-top: 16px !important;
@@ -490,16 +498,15 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
   .hm-hero { padding-block: 56px 8px; }
   .hm-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }
   .hm-tile-support { grid-column: span 7; }
-  .hm-tile-cards { grid-column: span 5; }
-  .hm-tile-escalate,
-  .hm-tile-reviews,
-  .hm-tile-soon { grid-column: span 4; }
+  .hm-tile-escalate { grid-column: span 5; }
+  .hm-tile-soon { grid-column: 1 / -1; }
+  .hm-tile-soon .hm-tile-link { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
   .hm-tile-link { padding: 30px; min-height: 260px; }
   .hm-tile-support .hm-tile-link,
-  .hm-tile-cards .hm-tile-link { min-height: 340px; }
+  .hm-tile-escalate .hm-tile-link { min-height: 340px; }
   .hm-tile-support .hm-logos { grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 7px; }
   .hm-about { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: 64px; }
-  .hm-about-photo { width: 100%; max-width: 360px; }
+  .hm-about { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
 }
 @media (max-width: 639px) {
   .hm { padding-block: 24px 88px; }
@@ -511,5 +518,7 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
   .hm-tools, .hm-latest, .hm-about { margin-top: 80px; }
   .hm-tile-link { padding: 22px; border-radius: 24px; }
   .hm .hm-follow { margin-top: 72px; }
+  .hm-fan { height: 240px; }
+  .hm-fan img { width: 132px; border-radius: 10px; }
 }
 @media (hover: none) { .hm-search-key { display: none; } }
