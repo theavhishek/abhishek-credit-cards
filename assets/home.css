@@ -266,7 +266,6 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 }
 
 /* Tile visuals */
-.hm-tile-kicker { color: var(--hm-orange-text); font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
 .hm-ladder { display: grid; gap: 6px; padding: 0; counter-reset: none; }
 .hm-ladder > span {
   position: relative;
@@ -299,40 +298,6 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
 }
 .hm-ladder .is-rbi { font-weight: 650; }
 .hm-ladder .is-rbi b { background: var(--hm-orange); color: #1a1206; }
-.hm-meter { display: grid; gap: 10px; }
-.hm-meter-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 0.875rem;
-  font-variant-numeric: tabular-nums;
-}
-.hm-meter-row b { color: var(--text); font-size: 1.25rem; font-weight: 650; letter-spacing: -0.01em; }
-.hm-meter-track {
-  position: relative;
-  display: block;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--surface-muted);
-}
-.hm-meter-fill {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 0;
-  border-radius: inherit;
-  background: var(--hm-orange);
-}
-.hm-meter-cap {
-  position: absolute;
-  inset-block: -5px;
-  width: 2px;
-  margin-inline-start: -1px;
-  border-radius: 1px;
-  background: var(--text);
-}
-
 .hm-logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 8px; }
 .hm-logos img,
 .hm-logos-more {
@@ -534,8 +499,8 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
   .hm-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }
   .hm-tile-support { grid-column: span 7; }
   .hm-tile-escalate { grid-column: span 5; }
-  .hm-tile-calc,
-  .hm-tile-soon { grid-column: span 4; }
+  .hm-tile-soon { grid-column: 1 / -1; }
+  .hm-tile-soon .hm-tile-link { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
   .hm-tile-link { padding: 30px; min-height: 260px; }
   .hm-tile-support .hm-tile-link,
   .hm-tile-escalate .hm-tile-link { min-height: 340px; }

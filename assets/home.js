@@ -46,9 +46,7 @@
   // Tools
   [
     { title: "Bank support directory", sub: "Helplines and complaint emails for every bank", href: "https://avhishek.in/bank-support", words: "support helpline customer care complaint grievance nodal email directory" },
-    { title: "Complaint escalation guide", sub: "Customer care, nodal officer, principal nodal officer, RBI", href: "https://avhishek.in/bank-support#how-to-escalate", words: "escalate escalation complaint rbi ombudsman cms nodal principal" },
-    { title: "HSBC Live+ cashback cap calculator", sub: "Where the ₹1,200 monthly cap kicks in", href: "https://avhishek.in/card-reviews/hsbc-live-plus#calculator", words: "calculator calculate cashback cap hsbc live plus live+" },
-    { title: "Eternal SBI savings estimator", sub: "What 10% off could save you in a year", href: "https://avhishek.in/card-reviews/eternal-sbi-card#calculator", words: "calculator calculate estimator savings discount eternal sbi zomato blinkit district" }
+    { title: "Complaint escalation guide", sub: "Customer care, nodal officer, principal nodal officer, RBI", href: "https://avhishek.in/bank-support#how-to-escalate", words: "escalate escalation complaint rbi ombudsman cms nodal principal" }
   ].forEach(tool => items.push({ group: "Tools", ...tool, hay: `${tool.title} ${tool.words}`.toLowerCase() }));
 
   // Pages
