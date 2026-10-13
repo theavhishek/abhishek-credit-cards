@@ -121,7 +121,7 @@
   function feeInfo(card) {
     if (card.annualFee === "LTF") return {label:"LTF", cls:"fee-ltf", detail:"Lifetime free"};
     if (card.tag === "Paid") return {label:"Paid", cls:"fee-paid", detail:"Annual fee applicable"};
-    if (card.tag === "Waiver") return {label:"Waiver", cls:"fee-waiver", detail:"Fee waiver available"};
+    if (card.annualFee === "Waiver" || card.tag === "Waiver") return {label:"Waiver", cls:"fee-waiver", detail:"Fee waiver available"};
     return {label:"—", cls:"fee-unknown", detail:"Fee not specified"};
   }
 
