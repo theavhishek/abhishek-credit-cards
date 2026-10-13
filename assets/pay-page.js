@@ -57,6 +57,7 @@
   const external = svg('<path d="M7 17 17 7M8 7h9v9"/>', 14);
   const clock = svg('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>', 14);
   const warn = svg('<path d="M12 3 2.5 20h19Z"/><path d="M12 10v4.5M12 17.5h.01"/>');
+  const VERIFY = "Before paying, verify the recipient details displayed by your UPI application. If the payee cannot be verified or appears incorrect, do not proceed. Use the bank’s official payment page or contact the bank for confirmation.";
   const info = svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/>');
 
   /* ---------- Markup ---------- */
@@ -67,7 +68,8 @@
         : `<span class="py-ph">${esc(p.ph)}</span>`).join("");
       return `<span class="py-pattern">${parts}</span>`
         + (f.example ? `<span class="py-example">For example <span class="py-mono">${esc(f.example)}</span></span>` : "")
-        + (f.note ? `<span class="py-example">${esc(f.note)}</span>` : "");
+        + (f.note ? `<span class="py-example">${esc(f.note)}</span>` : "")
+        + (f.keys ? `<ul class="py-keys">${f.keys.map(([ph, text]) => `<li><span class="py-ph">${esc(ph)}</span><span>${esc(text)}</span></li>`).join("")}</ul>` : "");
     }
     if (f.value) {
       const mono = f.label === "IFSC" ? " py-mono" : "";
@@ -90,8 +92,8 @@
         <h3 class="py-method-title">${esc(m.title)}</h3>
       </div>
       ${m.how ? `<p class="py-how">${esc(m.how)}</p>` : ""}
-      ${fields}
-      ${time}
+      ${fields}${m.note ? `<p class="py-callout">${info}<span>${esc(m.note)}</span></p>` : ""}${m.verify ? `<p class="py-callout is-caution">${warn}<span>${esc(VERIFY)}</span></p>` : ""}
+      ${time}${m.src ? `<p class="py-source"><a href="${esc(m.src.url)}" target="_blank" rel="noopener noreferrer">Official source: ${esc(m.src.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a></p>` : ""}
     </li>`;
   }
 
