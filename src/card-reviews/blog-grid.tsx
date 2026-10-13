@@ -179,7 +179,7 @@ export function BlogGrid({
       </motion.div>}
       <div className={styles.cardBody}>
         <Meta post={post} />
-        <h3 className={isFeatured ? styles.featuredTitle : styles.cardTitle}>{post.title}</h3>
+        <h2 className={isFeatured ? styles.featuredTitle : styles.cardTitle}>{post.title}</h2>
         <p className={styles.excerpt}>{post.excerpt}</p>
         <Byline post={post} />
       </div>
