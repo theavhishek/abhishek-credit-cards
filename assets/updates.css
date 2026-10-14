@@ -411,6 +411,28 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
 .up-sharemenu svg { flex: none; width: 18px; height: 18px; color: var(--muted); }
 @media (hover: hover) { .up-sharemenu :is(a, button):hover { background: var(--up-fill); } }
 
+/* Share targets take their network's colour on hover, focus and tap. */
+.up-sharemenu a[href^="https://wa.me/"],
+.up-sharebar a[href^="https://wa.me/"] { --up-brand: #25d366; }
+.up-sharemenu a[href^="https://t.me/"],
+.up-sharebar a[href^="https://t.me/"] { --up-brand: #229ed9; }
+.up-sharemenu a[href^="https://x.com/"],
+.up-sharebar a[href^="https://x.com/"] { --up-brand: var(--text); }
+.up-sharemenu svg,
+.up-sharebar svg { transition: color 0.15s var(--ease); }
+.up-sharemenu a[href]:is(:focus-visible, :active),
+.up-sharebar a[href]:is(:focus-visible, :active) { background: color-mix(in srgb, var(--up-brand, var(--text)) 14%, transparent); }
+.up-sharebar a[href]:is(:focus-visible, :active) { border-color: var(--up-brand, var(--line-strong)); }
+.up-sharemenu a[href]:is(:focus-visible, :active) svg,
+.up-sharebar a[href]:is(:focus-visible, :active) svg { color: var(--up-brand, var(--muted)); }
+@media (hover: hover) {
+  .up-sharemenu a[href]:hover,
+  .up-sharebar a[href]:hover { background: color-mix(in srgb, var(--up-brand, var(--text)) 14%, transparent); }
+  .up-sharebar a[href]:hover { border-color: var(--up-brand, var(--line-strong)); }
+  .up-sharemenu a[href]:hover svg,
+  .up-sharebar a[href]:hover svg { color: var(--up-brand, var(--muted)); }
+}
+
 /* ---------- Offer cards ---------- */
 .up-offer {
   margin-block: 10px;
@@ -595,6 +617,7 @@ html[data-theme="dark"] .up-offer { box-shadow: 0 0 0 1px var(--line); }
   border-radius: 16px;
   background: var(--surface-muted);
 }
+.up-article-figure.is-portrait { max-width: 480px; }
 .up-article-figure figcaption { margin-block-start: 8px; font-size: 0.8125rem; color: var(--muted); }
 .up-article .rv-body { grid-template-columns: minmax(0, 1fr); margin-block-start: 40px; }
 .up-article .rv-article { max-width: 68ch; }
