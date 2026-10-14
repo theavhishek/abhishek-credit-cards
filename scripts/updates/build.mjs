@@ -233,7 +233,7 @@ function buildArticle(item) {
   const byline = `By <strong>Abhishek Meena</strong>, ${item.updated ? `published <time datetime="${core.isoDate(item.published)}">${esc(longDate(item.published))}</time>, updated <time datetime="${core.isoDate(item.updated)}">${esc(longDate(item.updated))}</time>` : `published <time datetime="${core.isoDate(item.published)}">${esc(longDate(item.published))}</time>`}. About ${minutes} minute${minutes === 1 ? "" : "s"} to read.`;
 
   const figure = item.image
-    ? `<figure class="up-article-figure"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" width="${item.image.width}" height="${item.image.height}" fetchpriority="high"></figure>`
+    ? `<figure class="up-article-figure${item.image.height > item.image.width ? " is-portrait" : ""}"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" width="${item.image.width}" height="${item.image.height}" fetchpriority="high"></figure>`
     : "";
 
   const onSite = [];

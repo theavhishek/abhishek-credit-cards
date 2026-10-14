@@ -6,6 +6,8 @@ category: cashback
 published: 2026-10-14
 issuer: Punjab National Bank
 tags: [navratri, dussehra, festive offer, pnb]
+image: /assets/updates/pnb-navratri-dussehra-cashback-2026.jpg
+imageAlt: PNB Credit Card Navratri and Dussehra cashback campaign poster showing 10% cashback, a minimum order value of ₹9,999, maximum cashback of ₹1,500 and a campaign period of 11 to 20 October 2026
 offer:
   cap: ₹1,500 per card, once per campaign
   minSpend: At least 3 transactions of ₹9,999 each
