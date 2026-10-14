@@ -173,9 +173,6 @@
         ${bbpsRow(e)}
         ${notes}
         ${list}
-        <div class="py-foot">
-          <a class="py-help" href="/bank-support#${slug(bank)}">Payment not showing? ${esc(shortNames[bank] || bank)} support</a>
-        </div>
       </div>
     </details>`;
   }
