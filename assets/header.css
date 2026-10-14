@@ -234,6 +234,11 @@ html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
+  /* Mobile tab order only; keep the desktop navigation unchanged. */
+  html[data-theme] body.unified-navbar .topbar-links > .collection-link:nth-child(3) { order: 1; } /* Updates */
+  html[data-theme] body.unified-navbar .topbar-links > .collection-link:nth-child(2) { order: 2; } /* Reviews */
+  html[data-theme] body.unified-navbar .topbar-links > .collection-link:nth-child(1) { order: 3; } /* Cards */
+  html[data-theme] body.unified-navbar .topbar-links > .collection-link:nth-child(4) { order: 4; } /* Support */
   html[data-theme] body.unified-navbar .topbar-links .collection-link {
     flex-direction: column !important;
     gap: 3px !important;
