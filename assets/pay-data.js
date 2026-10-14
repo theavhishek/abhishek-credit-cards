@@ -283,9 +283,19 @@ window.PAY_METHODS = {
   "Equitas Small Finance Bank": {
     note: "Equitas publishes the IFSC for payments from other banks (ESFB0CCARDS), but not what to enter as the account number. Check your statement or call the bank before sending money this way.",
     methods: [
+      { kind: "upi", title: "Pay via UPI ID",
+        how: "In your UPI app, choose Pay to UPI ID and enter the full ID without spaces:",
+        fields: [{ label: "UPI ID", pattern: ["CC.", { ph: "registered mobile number" }, { ph: "last 6 card digits" }, "@equitas"],
+          keys: [["registered mobile number", "The 10-digit mobile number registered with your Equitas credit card."], ["last 6 card digits", "The final 6 digits of that credit card number, typed immediately after your mobile number."]] }],
+        verify: true, time: "Time not stated",
+        src: { label: "Equitas: Credit Card Payment Options", url: "https://equitas.bank.in/credit-card-payment-options/" }
+      },
       { kind: "app", title: "Equitas net banking, mobile banking or the Selfe app" }
     ],
-    sources: [{ label: "Equitas: Credit card MITC 2024 (PDF)", url: "https://equitas.bank.in/strapi-dev/uploads/MITC_Credit_Cards_Final_2024_86cd34552e.pdf" }]
+    sources: [
+      { label: "Equitas: Credit Card Payment Options", url: "https://equitas.bank.in/credit-card-payment-options/" },
+      { label: "Equitas: Credit card MITC 2024 (PDF)", url: "https://equitas.bank.in/strapi-dev/uploads/MITC_Credit_Cards_Final_2024_86cd34552e.pdf" }
+    ]
   },
 
   "AU Small Finance Bank": {
