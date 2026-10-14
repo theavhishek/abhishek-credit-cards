@@ -6,8 +6,17 @@
    - `time` is the bank's own wording, shortened. `speed` drives the chip colour:
      "fast" (instant or same day), "mid" (next working day), "slow" (2+ days), "" (not stated). */
 window.PAY_CHECKED = "2026-10-13";
+/* Banks live on Bharat Connect (BBPS), by the exact biller name shown in the biller list on 14 Oct 2026.
+   `by` marks a fintech card that has its own biller name. Amex, Equitas, Standard Chartered and Unity were not in that list. */
+window.PAY_BBPS_CHECKED = "2026-10-14";
+window.PAY_BBPS_OTHERS = [
+  "Bandhan Bank", "Bank of Maharashtra", "CUB", "DCB Bank", "Dhanlaxmi Bank", "ESAF Bank", "IDBI Bank", "IOB",
+  "J&K Bank", "Saraswat Co-operative Bank", "Suryoday Small Finance Bank", "Tamilnad Mercantile Bank",
+  "SLICE", { n: "SIB One", by: "OneCard" }
+];
 window.PAY_METHODS = {
   "Axis Bank": {
+    bbps: ["Axis Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT from another bank",
         fields: [
@@ -30,6 +39,7 @@ window.PAY_METHODS = {
   },
 
   "Kotak Mahindra Bank": {
+    bbps: ["Kotak Mahindra Bank Credit Card"],
     methods: [
       { kind: "imps", title: "IMPS or NEFT from another bank",
         fields: [
@@ -46,6 +56,7 @@ window.PAY_METHODS = {
   },
 
   "SBI Card": {
+    bbps: ["SBI Card"],
     caution: "NEFT and IMPS use different account numbers. Don’t use your card number for IMPS.",
     methods: [
       { kind: "imps", title: "IMPS from another bank",
@@ -74,6 +85,7 @@ window.PAY_METHODS = {
   },
 
   "IDFC FIRST Bank": {
+    bbps: ["IDFC FIRST Bank Credit Card"],
     methods: [
       { kind: "upi", title: "Pay to a UPI ID",
         how: "In a UPI-enabled banking app or the BHIM app, go to UPI › Send Money and pay to:",
@@ -94,6 +106,7 @@ window.PAY_METHODS = {
   },
 
   "ICICI Bank": {
+    bbps: ["ICICI Credit card"],
     methods: [
       { kind: "upi", title: "Pay to a UPI ID",
         how: "Pay to this UPI ID, or scan ICICI’s Scan to Pay QR. You don’t need an ICICI account.",
@@ -112,6 +125,7 @@ window.PAY_METHODS = {
   },
 
   "BOBCARD": {
+    bbps: ["BoB Credit Card", { n: "BOBCARD One Credit Card", by: "OneCard" }],
     note: "BOBCARD doesn’t publish NEFT or IMPS details on its website. Use the methods below, or the details printed on your statement.",
     methods: [
       { kind: "gateway", title: "InstaPay", how: "Pay by net banking, debit card or UPI on BOBCARD’s InstaPay page (BillDesk or Razorpay).", time: "Confirmed immediately", speed: "fast" },
@@ -123,6 +137,7 @@ window.PAY_METHODS = {
   },
 
   "YES BANK": {
+    bbps: ["Yes Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT, IMPS or RTGS from another bank",
         how: "Add your YES BANK credit card as a beneficiary.",
@@ -139,6 +154,7 @@ window.PAY_METHODS = {
   },
 
   "HDFC Bank": {
+    bbps: ["HDFC Credit Card", "HDFC Bank Pixel Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT, RTGS or IMPS from another bank",
         fields: [
@@ -156,6 +172,7 @@ window.PAY_METHODS = {
   },
 
   "Punjab National Bank": {
+    bbps: ["Punjab National Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT from another bank",
         fields: [
@@ -169,6 +186,7 @@ window.PAY_METHODS = {
   },
 
   "Indian Bank": {
+    bbps: ["Indian bank credit card", { n: "Indian Bank One Credit Card", by: "OneCard" }],
     caution: "The account number starts with the letters INBCC. Don’t send to your card number on its own.",
     methods: [
       { kind: "neft", title: "NEFT, RTGS or IMPS from another bank",
@@ -184,6 +202,7 @@ window.PAY_METHODS = {
   },
 
   "Bank of India": {
+    bbps: ["Bank of India Credit Card"],
     note: "Bank of India’s own pages give two different NEFT formats. Its English page says to use IFSC BKID0000101 with your card number as the account number. Another of its pages asks you to send money to a bank account and quote your card number as the reference. Until the bank confirms one, use the methods below or call 1800-220-229 before sending a NEFT.",
     methods: [
       { kind: "gateway", title: "BillDesk", how: "For direct billing cards: pay from another bank’s internet banking through BOI Online › Payment Services." },
@@ -197,6 +216,7 @@ window.PAY_METHODS = {
   },
 
   "Canara Bank": {
+    bbps: ["Canara Credit Card"],
     older: "From Canara Bank’s credit card policy for 2023–24, the newest document where the bank publishes these details.",
     methods: [
       { kind: "neft", title: "NEFT from another bank",
@@ -213,6 +233,7 @@ window.PAY_METHODS = {
   },
 
   "OneCard": {
+    bbps: [{ n: "CSB One Credit Card", by: "OneCard" }, { n: "Indian Bank One Credit Card", by: "OneCard" }, { n: "BOBCARD One Credit Card", by: "OneCard" }, { n: "SIB One Credit Card", by: "OneCard" }],
     caution: "Your NEFT and IMPS account number is unique to your card and only shown in the OneCard app. Never use one someone else shares.",
     methods: [
       { kind: "app", title: "OneCard app", how: "Pay by UPI from any UPI app, a debit card or net banking." },
@@ -223,6 +244,7 @@ window.PAY_METHODS = {
   },
 
   "RBL Bank": {
+    bbps: ["RBL Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT from another bank",
         fields: [
@@ -240,6 +262,7 @@ window.PAY_METHODS = {
   },
 
   "IndusInd Bank": {
+    bbps: ["IndusInd Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT, RTGS or IMPS from another bank",
         fields: [
@@ -266,6 +289,7 @@ window.PAY_METHODS = {
   },
 
   "AU Small Finance Bank": {
+    bbps: ["AU Bank Credit Card"],
     methods: [
       { kind: "upi", title: "Pay to a UPI ID",
         how: "In your UPI app, choose Pay to UPI ID and enter:",
@@ -279,6 +303,7 @@ window.PAY_METHODS = {
   },
 
   "HSBC India": {
+    bbps: ["HSBC Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT from another bank",
         fields: [
@@ -316,6 +341,7 @@ window.PAY_METHODS = {
   },
 
   "SBM Bank India": {
+    bbps: ["SBM Bank India Limited"],
     note: "SBM Bank India issues its cards with partner apps, and its website doesn’t publish a bank-wide way to pay. Pay in the partner app you applied through, or use the details printed on your statement.",
     methods: [],
     sources: [{ label: "SBM Bank India: Credit cards", url: "https://www.sbmbank.co.in/smart_banking/consumer-credit-cards.php" }]
@@ -330,6 +356,7 @@ window.PAY_METHODS = {
   },
 
   "CSB Bank": {
+    bbps: [{ n: "CSB One Credit Card", by: "OneCard" }, "Edge CSB Bank Credit Card"],
     note: "Most CSB credit cards are OneCards. Pay those in the OneCard app (see OneCard above). For other CSB cards, use the details printed on your statement.",
     methods: [],
     sources: [
@@ -339,6 +366,7 @@ window.PAY_METHODS = {
   },
 
   "Federal Bank": {
+    bbps: ["Federal Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT or IMPS",
         how: "Federal Bank describes this for FedMobile and FedNet. Add the card as a beneficiary:",
@@ -369,6 +397,7 @@ window.PAY_METHODS = {
   },
 
   "Union Bank of India": {
+    bbps: ["Union Bank of India Credit Card"],
     note: "Union Bank says you can pay from any bank by NEFT, IMPS or UPI, but doesn’t publish the account format. Use the UPI or bank details printed on your monthly statement.",
     methods: [
       { kind: "app", title: "Union Bank mobile or internet banking" },
@@ -379,6 +408,7 @@ window.PAY_METHODS = {
   },
 
   "DBS Bank": {
+    bbps: ["DBS Bank Credit Card"],
     methods: [
       { kind: "imps", title: "NEFT or IMPS from another bank",
         fields: [

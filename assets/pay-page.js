@@ -105,6 +105,19 @@
     return "Check your statement";
   }
 
+  const billerPill = b => {
+    const o = typeof b === "string" ? { n: b } : b;
+    return `<li class="py-biller"><span>${esc(o.n)}</span>${o.by ? `<small>${esc(o.by)} card</small>` : ""}</li>`;
+  };
+  const bbpsOthersHTML = () => (window.PAY_BBPS_OTHERS || []).map(billerPill).join("");
+  const bbpsRow = e => (e.bbps || []).length
+    ? `<div class="py-live-row">
+        <span class="py-live-icon" aria-hidden="true">${kindIcon.bbps}</span>
+        <div><p class="py-live-title">Live on Bharat Connect (BBPS)</p>
+        <p class="py-how">In PhonePe, Google Pay, CRED or any app’s credit card bills, search for ${(e.bbps).length > 1 ? "any of these" : "this"}:</p>
+        <ul class="py-billers">${e.bbps.map(billerPill).join("")}</ul></div>
+      </div>` : "";
+
   function bankCard(bank) {
     const e = DATA[bank] || {};
     const notes = [
@@ -117,10 +130,11 @@
     return `<details class="sp-bank py-bank" id="${slug(bank)}" data-bank="${esc(bank)}">
       <summary class="sp-bank-summary">
         ${logo(bank, "sp-bank-logo")}
-        <span class="sp-bank-name"><strong>${esc(bank)}</strong><span>${esc(summaryMeta(e))}</span></span>
+        <span class="sp-bank-name"><strong>${esc(bank)}</strong><span>${esc(summaryMeta(e))}</span>${(e.bbps || []).length ? '<span class="py-live">Live on BBPS</span>' : ""}</span>
         ${chevron}
       </summary>
       <div class="sp-bank-body py-body">
+        ${bbpsRow(e)}
         ${notes}
         ${list}
         <div class="py-foot">
@@ -137,7 +151,7 @@
   const listHTML = (subset = banks) => subset.map(bankCard).join("");
 
   if (isNode) {
-    module.exports = { pickerHTML, listHTML, banks };
+    module.exports = { pickerHTML, listHTML, banks, bbpsOthersHTML };
     return;
   }
 
