@@ -90,7 +90,7 @@
 
   const timeChip = m => m.time
     ? `<p class="py-time${m.speed ? ` is-${m.speed}` : ""}">${clock}<span>${esc(m.time)}</span></p>` : "";
-  const extras = m => `${m.note ? `<p class="py-note">${info}<span>${esc(m.note)}</span></p>` : ""}${m.verify ? `<p class="py-verify">${warn}<span>${esc(VERIFY)}</span></p>` : ""}${m.src ? `<p class="py-source"><a href="${esc(m.src.url)}" target="_blank" rel="noopener noreferrer">Official source: ${esc(m.src.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a></p>` : ""}`;
+  const extras = m => `${m.note ? `<p class="py-note">${info}<span>${esc(m.note)}</span></p>` : ""}${m.verify ? `<p class="py-verify">${warn}<span>${esc(VERIFY)}</span></p>` : ""}`;
 
   function method(m, bank, hit) {
     const fields = `<dl class="py-fields">${m.fields.map(f => `<div class="py-field"><dt>${esc(f.label)}</dt><dd>${fieldValue(f, bank)}</dd></div>`).join("")}</dl>`;
@@ -162,7 +162,6 @@
     const detail = ordered.filter(hasFields), ways = ordered.filter(m => !hasFields(m));
     const list = (detail.length ? `<ul class="py-methods">${detail.map(m => method(m, bank, hit(m))).join("")}</ul>` : "")
       + (ways.length ? `<ul class="py-ways">${ways.map(m => way(m, hit(m))).join("")}</ul>` : "");
-    const sources = (e.sources || []).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a>`).join("");
     const line = kinds.length ? preview(e, kinds[0]) : "";
     return `<details class="sp-bank py-bank" id="${slug(bank)}" data-bank="${esc(bank)}">
       <summary class="sp-bank-summary">
@@ -175,11 +174,23 @@
         ${notes}
         ${list}
         <div class="py-foot">
-          <p class="py-source"><span>Source, checked ${esc(fmtDate(CHECKED))}:</span> ${sources}</p>
           <a class="py-help" href="/bank-support#${slug(bank)}">Payment not showing? ${esc(shortNames[bank] || bank)} support</a>
         </div>
       </div>
     </details>`;
+  }
+
+  /* Every official source, once, for the bottom of the page. */
+  function sourcesHTML() {
+    const rows = banks.map(bank => {
+      const e = DATA[bank] || {};
+      const seen = new Set();
+      const links = [...(e.sources || []), ...(e.methods || []).map(m => m.src).filter(Boolean)]
+        .filter(l => !seen.has(l.url) && seen.add(l.url));
+      if (!links.length) return "";
+      return `<li id="src-${slug(bank).slice(5)}"><strong>${esc(bank)}</strong><span>${links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a>`).join("")}</span></li>`;
+    });
+    return rows.join("");
   }
 
   const pickerHTML = () => banks.map(bank => `<li><a class="sp-pick" href="#${slug(bank)}" data-bank="${esc(bank)}">
@@ -188,7 +199,7 @@
   const listHTML = (subset = banks, kinds = []) => subset.map(b => bankCard(b, kinds)).join("");
 
   if (isNode) {
-    module.exports = { pickerHTML, listHTML, banks, bbpsOthersHTML };
+    module.exports = { pickerHTML, listHTML, banks, bbpsOthersHTML, sourcesHTML };
     return;
   }
 
