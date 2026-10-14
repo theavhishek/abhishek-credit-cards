@@ -281,6 +281,7 @@ window.PAY_METHODS = {
   },
 
   "Equitas Small Finance Bank": {
+    checked: "2026-10-14",
     note: "Equitas publishes the IFSC for payments from other banks (ESFB0CCARDS), but not what to enter as the account number. Check your statement or call the bank before sending money this way.",
     methods: [
       { kind: "upi", title: "Pay via UPI ID",
