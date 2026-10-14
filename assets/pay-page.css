@@ -235,7 +235,8 @@ html[data-theme="dark"] .py {
   font-weight: 600;
   line-height: 1.5;
 }
-.sp-bank-name .py-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fc6e20; }
+.sp-bank-name .py-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #16a34a; }
+html[data-theme="dark"] .sp-bank-name .py-live::before { background: #4ade80; }
 .sp-bank-name .py-preview {
   font-family: var(--site-mono);
   font-size: 0.8125rem;
