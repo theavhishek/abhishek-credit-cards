@@ -80,22 +80,56 @@
     return `<span class="py-text">${esc(f.text)}</span>`;
   }
 
-  function method(m, bank) {
-    const fields = (m.fields || []).length
-      ? `<dl class="py-fields">${m.fields.map(f => `<div class="py-field"><dt>${esc(f.label)}</dt><dd>${fieldValue(f, bank)}</dd></div>`).join("")}</dl>` : "";
-    const time = m.time
-      ? `<p class="py-time${m.speed ? ` is-${m.speed}` : ""}">${clock}<span>${esc(m.time)}</span></p>` : "";
-    const wide = (m.fields || []).length ? " is-wide" : "";
-    return `<li class="py-method py-kind-${esc(m.kind)}${wide}">
+  const NEG = /doesn.t publish|doesn.t take|not accepted/i;
+  const KEYWORDS = ["upi", "imps", "neft", "bbps"];
+  const hasFields = m => (m.fields || []).length > 0;
+  /* A method matches a keyword by its kind, or by naming it in its title or text (unless it says it isn't offered). */
+  const methodMatches = (m, k) => m.kind === k
+    || (new RegExp("\\b" + k + "\\b", "i").test(`${m.title} ${m.how || ""}`) && !NEG.test(m.how || ""));
+  const bankMatches = (e, k) => (k === "bbps" && (e.bbps || []).length > 0) || (e.methods || []).some(m => methodMatches(m, k));
+
+  const timeChip = m => m.time
+    ? `<p class="py-time${m.speed ? ` is-${m.speed}` : ""}">${clock}<span>${esc(m.time)}</span></p>` : "";
+  const extras = m => `${m.note ? `<p class="py-note">${info}<span>${esc(m.note)}</span></p>` : ""}${m.verify ? `<p class="py-verify">${warn}<span>${esc(VERIFY)}</span></p>` : ""}${m.src ? `<p class="py-source"><a href="${esc(m.src.url)}" target="_blank" rel="noopener noreferrer">Official source: ${esc(m.src.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a></p>` : ""}`;
+
+  function method(m, bank, hit) {
+    const fields = `<dl class="py-fields">${m.fields.map(f => `<div class="py-field"><dt>${esc(f.label)}</dt><dd>${fieldValue(f, bank)}</dd></div>`).join("")}</dl>`;
+    return `<li class="py-method py-kind-${esc(m.kind)}${hit ? " is-match" : ""}">
       <div class="py-method-head">
         <span class="py-kind" aria-hidden="true">${kindIcon[m.kind] || kindIcon.other}</span>
         <h3 class="py-method-title">${esc(m.title)}</h3>
+        ${timeChip(m)}
       </div>
       ${m.how ? `<p class="py-how">${esc(m.how)}</p>` : ""}
-      ${fields}${m.note ? `<p class="py-callout">${info}<span>${esc(m.note)}</span></p>` : ""}${m.verify ? `<p class="py-callout is-caution">${warn}<span>${esc(VERIFY)}</span></p>` : ""}
-      ${time}${m.src ? `<p class="py-source"><a href="${esc(m.src.url)}" target="_blank" rel="noopener noreferrer">Official source: ${esc(m.src.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a></p>` : ""}
+      ${fields}${extras(m)}
     </li>`;
   }
+
+  function way(m, hit) {
+    return `<li class="py-way py-kind-${esc(m.kind)}${hit ? " is-match" : ""}">
+      <span class="py-kind" aria-hidden="true">${kindIcon[m.kind] || kindIcon.other}</span>
+      <div class="py-way-main">
+        <h3 class="py-method-title">${esc(m.title)}</h3>
+        ${m.how ? `<p class="py-how">${esc(m.how)}</p>` : ""}
+        ${extras(m)}
+      </div>
+      ${timeChip(m)}
+    </li>`;
+  }
+
+  /* The one line of detail shown in a search result: the UPI ID format, the IFSC, or the method name. */
+  function preview(e, k) {
+    if (k === "bbps") return (e.bbps || []).map(b => typeof b === "string" ? b : b.n).join(" · ");
+    const m = (e.methods || []).find(x => methodMatches(x, k) && hasFields(x)) || (e.methods || []).find(x => methodMatches(x, k));
+    if (!m) return "";
+    const want = k === "upi" ? /upi/i : /ifsc/i;
+    const f = (m.fields || []).find(x => want.test(x.label)) || (m.fields || [])[0];
+    if (f && f.pattern) return `${f.label}: ` + f.pattern.map(x => typeof x === "string" ? x : `‹${x.ph}›`).join("");
+    if (f && f.value) return `${f.label}: ${f.value}`;
+    const t = m.how ? `${m.title}: ${m.how}` : m.title;
+    return t.length > 120 ? t.slice(0, 117).replace(/\s+\S*$/, "") + "…" : t;
+  }
+  const detailed = (e, k) => k === "bbps" || (e.methods || []).some(m => methodMatches(m, k) && hasFields(m));
 
   function summaryMeta(entry) {
     const kinds = [...new Set((entry.methods || []).map(m => m.kind))];
@@ -112,25 +146,28 @@
   const bbpsOthersHTML = () => (window.PAY_BBPS_OTHERS || []).map(billerPill).join("");
   const bbpsRow = e => (e.bbps || []).length
     ? `<div class="py-live-row">
-        <span class="py-live-icon" aria-hidden="true">${kindIcon.bbps}</span>
-        <div><p class="py-live-title">Live on Bharat Connect (BBPS)</p>
-        <p class="py-how">In PhonePe, Google Pay, CRED or any app’s credit card bills, search for ${(e.bbps).length > 1 ? "any of these" : "this"}:</p>
-        <ul class="py-billers">${e.bbps.map(billerPill).join("")}</ul></div>
+        <p class="py-live-title"><span class="py-live-icon" aria-hidden="true">${kindIcon.bbps}</span><strong>Live on BBPS</strong><span>Search for ${(e.bbps).length > 1 ? "any of these" : "this"} in PhonePe, Google Pay or CRED</span></p>
+        <ul class="py-billers">${e.bbps.map(billerPill).join("")}</ul>
       </div>` : "";
 
-  function bankCard(bank) {
+  function bankCard(bank, kinds = []) {
     const e = DATA[bank] || {};
     const notes = [
       e.caution ? `<p class="py-callout is-caution">${warn}<span>${esc(e.caution)}</span></p>` : "",
-      e.note ? `<p class="py-callout">${info}<span>${esc(e.note)}</span></p>` : "",
+      e.note ? `<p class="py-note">${info}<span>${esc(e.note)}</span></p>` : "",
       e.older ? `<p class="py-older">${esc(e.older)}</p>` : ""
     ].join("");
-    const list = (e.methods || []).length ? `<ul class="py-methods">${e.methods.map(m => method(m, bank)).join("")}</ul>` : "";
+    const hit = m => kinds.length > 0 && kinds.every(k => methodMatches(m, k));
+    const ordered = [...(e.methods || [])].sort((x, y) => hit(y) - hit(x));
+    const detail = ordered.filter(hasFields), ways = ordered.filter(m => !hasFields(m));
+    const list = (detail.length ? `<ul class="py-methods">${detail.map(m => method(m, bank, hit(m))).join("")}</ul>` : "")
+      + (ways.length ? `<ul class="py-ways">${ways.map(m => way(m, hit(m))).join("")}</ul>` : "");
     const sources = (e.sources || []).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.label)}${external}<span class="sr-only"> (opens in a new tab)</span></a>`).join("");
+    const line = kinds.length ? preview(e, kinds[0]) : "";
     return `<details class="sp-bank py-bank" id="${slug(bank)}" data-bank="${esc(bank)}">
       <summary class="sp-bank-summary">
         ${logo(bank, "sp-bank-logo")}
-        <span class="sp-bank-name"><strong>${esc(bank)}</strong><span>${esc(summaryMeta(e))}</span>${(e.bbps || []).length ? '<span class="py-live">Live on BBPS</span>' : ""}</span>
+        <span class="sp-bank-name"><strong>${esc(bank)}</strong>${line ? `<span class="py-preview">${esc(line)}</span>` : `<span class="py-meta"><span>${esc(summaryMeta(e))}</span>${(e.bbps || []).length ? '<span class="py-live">Live on BBPS</span>' : ""}</span>`}</span>
         ${chevron}
       </summary>
       <div class="sp-bank-body py-body">
@@ -138,7 +175,7 @@
         ${notes}
         ${list}
         <div class="py-foot">
-          <p class="py-source"><span>Source, checked ${esc(fmtDate(e.checked || CHECKED))}:</span> ${sources}</p>
+          <p class="py-source"><span>Source, checked ${esc(fmtDate(CHECKED))}:</span> ${sources}</p>
           <a class="py-help" href="/bank-support#${slug(bank)}">Payment not showing? ${esc(shortNames[bank] || bank)} support</a>
         </div>
       </div>
@@ -148,7 +185,7 @@
   const pickerHTML = () => banks.map(bank => `<li><a class="sp-pick" href="#${slug(bank)}" data-bank="${esc(bank)}">
         ${logo(bank, "sp-pick-logo")}<span class="sp-pick-name">${esc(shortNames[bank] || bank)}</span>
       </a></li>`).join("");
-  const listHTML = (subset = banks) => subset.map(bankCard).join("");
+  const listHTML = (subset = banks, kinds = []) => subset.map(b => bankCard(b, kinds)).join("");
 
   if (isNode) {
     module.exports = { pickerHTML, listHTML, banks, bbpsOthersHTML };
@@ -179,16 +216,24 @@
 
   const norm = s => s.toLowerCase().replace(/\s+/g, " ");
   const haystack = Object.fromEntries(banks.map(b => [b, norm(`${b} ${shortNames[b] || ""} ${JSON.stringify(DATA[b] || {})}`)]));
-  const matches = (bank, q) => !q || q.split(" ").every(t => haystack[bank].includes(t));
+  const parse = q => {
+    const tokens = q.split(" ").filter(Boolean);
+    return { kinds: tokens.filter(t => KEYWORDS.includes(t)), words: tokens.filter(t => !KEYWORDS.includes(t)) };
+  };
+  const matches = (bank, { kinds, words }) => kinds.every(k => bankMatches(DATA[bank] || {}, k)) && words.every(t => haystack[bank].includes(t));
+  const chips = [...document.querySelectorAll(".py-fchip")];
 
   function render() {
     const q = norm((search?.value || "").trim());
-    const shown = banks.filter(b => matches(b, q));
-    list.innerHTML = listHTML(shown);
-    const autoOpen = q && shown.length <= 2;
+    const parsed = parse(q);
+    const shown = banks.filter(b => matches(b, parsed));
+    if (parsed.kinds.length) shown.sort((x, y) => detailed(DATA[y], parsed.kinds[0]) - detailed(DATA[x], parsed.kinds[0]));
+    list.innerHTML = listHTML(shown, parsed.kinds);
+    const autoOpen = q && shown.length <= 3;
     list.querySelectorAll(".sp-bank").forEach(card => { card.open = autoOpen || open.has(card.dataset.bank); });
     if (count) count.textContent = q ? `${shown.length} of ${banks.length} banks` : `${banks.length} banks`;
     if (empty) empty.hidden = shown.length > 0;
+    chips.forEach(c => c.setAttribute("aria-pressed", String(q === c.dataset.q)));
     attachLogoFallbacks(list);
   }
 
@@ -204,6 +249,10 @@
     search.value = readQuery();
     search.addEventListener("input", () => { writeQuery(search.value.trim()); render(); });
   }
+  chips.forEach(c => c.addEventListener("click", () => {
+    const next = search.value.trim().toLowerCase() === c.dataset.q ? "" : c.dataset.q;
+    search.value = next; writeQuery(next); render();
+  }));
   if (search?.value) render(); else attachLogoFallbacks(list);
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
