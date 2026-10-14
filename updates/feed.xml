@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Avhishek: credit card news and offers</title>
+    <link>https://avhishek.in/updates</link>
+    <description>Indian credit card news, devaluations, bank changes and offers, each linked to its source.</description>
+    <language>en-in</language>
+    <atom:link href="https://avhishek.in/updates/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Mon, 12 Oct 2026 18:30:00 GMT</lastBuildDate>
+    <item>
+      <title>Eternal SBI Card reported with 10% off on Zomato, Blinkit and District</title>
+      <link>https://avhishek.in/updates#eternal-sbi-card-reported</link>
+      <guid isPermaLink="false">https://avhishek.in/updates#eternal-sbi-card-reported</guid>
+      <pubDate>Mon, 12 Oct 2026 18:30:00 GMT</pubDate>
+      <category>Card launch</category>
+      <description>SBI Card is reportedly preparing a co-branded card with Eternal. Early material shows 10% off on Zomato, District and non-grocery Blinkit orders; fees, caps and the launch date aren’t confirmed. (Reported)</description>
+    </item>
+    <item>
+      <title>Slice Business Credit Card launches in December 2026</title>
+      <link>https://avhishek.in/updates#slice-business-credit-card-launch</link>
+      <guid isPermaLink="false">https://avhishek.in/updates#slice-business-credit-card-launch</guid>
+      <pubDate>Mon, 12 Oct 2026 18:30:00 GMT</pubDate>
+      <category>Card launch</category>
+      <description>Slice’s business card for sole proprietors is due in December 2026. Pre-launch material promises no annual fee, up to 2% cashback and zero forex markup; the full terms aren’t out yet.</description>
+    </item>
+  </channel>
+</rss>

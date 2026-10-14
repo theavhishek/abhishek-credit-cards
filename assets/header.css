@@ -3,8 +3,8 @@
    Loaded last, so it replaces the older navbar rules in site.css,
    responsive.css, portrait-hero.css, unified-navbar.css and typography.css.
 
-   Wide screens: a pinned bar with the wordmark, three links and the theme switch.
-   Phones (≤ 640px): the bar keeps the wordmark and switch; the three links move
+   Wide screens: a pinned bar with the wordmark, four links and the theme switch.
+   Phones (≤ 640px): the bar keeps the wordmark and switch; the four links move
    to a floating tab bar at the bottom of the screen, within thumb reach.
    ========================================================================== */
 
@@ -251,8 +251,13 @@ html[data-theme] body.unified-navbar .topbar-actions .plane-switch::before {
 
 }
 
+/* Four tabs: narrow them on small phones so the bar never overflows. */
+@media (max-width: 400px) {
+  html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 76px !important; }
+}
 @media (max-width: 340px) {
-  html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 78px !important; }
+  html[data-theme] body.unified-navbar .topbar-links { gap: 2px; padding: 4px; }
+  html[data-theme] body.unified-navbar .topbar-links .collection-link { width: 68px !important; }
 }
 
 /* ---------- Press feedback and preferences ---------- */

@@ -20,9 +20,11 @@ avhishek.in: Abhishek Meena's personal credit-card site (portfolio, card reviews
   - `support.html` → `/bank-support`
   - `pay-credit-card-bill.html`, `card-reviews.html`, `disclaimer.html`, `404.html`
   - `card-reviews/<slug>.html` → individual reviews
+  - `updates.html` → `/updates` (news and offers), plus generated `updates/<slug>.html`, `updates/archive.html` and `updates/feed.xml`
 - Routing, redirects and security headers live in `vercel.json` (`cleanUrls`, host-based rewrites). `_headers` and `CNAME` are leftovers that Vercel ignores; don't rely on them.
 - Data lives in plain JS globals: `window.PORTFOLIO_DATA` (`assets/data.js`), `window.SUPPORT_CONTACTS` (`support-data.js`), `window.PAY_METHODS` (`pay-data.js`, with its sourcing rules in the file header).
-- The only compiled piece is the card-reviews grid: React 19 + motion in `src/`, bundled by `pnpm build:reviews` into `assets/card-reviews-react.js`. The bundle is committed; rebuild and commit it whenever `src/` changes. Review list data is in `src/card-reviews/blog-grid-data.ts`.
+- News and offers: one Markdown file per item in `content/updates/`. `pnpm build:updates` validates them and writes the generated files, which are committed (Vercel has no build step). Status, filters and card markup live in `assets/updates-core.js`, shared by the build and the browser. Full guide: `docs/publishing-updates.md`.
+- The only other compiled piece is the card-reviews grid: React 19 + motion in `src/`, bundled by `pnpm build:reviews` into `assets/card-reviews-react.js`. The bundle is committed; rebuild and commit it whenever `src/` changes. Review list data is in `src/card-reviews/blog-grid-data.ts`.
 
 ## Design system
 
@@ -36,6 +38,7 @@ avhishek.in: Abhishek Meena's personal credit-card site (portfolio, card reviews
 ## Working conventions
 
 - Cache busting: asset URLs carry `?v=N`. When you edit a CSS/JS file, bump its `?v=` in every page that loads it.
-- Header/footer markup is duplicated in each HTML page; a nav or footer change must be applied to every page.
+- Header/footer markup is duplicated in each HTML page; a nav or footer change must be applied to every page, and to `scripts/updates/templates/page.html` (then run `pnpm build:updates`).
+- Publishing an update: add or edit `content/updates/<slug>.md`, run `pnpm build:updates` and `pnpm test:updates`, commit the Markdown and generated files. Never invent a rate, cap, date, code or link; an offer without `verified` and an end date never shows as active. Sample data lives in `content/updates/_fixtures/` and only appears in `pnpm preview:updates`.
 - New pages or reviews: add to `sitemap.xml`, include JSON-LD, OG image in `assets/og/`, and (for reviews) an entry in `blog-grid-data.ts` plus rebuilt bundle.
 - Local preview: `pnpm dev` (port 3000). Note it serves the portfolio at `/`, unlike production. Check pages in both themes and at phone width before opening a PR.

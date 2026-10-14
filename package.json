@@ -3,6 +3,10 @@
   "private": true,
   "scripts": {
     "dev": "node preview-server.mjs",
+    "build:updates": "node scripts/updates/build.mjs",
+    "check:updates": "node scripts/updates/build.mjs --check",
+    "preview:updates": "node scripts/updates/build.mjs --preview && PREVIEW_ROOT=.preview node preview-server.mjs",
+    "test:updates": "node --test scripts/updates/updates.test.mjs",
     "build:reviews": "esbuild src/card-reviews-entry.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=assets/card-reviews-react.js"
   },
   "dependencies": {
