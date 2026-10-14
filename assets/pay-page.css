@@ -269,18 +269,19 @@ html[data-theme="dark"] .py {
 .py-biller small { color: var(--muted); font-size: 0.75rem; font-weight: 500; }
 
 /* ---------- Method filter chips ---------- */
-.py-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -4px 0 16px; }
+.py-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 12px 0 18px; }
 .py-filters-label { color: var(--muted); font-size: 0.875rem; margin-inline-end: 4px; }
 .py-fchip {
   min-height: 36px;
-  padding: 0 14px;
+  padding: 0 12px;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
   color: var(--text);
   font: inherit;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
+  line-height: 1.2;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background 160ms var(--ease), border-color 160ms var(--ease), color 160ms var(--ease);
@@ -311,6 +312,8 @@ html[data-theme="dark"] .py {
 .py-bbps strong { color: var(--text); font-weight: 600; }
 .py-bbps h3 { margin-top: 8px; font-size: 0.9375rem; font-weight: 650; }
 .py-fine { max-width: 70ch; margin-top: 32px !important; color: var(--muted); font-size: 0.8125rem; line-height: 1.6; }
+/* Separate the safety disclaimer from the channel follow panel. */
+.py .py-fine + .py-follow { margin-block-start: 32px; }
 
 /* ---------- Layout ---------- */
 @media (min-width: 720px) {
