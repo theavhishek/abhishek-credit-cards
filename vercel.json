@@ -103,6 +103,28 @@
       "permanent": true
     },
     {
+      "source": "/updates",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/updates",
+      "permanent": true
+    },
+    {
+      "source": "/updates/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/updates/:path*",
+      "permanent": true
+    },
+    {
       "source": "/disclaimer",
       "has": [
         {

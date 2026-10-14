@@ -5,6 +5,9 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
+// `pnpm preview:updates` sets PREVIEW_ROOT=.preview: files built there (with
+// sample fixtures) win over the repo copies.
+const PREVIEW_ROOT = process.env.PREVIEW_ROOT ? path.resolve(__dirname, process.env.PREVIEW_ROOT) : null;
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -40,6 +43,8 @@ const server = http.createServer((req, res) => {
     pathname = "/card-reviews.html";
   } else if (pathname === "/bank-support" || pathname === "/support") {
     pathname = "/support.html";
+  } else if (pathname === "/updates") {
+    pathname = "/updates.html";
   } else if (pathname === "/disclaimer") {
     pathname = "/disclaimer.html";
   } else if (pathname === "/coming-soon") {
@@ -47,6 +52,12 @@ const server = http.createServer((req, res) => {
   }
 
   let filePath = path.join(__dirname, pathname);
+  if (PREVIEW_ROOT) {
+    const previewPath = path.join(PREVIEW_ROOT, pathname);
+    const candidates = [previewPath, previewPath + ".html"];
+    const hit = candidates.find((c) => fs.existsSync(c) && fs.statSync(c).isFile());
+    if (hit) filePath = hit;
+  }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
     filePath = path.join(filePath, "index.html");
