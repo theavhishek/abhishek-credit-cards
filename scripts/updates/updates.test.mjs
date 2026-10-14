@@ -112,6 +112,17 @@ test("filters: default view hides ended and unverified offers", () => {
   assert.equal(pick({ view: "all", cat: "devaluation" }), "n");
 });
 
+test("feed cards show the item's image beside the headline", () => {
+  const item = { slug: "x", type: "news", title: "T", summary: "S", category: "banking", published: "2026-10-14", confirmation: "official",
+    image: { src: "/assets/updates/x.jpg", thumb: "/assets/updates/x-thumb.webp", width: 1024, height: 1536, alt: "Poster" } };
+  const html = core.renderItem(item);
+  assert.match(html, /class="up-item up-news has-thumb"/);
+  assert.match(html, /<span class="up-thumb is-portrait" aria-hidden="true"><img src="\/assets\/updates\/x-thumb.webp" alt=""/);
+  assert.match(html, /<div class="up-item-head">.*<h3 class="up-title">T<\/h3><\/div><div class="up-item-body"><p class="up-summary">S<\/p>/);
+  delete item.image;
+  assert.doesNotMatch(core.renderItem(item), /up-thumb|up-item-head/);
+});
+
 test("the repo's content is valid", () => {
   const { errors } = loadItems();
   assert.deepEqual(errors, []);

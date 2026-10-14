@@ -78,7 +78,7 @@ const publicItem = (item) => {
   const out = {
     slug: item.slug, type: item.type, title: item.title, summary: item.summary, category: item.category,
     published: item.published, updated: item.updated, issuer: item.issuer, merchant: item.merchant,
-    cards: item.cards, tags: item.tags, confirmation: item.confirmation,
+    cards: item.cards, tags: item.tags, confirmation: item.confirmation, image: item.image,
     sources: item.sources, link: item.link, page: item.page, archived: item.archived, offer: item.offer,
   };
   if (item.fixture) out.fixture = true;
