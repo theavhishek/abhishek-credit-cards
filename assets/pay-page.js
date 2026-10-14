@@ -138,7 +138,7 @@
         ${notes}
         ${list}
         <div class="py-foot">
-          <p class="py-source"><span>Source, checked ${esc(fmtDate(CHECKED))}:</span> ${sources}</p>
+          <p class="py-source"><span>Source, checked ${esc(fmtDate(e.checked || CHECKED))}:</span> ${sources}</p>
           <a class="py-help" href="/bank-support#${slug(bank)}">Payment not showing? ${esc(shortNames[bank] || bank)} support</a>
         </div>
       </div>
