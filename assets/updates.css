@@ -316,10 +316,10 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
 }
 .up-title {
   margin-block-start: 8px !important;
-  font-size: 1.25rem;
-  font-weight: 650;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
   text-wrap: balance;
 }
 .up-title a {
@@ -332,8 +332,8 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
 @media (hover: hover) { .up-title a:hover { text-decoration-color: var(--up-brand); } }
 .up-summary {
   max-width: 64ch;
-  margin-block-start: 6px !important;
-  font-size: 1rem;
+  margin-block-start: 8px !important;
+  font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--muted);
   text-wrap: pretty;
@@ -471,10 +471,62 @@ html[data-theme="dark"] .up-offer { box-shadow: 0 0 0 1px var(--line); }
   letter-spacing: -0.025em;
   font-variant-numeric: tabular-nums;
 }
-.up-offer-value + .up-title { margin-block-start: 4px !important; }
-.up-offer .up-title { font-size: 1.125rem; }
+/* In the feed the headline figure leads; the title under it steps down a size. */
+.up-item .up-offer-value { font-size: 2rem; }
+.up-offer-value + .up-title { margin-block-start: 6px !important; font-size: 1.25rem; }
 .up-offer[data-status="expired"] :is(.up-offer-value, .up-title) { color: var(--muted); }
 .up-offer[data-status="expired"] .up-offer-value { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--line-strong); }
+
+/* ---------- Item image ---------- */
+/* Image on the left; the head (labels and title) sits beside it. On wide
+   screens the body continues beside it too, on phones it runs full width. */
+.up-item.has-thumb {
+  --up-thumb: 168px;
+  display: grid;
+  grid-template-columns: var(--up-thumb) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 20px;
+  align-items: start;
+}
+.up-item.has-thumb.up-offer { --up-thumb: 184px; }
+.up-thumb { grid-row: 1 / span 2; display: block; }
+.up-thumb.is-landscape { --up-thumb-ratio: 4 / 3; }
+.up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 200px; }
+.up-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--up-thumb-ratio, auto);
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--up-fill);
+  box-shadow: 0 0 0 1px var(--line);
+}
+a.up-thumb img { transition: opacity 150ms ease-out; }
+@media (hover: hover) { a.up-thumb:hover img { opacity: 0.88; } }
+.up-item.has-thumb .up-item-top { padding-inline-end: 44px; }
+.up-item-head .up-item-top:first-child { margin-block-start: 0; }
+.up-offer[data-status="expired"] .up-thumb img { filter: grayscale(1); opacity: 0.7; }
+/* Narrow cards (phones, and beside the sidebar on laptops): smaller image
+   beside the head only, with the rest of the card at full width. */
+.up-day-items > li { container-type: inline-size; }
+@container (max-width: 560px) {
+  .up-item.has-thumb,
+  .up-item.has-thumb.up-offer { --up-thumb: 116px; column-gap: 16px; grid-template-rows: auto; }
+  .up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 136px; }
+  .up-thumb { grid-row: 1; }
+  .up-item.has-thumb .up-item-body { grid-column: 1 / -1; }
+}
+@container (max-width: 400px) {
+  .up-item.has-thumb,
+  .up-item.has-thumb.up-offer { --up-thumb: 92px; column-gap: 14px; }
+  .up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 108px; }
+  .up-item.has-thumb .up-item-top { padding-inline-end: 36px; }
+}
+@container (max-width: 300px) {
+  .up-item.has-thumb,
+  .up-item.has-thumb.up-offer { --up-thumb: 76px; column-gap: 12px; }
+}
 
 .up-terms {
   display: grid;
@@ -682,7 +734,11 @@ html[data-theme="dark"] .up-offer { box-shadow: 0 0 0 1px var(--line); }
   .up-tab { flex: 1; padding-inline: 8px; }
   .up-offer { padding: 16px 16px 18px; margin-inline: -4px; }
   .up-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
-  .up-title { font-size: 1.125rem; }
+  .up-title { font-size: 1.25rem; line-height: 1.25; }
+  .up-summary { font-size: 0.9375rem; }
+  .up-item.has-thumb .up-title { font-size: 1.1875rem; }
+  .up-item .up-offer-value { font-size: 1.75rem; }
+  .up-offer-value + .up-title { font-size: 1.125rem; }
 }
 @media (max-width: 340px) {
   .up-terms { grid-template-columns: minmax(0, 1fr); }

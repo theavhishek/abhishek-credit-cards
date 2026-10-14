@@ -380,7 +380,12 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
         else {
           const size = imageSize(abs);
           if (!size) fail(`Couldn't read the size of ${d.image}; use JPEG, PNG or WebP.`);
-          else image = { src: d.image, ...size, alt: d.imageAlt || "" };
+          else {
+            image = { src: d.image, ...size, alt: d.imageAlt || "" };
+            // Optional smaller copy for the feed: <name>-thumb.webp next to the image.
+            const thumb = d.image.replace(/\.[a-z]+$/i, "-thumb.webp");
+            if (thumb !== d.image && fs.existsSync(path.join(ROOT, thumb))) image.thumb = thumb;
+          }
         }
         if (!d.imageAlt) fail(`"imageAlt" is required when there's an image (describe what it shows).`);
       }

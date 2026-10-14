@@ -63,7 +63,7 @@ tags: [smartbuy, reward points]            # optional extra search words
 confirmation: official          # news only: official, reported or unconfirmed
 link: /card-reviews/hsbc-live-plus         # optional: a related page on this site
 related: [another-update-file-name]        # optional: pin related updates
-image: /assets/updates/infinia.webp        # optional, with imageAlt
+image: /assets/updates/infinia.webp        # optional, with imageAlt; shown on the feed card and the article
 imageAlt: What the image shows
 page: true                      # optional; see "Feed item or full article"
 archived: false                 # optional; true moves old news to the archive
@@ -98,6 +98,17 @@ News: `launch`, `devaluation`, `banking`, `regulatory` (RBI and regulation),
 
 Offers: `card-offer`, `gift-card`, `cashback`, `shopping`, `travel`,
 `limited` (limited-time promotions).
+
+### Images
+
+An image makes an item easier to spot when people scan the feed: it appears
+beside the headline on the feed card and at the top of the article. Use the
+bank's or merchant's own poster or a picture you made; never a stock photo.
+Items without an image simply show no picture.
+
+Put the file in `assets/updates/`. For a faster feed, also add a small copy
+named `<same-name>-thumb.webp` (about 336 px wide). The build uses it on the
+feed card when it exists, and the full image everywhere else.
 
 ## How offer status works
 

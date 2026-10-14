@@ -237,6 +237,27 @@
     return "<h" + level + ' class="up-title">' + inner + "</h" + level + ">";
   }
 
+  // The item's image beside the headline, so the feed can be scanned. The title
+  // and summary carry the same facts, so the image is hidden from screen readers.
+  function renderThumb(item) {
+    var img = item.image;
+    if (!img || !img.src) return "";
+    var shape = img.height > img.width ? "is-portrait" : "is-landscape";
+    var tag = '<img src="' + esc(img.thumb || img.src) + '" alt="" width="' + Number(img.width) + '" height="' + Number(img.height) + '" loading="lazy" decoding="async">';
+    var href = itemHref(item);
+    return href
+      ? '<a class="up-thumb ' + shape + '" href="' + esc(href) + '"' + linkAttrs(href) + ' tabindex="-1" aria-hidden="true">' + tag + "</a>"
+      : '<span class="up-thumb ' + shape + '" aria-hidden="true">' + tag + "</span>";
+  }
+
+  // With an image, the card is split into a head (beside the image) and a body.
+  function withThumb(item, head, body) {
+    var thumb = renderThumb(item);
+    return thumb
+      ? thumb + '<div class="up-item-head">' + head + '</div><div class="up-item-body">' + body + "</div>"
+      : head + body;
+  }
+
   function renderTerms(item) {
     var o = item.offer || {};
     var rows = [];
@@ -268,27 +289,29 @@
       var links = [];
       if (o.link) links.push('<a href="' + esc(o.link) + '"' + linkAttrs(o.link) + ">Offer page" + newTab(o.link) + "</a>");
       if (o.terms) links.push('<a href="' + esc(o.terms) + '"' + linkAttrs(o.terms) + ">Terms" + newTab(o.terms) + "</a>");
-      return '<article class="up-item up-offer" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
+      return '<article class="up-item up-offer' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
         ' data-starts="' + esc(o.starts || "") + '" data-ends="' + esc(o.ends || "") + '" data-verified="' + esc(o.verified || "") + '">' +
-        '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
-        '<span class="up-status">' + STATUS_LABEL[status] + "</span>" + fixture + "</div>" +
-        (o.value ? '<p class="up-offer-value">' + esc(o.value) + "</p>" : "") +
-        renderTitle(item, level) +
-        '<p class="up-summary">' + esc(item.summary) + "</p>" +
-        renderTerms(item) +
-        metaLine([who, "Posted " + posted, updated, verified]) +
-        (links.length ? '<p class="up-links">' + links.join("") + "</p>" : "") +
+        withThumb(item,
+          '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
+          '<span class="up-status">' + STATUS_LABEL[status] + "</span>" + fixture + "</div>" +
+          (o.value ? '<p class="up-offer-value">' + esc(o.value) + "</p>" : "") +
+          renderTitle(item, level),
+          '<p class="up-summary">' + esc(item.summary) + "</p>" +
+          renderTerms(item) +
+          metaLine([who, "Posted " + posted, updated, verified]) +
+          (links.length ? '<p class="up-links">' + links.join("") + "</p>" : "")) +
         shareButton(item) +
         "</article>";
     }
 
     var conf = item.confirmation || "official";
-    return '<article class="up-item up-news" id="' + esc(item.slug) + '" data-type="news">' +
-      '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
-      '<span class="up-confirm" data-confirm="' + esc(conf) + '">' + CONFIRMATION[conf] + "</span>" + fixture + "</div>" +
-      renderTitle(item, level) +
-      '<p class="up-summary">' + esc(item.summary) + "</p>" +
-      metaLine([who, posted, updated, sourceLink(item.sources && item.sources[0])]) +
+    return '<article class="up-item up-news' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="news">' +
+      withThumb(item,
+        '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
+        '<span class="up-confirm" data-confirm="' + esc(conf) + '">' + CONFIRMATION[conf] + "</span>" + fixture + "</div>" +
+        renderTitle(item, level),
+        '<p class="up-summary">' + esc(item.summary) + "</p>" +
+        metaLine([who, posted, updated, sourceLink(item.sources && item.sources[0])])) +
       shareButton(item) +
       "</article>";
   }
