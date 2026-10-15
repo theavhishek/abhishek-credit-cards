@@ -613,21 +613,18 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
   --hm-gold: #a8741b;
   --hm-glow-a: color-mix(in srgb, var(--hm-orange) 16%, transparent);
   --hm-glow-b: color-mix(in srgb, #e8b04a 18%, transparent);
-  --hm-dots: rgb(0 0 0 / 0.07);
   --hm-lift: 0 1px 2px rgb(0 0 0 / 0.04), 0 22px 44px -24px rgb(0 0 0 / 0.28);
 }
 html[data-theme="dark"] .hm {
   --hm-gold: #f3d99a;
   --hm-glow-a: color-mix(in srgb, var(--hm-orange) 22%, transparent);
   --hm-glow-b: color-mix(in srgb, #e8b04a 14%, transparent);
-  --hm-dots: rgb(255 255 255 / 0.08);
   --hm-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -24px rgb(0 0 0 / 0.9);
 }
 
-/* ---------- Hero: warm glow and dot grid ---------- */
+/* ---------- Hero: warm glow ---------- */
 .hm-hero { position: relative; isolation: isolate; }
-.hm-hero::before,
-.hm-hero::after {
+.hm-hero::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -639,13 +636,6 @@ html[data-theme="dark"] .hm {
     radial-gradient(42% 46% at 30% 30%, var(--hm-glow-a), transparent 70%),
     radial-gradient(40% 44% at 72% 38%, var(--hm-glow-b), transparent 70%);
   filter: blur(8px);
-}
-.hm-hero::after {
-  inset: -48px 0 -24px;
-  background-image: radial-gradient(var(--hm-dots) 1px, transparent 1.4px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
-  mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
 }
 /* Search gets a faint warm ring so it reads as the place to start */
 .hm-search-field {
@@ -841,4 +831,57 @@ html[data-theme="dark"] .hm-tile-go { color: color-mix(in srgb, var(--tile) 45%,
 @keyframes hm-rise {
   from { opacity: 0; translate: 0 28px; }
   to { opacity: 1; translate: 0 0; }
+}
+
+/* ---------- Page background: drifting colour fields, a fine grid and grain ----------
+   Fixed behind the page so content scrolls over it. The footer keeps its own
+   solid background, so this ends where the footer starts. */
+body.home-page {
+  --bg-a: color-mix(in srgb, #fc6e20 13%, transparent);
+  --bg-b: color-mix(in srgb, #5b8def 11%, transparent);
+  --bg-c: color-mix(in srgb, #e8b04a 15%, transparent);
+  --bg-grid: rgb(0 0 0 / 0.045);
+}
+html[data-theme="dark"] body.home-page {
+  --bg-a: color-mix(in srgb, #fc6e20 17%, transparent);
+  --bg-b: color-mix(in srgb, #5b6cff 15%, transparent);
+  --bg-c: color-mix(in srgb, #e8b04a 9%, transparent);
+  --bg-grid: rgb(255 255 255 / 0.05);
+}
+body.home-page::before,
+body.home-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+body.home-page::before {
+  inset: -15%;
+  background:
+    radial-gradient(34% 30% at 18% 22%, var(--bg-a), transparent 70%),
+    radial-gradient(30% 34% at 86% 40%, var(--bg-b), transparent 70%),
+    radial-gradient(36% 30% at 40% 88%, var(--bg-c), transparent 70%);
+  filter: blur(20px);
+}
+body.home-page::after {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+  background-size: 160px 160px, 56px 56px, 56px 56px;
+  background-position: 0 0, center top, center top;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, rgb(0 0 0 / 0.35) 100%);
+  mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, rgb(0 0 0 / 0.35) 100%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  body.home-page::before { animation: hm-drift 28s ease-in-out infinite alternate; }
+}
+@keyframes hm-drift {
+  0% { translate: 0 0; scale: 1; }
+  50% { translate: 3% -2%; scale: 1.04; }
+  100% { translate: -3% 2%; scale: 1; }
+}
+@media (forced-colors: active) {
+  body.home-page::before, body.home-page::after { display: none; }
 }
