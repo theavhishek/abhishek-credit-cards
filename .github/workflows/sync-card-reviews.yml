@@ -1,0 +1,50 @@
+name: Sync card review listings
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "card-reviews/*.html"
+      - "scripts/reviews/**"
+      - "src/card-reviews/**"
+      - "src/card-reviews-entry.tsx"
+      - ".github/workflows/sync-card-reviews.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-card-reviews-main
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Regenerate review listings from articles
+        run: |
+          node scripts/reviews/build.mjs
+          pnpm build:reviews
+          node scripts/reviews/build.mjs --cache
+          git diff --check
+      - name: Publish synchronized pages
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add home.html card-reviews.html src/card-reviews/blog-grid-data.ts assets/card-reviews-react.js
+            git commit -m "Automatically sync homepage and review listings [skip ci]"
+            git push origin HEAD:main
+          fi
