@@ -602,3 +602,269 @@ html[data-theme="dark"] .hm-review-media { outline-color: oklch(1 0 0 / 0.1); }
 @media (min-width: 720px) {
   .hm-update { grid-template-columns: 160px minmax(0, 1fr) auto; align-items: baseline; gap: 24px; padding-block: 18px; }
 }
+
+/* ==========================================================================
+   Visual refresh (2026-10): warmer surfaces and a little depth.
+   Extends the brand orange and the headline's gold foil rather than adding
+   new colours. Every effect has a light and dark value and respects
+   prefers-reduced-motion.
+   ========================================================================== */
+.hm {
+  --hm-gold: #a8741b;
+  --hm-glow-a: color-mix(in srgb, var(--hm-orange) 16%, transparent);
+  --hm-glow-b: color-mix(in srgb, #e8b04a 18%, transparent);
+  --hm-dots: rgb(0 0 0 / 0.07);
+  --hm-lift: 0 1px 2px rgb(0 0 0 / 0.04), 0 22px 44px -24px rgb(0 0 0 / 0.28);
+}
+html[data-theme="dark"] .hm {
+  --hm-gold: #f3d99a;
+  --hm-glow-a: color-mix(in srgb, var(--hm-orange) 22%, transparent);
+  --hm-glow-b: color-mix(in srgb, #e8b04a 14%, transparent);
+  --hm-dots: rgb(255 255 255 / 0.08);
+  --hm-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -24px rgb(0 0 0 / 0.9);
+}
+
+/* ---------- Hero: warm glow, dot grid and two floating cards ---------- */
+.hm-hero { position: relative; isolation: isolate; }
+.hm-hero::before,
+.hm-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.hm-hero::before {
+  inset: -64px 0 -40px;
+  background:
+    radial-gradient(42% 46% at 30% 30%, var(--hm-glow-a), transparent 70%),
+    radial-gradient(40% 44% at 72% 38%, var(--hm-glow-b), transparent 70%);
+  filter: blur(8px);
+}
+.hm-hero::after {
+  inset: -48px 0 -24px;
+  background-image: radial-gradient(var(--hm-dots) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
+}
+.hm-hero-art { display: none; }
+@media (min-width: 1100px) {
+  .hm-hero-art { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .hm-float {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    aspect-ratio: 54 / 85.6;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 0.1), 0 26px 50px -18px rgb(0 0 0 / 0.45);
+    outline: 1px solid rgb(255 255 255 / 0.5);
+    outline-offset: -1px;
+  }
+  .hm-float-l { inset-block-start: 120px; inset-inline-start: 3%; rotate: -11deg; }
+  .hm-float-r { inset-block-start: 64px; inset-inline-end: 3%; rotate: 9deg; }
+}
+@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+  .hm-float-l { animation: hm-float 7s ease-in-out infinite; }
+  .hm-float-r { animation: hm-float 8s ease-in-out -3s infinite; }
+}
+@keyframes hm-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+/* Search gets a faint warm ring so it reads as the place to start */
+.hm-search-field {
+  border-color: color-mix(in srgb, var(--hm-orange) 22%, var(--line-strong));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 0 0 6px color-mix(in srgb, var(--hm-orange) 6%, transparent), 0 18px 44px -20px color-mix(in srgb, var(--hm-orange) 30%, rgb(0 0 0 / 0.3));
+}
+
+/* At-a-glance numbers */
+.hm-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: min(760px, 100%);
+  margin-top: 40px !important;
+}
+.hm-stats li {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.hm-stats b {
+  background: linear-gradient(180deg, var(--text) 30%, color-mix(in srgb, var(--hm-gold) 85%, var(--text)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+.hm-stats span { color: var(--muted); font-size: 0.8125rem; font-weight: 500; line-height: 1.3; }
+@media (min-width: 640px) { .hm-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (forced-colors: active) { .hm-stats b { background: none; color: CanvasText; } }
+
+/* ---------- Section titles end in the wordmark's orange square ---------- */
+.hm-section-head h2::after,
+.hm-about h2::after {
+  content: "";
+  display: inline-block;
+  width: 0.17em;
+  height: 0.17em;
+  margin-inline-start: 0.06em;
+  background: var(--hm-orange);
+}
+
+/* ---------- Tool tiles: an icon and a tinted corner per tool ---------- */
+.hm-tile-support { --tile: #0a84ff; }
+.hm-tile-escalate { --tile: var(--hm-orange); }
+.hm-tile-pay { --tile: #16a34a; }
+.hm-tile-soon { --tile: var(--hm-orange); }
+.hm-tile-link {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tile) 9%, transparent), transparent 55%),
+    var(--surface);
+  transition: border-color 200ms ease-out, box-shadow 250ms ease-out, translate 250ms var(--hm-ease);
+}
+html[data-theme="dark"] .hm-tile-link {
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tile) 16%, transparent), transparent 55%),
+    var(--surface);
+}
+.hm-tile-soon .hm-tile-link {
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--hm-orange) 12%, transparent), transparent 60%),
+    color-mix(in srgb, var(--hm-orange) 4%, var(--surface));
+}
+@media (hover: hover) {
+  .hm-tile-link:hover {
+    border-color: color-mix(in srgb, var(--tile) 35%, var(--line-strong));
+    box-shadow: var(--hm-lift);
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hm-tile-link:hover { translate: 0 -3px; }
+}
+.hm-tile-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--tile) 12%, var(--surface));
+  color: color-mix(in srgb, var(--tile) 82%, var(--text));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tile) 22%, transparent);
+}
+html[data-theme="dark"] .hm-tile-icon {
+  background: color-mix(in srgb, var(--tile) 20%, var(--surface));
+  color: color-mix(in srgb, var(--tile) 60%, #fff);
+}
+.hm-tile-go { color: color-mix(in srgb, var(--tile) 70%, var(--text)); }
+html[data-theme="dark"] .hm-tile-go { color: color-mix(in srgb, var(--tile) 45%, var(--text)); }
+.hm-logos img { transition: translate 250ms var(--hm-ease), box-shadow 250ms ease-out; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hm-tile-support .hm-tile-link:hover .hm-logos img { translate: 0 -2px; box-shadow: 0 6px 12px -8px rgb(0 0 0 / 0.35); }
+  .hm-tile-support .hm-tile-link:hover .hm-logos img:nth-child(odd) { transition-delay: 40ms; }
+}
+.hm-ladder .is-rbi b { box-shadow: 0 0 0 4px color-mix(in srgb, var(--hm-orange) 20%, transparent); }
+.hm-paymock { box-shadow: 0 16px 32px -24px rgb(0 0 0 / 0.35); }
+
+/* ---------- Latest reviews as raised cards ---------- */
+.hm-review {
+  height: 100%;
+  align-content: start;
+  padding: 10px 10px 22px;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: border-color 200ms ease-out, box-shadow 250ms ease-out, translate 250ms var(--hm-ease);
+}
+.hm-review > :not(.hm-review-media) { padding-inline: 10px; }
+.hm-review-media { border-radius: 20px; }
+.hm-review:focus-visible { border-radius: 28px; outline-offset: 3px; }
+@media (hover: hover) {
+  .hm-review:hover { border-color: var(--line-strong); box-shadow: var(--hm-lift); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hm-review:hover { translate: 0 -3px; }
+  .hm-review:hover .hm-review-media img { scale: 1.04; }
+}
+.hm-reviews > li { min-width: 0; }
+.hm-review-tag {
+  background: color-mix(in srgb, var(--hm-orange) 12%, var(--surface));
+  color: var(--hm-orange-text);
+}
+
+/* ---------- Latest updates as one card ---------- */
+.hm-updates-list {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+}
+.hm-updates-list > li:last-child { border-bottom: 0; }
+.hm-update { padding-inline: 20px; transition: background-color 150ms ease-out; }
+.hm-update:focus-visible { outline-offset: -3px; border-radius: 22px; }
+@media (hover: hover) { .hm-update:hover { background: var(--surface-soft); } }
+.hm-update-kicker {
+  justify-self: start;
+  width: max-content;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hm-orange) 12%, transparent);
+  font-size: 0.75rem;
+}
+@media (min-width: 720px) {
+  .hm-update { padding-inline: 24px; align-items: center; }
+  .hm-update-kicker { align-self: center; }
+}
+
+/* ---------- About: a warm panel ---------- */
+.hm-about {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 28px 22px 32px;
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(60% 80% at 15% 50%, var(--hm-glow-b), transparent 70%),
+    radial-gradient(50% 70% at 0% 100%, var(--hm-glow-a), transparent 70%),
+    var(--surface);
+}
+.hm-about-fan { width: 100%; margin-inline: auto; }
+.hm-about-links a { background: color-mix(in srgb, var(--surface) 80%, transparent); }
+@media (min-width: 960px) {
+  .hm-about { padding: 48px 56px 48px 32px; }
+}
+
+/* ---------- Gentle reveal as sections scroll into view ---------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hm-tile,
+    .hm-reviews > li,
+    .hm-updates-list,
+    .hm-about,
+    .hm .hm-follow {
+      animation: hm-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+@keyframes hm-rise {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
