@@ -624,7 +624,7 @@ html[data-theme="dark"] .hm {
   --hm-lift: 0 1px 2px rgb(0 0 0 / 0.4), 0 24px 48px -24px rgb(0 0 0 / 0.9);
 }
 
-/* ---------- Hero: warm glow, dot grid and two floating cards ---------- */
+/* ---------- Hero: warm glow and dot grid ---------- */
 .hm-hero { position: relative; isolation: isolate; }
 .hm-hero::before,
 .hm-hero::after {
@@ -647,32 +647,6 @@ html[data-theme="dark"] .hm {
   -webkit-mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
   mask-image: radial-gradient(60% 60% at 50% 42%, #000 20%, transparent 75%);
 }
-.hm-hero-art { display: none; }
-@media (min-width: 1100px) {
-  .hm-hero-art { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-  .hm-float {
-    position: absolute;
-    width: 150px;
-    height: auto;
-    aspect-ratio: 54 / 85.6;
-    border-radius: 12px;
-    object-fit: cover;
-    box-shadow: 0 1px 1px rgb(0 0 0 / 0.1), 0 26px 50px -18px rgb(0 0 0 / 0.45);
-    outline: 1px solid rgb(255 255 255 / 0.5);
-    outline-offset: -1px;
-  }
-  .hm-float-l { inset-block-start: 120px; inset-inline-start: 3%; rotate: -11deg; }
-  .hm-float-r { inset-block-start: 64px; inset-inline-end: 3%; rotate: 9deg; }
-}
-@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
-  .hm-float-l { animation: hm-float 7s ease-in-out infinite; }
-  .hm-float-r { animation: hm-float 8s ease-in-out -3s infinite; }
-}
-@keyframes hm-float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -12px; }
-}
-
 /* Search gets a faint warm ring so it reads as the place to start */
 .hm-search-field {
   border-color: color-mix(in srgb, var(--hm-orange) 22%, var(--line-strong));
