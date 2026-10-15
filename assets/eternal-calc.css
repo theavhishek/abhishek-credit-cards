@@ -1,0 +1,168 @@
+/* Eternal SBI Card cashback calculator: one row per spend category, three capped pools. */
+.ec { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 960px) {
+  .rv-calc.ec { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .ec .rv-calc-intro p { max-width: 64ch; }
+}
+
+.ec-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-block-start: 16px; }
+.ec-presets span { font-size: var(--rv-fs-caption); color: var(--muted); margin-inline-end: 4px; }
+.ec-presets button {
+  min-height: 36px;
+  padding-inline: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--rv-fs-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+.ec-presets button[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.ec-presets button:focus-visible,
+.ec-row input:focus-visible,
+.ec-movie input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) {
+  .ec-presets button[aria-pressed="false"]:hover { border-color: var(--muted); }
+}
+
+.ec-layout { display: grid; gap: 28px; min-width: 0; }
+@media (min-width: 960px) {
+  .ec-layout { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+}
+
+/* Inputs */
+.ec-group { border: 0; margin: 0; padding: 0; min-width: 0; }
+.ec-group + .ec-group { margin-block-start: 20px; }
+.ec-group legend {
+  padding: 0 0 8px;
+  font-size: var(--rv-fs-caption);
+  font-weight: 600;
+  color: var(--muted);
+}
+.ec-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8.5rem;
+  grid-template-areas: "label field" "hint result";
+  gap: 2px 16px;
+  align-items: center;
+  padding-block: 12px;
+  border-block-start: 1px solid var(--line);
+}
+.ec-row label { grid-area: label; font-weight: 600; line-height: 1.3; }
+.ec-hint { grid-area: hint; font-size: var(--rv-fs-caption); color: var(--muted); line-height: 1.4; }
+.ec-hint b { font-weight: 650; color: var(--rv-accent); }
+.ec-field {
+  grid-area: field;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--rv-radius-sm);
+  background: var(--page);
+}
+.ec-field:focus-within { border-color: var(--focus); }
+.ec-field span { color: var(--muted); }
+.ec-field input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: 8px 0 8px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+.ec-field input:focus-visible { outline: none; }
+.ec-result {
+  grid-area: result;
+  font-size: var(--rv-fs-caption);
+  text-align: end;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.ec-result strong { color: var(--text); font-weight: 600; }
+
+.ec-movie {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-block-start: 20px;
+  padding: 14px;
+  border-radius: var(--rv-radius-sm);
+  background: var(--surface-muted);
+  font-size: var(--rv-fs-small);
+  line-height: 1.45;
+}
+.ec-movie input { inline-size: 20px; block-size: 20px; margin: 1px 0 0; accent-color: var(--rv-brand); flex: none; }
+.ec-movie label { font-weight: 600; }
+.ec-movie span { display: block; color: var(--muted); font-weight: 400; }
+
+/* Results */
+.ec-out { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 960px) { .ec-out { position: sticky; top: 112px; } }
+.ec-total {
+  padding: 20px;
+  border-radius: var(--rv-radius-md);
+  background: var(--page);
+  border: 1px solid var(--line);
+}
+.ec-total-label { font-size: var(--rv-fs-small); color: var(--muted); }
+.ec-total-value {
+  display: block;
+  margin-block-start: 2px;
+  font-size: clamp(2.25rem, 1.8rem + 1.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.ec-total-value small { font-size: 1rem; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+.ec-total dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-block-start: 16px;
+  padding-block-start: 14px;
+  border-block-start: 1px solid var(--line);
+}
+.ec-total dt { font-size: var(--rv-fs-caption); color: var(--muted); line-height: 1.35; }
+.ec-total dd { margin-block-start: 2px; font-size: 1.1875rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+
+.ec-pools { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; }
+.ec-pool-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.ec-pool-name { font-size: var(--rv-fs-small); font-weight: 600; }
+.ec-pool-amt { font-size: var(--rv-fs-small); font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.ec-pool-amt strong { color: var(--text); font-weight: 650; }
+.ec-bar {
+  position: relative;
+  height: 10px;
+  margin-block: 8px 6px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+.ec-bar span { position: absolute; inset-block: 0; inset-inline-start: 0; border-radius: inherit; background: var(--rv-brand); }
+.ec-pool[data-full="true"] .ec-bar span { background: var(--text); }
+.ec-pool-note { font-size: var(--rv-fs-caption); color: var(--muted); line-height: 1.4; min-height: 1.4em; }
+.ec-pool[data-full="true"] .ec-pool-note { color: var(--rv-accent); font-weight: 500; }
+@media (prefers-reduced-motion: no-preference) {
+  .ec-bar span { transition: inline-size 160ms var(--rv-ease); }
+}
+
+.ec-waiver { font-size: var(--rv-fs-small); line-height: 1.5; color: var(--muted); }
+.ec-waiver strong { color: var(--text); }
+
+@media (max-width: 560px) {
+  .ec-row { grid-template-columns: minmax(0, 1fr) 7.5rem; }
+  .ec-total dl { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .ec-total dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+}
+@media print {
+  .ec-presets { display: none; }
+}
