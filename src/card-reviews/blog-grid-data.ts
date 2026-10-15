@@ -13,7 +13,7 @@ export type BlogPost = {
   featured?: boolean;
 };
 
-export const blogCategories = ["Cashback", "Pre-launch"];
+export const blogCategories = ["Cashback", "Launched", "Pre-launch"];
 
 export const blogPosts: BlogPost[] = [
   {
@@ -37,16 +37,16 @@ export const blogPosts: BlogPost[] = [
   {
     id: "eternal-sbi-card",
     featured: false,
-    category: "Pre-launch",
-    date: "2026-10-13",
-    readTime: 3,
+    category: "Launched",
+    date: "2026-10-15",
+    readTime: 5,
     author: {
       name: "Abhishek Meena",
       role: "Independent card reviewer",
       avatar: "/assets/abhishek-face.jpg",
     },
     title: "Eternal SBI Credit Card",
-    excerpt: "Reported 10% off on Zomato, Blinkit and District, the rumoured ₹499 fee, and what isn’t confirmed yet.",
+    excerpt: "Launched 15 October: Zomato and District 10% off, Blinkit 5–10%, ₹2,000 monthly discount cap and ₹499 fee. Early access is rolling out.",
     image: {
       src: "/assets/reviews/eternal-sbi-card.jpg",
       alt: "Eternal SBI Card, black card design",
