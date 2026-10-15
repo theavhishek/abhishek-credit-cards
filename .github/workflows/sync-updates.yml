@@ -1,0 +1,42 @@
+name: Sync Updates from source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/updates/**"
+      - "scripts/updates/**"
+      - ".github/workflows/sync-updates.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-updates-main
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Regenerate the Updates pages, homepage and feed
+        run: |
+          node scripts/updates/build.mjs
+          node scripts/updates/build.mjs --check
+          git diff --check
+      - name: Publish changed generated outputs
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add updates.html updates/ updates/feed.xml updates/archive.html assets/updates-index.json home.html sitemap.xml
+            git commit -m "Automatically sync Updates pages and homepage [skip ci]"
+            git push origin HEAD:main
+          fi
