@@ -39,7 +39,7 @@ export const blogPosts: BlogPost[] = [
     featured: false,
     category: "Launched",
     date: "2026-10-15",
-    readTime: 12,
+    readTime: 9,
     author: {
       name: "Abhishek Meena",
       role: "Independent card reviewer",
