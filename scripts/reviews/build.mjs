@@ -113,7 +113,7 @@ const footer = '          <div class="gf-column gf-column-latest">\n' +
   '            <h2 class="gf-heading">Latest reviews</h2>\n            <ul>\n' +
   top.map(p => '              <li><a href="https://avhishek.in/card-reviews/' + escape(p.id) + '">' + escape(shortName(p)) + (p.category === "Pre-launch" ? ' <span class="gf-tag">Pre-launch</span>' : "") + '</a></li>').join("\n") +
   '\n            </ul>\n          </div>';
-const footerRegex = /<div class="gf-column gf-column-latest">[\s\S]*?<\/div>/g;
+const footerRegex = /^[ \t]*<div class="gf-column gf-column-latest">[\s\S]*?<\/div>/gm;
 if ([...home.matchAll(footerRegex)].length!==1) throw new Error("Expected exactly one latest reviews footer");
 home = home.replace(footerRegex, footer);
 write("home.html", home);
@@ -123,7 +123,7 @@ let listing = read("card-reviews.html");
 const staticList = '        <ul class="reviews-static-list">\n' +
   posts.map(p => '          <li>\n            <article>\n              <p class="reviews-static-meta">' + escape(p.category) + ' · <time datetime="' + p.date + '">' + formatDate(p.date) + '</time> · ' + p.readTime + ' min read</p>\n              <h2><a href="/card-reviews/' + escape(p.id) + '">' + escape(p.title) + '</a></h2>\n              <p>' + escape(p.excerpt) + '</p>\n              <p class="reviews-static-meta">By Abhishek Meena</p>\n            </article>\n          </li>').join("\n") +
   '\n        </ul>';
-const staticRegex = /<ul class="reviews-static-list">[\s\S]*?<\/ul>/g;
+const staticRegex = /^[ \t]*<ul class="reviews-static-list">[\s\S]*?<\/ul>/gm;
 if ([...listing.matchAll(staticRegex)].length!==1) throw new Error("Expected exactly one static listing");
 listing = listing.replace(staticRegex, staticList);
 const schemaRegex = /<script type="application\/ld\+json">(\{[\s\S]*?\})<\/script>/;
