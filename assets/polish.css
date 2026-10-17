@@ -1,0 +1,162 @@
+/* Interface polish, loaded with motion.css on every page.
+   Layered depth on cards, tactile primary buttons, smooth accordions, sharper
+   type details. Follows the emil-design-eng skill (.agents/skills). */
+
+:root {
+  --pl-elev-1: 0 1px 2px rgb(0 0 0 / 0.05), 0 4px 8px -2px rgb(0 0 0 / 0.04), 0 14px 28px -14px rgb(0 0 0 / 0.16);
+  --pl-elev-2: 0 2px 4px rgb(0 0 0 / 0.05), 0 8px 16px -4px rgb(0 0 0 / 0.06), 0 28px 48px -20px rgb(0 0 0 / 0.26);
+  --pl-image-ring: rgb(0 0 0 / 0.07);
+  interpolate-size: allow-keywords;
+}
+html[data-theme="dark"] {
+  --pl-elev-1: inset 0 1px 0 rgb(255 255 255 / 0.07), 0 1px 2px rgb(0 0 0 / 0.5), 0 14px 28px -14px rgb(0 0 0 / 0.8);
+  --pl-elev-2: inset 0 1px 0 rgb(255 255 255 / 0.09), 0 2px 4px rgb(0 0 0 / 0.5), 0 28px 48px -18px rgb(0 0 0 / 0.9);
+  --pl-image-ring: rgb(255 255 255 / 0.08);
+}
+
+/* Type: balanced headings, no lonely last words, steady numbers. */
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+table, .rv-spec dd, .rv-calc-results dd, .rv-facts dd, .hm-update time, .up-item time { font-variant-numeric: tabular-nums; }
+
+/* Depth: cards sit on the page instead of being outlined on it. */
+.sp-bank,
+.py-sources,
+.rv-calc,
+.rv-table-wrap,
+.bank-group,
+.hm-tile-link,
+.hm-review,
+.up-item { box-shadow: var(--pl-elev-1); }
+
+.rv-hero-card,
+.sp-picker-wrap { box-shadow: var(--pl-elev-2); }
+
+.sp-bank[open] { box-shadow: var(--pl-elev-2); }
+
+@media (hover: hover) and (pointer: fine) {
+  .sp-bank:not([open]):hover,
+  .hm-tile-link:hover,
+  .hm-review:hover { box-shadow: var(--pl-elev-2); }
+
+  .sp-pick .sp-pick-logo { transition: translate 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+  .sp-pick:hover .sp-pick-logo { translate: 0 -2px; box-shadow: var(--pl-elev-2); }
+
+  .rv-table-wrap tbody tr { transition: background-color 150ms ease; }
+  .rv-table-wrap tbody tr:hover { background-color: var(--surface-muted); }
+}
+
+/* Images get a hairline edge so light photos don't bleed into white cards. */
+.hm-review img,
+.up-thumb img,
+.up-article-figure img,
+.rv-hero-card img { outline: 1px solid var(--pl-image-ring); outline-offset: -1px; }
+
+/* Primary buttons: a soft top light and a grounded shadow, so they read as pressable. */
+.rv-btn-primary,
+.ch-btn-primary,
+.hm-about-cta {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0) 60%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 1px 2px rgb(0 0 0 / 0.18), 0 8px 18px -8px rgb(0 0 0 / 0.4);
+}
+html[data-theme="dark"] .rv-btn-primary,
+html[data-theme="dark"] .ch-btn-primary,
+html[data-theme="dark"] .hm-about-cta {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0), rgb(0 0 0 / 0.06));
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.08), 0 8px 20px -10px rgb(255 255 255 / 0.25);
+}
+
+/* Search fields: a soft focus halo instead of a hard switch. */
+.sp-search { transition: border-color 150ms ease, box-shadow 150ms ease; }
+.sp-search:focus-within {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 16%, transparent);
+}
+
+/* Accordions open and close smoothly where the browser supports it. */
+@supports selector(::details-content) {
+  .sp-bank::details-content,
+  .py-sources::details-content,
+  .rv-faq details::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      block-size 260ms var(--ease-out),
+      opacity 200ms ease,
+      content-visibility 260ms allow-discrete;
+  }
+  .sp-bank[open]::details-content,
+  .py-sources[open]::details-content,
+  .rv-faq details[open]::details-content { block-size: auto; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-bank::details-content,
+  .py-sources::details-content,
+  .rv-faq details::details-content { transition-property: opacity, content-visibility; }
+  .sp-pick:hover .sp-pick-logo { translate: none; }
+}
+
+/* Hero headlines: the gold second line gets the same foil as the portfolio page,
+   with one light band sweeping across as the page opens. */
+.hm-title-foil, .sp-title-foil {
+  --foil-top: #a8741b;
+  --foil-bottom: #6f4610;
+  --foil-band: rgb(255 236 190 / 0.75);
+}
+html[data-theme="dark"] .hm-title-foil,
+html[data-theme="dark"] .sp-title-foil {
+  --foil-top: #f3d99a;
+  --foil-bottom: #b88a3e;
+  --foil-band: rgb(255 250 235 / 0.8);
+}
+html[data-theme] .hm-title-foil,
+html[data-theme] .sp-title-foil {
+  background-image:
+    linear-gradient(100deg, transparent 40%, var(--foil-band) 50%, transparent 60%),
+    linear-gradient(180deg, var(--foil-top) 0%, var(--foil-bottom) 100%);
+  background-size: 300% 100%, 100% 100%;
+  background-position: 100% 0, 0 0;
+  background-repeat: no-repeat;
+}
+
+/* Page heroes settle in once on load: headline, then copy, then actions. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme] .hm-title-foil,
+  html[data-theme] .sp-title-foil { animation: pl-foil 1400ms ease-out 500ms both; }
+
+  .hm-title, .sp-title, .up-hero h1, .rv-hero-copy h1, .lg-head h1 { animation: pl-hero-in 700ms var(--ease-out) both; }
+  .hm-lead, .sp-hero-copy > p:not(.sp-verified), .up-hero > p, .rv-hero-copy > p, .lg-head > p { animation: pl-hero-in 700ms var(--ease-out) 90ms both; }
+  .hm-search, .hm-try, .sp-hero-link, .rv-actions, .rv-byline { animation: pl-hero-in 700ms var(--ease-out) 170ms both; }
+  .sp-picker-wrap, .rv-hero-card { animation: pl-panel-in 800ms var(--ease-out) 120ms both; }
+}
+@keyframes pl-foil {
+  from { background-position: 100% 0, 0 0; }
+  to { background-position: 0% 0, 0 0; }
+}
+@keyframes pl-hero-in {
+  from { opacity: 0; translate: 0 14px; filter: blur(6px); }
+}
+@keyframes pl-panel-in {
+  from { opacity: 0; translate: 0 18px; scale: 0.98; }
+}
+@media print {
+  .hm-title, .sp-title, .hm-lead, .hm-search, .hm-try, .sp-picker-wrap, .rv-hero-card { animation: none !important; }
+}
+
+/* Review hero card: the card image leans toward the pointer with a moving glare (motion.js). */
+.rv-hero-card { position: relative; }
+.rv-hero-card.pl-tilt img { will-change: transform; }
+.rv-hero-card .pl-glare {
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 16 / 9;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgb(255 255 255 / 0.35), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+.rv-hero-card.is-tilting .pl-glare { opacity: 1; }
