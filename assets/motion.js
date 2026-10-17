@@ -34,6 +34,55 @@
     transition.finished.finally(() => root.classList.remove("mo-theme-vt"));
   }, true);
 
+  // Review hero card: the image leans toward the pointer on a light spring, with a
+  // glare that follows. Decorative only, so fine pointers only and never with reduced motion.
+  const tiltCard = document.querySelector(".rv-hero-card");
+  const tiltImage = tiltCard?.querySelector("img");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (tiltImage && finePointer.matches && !reduceMotion.matches) {
+    tiltCard.classList.add("pl-tilt");
+    const glare = document.createElement("span");
+    glare.className = "pl-glare";
+    glare.setAttribute("aria-hidden", "true");
+    tiltCard.appendChild(glare);
+
+    const state = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0, s: 1, vs: 0, ts: 1 };
+    let frame = 0;
+    const step = () => {
+      // Spring: stiffness 0.08, damping 0.78 per frame; a little give, no wobble.
+      for (const [p, v, t] of [["x", "vx", "tx"], ["y", "vy", "ty"], ["s", "vs", "ts"]]) {
+        state[v] = (state[v] + (state[t] - state[p]) * 0.08) * 0.78;
+        state[p] += state[v];
+      }
+      tiltImage.style.transform =
+        `perspective(900px) rotateX(${state.y * -6}deg) rotateY(${state.x * 8}deg) scale(${state.s})`;
+      const moving = [state.vx, state.vy, state.vs].some((v) => Math.abs(v) > 0.0005) ||
+        Math.abs(state.tx - state.x) > 0.001 || Math.abs(state.ty - state.y) > 0.001;
+      frame = moving ? requestAnimationFrame(step) : 0;
+    };
+    const kick = () => { if (!frame) frame = requestAnimationFrame(step); };
+
+    tiltImage.addEventListener("pointermove", (event) => {
+      const box = tiltImage.getBoundingClientRect();
+      const px = (event.clientX - box.left) / box.width;
+      const py = (event.clientY - box.top) / box.height;
+      state.tx = px - 0.5;
+      state.ty = py - 0.5;
+      state.ts = 1.06;
+      glare.style.setProperty("--gx", `${px * 100}%`);
+      glare.style.setProperty("--gy", `${py * 100}%`);
+      tiltCard.classList.add("is-tilting");
+      kick();
+    });
+    tiltImage.addEventListener("pointerleave", () => {
+      state.tx = 0;
+      state.ty = 0;
+      state.ts = 1;
+      tiltCard.classList.remove("is-tilting");
+      kick();
+    });
+  }
+
   // Scroll reveal: only content that starts below the fold, once, with a short stagger.
   if (!("IntersectionObserver" in window)) return;
   const selectors = [
