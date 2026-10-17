@@ -1,0 +1,67 @@
+/* Motion layer, loaded last on every page.
+   Page-to-page crossfade, theme reveal, scroll reveal and press feedback.
+   Values follow the `animate` skill (.agents/skills/animate). */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Page to page: the new page settles in over the old one; the header stays put. */
+@view-transition { navigation: auto; }
+
+header.topbar { view-transition-name: site-header; }
+@media (max-width: 640px) {
+  html[data-theme] body.unified-navbar .topbar-links { view-transition-name: site-tabs; }
+}
+
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) { animation: mo-page-in 280ms var(--ease-out) both; }
+
+@keyframes mo-page-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* Theme switch: motion.js grows the new theme out of the switch as a circle. */
+html.mo-theme-vt header.topbar,
+html.mo-theme-vt body.unified-navbar .topbar-links { view-transition-name: none !important; }
+html.mo-theme-vt::view-transition-old(root),
+html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+/* Scroll reveal: motion.js marks sections below the fold, then reveals each once. */
+.mo-reveal {
+  opacity: 0;
+  translate: 0 12px;
+  transition:
+    opacity 500ms var(--ease-out) var(--mo-delay, 0ms),
+    translate 500ms var(--ease-out) var(--mo-delay, 0ms);
+}
+.mo-reveal.is-in { opacity: 1; translate: none; }
+
+/* Press feedback for controls that had none. */
+.sp-copy,
+.sp-hero-link,
+.sp-rbi-link,
+.up-share,
+.up-filter-btn,
+.hm-more,
+.reset-button { transition: scale 140ms var(--ease-out); }
+
+.sp-copy:active,
+.sp-hero-link:active,
+.sp-rbi-link:active,
+.up-share:active,
+.up-filter-btn:active,
+.hm-more:active,
+.reset-button:active,
+.quick:active { scale: 0.97; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation-name: mo-fade-in; animation-duration: 180ms; }
+  @keyframes mo-fade-in { from { opacity: 0; } }
+  .mo-reveal { translate: none; transition-duration: 240ms; }
+}
+
+@media print {
+  .mo-reveal { opacity: 1 !important; translate: none !important; }
+}
