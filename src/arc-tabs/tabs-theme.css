@@ -53,7 +53,7 @@ html[data-theme="dark"] .arc-tabs--updates { --surface: color-mix(in srgb, var(-
 /* Navbar (desktop and tablet). Phones keep the bottom tab bar, so the original links stay there. */
 .arc-tabs--nav {
   --surface-muted: transparent;
-  --border: var(--hd-edge);
+  --border: transparent; /* no outline around the links or the selected pill (his request) */
   --text-muted: var(--hd-link);
   --control-height-sm: 40px;
   --text-sm: 15px;
@@ -64,7 +64,7 @@ html[data-theme="dark"] .arc-tabs--updates { --surface: color-mix(in srgb, var(-
   align-items: center;
   letter-spacing: -0.01em;
 }
-html[data-theme="dark"] .arc-tabs--nav { --surface: color-mix(in srgb, var(--text) 20%, var(--page)); --border: var(--line-strong); }
+html[data-theme="dark"] .arc-tabs--nav { --surface: color-mix(in srgb, var(--text) 20%, var(--page)); }
 /* Arrow keys move focus here without switching pages, so show focus as a soft fill instead of a ring. */
 .arc-tabs--nav [role="tab"]:focus-visible:not([data-state="active"]) { background: var(--hd-fill-hover); color: var(--text); }
 @media (min-width: 641px) { body.unified-navbar .topbar-links[data-arc-mounted] { display: none !important; } }
