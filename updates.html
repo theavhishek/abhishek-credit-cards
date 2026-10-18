@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="/assets/backdrop.css?v=1">
   <link rel="stylesheet" href="/assets/header.css?v=7">
   <link rel="stylesheet" href="/assets/updates.css?v=949be647">
+  <link rel="stylesheet" href="/assets/arc-tabs.css?v=2">
   <link rel="stylesheet" href="/assets/polish.css?v=1">
   <link rel="stylesheet" href="/assets/motion.css?v=1">
 </head>
@@ -90,7 +91,7 @@
     <div class="up-layout">
       <div class="up-main" data-updates data-index="/assets/updates-index.json?v=8f7ffb7d">
         <div class="up-toolbar">
-          <div class="up-tabs" role="group" aria-label="Show">
+          <div class="up-tabs" role="group" aria-label="Show" data-arc-tabs="updates" data-arc-controls="up-feed">
             <button type="button" class="up-tab" data-view="all" aria-pressed="true">All updates</button>
             <button type="button" class="up-tab" data-view="news" aria-pressed="false">News</button>
             <button type="button" class="up-tab" data-view="offers" aria-pressed="false">Offers</button>
@@ -215,6 +216,7 @@
   <script src="/assets/card-reviews.js?v=3"></script>
   <script src="/assets/updates-core.js?v=8d0893b9" defer></script>
   <script src="/assets/updates.js?v=50ffa338" defer></script>
+  <script type="module" src="/assets/arc-tabs.js?v=2"></script>
   <script src="/assets/motion.js?v=2" defer></script>
 </body>
 </html>

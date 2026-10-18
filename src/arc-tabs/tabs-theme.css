@@ -1,0 +1,51 @@
+/* Maps the uiarc tabs' tokens onto the site tokens (site.css). Each group keeps the active colours its old control had. */
+[data-arc-tabs][hidden], [data-arc-tabs] [hidden] { display: none !important; }
+
+.arc-tabs {
+  --border: var(--line);
+  --surface-muted: color-mix(in srgb, var(--text) 6%, transparent);
+  --foreground: var(--text);
+  --text-muted: var(--muted);
+  --text-secondary: var(--muted);
+  --accent-strong: var(--text);
+  --radius-control: 999px;
+  --control-height-sm: 38px;
+  --space-1: 3px;
+  --space-3: 14px;
+  --space-4: 16px;
+  --text-sm: 0.875rem;
+  --leading-body: 1.5;
+  --duration-fast: 0.15s;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-resting: 0 1px 2px rgb(0 0 0 / 0.06);
+  min-width: 0;
+  max-width: 100%;
+}
+/* Focus moves with the selection (arrow keys pick the tab), so the gliding pill already shows where focus is: no extra ring. */
+.arc-tabs [role="tab"]:focus, .arc-tabs [role="tab"]:focus-visible { outline: none; }
+.arc-tabs button:not([role="tab"]):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.arc-tabs [role="tab"][data-state="active"] { font-weight: 600; }
+
+/* /updates: All updates, News, Offers */
+.arc-tabs--updates { flex: none; }
+@media (max-width: 560px) { .arc-tabs--updates { flex: 1 1 100%; } }
+/* Dark: the white-on-black page made the selected pill blend in, so lift it clearly above the track. */
+html[data-theme="dark"] .arc-tabs--updates { --surface: color-mix(in srgb, var(--text) 22%, var(--page)); --border: var(--line-strong); }
+
+/* Card stack quick filters: the selected filter stays filled in the text colour, as before. */
+.arc-tabs--quick {
+  --surface: var(--text);
+  --accent-strong: var(--page);
+  --control-height-sm: 34px;
+  --text-sm: 13px;
+  --space-3: 13px;
+  flex: 0 1 auto;
+}
+
+/* Loan EMI schedule view: the selected view stays filled in the text colour, as before. */
+.arc-tabs--schedule {
+  --surface: var(--text);
+  --accent-strong: var(--page);
+  --border: var(--line-strong);
+  --control-height-sm: 40px;
+}
