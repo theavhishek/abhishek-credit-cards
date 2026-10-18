@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=7">
   <link rel="stylesheet" href="/assets/support-page.css?v=4">
   <link rel="stylesheet" href="/assets/emi-calc.css?v=1">
+  <link rel="stylesheet" href="/assets/loan-emi-donut.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=1">
   <link rel="stylesheet" href="/assets/motion.css?v=1">
 </head>
@@ -247,13 +248,7 @@
             <div class="is-strong"><dt>Effective annual cost (APR)</dt><dd id="outApr">11.02%</dd></div>
           </dl>
           <p class="ce-note" id="aprNote" style="margin-top:14px">Quoted rate 10.5%, but fees and charges push the effective annual cost to 11.02%. APR is the yearly rate that matches what you receive with every EMI you pay. Compounded monthly it is 11.59% a year.</p>
-          <div class="ce-donut" style="margin-top:16px">
-            <svg id="donut" role="img" aria-labelledby="donutLabel"></svg>
-            <ul class="ce-legend-list" id="donutLabel">
-              <li><i style="background:var(--ce-principal)"></i><span>Principal</span><b id="lgPrincipal">78%</b></li>
-              <li><i style="background:var(--ce-interest)"></i><span>Interest</span><b id="lgInterest">22%</b></li>
-            </ul>
-          </div>
+          <div id="loanDonutRoot"></div>
         </div>
         <div class="ce-actions ce-no-print">
           <button type="button" class="ce-btn" id="btnCopy"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy summary</button>
@@ -566,7 +561,8 @@
   <script src="/assets/card-reviews.js?v=3"></script>
   <script src="/assets/emi-core.js?v=1"></script>
   <script src="/assets/emi-ui.js?v=1"></script>
-  <script src="/assets/loan-emi.js?v=1"></script>
+  <script src="/assets/loan-emi.js?v=2"></script>
+  <script type="module" src="/assets/loan-emi-donut.js?v=1"></script>
   <script src="/assets/motion.js?v=2" defer></script>
 </body>
 </html>

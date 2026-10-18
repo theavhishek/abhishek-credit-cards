@@ -141,11 +141,9 @@
 
     var c = COLORS();
     var p = res.financedPrincipal, i = res.totalInterest;
-    U.donut(el("donut"), [{ value: p, color: c.principal }, { value: i, color: c.interest }]);
-    var pctP = p + i > 0 ? Math.round((p / (p + i)) * 100) : 100;
-    el("lgPrincipal").textContent = pctP + "%";
-    el("lgInterest").textContent = (100 - pctP) + "%";
-    el("donut").setAttribute("aria-label", "Principal " + pctP + "% (" + fmt(p) + "), interest " + (100 - pctP) + "% (" + fmt(i) + ")");
+    // The donut is the React add-on in assets/loan-emi-donut.js (src/loan-emi-donut-entry.tsx).
+    window.__loanEmiDonut = { principal: p, interest: i };
+    window.dispatchEvent(new CustomEvent("loan-emi:donut", { detail: window.__loanEmiDonut }));
 
     renderChart(input, res, pp, useAdjusted, c);
     renderRepay(input, res, pp, plan, flat);
