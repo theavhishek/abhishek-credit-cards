@@ -55,7 +55,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=7">
   <link rel="stylesheet" href="/assets/support-page.css?v=4">
   <link rel="stylesheet" href="/assets/emi-calc.css?v=1">
-  <link rel="stylesheet" href="/assets/loan-emi-donut.css?v=1">
+  <link rel="stylesheet" href="/assets/loan-emi-donut.css?v=2">
   <link rel="stylesheet" href="/assets/polish.css?v=1">
   <link rel="stylesheet" href="/assets/motion.css?v=1">
 </head>
@@ -379,13 +379,13 @@
         <p id="scheduleIntro">Every EMI split into interest and principal, with any prepayment you planned above.</p>
       </div>
       <div class="ce-table-tools">
-        <div class="ce-seg" role="radiogroup" aria-label="Schedule view">
+        <div class="ce-seg" role="radiogroup" aria-label="Schedule view" data-arc-tabs="schedule" data-arc-controls="schedWrap">
           <label><input type="radio" name="view" value="monthly" checked><span>Month by month</span></label>
           <label><input type="radio" name="view" value="yearly"><span>Year by year</span></label>
         </div>
         <p class="ce-hint" id="scheduleCheck"></p>
       </div>
-      <div class="ce-table-wrap ce-table-tall" tabindex="0" role="region" aria-labelledby="schedule-title">
+      <div class="ce-table-wrap ce-table-tall" id="schedWrap" tabindex="0" role="region" aria-labelledby="schedule-title">
         <table class="ce-table">
           <thead id="schedHead"></thead>
           <tbody id="schedBody"></tbody>
@@ -562,7 +562,7 @@
   <script src="/assets/emi-core.js?v=1"></script>
   <script src="/assets/emi-ui.js?v=1"></script>
   <script src="/assets/loan-emi.js?v=2"></script>
-  <script type="module" src="/assets/loan-emi-donut.js?v=1"></script>
+  <script type="module" src="/assets/loan-emi-donut.js?v=2"></script>
   <script src="/assets/motion.js?v=2" defer></script>
 </body>
 </html>
