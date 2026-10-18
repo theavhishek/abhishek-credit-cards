@@ -21,12 +21,16 @@
   min-width: 0;
   max-width: 100%;
 }
-.arc-tabs [role="tab"]:focus-visible,
-.arc-tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* Focus moves with the selection (arrow keys pick the tab), so the gliding pill already shows where focus is: no extra ring. */
+.arc-tabs [role="tab"]:focus, .arc-tabs [role="tab"]:focus-visible { outline: none; }
+.arc-tabs button:not([role="tab"]):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.arc-tabs [role="tab"][data-state="active"] { font-weight: 600; }
 
 /* /updates: All updates, News, Offers */
 .arc-tabs--updates { flex: none; }
 @media (max-width: 560px) { .arc-tabs--updates { flex: 1 1 100%; } }
+/* Dark: the white-on-black page made the selected pill blend in, so lift it clearly above the track. */
+html[data-theme="dark"] .arc-tabs--updates { --surface: color-mix(in srgb, var(--text) 22%, var(--page)); --border: var(--line-strong); }
 
 /* Card stack quick filters: the selected filter stays filled in the text colour, as before. */
 .arc-tabs--quick {
