@@ -160,3 +160,25 @@ html[data-theme] .sp-title-foil {
   mix-blend-mode: soft-light;
 }
 .rv-hero-card.is-tilting .pl-glare { opacity: 1; }
+
+/* Bottom edge: content softens into a light blur as it scrolls off the screen.
+   On phones the band reaches up behind the tab bar. Decorative and click-through. */
+html::after {
+  content: "";
+  position: fixed;
+  z-index: 99;
+  inset-inline: 0;
+  bottom: 0;
+  height: 56px;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to top, #000 20%, transparent);
+  mask-image: linear-gradient(to top, #000 20%, transparent);
+}
+@media (max-width: 640px) {
+  html::after { height: calc(96px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-transparency: reduce), print {
+  html::after { content: none; }
+}
