@@ -58,6 +58,36 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
 .reset-button:active,
 .quick:active { scale: 0.97; }
 
+/* Links and buttons: one hover and press language across the site.
+   Text links get a soft highlight behind the words on hover (no underline colour change);
+   pressing anything clickable deepens that highlight or shrinks the control a touch. */
+:root {
+  --mo-link-hl: color-mix(in srgb, var(--text) 9%, transparent);
+  --mo-link-hl-press: color-mix(in srgb, var(--text) 16%, transparent);
+}
+:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link) {
+  border-radius: 6px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out), scale 140ms var(--ease-out);
+}
+@media (hover: hover) {
+  :is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):hover {
+    color: var(--text);
+    background-color: var(--mo-link-hl);
+    box-shadow: 0 0 0 3px var(--mo-link-hl);
+    text-decoration-color: transparent !important;
+  }
+}
+:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):active {
+  background-color: var(--mo-link-hl-press);
+  box-shadow: 0 0 0 3px var(--mo-link-hl-press);
+}
+:where(a, button, summary) { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  :where(a, button:not(:disabled), summary):active { scale: 0.97; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-new(root) { animation-name: mo-fade-in; animation-duration: 180ms; }
   @keyframes mo-fade-in { from { opacity: 0; } }
