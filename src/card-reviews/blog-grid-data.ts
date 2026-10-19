@@ -9,6 +9,24 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "rbl-jalsa-credit-card",
+    "title": "RBL Bank Jalsa Credit Card",
+    "excerpt": "A ₹999 RuPay card that pays 5% back on nine food, grocery and shopping apps, capped at ₹50 an order and ₹500 a month. Add a ₹1,000 welcome voucher and a ₹500 voucher at ₹3 lakh a year. Everything else earns nothing.",
+    "category": "Cashback",
+    "date": "2026-10-19",
+    "readTime": 7,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/rbl-jalsa-credit-card.jpg",
+      "alt": "Illustration of the RBL Bank Jalsa RuPay credit card: a pink-to-purple card with the word Jalsa, a chip and the RuPay name"
+    },
+    "featured": false
+  },
+  {
     "id": "eternal-sbi-card",
     "title": "Eternal SBI Credit Card",
     "excerpt": "A ₹499 card that takes 10% off Zomato, District and Blinkit beauty and electronics, 5% off the rest of Blinkit, and pays cashback on Uber, ixigo, Apollo, Urban Company and everyday spends. Three separate caps decide…",
