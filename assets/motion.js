@@ -59,6 +59,13 @@
     tabBar.addEventListener("focusin", () => root.classList.remove("nav-compact"));
   }
 
+  // Bottom-edge blur band (styled in polish.css): decorative, so hidden from assistive tech.
+  const edge = document.createElement("div");
+  edge.className = "pl-edge-blur";
+  edge.setAttribute("aria-hidden", "true");
+  edge.innerHTML = "<span></span><span></span><span></span><span></span>";
+  document.body.appendChild(edge);
+
   // Review hero card: the image leans toward the pointer on a light spring, with a
   // glare that follows. Decorative only, so fine pointers only and never with reduced motion.
   const tiltCard = document.querySelector(".rv-hero-card");
