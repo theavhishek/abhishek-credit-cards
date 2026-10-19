@@ -58,6 +58,28 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
 .reset-button:active,
 .quick:active { scale: 0.97; }
 
+/* Links and buttons: one hover and press language across the site.
+   Dark text links fade a little on hover, grey ones brighten; pressing dims them; nothing is drawn around them.
+   Pressing anything clickable also shrinks it a touch. */
+:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link) {
+  transition: opacity 160ms var(--ease-out), color 160ms var(--ease-out), scale 140ms var(--ease-out);
+}
+@media (hover: hover) {
+  :is(a:not([class]), .hm-more, .sp-rbi-link, .disclaimer-link):not(.gf a):hover { opacity: 0.68; }
+  /* Grey links (footer, updates archive) brighten to full text colour instead of fading. */
+  .gf a:hover, .up-archive-link:hover { color: var(--text); }
+  /* The fade replaces the old hover underlines (footer, breadcrumbs, thicker review links). */
+  .gf-column a:not([aria-current]):hover,
+  .gf-bottom-links a:not([aria-current]):hover,
+  .rv-crumbs a:hover { text-decoration-color: transparent !important; }
+  .rv-article a:not(.rv-btn):hover { text-decoration-thickness: from-font !important; }
+}
+:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):active { opacity: 0.5; }
+:where(a, button, summary) { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  :where(a, button:not(:disabled), summary):active { scale: 0.97; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-new(root) { animation-name: mo-fade-in; animation-duration: 180ms; }
   @keyframes mo-fade-in { from { opacity: 0; } }
