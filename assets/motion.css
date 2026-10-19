@@ -59,30 +59,22 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
 .quick:active { scale: 0.97; }
 
 /* Links and buttons: one hover and press language across the site.
-   Text links get a soft highlight behind the words on hover (no underline colour change);
-   pressing anything clickable deepens that highlight or shrinks the control a touch. */
-:root {
-  --mo-link-hl: color-mix(in srgb, var(--text) 9%, transparent);
-  --mo-link-hl-press: color-mix(in srgb, var(--text) 16%, transparent);
-}
+   Dark text links fade a little on hover, grey ones brighten; pressing dims them; nothing is drawn around them.
+   Pressing anything clickable also shrinks it a touch. */
 :is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link) {
-  border-radius: 6px;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out), scale 140ms var(--ease-out);
+  transition: opacity 160ms var(--ease-out), color 160ms var(--ease-out), scale 140ms var(--ease-out);
 }
 @media (hover: hover) {
-  :is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):hover {
-    color: var(--text);
-    background-color: var(--mo-link-hl);
-    box-shadow: 0 0 0 3px var(--mo-link-hl);
-    text-decoration-color: transparent !important;
-  }
+  :is(a:not([class]), .hm-more, .sp-rbi-link, .disclaimer-link):not(.gf a):hover { opacity: 0.68; }
+  /* Grey links (footer, updates archive) brighten to full text colour instead of fading. */
+  .gf a:hover, .up-archive-link:hover { color: var(--text); }
+  /* The fade replaces the old hover underlines (footer, breadcrumbs, thicker review links). */
+  .gf-column a:not([aria-current]):hover,
+  .gf-bottom-links a:not([aria-current]):hover,
+  .rv-crumbs a:hover { text-decoration-color: transparent !important; }
+  .rv-article a:not(.rv-btn):hover { text-decoration-thickness: from-font !important; }
 }
-:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):active {
-  background-color: var(--mo-link-hl-press);
-  box-shadow: 0 0 0 3px var(--mo-link-hl-press);
-}
+:is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):active { opacity: 0.5; }
 :where(a, button, summary) { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: no-preference) {
   :where(a, button:not(:disabled), summary):active { scale: 0.97; }
