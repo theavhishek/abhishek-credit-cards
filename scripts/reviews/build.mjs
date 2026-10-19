@@ -100,8 +100,9 @@ const reviewItem = (p) => {
     '          </a>\n        </li>';
 };
 let home = read("home.html");
-const homeBlock = '      <ul class="hm-reviews">\n' + top.map(reviewItem).join("\n") + '\n      </ul>';
-const homeRegex = /<ul class="hm-reviews">[\s\S]*?<\/ul>/g;
+// The homepage row scrolls sideways, so it lists every review, newest first.
+const homeBlock = '      <ul class="hm-reviews" id="hm-reviews" aria-label="Card reviews">\n' + posts.map(reviewItem).join("\n") + '\n      </ul>';
+const homeRegex = /<ul class="hm-reviews"[^>]*>[\s\S]*?<\/ul>/g;
 if ([...home.matchAll(homeRegex)].length!==1) throw new Error("Expected exactly one homepage review list");
 home = home.replace(homeRegex, homeBlock.trimStart());
 const shortName = (p) => ({

@@ -804,3 +804,56 @@ html[data-theme="dark"] .hm-tile-go { color: color-mix(in srgb, var(--tile) 45%,
   from { opacity: 0; translate: 0 28px; }
   to { opacity: 1; translate: 0 0; }
 }
+
+/* ---------- Latest reviews: a sideways-scrolling row with arrow buttons ---------- */
+.hm-latest-actions { display: flex; align-items: center; gap: 12px; }
+.hm-scroll-btns { display: flex; gap: 8px; }
+.hm-scroll-btns[hidden] { display: none; }
+.hm-scroll-btn {
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 200ms ease-out, opacity 200ms ease-out, scale 160ms var(--hm-ease);
+}
+.hm-scroll-btn:disabled { opacity: 0.35; cursor: default; }
+.hm-scroll-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .hm-scroll-btn:not(:disabled):hover { border-color: var(--muted); } }
+@media (prefers-reduced-motion: no-preference) { .hm-scroll-btn:not(:disabled):active { scale: 0.94; } }
+
+.hm .hm-reviews {
+  display: grid;
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 86%;
+  gap: 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 6px;
+  scrollbar-width: none;
+  /* Room for the hover lift, shadow and focus ring inside the scroller. */
+  padding: 6px 6px 18px;
+  margin-inline: -6px;
+  margin-bottom: -12px;
+}
+.hm .hm-reviews::-webkit-scrollbar { display: none; }
+.hm .hm-reviews > li,
+.hm .hm-reviews > li:nth-child(3):last-child { display: list-item; scroll-snap-align: start; }
+@media (min-width: 640px) {
+  .hm .hm-reviews { grid-auto-columns: calc((100% - 24px) / 2); gap: 24px; }
+}
+@media (min-width: 960px) {
+  .hm .hm-reviews { grid-auto-columns: calc((100% - 48px) / 3); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hm .hm-reviews { scroll-behavior: smooth; }
+}
+/* The view() reveal would track the sideways scroller, so keep the cards visible. */
+.hm .hm-reviews > li { animation: none; }
