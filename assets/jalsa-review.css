@@ -1,0 +1,41 @@
+/* RBL Jalsa review: fee tabs. The calculator reuses eternal-calc.css. */
+.jl-tabs { display: none; }
+.rv-fees.is-tabbed .jl-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 16px 4px; }
+.jl-tabs button {
+  min-height: 36px;
+  padding-inline: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--rv-fs-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+.jl-tabs button[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.jl-tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.arc-tabs--fees { margin-block: 16px 4px; max-inline-size: 100%; overflow-x: auto; }
+
+.jl-panel-title { margin-block: 20px 4px; }
+.rv-fees.is-tabbed .jl-panel-title {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rv-fees.is-tabbed .jl-panel:not([hidden]) { animation: jl-panel-in 220ms var(--rv-ease, ease-out); }
+}
+@keyframes jl-panel-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@media print {
+  .jl-tabs, .arc-tabs--fees { display: none !important; }
+  .jl-panel[hidden] { display: block; }
+  .rv-fees.is-tabbed .jl-panel-title { position: static; inline-size: auto; block-size: auto; clip-path: none; }
+}
