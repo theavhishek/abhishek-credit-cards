@@ -161,24 +161,43 @@ html[data-theme] .sp-title-foil {
 }
 .rv-hero-card.is-tilting .pl-glare { opacity: 1; }
 
-/* Bottom edge: content softens into a light blur as it scrolls off the screen.
-   On phones the band reaches up behind the tab bar. Decorative and click-through. */
-html::after {
-  content: "";
+/* Bottom edge: content eases into a blur as it scrolls off the screen. motion.js adds
+   the band; four stacked layers (1, 2, 4, 8px) each cover an overlapping slice, so the
+   blur builds gradually with no visible line. On phones it reaches up behind the tab bar. */
+.pl-edge-blur {
   position: fixed;
   z-index: 99;
   inset-inline: 0;
   bottom: 0;
-  height: 56px;
+  height: 72px;
   pointer-events: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  -webkit-mask-image: linear-gradient(to top, #000 20%, transparent);
-  mask-image: linear-gradient(to top, #000 20%, transparent);
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--page, #f5f5f7) 28%, transparent));
+  transform: translateZ(0);
+}
+.pl-edge-blur > span { position: absolute; inset: 0; }
+.pl-edge-blur > span:nth-child(1) {
+  backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 50%, transparent 75%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 25%, #000 50%, transparent 75%);
+}
+.pl-edge-blur > span:nth-child(2) {
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 25%, #000 50%, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 25%, #000 50%, #000 75%, transparent 100%);
+}
+.pl-edge-blur > span:nth-child(3) {
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 50%, #000 75%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 50%, #000 75%, #000 100%);
+}
+.pl-edge-blur > span:nth-child(4) {
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 75%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 75%, #000 100%);
 }
 @media (max-width: 640px) {
-  html::after { height: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .pl-edge-blur { height: calc(112px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-transparency: reduce), print {
-  html::after { content: none; }
+  .pl-edge-blur { display: none; }
 }
