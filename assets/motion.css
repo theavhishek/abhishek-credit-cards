@@ -69,11 +69,14 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
   /* Grey links (footer, updates archive) brighten to full text colour instead of fading. */
   .gf a:hover, .up-archive-link:hover { color: var(--text); }
   /* The fade replaces the old hover underlines (footer, breadcrumbs, thicker review links). */
-  .gf-column a:not([aria-current]):hover,
-  .gf-bottom-links a:not([aria-current]):hover,
+  .gf-column a:hover,
+  .gf-bottom-links a:hover,
   .rv-crumbs a:hover { text-decoration-color: transparent !important; }
   .rv-article a:not(.rv-btn):hover { text-decoration-thickness: from-font !important; }
 }
+/* The footer link for the open page shows as selected by its full text colour, not an underline. */
+.gf-column a[aria-current],
+.gf-bottom-links a[aria-current] { text-decoration-color: transparent; }
 :is(a:not([class]), .hm-more, .sp-rbi-link, .up-archive-link, .gf-totop, .disclaimer-link):active { opacity: 0.5; }
 :where(a, button, summary) { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: no-preference) {
