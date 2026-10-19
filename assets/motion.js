@@ -34,6 +34,31 @@
     transition.finished.finally(() => root.classList.remove("mo-theme-vt"));
   }, true);
 
+  // Phone tab bar: shrink to icons while scrolling down, bring the labels back on the
+  // way up or near the top. Styles live in header.css (.nav-compact).
+  const tabBar = document.querySelector("body.unified-navbar .topbar-links");
+  const phone = window.matchMedia("(max-width: 640px)");
+  if (tabBar) {
+    let lastY = scrollY;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = Math.max(scrollY, 0);
+      const delta = y - lastY;
+      if (!phone.matches || y < 80) root.classList.remove("nav-compact");
+      else if (delta > 6) root.classList.add("nav-compact");
+      else if (delta < -6) root.classList.remove("nav-compact");
+      else return;
+      lastY = y;
+    };
+    addEventListener("scroll", () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    phone.addEventListener("change", update);
+    // Reaching for the bar (or tabbing into it) always shows the labels.
+    tabBar.addEventListener("focusin", () => root.classList.remove("nav-compact"));
+  }
+
   // Review hero card: the image leans toward the pointer on a light spring, with a
   // glare that follows. Decorative only, so fine pointers only and never with reduced motion.
   const tiltCard = document.querySelector(".rv-hero-card");

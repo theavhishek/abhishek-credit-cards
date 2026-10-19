@@ -7,12 +7,14 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Page to page: the new page settles in over the old one; the header stays put. */
+/* Page to page: the new page settles in over the old one; the header stays put.
+   The names apply only during a transition: a named header is a backdrop root,
+   which would stop the phone tab bar inside it from blurring the page behind. */
 @view-transition { navigation: auto; }
 
-header.topbar { view-transition-name: site-header; }
+html:active-view-transition header.topbar { view-transition-name: site-header; }
 @media (max-width: 640px) {
-  html[data-theme] body.unified-navbar .topbar-links { view-transition-name: site-tabs; }
+  html:active-view-transition[data-theme] body.unified-navbar .topbar-links { view-transition-name: site-tabs; }
 }
 
 ::view-transition-old(root) { animation: none; }
