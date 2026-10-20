@@ -40,7 +40,7 @@ export interface BlogGridProps {
 const smooth = motionTokens.spring.smooth;
 const morph = motionTokens.spring.morph;
 const standard = [...motionTokens.ease.standard] as [number, number, number, number];
-const dateFormat = new Intl.DateTimeFormat("en-IN", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+const dateFormat = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 const formatDate = (iso: string) => dateFormat.format(new Date(`${iso}T00:00:00Z`));
 
 function useControllable<T>(value: T | undefined, initial: T, onChange?: (next: T) => void) {
@@ -81,14 +81,16 @@ function AutoHeight({ changeKey, reduced, className, children }: { changeKey: st
 }
 
 function Meta({ post }: { post: BlogPost }) {
-  return <p className={styles.meta}><span>{post.category}</span><span aria-hidden="true">·</span><time dateTime={post.date}>{formatDate(post.date)}</time></p>;
+  return <p className={styles.meta}><span>{post.category}</span></p>;
 }
 
 function Byline({ post }: { post: BlogPost }) {
   return <div className={styles.byline}>
-    {post.author.avatar ? <img className={styles.avatar} src={post.author.avatar} alt="" width={24} height={24} loading="lazy" /> : <span className={styles.avatar} aria-hidden="true" />}
-    <span className={styles.authorName}>{post.author.name}</span>
-    <span className={styles.readTime}>{post.readTime} min read</span>
+    {post.author.avatar ? <img className={styles.avatar} src={post.author.avatar} alt="" width={36} height={36} loading="lazy" /> : <span className={styles.avatar} aria-hidden="true" />}
+    <span className={styles.bylineCopy}>
+      <strong className={styles.authorName}>{post.author.name}</strong>
+      <span className={styles.bylineMeta}><time dateTime={post.date}>{formatDate(post.date)}</time><span aria-hidden="true">·</span><span>{post.readTime} min read</span></span>
+    </span>
   </div>;
 }
 

@@ -115,22 +115,22 @@ html { scroll-padding-top: 112px; }
 .rv-byline {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-block-start: 24px !important;
-  font-size: var(--rv-fs-small);
-  line-height: 1.45;
   color: var(--muted);
 }
 .rv-byline img {
   flex: none;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   outline: 1px solid oklch(0 0 0 / 0.1);
   outline-offset: -1px;
 }
-.rv-byline strong { color: var(--text); font-weight: 600; }
+.rv-byline-copy { display: grid; gap: 2px; min-width: 0; }
+.rv-byline strong { color: var(--text); font-size: 1rem; font-weight: 650; line-height: 1.3; }
+.rv-byline-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 9px; font-size: 0.875rem; line-height: 1.45; }
 .rv-actions {
   display: flex;
   flex-wrap: wrap;
