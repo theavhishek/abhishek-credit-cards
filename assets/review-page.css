@@ -614,7 +614,7 @@ html { scroll-padding-top: 112px; }
 .rv-faq details + details { border-block-start: 1px solid var(--line); }
 .rv-faq summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
   min-height: 56px;
@@ -626,6 +626,9 @@ html { scroll-padding-top: 112px; }
   list-style: none;
 }
 .rv-faq summary::-webkit-details-marker { display: none; }
+/* Topic icon in front of each FAQ question (lucide). */
+.rv-faq-icon { color: var(--muted); transition: color 150ms ease; }
+.rv-faq details[open] .rv-faq-icon { color: var(--rv-accent); }
 .rv-faq summary::after {
   content: "";
   width: 8px;
@@ -637,12 +640,13 @@ html { scroll-padding-top: 112px; }
 }
 .rv-faq details[open] summary::after { rotate: 225deg; translate: 0 2px; }
 .rv-faq details p {
-  padding: 0 32px 18px 0;
+  padding: 0 32px 18px 34px;
   color: var(--muted);
   font-size: 1rem;
 }
 @media (hover: hover) {
   .rv-faq summary:hover { color: var(--rv-accent); }
+  .rv-faq summary:hover .rv-faq-icon { color: var(--rv-accent); }
 }
 
 /* Apply panel */
