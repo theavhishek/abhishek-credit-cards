@@ -7,7 +7,7 @@
 - **Privacy**: Never use personal email addresses in commit metadata; always use the private GitHub no-reply address (`theavhishek@users.noreply.github.com`).
 
 ## Credit Card Review Byline
-- On every dedicated card-review article, display only: **By Abhishek Meena, updated [date]. About [X] minutes to read.**
+- On every dedicated card-review article, display a two-line byline: **Abhishek Meena** above **[Month day, year] · [X] min read**. Use the same author/date/read-time arrangement on review listing cards.
 - The date must match the article's actual last-update date, and the reading time should fit that article.
 - Do not include the card network, issuer, category, or other facts in the byline.
 - Keep structured article metadata (such as `dateModified`) consistent with the visible update date.

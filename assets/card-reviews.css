@@ -56,3 +56,10 @@
 .reviews-static-meta {
   font-size: 13px;
 }
+.reviews-static-list .reviews-static-byline {
+  display: grid;
+  gap: 2px;
+  margin-top: 14px;
+  font-size: 13px;
+}
+.reviews-static-byline strong { color: var(--text); font-size: 14px; }
