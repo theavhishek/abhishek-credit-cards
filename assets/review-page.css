@@ -614,7 +614,7 @@ html { scroll-padding-top: 112px; }
 .rv-faq details + details { border-block-start: 1px solid var(--line); }
 .rv-faq summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px;
   min-height: 56px;
@@ -626,6 +626,17 @@ html { scroll-padding-top: 112px; }
   list-style: none;
 }
 .rv-faq summary::-webkit-details-marker { display: none; }
+/* Question icon in front of each FAQ (lucide circle-help). */
+.rv-faq summary::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 150ms ease;
+}
+.rv-faq details[open] summary::before { background: var(--rv-accent); }
 .rv-faq summary::after {
   content: "";
   width: 8px;
@@ -637,12 +648,13 @@ html { scroll-padding-top: 112px; }
 }
 .rv-faq details[open] summary::after { rotate: 225deg; translate: 0 2px; }
 .rv-faq details p {
-  padding: 0 32px 18px 0;
+  padding: 0 32px 18px 34px;
   color: var(--muted);
   font-size: 1rem;
 }
 @media (hover: hover) {
   .rv-faq summary:hover { color: var(--rv-accent); }
+  .rv-faq summary:hover::before { background: var(--rv-accent); }
 }
 
 /* Apply panel */
