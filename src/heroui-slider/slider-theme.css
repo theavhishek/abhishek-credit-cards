@@ -1,0 +1,57 @@
+/* HeroUI Slider on the site's own styles. HeroUI's Tailwind theme isn't loaded; its parts carry
+   BEM classes (slider, slider__track, slider__fill, slider__thumb) that are drawn here to match
+   the native range inputs they replace. */
+.slider-mount { display: contents; }
+.slider { position: relative; touch-action: none; }
+.slider__track { position: relative; inline-size: 100%; block-size: 100%; }
+.slider__fill { position: absolute; }
+/* react-aria positions the thumb: left at the value, translate(-50%, -50%) to centre it. */
+.slider__thumb { cursor: grab; }
+.slider__thumb[data-dragging="true"] { cursor: grabbing; }
+.slider__thumb[data-focus-visible="true"] { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* EMI calculators (.ce-range): a 6px rail filled in the text colour, white thumb with a dark ring. */
+.slider.ce-range { block-size: 28px; }
+.ce-range .slider__track::before,
+.ce-range .slider__fill {
+  inset-block-start: 50%;
+  block-size: 6px;
+  translate: 0 -50%;
+  border-radius: 999px;
+}
+/* The native thumb stayed inside the rail; inset the track by half a thumb so it still does. */
+.ce-range .slider__track { margin-inline: 11px; inline-size: auto; }
+.ce-range .slider__track::before { content: ""; position: absolute; inset-inline: -11px; background: var(--surface-muted); }
+.ce-range .slider__fill { box-sizing: content-box; margin-inline-start: -11px; padding-inline-start: 11px; background: var(--text); }
+.ce-range .slider__thumb {
+  inset-block-start: 50%;
+  inline-size: 22px;
+  block-size: 22px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--text);
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+}
+
+/* Review cap calculators (.rv-calc): the slider sits on top of the meter, so the thumb rides the
+   fill; the meter draws the fill itself. 44px tall for an easy touch target. */
+.rv-calc .slider {
+  position: absolute;
+  inset-inline: 0;   /* the rail is already inset by half a thumb, so the thumb centre lands on the fill edge */
+  inset-block-start: 50%;
+  block-size: 44px;
+  translate: 0 -50%;
+  cursor: pointer;
+}
+.rv-calc .slider__fill { display: none; }
+.rv-calc .slider__thumb {
+  inset-block-start: 50%;
+  inline-size: 28px;
+  block-size: 28px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 3px solid var(--surface);
+  background: var(--text);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.3);
+}
