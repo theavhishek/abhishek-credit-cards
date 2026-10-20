@@ -612,7 +612,7 @@ html { scroll-padding-top: 112px; }
 /* FAQ */
 .rv-faq { border-block: 1px solid var(--line); }
 .rv-faq details + details { border-block-start: 1px solid var(--line); }
-.rv-faq summary {
+.rv-faq :is(summary, .accordion__trigger) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
@@ -626,7 +626,7 @@ html { scroll-padding-top: 112px; }
   list-style: none;
 }
 .rv-faq summary::-webkit-details-marker { display: none; }
-.rv-faq summary::after {
+.rv-faq :is(summary, .accordion__trigger)::after {
   content: "";
   width: 8px;
   height: 8px;
@@ -635,14 +635,14 @@ html { scroll-padding-top: 112px; }
   rotate: 45deg;
   translate: 0 -2px;
 }
-.rv-faq details[open] summary::after { rotate: 225deg; translate: 0 2px; }
+.rv-faq details:is([open]:not([data-accordion]), [data-expanded]) :is(summary, .accordion__trigger)::after { rotate: 225deg; translate: 0 2px; }
 .rv-faq details p {
   padding: 0 32px 18px 0;
   color: var(--muted);
   font-size: 1rem;
 }
 @media (hover: hover) {
-  .rv-faq summary:hover { color: var(--rv-accent); }
+  .rv-faq :is(summary, .accordion__trigger):hover { color: var(--rv-accent); }
 }
 
 /* Apply panel */

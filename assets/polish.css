@@ -33,10 +33,11 @@ table, .rv-spec dd, .rv-calc-results dd, .rv-facts dd, .hm-update time, .up-item
 .rv-hero-card,
 .sp-picker-wrap { box-shadow: var(--pl-elev-2); }
 
-.sp-bank[open] { box-shadow: var(--pl-elev-2); }
+.sp-bank:is([open]:not([data-accordion]), [data-expanded]) { box-shadow: var(--pl-elev-2); }
 
 @media (hover: hover) and (pointer: fine) {
-  .sp-bank:not([open]):hover,
+  .sp-bank:not([open], [data-expanded]):hover,
+  .sp-bank[data-accordion]:not([data-expanded]):hover,
   .hm-tile-link:hover,
   .hm-review:hover { box-shadow: var(--pl-elev-2); }
 

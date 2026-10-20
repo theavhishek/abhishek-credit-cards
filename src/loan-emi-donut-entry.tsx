@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { DonutChart } from "./arc/donut-chart/donut-chart";
 import "./loan-emi/donut-theme.css";
 import { mountArcTabs } from "./arc-tabs-mount";
+import { mountHeroAccordions } from "./heroui-accordion/accordion-mount";
 
 // assets/loan-emi.js publishes the latest principal and interest on window and fires this event on every recalculation.
 type Split = { principal: number; interest: number };
@@ -40,5 +41,6 @@ function LoanDonut() {
 const root = document.querySelector("#loanDonutRoot");
 if (root) createRoot(root).render(<LoanDonut />);
 
-// This page also uses the uiarc tabs (schedule view); sharing the bundle keeps React to one copy.
+// This page also uses the uiarc tabs (schedule view) and the HeroUI accordions; sharing the bundle keeps React to one copy.
 mountArcTabs();
+mountHeroAccordions();

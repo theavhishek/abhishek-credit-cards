@@ -1,0 +1,34 @@
+/* HeroUI Accordion on the site's own styles. HeroUI's Tailwind theme isn't loaded: its parts carry
+   their BEM classes (accordion__trigger, accordion__panel …) and the page CSS styles them in place of
+   the old summary. Resets use :where() so every page rule wins. */
+:where(.accordion, .accordion__item, .accordion__body, .accordion__body-inner) { display: block; }
+/* The heading is a real h3 for screen readers but must look like the old summary, so it beats the
+   pages' h3 rules (.rv-section h3, text-wrap: balance …). */
+.accordion .accordion__heading { margin: 0; font: inherit; letter-spacing: inherit; color: inherit; text-wrap: inherit; }
+:where(.accordion__trigger) {
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-align: start;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Opens and closes like the old smooth <details> (assets/polish.css): react-aria measures the
+   panel into --disclosure-panel-height and hides it with hidden="until-found" once closed. */
+.accordion__panel {
+  block-size: var(--disclosure-panel-height);
+  overflow: clip;
+  opacity: 0;
+  transition: block-size 260ms var(--ease-out, ease-out), opacity 200ms ease;
+}
+.accordion__panel[data-expanded="true"] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .accordion__panel { transition-property: opacity; }
+}

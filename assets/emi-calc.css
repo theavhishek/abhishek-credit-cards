@@ -180,7 +180,8 @@ html[data-theme="dark"] .ce {
   background: var(--surface-soft);
 }
 html[data-theme="dark"] .ce-more { background: color-mix(in srgb, var(--surface-soft) 55%, var(--surface)); }
-.ce-more > summary {
+.ce-more > summary,
+.ce-more .accordion__trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -194,10 +195,14 @@ html[data-theme="dark"] .ce-more { background: color-mix(in srgb, var(--surface-
   -webkit-tap-highlight-color: transparent;
 }
 .ce-more > summary::-webkit-details-marker { display: none; }
-.ce-more > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 16px; }
-.ce-more > summary .ce-sum-val { margin-inline-start: auto; color: var(--muted); font-size: 0.8125rem; font-weight: 500; font-variant-numeric: tabular-nums; text-align: end; }
-.ce-more > summary svg { flex: none; transition: rotate 200ms var(--ease-out, ease); }
-.ce-more[open] > summary svg { rotate: 180deg; }
+.ce-more > summary:focus-visible,
+.ce-more .accordion__trigger:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 16px; }
+.ce-more > summary .ce-sum-val,
+.ce-more .accordion__trigger .ce-sum-val { margin-inline-start: auto; color: var(--muted); font-size: 0.8125rem; font-weight: 500; font-variant-numeric: tabular-nums; text-align: end; }
+.ce-more > summary svg,
+.ce-more .accordion__trigger svg { flex: none; transition: rotate 200ms var(--ease-out, ease); }
+.ce-more[open] > summary svg,
+.ce-more[data-expanded] .accordion__trigger svg { rotate: 180deg; }
 .ce-more-body { display: grid; gap: 18px; padding: 4px 16px 18px; }
 .ce-sub { display: grid; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
 .ce-sub:first-child { padding-top: 0; border-top: 0; }
@@ -428,11 +433,11 @@ html:not([data-theme="dark"]) .ce-badge.is-warn { color: #8a5300; }
 .ce-prose .ce-table-wrap { margin-block: 4px; }
 .ce-faq { display: grid; gap: 10px; max-inline-size: 80ch; }
 .ce-faq details { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-.ce-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 14px 18px; font-size: 1rem; font-weight: 600; line-height: 1.35; cursor: pointer; list-style: none; }
+.ce-faq :is(summary, .accordion__trigger) { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 14px 18px; font-size: 1rem; font-weight: 600; line-height: 1.35; cursor: pointer; list-style: none; }
 .ce-faq summary::-webkit-details-marker { display: none; }
-.ce-faq summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 16px; }
-.ce-faq summary svg { flex: none; transition: rotate 200ms ease; }
-.ce-faq details[open] summary svg { rotate: 180deg; }
+.ce-faq :is(summary, .accordion__trigger):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; border-radius: 16px; }
+.ce-faq :is(summary, .accordion__trigger) svg { flex: none; transition: rotate 200ms ease; }
+.ce-faq details:is([open]:not([data-accordion]), [data-expanded]) :is(summary, .accordion__trigger) svg { rotate: 180deg; }
 .ce-faq .ce-prose { padding: 0 18px 18px; font-size: 0.9375rem; }
 .ce-related { display: grid; gap: 12px; }
 @media (min-width: 760px) { .ce-related { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -472,7 +477,8 @@ html:not([data-theme="dark"]) .ce-badge.is-warn { color: #8a5300; }
   .ce-out { position: static !important; }
   .ce-panel, .ce-scn, .ce-vs-col, .ce-table-wrap { box-shadow: none !important; break-inside: avoid; }
   .ce-more { display: block; }
-  .ce-more:not([open]) { display: none; }
+  .ce-more:not([open], [data-expanded]),
+  .ce-more[data-accordion]:not([data-expanded]) { display: none; }
   .ce-table-wrap, .ce-table-tall { max-block-size: none !important; overflow: visible !important; }
   .ce-table thead th { position: static; }
   .sp-title-foil { color: #000 !important; -webkit-text-fill-color: #000; background: none !important; }
