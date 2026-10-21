@@ -221,8 +221,10 @@
     return "upi://pay?" + q.join("&");
   }
 
+  let lastQr = null;
   function drawQr(text) {
     els.qr.classList.toggle("is-empty", !text);
+    if (!text) lastQr = null;
     if (!text || typeof window.qrcode !== "function") {
       els.qr.innerHTML = `<span class="ui-qr-empty">Your QR code appears here once the UPI ID is complete.</span>`;
       return;
@@ -230,6 +232,7 @@
     const qr = window.qrcode(0, "M");
     qr.addData(text);
     qr.make();
+    lastQr = qr;
     const n = qr.getModuleCount();
     let d = "";
     for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (qr.isDark(r, c)) d += `M${c} ${r}h1v1h-1z`;
@@ -278,30 +281,114 @@
     flash(els.copy, "Copied. Paste it into Pay to UPI ID in your app.");
   }
 
-  function saveQr() {
-    const svg = els.qr.querySelector("svg");
-    if (!svg) return;
-    const size = 720;
-    const img = new Image();
-    img.onload = () => {
-      const c = document.createElement("canvas");
-      c.width = size; c.height = size + 96;
-      const ctx = c.getContext("2d");
-      ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(img, 0, 0, size, size);
-      ctx.fillStyle = "#111"; ctx.textAlign = "center";
-      ctx.font = "600 26px Geist, system-ui, sans-serif";
-      ctx.fillText(bank.name + " credit card bill", size / 2, size + 34);
-      ctx.font = "500 24px 'Geist Mono', ui-monospace, monospace";
-      ctx.fillText(ready, size / 2, size + 74, size - 40);
-      const a = document.createElement("a");
-      a.download = `upi-${bank.slug}.png`;
-      a.href = c.toDataURL("image/png");
-      a.click();
-      flash(els.save, "QR saved. It shows part of your card number, so keep it to yourself.");
-    };
-    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(new XMLSerializer().serializeToString(svg));
+  // Saved QR: the same QR modules as on screen, drawn pixel-exact on a plain white field, inside a
+  // light branded card with the bank, the UPI ID and a link back to this page. Nothing is drawn
+  // over or around the code itself beyond its white quiet zone.
+  const PAGE_URL = "https://avhishek.in/credit-card-upi-id";
+  function loadImage(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function fitText(ctx, text, max, font, size) {
+    let px = size;
+    do { ctx.font = font.replace("{px}", px); px -= 1; } while (ctx.measureText(text).width > max && px > 14);
+  }
+
+  async function saveQr() {
+    if (!ready || !lastQr) return;
+    const sans = "Geist, system-ui, -apple-system, 'Segoe UI', sans-serif";
+    const mono = "'Geist Mono', ui-monospace, Menlo, monospace";
+    try { await document.fonts.ready; } catch (e) { /* draw with fallbacks */ }
+    const logo = marks[bank.name] ? await loadImage(`/assets/bank-logos/${marks[bank.name]}`) : null;
+
+    const W = 1080, pad = 72, cardX = 48, cardW = W - 96;
+    const n = lastQr.getModuleCount();
+    const quiet = 4;
+    const scale = Math.floor(600 / (n + quiet * 2));
+    const qrPx = scale * (n + quiet * 2);
+    const qrY = 270, idY = qrY + qrPx + 84, noteY = idY + 52, footY = noteY + 72;
+    const H = footY + 150 + 48;
+    const c = document.createElement("canvas");
+    c.width = W; c.height = H;
+    const ctx = c.getContext("2d");
+
+    // Page and card
+    ctx.fillStyle = "#f5f5f7"; ctx.fillRect(0, 0, W, H);
+    ctx.save();
+    ctx.shadowColor = "rgba(0,0,0,0.08)"; ctx.shadowBlur = 40; ctx.shadowOffsetY = 12;
+    roundRect(ctx, cardX, 48, cardW, H - 96, 48); ctx.fillStyle = "#fff"; ctx.fill();
+    ctx.restore();
+    ctx.save();
+    roundRect(ctx, cardX, 48, cardW, H - 96, 48); ctx.clip();
+    ctx.fillStyle = "#fc6e20"; ctx.fillRect(cardX, 48, cardW, 10);
+    ctx.restore();
+
+    // Bank header
+    let y = 130;
+    if (logo) {
+      roundRect(ctx, pad + 24, y - 6, 84, 84, 20); ctx.fillStyle = "#fff"; ctx.fill();
+      ctx.strokeStyle = "rgba(0,0,0,0.08)"; ctx.lineWidth = 2; ctx.stroke();
+      const r = Math.min(56 / logo.width, 56 / logo.height);
+      ctx.drawImage(logo, pad + 24 + (84 - logo.width * r) / 2, y - 6 + (84 - logo.height * r) / 2, logo.width * r, logo.height * r);
+    }
+    const tx = logo ? pad + 128 : pad + 24;
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#6e6e73"; ctx.font = `500 26px ${sans}`;
+    ctx.fillText("Credit card bill · Pay to UPI ID", tx, y + 26);
+    ctx.fillStyle = "#1d1d1f"; fitText(ctx, bank.name, cardW - (tx - cardX) - 40, `700 {px}px ${sans}`, 44);
+    ctx.fillText(bank.name, tx, y + 72);
+
+    // QR code: exact modules, integer scale, white quiet zone
+    y = qrY;
+    const qx = Math.round((W - qrPx) / 2);
+    ctx.fillStyle = "#fff"; ctx.fillRect(qx, y, qrPx, qrPx);
+    ctx.fillStyle = "#000";
+    for (let r = 0; r < n; r++) for (let col = 0; col < n; col++) {
+      if (lastQr.isDark(r, col)) ctx.fillRect(qx + (col + quiet) * scale, y + (r + quiet) * scale, scale, scale);
+    }
+    ctx.strokeStyle = "rgba(0,0,0,0.08)"; ctx.lineWidth = 2;
+    roundRect(ctx, qx - 1, y - 1, qrPx + 2, qrPx + 2, 24); ctx.stroke();
+
+    // UPI ID and amount
+    y = idY;
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#1d1d1f"; fitText(ctx, ready, cardW - 120, `600 {px}px ${mono}`, 40);
+    ctx.fillText(ready, W / 2, y);
+    const amount = parseAmount();
+    y = noteY;
+    ctx.fillStyle = "#6e6e73"; ctx.font = `500 26px ${sans}`;
+    ctx.fillText(amount ? `Amount ₹${amount.toLocaleString("en-IN", { maximumFractionDigits: 2 })} · Scan with any UPI app` : "Scan with any UPI app and check the payee name before you pay", W / 2, y);
+
+    // Footer: brand and link back to the tool
+    const fy = footY;
+    ctx.strokeStyle = "rgba(0,0,0,0.08)"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cardX + 48, fy); ctx.lineTo(cardX + cardW - 48, fy); ctx.stroke();
+    ctx.font = `700 40px ${sans}`;
+    const word = "abhishek", ww = ctx.measureText(word).width, dot = ctx.measureText(".").width;
+    const bx = W / 2 - (ww + dot) / 2;
+    ctx.textAlign = "left"; ctx.fillStyle = "#1d1d1f"; ctx.fillText(word, bx, fy + 62);
+    ctx.fillStyle = "#fc6e20"; ctx.fillText(".", bx + ww, fy + 62);
+    ctx.textAlign = "center"; ctx.fillStyle = "#6e6e73"; ctx.font = `500 26px ${sans}`;
+    ctx.fillText("Make your card’s UPI ID at " + PAGE_URL, W / 2, fy + 108, cardW - 80);
+
+    const a = document.createElement("a");
+    a.download = `upi-${bank.slug}.png`;
+    a.href = c.toDataURL("image/png");
+    a.click();
+    flash(els.save, "QR saved. It shows part of your card number, so keep it to yourself.");
   }
 
   let flashTimer;
