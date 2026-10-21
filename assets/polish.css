@@ -102,9 +102,10 @@ html[data-theme="dark"] .hm-about-cta {
 /* Hero headlines: the gold second line gets the same foil as the portfolio page,
    with one light band sweeping across as the page opens. */
 .hm-title-foil, .sp-title-foil {
-  --foil-top: #a8741b;
-  --foil-bottom: #6f4610;
-  --foil-band: rgb(255 236 190 / 0.75);
+  /* Day mode: brand orange instead of the gold, which went muddy brown on the light page. */
+  --foil-top: #ea5a12;     /* 3.2:1 on the light page */
+  --foil-bottom: #c2410c;  /* 4.7:1 */
+  --foil-band: rgb(255 214 180 / 0.75);
 }
 html[data-theme="dark"] .hm-title-foil,
 html[data-theme="dark"] .sp-title-foil {
