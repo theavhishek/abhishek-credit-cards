@@ -240,9 +240,9 @@ html[data-theme] .ch-ambient.is-swapping { opacity: 0; }
 /* Second line takes the gold-card foil: a metallic vertical gradient,
    plus one light band that sweeps across during the load moment. */
 .ch-title-foil {
-  --foil-top: #a8741b;     /* 3.7:1 on the light page */
-  --foil-bottom: #6f4610;  /* 7.5:1 */
-  --foil-band: rgb(255 236 190 / 0.75);
+  --foil-top: #ea5a12;     /* 3.2:1 on the light page; brand orange in day mode */
+  --foil-bottom: #c2410c;  /* 4.7:1 */
+  --foil-band: rgb(255 214 180 / 0.75);
   padding-bottom: 0.06em;  /* room for descenders under background-clip */
   background:
     linear-gradient(100deg, transparent 40%, var(--foil-band) 50%, transparent 60%) 100% 0 / 300% 100% no-repeat,
