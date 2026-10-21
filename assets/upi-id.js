@@ -9,7 +9,7 @@
   const DATA = window.PAY_METHODS || {};
   const isNode = typeof document === "undefined";
 
-  const order = ["ICICI Bank", "SBI Card", "Axis Bank", "IDFC FIRST Bank", "AU Small Finance Bank", "American Express", "Equitas Small Finance Bank"];
+  const order = ["ICICI Bank", "Axis Bank", "Equitas Small Finance Bank", "AU Small Finance Bank"];
   const marks = {
     "Axis Bank":"utib.svg", "Kotak Mahindra Bank":"kkbk.svg", "SBI Card":"sbin.svg", "IDFC FIRST Bank":"idfb.svg", "ICICI Bank":"icic.svg",
     "BOBCARD":"barb.svg", "YES BANK":"yesb.svg", "HDFC Bank":"hdfc.svg", "Punjab National Bank":"punb.svg", "Indian Bank":"idib.svg",
@@ -19,9 +19,9 @@
     "Equitas Small Finance Bank":"esfb.svg", "SBM Bank India":"sbm.png", "Unity Small Finance Bank":"unity-custom.png"
   };
   const shortNames = {
-    "Axis Bank":"Axis", "Kotak Mahindra Bank":"Kotak", "IDFC FIRST Bank":"IDFC FIRST", "ICICI Bank":"ICICI",
+    "Axis Bank":"Axis Bank", "Kotak Mahindra Bank":"Kotak", "IDFC FIRST Bank":"IDFC FIRST", "ICICI Bank":"ICICI Bank",
     "HDFC Bank":"HDFC", "Punjab National Bank":"PNB", "Canara Bank":"Canara", "RBL Bank":"RBL", "IndusInd Bank":"IndusInd",
-    "Equitas Small Finance Bank":"Equitas", "AU Small Finance Bank":"AU", "HSBC India":"HSBC", "American Express":"Amex",
+    "Equitas Small Finance Bank":"Equitas Bank", "AU Small Finance Bank":"AU Bank", "HSBC India":"HSBC", "American Express":"Amex",
     "SBM Bank India":"SBM", "Unity Small Finance Bank":"Unity", "CSB Bank":"CSB", "Federal Bank":"Federal",
     "Standard Chartered Bank":"Standard Chartered", "Union Bank of India":"Union Bank", "DBS Bank":"DBS"
   };
@@ -46,7 +46,7 @@
   };
 
   const upiBanks = () => {
-    const names = [...order.filter(b => DATA[b]), ...Object.keys(DATA).filter(b => !order.includes(b))];
+    const names = order.filter(b => DATA[b]);
     return names.flatMap(name => {
       const bank = DATA[name];
       const method = (bank.methods || []).find(m => m.kind === "upi" && m.fields && m.fields[0] && m.fields[0].pattern);
@@ -58,8 +58,8 @@
     });
   };
   const otherBanks = () => {
-    const withId = new Set(upiBanks().map(b => b.name));
-    return Object.keys(DATA).filter(b => !withId.has(b)).sort((a, b) => short(a).localeCompare(short(b)));
+    const hasPublishedUpi = bank => (bank.methods || []).some(m => m.kind === "upi" && m.fields?.[0]?.pattern);
+    return Object.keys(DATA).filter(b => !hasPublishedUpi(DATA[b])).sort((a, b) => short(a).localeCompare(short(b)));
   };
 
   const logo = bank => `<span class="ui-logo" aria-hidden="true"><img src="/assets/bank-logos/${esc(marks[bank] || "")}" alt="" width="28" height="28" decoding="async"></span>`;
