@@ -7,18 +7,18 @@
    text stays easy to read. The footer keeps its own solid background.
    ========================================================================== */
 body {
-  --bd-dot: rgb(0 0 0 / .2);
-  --bd-rule: rgb(0 0 0 / .055);
-  --bd-mark: rgb(0 0 0 / .3);
+  --bd-dot: rgb(0 0 0 / .12);
+  --bd-rule: rgb(0 0 0 / .032);
+  --bd-mark: rgb(0 0 0 / .16);
   --bd-hot: #fc6e20;
-  --bd-hot-rule: rgb(252 110 32 / .4);
+  --bd-hot-rule: rgb(252 110 32 / .28);
 }
 html[data-theme="dark"] body {
-  --bd-dot: rgb(255 255 255 / .17);
-  --bd-rule: rgb(255 255 255 / .06);
-  --bd-mark: rgb(255 255 255 / .3);
+  --bd-dot: rgb(255 255 255 / .1);
+  --bd-rule: rgb(255 255 255 / .035);
+  --bd-mark: rgb(255 255 255 / .16);
   --bd-hot: #ff8a3d;
-  --bd-hot-rule: rgb(255 138 61 / .45);
+  --bd-hot-rule: rgb(255 138 61 / .3);
 }
 body::before,
 body::after {
@@ -34,7 +34,7 @@ body::before {
   --bd-d: var(--bd-dot);
   --bd-r: var(--bd-rule);
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23000' stroke-opacity='.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23000' stroke-opacity='.16'/%3E%3C/svg%3E"),
     radial-gradient(circle at 12px 12px, var(--bd-d) .9px, transparent 1.3px),
     linear-gradient(transparent 60px, var(--bd-r) 60px 61px, transparent 61px),
     linear-gradient(90deg, transparent 60px, var(--bd-r) 60px 61px, transparent 61px);
@@ -44,7 +44,7 @@ body::before {
 }
 html[data-theme="dark"] body::before {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23fff' stroke-opacity='.3'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23fff' stroke-opacity='.16'/%3E%3C/svg%3E"),
     radial-gradient(circle at 12px 12px, var(--bd-d) .9px, transparent 1.3px),
     linear-gradient(transparent 60px, var(--bd-r) 60px 61px, transparent 61px),
     linear-gradient(90deg, transparent 60px, var(--bd-r) 60px 61px, transparent 61px);
@@ -63,7 +63,7 @@ body::after {
   -webkit-mask-image: radial-gradient(170px circle at var(--bd-x, 50%) var(--bd-y, 30%), #000, transparent 75%);
   mask-image: radial-gradient(170px circle at var(--bd-x, 50%) var(--bd-y, 30%), #000, transparent 75%);
 }
-html.bd-pointer body::after { opacity: .9; }
+html.bd-pointer body::after { opacity: .6; }
 @media (hover: none), (prefers-reduced-motion: reduce) {
   body::after { display: none; }
 }
