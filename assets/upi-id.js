@@ -9,7 +9,7 @@
   const DATA = window.PAY_METHODS || {};
   const isNode = typeof document === "undefined";
 
-  const order = ["ICICI Bank", "Axis Bank", "Equitas Small Finance Bank", "AU Small Finance Bank"];
+  const order = ["ICICI Bank", "Axis Bank", "Equitas Small Finance Bank", "AU Small Finance Bank", "SBI Card", "IDFC FIRST Bank", "American Express"];
   const marks = {
     "Axis Bank":"utib.svg", "Kotak Mahindra Bank":"kkbk.svg", "SBI Card":"sbin.svg", "IDFC FIRST Bank":"idfb.svg", "ICICI Bank":"icic.svg",
     "BOBCARD":"barb.svg", "YES BANK":"yesb.svg", "HDFC Bank":"hdfc.svg", "Punjab National Bank":"punb.svg", "Indian Bank":"idib.svg",
