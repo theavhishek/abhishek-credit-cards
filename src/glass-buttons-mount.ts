@@ -11,7 +11,7 @@ import { buildLensMapDataUrl, clamp, MAX_LENS_SURFACE_AREA, type LensRadii } fro
 //   clear: outlined buttons, which become clear glass
 //   ghost: icon buttons that only show glass on hover (the GlassButton ghost variant)
 const GROUPS: [string, string][] = [
-  ["solid", ".ch-btn-primary, .rv-btn-primary, .hm-about-cta, .not-found-btn-primary, .up-btn-solid"],
+  ["solid", ".ch-btn-primary, .rv-btn-primary, .hm-about-cta, .not-found-btn-primary, .up-btn-solid, .py-hero-btn"],
   ["brand", ".wa-follow-btn"],
   ["clear", ".ch-btn-quiet, .rv-btn-quiet, .ce-btn, .up-btn, .up-filter-btn, .not-found-btn, .reset-button, .hm-scroll-btn, .up-sharebar a, .up-sharebar button"],
   ["ghost", ".up-share"],
