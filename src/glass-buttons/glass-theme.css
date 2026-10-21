@@ -1,0 +1,69 @@
+/* Site buttons in the GlassyUI glass-button material (glass-buttons-mount.ts adds the layers).
+   The registry styles in liquid.css sit in a cascade layer, so every site rule already beats them.
+   This file only settles where the two meet: the site keeps each button's size, type and colours,
+   and the glass brings its frost, sheen, rim, press light and resting shadow. */
+
+/* A bare .lg-button brings its own padding, type and display. Where a site rule doesn't set one of
+   these, fall back to the browser default as before, not to the registry's. */
+:where(.lg-button[data-glass]) {
+  display: revert;
+  align-items: revert;
+  justify-content: revert;
+  gap: revert;
+  padding: revert;
+  border: revert;
+  font-weight: revert;
+  letter-spacing: revert;
+  /* Layout containment drops the button's text baseline and paint containment clips the follow button's pulse ring. */
+  contain: none;
+}
+
+/* The glass layers draw the fill, so the host's own background steps aside (the follow button keeps its green). */
+html .lg-button:is([data-glass="solid"], [data-glass="clear"], [data-glass="ghost"]) {
+  background: transparent;
+}
+html .lg-button:is([data-glass="solid"], [data-glass="clear"]) {
+  /* The registry's resting shadow, which lowers under a pointer and a press, in place of the old flat one. */
+  box-shadow: revert-layer;
+  transition:
+    scale 150ms ease-out,
+    opacity 200ms ease-out,
+    border-color 150ms ease,
+    color 150ms ease,
+    --lg-button-rise calc(var(--lg-motion-duration) * 1.6) var(--lg-ease-out);
+}
+
+/* Solid CTAs: the same ink as before, as tinted glass. Hover lightens it as the old hover did. */
+.lg-button[data-glass="solid"] {
+  --lg-button-fill: color-mix(in oklab, var(--text) 88%, transparent);
+  --lg-button-fill-hover: color-mix(in oklab, var(--text) 78%, transparent);
+}
+html[data-theme="dark"] .lg-button[data-glass="solid"] {
+  --lg-button-fill: color-mix(in oklab, var(--text) 92%, transparent);
+  --lg-button-fill-hover: color-mix(in oklab, var(--text) 82%, transparent);
+}
+
+/* WhatsApp follow: its green, sweep and glow stay; the glass adds the sheen, rim and press light on top. */
+.lg-button[data-glass="brand"] {
+  --lg-button-fill: transparent;
+  --lg-button-fill-hover: transparent;
+}
+
+/* Outlined buttons keep their outline; open menus keep their filled look. */
+.lg-button.up-filter-btn[aria-expanded="true"],
+.lg-button.up-share[aria-expanded="true"] {
+  --lg-button-fill: var(--lg-button-fill-hover);
+}
+
+/* Icon share buttons on the feed: ghost glass, only seen on hover or while the menu is open. */
+.lg-button.up-share {
+  --lg-button-fill-hover: var(--up-fill);
+}
+
+/* Share bar on update pages: each network still lights up in its brand colour on hover and focus.
+   The site's tint shows on the button itself, so the glass fill clears out of its way. */
+.up-sharebar a[href].lg-button:is(:hover, :focus-visible, :active) {
+  --lg-button-fill: transparent;
+  --lg-button-fill-hover: transparent;
+  background: color-mix(in srgb, var(--up-brand, var(--text)) 14%, transparent);
+}
