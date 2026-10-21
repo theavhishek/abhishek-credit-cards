@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Credit card UPI ID generator (/credit-card-upi-id)
+   Builds on emi-calc.css (panels, fields, buttons, FAQ) and support-page.css
+   (hero, section heads). The memorable piece is the "slip": the UPI ID shown
+   as its parts, with each part you type filling its own slot.
+   ========================================================================== */
+
+.ui {
+  --ui-slot: var(--ce-accent);
+  --ui-ok: var(--ce-ok);
+  --ui-warn-bg: color-mix(in srgb, #f59e0b 10%, var(--surface));
+}
+html[data-theme="dark"] .ui { --ui-warn-bg: color-mix(in srgb, #f59e0b 12%, var(--surface)); }
+
+/* Narrower form column than the calculators: the slip carries the page. */
+@media (min-width: 1000px) {
+  .ui-calc { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
+}
+
+/* ---------- Bank picker ---------- */
+.ui-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.ui-pick {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--page);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+.ui-pick input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.ui-logo {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.ui-logo img { inline-size: 24px; block-size: 24px; object-fit: contain; }
+@media (hover: hover) { .ui-pick:hover { border-color: color-mix(in srgb, var(--text) 30%, transparent); } }
+.ui-pick:has(input:checked) {
+  border-color: var(--text);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+.ui-pick:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ---------- The slip ---------- */
+.ui-slip { display: grid; gap: 20px; }
+.ui-slip-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.ui-slip-logo {
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.ui-slip-logo img { inline-size: 30px; block-size: 30px; object-fit: contain; }
+.ui-slip-title { font-size: 0.8125rem; font-weight: 500; color: var(--muted); line-height: 1.3; }
+.ui-slip-bank { font-size: 1.0625rem; font-weight: 650; line-height: 1.25; letter-spacing: -0.01em; }
+.ui-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--radius-full);
+  background: var(--surface-muted);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.ui-state::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: currentColor; opacity: 0.7; }
+.ui-state[data-state="ready"] { background: color-mix(in srgb, var(--ui-ok) 14%, var(--surface)); color: var(--ui-ok); }
+.ui-state[data-state="error"] { background: color-mix(in srgb, var(--ce-bad) 12%, var(--surface)); color: var(--ce-bad); }
+@media (max-width: 420px) { .ui-state { grid-column: 1 / -1; justify-self: start; } }
+
+/* The UPI ID itself: fixed parts in grey, your parts in slots that fill as you type. */
+.ui-vpa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 10px;
+  min-height: 4.5rem;
+  padding: 18px 16px 14px;
+  border-radius: 16px;
+  background: var(--page);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-family: var(--site-mono);
+  font-size: clamp(1.0625rem, 0.7rem + 1.5vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  transition: box-shadow 250ms ease;
+}
+.ui-vpa.is-ready { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ui-ok) 55%, transparent); }
+.ui-seg { display: inline-flex; flex-direction: column; gap: 6px; }
+.ui-seg.is-fixed { color: var(--muted); }
+.ui-seg.is-slot > span { display: contents; }
+.ui-seg.is-slot {
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  padding-bottom: 22px;
+}
+.ui-seg.is-slot::before {
+  content: "";
+  position: absolute;
+  inset-inline: 1px;
+  bottom: 18px;
+  block-size: 2px;
+  border-radius: 2px;
+  background: var(--ui-slot);
+  opacity: 0.55;
+  transition: background-color 200ms ease, opacity 200ms ease;
+}
+.ui-seg.is-slot::after {
+  content: attr(data-label);
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  color: var(--soft);
+  font-family: var(--site-font, inherit);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.ui-seg.is-full::before { background: var(--ui-ok); opacity: 0.8; }
+.ui-typed { color: var(--text); font-weight: 600; }
+.ui-rest { color: var(--soft); opacity: 0.6; }
+
+.ui-slip-body { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: start; }
+.ui-qr {
+  display: grid;
+  place-items: center;
+  inline-size: 168px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.ui-qr svg { display: block; inline-size: 100%; block-size: 100%; }
+.ui-qr.is-empty { background: var(--page); box-shadow: inset 0 0 0 1px var(--line-strong); border: 0; }
+.ui-qr-empty { padding: 16px; color: var(--muted); font-size: 0.75rem; line-height: 1.45; text-align: center; text-wrap: balance; }
+.ui-qr:not(.is-empty) svg { animation: ui-qr-in 320ms var(--ease-out, ease) both; }
+@keyframes ui-qr-in { from { opacity: 0; scale: 0.96; } }
+@media (prefers-reduced-motion: reduce) { .ui-qr:not(.is-empty) svg { animation: none; } }
+
+.ui-actions { display: grid; gap: 8px; justify-items: start; }
+.ui-actions .ce-btn { min-height: 44px; }
+.ui-actions .ce-btn:disabled,
+.ui-actions .ce-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+.ui-actions .ce-btn:disabled:active { scale: 1; }
+.ui-actions .ce-status { max-inline-size: 30ch; }
+
+@media (max-width: 459px) {
+  .ui-slip-body { grid-template-columns: minmax(0, 1fr); }
+  .ui-qr { inline-size: min(220px, 100%); justify-self: center; }
+  .ui-actions { justify-items: stretch; }
+  .ui-actions .ce-btn { justify-content: center; }
+}
+
+/* Bank facts under the slip */
+.ui-facts { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.ui-fact {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.ui-fact:last-child { border-bottom: 0; padding-bottom: 0; }
+.ui-fact-k { color: var(--muted); }
+.ui-fact a { color: var(--text); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+.ui-fact.is-warn { margin-block: 6px; padding: 11px 12px; border: 0; border-radius: 12px; background: var(--ui-warn-bg); }
+.ui-fact.is-warn .ui-fact-k { color: var(--ce-warn); font-weight: 600; }
+.ui-time.is-fast { color: var(--ui-ok); font-weight: 600; }
+.ui-time.is-mid { color: var(--ce-warn); font-weight: 600; }
+.ui-time.is-slow { color: var(--ce-bad); font-weight: 600; }
+@media (max-width: 459px) { .ui-fact { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* ---------- Sections ---------- */
+.ui-steps { display: grid; gap: 12px; counter-reset: ui-step; }
+@media (min-width: 760px) { .ui-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ui-steps li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  counter-increment: ui-step;
+}
+.ui-steps li::before {
+  content: counter(ui-step);
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.ui-steps b { font-size: 1rem; font-weight: 650; }
+.ui-steps span { color: var(--muted); font-size: 0.875rem; line-height: 1.5; text-wrap: pretty; }
+
+.ui-others-lead { max-inline-size: 68ch; margin-bottom: 16px !important; color: var(--muted); font-size: 0.9375rem; line-height: 1.6; text-wrap: pretty; }
+.ui-others { display: flex; flex-wrap: wrap; gap: 8px; }
+.ui-others a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 14px 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  font-size: 0.875rem;
+  font-weight: 550;
+  transition: border-color 150ms ease;
+}
+.ui-others img { inline-size: 22px; block-size: 22px; padding: 2px; border-radius: 50%; background: #fff; object-fit: contain; }
+.ui-others a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .ui-others a:hover { border-color: var(--line-strong); } }

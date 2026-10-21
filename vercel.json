@@ -103,6 +103,17 @@
       "permanent": true
     },
     {
+      "source": "/credit-card-upi-id",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/credit-card-upi-id",
+      "permanent": true
+    },
+    {
       "source": "/updates",
       "has": [
         {

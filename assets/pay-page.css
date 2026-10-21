@@ -350,3 +350,6 @@ html[data-theme="dark"] .sp-bank-name .py-live::before { background: #4ade80; }
 @media print {
   .py-copy, .py-help, .py-filters { display: none; }
 }
+
+/* Second hero link: the UPI ID generator */
+.py .sp-hero-link + .sp-hero-link { margin-inline-start: 20px; }
