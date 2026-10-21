@@ -351,5 +351,21 @@ html[data-theme="dark"] .sp-bank-name .py-live::before { background: #4ade80; }
   .py-copy, .py-help, .py-filters { display: none; }
 }
 
-/* Second hero link: the UPI ID generator */
-.py .sp-hero-link + .sp-hero-link { margin-inline-start: 20px; }
+/* Hero button: the UPI ID generator (glass-buttons.js adds the glass layers) */
+.py-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  margin-top: 20px;
+  padding-inline: 20px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--page);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.py-hero-btn svg { flex: none; }
