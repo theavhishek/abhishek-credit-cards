@@ -236,11 +236,8 @@
     els.qr.innerHTML = `<svg viewBox="-3 -3 ${n + 6} ${n + 6}" role="img" aria-label="UPI QR code for ${esc(ready)}" shape-rendering="crispEdges"><rect x="-3" y="-3" width="${n + 6}" height="${n + 6}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
   }
 
-  // The pay page's "how" lines end with a colon that leads into the ID; finish the sentence here.
-  const howText = how => {
-    const text = how.trim().replace(/:$/, "").replace(/\b(to|enter)$/, "$1 this UPI ID");
-    return /[.!?]$/.test(text) ? text : text + ".";
-  };
+  // Same steps for every bank (Abhishek's wording), rather than each bank's own "how" line.
+  const HOW = "Copy this UPI ID or scan the QR code in any UPI app, like PhonePe, Google Pay, Paytm, CRED or BHIM. Check the payee details, then pay.";
 
   // UPI card payments usually post almost instantly in practice; Amex is the exception and keeps
   // its own stated time. Where a bank states a longer time, that wording is still shown below.
@@ -249,7 +246,7 @@
     if (STATED_TIME_ONLY.includes(bank.name)) {
       return m.time ? `<li class="ui-fact"><span class="ui-fact-k">Posting time</span><span class="ui-time${speedCls}">${esc(m.time)}</span></li>` : "";
     }
-    const stated = m.time && !/not stated/i.test(m.time) ? `<span class="ui-fact-sub">${esc(bank.name)} states: ${esc(m.time)}</span>` : "";
+    const stated = m.time && !/not stated|instant/i.test(m.time) ? `<span class="ui-fact-sub">${esc(bank.name)} states: ${esc(m.time)}</span>` : "";
     return `<li class="ui-fact"><span class="ui-fact-k">Posting time</span><span><span class="ui-time is-fast">Almost instant</span>${stated}</span></li>`;
   }
 
@@ -260,7 +257,7 @@
     const verify = "Before you pay, check that your UPI app shows " + bank.name + " (or its card division) as the payee. If it shows anyone else, don’t pay.";
     els.facts.innerHTML = [
       postingTime(m, speedCls),
-      m.how ? `<li class="ui-fact"><span class="ui-fact-k">How</span><span>${esc(howText(m.how))}</span></li>` : "",
+      `<li class="ui-fact"><span class="ui-fact-k">How</span><span>${esc(HOW)}</span></li>`,
       m.note ? `<li class="ui-fact"><span class="ui-fact-k">Bank’s note</span><span>${esc(m.note)}</span></li>` : "",
       `<li class="ui-fact is-warn"><span class="ui-fact-k">Payee check</span><span>${esc(verify)}</span></li>`,
       src ? `<li class="ui-fact"><span class="ui-fact-k">Source</span><span><a href="${esc(src.url)}" target="_blank" rel="noopener noreferrer">${esc(src.label)}<span class="sr-only"> (opens in a new tab)</span></a>, checked ${esc(fmtDate(bank.checked))}</span></li>` : ""
