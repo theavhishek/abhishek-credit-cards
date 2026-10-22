@@ -92,6 +92,18 @@ test("markdown escapes HTML and only allows safe links", () => {
   assert.equal(problems.length, 1);
 });
 
+test("markdown tables render as review-style tables", () => {
+  const problems = [];
+  const { html } = renderMarkdown("## Fees\n\n| Due | Fee |\n|---|---|\n| ₹500 or less | **NIL** |\n| <b>x</b> | ₹500 |", problems);
+  assert.match(html, /<div class="rv-table-wrap" role="region" aria-label="Fees" tabindex="0"><table class="rv-table">/);
+  assert.match(html, /<thead><tr><th scope="col">Due<\/th><th scope="col">Fee<\/th><\/tr><\/thead>/);
+  assert.match(html, /<td><strong>NIL<\/strong><\/td>/);
+  assert.match(html, /&lt;b&gt;x/);
+  assert.equal(problems.length, 0);
+  renderMarkdown("| a | b |\n| c | d |", problems);
+  assert.equal(problems.length, 1);
+});
+
 test("filters: default view hides ended and unverified offers", () => {
   const now = ist("2026-10-14 12:00");
   const items = [

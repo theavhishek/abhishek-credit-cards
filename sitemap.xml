@@ -93,9 +93,15 @@
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>
-    <lastmod>2026-10-14</lastmod>
+    <lastmod>2026-10-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avhishek.in/updates/pnb-credit-card-charges-revised-november-2026</loc>
+    <lastmod>2026-10-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avhishek.in/updates/pnb-navratri-dussehra-cashback-2026</loc>
