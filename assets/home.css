@@ -75,6 +75,10 @@ html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
     animation: hm-soon-sheen 3.2s ease-in-out 900ms infinite;
   }
 }
+@media (max-width: 640px) {
+  .hm-soon { gap: 7px; margin-bottom: 16px !important; padding: 5px 11px 5px 10px; font-size: 0.75rem; }
+  .hm-soon-dot { width: 6px; height: 6px; }
+}
 @keyframes hm-soon-in { from { opacity: 0; transform: translateY(6px) scale(0.97); } }
 @keyframes hm-soon-ping { 0% { opacity: 0.55; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(2.8); } }
 @keyframes hm-soon-sheen { 0% { background-position: 160% 0, 0 0; } 60%, 100% { background-position: -60% 0, 0 0; } }
