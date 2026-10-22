@@ -230,7 +230,10 @@ function buildArticle(item) {
     ? `<div class="up-item-top"><span class="up-kicker">${esc(core.categoryLabel(item.category))}</span><span class="up-confirm" data-confirm="${esc(conf)}">${core.CONFIRMATION[conf]}</span></div>`
     : `<div class="up-item-top"><span class="up-kicker">${esc(core.categoryLabel(item.category))}</span></div>`;
 
-  const byline = `By <strong>Abhishek Meena</strong>, ${item.updated ? `published <time datetime="${core.isoDate(item.published)}">${esc(longDate(item.published))}</time>, updated <time datetime="${core.isoDate(item.updated)}">${esc(longDate(item.updated))}</time>` : `published <time datetime="${core.isoDate(item.published)}">${esc(longDate(item.published))}</time>`}. About ${minutes} minute${minutes === 1 ? "" : "s"} to read.`;
+  // Same two-line byline as the card reviews: name, then last-update date · read time.
+  const shown = lastChanged(item);
+  const reviewDate = new Date(`${core.isoDate(shown)}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+  const byline = `<strong>Abhishek Meena</strong><span class="rv-byline-meta"><time datetime="${core.isoDate(shown)}">${esc(reviewDate)}</time><span aria-hidden="true">·</span><span>${minutes} min read</span></span>`;
 
   const figure = item.image
     ? `<figure class="up-article-figure${item.image.height > item.image.width ? " is-portrait" : ""}"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" width="${item.image.width}" height="${item.image.height}" fetchpriority="high"></figure>`
@@ -274,8 +277,8 @@ function buildArticle(item) {
         <h1>${esc(item.title)}</h1>
         <p class="rv-dek">${esc(item.summary)}</p>
         <p class="rv-byline">
-          <img src="/assets/abhishek-face-96.jpg" alt="" width="36" height="36">
-          <span>${byline}</span>
+          <img src="/assets/abhishek-face-96.jpg" alt="" width="44" height="44">
+          <span class="rv-byline-copy">${byline}</span>
         </p>
       </div>
     </header>

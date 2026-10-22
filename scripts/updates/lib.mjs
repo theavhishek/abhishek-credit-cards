@@ -117,7 +117,7 @@ export function parseFrontmatter(source) {
   return { data, body };
 }
 
-/* ---------- Markdown (paragraphs, ## and ### headings, lists, quotes, links) ---------- */
+/* ---------- Markdown (paragraphs, ## and ### headings, lists, quotes, tables, links) ---------- */
 
 const esc = core.esc;
 
@@ -150,20 +150,43 @@ export function renderMarkdown(source, problems = []) {
   let para = [];
   let list = null;
   let quote = [];
+  let table = [];
+  let lastHeading = "";
+  const cells = (row) => row.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  const flushTable = () => {
+    if (!table.length) return;
+    const rows = table.map(cells);
+    table = [];
+    if (rows.length < 2 || !rows[1].every((c) => /^:?-{3,}:?$/.test(c))) {
+      problems.push("A table needs a header row, then a |---| row, then its rows.");
+      return;
+    }
+    const [head, , ...body] = rows;
+    const th = head.map((c) => `<th scope="col">${inline(c, problems)}</th>`).join("");
+    const tr = body.map((r) => `<tr>${head.map((_, n) => `<td>${inline(r[n] || "", problems)}</td>`).join("")}</tr>`).join("");
+    html.push(`<div class="rv-table-wrap" role="region" aria-label="${esc(lastHeading || "Table")}" tabindex="0"><table class="rv-table"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`);
+  };
   const flushPara = () => { if (para.length) { html.push(`<p>${inline(para.join(" "), problems)}</p>`); para = []; } };
   const flushList = () => { if (list) { html.push(`<${list.tag}>${list.items.map((t) => `<li>${inline(t, problems)}</li>`).join("")}</${list.tag}>`); list = null; } };
   const flushQuote = () => { if (quote.length) { html.push(`<blockquote class="up-quote"><p>${inline(quote.join(" "), problems)}</p></blockquote>`); quote = []; } };
-  const flushAll = () => { flushPara(); flushList(); flushQuote(); };
+  const flushAll = () => { flushPara(); flushList(); flushQuote(); flushTable(); };
 
   for (const raw of lines) {
     const line = raw.trimEnd();
     if (!line.trim()) { flushAll(); continue; }
     let m;
+    if (/^\|/.test(line.trim())) {
+      flushPara(); flushList(); flushQuote();
+      table.push(line);
+      continue;
+    }
+    flushTable();
     if ((m = /^(#{1,6})\s+(.*)$/.exec(line))) {
       flushAll();
       if (m[1].length === 1) { problems.push("Use ## for headings in the body; the title is the page's only top heading."); continue; }
       if (m[1].length > 3) { problems.push(`Heading "${m[2]}" is too deep; use ## or ###.`); continue; }
       const id = slugify(m[2]);
+      lastHeading = m[2].replace(/[*_`]/g, "");
       if (m[1].length === 2) headings.push({ id, text: m[2] });
       html.push(`<h${m[1].length} id="${id}">${inline(m[2], problems)}</h${m[1].length}>`);
     } else if ((m = /^\s*[-*]\s+(.*)$/.exec(line))) {
