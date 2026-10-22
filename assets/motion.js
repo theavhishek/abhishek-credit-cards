@@ -59,9 +59,8 @@
     tabBar.addEventListener("focusin", () => root.classList.remove("nav-compact"));
   }
 
-  // Tools sheet (#navTools): a native popover. Phones open it from the tab bar, wider
-  // screens from the Tools button in the bar, where it drops down right-aligned under
-  // the button. Browsers without popover support get a plain toggle.
+  // Explore sheet (#navTools): a native popover. Phones open it from the tab bar, wider
+  // screens from the Explore button in the bar, where it drops down under the button. Browsers without popover support get a plain toggle.
   const toolsSheet = document.getElementById("navTools");
   const toolsButtons = document.querySelectorAll(".nav-tools-toggle, .nav-tools-menu");
   if (toolsSheet && toolsButtons.length) {
@@ -71,7 +70,7 @@
       const rect = button.getBoundingClientRect();
       const bar = button.closest(".topbar-shell")?.getBoundingClientRect() ?? rect;
       toolsSheet.style.setProperty("--nav-menu-top", `${Math.round(bar.bottom + 8)}px`);
-      toolsSheet.style.setProperty("--nav-menu-right", `${Math.max(12, Math.round(innerWidth - rect.right - 6))}px`);
+      toolsSheet.style.setProperty("--nav-menu-left", `${Math.max(12, Math.round(rect.left - 6))}px`);
     };
     toolsSheet.addEventListener("beforetoggle", event => { if (event.newState === "open") place(); });
     addEventListener("resize", () => { if (toolsSheet.matches(".is-open")) place(); try { if (toolsSheet.matches(":popover-open")) toolsSheet.hidePopover(); } catch {} });
