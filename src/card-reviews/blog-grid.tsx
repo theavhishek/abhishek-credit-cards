@@ -177,7 +177,7 @@ export function BlogGrid({
     const href = getHref?.(post);
     const inner = <>
       {post.image && <motion.div layoutId={reduced ? undefined : `${uid}-image-${post.id}`} transition={morph} className={styles.imageFrame}>
-        <img className={styles.image} src={post.image.src} alt={post.image.alt} loading={isFeatured ? "eager" : "lazy"} referrerPolicy="no-referrer" />
+        <img className={styles.image} src={post.image.src} srcSet={post.image.srcset} sizes={post.image.srcset ? (isFeatured ? "(min-width: 1024px) 640px, 92vw" : "(min-width: 1024px) 380px, (min-width: 600px) 46vw, 92vw") : undefined} alt={post.image.alt} loading={isFeatured ? "eager" : "lazy"} fetchPriority={isFeatured ? "high" : undefined} referrerPolicy="no-referrer" />
       </motion.div>}
       <div className={styles.cardBody}>
         <Meta post={post} />

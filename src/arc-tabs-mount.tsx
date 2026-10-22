@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Tabs, TabsList, TabsTrigger } from "./arc/tabs/tabs";
 import "./arc-tabs/tabs-theme.css";
@@ -31,8 +31,10 @@ function selected(items: Item[]) {
   return on?.value ?? "";
 }
 
-function GroupTabs({ group, items }: { group: HTMLElement; items: Item[] }) {
+function GroupTabs({ group, items, onMount }: { group: HTMLElement; items: Item[]; onMount: () => void }) {
   const [value, setValue] = useState(() => selected(items));
+  // Hide the originals in the same commit that shows the tabs, so the page never paints the gap (layout shift).
+  useLayoutEffect(onMount, [onMount]);
   useEffect(() => {
     // Nav links: the page you're on never changes in place, but Back can restore this page after a tab was picked.
     if (items.some(item => item.href)) {
@@ -84,22 +86,22 @@ function GroupTabs({ group, items }: { group: HTMLElement; items: Item[] }) {
 
 export function mountArcTabs() {
   document.querySelectorAll<HTMLElement>("[data-arc-tabs]").forEach(group => {
-    if (group.dataset.arcMounted) return;
+    if (group.dataset.arcMounting) return;
     const items = readItems(group);
     if (items.length < 2) return;
-    group.dataset.arcMounted = "true";
     const mount = document.createElement("div");
     mount.className = `arc-tabs arc-tabs--${group.dataset.arcTabs || "default"}`;
     // A group that holds only its options is swapped whole; one that also holds other controls keeps them.
     const onlyItems = Array.from(group.children).every(child => items.some(item => item.el === child));
-    if (group.dataset.arcKeep !== undefined) group.before(mount);
-    else if (onlyItems) {
-      group.before(mount);
-      group.hidden = true;
-    } else {
-      items[0].el.before(mount);
-      items.forEach(item => { item.el.hidden = true; });
-    }
-    createRoot(mount).render(<GroupTabs group={group} items={items} />);
+    if (group.dataset.arcKeep !== undefined || onlyItems) group.before(mount);
+    else items[0].el.before(mount);
+    group.dataset.arcMounting = "true";
+    const onMount = () => {
+      group.dataset.arcMounted = "true";
+      if (group.dataset.arcKeep !== undefined) return;
+      if (onlyItems) group.hidden = true;
+      else items.forEach(item => { item.el.hidden = true; });
+    };
+    createRoot(mount).render(<GroupTabs group={group} items={items} onMount={onMount} />);
   });
 }

@@ -21,7 +21,7 @@ avhishek.in: Abhishek Meena's personal credit-card site (portfolio, card reviews
   - `pay-credit-card-bill.html`, `card-reviews.html`, `disclaimer.html`, `404.html`
   - `card-reviews/<slug>.html` → individual reviews
   - `updates.html` → `/updates` (news and offers), plus generated `updates/<slug>.html`, `updates/archive.html` and `updates/feed.xml`
-- Routing, redirects and security headers live in `vercel.json` (`cleanUrls`, host-based rewrites). `_headers` and `CNAME` are leftovers that Vercel ignores; don't rely on them.
+- Routing, redirects and security headers live in `vercel.json` (`cleanUrls`, host-based rewrites). `.vercelignore` keeps repo-only files (docs, sources, scripts, agent notes) off the live site; add new non-site folders there.
 - Data lives in plain JS globals: `window.PORTFOLIO_DATA` (`assets/data.js`), `window.SUPPORT_CONTACTS` (`support-data.js`), `window.PAY_METHODS` (`pay-data.js`, with its sourcing rules in the file header).
 - News and offers: one Markdown file per item in `content/updates/`. `pnpm build:updates` validates them and writes the generated files, which are committed (Vercel has no build step). Status, filters and card markup live in `assets/updates-core.js`, shared by the build and the browser. Full guide: `docs/publishing-updates.md`.
 - The only other compiled piece is the card-reviews grid: React 19 + motion in `src/`, bundled by `pnpm build:reviews` into `assets/card-reviews-react.js`. The bundle is committed; rebuild and commit it whenever `src/` changes. Review list data is in `src/card-reviews/blog-grid-data.ts`.
