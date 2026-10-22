@@ -1,0 +1,7 @@
+# Repo-only files: not part of the live site (Vercel serves the repo root as-is).
+CLAUDE.md
+AGENTS.md
+src
+scripts
+docs
+.agents

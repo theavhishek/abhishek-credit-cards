@@ -3,7 +3,7 @@
 export type BlogAuthor = { name: string; avatar?: string; role?: string };
 export type BlogPost = {
   id: string; title: string; excerpt: string; category: string; date: string;
-  readTime: number; author: BlogAuthor; image?: { src: string; alt: string };
+  readTime: number; author: BlogAuthor; image?: { src: string; alt: string; srcset?: string };
   body?: string[]; featured?: boolean;
 };
 export const blogCategories = ["Cashback","Launched","Pre-launch"];
@@ -18,11 +18,12 @@ export const blogPosts: BlogPost[] = [
     "author": {
       "name": "Abhishek Meena",
       "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face.jpg"
+      "avatar": "/assets/abhishek-face-96.jpg"
     },
     "image": {
       "src": "/assets/reviews/rbl-jalsa-credit-card.jpg",
-      "alt": "Illustration of the RBL Bank Jalsa RuPay credit card: a pink-to-purple card with the word Jalsa, a chip and the RuPay name"
+      "alt": "Illustration of the RBL Bank Jalsa RuPay credit card: a pink-to-purple card with the word Jalsa, a chip and the RuPay name",
+      "srcset": "/assets/reviews/rbl-jalsa-credit-card-800.webp 800w, /assets/reviews/rbl-jalsa-credit-card-1200.webp 1200w, /assets/reviews/rbl-jalsa-credit-card.jpg 1600w"
     },
     "featured": false
   },
@@ -36,11 +37,12 @@ export const blogPosts: BlogPost[] = [
     "author": {
       "name": "Abhishek Meena",
       "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face.jpg"
+      "avatar": "/assets/abhishek-face-96.jpg"
     },
     "image": {
       "src": "/assets/reviews/eternal-sbi-card.jpg",
-      "alt": "Eternal SBI Card: a black card with the eternal logo above Zomato, Blinkit and District, and the SBI Card logo at the bottom"
+      "alt": "Eternal SBI Card: a black card with the eternal logo above Zomato, Blinkit and District, and the SBI Card logo at the bottom",
+      "srcset": "/assets/reviews/eternal-sbi-card-800.webp 800w, /assets/reviews/eternal-sbi-card-1200.webp 1200w, /assets/reviews/eternal-sbi-card.jpg 1600w"
     },
     "featured": false
   },
@@ -54,7 +56,7 @@ export const blogPosts: BlogPost[] = [
     "author": {
       "name": "Abhishek Meena",
       "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face.jpg"
+      "avatar": "/assets/abhishek-face-96.jpg"
     },
     "image": {
       "src": "/assets/reviews/hsbc-live-plus.jpg",
@@ -72,11 +74,12 @@ export const blogPosts: BlogPost[] = [
     "author": {
       "name": "Abhishek Meena",
       "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face.jpg"
+      "avatar": "/assets/abhishek-face-96.jpg"
     },
     "image": {
       "src": "/assets/reviews/slice-business-credit-card.jpg",
-      "alt": "Slice Business credit cards: two dark purple cards with the slice business logo, one on Visa and one on RuPay"
+      "alt": "Slice Business credit cards: two dark purple cards with the slice business logo, one on Visa and one on RuPay",
+      "srcset": "/assets/reviews/slice-business-credit-card-800.webp 800w, /assets/reviews/slice-business-credit-card-1200.webp 1200w, /assets/reviews/slice-business-credit-card.jpg 1600w"
     },
     "featured": false
   }

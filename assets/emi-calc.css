@@ -137,7 +137,7 @@ html[data-theme="dark"] .ce {
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
 }
 .ce-range::-moz-range-thumb { inline-size: 18px; block-size: 18px; border-radius: 50%; border: 2px solid var(--text); background: var(--surface); }
-.ce-range-scale { display: flex; justify-content: space-between; color: var(--soft); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.ce-range-scale { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
 
 /* Segmented choices (radio groups) */
 .ce-seg { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -356,6 +356,7 @@ html[data-theme="dark"] .ce-note { background: color-mix(in srgb, var(--surface-
 .ce-badge.is-warn { background: color-mix(in srgb, var(--ce-warn) 16%, transparent); color: var(--ce-warn); }
 .ce-badge.is-bad { background: color-mix(in srgb, var(--ce-bad) 12%, transparent); color: var(--ce-bad); }
 html:not([data-theme="dark"]) .ce-badge.is-warn { color: #8a5300; }
+html:not([data-theme="dark"]) .ce-badge.is-ok { color: #166534; } /* #15803d sat at 4.1:1 on its tint */
 .ce-explain { margin-top: 14px; font-size: 0.9375rem; line-height: 1.55; }
 
 /* Verdict (No-Cost EMI) */

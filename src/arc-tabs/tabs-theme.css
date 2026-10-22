@@ -25,6 +25,8 @@
 .arc-tabs [role="tab"]:focus, .arc-tabs [role="tab"]:focus-visible { outline: none; }
 .arc-tabs button:not([role="tab"]):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .arc-tabs [role="tab"][data-state="active"] { font-weight: 600; }
+/* Day mode: unselected labels in --muted sat just under 4.5:1 on the grey track. The navbar sets its own colour. */
+html:not([data-theme="dark"]) .arc-tabs:not(.arc-tabs--nav) { --text-muted: #5e5e63; }
 
 /* /updates: All updates, News, Offers */
 .arc-tabs--updates { flex: none; }

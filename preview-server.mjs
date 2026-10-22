@@ -48,7 +48,9 @@ const server = http.createServer((req, res) => {
   } else if (pathname === "/disclaimer") {
     pathname = "/disclaimer.html";
   } else if (pathname === "/coming-soon") {
-    pathname = "/coming-soon.html";
+    // Retired page: production redirects it home (vercel.json).
+    res.writeHead(308, { Location: "/" });
+    return res.end();
   }
 
   let filePath = path.join(__dirname, pathname);

@@ -35,6 +35,8 @@ const match = (s, regex, name) => {
   if (!result) throw new Error("Missing " + name);
   return result[1];
 };
+// Article bylines use the long form ("October 15, 2026").
+const longDate = (date) => new Intl.DateTimeFormat("en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T00:00:00Z"));
 const formatDate = (date) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(date + "T00:00:00Z"));
 
 function extract(filename) {
@@ -45,7 +47,8 @@ function extract(filename) {
   const title = heading.replace(/(?::\s*the full review|\s+(?:review|preview))$/i, "").trim();
   const byline = match(hero, /<p class="rv-byline">([\s\S]*?)<\/p>/, slug + " byline");
   const date = match(byline, /<time datetime="(\d{4}-\d{2}-\d{2})"/, slug + " updated date");
-  const readTime = Number(match(byline, /About (\d+) minutes? to read/i, slug + " reading time"));
+  // Bylines read "9 min read" (older ones said "About 9 minutes to read").
+  const readTime = Number(match(byline, /(\d+) (?:min read|minutes? to read)/i, slug + " reading time"));
   const excerpt = plain(match(hero, /<p class="rv-dek">([\s\S]*?)<\/p>/, slug + " introductory summary"));
   const intro = excerpt.length > 220 ? excerpt.slice(0, 217).replace(/\s+\S*$/, "") + "…" : excerpt;
   const status = (hero.match(/<p class="pv-status">([\s\S]*?)<\/p>/) || [,""])[1];
@@ -58,7 +61,7 @@ function extract(filename) {
   if (!image.src.startsWith("/assets/reviews/")) throw new Error(slug + ": expected a local review hero image");
   const img = { src: image.src, alt: image.alt, srcset: attribute(imgTag,"srcset"), width: attribute(imgTag,"width"), height: attribute(imgTag,"height"), referrerpolicy: attribute(imgTag,"referrerpolicy") };
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !readTime || !title || !intro) throw new Error("Invalid review details: " + slug);
-  return { id: slug, title, excerpt: intro, category, date, readTime, author: { name: "Abhishek Meena", role: "Independent card reviewer", avatar: "/assets/abhishek-face.jpg" }, image, img };
+  return { id: slug, title, excerpt: intro, category, date, readTime, author: { name: "Abhishek Meena", role: "Independent card reviewer", avatar: "/assets/abhishek-face-96.jpg" }, image, img };
 }
 
 const posts = readdirSync(reviewDir).filter(x => x.endsWith(".html")).map(extract).sort((a,b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
@@ -73,12 +76,12 @@ const source = [
   "export type BlogAuthor = { name: string; avatar?: string; role?: string };",
   "export type BlogPost = {",
   "  id: string; title: string; excerpt: string; category: string; date: string;",
-  "  readTime: number; author: BlogAuthor; image?: { src: string; alt: string };",
+  "  readTime: number; author: BlogAuthor; image?: { src: string; alt: string; srcset?: string };",
   "  body?: string[]; featured?: boolean;",
   "};",
   "export const blogCategories = " + JSON.stringify(categories) + ";",
   "export const blogPosts: BlogPost[] = " + JSON.stringify(posts.map(p => ({
-    id:p.id,title:p.title,excerpt:p.excerpt,category:p.category,date:p.date,readTime:p.readTime,author:p.author,image:p.image,featured:false
+    id:p.id,title:p.title,excerpt:p.excerpt,category:p.category,date:p.date,readTime:p.readTime,author:p.author,image:p.img.srcset ? { ...p.image, srcset: p.img.srcset } : p.image,featured:false
   })),null,2) + ";",
   ""
 ].join("\n");
@@ -123,7 +126,7 @@ write("home.html", home);
 // The static review listing remains useful to crawlers and before React boots.
 let listing = read("card-reviews.html");
 const staticList = '        <ul class="reviews-static-list">\n' +
-  posts.map(p => '          <li>\n            <article>\n              <p class="reviews-static-meta">' + escape(p.category) + ' · <time datetime="' + p.date + '">' + formatDate(p.date) + '</time> · ' + p.readTime + ' min read</p>\n              <h2><a href="/card-reviews/' + escape(p.id) + '">' + escape(p.title) + '</a></h2>\n              <p>' + escape(p.excerpt) + '</p>\n              <p class="reviews-static-meta">By Abhishek Meena</p>\n            </article>\n          </li>').join("\n") +
+  posts.map(p => '          <li>\n            <article>\n              <p class="reviews-static-meta">' + escape(p.category) + '</p>\n              <h2><a href="/card-reviews/' + escape(p.id) + '">' + escape(p.title) + '</a></h2>\n              <p>' + escape(p.excerpt) + '</p>\n              <p class="reviews-static-byline"><strong>Abhishek Meena</strong><span><time datetime="' + p.date + '">' + longDate(p.date) + '</time> · ' + p.readTime + ' min read</span></p>\n            </article>\n          </li>').join("\n") +
   '\n        </ul>';
 const staticRegex = /^[ \t]*<ul class="reviews-static-list">[\s\S]*?<\/ul>/gm;
 if ([...listing.matchAll(staticRegex)].length!==1) throw new Error("Expected exactly one static listing");
