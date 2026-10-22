@@ -27,6 +27,57 @@ html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
   padding-block: 40px 8px;
   text-align: center;
 }
+/* "Coming soon" badge above the headline: pulsing brand dot, light sweep
+   across the text. Rests as a plain pill under reduced motion. */
+.hm-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px !important;
+  padding: 7px 14px 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  box-shadow: var(--shadow);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-align: center;
+}
+.hm-soon-dot {
+  position: relative;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hm-orange);
+}
+.hm-soon-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--hm-orange);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .hm-soon { animation: hm-soon-in 640ms var(--hm-ease) both; }
+  .hm-soon-dot::after { animation: hm-soon-ping 2s cubic-bezier(0, 0, 0.2, 1) 700ms infinite; }
+  .hm-soon-text {
+    background:
+      linear-gradient(105deg, transparent 38%, var(--hm-orange-text) 50%, transparent 62%) 160% 0 / 250% 100% no-repeat,
+      linear-gradient(var(--muted), var(--muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hm-soon-sheen 3.2s ease-in-out 900ms infinite;
+  }
+}
+@keyframes hm-soon-in { from { opacity: 0; transform: translateY(6px) scale(0.97); } }
+@keyframes hm-soon-ping { 0% { opacity: 0.55; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(2.8); } }
+@keyframes hm-soon-sheen { 0% { background-position: 160% 0, 0 0; } 60%, 100% { background-position: -60% 0, 0 0; } }
 .hm-title {
   max-width: 14ch;
   color: var(--text);
