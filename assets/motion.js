@@ -59,6 +59,20 @@
     tabBar.addEventListener("focusin", () => root.classList.remove("nav-compact"));
   }
 
+  // Phone Tools sheet: a native popover. Browsers without popover support get a plain toggle.
+  const toolsSheet = document.getElementById("navTools");
+  const toolsButton = document.querySelector(".nav-tools-toggle");
+  if (toolsSheet && toolsButton && !HTMLElement.prototype.hasOwnProperty("popover")) {
+    const setOpen = open => {
+      toolsSheet.classList.toggle("is-open", open);
+      toolsButton.setAttribute("aria-expanded", String(open));
+    };
+    setOpen(false);
+    toolsButton.addEventListener("click", event => { event.stopPropagation(); setOpen(!toolsSheet.classList.contains("is-open")); });
+    document.addEventListener("click", event => { if (!toolsSheet.contains(event.target)) setOpen(false); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") setOpen(false); });
+  }
+
   // Bottom-edge blur band (styled in polish.css): decorative, so hidden from assistive tech.
   const edge = document.createElement("div");
   edge.className = "pl-edge-blur";
