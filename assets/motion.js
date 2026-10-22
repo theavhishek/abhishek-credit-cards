@@ -59,18 +59,33 @@
     tabBar.addEventListener("focusin", () => root.classList.remove("nav-compact"));
   }
 
-  // Phone Tools sheet: a native popover. Browsers without popover support get a plain toggle.
+  // Tools sheet (#navTools): a native popover. Phones open it from the tab bar, wider
+  // screens from the Tools button in the bar, where it drops down right-aligned under
+  // the button. Browsers without popover support get a plain toggle.
   const toolsSheet = document.getElementById("navTools");
-  const toolsButton = document.querySelector(".nav-tools-toggle");
-  if (toolsSheet && toolsButton && !HTMLElement.prototype.hasOwnProperty("popover")) {
-    const setOpen = open => {
-      toolsSheet.classList.toggle("is-open", open);
-      toolsButton.setAttribute("aria-expanded", String(open));
+  const toolsButtons = document.querySelectorAll(".nav-tools-toggle, .nav-tools-menu");
+  if (toolsSheet && toolsButtons.length) {
+    const place = () => {
+      const button = document.querySelector(".nav-tools-menu");
+      if (phone.matches || !button) return;
+      const rect = button.getBoundingClientRect();
+      const bar = button.closest(".topbar-shell")?.getBoundingClientRect() ?? rect;
+      toolsSheet.style.setProperty("--nav-menu-top", `${Math.round(bar.bottom + 8)}px`);
+      toolsSheet.style.setProperty("--nav-menu-right", `${Math.max(12, Math.round(innerWidth - rect.right - 6))}px`);
     };
-    setOpen(false);
-    toolsButton.addEventListener("click", event => { event.stopPropagation(); setOpen(!toolsSheet.classList.contains("is-open")); });
-    document.addEventListener("click", event => { if (!toolsSheet.contains(event.target)) setOpen(false); });
-    document.addEventListener("keydown", event => { if (event.key === "Escape") setOpen(false); });
+    toolsSheet.addEventListener("beforetoggle", event => { if (event.newState === "open") place(); });
+    addEventListener("resize", () => { if (toolsSheet.matches(".is-open")) place(); try { if (toolsSheet.matches(":popover-open")) toolsSheet.hidePopover(); } catch {} });
+    if (!HTMLElement.prototype.hasOwnProperty("popover")) {
+      const setOpen = open => {
+        if (open) place();
+        toolsSheet.classList.toggle("is-open", open);
+        toolsButtons.forEach(button => button.setAttribute("aria-expanded", String(open)));
+      };
+      setOpen(false);
+      toolsButtons.forEach(button => button.addEventListener("click", event => { event.stopPropagation(); setOpen(!toolsSheet.classList.contains("is-open")); }));
+      document.addEventListener("click", event => { if (!toolsSheet.contains(event.target)) setOpen(false); });
+      document.addEventListener("keydown", event => { if (event.key === "Escape") setOpen(false); });
+    }
   }
 
   // Bottom-edge blur band (styled in polish.css): decorative, so hidden from assistive tech.
