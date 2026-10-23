@@ -351,6 +351,7 @@
   function matches(item, state, now) {
     if (state.view === "news" && item.type !== "news") return false;
     if (state.view === "offers" && item.type !== "offer") return false;
+    if (state.view === "devaluations" && item.category !== "devaluation") return false;
     if (state.cat && item.category !== state.cat) return false;
     if (state.bank && item.issuer !== state.bank && item.merchant !== state.bank) return false;
     var show = state.show || "current";

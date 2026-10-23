@@ -25,7 +25,7 @@
   const SHOW_LABEL = { archive: "Ended and archived", all: "Everything" };
   const params = new URLSearchParams(location.search);
   const state = {
-    view: ["news", "offers"].includes(params.get("view")) ? params.get("view") : "all",
+    view: ["news", "offers", "devaluations"].includes(params.get("view")) ? params.get("view") : "all",
     q: params.get("q") || "",
     cat: core.CATEGORIES[params.get("category")] ? params.get("category") : "",
     bank: params.get("bank") || "",
@@ -50,7 +50,8 @@
   function fillCategories() {
     const used = new Set(items.map((item) => item.category));
     const options = Object.entries(core.CATEGORIES).filter(([key, c]) =>
-      used.has(key) && (state.view === "all" || c.type === (state.view === "news" ? "news" : "offer")));
+      used.has(key) && (state.view === "all" ||
+        (state.view === "devaluations" ? key === "devaluation" : c.type === (state.view === "news" ? "news" : "offer"))));
     if (state.cat && !options.some(([key]) => key === state.cat)) state.cat = "";
     cat.innerHTML = '<option value="">All categories</option>' +
       options.map(([key, c]) => `<option value="${key}">${core.esc(c.plural)}</option>`).join("");
@@ -94,6 +95,7 @@
   function countText(n) {
     const noun = state.view === "news" ? (n === 1 ? "news item" : "news items")
       : state.view === "offers" ? (n === 1 ? "offer" : "offers")
+      : state.view === "devaluations" ? (n === 1 ? "devaluation" : "devaluations")
       : (n === 1 ? "update" : "updates");
     const scope = state.show === "archive" ? " ended or archived" : state.show === "current" ? " current" : "";
     return `${n.toLocaleString("en-IN")}${scope} ${noun}`;
@@ -116,7 +118,7 @@
     }
     const wider = state.show === "current" && items.some((item) => core.matches(item, { ...state, show: "all" }, now));
     return `<div class="up-empty">
-      <h2>No ${state.view === "offers" ? "offers" : state.view === "news" ? "news" : "updates"} match</h2>
+      <h2>No ${state.view === "offers" ? "offers" : state.view === "news" ? "news" : state.view === "devaluations" ? "devaluations" : "updates"} match</h2>
       <p>${wider ? "Nothing current matches, but some ended or unverified items do." : "Try a bank, card or merchant name, or clear the filters."}</p>
       ${wider ? '<button type="button" class="up-btn up-btn-solid" data-show-all>Include ended offers</button>' : ""}
       <button type="button" class="up-btn" data-clear>Clear filters</button>
