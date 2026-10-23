@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "kredit-pe-yes-bank-max-credit-card",
+    "title": "Kredit.Pe YES BANK Max Credit Card",
+    "excerpt": "A lifetime-free RuPay card advertising 5% cashback, 3% to 5% on UPI and up to ₹1,000 to start. The catch: the cashback stays inside Kredit.Pe, and voucher fees and redemption charges eat into it.",
+    "category": "Cashback",
+    "date": "2026-10-24",
+    "readTime": 5,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/kredit-pe-yes-bank-max-credit-card.jpg",
+      "alt": "The Kredit.Pe YES BANK Max credit card: blue top half with a chip and contactless mark, white lower half with the Kredit.Pe name",
+      "srcset": "/assets/reviews/kredit-pe-yes-bank-max-credit-card-800.webp 800w, /assets/reviews/kredit-pe-yes-bank-max-credit-card-1200.webp 1200w, /assets/reviews/kredit-pe-yes-bank-max-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "rbl-jalsa-credit-card",
     "title": "RBL Bank Jalsa Credit Card",
     "excerpt": "A ₹999 RuPay card that pays 5% back on nine food, grocery and shopping apps, capped at ₹50 an order and ₹500 a month. Add a ₹1,000 welcome voucher and a ₹500 voucher at ₹3 lakh a year. Everything else earns nothing.",
