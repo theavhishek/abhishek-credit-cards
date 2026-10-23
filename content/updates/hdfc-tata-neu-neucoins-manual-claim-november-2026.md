@@ -8,6 +8,8 @@ published: 2026-10-23
 issuer: HDFC Bank
 cards: [Tata Neu Plus HDFC Bank, Tata Neu Infinity HDFC Bank]
 tags: [hdfc, tata neu, neucoins, reward points, expiry, devaluation]
+image: /assets/updates/hdfc-tata-neu-neucoins-manual-claim-november-2026.jpg
+imageAlt: HDFC Bank email to Tata Neu HDFC Bank Credit Card holders saying that from 25 November 2026 Tata NeuCoins must be claimed through the Tata Neu app, can be claimed within 12 months of the statement date and stay valid for 12 more months after claiming, and are no longer credited automatically
 sources:
   - label: HDFC Bank, Tata NeuCoins claim and redemption process (PDF)
     url: https://www.hdfc.bank.in/content/dam/hdfcbankpws/in/en/pdfs/TataNeuCC_neucoins_Claim.pdf
