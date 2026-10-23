@@ -116,6 +116,8 @@ test("filters: default view hides ended and unverified offers", () => {
   const pick = (state) => items.filter((i) => core.matches(i, state, now)).map((i) => i.slug).join();
   assert.equal(pick({ view: "all" }), "n,a");
   assert.equal(pick({ view: "offers" }), "a");
+  assert.equal(pick({ view: "devaluations" }), "n");
+  assert.equal(pick({ view: "devaluations", show: "all" }), "n");
   assert.equal(pick({ view: "all", show: "archive" }), "old,e");
   assert.equal(pick({ view: "all", show: "all" }), "n,old,a,e,u");
   assert.equal(pick({ view: "all", q: "save10" }), "a");
