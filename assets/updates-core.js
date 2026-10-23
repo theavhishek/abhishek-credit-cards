@@ -216,12 +216,6 @@
 
   var ICON_SHARE = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
 
-  function sourceLink(src) {
-    if (!src) return "";
-    var kind = src.kind && src.kind !== "official" ? " (" + SOURCE_KINDS[src.kind] + ")" : "";
-    return 'Source: <a href="' + esc(src.url) + '"' + linkAttrs(src.url) + ">" + esc(src.label) + newTab(src.url) + "</a>" + esc(kind);
-  }
-
   function metaLine(bits) {
     return '<p class="up-meta">' + bits.filter(Boolean).map(function (b) { return "<span>" + b + "</span>"; }).join("") + "</p>";
   }
@@ -311,7 +305,7 @@
         '<span class="up-confirm" data-confirm="' + esc(conf) + '">' + CONFIRMATION[conf] + "</span>" + fixture + "</div>" +
         renderTitle(item, level),
         '<p class="up-summary">' + esc(item.summary) + "</p>" +
-        metaLine([who, posted, updated, sourceLink(item.sources && item.sources[0])])) +
+        metaLine([who, posted, updated])) +
       shareButton(item) +
       "</article>";
   }
