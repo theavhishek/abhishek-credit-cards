@@ -9,13 +9,12 @@
   --hm-gutter: 20px;
   --hm-orange: #fc6e20;
   --hm-orange-text: #c2410c;
-  --hm-red-text: #c81e1e;
   --hm-ease: cubic-bezier(0.2, 0, 0, 1);
   width: min(1180px, 100% - 2 * var(--hm-gutter));
   margin-inline: auto;
   padding-block: 48px 104px;
 }
-html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; --hm-red-text: #ff6b6b; }
+html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
 @media (min-width: 720px) { .hm { --hm-gutter: 32px; } }
 .hm:focus { outline: none; }
 .hm :where(h1, h2, h3, p, ul) { margin: 0; }
@@ -807,10 +806,24 @@ html[data-theme="dark"] .hm-tile-go { color: color-mix(in srgb, var(--tile) 45%,
   background: color-mix(in srgb, var(--hm-orange) 12%, transparent);
   font-size: 0.75rem;
 }
-/* Devaluations stand out in red instead of the category orange. */
+/* Devaluations stand out as a solid red badge with a falling-arrow icon. */
 .hm-update-kicker[data-cat="devaluation"] {
-  color: var(--hm-red-text);
-  background: color-mix(in srgb, var(--hm-red-text) 12%, transparent);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding-inline-start: 8px;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 700;
+}
+.hm-update-kicker[data-cat="devaluation"]::before {
+  content: "";
+  flex: none;
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 @media (min-width: 720px) {
   .hm-update { padding-inline: 24px; align-items: center; }
