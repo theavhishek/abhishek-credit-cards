@@ -286,7 +286,7 @@
       return '<article class="up-item up-offer' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
         ' data-starts="' + esc(o.starts || "") + '" data-ends="' + esc(o.ends || "") + '" data-verified="' + esc(o.verified || "") + '">' +
         withThumb(item,
-          '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
+          '<div class="up-item-top"><span class="up-kicker" data-cat="' + esc(item.category) + '">' + esc(categoryLabel(item.category)) + "</span>" +
           '<span class="up-status">' + STATUS_LABEL[status] + "</span>" + fixture + "</div>" +
           (o.value ? '<p class="up-offer-value">' + esc(o.value) + "</p>" : "") +
           renderTitle(item, level),
@@ -301,7 +301,7 @@
     var conf = item.confirmation || "official";
     return '<article class="up-item up-news' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="news">' +
       withThumb(item,
-        '<div class="up-item-top"><span class="up-kicker">' + esc(categoryLabel(item.category)) + "</span>" +
+        '<div class="up-item-top"><span class="up-kicker" data-cat="' + esc(item.category) + '">' + esc(categoryLabel(item.category)) + "</span>" +
         '<span class="up-confirm" data-confirm="' + esc(conf) + '">' + CONFIRMATION[conf] + "</span>" + fixture + "</div>" +
         renderTitle(item, level),
         '<p class="up-summary">' + esc(item.summary) + "</p>" +

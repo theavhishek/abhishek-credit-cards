@@ -1,7 +1,9 @@
 /* ==========================================================================
    News and offers (/updates, /updates/archive and /updates/<slug>).
    Site tokens from site.css. The brand orange #fc6e20 marks categories and
-   the headline dot; status colours are reserved for offer status only.
+   the headline dot, except Devaluation, Card launch and Cashback deal,
+   which are solid coloured badges so they stand out;
+   status colours are reserved for offer status only.
    Article pages also load review-page.css for the byline, body and sources.
    ========================================================================== */
 
@@ -11,6 +13,9 @@
   --up-ok: #1a7f37;
   --up-info: #0a5fc2;
   --up-warn: #8a5300;
+  --up-danger: #c81e1e;          /* devaluation red: 5.5:1 on --page */
+  --up-danger-fill: #dc2626;     /* devaluation badge: white text 4.8:1 */
+  --up-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E");
   --up-fill: color-mix(in srgb, var(--text) 6%, transparent);
   --up-fill-strong: color-mix(in srgb, var(--text) 10%, transparent);
   --up-ease: cubic-bezier(0.2, 0, 0, 1);
@@ -20,6 +25,7 @@ html[data-theme="dark"] {
   --up-ok: #3fb950;
   --up-info: #58a6ff;
   --up-warn: #e3b341;
+  --up-danger: #ff6b6b;
 }
 
 /* ---------- Page frame ---------- */
@@ -115,6 +121,10 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
 }
 @media (hover: hover) { .up-tab[aria-pressed="false"]:hover { color: var(--text); } }
+/* Devaluations tab turns red when selected (fallback buttons and the uiarc tabs, 4th tab). */
+.up-tab[data-view="devaluations"][aria-pressed="true"],
+.arc-tabs--updates [role="tab"][data-value="3"][aria-selected="true"],
+.arc-tabs--updates [role="tab"][data-value="3"][aria-selected="true"] span { color: var(--up-danger); }
 
 .up-search {
   position: relative;
@@ -302,6 +312,32 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   line-height: 1.4;
 }
 .up-kicker { color: var(--up-accent); font-weight: 600; }
+/* Badge categories: Devaluation (red, falling arrow), Card launch (indigo, sparkle) and
+   Cashback deal (green, percent) are solid pills so they stand out from the orange labels. */
+.up-kicker[data-cat="devaluation"] { --up-badge: var(--up-danger-fill); --up-badge-icon: var(--up-down-icon); }
+.up-kicker[data-cat="launch"] { --up-badge: #4f46e5; --up-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 2l2.4 7.1L21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.9z'/%3E%3C/svg%3E"); }
+.up-kicker[data-cat="cashback"] { --up-badge: #15803d; --up-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='2.5'/%3E%3Ccircle cx='17' cy='17' r='2.5'/%3E%3Cpath d='M19 5L5 19'/%3E%3C/svg%3E"); }
+.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 5px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  background: var(--up-badge);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"])::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  -webkit-mask: var(--up-badge-icon) center / contain no-repeat;
+  mask: var(--up-badge-icon) center / contain no-repeat;
+}
 .up-confirm { color: var(--muted); font-weight: 500; }
 .up-confirm[data-confirm="reported"],
 .up-confirm[data-confirm="unconfirmed"] { color: var(--up-warn); }
