@@ -1,7 +1,8 @@
 /* ==========================================================================
    News and offers (/updates, /updates/archive and /updates/<slug>).
    Site tokens from site.css. The brand orange #fc6e20 marks categories and
-   the headline dot; status colours are reserved for offer status only.
+   the headline dot, except Devaluation, which is red so it stands out;
+   status colours are reserved for offer status only.
    Article pages also load review-page.css for the byline, body and sources.
    ========================================================================== */
 
@@ -11,6 +12,7 @@
   --up-ok: #1a7f37;
   --up-info: #0a5fc2;
   --up-warn: #8a5300;
+  --up-danger: #c81e1e;          /* devaluation red: 5.5:1 on --page */
   --up-fill: color-mix(in srgb, var(--text) 6%, transparent);
   --up-fill-strong: color-mix(in srgb, var(--text) 10%, transparent);
   --up-ease: cubic-bezier(0.2, 0, 0, 1);
@@ -20,6 +22,7 @@ html[data-theme="dark"] {
   --up-ok: #3fb950;
   --up-info: #58a6ff;
   --up-warn: #e3b341;
+  --up-danger: #ff6b6b;
 }
 
 /* ---------- Page frame ---------- */
@@ -115,6 +118,10 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 0 0 1px var(--line);
 }
 @media (hover: hover) { .up-tab[aria-pressed="false"]:hover { color: var(--text); } }
+/* Devaluations tab turns red when selected (fallback buttons and the uiarc tabs, 4th tab). */
+.up-tab[data-view="devaluations"][aria-pressed="true"],
+.arc-tabs--updates [role="tab"][data-value="3"][aria-selected="true"],
+.arc-tabs--updates [role="tab"][data-value="3"][aria-selected="true"] span { color: var(--up-danger); }
 
 .up-search {
   position: relative;
@@ -302,6 +309,7 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   line-height: 1.4;
 }
 .up-kicker { color: var(--up-accent); font-weight: 600; }
+.up-kicker[data-cat="devaluation"] { color: var(--up-danger); }
 .up-confirm { color: var(--muted); font-weight: 500; }
 .up-confirm[data-confirm="reported"],
 .up-confirm[data-confirm="unconfirmed"] { color: var(--up-warn); }

@@ -227,8 +227,8 @@ function buildArticle(item) {
   const conf = item.confirmation;
 
   const kicker = item.type === "news"
-    ? `<div class="up-item-top"><span class="up-kicker">${esc(core.categoryLabel(item.category))}</span><span class="up-confirm" data-confirm="${esc(conf)}">${core.CONFIRMATION[conf]}</span></div>`
-    : `<div class="up-item-top"><span class="up-kicker">${esc(core.categoryLabel(item.category))}</span></div>`;
+    ? `<div class="up-item-top"><span class="up-kicker" data-cat="${esc(item.category)}">${esc(core.categoryLabel(item.category))}</span><span class="up-confirm" data-confirm="${esc(conf)}">${core.CONFIRMATION[conf]}</span></div>`
+    : `<div class="up-item-top"><span class="up-kicker" data-cat="${esc(item.category)}">${esc(core.categoryLabel(item.category))}</span></div>`;
 
   // Same two-line byline as the card reviews: name, then last-update date · read time.
   const shown = lastChanged(item);
@@ -258,7 +258,7 @@ function buildArticle(item) {
   const relatedHtml = related.length ? `<section class="rv-section" aria-labelledby="related-title">
           <h2 id="related-title">Related updates</h2>
           <ol class="up-related">
-            ${related.map((r) => `<li><a href="${esc(core.itemHref(r) || `/updates#${r.slug}`)}"><span class="up-kicker">${esc(core.categoryLabel(r.category))}</span><span class="up-related-title">${esc(r.title)}</span><span class="up-related-date">${esc(core.fmtDate(r.published))}</span></a></li>`).join("\n            ")}
+            ${related.map((r) => `<li><a href="${esc(core.itemHref(r) || `/updates#${r.slug}`)}"><span class="up-kicker" data-cat="${esc(r.category)}">${esc(core.categoryLabel(r.category))}</span><span class="up-related-title">${esc(r.title)}</span><span class="up-related-date">${esc(core.fmtDate(r.published))}</span></a></li>`).join("\n            ")}
           </ol>
         </section>` : "";
 
@@ -465,7 +465,7 @@ function buildHome() {
   const rows = latest.map((i) => {
     const href = core.itemHref(i) && !core.isExternal(core.itemHref(i)) ? core.itemHref(i) : `/updates#${i.slug}`;
     const ends = i.offer && i.offer.ends && i.offer.ends !== "ongoing" ? ` data-ends-at="${core.toMs(i.offer.ends, "end")}"` : "";
-    return `          <li${ends}><a class="hm-update" href="${esc(href)}"><span class="hm-update-kicker">${esc(core.categoryLabel(i.category))}</span><span class="hm-update-title">${esc(i.title)}</span><time class="hm-update-date" datetime="${core.isoDate(i.published)}">${esc(core.fmtDate(i.published))}</time></a></li>`;
+    return `          <li${ends}><a class="hm-update" href="${esc(href)}"><span class="hm-update-kicker" data-cat="${esc(i.category)}">${esc(core.categoryLabel(i.category))}</span><span class="hm-update-title">${esc(i.title)}</span><time class="hm-update-date" datetime="${core.isoDate(i.published)}">${esc(core.fmtDate(i.published))}</time></a></li>`;
   });
   const block = `
     <section class="hm-updates" aria-labelledby="updates-title">

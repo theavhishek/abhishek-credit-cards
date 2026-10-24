@@ -9,12 +9,13 @@
   --hm-gutter: 20px;
   --hm-orange: #fc6e20;
   --hm-orange-text: #c2410c;
+  --hm-red-text: #c81e1e;
   --hm-ease: cubic-bezier(0.2, 0, 0, 1);
   width: min(1180px, 100% - 2 * var(--hm-gutter));
   margin-inline: auto;
   padding-block: 48px 104px;
 }
-html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
+html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; --hm-red-text: #ff6b6b; }
 @media (min-width: 720px) { .hm { --hm-gutter: 32px; } }
 .hm:focus { outline: none; }
 .hm :where(h1, h2, h3, p, ul) { margin: 0; }
@@ -805,6 +806,11 @@ html[data-theme="dark"] .hm-tile-go { color: color-mix(in srgb, var(--tile) 45%,
   border-radius: 999px;
   background: color-mix(in srgb, var(--hm-orange) 12%, transparent);
   font-size: 0.75rem;
+}
+/* Devaluations stand out in red instead of the category orange. */
+.hm-update-kicker[data-cat="devaluation"] {
+  color: var(--hm-red-text);
+  background: color-mix(in srgb, var(--hm-red-text) 12%, transparent);
 }
 @media (min-width: 720px) {
   .hm-update { padding-inline: 24px; align-items: center; }
