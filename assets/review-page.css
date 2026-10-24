@@ -68,27 +68,52 @@ html { scroll-padding-top: 112px; }
 }
 
 /* ---------- Breadcrumb ---------- */
+/* Pill breadcrumb: full-width rounded box on phones, a fitted pill from 641px. */
 .rv-crumbs ol {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 8px;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 6px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 6px 8px;
   list-style: none;
-  font-size: var(--rv-fs-caption);
+  border: 1px solid color-mix(in srgb, var(--line-strong) 70%, transparent);
+  border-radius: var(--radius-lg);
+  background: var(--page);
+  box-shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1);
+  font-size: 14px;
+  line-height: 1.4;
   color: var(--muted);
 }
+.rv-crumbs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
 .rv-crumbs li:not(:last-child)::after {
-  content: "/";
-  margin-inline-start: 8px;
-  color: var(--soft);
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background: var(--soft);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .rv-crumbs a {
   color: var(--muted);
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
-.rv-crumbs [aria-current="page"] { color: var(--text); font-weight: 500; }
+.rv-crumbs [aria-current="page"] { color: var(--text); font-weight: 400; }
+@media (min-width: 641px) {
+  .rv-crumbs ol {
+    width: fit-content;
+    justify-content: flex-start;
+    gap: 4px 10px;
+    padding-inline: 12px;
+    border-radius: var(--radius-full);
+  }
+  .rv-crumbs li { gap: 10px; }
+}
 
 /* ---------- Hero ---------- */
 .rv-hero {
@@ -171,7 +196,6 @@ html { scroll-padding-top: 112px; }
 @media (hover: hover) {
   .rv-btn-primary:hover { background: color-mix(in oklab, var(--text) 86%, var(--page)); }
   .rv-btn-quiet:hover { background: var(--surface); border-color: var(--muted); }
-  .rv-crumbs a:hover { text-decoration-color: currentColor; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .rv-btn:active { scale: 0.96; }
