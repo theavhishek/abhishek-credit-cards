@@ -101,6 +101,31 @@ html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
 }
 html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180deg, #f3d99a 0%, #b88a3e 100%); }
 @media (forced-colors: active) { .hm-title-foil { background: none; color: CanvasText; } }
+
+/* Headline motion: each word rises out of its own mask, then the foil shine sweeps the
+   second line and comes back every few seconds. Replaces polish.css's one-off hero entrance
+   and foil sweep on this headline only. */
+.hm-w {
+  display: inline-block;
+  overflow: clip;
+  overflow-clip-margin: 0.1em;
+  padding-bottom: 0.08em; /* keeps descenders inside the mask */
+  margin-bottom: -0.08em;
+  vertical-align: top;
+}
+.hm-w > span { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .hm-hero .hm-title { animation: none; }
+  .hm-w > span { animation: hm-word-rise 900ms var(--ease-out) calc(80ms + var(--i) * 75ms) backwards; }
+  html[data-theme] .hm-hero .hm-title-foil { animation: hm-foil-loop 6s ease-out 1.4s infinite backwards; }
+}
+@keyframes hm-word-rise {
+  from { opacity: 0; transform: translateY(105%); }
+}
+@keyframes hm-foil-loop {
+  0% { background-position: 100% 0, 0 0; }
+  24%, 100% { background-position: 0% 0, 0 0; }
+}
 .hm-lead {
   max-width: 52ch;
   margin-top: 22px !important;
