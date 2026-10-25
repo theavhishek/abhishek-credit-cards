@@ -409,10 +409,6 @@ html[data-theme] body.unified-navbar .nav-tools-link {
 html[data-theme] body.unified-navbar .nav-tools-link .nav-icon { display: block; width: 22px; height: 22px; color: var(--hd-link); }
 /* My card collection leads the sheet across the full width. */
 html[data-theme] body.unified-navbar .nav-tools-link--wide { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; min-height: 56px; }
-/* An odd tool out at the end of the two-column phone sheet takes the full row. */
-@media (max-width: 640px) {
-  html[data-theme] body.unified-navbar .nav-tools-link:last-child:nth-child(even) { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; min-height: 56px; }
-}
 html[data-theme] body.unified-navbar .nav-tools-link[aria-current] { background: var(--hd-glass-pill); box-shadow: var(--hd-glass-pill-shadow); font-weight: 650; }
 html[data-theme] body.unified-navbar .nav-tools-link[aria-current] .nav-icon { color: #fc6e20; }
 html[data-theme] body.unified-navbar .nav-tools-link:focus-visible { outline: 2px solid var(--focus, #075cff); outline-offset: 2px; }
