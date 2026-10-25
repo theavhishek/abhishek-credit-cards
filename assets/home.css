@@ -82,34 +82,18 @@ html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
 @keyframes hm-soon-in { from { opacity: 0; transform: translateY(6px) scale(0.97); } }
 @keyframes hm-soon-ping { 0% { opacity: 0.55; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(2.8); } }
 @keyframes hm-soon-sheen { 0% { background-position: 160% 0, 0 0; } 60%, 100% { background-position: -60% 0, 0 0; } }
-/* Headline: Geist sans first line, Instrument Serif italic second line (self-hosted, OFL). */
-@font-face {
-  font-family: "Instrument Serif";
-  src: url("instrument-serif-latin-400-italic.woff2") format("woff2");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
 .hm-title {
-  max-width: 15ch;
+  max-width: 14ch;
   color: var(--text);
   font-size: clamp(2.75rem, 1.5rem + 5.2vw, 5.75rem);
-  font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
   text-wrap: balance;
 }
 .hm-title > span { display: block; }
 .hm-title-foil {
-  margin-inline-start: -0.02em;
   padding-bottom: 0.06em;
-  padding-inline-end: 0.08em; /* room for the italic overhang so the foil clip doesn't cut it */
-  font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
-  font-size: 1.14em;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.015em;
   background: linear-gradient(180deg, #a8741b 0%, #6f4610 100%);
   -webkit-background-clip: text;
   background-clip: text;
