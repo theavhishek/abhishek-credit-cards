@@ -43,6 +43,99 @@
     return Object.assign({ label, value: String(value) }, opts || {});
   }
 
+  /* ---------- Merchant category codes (ISO 18245, as card networks publish them) ----------
+     Only the names of standard codes; nothing here says what a card earns. */
+  const MCC_GROUPS = {
+    grocery: "Groceries", dining: "Dining", fuel: "Fuel", utility: "Utilities and bills", telecom: "Phone and internet",
+    travel: "Travel", transport: "Transport", shopping: "Shopping", electronics: "Electronics", fashion: "Fashion",
+    health: "Health", education: "Education", entertainment: "Entertainment", digital: "Digital goods",
+    government: "Government", insurance: "Insurance", rent: "Rent", jewellery: "Jewellery", home: "Home",
+    auto: "Automotive", services: "Services", finance: "Wallets and money transfer", gaming: "Betting and gaming", other: "Other",
+  };
+  const MCC = {
+    "4111": ["Local and suburban commuter transport", "transport"], "4112": ["Passenger railways", "travel"],
+    "4121": ["Taxis and ride-hailing", "transport"], "4131": ["Bus lines", "travel"], "4214": ["Freight and trucking", "services"],
+    "4215": ["Courier services", "services"], "4411": ["Cruise lines", "travel"], "4511": ["Airlines", "travel"],
+    "4582": ["Airports and terminals", "travel"], "4722": ["Travel agencies and tour operators", "travel"],
+    "4784": ["Tolls and bridge fees", "transport"], "4789": ["Transportation services", "transport"],
+    "4812": ["Telecom equipment and phone sales", "telecom"], "4814": ["Telecom services", "telecom"],
+    "4816": ["Computer network and information services", "telecom"], "4829": ["Money transfer", "finance"],
+    "4899": ["Cable, satellite and pay TV", "telecom"], "4900": ["Utilities: electricity, gas, water", "utility"],
+    "5013": ["Motor vehicle supplies and parts", "auto"], "5045": ["Computers and peripherals", "electronics"],
+    "5094": ["Precious stones, metals and jewellery (wholesale)", "jewellery"], "5111": ["Stationery and office supplies", "shopping"],
+    "5122": ["Drugs and druggists’ sundries", "health"], "5200": ["Home supply warehouse stores", "home"],
+    "5211": ["Building materials and hardware", "home"], "5251": ["Hardware stores", "home"],
+    "5261": ["Nurseries and garden supplies", "home"], "5300": ["Wholesale clubs", "shopping"],
+    "5309": ["Duty-free stores", "shopping"], "5310": ["Discount stores", "shopping"], "5311": ["Department stores", "shopping"],
+    "5331": ["Variety stores", "shopping"], "5399": ["General merchandise", "shopping"],
+    "5411": ["Grocery stores and supermarkets", "grocery"], "5422": ["Meat and seafood shops", "grocery"],
+    "5441": ["Sweet and confectionery shops", "grocery"], "5451": ["Dairy product stores", "grocery"],
+    "5462": ["Bakeries", "grocery"], "5499": ["Convenience and specialty food stores", "grocery"],
+    "5511": ["Car dealers (new and used)", "auto"], "5521": ["Used car dealers", "auto"], "5532": ["Tyre stores", "auto"],
+    "5533": ["Auto parts and accessories", "auto"], "5541": ["Fuel stations", "fuel"], "5542": ["Automated fuel dispensers", "fuel"],
+    "5571": ["Motorcycle dealers", "auto"], "5611": ["Men’s clothing", "fashion"], "5621": ["Women’s clothing", "fashion"],
+    "5631": ["Women’s accessories", "fashion"], "5641": ["Children’s clothing", "fashion"], "5651": ["Family clothing stores", "fashion"],
+    "5655": ["Sports and riding apparel", "fashion"], "5661": ["Shoe stores", "fashion"], "5691": ["Men’s and women’s clothing", "fashion"],
+    "5699": ["Apparel and accessories", "fashion"], "5712": ["Furniture and home furnishings", "home"],
+    "5719": ["Home furnishing specialty stores", "home"], "5722": ["Household appliances", "electronics"],
+    "5732": ["Electronics stores", "electronics"], "5734": ["Computer software stores", "electronics"],
+    "5735": ["Music stores", "entertainment"], "5811": ["Caterers", "dining"], "5812": ["Restaurants", "dining"],
+    "5813": ["Bars, pubs and nightclubs", "dining"], "5814": ["Fast food and quick service restaurants", "dining"],
+    "5815": ["Digital goods: books, films, music", "digital"], "5816": ["Digital goods: games", "digital"],
+    "5817": ["Digital goods: apps", "digital"], "5818": ["Digital goods: large merchants", "digital"],
+    "5912": ["Pharmacies and chemists", "health"], "5921": ["Liquor stores", "shopping"], "5932": ["Antique shops", "shopping"],
+    "5941": ["Sporting goods", "shopping"], "5942": ["Book stores", "shopping"], "5943": ["Stationery stores", "shopping"],
+    "5944": ["Jewellery, watches and silverware", "jewellery"], "5945": ["Toys and games", "shopping"],
+    "5946": ["Camera and photo supplies", "electronics"], "5947": ["Gift and souvenir shops", "shopping"],
+    "5948": ["Luggage and leather goods", "fashion"], "5949": ["Fabric and sewing stores", "fashion"],
+    "5960": ["Direct marketing: insurance", "insurance"], "5964": ["Direct marketing: catalogue merchants", "shopping"],
+    "5965": ["Direct marketing: catalogue and retail", "shopping"], "5966": ["Direct marketing: outbound telemarketing", "shopping"],
+    "5967": ["Direct marketing: inbound teleservices", "shopping"], "5968": ["Direct marketing: subscriptions", "shopping"],
+    "5969": ["Direct marketing: other", "shopping"], "5970": ["Artist and craft supplies", "shopping"],
+    "5977": ["Cosmetics stores", "fashion"], "5983": ["Fuel dealers: fuel oil, LPG, wood", "fuel"],
+    "5992": ["Florists", "shopping"], "5993": ["Tobacco shops", "shopping"], "5994": ["News dealers", "shopping"],
+    "5995": ["Pet shops and pet food", "shopping"], "5999": ["Miscellaneous retail", "shopping"],
+    "6010": ["Manual cash disbursement", "finance"], "6011": ["ATM cash withdrawal", "finance"],
+    "6012": ["Financial institutions: merchandise and services", "finance"], "6051": ["Quasi-cash: wallets, forex, crypto", "finance"],
+    "6211": ["Securities brokers", "finance"], "6300": ["Insurance", "insurance"], "6513": ["Rent and real-estate agents", "rent"],
+    "6540": ["Stored-value card and wallet loads", "finance"], "7011": ["Hotels and resorts", "travel"],
+    "7032": ["Camps and recreation", "travel"], "7210": ["Laundry and cleaning", "services"], "7216": ["Dry cleaners", "services"],
+    "7230": ["Salons and barbers", "services"], "7298": ["Health and beauty spas", "services"],
+    "7311": ["Advertising services", "services"], "7372": ["Software and IT services", "services"],
+    "7399": ["Business services", "services"], "7512": ["Car rental", "travel"], "7523": ["Parking", "transport"],
+    "7538": ["Car servicing and repair", "auto"], "7542": ["Car washes", "auto"], "7832": ["Cinemas", "entertainment"],
+    "7841": ["Video rental and streaming", "entertainment"], "7922": ["Theatre and event tickets", "entertainment"],
+    "7941": ["Sports clubs and stadiums", "entertainment"], "7991": ["Tourist attractions", "entertainment"],
+    "7993": ["Video game arcades", "entertainment"], "7994": ["Gaming cafés", "entertainment"],
+    "7995": ["Betting, lottery and casino", "gaming"], "7996": ["Amusement parks", "entertainment"],
+    "7997": ["Gyms, clubs and memberships", "entertainment"], "7999": ["Recreation services", "entertainment"],
+    "8011": ["Doctors", "health"], "8021": ["Dentists", "health"], "8042": ["Optometrists", "health"], "8043": ["Opticians", "health"],
+    "8062": ["Hospitals", "health"], "8071": ["Medical and dental labs", "health"], "8099": ["Medical services", "health"],
+    "8111": ["Legal services", "services"], "8211": ["Schools", "education"], "8220": ["Colleges and universities", "education"],
+    "8241": ["Correspondence schools", "education"], "8244": ["Business and secretarial schools", "education"],
+    "8249": ["Vocational and trade schools", "education"], "8299": ["Coaching and educational services", "education"],
+    "8351": ["Child care", "education"], "8398": ["Charities", "services"], "8641": ["Associations and clubs", "services"],
+    "8661": ["Religious organisations", "services"], "8699": ["Membership organisations", "services"],
+    "8931": ["Accounting and bookkeeping", "services"], "8999": ["Professional services", "services"],
+    "9211": ["Court costs", "government"], "9222": ["Fines", "government"], "9311": ["Tax payments", "government"],
+    "9399": ["Government services", "government"], "9402": ["Postal services", "government"],
+  };
+
+  // A code from the QR becomes { code, name, group, groupLabel } or a "missing" record with the reason.
+  function mccInfo(raw) {
+    const code = String(raw || "").trim();
+    if (!code) return { code: "", missing: "none" };
+    if (code === "0000") return { code, missing: "placeholder" };
+    if (!/^\d{4}$/.test(code)) return { code, missing: "invalid" };
+    const n = Number(code);
+    let entry = MCC[code];
+    if (!entry && n >= 3000 && n <= 3350) entry = ["Airlines", "travel"];
+    if (!entry && n >= 3351 && n <= 3441) entry = ["Car rental", "travel"];
+    if (!entry && n >= 3501 && n <= 3999) entry = ["Hotels and resorts", "travel"];
+    if (!entry) return { code, name: "Not in the standard list this page knows", group: "other", groupLabel: MCC_GROUPS.other, unknown: true };
+    return { code, name: entry[0], group: entry[1], groupLabel: MCC_GROUPS[entry[1]] };
+  }
+
   /* ---------- UPI: upi://pay?pa=…&pn=…&am=… ---------- */
   function parseUpi(text) {
     const m = /^upi:\/\/([a-z]+)\/?(?:\?(.*))?$/is.exec(text);
@@ -59,7 +152,6 @@
     else fields.push(field("Amount", "Not set: you type it in your app"));
     if (p.cu && p.cu.toUpperCase() !== "INR") fields.push(field("Currency", p.cu));
     if (p.tn) fields.push(field("Note", p.tn));
-    if (p.mc && p.mc !== "0000") fields.push(field("Merchant category code", p.mc, { mono: true }));
     if (p.tr) fields.push(field("Reference", p.tr, { mono: true }));
     if (p.tid) fields.push(field("Transaction ID", p.tid, { mono: true }));
 
@@ -72,6 +164,7 @@
 
     return {
       type: "upi",
+      mcc: mccInfo(p.mc),
       label: action === "mandate" ? "UPI AutoPay request" : "UPI payment",
       title: p.pn || vpa || "UPI code",
       subtitle: p.pn && vpa ? vpa : "",
@@ -127,7 +220,6 @@
     if (vpa) fields.push(field("UPI ID", vpa, { mono: true, copy: true }));
     if (amount) fields.push(field("Amount", currency === "356" && validAmount(amount) ? rupees(amount) : amount, { mono: true }));
     else fields.push(field("Amount", "Not set: you type it in your app"));
-    if (get("52") && get("52") !== "0000") fields.push(field("Merchant category code", get("52"), { mono: true }));
 
     const crcTag = tags.find((t) => t.id === "63");
     if (crcTag) {
@@ -140,6 +232,7 @@
 
     return {
       type: "bharatqr",
+      mcc: mccInfo(get("52")),
       label: "Bharat QR payment",
       title: name || vpa || "Merchant payment code",
       subtitle: [city, vpa && name ? vpa : ""].filter(Boolean).join(" · "),
@@ -347,5 +440,5 @@
     return Object.assign(parseText(text), { raw: text });
   }
 
-  return { parse, crc16 };
+  return { parse, crc16, mccInfo };
 });

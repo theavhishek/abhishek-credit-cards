@@ -169,6 +169,22 @@ img.qs-still { object-fit: contain; }
   overflow-wrap: anywhere;
 }
 
+.qs-mcc {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--page);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ce-ok) 50%, transparent);
+}
+.qs-mcc[data-state="missing"],
+.qs-mcc[data-state="unknown"] { box-shadow: inset 0 0 0 1px var(--line-strong); }
+.qs-mcc-k { color: var(--muted); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; }
+.qs-mcc-v { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.qs-mcc-code { font-family: var(--site-mono); font-size: 1.5rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.qs-mcc[data-state="missing"] .qs-mcc-code { color: var(--muted); }
+.qs-mcc-name { font-size: 1rem; font-weight: 600; overflow-wrap: anywhere; }
+.qs-mcc-note { color: var(--muted); font-size: 0.8125rem; line-height: 1.5; text-wrap: pretty; }
 .qs-fields { display: grid; border-top: 1px solid var(--line); }
 .qs-field {
   display: grid;

@@ -162,3 +162,17 @@ test("jsQR decodes a generated UPI code end to end", () => {
   assert.equal(out.data, text);
   assert.equal(Q.parse(out.data).title, "Asha Stores");
 });
+
+test("MCC from UPI and Bharat QR codes", () => {
+  assert.deepEqual(Q.parse("upi://pay?pa=shop@okbank&mc=5411").mcc, { code: "5411", name: "Grocery stores and supermarkets", group: "grocery", groupLabel: "Groceries" });
+  assert.equal(Q.parse("upi://pay?pa=friend@ybl&mc=0000").mcc.missing, "placeholder");
+  assert.equal(Q.parse("upi://pay?pa=shop@paytm").mcc.missing, "none");
+  assert.equal(Q.parse("upi://pay?pa=shop@paytm&mc=54A1").mcc.missing, "invalid");
+  assert.equal(Q.mccInfo("3005").name, "Airlines");
+  assert.equal(Q.mccInfo("3400").name, "Car rental");
+  assert.equal(Q.mccInfo("3640").name, "Hotels and resorts");
+  assert.equal(Q.mccInfo("1234").unknown, true);
+  const text = emv([["00", "01"], ["26", "0010A000000524" + "0115merchant@okbank"], ["52", "5812"], ["53", "356"], ["58", "IN"], ["59", "Cafe"], ["60", "Pune"]]);
+  assert.equal(Q.parse(text).mcc.name, "Restaurants");
+  assert.equal(Q.parse("https://example.com").mcc, undefined);
+});

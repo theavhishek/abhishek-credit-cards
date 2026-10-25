@@ -19,6 +19,7 @@
     fields: $("qsFields"), notes: $("qsNotes"), raw: $("qsRaw"), rawWrap: $("qsRawWrap"),
     copy: $("btnCopy"), open: $("btnOpen"), save: $("btnSaveContact"), again: $("btnAgain"),
     copyRaw: $("btnCopyRaw"), status: $("qsStatus"),
+    mcc: $("qsMcc"), mccCode: $("qsMccCode"), mccName: $("qsMccName"), mccNote: $("qsMccNote"),
   };
   if (!els.view || !window.QR_PARSE) return;
 
@@ -286,6 +287,7 @@
     els.title.textContent = r.title;
     els.subtitle.textContent = r.subtitle || "";
     els.subtitle.hidden = !r.subtitle;
+    renderMcc(r.mcc);
 
     els.fields.replaceChildren(...r.fields.map((f) => {
       const row = document.createElement("div");
@@ -336,6 +338,29 @@
       els.body.classList.remove("is-in");
       void els.body.offsetWidth;
       els.body.classList.add("is-in");
+    }
+  }
+
+  // Payment codes: the merchant category code is the headline fact, so it gets its own block.
+  function renderMcc(m) {
+    els.mcc.hidden = !m;
+    if (!m) return;
+    els.mcc.dataset.state = m.missing ? "missing" : m.unknown ? "unknown" : "ok";
+    els.mccCode.textContent = m.missing === "none" ? "None" : m.code;
+    if (m.missing === "none") {
+      els.mccName.textContent = "Not in this code";
+      els.mccNote.textContent = "Many static UPI QRs (Paytm’s, for example) leave the MCC out. When you pay with a credit card on UPI, the merchant’s bank sets the MCC at the time of payment, so check your card statement for the real one.";
+    } else if (m.missing === "placeholder") {
+      els.mccName.textContent = "Placeholder, not a real category";
+      els.mccNote.textContent = "0000 is used for person-to-person UPI IDs and by many shop QRs (PhonePe’s, for example). The real MCC is set by the merchant’s bank when you pay, so check your card statement for it.";
+    } else if (m.missing === "invalid") {
+      els.mccName.textContent = "Not a valid MCC";
+      els.mccNote.textContent = "An MCC is four digits. This code carries something else, so the category can’t be read from it.";
+    } else {
+      els.mccName.textContent = m.name;
+      els.mccNote.textContent = m.unknown
+        ? "This code isn’t in the standard MCC list this page uses. Your card statement will show how the network names it."
+        : `Category: ${m.groupLabel}. This is the MCC the QR declares; the merchant’s bank can still send a different one when you pay, and your card statement shows the final one.`;
     }
   }
 
