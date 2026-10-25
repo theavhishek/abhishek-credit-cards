@@ -265,6 +265,13 @@ img.qs-still { object-fit: contain; }
 .qs-raw .ce-btn { margin: 0 14px 14px; }
 
 /* ---------- Sections ---------- */
+/* FAQ: a topic icon before each question, grey, orange when open or hovered (as on the review FAQs). */
+.qs .qs-faq-q { display: flex; align-items: center; gap: 12px; }
+.qs .qs-faq-icon { flex: none; color: var(--muted); transition: color 150ms ease; }
+.qs .ce-faq details[open] .qs-faq-icon { color: var(--ce-accent); }
+@media (hover: hover) { .qs .ce-faq summary:hover .qs-faq-icon { color: var(--ce-accent); } }
+.qs .ce-faq .ce-prose { padding-inline-start: 48px; }
+
 .qs-checks { display: grid; gap: 12px; }
 @media (min-width: 760px) { .qs-checks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .qs-checks li {
