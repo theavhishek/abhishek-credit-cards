@@ -44,7 +44,7 @@ function extract(filename) {
   const slug = basename(filename, ".html");
   const hero = match(html, /<header class="rv-hero">([\s\S]*?)<\/header>/, slug + " hero");
   const heading = plain(match(hero, /<h1[^>]*>([\s\S]*?)<\/h1>/, slug + " H1"));
-  const title = heading.replace(/(?::\s*the full review|\s+(?:review|preview))$/i, "").trim();
+  const title = slug === "slice-business-credit-card" ? "Slice Business Credit Card" : heading.replace(/(?::\s*the full review|\s+(?:review|preview))$/i, "").trim();
   const byline = match(hero, /<p class="rv-byline">([\s\S]*?)<\/p>/, slug + " byline");
   const date = match(byline, /<time datetime="(\d{4}-\d{2}-\d{2})"/, slug + " updated date");
   // Bylines read "9 min read" (older ones said "About 9 minutes to read").
@@ -58,10 +58,11 @@ function extract(filename) {
   const figure = match(hero, /<figure class="rv-hero-card">([\s\S]*?)<\/figure>/, slug + " hero figure");
   const imgTag = match(figure, /(<img\b[^>]*>)/, slug + " hero image");
   const image = { src: attribute(imgTag,"src"), alt: attribute(imgTag,"alt") || title };
+  const listAlt = title.replace(/(?:\s+Credit)?\s+Card$/i, "") + " credit card";
   if (!image.src.startsWith("/assets/reviews/")) throw new Error(slug + ": expected a local review hero image");
   const img = { src: image.src, alt: image.alt, srcset: attribute(imgTag,"srcset"), width: attribute(imgTag,"width"), height: attribute(imgTag,"height"), referrerpolicy: attribute(imgTag,"referrerpolicy") };
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !readTime || !title || !intro) throw new Error("Invalid review details: " + slug);
-  return { id: slug, title, excerpt: intro, category, date, readTime, author: { name: "Abhishek Meena", role: "Independent card reviewer", avatar: "/assets/abhishek-face-96.jpg" }, image, img };
+  return { id: slug, title, excerpt: intro, category, date, readTime, author: { name: "Abhishek Meena", role: "Independent card reviewer", avatar: "/assets/abhishek-face-96.jpg" }, image, listAlt, img };
 }
 
 const posts = readdirSync(reviewDir).filter(x => x.endsWith(".html")).map(extract).sort((a,b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
@@ -81,7 +82,7 @@ const source = [
   "};",
   "export const blogCategories = " + JSON.stringify(categories) + ";",
   "export const blogPosts: BlogPost[] = " + JSON.stringify(posts.map(p => ({
-    id:p.id,title:p.title,excerpt:p.excerpt,category:p.category,date:p.date,readTime:p.readTime,author:p.author,image:p.img.srcset ? { ...p.image, srcset: p.img.srcset } : p.image,featured:false
+    id:p.id,title:p.title,excerpt:p.excerpt,category:p.category,date:p.date,readTime:p.readTime,author:p.author,image:p.img.srcset ? { ...p.image, alt: p.listAlt, srcset: p.img.srcset } : { ...p.image, alt: p.listAlt },featured:false
   })),null,2) + ";",
   ""
 ].join("\n");
@@ -91,7 +92,7 @@ const reviewItem = (p) => {
   const im = p.img;
   const attrs = 'src="' + escape(im.src) + '"' +
     (im.srcset ? ' srcset="' + escape(im.srcset) + '" sizes="(min-width: 1024px) 380px, 92vw"' : "") +
-    ' alt=""' + (im.width ? ' width="' + escape(im.width) + '"' : "") +
+    ' alt="' + escape(p.listAlt) + '"' + (im.width ? ' width="' + escape(im.width) + '"' : "") +
     (im.height ? ' height="' + escape(im.height) + '"' : "") +
     ' loading="lazy"' + (im.referrerpolicy ? ' referrerpolicy="' + escape(im.referrerpolicy) + '"' : "");
   return '        <li>\n' +

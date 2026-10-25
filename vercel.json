@@ -4,17 +4,6 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/sitemap.xml",
-      "has": [
-        {
-          "type": "host",
-          "value": "cards\\.avhishek\\.in"
-        }
-      ],
-      "destination": "https://avhishek.in/sitemap.xml",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
       "has": [
         {
@@ -244,6 +233,28 @@
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
         }
       ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/sitemap\\.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "dest": "/cards-sitemap.xml"
+    },
+    {
+      "src": "/robots\\.txt",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "dest": "/cards-robots.txt"
     }
   ]
 }

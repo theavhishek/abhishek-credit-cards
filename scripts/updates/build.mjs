@@ -37,7 +37,7 @@ function fail(lines) {
 }
 
 const read = (rel) => fs.readFileSync(path.join(ROOT, rel), "utf8");
-const hash = (text) => crypto.createHash("sha256").update(text).digest("hex").slice(0, 8);
+const hash = (text) => crypto.createHash("sha256").update(text.replace(/\r\n/g, "\n")).digest("hex").slice(0, 8);
 const json = (value) => JSON.stringify(value).replace(/</g, "\\u003c");
 
 function replaceBetween(text, name, content, file) {
@@ -69,6 +69,11 @@ const assetVersions = {
 
 const lastChanged = (item) => item.updated || item.published;
 const dateOnly = (value) => value.slice(0, 10);
+const articleDateTime = (value) => {
+  const match = value.match(/^(\d{4}-\d{2}-\d{2})(?:[T ](\d{2}:\d{2})(?::(\d{2}))?)?$/);
+  if (!match) throw new Error(`Unsupported article date: ${value}`);
+  return `${match[1]}T${match[2] || "09:00"}:${match[3] || "00"}+05:30`;
+};
 const longDate = (value) => core.fmtDate(value, { long: true });
 const absolute = (href) => (href.startsWith("/") ? SITE + href : href);
 
@@ -132,7 +137,7 @@ function buildHub() {
         ...(pages.length ? {
           hasPart: pages.slice(0, 50).map((i) => ({
             "@type": i.type === "news" ? "NewsArticle" : "Article", headline: i.title, url: core.itemUrl(i),
-            datePublished: core.isoDate(i.published),
+            datePublished: articleDateTime(i.published),
           })),
         } : {}),
       },
@@ -322,8 +327,8 @@ function buildArticle(item) {
         url: canonical,
         mainEntityOfPage: canonical,
         image: absolute(og.src),
-        datePublished: core.isoDate(item.published),
-        dateModified: core.isoDate(modified),
+        datePublished: articleDateTime(item.published),
+        dateModified: articleDateTime(modified),
         inLanguage: "en-IN",
         articleSection: core.categoryLabel(item.category),
         author,
@@ -334,9 +339,15 @@ function buildArticle(item) {
     ],
   };
 
-  const title = item.title.length > 62 ? item.title : `${item.title} | Avhishek`;
+  const seoTitles = {
+    "hdfc-tata-neu-neucoins-manual-claim-november-2026": "Tata Neu NeuCoins: Manual Claims | Avhishek",
+    "pnb-credit-card-charges-revised-november-2026": "PNB Card Charges from Nov 2026 | Avhishek",
+    "pnb-navratri-dussehra-cashback-2026": "PNB Card Navratri Cashback | Avhishek",
+  };
+  const shortTitle = item.title.length <= 49 ? item.title : item.title.slice(0, 46).replace(/\s+\S*$/, "") + "…";
+  const title = seoTitles[item.slug] || `${shortTitle} | Avhishek`;
   const html = fill(template, {
-    source: item.file,
+    source: item.file.replaceAll("\\", "/"),
     robots: "index, follow",
     description: esc(item.summary),
     ogType: "article",
@@ -346,7 +357,7 @@ function buildArticle(item) {
     ogImageWidth: String(og.width),
     ogImageHeight: String(og.height),
     ogImageAlt: esc(og.alt || item.title),
-    articleMeta: `  <meta property="article:published_time" content="${core.isoDate(item.published)}">\n  <meta property="article:modified_time" content="${core.isoDate(modified)}">\n`,
+    articleMeta: `  <meta property="article:published_time" content="${articleDateTime(item.published)}">\n  <meta property="article:modified_time" content="${articleDateTime(modified)}">\n`,
     title: esc(title),
     jsonld: json(graph),
     styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=8">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n',
@@ -503,11 +514,13 @@ const stale = fs.existsSync(updatesDir)
       fs.readFileSync(path.join(updatesDir, f), "utf8").includes(GENERATED_MARK)).map((f) => `updates/${f}`)
   : [];
 
+const sameContent = (current, generated) => current.replace(/\r\n/g, "\n") === generated.replace(/\r\n/g, "\n");
+
 if (CHECK) {
   const out = [];
   for (const [rel, content] of outputs) {
     const file = path.join(OUT, rel);
-    if (!fs.existsSync(file) || fs.readFileSync(file, "utf8") !== content) out.push(`${rel} is out of date`);
+    if (!fs.existsSync(file) || !sameContent(fs.readFileSync(file, "utf8"), content)) out.push(`${rel} is out of date`);
   }
   stale.forEach((rel) => out.push(`${rel} should be removed`));
   if (out.length) {
@@ -520,7 +533,7 @@ if (CHECK) {
   for (const [rel, content] of outputs) {
     const file = path.join(OUT, rel);
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    if (!fs.existsSync(file) || fs.readFileSync(file, "utf8") !== content) {
+    if (!fs.existsSync(file) || !sameContent(fs.readFileSync(file, "utf8"), content)) {
       fs.writeFileSync(file, content);
       console.log(`  wrote ${path.relative(ROOT, file)}`);
     }

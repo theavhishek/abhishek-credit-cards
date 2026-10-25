@@ -47,7 +47,7 @@
     const fallback = initials(bank);
     const png = domain ? window.BANK_LOGO_PNG?.[domain] : "";
     if (!png) return `<span class="support-bank-fallback" style="display:grid">${esc(fallback)}</span>`;
-    return `<img class="support-bank-img" src="${esc(png)}" alt="${esc(bank)} logo" loading="lazy" decoding="async"><span class="support-bank-fallback">${esc(fallback)}</span>`;
+    return `<img class="support-bank-img" src="${esc(png)}" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="support-bank-fallback">${esc(fallback)}</span>`;
   }
 
   function installLogoFallbacks() {

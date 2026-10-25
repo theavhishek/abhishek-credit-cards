@@ -71,7 +71,7 @@
       </label>`).join("");
   }
   function othersHTML() {
-    return otherBanks().map(b => `<li><a href="/pay-credit-card-bill#bank-${esc(slug(b))}">${marks[b] ? `<img src="/assets/bank-logos/${esc(marks[b])}" alt="" width="20" height="20" loading="lazy" decoding="async">` : ""}${esc(short(b))}</a></li>`).join("");
+    return otherBanks().map(b => `<li><a href="/pay-credit-card-bill#bank-${esc(slug(b))}">${marks[b] ? `<img src="/assets/bank-logos/${esc(marks[b])}" alt="" aria-hidden="true" width="20" height="20" loading="lazy" decoding="async">` : ""}${esc(short(b))}</a></li>`).join("");
   }
 
   if (isNode) {

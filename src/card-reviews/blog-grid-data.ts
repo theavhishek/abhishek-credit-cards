@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
     },
     "image": {
       "src": "/assets/reviews/kredit-pe-yes-bank-max-credit-card.jpg",
-      "alt": "The Kredit.Pe YES BANK Max credit card: blue top half with a chip and contactless mark, white lower half with the Kredit.Pe name",
+      "alt": "Kredit.Pe YES BANK Max credit card",
       "srcset": "/assets/reviews/kredit-pe-yes-bank-max-credit-card-800.webp 800w, /assets/reviews/kredit-pe-yes-bank-max-credit-card-1200.webp 1200w, /assets/reviews/kredit-pe-yes-bank-max-credit-card.jpg 1600w"
     },
     "featured": false
@@ -41,7 +41,7 @@ export const blogPosts: BlogPost[] = [
     },
     "image": {
       "src": "/assets/reviews/rbl-jalsa-credit-card.jpg",
-      "alt": "Illustration of the RBL Bank Jalsa RuPay credit card: a pink-to-purple card with the word Jalsa, a chip and the RuPay name",
+      "alt": "RBL Bank Jalsa credit card",
       "srcset": "/assets/reviews/rbl-jalsa-credit-card-800.webp 800w, /assets/reviews/rbl-jalsa-credit-card-1200.webp 1200w, /assets/reviews/rbl-jalsa-credit-card.jpg 1600w"
     },
     "featured": false
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     },
     "image": {
       "src": "/assets/reviews/eternal-sbi-card.jpg",
-      "alt": "Eternal SBI Card: a black card with the eternal logo above Zomato, Blinkit and District, and the SBI Card logo at the bottom",
+      "alt": "Eternal SBI credit card",
       "srcset": "/assets/reviews/eternal-sbi-card-800.webp 800w, /assets/reviews/eternal-sbi-card-1200.webp 1200w, /assets/reviews/eternal-sbi-card.jpg 1600w"
     },
     "featured": false
@@ -79,7 +79,7 @@ export const blogPosts: BlogPost[] = [
     },
     "image": {
       "src": "/assets/reviews/hsbc-live-plus.jpg",
-      "alt": "HSBC Live+ Visa Infinite credit card"
+      "alt": "HSBC Live+ credit card"
     },
     "featured": false
   },
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     },
     "image": {
       "src": "/assets/reviews/slice-business-credit-card.jpg",
-      "alt": "Slice Business credit cards: two dark purple cards with the slice business logo, one on Visa and one on RuPay",
+      "alt": "Slice Business credit card",
       "srcset": "/assets/reviews/slice-business-credit-card-800.webp 800w, /assets/reviews/slice-business-credit-card-1200.webp 1200w, /assets/reviews/slice-business-credit-card.jpg 1600w"
     },
     "featured": false

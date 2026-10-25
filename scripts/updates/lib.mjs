@@ -5,11 +5,12 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 export const core = require("../../assets/updates-core.js");
 
-export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
+export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 export const CONTENT_DIR = path.join(ROOT, "content/updates");
 export const FIXTURE_DIR = path.join(CONTENT_DIR, "_fixtures");
 

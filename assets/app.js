@@ -63,7 +63,7 @@
     const src = bankLogoFiles[bankName] ? `assets/bank-logos/${bankLogoFiles[bankName]}` : "";
     const fallback = (bankShort[bankName] || bankName).replace(/[^A-Za-z0-9]/g,"").slice(0,2).toUpperCase();
     if (!src) return `<span class="logo-fallback" style="display:grid">${esc(fallback)}</span>`;
-    return `<img class="bank-logo" alt="" src="${esc(src)}" loading="lazy" decoding="async"><span class="logo-fallback">${esc(fallback)}</span>`;
+    return `<img class="bank-logo" alt="" aria-hidden="true" src="${esc(src)}" loading="lazy" decoding="async"><span class="logo-fallback">${esc(fallback)}</span>`;
   }
 
   function installLogoFallbacks(scope = document) {
