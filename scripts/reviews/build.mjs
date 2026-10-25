@@ -15,7 +15,7 @@ const read = (path) => readFileSync(join(root, path), "utf8");
 function write(path, next) {
   const full = join(root, path);
   const previous = readFileSync(full, "utf8");
-  if (previous === next) return;
+  if (previous.replace(/\r\n/g, "\n") === next.replace(/\r\n/g, "\n")) return;
   changed.push(path);
   if (!check) writeFileSync(full, next);
 }
