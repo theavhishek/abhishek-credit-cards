@@ -9,11 +9,12 @@ import "./arc-tabs/tabs-theme.css";
 // and the tab follows whatever the page script selects (resets, URL state). Without JS the originals show.
 // Nav links ([aria-current] marks the page you're on) switch with Enter or a click, not on arrow keys,
 // so moving through the tabs never leaves the page. data-arc-keep leaves hiding the originals to CSS.
-type Item = { value: string; label: string; el: HTMLElement; target: HTMLElement; href?: string };
+// An option may hold a decorative <span class="arc-tab-icon">; the tab shows a copy of it before the label (styled by the page).
+type Item = { value: string; label: string; el: HTMLElement; target: HTMLElement; href?: string; icon?: string };
 
 function readItems(group: HTMLElement): Item[] {
   const buttons = Array.from(group.querySelectorAll<HTMLButtonElement>("button[aria-pressed]"));
-  if (buttons.length) return buttons.map((el, i) => ({ value: String(i), label: el.textContent?.trim() ?? "", el, target: el }));
+  if (buttons.length) return buttons.map((el, i) => ({ value: String(i), label: el.textContent?.trim() ?? "", el, target: el, icon: el.querySelector(".arc-tab-icon")?.outerHTML }));
   const links = Array.from(group.querySelectorAll<HTMLAnchorElement>(":scope > a[href]"));
   if (links.length) return links.map((el, i) => ({ value: String(i), label: el.textContent?.trim() ?? "", el, target: el, href: el.href }));
   return Array.from(group.querySelectorAll<HTMLInputElement>('input[type="radio"]')).map(input => {
@@ -77,7 +78,7 @@ function GroupTabs({ group, items, onMount }: { group: HTMLElement; items: Item[
             onMouseDown={item.href ? event => { if (event.metaKey || event.ctrlKey || event.shiftKey) event.preventDefault(); } : undefined}
             onClick={item.href ? event => { if (event.metaKey || event.ctrlKey || event.shiftKey) window.open(item.href, "_blank", "noopener"); } : undefined}
             onAuxClick={item.href ? event => { if (event.button === 1) window.open(item.href, "_blank", "noopener"); } : undefined}
-          >{item.label}</TabsTrigger>
+          >{item.icon ? <span className="arc-tab-inner"><span className="arc-tab-icon-slot" aria-hidden="true" dangerouslySetInnerHTML={{ __html: item.icon }}/>{item.label}</span> : item.label}</TabsTrigger>
         ))}
       </TabsList>
     </Tabs>
