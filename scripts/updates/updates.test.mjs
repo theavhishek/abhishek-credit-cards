@@ -126,14 +126,19 @@ test("filters: default view hides ended and unverified offers", () => {
   assert.equal(pick({ view: "all", cat: "devaluation" }), "n");
 });
 
-test("feed cards show the item's image beside the headline", () => {
-  const item = { slug: "x", type: "news", title: "T", summary: "S", category: "banking", published: "2026-10-14", confirmation: "official",
-    image: { src: "/assets/updates/x.jpg", thumb: "/assets/updates/x-thumb.webp", width: 1024, height: 1536, alt: "Poster" } };
+test("feed cards show the item's fact tile beside the headline, not its image", () => {
+  const item = { slug: "x", type: "news", title: "T", summary: "S", category: "devaluation", published: "2026-10-14", confirmation: "official", issuer: "PNB",
+    image: { src: "/assets/updates/x.jpg", thumb: "/assets/updates/x-thumb.webp", width: 1024, height: 1536, alt: "Poster" },
+    tile: { figure: "₹99", caption: "per redemption", logo: "/assets/bank-logos/punb.svg" } };
   const html = core.renderItem(item);
   assert.match(html, /class="up-item up-news has-thumb"/);
-  assert.match(html, /<span class="up-thumb is-portrait" aria-hidden="true"><img src="\/assets\/updates\/x-thumb.webp" alt=""/);
+  assert.match(html, /<span class="up-thumb up-tile" data-cat="devaluation" aria-hidden="true"><span class="up-tile-mark"><img class="up-tile-logo" src="\/assets\/bank-logos\/punb.svg" alt=""/);
+  assert.match(html, /<span class="up-tile-figure">₹99<\/span><span class="up-tile-caption">per redemption<\/span>/);
+  assert.doesNotMatch(html, /x-thumb\.webp|x\.jpg/);
   assert.match(html, /<div class="up-item-head">.*<h3 class="up-title">T<\/h3><\/div><div class="up-item-body"><p class="up-summary">S<\/p>/);
-  delete item.image;
+  delete item.tile.logo;
+  assert.match(core.renderItem(item), /<span class="up-tile-name">PNB<\/span>/);
+  delete item.tile;
   assert.doesNotMatch(core.renderItem(item), /up-thumb|up-item-head/);
 });
 

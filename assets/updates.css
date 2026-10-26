@@ -517,55 +517,133 @@ html[data-theme="dark"] .up-offer:not(.up-item) { box-shadow: 0 0 0 1px var(--li
 .up-offer[data-status="expired"] :is(.up-offer-value, .up-title) { color: var(--muted); }
 .up-offer[data-status="expired"] .up-offer-value { text-decoration: line-through; text-decoration-thickness: 1.5px; text-decoration-color: var(--line-strong); }
 
-/* ---------- Item image ---------- */
-/* Image on the left; the head (labels and title) sits beside it. On wide
-   screens the body continues beside it too, on phones it runs full width. */
+/* ---------- Feed tile ---------- */
+/* A square fact tile on the left: the issuer's logo, one key figure in the
+   category colour and a short caption. The head (labels and title) sits
+   beside it. On wide screens the body continues beside it too, on phones it
+   runs full width. Posters stay on the article page. */
 .up-item.has-thumb {
-  --up-thumb: 168px;
+  --up-thumb: 128px;
   display: grid;
   grid-template-columns: var(--up-thumb) minmax(0, 1fr);
   grid-template-rows: auto 1fr;
   column-gap: 20px;
   align-items: start;
 }
-.up-item.has-thumb.up-offer { --up-thumb: 184px; }
 .up-thumb { grid-row: 1 / span 2; display: block; }
-.up-thumb.is-landscape { --up-thumb-ratio: 4 / 3; }
-.up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 200px; }
-.up-thumb img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: var(--up-thumb-ratio, auto);
-  object-fit: cover;
-  border-radius: 10px;
-  background: var(--up-fill);
-  box-shadow: 0 0 0 1px var(--line);
+/* Tinted liquid glass, the same material as the phone tab bar (header.css
+   --hd-glass tokens): frosted glass over a soft glow in the category colour,
+   with a light rim on the top-left and bottom-right edges. */
+.up-tile {
+  --up-tile-ink: var(--up-accent);
+  --up-tile-glow: var(--up-tile-ink);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+  padding: 11%;
+  overflow: hidden;
+  border-radius: 18px;
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.18) 55%, rgb(255 255 255 / 0.05)),
+    color-mix(in srgb, var(--up-tile-glow) 8%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(200%) brightness(1.04);
+  backdrop-filter: blur(16px) saturate(200%) brightness(1.04);
+  box-shadow: inset 0 0 0 1px var(--hd-glass-edge), var(--hd-glass-shadow);
+  container-type: inline-size;
+  color: var(--text);
+  text-decoration: none;
 }
-a.up-thumb img { transition: opacity 150ms ease-out; }
-@media (hover: hover) { a.up-thumb:hover img { opacity: 0.88; } }
+html[data-theme="dark"] .up-tile {
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0)),
+    color-mix(in srgb, var(--up-tile-glow) 10%, rgb(20 20 22 / 0.6));
+}
+.up-tile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto -25% -35% auto;
+  width: 95%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--up-tile-glow) 55%, transparent), transparent 68%);
+  filter: blur(6px);
+}
+.up-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.25px;
+  border-radius: inherit;
+  background: var(--hd-glass-rim);
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.up-tile[data-cat="devaluation"] { --up-tile-ink: var(--up-danger); }
+.up-tile[data-cat="launch"] { --up-tile-ink: #4f46e5; }
+.up-tile[data-cat="cashback"] { --up-tile-ink: #15803d; }
+.up-tile[data-cat="spend-offer"] { --up-tile-ink: #1d4ed8; }
+html[data-theme="dark"] .up-tile:is([data-cat="launch"], [data-cat="cashback"], [data-cat="spend-offer"]) { --up-tile-ink: color-mix(in srgb, var(--up-tile-c) 50%, #fff); }
+html[data-theme="dark"] .up-tile[data-cat="launch"] { --up-tile-c: #4f46e5; }
+html[data-theme="dark"] .up-tile[data-cat="cashback"] { --up-tile-c: #15803d; }
+html[data-theme="dark"] .up-tile[data-cat="spend-offer"] { --up-tile-c: #1d4ed8; }
+.up-tile-mark { display: flex; flex: none; align-items: center; height: 28cqi; margin-block-end: auto; }
+.up-tile-logo { width: auto; max-width: 100%; height: 100%; object-fit: contain; object-position: left center; }
+html[data-theme="dark"] .up-tile-logo[data-invert-dark] { filter: invert(1); }
+.up-tile-name {
+  overflow: hidden;
+  font-size: 14cqi;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.up-tile-figure {
+  padding-block-start: 4cqi;
+  color: var(--up-tile-ink);
+  font-size: 27cqi;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.up-tile-caption {
+  margin-block-start: 5cqi;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: max(10px, 10.5cqi);
+  font-weight: 500;
+  line-height: 1.2;
+  opacity: 0.72;
+}
+a.up-thumb { transition: opacity 150ms ease-out; }
+@media (hover: hover) { a.up-thumb:hover { opacity: 0.88; } }
 .up-item.has-thumb .up-item-top { padding-inline-end: 44px; }
 .up-item-head .up-item-top:first-child { margin-block-start: 0; }
-.up-offer[data-status="expired"] .up-thumb img { filter: grayscale(1); opacity: 0.7; }
-/* Narrow cards (phones, and beside the sidebar on laptops): smaller image
+.up-offer[data-status="expired"] .up-thumb { filter: grayscale(1); opacity: 0.7; }
+/* Narrow cards (phones, and beside the sidebar on laptops): smaller tile
    beside the head only, with the rest of the card at full width. */
 .up-day-items > li { container-type: inline-size; }
 @container (max-width: 560px) {
-  .up-item.has-thumb,
-  .up-item.has-thumb.up-offer { --up-thumb: 116px; column-gap: 16px; grid-template-rows: auto; }
-  .up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 136px; }
+  .up-item.has-thumb { --up-thumb: 104px; column-gap: 16px; grid-template-rows: auto; }
   .up-thumb { grid-row: 1; }
   .up-item.has-thumb .up-item-body { grid-column: 1 / -1; }
 }
 @container (max-width: 400px) {
-  .up-item.has-thumb,
-  .up-item.has-thumb.up-offer { --up-thumb: 92px; column-gap: 14px; }
-  .up-item.has-thumb:has(.up-thumb.is-landscape) { --up-thumb: 108px; }
+  .up-item.has-thumb { --up-thumb: 96px; column-gap: 14px; }
   .up-item.has-thumb .up-item-top { padding-inline-end: 36px; }
 }
 @container (max-width: 300px) {
-  .up-item.has-thumb,
-  .up-item.has-thumb.up-offer { --up-thumb: 76px; column-gap: 12px; }
+  .up-item.has-thumb { --up-thumb: 80px; column-gap: 12px; }
 }
 
 .up-terms {

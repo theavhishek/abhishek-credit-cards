@@ -12,6 +12,10 @@ issuer: HSBC India
 merchant: Myntra
 cards: [HSBC Live+]
 tags: [fashion, shopping]
+tile:
+  figure: 10%
+  caption: cashback on Myntra
+  logo: /assets/bank-logos/hsbc.svg
 link: /card-reviews/hsbc-live-plus
 offer:
   value: 10% cashback

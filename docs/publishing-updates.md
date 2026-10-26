@@ -63,8 +63,13 @@ tags: [smartbuy, reward points]            # optional extra search words
 confirmation: official          # news only: official, reported or unconfirmed
 link: /card-reviews/hsbc-live-plus         # optional: a related page on this site
 related: [another-update-file-name]        # optional: pin related updates
-image: /assets/updates/infinia.webp        # optional, with imageAlt; shown on the feed card and the article
+image: /assets/updates/infinia.webp        # optional, with imageAlt; shown at the top of the article
 imageAlt: What the image shows
+tile:                           # the fact tile beside the headline in the feed
+  figure: 2.5%                  # the one number or date the item is about, up to 6 characters
+  caption: extra valueback      # a few words under it, up to 20 characters
+  logo: /assets/bank-logos/hdfc.svg        # optional; without it the issuer's name is shown
+  invertOnDark: true            # optional; for a black logo that would vanish in dark mode
 page: true                      # optional; see "Feed item or full article"
 archived: false                 # optional; true moves old news to the archive
 draft: true                     # optional; drafts are never published
@@ -99,16 +104,18 @@ News: `launch`, `devaluation`, `banking`, `regulatory` (RBI and regulation),
 Offers: `card-offer`, `gift-card`, `cashback`, `spend-offer` (spend a target, earn a bonus), `shopping`, `travel`,
 `limited` (limited-time promotions).
 
-### Images
+### Feed tile and images
 
-An image makes an item easier to spot when people scan the feed: it appears
-beside the headline on the feed card and at the top of the article. Use the
-bank's or merchant's own poster or a picture you made; never a stock photo.
-Items without an image simply show no picture.
+Each feed card has a square fact tile beside the headline: the bank's logo
+from `assets/bank-logos/`, one key figure in the category colour, and a short
+caption, all set in `tile:`. Take the figure and caption from the item's own
+facts (its summary, offer block or source), never a number that isn't in
+them. Items without a tile show no picture in the feed.
 
-Put the file in `assets/updates/`. For a faster feed, also add a small copy
-named `<same-name>-thumb.webp` (about 336 px wide). The build uses it on the
-feed card when it exists, and the full image everywhere else.
+Posters and PDF screenshots go in `image:`. They appear at the top of the
+article and in link previews, not in the feed, where their small print can't
+be read. Use the bank's or merchant's own poster or a picture you made; never
+a stock photo. Put the file in `assets/updates/`.
 
 ## How offer status works
 
