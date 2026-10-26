@@ -291,8 +291,6 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   font-variant-numeric: tabular-nums;
 }
 .up-day-items > li + li { border-block-start: 1px solid var(--line); }
-.up-day-items > li:has(> .up-offer) + li,
-.up-day-items > li + li:has(> .up-offer) { border-block-start-color: transparent; }
 @media (min-width: 720px) {
   .up-day { grid-template-columns: 124px minmax(0, 1fr); gap: 24px; padding-block: 28px 8px; }
   .up-day-label { position: sticky; top: 104px; align-self: start; padding-block-start: 18px; }
@@ -471,16 +469,17 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   .up-sharebar a[href]:hover svg { color: var(--up-brand, var(--muted)); }
 }
 
-/* ---------- Offer cards ---------- */
-.up-offer {
+/* ---------- Offer cards ----------
+   The boxed panel is the "Offer details" block on an article page. In the
+   feed, offers sit unboxed like news so the two read the same. */
+.up-offer:not(.up-item) {
   margin-block: 10px;
   padding: 18px 20px 20px;
   border-radius: 14px;
   background: var(--surface);
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 0 0 1px var(--line);
 }
-html[data-theme="dark"] .up-offer { box-shadow: 0 0 0 1px var(--line); }
-.up-offer .up-share { top: 8px; inset-inline-end: 8px; }
+html[data-theme="dark"] .up-offer:not(.up-item) { box-shadow: 0 0 0 1px var(--line); }
 .up-status {
   display: inline-flex;
   align-items: center;
@@ -770,7 +769,7 @@ a.up-thumb img { transition: opacity 150ms ease-out; }
   .up-toolbar { gap: 8px; }
   .up-tabs { flex: 1 1 100%; }
   .up-tab { flex: 1; padding-inline: 8px; }
-  .up-offer { padding: 16px 16px 18px; margin-inline: -4px; }
+  .up-offer:not(.up-item) { padding: 16px 16px 18px; margin-inline: -4px; }
   .up-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
   .up-title { font-size: 1.25rem; line-height: 1.25; }
   .up-summary { font-size: 0.9375rem; }

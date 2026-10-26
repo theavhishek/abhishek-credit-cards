@@ -288,7 +288,7 @@
           '<span class="up-status">' + STATUS_LABEL[status] + "</span>" + fixture + "</div>" +
           renderTitle(item, level),
           '<p class="up-summary">' + esc(item.summary) + "</p>" +
-          metaLine([who, "Posted " + posted, updated])) +
+          metaLine([who, posted, updated])) +
         shareButton(item) +
         "</article>";
     }
