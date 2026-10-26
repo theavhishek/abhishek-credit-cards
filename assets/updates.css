@@ -301,6 +301,9 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   padding-block: 18px 22px;
 }
 .up-item:target { scroll-margin-top: 112px; }
+/* Feed items are separated by dividers, not boxes, so drop the card shadow
+   polish.css gives .up-item (it showed as a faint box with no background). */
+.up-day-items .up-item { box-shadow: none; }
 .up-item-top {
   display: flex;
   flex-wrap: wrap;
