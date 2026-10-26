@@ -96,7 +96,7 @@ offer:
 News: `launch`, `devaluation`, `banking`, `regulatory` (RBI and regulation),
 `rewards` (rewards and benefits changes), `announcement`.
 
-Offers: `card-offer`, `gift-card`, `cashback`, `shopping`, `travel`,
+Offers: `card-offer`, `gift-card`, `cashback`, `spend-offer` (spend a target, earn a bonus), `shopping`, `travel`,
 `limited` (limited-time promotions).
 
 ### Images

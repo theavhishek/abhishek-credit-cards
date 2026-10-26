@@ -32,6 +32,7 @@
     "card-offer": { label: "Card offer", plural: "Credit card offers", type: "offer" },
     "gift-card": { label: "Gift card deal", plural: "Gift card deals", type: "offer" },
     cashback: { label: "Cashback deal", plural: "Cashback deals", type: "offer" },
+    "spend-offer": { label: "Spend-based offer", plural: "Spend-based offers", type: "offer" },
     shopping: { label: "Shopping offer", plural: "Shopping offers", type: "offer" },
     travel: { label: "Travel offer", plural: "Travel offers", type: "offer" },
     limited: { label: "Limited-time offer", plural: "Limited-time promotions", type: "offer" }
@@ -277,23 +278,17 @@
     if (item.type === "offer") {
       var o = item.offer || {};
       var status = offerStatus(o, now);
-      var verified = o.verified && isValidDate(o.verified)
-        ? "Checked against official terms on " + esc(fmtDate(o.verified))
-        : "Not yet checked against official terms";
-      var links = [];
-      if (o.link) links.push('<a href="' + esc(o.link) + '"' + linkAttrs(o.link) + ">Offer page" + newTab(o.link) + "</a>");
-      if (o.terms) links.push('<a href="' + esc(o.terms) + '"' + linkAttrs(o.terms) + ">Terms" + newTab(o.terms) + "</a>");
+      // The feed card stays short on purpose: the label, the headline and a
+      // sentence. The terms, the check date and the offer links live on the
+      // item's own page, so there is a reason to open it.
       return '<article class="up-item up-offer' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
         ' data-starts="' + esc(o.starts || "") + '" data-ends="' + esc(o.ends || "") + '" data-verified="' + esc(o.verified || "") + '">' +
         withThumb(item,
           '<div class="up-item-top"><span class="up-kicker" data-cat="' + esc(item.category) + '">' + esc(categoryLabel(item.category)) + "</span>" +
           '<span class="up-status">' + STATUS_LABEL[status] + "</span>" + fixture + "</div>" +
-          (o.value ? '<p class="up-offer-value">' + esc(o.value) + "</p>" : "") +
           renderTitle(item, level),
           '<p class="up-summary">' + esc(item.summary) + "</p>" +
-          renderTerms(item) +
-          metaLine([who, "Posted " + posted, updated, verified]) +
-          (links.length ? '<p class="up-links">' + links.join("") + "</p>" : "")) +
+          metaLine([who, "Posted " + posted, updated])) +
         shareButton(item) +
         "</article>";
     }

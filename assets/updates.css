@@ -1,7 +1,8 @@
 /* ==========================================================================
    News and offers (/updates, /updates/archive and /updates/<slug>).
    Site tokens from site.css. The brand orange #fc6e20 marks categories and
-   the headline dot, except Devaluation, Card launch and Cashback deal,
+   the headline dot, except Devaluation, Card launch, Cashback deal and
+   Spend-based offer,
    which are solid coloured badges so they stand out;
    status colours are reserved for offer status only.
    Article pages also load review-page.css for the byline, body and sources.
@@ -312,12 +313,13 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   line-height: 1.4;
 }
 .up-kicker { color: var(--up-accent); font-weight: 600; }
-/* Badge categories: Devaluation (red, falling arrow), Card launch (indigo, sparkle) and
-   Cashback deal (green, percent) are solid pills so they stand out from the orange labels. */
+/* Badge categories: Devaluation (red, falling arrow), Card launch (indigo, sparkle),
+   Cashback deal (green, percent) and Spend-based offer (blue, shopping bag) are solid pills so they stand out from the orange labels. */
 .up-kicker[data-cat="devaluation"] { --up-badge: var(--up-danger-fill); --up-badge-icon: var(--up-down-icon); }
 .up-kicker[data-cat="launch"] { --up-badge: #4f46e5; --up-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 2l2.4 7.1L21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.9z'/%3E%3C/svg%3E"); }
 .up-kicker[data-cat="cashback"] { --up-badge: #15803d; --up-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='2.5'/%3E%3Ccircle cx='17' cy='17' r='2.5'/%3E%3Cpath d='M19 5L5 19'/%3E%3C/svg%3E"); }
-.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"]) {
+.up-kicker[data-cat="spend-offer"] { --up-badge: #1d4ed8; --up-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8h14l-1 13H6z'/%3E%3Cpath d='M9 10V6a3 3 0 0 1 6 0v4'/%3E%3C/svg%3E"); }
+.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"], [data-cat="spend-offer"]) {
   display: inline-flex;
   align-items: center;
   justify-self: start;
@@ -329,7 +331,7 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   font-weight: 700;
   letter-spacing: 0.01em;
 }
-.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"])::before {
+.up-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"], [data-cat="spend-offer"])::before {
   content: "";
   flex: none;
   width: 14px;
