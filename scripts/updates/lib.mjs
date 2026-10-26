@@ -20,10 +20,13 @@ const MIN_PAGE_WORDS = 150;
 
 const TOP_KEYS = new Set([
   "type", "title", "summary", "category", "published", "updated", "issuer", "merchant", "cards", "tags",
-  "confirmation", "sources", "link", "related", "image", "imageAlt", "page", "archived", "draft", "offer",
+  "confirmation", "sources", "link", "related", "image", "imageAlt", "tile", "page", "archived", "draft", "offer",
 ]);
 const OFFER_KEYS = new Set(["value", "cap", "minSpend", "starts", "ends", "eligibility", "code", "link", "terms", "verified"]);
 const SOURCE_KEYS = new Set(["label", "url", "kind"]);
+const TILE_KEYS = new Set(["figure", "caption", "logo", "invertOnDark"]);
+const TILE_FIGURE_MAX = 6;
+const TILE_CAPTION_MAX = 20;
 
 /* ---------- Frontmatter (a small, strict YAML subset) ---------- */
 
@@ -415,6 +418,26 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       }
     }
 
+    // Feed tile: logo, one key figure and a caption, beside the headline in the feed
+    let tile = null;
+    if (d.tile != null) {
+      if (typeof d.tile !== "object" || Array.isArray(d.tile)) fail(`"tile" must be a block with figure, caption and logo.`);
+      else {
+        tile = { ...d.tile };
+        for (const key of Object.keys(tile)) if (!TILE_KEYS.has(key)) fail(`tile: unknown field "${key}".`);
+        for (const key of ["figure", "caption", "logo"]) if (tile[key] != null && typeof tile[key] !== "string") fail(`tile.${key} must be text.`);
+        if (tile.invertOnDark != null && typeof tile.invertOnDark !== "boolean") fail(`tile.invertOnDark must be true or false.`);
+        if (!tile.figure) fail(`tile.figure is required: the one number or date the item is about, like 2.5% or 25 Nov.`);
+        else if (tile.figure.length > TILE_FIGURE_MAX) fail(`tile.figure is ${tile.figure.length} characters; keep it to ${TILE_FIGURE_MAX} so it fits the tile.`);
+        if (!tile.caption) fail(`tile.caption is required: a few words under the figure, like "extra valueback".`);
+        else if (tile.caption.length > TILE_CAPTION_MAX) fail(`tile.caption is ${tile.caption.length} characters; keep it to ${TILE_CAPTION_MAX}.`);
+        if (tile.logo != null) {
+          if (!tile.logo.startsWith("/assets/")) fail(`tile.logo must be a file under /assets/, like /assets/bank-logos/hdfc.svg.`);
+          else if (!fs.existsSync(path.join(ROOT, tile.logo))) fail(`tile.logo ${tile.logo} doesn't exist.`);
+        } else if (!d.issuer && !d.merchant) fail(`A tile without tile.logo shows the issuer's name, so set "issuer".`);
+      }
+    } else warn(`No "tile", so the feed card shows no picture beside the headline.`);
+
     // Body and page
     const bodyProblems = [];
     const body = parsed.body.trim();
@@ -449,6 +472,7 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       link: d.link || null,
       related: d.related || [],
       image,
+      tile,
       page,
       archived: !!d.archived,
       offer,

@@ -232,20 +232,27 @@
     return "<h" + level + ' class="up-title">' + inner + "</h" + level + ">";
   }
 
-  // The item's image beside the headline, so the feed can be scanned. The title
-  // and summary carry the same facts, so the image is hidden from screen readers.
+  // A fact tile beside the headline, so the feed can be scanned: the issuer's
+  // logo (or name), one key figure and a short caption, all written in the
+  // item's "tile" field. Posters and screenshots stay on the article page,
+  // because their small print can't be read at feed size. The title and
+  // summary carry the same facts, so the tile is hidden from screen readers.
   function renderThumb(item) {
-    var img = item.image;
-    if (!img || !img.src) return "";
-    var shape = img.height > img.width ? "is-portrait" : "is-landscape";
-    var tag = '<img src="' + esc(img.thumb || img.src) + '" alt="" width="' + Number(img.width) + '" height="' + Number(img.height) + '" loading="lazy" decoding="async">';
+    var t = item.tile;
+    if (!t || !t.figure) return "";
+    var mark = t.logo
+      ? '<img class="up-tile-logo" src="' + esc(t.logo) + '" alt="" loading="lazy" decoding="async"' + (t.invertOnDark ? " data-invert-dark" : "") + ">"
+      : '<span class="up-tile-name">' + esc(item.issuer || item.merchant || "") + "</span>";
+    var inner = '<span class="up-tile-mark">' + mark + '</span><span class="up-tile-figure">' + esc(t.figure) + "</span>" +
+      (t.caption ? '<span class="up-tile-caption">' + esc(t.caption) + "</span>" : "");
+    var cls = 'up-thumb up-tile" data-cat="' + esc(item.category);
     var href = itemHref(item);
     return href
-      ? '<a class="up-thumb ' + shape + '" href="' + esc(href) + '"' + linkAttrs(href) + ' tabindex="-1" aria-hidden="true">' + tag + "</a>"
-      : '<span class="up-thumb ' + shape + '" aria-hidden="true">' + tag + "</span>";
+      ? '<a class="' + cls + '" href="' + esc(href) + '"' + linkAttrs(href) + ' tabindex="-1" aria-hidden="true">' + inner + "</a>"
+      : '<span class="' + cls + '" aria-hidden="true">' + inner + "</span>";
   }
 
-  // With an image, the card is split into a head (beside the image) and a body.
+  // With a tile, the card is split into a head (beside the tile) and a body.
   function withThumb(item, head, body) {
     var thumb = renderThumb(item);
     return thumb
@@ -281,7 +288,7 @@
       // The feed card stays short on purpose: the label, the headline and a
       // sentence. The terms, the check date and the offer links live on the
       // item's own page, so there is a reason to open it.
-      return '<article class="up-item up-offer' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
+      return '<article class="up-item up-offer' + (item.tile ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="offer" data-status="' + status + '"' +
         ' data-starts="' + esc(o.starts || "") + '" data-ends="' + esc(o.ends || "") + '" data-verified="' + esc(o.verified || "") + '">' +
         withThumb(item,
           '<div class="up-item-top"><span class="up-kicker" data-cat="' + esc(item.category) + '">' + esc(categoryLabel(item.category)) + "</span>" +
@@ -294,7 +301,7 @@
     }
 
     var conf = item.confirmation || "official";
-    return '<article class="up-item up-news' + (item.image ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="news">' +
+    return '<article class="up-item up-news' + (item.tile ? " has-thumb" : "") + '" id="' + esc(item.slug) + '" data-type="news">' +
       withThumb(item,
         '<div class="up-item-top"><span class="up-kicker" data-cat="' + esc(item.category) + '">' + esc(categoryLabel(item.category)) + "</span>" +
         '<span class="up-confirm" data-confirm="' + esc(conf) + '">' + CONFIRMATION[conf] + "</span>" + fixture + "</div>" +

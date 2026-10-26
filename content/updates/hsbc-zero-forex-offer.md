@@ -10,6 +10,10 @@ category: travel
 published: 2026-10-14
 issuer: HSBC India
 tags: [forex, international, travel]
+tile:
+  figure: 0%
+  caption: forex markup
+  logo: /assets/bank-logos/hsbc.svg
 offer:
   value: 0% forex markup
   ends: 2026-10-31

@@ -7,6 +7,10 @@ confirmation: official
 published: 2026-10-22
 issuer: Punjab National Bank
 tags: [pnb, fees and charges, utility bills, reward points, late payment fee, devaluation]
+tile:
+  figure: ₹99
+  caption: per redemption + GST
+  logo: /assets/bank-logos/punb.svg
 sources:
   - label: PNB public notice, revision in service charges on credit cards (PDF)
     url: https://creditcard.pnb.bank.in/Documents/revised-charges.pdf
