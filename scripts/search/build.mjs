@@ -94,7 +94,20 @@ for (const [key, card] of cards) {
   entries.push({ k: "card", t: name, d: `In my card collection · ${card.networks.join(", ")}`, u: `https://cards.avhishek.in/?q=${encodeURIComponent(key)}`, w: `${bankWords(card.bank)} ${(card.bestFor ?? []).join(" ")}` });
 }
 
-const json = JSON.stringify({ entries }) + "\n";
+// Newest reviews for the desktop Reviews hover menu, from the generated review list.
+const grid = read("src/card-reviews/blog-grid-data.ts");
+const posts = JSON.parse(grid.slice(grid.indexOf("= [", grid.indexOf("blogPosts")) + 2, grid.lastIndexOf("]") + 1));
+const reviews = posts
+  .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+  .map((post) => ({
+    t: post.title,
+    u: abs(`/card-reviews/${post.id}`),
+    date: post.date,
+    min: post.readTime,
+    img: post.image?.srcset?.split(",").map((s) => s.trim().split(" ")[0]).find((src) => src.endsWith(".webp")) ?? post.image?.src ?? "",
+  }));
+
+const json = JSON.stringify({ entries, reviews }) + "\n";
 if (process.argv.includes("--check")) {
   if (json !== read(OUT)) { console.error(`${OUT} is out of date: run pnpm build:search`); process.exit(1); }
   console.log(`${OUT} is up to date`);
