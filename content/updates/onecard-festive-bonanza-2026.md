@@ -2,7 +2,7 @@
 type: offer
 title: OneCard Festive Bonanza gives extra 2.5% valueback on spends
 summary: Selected OneCard users get an extra 2.5% valueback on total eligible spends from 25 to 31 October 2026 after a personalised spend target (₹50,000 here). Capped at 15,000 points (₹1,500), credited on 15 December 2026.
-category: card-offer
+category: spend-offer
 published: 2026-10-26
 issuer: OneCard
 tags: [festive bonanza, festive offer, valueback, spend offer, targeted offer, onecard]

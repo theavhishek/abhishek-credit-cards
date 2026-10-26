@@ -32,6 +32,7 @@
     "card-offer": { label: "Card offer", plural: "Credit card offers", type: "offer" },
     "gift-card": { label: "Gift card deal", plural: "Gift card deals", type: "offer" },
     cashback: { label: "Cashback deal", plural: "Cashback deals", type: "offer" },
+    "spend-offer": { label: "Spend-based offer", plural: "Spend-based offers", type: "offer" },
     shopping: { label: "Shopping offer", plural: "Shopping offers", type: "offer" },
     travel: { label: "Travel offer", plural: "Travel offers", type: "offer" },
     limited: { label: "Limited-time offer", plural: "Limited-time promotions", type: "offer" }
