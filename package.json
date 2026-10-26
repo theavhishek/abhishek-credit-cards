@@ -13,7 +13,9 @@
     "build:tabs": "esbuild src/arc-tabs-entry.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --outfile=assets/arc-tabs-app.js && node -e \"require('fs').renameSync('assets/arc-tabs-app.css','assets/arc-tabs.css')\" && esbuild src/arc-tabs-loader.js --format=esm --target=es2020 --minify --outfile=assets/arc-tabs.js",
     "build:glass": "esbuild src/glass-buttons-entry.ts --bundle --format=esm --target=es2020 --minify --outfile=assets/glass-buttons.js",
     "build:upi": "esbuild node_modules/qrcode-generator/dist/qrcode.js --minify --banner:js=\"/*! qrcode-generator 2.0.4 (c) 2009 Kazuhiko Arase, MIT license */\" --outfile=assets/qrcode.js && node scripts/upi/bake.mjs",
-    "check:upi": "node scripts/upi/bake.mjs --check"
+    "check:upi": "node scripts/upi/bake.mjs --check",
+    "build:search": "node scripts/search/build.mjs",
+    "check:search": "node scripts/search/build.mjs --check"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",
