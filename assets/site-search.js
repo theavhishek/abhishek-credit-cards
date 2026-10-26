@@ -14,9 +14,11 @@
   const SEEN_KEY = "avhishek-updates-seen";
   const RECENT_DAYS = 5;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
   const getJSON = (url) => fetch(url, { credentials: "same-origin" }).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
-  let updatesPromise;
+  let updatesPromise, siteIndexPromise;
+  const loadSiteIndex = () => (siteIndexPromise ||= getJSON(SEARCH_INDEX).catch(() => ({})));
   const loadUpdates = () => (updatesPromise ||= getJSON(UPDATES_INDEX).then((d) => d.items || []).catch(() => []));
 
   /* ---------- Updates badge ---------- */
@@ -92,6 +94,62 @@
     paintBadge();
   }, true);
 
+  /* ---------- Reviews hover menu (desktop) ----------
+     Resting the pointer on Reviews drops down the newest reviews, styled like the Explore menu
+     (header.css .nav-tools-sheet). The tab itself still opens /card-reviews on click. */
+  const hoverDesk = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 641px)");
+  const reviewsTab = (el) => {
+    const tab = el && el.closest && el.closest('.arc-tabs--nav [role="tab"], body.unified-navbar .topbar-links > a[data-nav="reviews"]');
+    return tab && tab.textContent.trim() === "Reviews" ? tab : null;
+  };
+  const monthDay = (iso) => {
+    const [y, m, d] = String(iso).split("-").map(Number);
+    return y ? new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
+  };
+  let reviewsSheet = null, reviewsOpen = 0, reviewsClose = 0;
+  const reviewsShown = () => !!reviewsSheet && reviewsSheet.matches(":popover-open");
+  const hideReviews = () => { try { if (reviewsShown()) reviewsSheet.hidePopover(); } catch {} };
+  const buildReviews = (reviews) => {
+    const sheet = document.createElement("nav");
+    sheet.className = "nav-tools-sheet nav-reviews-sheet";
+    sheet.id = "navReviews";
+    sheet.setAttribute("popover", "");
+    sheet.setAttribute("aria-label", "Latest reviews");
+    sheet.innerHTML = reviews.slice(0, 5).map((r) => `<a href="${esc(r.u)}" class="nav-tools-link nav-review-link">${r.img ? `<img class="nav-review-thumb" src="${esc(r.img)}" alt="" width="52" height="33" loading="lazy" decoding="async">` : ""}<span class="nav-tools-text"><span>${esc(r.t)}</span><small class="nav-tools-tagline">${esc(monthDay(r.date))}${r.min ? ` · ${r.min} min read` : ""}</small></span></a>`).join("") +
+      `<a href="${SITE}/card-reviews" class="nav-tools-link nav-reviews-all"><span>All reviews</span><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>`;
+    sheet.addEventListener("pointerenter", () => clearTimeout(reviewsClose));
+    sheet.addEventListener("pointerleave", () => { reviewsClose = setTimeout(hideReviews, 220); });
+    document.body.appendChild(sheet);
+    return sheet;
+  };
+  const showReviews = async (tab) => {
+    const data = await loadSiteIndex();
+    if (!data.reviews || !data.reviews.length || !tab.isConnected || !tab.matches(":hover")) return;
+    reviewsSheet ||= buildReviews(data.reviews);
+    const rect = tab.getBoundingClientRect();
+    const bar = (tab.closest(".topbar-shell") || tab).getBoundingClientRect();
+    const width = reviewsSheet.offsetWidth || 360;
+    reviewsSheet.style.setProperty("--nav-menu-top", `${Math.round(bar.bottom + 8)}px`);
+    reviewsSheet.style.setProperty("--nav-menu-left", `${Math.round(Math.max(12, Math.min(rect.left - 6, innerWidth - width - 12)))}px`);
+    try { if (!reviewsShown()) reviewsSheet.showPopover(); } catch {}
+  };
+  if (HTMLElement.prototype.hasOwnProperty("popover")) {
+    document.addEventListener("pointerover", (event) => {
+      const tab = reviewsTab(event.target);
+      if (!tab || !hoverDesk.matches || (event.relatedTarget && tab.contains(event.relatedTarget))) return;
+      clearTimeout(reviewsClose);
+      loadSiteIndex();
+      reviewsOpen = setTimeout(() => showReviews(tab), 80);
+    });
+    document.addEventListener("pointerout", (event) => {
+      const tab = reviewsTab(event.target);
+      if (!tab || (event.relatedTarget && tab.contains(event.relatedTarget))) return;
+      clearTimeout(reviewsOpen);
+      reviewsClose = setTimeout(hideReviews, 220);
+    });
+    addEventListener("resize", hideReviews);
+  }
+
   /* ---------- Search ---------- */
   const buttons = [...document.querySelectorAll(".site-search-btn")];
   if (!buttons.length) return;
@@ -118,7 +176,6 @@
     return icons[entry.k] || icons.page;
   };
   const svg = (paths) => `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
-  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const norm = (s) => String(s || "").toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/&/g, " and ").replace(/[^a-z0-9+₹]+/g, " ").trim();
 
   const updateEntry = (item) => ({
@@ -135,7 +192,7 @@
   let entries = null;
   let entriesPromise;
   const loadEntries = () => (entriesPromise ||= Promise.all([
-    getJSON(SEARCH_INDEX).then((d) => d.entries || []).catch(() => []),
+    loadSiteIndex().then((d) => d.entries || []),
     loadUpdates(),
   ]).then(([site, updates]) => {
     const sorted = [...updates].sort((a, b) => String(b.published).localeCompare(String(a.published)));

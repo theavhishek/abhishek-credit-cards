@@ -123,22 +123,54 @@ html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before,
 .arc-tabs--nav [role="tab"][data-badge]::after { position: relative; z-index: 1; }
 /* Desktop before the tabs load: the same, after the link text. */
 html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { order: 2; }
-/* Phones: a dot with the count on the icon's top-right corner, ringed in the bar's glass. */
+/* Phones: a dot with the count on the icon's top-right corner. */
 @media (max-width: 640px) {
   html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before {
     position: absolute;
     z-index: 1;
     top: 1px;
     left: calc(50% + 3px);
-    min-width: 19px;
-    height: 19px;
-    border: 2px solid var(--hd-surface-solid);
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
     font-size: 10.5px;
   }
   html.nav-compact[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { top: 4px; }
 }
 @media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
   html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+
+/* ---------- Reviews hover menu (desktop): the Explore menu's look, with a card thumbnail per review ---------- */
+html[data-theme] body.unified-navbar .nav-reviews-sheet { width: 372px; }
+html[data-theme] body.unified-navbar .nav-review-thumb {
+  flex: none;
+  width: 52px;
+  height: 33px;
+  border-radius: 5px;
+  object-fit: cover;
+  background: var(--hd-fill-hover);
+  box-shadow: 0 0 0 1px var(--hd-edge);
+}
+html[data-theme] body.unified-navbar .nav-reviews-sheet .nav-tools-text { min-width: 0; }
+html[data-theme] body.unified-navbar .nav-reviews-sheet .nav-tools-text > span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html[data-theme] body.unified-navbar .nav-reviews-all {
+  position: relative;
+  min-height: 44px !important;
+  margin-top: 7px;
+  color: var(--hd-link) !important;
+  font-size: 14px;
+}
+html[data-theme] body.unified-navbar .nav-reviews-all::before {
+  content: "";
+  position: absolute;
+  inset: -4px 12px auto;
+  height: 1px;
+  background: var(--hd-edge);
+}
+html[data-theme] body.unified-navbar .nav-reviews-all svg { flex: none; margin-inline-start: auto; }
+@media (max-width: 640px) {
+  html[data-theme] body.unified-navbar .nav-reviews-sheet { display: none !important; }
 }
 
 /* ---------- Search dialog ---------- */
