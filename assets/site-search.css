@@ -1,0 +1,323 @@
+/* Site search button, search dialog and the Updates badge (assets/site-search.js).
+   Loaded after header.css on every page with the unified navbar. */
+
+/* ---------- Search button: a round icon button in the bar ---------- */
+html[data-theme] body.unified-navbar .site-search-btn {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-inline-start: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--hd-link);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 150ms ease-out, color 150ms ease-out, scale 150ms ease-out;
+}
+html[data-theme] body.unified-navbar .site-search-btn svg { display: block; width: 20px; height: 20px; }
+@media (hover: hover) {
+  html[data-theme] body.unified-navbar .site-search-btn:hover { background: var(--hd-fill-hover); color: var(--text); }
+}
+html[data-theme] body.unified-navbar .site-search-btn[aria-expanded="true"] { background: var(--hd-fill-hover); color: var(--text); }
+html[data-theme] body.unified-navbar .site-search-btn:focus-visible { outline: 2px solid var(--focus, #075cff); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme] body.unified-navbar .site-search-btn:active { scale: 0.94; }
+}
+
+/* ---------- Phones: a round liquid-glass button beside the tab bar ----------
+   The tab bar and the button sit side by side, centred together. The tabs share the width
+   left after the button, so the pair never overflows a small phone. */
+@media (max-width: 640px) {
+  html[data-theme] body.unified-navbar {
+    --ss-tab: clamp(54px, calc((100vw - 132px) / 4), 84px);
+    --ss-size: 64px; /* the tab bar's height: 52px tabs + 5px padding + 1px edge, each side */
+    --ss-gap: 8px;
+  }
+  html.nav-compact[data-theme] body.unified-navbar { --ss-tab: 56px; --ss-size: 56px; }
+
+  html[data-theme] body.unified-navbar .topbar-links {
+    inset-inline: 0 calc(var(--ss-size) + var(--ss-gap));
+    gap: 4px;
+    padding: 5px;
+  }
+  html[data-theme] body.unified-navbar .topbar-links .collection-link,
+  html.nav-compact[data-theme] body.unified-navbar .topbar-links .collection-link { width: var(--ss-tab) !important; }
+
+  html[data-theme] body.unified-navbar .site-search-btn {
+    position: fixed;
+    z-index: 101;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    /* Bar width is 4 tabs + 3 gaps + padding + edges (4 × tab + 24px). */
+    left: calc(50% + (4 * var(--ss-tab) + 24px + var(--ss-gap) - var(--ss-size)) / 2);
+    width: var(--ss-size);
+    height: var(--ss-size);
+    margin: 0;
+    border: 1px solid var(--hd-glass-edge);
+    background: var(--hd-glass);
+    box-shadow: var(--hd-glass-shadow);
+    color: var(--text);
+    backdrop-filter: blur(16px) saturate(200%) brightness(1.04);
+    -webkit-backdrop-filter: blur(16px) saturate(200%) brightness(1.04);
+  }
+  /* Same light rim as the tab bar. */
+  html[data-theme] body.unified-navbar .site-search-btn::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--hd-glass-rim);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    pointer-events: none;
+  }
+  html[data-theme] body.unified-navbar .site-search-btn svg { width: 24px; height: 24px; }
+  html[data-theme] body.unified-navbar .site-search-btn[aria-expanded="true"] { background: var(--hd-glass); }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
+  html[data-theme] body.unified-navbar .site-search-btn {
+    transition: left 300ms cubic-bezier(0.23, 1, 0.32, 1), width 300ms cubic-bezier(0.23, 1, 0.32, 1), height 300ms cubic-bezier(0.23, 1, 0.32, 1), scale 150ms ease-out;
+  }
+  html:active-view-transition[data-theme] body.unified-navbar .site-search-btn { view-transition-name: site-search; }
+  html.mo-theme-vt body.unified-navbar .site-search-btn { view-transition-name: none !important; }
+}
+@media (max-width: 640px) and (prefers-reduced-transparency: reduce) {
+  html[data-theme] body.unified-navbar .site-search-btn { background: var(--hd-surface-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  html[data-theme] body.unified-navbar .site-search-btn::before { content: none; }
+}
+@media print {
+  html[data-theme] body.unified-navbar .site-search-btn { display: none; }
+}
+
+/* ---------- Updates badge: count of new updates (data-badge, set by site-search.js) ---------- */
+html[data-theme] body.unified-navbar {
+  --ss-badge: #ea580c;
+  --ss-badge-text: #fff;
+}
+html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before,
+.arc-tabs--nav [role="tab"][data-badge]::after {
+  content: attr(data-badge);
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--ss-badge);
+  color: var(--ss-badge-text);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  line-height: 1;
+  box-sizing: border-box;
+}
+/* Desktop tabs: the count sits after the label, inside the tab. */
+.arc-tabs--nav [role="tab"][data-badge] { grid-auto-flow: column; column-gap: 7px; }
+.arc-tabs--nav [role="tab"][data-badge]::after { position: relative; z-index: 1; }
+/* Desktop before the tabs load: the same, after the link text. */
+html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { order: 2; }
+/* Phones: a dot with the count on the icon's top-right corner, ringed in the bar's glass. */
+@media (max-width: 640px) {
+  html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before {
+    position: absolute;
+    z-index: 1;
+    top: 1px;
+    left: calc(50% + 3px);
+    min-width: 19px;
+    height: 19px;
+    border: 2px solid var(--hd-surface-solid);
+    font-size: 10.5px;
+  }
+  html.nav-compact[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { top: 4px; }
+}
+@media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
+  html[data-theme] body.unified-navbar .topbar-links > a[data-badge]::before { transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+
+/* ---------- Search dialog ---------- */
+html.ss-open { overflow: hidden; }
+.ss-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: hidden;
+}
+.ss-dialog::backdrop { background: rgb(0 0 0 / 0.18); }
+html[data-theme="dark"] .ss-dialog::backdrop { background: rgb(0 0 0 / 0.5); }
+.ss-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(640px, 100% - 32px);
+  max-height: min(600px, 100% - 22vh);
+  margin: 11vh auto 0;
+  overflow: hidden;
+  border: 1px solid var(--hd-edge, var(--line));
+  border-radius: 24px;
+  background: var(--hd-surface, var(--surface));
+  box-shadow: var(--hd-shadow-raised, 0 12px 32px rgb(0 0 0 / 0.18));
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+.ss-field {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+  padding-inline: 20px 10px;
+  border-bottom: 1px solid var(--hd-edge, var(--line));
+  color: var(--muted);
+}
+.ss-field > svg { flex: none; width: 20px; height: 20px; }
+.ss-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ss-input::placeholder { color: var(--muted); opacity: 1; }
+.ss-input::-webkit-search-cancel-button { display: none; }
+.ss-close {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.ss-close svg { display: none; width: 20px; height: 20px; }
+.ss-close kbd {
+  padding: 3px 7px;
+  border: 1px solid var(--hd-edge, var(--line));
+  border-radius: 7px;
+  font-family: var(--site-mono, ui-monospace, monospace);
+  font-size: 11.5px;
+  line-height: 1.2;
+}
+@media (hover: hover) { .ss-close:hover { background: var(--hd-fill-hover); color: var(--text); } }
+.ss-close:focus-visible { outline: 2px solid var(--focus, #075cff); outline-offset: -2px; }
+
+.ss-results {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: 6px;
+}
+.ss-group + .ss-group { margin-top: 6px; }
+.ss-heading {
+  margin: 0;
+  padding: 10px 12px 6px;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.ss-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+.ss-option[aria-selected="true"] { background: var(--hd-fill-hover, color-mix(in srgb, var(--text) 6%, transparent)); }
+.ss-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--hd-edge, var(--line));
+  border-radius: 12px;
+  color: var(--hd-link, var(--muted));
+}
+.ss-option[aria-selected="true"] .ss-icon { color: #fc6e20; }
+.ss-text { display: grid; flex: 1; min-width: 0; gap: 2px; }
+.ss-title {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ss-title mark { background: none; color: inherit; font-weight: 700; }
+.ss-desc {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ss-kind {
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ss-kind[data-cat="devaluation"] { color: #dc2626; font-weight: 600; }
+html[data-theme="dark"] .ss-kind[data-cat="devaluation"] { color: #f87171; }
+.ss-note { margin: 0; padding: 22px 14px; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
+
+/* Phones: the dialog drops from the top, clear of the keyboard, and closes with an X. */
+@media (max-width: 640px) {
+  .ss-panel {
+    width: calc(100% - 20px);
+    max-height: calc(100% - 20px - env(safe-area-inset-top, 0px));
+    margin-top: calc(10px + env(safe-area-inset-top, 0px));
+    border-radius: 22px;
+  }
+  .ss-field { height: 56px; padding-inline: 16px 6px; }
+  .ss-close kbd { display: none; }
+  .ss-close svg { display: block; }
+  .ss-option { min-height: 58px; padding: 8px 10px; gap: 11px; }
+  .ss-kind { display: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ss-dialog[open] .ss-panel { animation: ss-in 240ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .ss-dialog[open]::backdrop { animation: ss-fade 200ms ease-out; }
+}
+@keyframes ss-in { from { opacity: 0; translate: 0 -8px; scale: 0.98; } }
+@keyframes ss-fade { from { opacity: 0; } }
+@media (prefers-reduced-transparency: reduce) {
+  .ss-panel { background: var(--hd-surface-solid, var(--page)); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
