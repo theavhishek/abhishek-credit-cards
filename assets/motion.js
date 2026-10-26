@@ -73,6 +73,29 @@
       toolsSheet.style.setProperty("--nav-menu-left", `${Math.max(12, Math.round(rect.left - 6))}px`);
     };
     toolsSheet.addEventListener("beforetoggle", event => { if (event.newState === "open") place(); });
+    // Desktop with a mouse: the menu also opens when the pointer rests on Explore, and closes a moment
+    // after it leaves both the button and the menu. A click while hover-opened keeps it open.
+    const hoverMenu = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 641px)");
+    const menuButton = document.querySelector(".nav-tools-menu");
+    if (menuButton && HTMLElement.prototype.hasOwnProperty("popover")) {
+      let openTimer = 0, closeTimer = 0, hoverOpened = false;
+      const isOpen = () => toolsSheet.matches(":popover-open");
+      const enter = () => {
+        if (!hoverMenu.matches) return;
+        clearTimeout(closeTimer);
+        if (!isOpen()) openTimer = setTimeout(() => { try { toolsSheet.showPopover({ source: menuButton }); } catch { try { toolsSheet.showPopover(); } catch {} } hoverOpened = true; }, 80);
+      };
+      const leave = () => {
+        clearTimeout(openTimer);
+        if (hoverMenu.matches && hoverOpened) closeTimer = setTimeout(() => { if (isOpen()) toolsSheet.hidePopover(); }, 220);
+      };
+      [menuButton, toolsSheet].forEach(el => { el.addEventListener("pointerenter", enter); el.addEventListener("pointerleave", leave); });
+      menuButton.addEventListener("click", event => {
+        clearTimeout(openTimer);
+        if (hoverOpened && isOpen()) { event.preventDefault(); hoverOpened = false; }
+      });
+      toolsSheet.addEventListener("toggle", event => { if (event.newState === "closed") hoverOpened = false; });
+    }
     addEventListener("resize", () => { if (toolsSheet.matches(".is-open")) place(); try { if (toolsSheet.matches(":popover-open")) toolsSheet.hidePopover(); } catch {} });
     if (!HTMLElement.prototype.hasOwnProperty("popover")) {
       const setOpen = open => {
