@@ -1,4 +1,22 @@
 User-agent: *
 Allow: /
 
+# Search and user-requested retrieval. Keep these separate from training controls.
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# AI training/grounding permissions are configured independently here.
+# These currently preserve the existing allow-all policy.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://avhishek.in/sitemap.xml
