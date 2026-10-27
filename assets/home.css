@@ -767,8 +767,7 @@ html[data-theme="dark"] .hm {
   overflow-x: auto;
   scrollbar-width: none;
 }
-.hm-marquee-item { flex: none; height: var(--mq-h); aspect-ratio: 400 / 634; rotate: -2deg; }
-.hm-marquee-item:nth-child(even) { rotate: 5deg; }
+.hm-marquee-item { flex: none; height: var(--mq-h); aspect-ratio: 400 / 634; }
 /* landscape cards stay landscape, at the same physical size as the upright ones */
 .hm-marquee-item.is-wide { height: calc(var(--mq-h) * 400 / 634); aspect-ratio: 634 / 400; }
 .hm-marquee-item.is-wide .hm-marquee-card { border-radius: 4.7% / 7.5%; }
