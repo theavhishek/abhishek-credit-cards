@@ -10,6 +10,7 @@
     const fill = row.querySelector(".up-calc-fill");
     const feeEl = row.querySelector(".up-calc-fee strong");
     const why = row.querySelector(".up-calc-why");
+    const gst = row.querySelector(".up-calc-gst");
     const threshold = Number(row.dataset.threshold);
     const rate = Number(row.dataset.rate);
     const cap = row.dataset.cap ? Number(row.dataset.cap) : Infinity;
@@ -25,6 +26,7 @@
       fill.style.inlineSize = `${(amount / max) * 100}%`;
       row.toggleAttribute("data-over", fee > 0);
       feeEl.textContent = rupees(fee);
+      if (gst) gst.hidden = !fee;
       why.textContent = fee
         ? `${rate}% of ${rupees(amount)}, charged on ${chargedOn}${fee === cap ? `, capped at ${rupees(cap)}` : ""}.`
         : `No fee up to ${rupees(threshold)}.`;

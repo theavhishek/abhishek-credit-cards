@@ -128,6 +128,7 @@ the marker it goes at the end of the body):
 calculator:
   title: Check your fee                 # optional
   intro: Move a slider to see what the bank would charge.   # optional
+  gst: true                             # optional; shows "+ GST" after the fee
   sliders:
     - label: One transport payment
       threshold: 30000                  # fee applies above this amount

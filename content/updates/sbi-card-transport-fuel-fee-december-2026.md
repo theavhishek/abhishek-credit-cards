@@ -16,6 +16,7 @@ imageAlt: SBI Card notice announcing new transportation and fuel transaction fee
 calculator:
   title: Check your fee
   intro: Move a slider to see what SBI Card would charge.
+  gst: true
   sliders:
     - label: One transport payment
       threshold: 30000
@@ -50,9 +51,9 @@ sources:
 ## Good to know
 
 - **Applies to:** every SBI credit card, from 1 December 2026.
-- **Not stated by SBI:** GST on the fee, a fee cap, or how it works with the fuel surcharge waiver.
+- **GST:** applies on top of the fee.
+- **Not stated by SBI:** a fee cap, or how it works with the fuel surcharge waiver.
 - **Not covered:** air, rail and cab bookings aren't in SBI's MCC list, so they shouldn't attract the fee.
 - **MCCs:** set by the card networks and can change without notice.
-- **Questions:** call [1860 180 1290](tel:18601801290) or 39 02 02 02 with your STD code.
 - **Tip:** move fuel to another card once the cycle nears the limit, and split big transport payments where the merchant allows it.
 - **Other fees:** this SBI notice covers only these two new fees, nothing else.

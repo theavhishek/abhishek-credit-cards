@@ -26,7 +26,7 @@ const TOP_KEYS = new Set([
 const OFFER_KEYS = new Set(["value", "cap", "minSpend", "starts", "ends", "eligibility", "code", "link", "terms", "verified"]);
 const SOURCE_KEYS = new Set(["label", "url", "kind"]);
 const TILE_KEYS = new Set(["figure", "caption", "logo", "invertOnDark"]);
-const CALC_KEYS = new Set(["title", "intro", "sliders"]);
+const CALC_KEYS = new Set(["title", "intro", "gst", "sliders"]);
 const SLIDER_KEYS = new Set(["label", "threshold", "rate", "cap", "max", "step", "value", "chargedOn"]);
 const CALC_MARKER = "{{calculator}}";
 const TILE_FIGURE_MAX = 6;
@@ -469,7 +469,8 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
             if (value > num.max) fail(`${at}.value can't be above max.`);
             return { label: raw.label, chargedOn: raw.chargedOn, threshold: num.threshold, rate: num.rate, cap: num.cap ?? null, max: num.max, step, value };
           });
-          calculator = { title: c.title || "Check your fee", intro: c.intro || "", sliders };
+          if (c.gst != null && typeof c.gst !== "boolean") fail(`calculator.gst must be true or false.`);
+          calculator = { title: c.title || "Check your fee", intro: c.intro || "", gst: !!c.gst, sliders };
         }
       }
     }
@@ -480,7 +481,9 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
     const body = parsed.body.trim();
     const rendered = body ? renderMarkdown(body, bodyProblems) : { html: "", headings: [] };
     bodyProblems.forEach(fail);
-    const words = body ? wordCount(body) : 0;
+    // The fee calculator's title, intro and slider wording are part of the article's text too.
+    const calcText = calculator ? [calculator.title, calculator.intro, ...calculator.sliders.flatMap((sl) => [sl.label, sl.chargedOn])].join(" ") : "";
+    const words = body ? wordCount(body) + (calcText ? wordCount(calcText) : 0) : 0;
     const page = d.page == null ? words >= MIN_PAGE_WORDS : d.page;
     if (d.page === true && words < MIN_PAGE_WORDS) fail(`"page: true" needs a body of at least ${MIN_PAGE_WORDS} words (has ${words}); short items stay in the feed.`);
     if (body && !page) warn(`Has a body of ${words} words but no page of its own; only the summary is shown.`);

@@ -189,7 +189,7 @@ test("fee calculator: read from the frontmatter and baked into the article", () 
   assert.deepEqual(item.calculator.sliders.map((s) => [s.threshold, s.rate, s.value]), [[30000, 1, 40000], [50000, 1, 60000]]);
   const html = fs.readFileSync(path.join(ROOT, "updates/sbi-card-transport-fuel-fee-december-2026.html"), "utf8");
   assert.match(html, /<section class="rv-calc up-calc" data-calc id="fee-calculator"/);
-  assert.match(html, /Fee <strong>₹400<\/strong>/);
+  assert.match(html, /Fee <strong>₹400<\/strong><span class="up-calc-gst"> \+ GST<\/span>/);
   assert.match(html, /Fee <strong>₹600<\/strong>/);
   assert.match(html, /<script src="\/assets\/updates-calc\.js\?v=/);
   assert.doesNotMatch(html, /\{\{calculator\}\}/);

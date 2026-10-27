@@ -255,7 +255,7 @@ function calculatorHtml(item) {
               </div>
               <div class="rv-meter-scale" aria-hidden="true"><span>₹0</span><span class="rv-meter-cap-label" style="inset-inline-start:${pct(s.threshold)}">${rupees(s.threshold)}</span><span>${rupees(s.max)}</span></div>
             </div>
-            <p class="up-calc-result" role="status"><span class="up-calc-fee">Fee <strong>${rupees(fee)}</strong></span><span class="up-calc-why">${esc(feeText(s, s.value))}</span></p>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Fee <strong>${rupees(fee)}</strong>${c.gst ? '<span class="up-calc-gst"' + (fee > 0 ? "" : " hidden") + "> + GST</span>" : ""}</span><span class="up-calc-why">${esc(feeText(s, s.value))}</span></p>
           </div>`;
   }).join("\n          ");
   return `<section class="rv-calc up-calc" data-calc id="fee-calculator" aria-labelledby="fee-calc-title">
