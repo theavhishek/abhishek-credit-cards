@@ -17,6 +17,7 @@ offer:
   ends: 2026-11-30
   eligibility: ICICI Bank Visa credit cardholders who register by missed call on 02269445464; Amazon Pay ICICI Bank cards excluded
   terms: https://www.icici.bank.in/content/dam/icicibank/india/managed-assets/docs/pdf/kings-tc.pdf
+  verified: 2026-10-27
 sources:
   - label: ICICI Bank, campaign terms and conditions (PDF)
     url: https://www.icici.bank.in/content/dam/icicibank/india/managed-assets/docs/pdf/kings-tc.pdf
