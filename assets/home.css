@@ -732,16 +732,21 @@ html[data-theme="dark"] .hm {
   z-index: 1;
   display: grid;
   justify-items: center;
-  margin-block: auto;
+  margin-block: auto 0;
 }
 .hm-marquee {
   --mq-h: clamp(180px, 27svh, 260px);
-  --mq-gap: 16px;
+  --mq-gap: 10px;
   --mq-speed: 40s;
   position: relative;
   width: 100vw;
-  margin: 12px calc(50% - 50vw) 0;
+  margin: calc(var(--mq-h) * -0.2) calc(50% - 50vw) 0;
 }
+/* compact search that sits on the faded card tops, like hero-3's button */
+.hm-hero--marquee .hm-search { width: min(540px, 100%); }
+.hm-hero--marquee .hm-search-field { min-height: 54px; padding-inline: 18px 10px; gap: 10px; }
+.hm-hero--marquee .hm-search-field input { height: 52px; font-size: 1rem; }
+.hm-hero--marquee .hm-search-icon { width: 20px; height: 20px; }
 .hm-marquee-viewport {
   height: calc(var(--mq-h) * 1.22);
   overflow-x: clip;
@@ -782,12 +787,14 @@ html[data-theme="dark"] .hm {
 body.home-page { overflow-x: clip; }
 @keyframes hm-marquee { from { transform: translateX(-50%); } to { transform: none; } }
 @media (max-width: 768px) {
-  .hm-marquee { --mq-h: 200px; --mq-gap: 12px; }
+  .hm-marquee { --mq-h: 200px; --mq-gap: 8px; }
 }
 @media (max-width: 640px) {
-  /* fill the first screen down to the bottom tab bar, strip resting on it */
-  .hm-hero--marquee { min-height: calc(100svh - 176px); padding-bottom: 0; }
-  .hm-marquee { --mq-h: 184px; --mq-gap: 10px; margin-top: 4px; }
+  .hm-hero--marquee { min-height: 0; padding-bottom: 0; }
+  .hm-marquee { --mq-h: 184px; --mq-gap: 6px; margin-top: -4px; }
+  .hm-hero--marquee .hm-search { width: min(330px, 100%); }
+  .hm-hero--marquee .hm-search-field { min-height: 48px; padding-inline: 16px 10px; }
+  .hm-hero--marquee .hm-search-field input { height: 46px; font-size: 0.95rem; }
 }
 
 /* ---------- Section titles end in the wordmark's orange square ---------- */
