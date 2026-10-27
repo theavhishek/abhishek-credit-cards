@@ -914,3 +914,16 @@ a.up-thumb { transition: opacity 150ms ease-out; }
 @media (forced-colors: active) {
   .up-status::before { forced-color-adjust: none; background: CanvasText; }
 }
+
+/* ---------- Fee calculator on update articles (calculator: in the frontmatter) ---------- */
+.up-calc { margin-block: 8px; }
+@media (min-width: 960px) {
+  .up-calc { grid-template-columns: minmax(0, 1fr); padding: 32px; }
+}
+.up-calc-row { display: grid; gap: 14px; min-width: 0; padding-block-start: 22px; border-block-start: 1px solid var(--line); }
+.up-calc-row .rv-calc-input output { font-size: 1.75rem; }
+.up-calc-row[data-over] .up-calc-fill { background: var(--up-danger-fill); }
+.up-calc-result { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: var(--rv-fs-small); line-height: 1.5; color: var(--muted); }
+.up-calc-fee { color: var(--text); }
+.up-calc-fee strong { margin-inline-start: 4px; font-size: 1.375rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.up-calc-row[data-over] .up-calc-fee strong { color: var(--up-danger); }

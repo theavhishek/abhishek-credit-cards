@@ -13,6 +13,24 @@ tile:
   logo: /assets/bank-logos/sbin.svg
 image: /assets/updates/sbi-card-transport-fuel-fee-december-2026.jpg
 imageAlt: SBI Card notice announcing new transportation and fuel transaction fees from December 2026
+calculator:
+  title: Check your fee
+  intro: Move a slider to see what SBI Card would charge.
+  sliders:
+    - label: One transport payment
+      threshold: 30000
+      rate: 1
+      max: 100000
+      step: 1000
+      value: 40000
+      chargedOn: the full payment
+    - label: Fuel spends in one billing cycle
+      threshold: 50000
+      rate: 1
+      max: 150000
+      step: 1000
+      value: 60000
+      chargedOn: all fuel spends in the cycle
 sources:
   - label: SBI Card, revision of charges on SBI Credit Card (PDF)
     url: https://www.sbicard.com/sbi-card-en/assets/docs/pdf/revised-charges.pdf
@@ -25,8 +43,9 @@ sources:
 | Fee | 1% | 1% |
 | Applies when | One payment is above ₹30,000 | The cycle's fuel total is above ₹50,000 |
 | Charged on | That payment | All fuel spends in the cycle |
-| Example | ₹40,000 → ₹400 | ₹60,000 → ₹600 |
 | MCCs | 4111 commuter, 4131 bus, 4784 tolls | 5172, 5541, 5542, 5983 |
+
+{{calculator}}
 
 ## Good to know
 
