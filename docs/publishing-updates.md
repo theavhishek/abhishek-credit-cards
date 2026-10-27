@@ -113,9 +113,27 @@ facts (its summary, offer block or source), never a number that isn't in
 them. Items without a tile show no picture in the feed.
 
 Posters and PDF screenshots go in `image:`. They appear at the top of the
-article and in link previews, not in the feed, where their small print can't
-be read. Use the bank's or merchant's own poster or a picture you made; never
+article, not in the feed, where their small print can't be read. Use the bank's or merchant's own poster or a picture you made; never
 a stock photo. Put the file in `assets/updates/`.
+
+### Link previews
+
+When an article link is shared (WhatsApp, X, Telegram, LinkedIn), apps show a
+1200×630 card made from the post: its category badge, the offer dates (or the
+published date for news), the title, and the same logo, figure and caption as
+the feed tile. Render it after adding or editing a post that has a page and a
+tile, then rebuild:
+
+```sh
+pnpm build:og        # writes assets/og/updates/<slug>.jpg and assets/og/manifest.json
+pnpm build:updates   # points the article's og:image at the card
+```
+
+`pnpm build:og` needs Playwright's Chromium (`pnpm dlx playwright install chromium`).
+Without a card, the article falls back to its `image:` poster, then to the
+Updates image. The Updates page image shows the three newest tiles, so it
+is rendered again by the same command. Fixed pages' preview images are set in
+`scripts/og/pages.mjs`; `pnpm check:og` fails when any image is out of date.
 
 ### Fee calculator
 
