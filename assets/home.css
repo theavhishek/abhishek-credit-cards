@@ -714,6 +714,89 @@ html[data-theme="dark"] .hm {
 }
 
 
+/* ---------- Card marquee hero (21st.dev hero-3 layout) ----------
+   The hero fills the first screen: copy centred above, a strip of upright card
+   faces along the bottom that tucks up under the copy, tilted -2deg / 5deg in
+   turn and drifting right. Like hero-3, the strip box is taller than the cards
+   and masked transparent > black 20% > black 80% > transparent, so the card tops
+   fade into the page and the bottoms stay solid. home.js repeats the set so one copy is wider than the screen,
+   then doubles it so the loop is seamless. Without JS or with reduced motion it
+   is a plain scroll row. Pauses on hover and keyboard focus. */
+.hm-hero--marquee {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 140px);
+}
+.hm-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  margin-block: auto 0;
+}
+.hm-marquee {
+  --mq-h: clamp(180px, 27svh, 260px);
+  --mq-gap: 10px;
+  --mq-speed: 40s;
+  position: relative;
+  width: 100vw;
+  margin: 14px calc(50% - 50vw) 0;
+}
+/* compact search above the card strip */
+.hm-hero--marquee .hm-search { width: min(540px, 100%); }
+.hm-hero--marquee .hm-search-field { min-height: 54px; padding-inline: 18px 10px; gap: 10px; }
+.hm-hero--marquee .hm-search-field input { height: 52px; font-size: 1rem; }
+.hm-hero--marquee .hm-search-icon { width: 20px; height: 20px; }
+.hm-marquee-viewport {
+  height: calc(var(--mq-h) * 1.22);
+  overflow-x: clip;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+.hm-marquee-track {
+  display: flex;
+  gap: var(--mq-gap);
+  width: max-content;
+  padding: 0 var(--mq-gap);
+}
+.hm-marquee:not(.is-looping) .hm-marquee-track {
+  width: auto;
+  justify-content: safe center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hm-marquee-item { flex: none; height: var(--mq-h); aspect-ratio: 400 / 634; rotate: -2deg; }
+.hm-marquee-item:nth-child(even) { rotate: 5deg; }
+.hm-marquee-card {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 7.5% / 4.7%;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: transform 320ms var(--hm-ease);
+}
+.hm-marquee-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hm-marquee-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+@media (hover: hover) {
+  .hm-marquee-card:hover { transform: scale(1.04); }
+}
+.hm-marquee.is-looping .hm-marquee-track { animation: hm-marquee var(--mq-speed) linear infinite; }
+.hm-marquee.is-looping:is(:hover, :has(.hm-marquee-card:focus-visible)) .hm-marquee-track { animation-play-state: paused; }
+/* 100vw counts a desktop scrollbar; don't let that extra width scroll the page */
+body.home-page { overflow-x: clip; }
+@keyframes hm-marquee { from { transform: translateX(-50%); } to { transform: none; } }
+@media (max-width: 768px) {
+  .hm-marquee { --mq-h: 200px; --mq-gap: 8px; }
+}
+@media (max-width: 640px) {
+  .hm-hero--marquee { min-height: 0; padding-bottom: 0; }
+  .hm-marquee { --mq-h: 184px; --mq-gap: 6px; margin-top: 10px; }
+  .hm-hero--marquee .hm-search { width: min(330px, 100%); }
+  .hm-hero--marquee .hm-search-field { min-height: 48px; padding-inline: 16px 10px; }
+  .hm-hero--marquee .hm-search-field input { height: 46px; font-size: 0.95rem; }
+}
+
 /* ---------- Section titles end in the wordmark's orange square ---------- */
 .hm-section-head h2::after,
 .hm-about h2::after {

@@ -1,3 +1,23 @@
+// Hero card marquee (hero-3 style): repeat the cards until one copy is wider than the screen, then
+// double it so translateX(-50%) loops without a seam. Reduced motion keeps the plain row.
+(() => {
+  const root = document.querySelector("[data-hm-marquee]");
+  const track = root?.querySelector(".hm-marquee-track");
+  if (!track || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const originals = [...track.children];
+  const clone = () => originals.forEach(item => {
+    const copy = item.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true");
+    copy.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
+    track.append(copy);
+  });
+  const step = originals[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+  const perSet = Math.max(1, Math.ceil(innerWidth * 1.2 / (step * originals.length)));
+  for (let i = 1; i < perSet * 2; i++) clone();
+  root.style.setProperty("--mq-speed", `${Math.round(step * originals.length * perSet / 45)}s`);
+  root.classList.add("is-looping");
+})();
+
 // Homepage: live counts and one search across banks, cards, reviews and tools.
 (() => {
   const cards = window.PORTFOLIO_DATA?.cards || [];
