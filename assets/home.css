@@ -714,6 +714,105 @@ html[data-theme="dark"] .hm {
 }
 
 
+/* ---------- Card marquee under the hero (after 21st.dev hero-3) ----------
+   Full-bleed strip of official card art, tilted tiles, faded at both edges.
+   home.js repeats the set so one copy is wider than the screen, then doubles it
+   so the loop is seamless. Without JS or with reduced motion it is a plain
+   scroll row. Pauses on hover, focus and the corner button. */
+.hm-marquee {
+  --mq-w: 300px;
+  --mq-gap: 22px;
+  --mq-speed: 40s;
+  position: relative;
+  width: 100vw;
+  margin: 52px calc(50% - 50vw) 0;
+}
+.hm-marquee-viewport {
+  overflow-x: clip;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.hm-marquee-track {
+  display: flex;
+  gap: var(--mq-gap);
+  width: max-content;
+  padding: 18px var(--mq-gap) 26px;
+}
+.hm-marquee:not(.is-looping) .hm-marquee-track {
+  width: auto;
+  justify-content: safe center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hm-marquee-item { flex: none; width: var(--mq-w); rotate: -2deg; }
+.hm-marquee-item:nth-child(even) { rotate: 3deg; translate: 0 8px; }
+.hm-marquee-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-muted);
+  box-shadow: var(--hm-lift);
+  color: #fff;
+  transition: transform 320ms var(--hm-ease), box-shadow 320ms var(--hm-ease);
+}
+.hm-marquee-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hm-marquee-name {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: grid;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgb(10 10 12 / 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: start;
+}
+.hm-marquee-name small { color: rgb(255 255 255 / 0.72); font-size: 0.75rem; font-weight: 500; }
+.hm-marquee-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+@media (hover: hover) {
+  .hm-marquee-card:hover { transform: translateY(-4px) scale(1.03); }
+}
+.hm-marquee.is-looping .hm-marquee-track { animation: hm-marquee var(--mq-speed) linear infinite; }
+.hm-marquee.is-looping:is(:hover, .is-paused, :has(.hm-marquee-card:focus-visible)) .hm-marquee-track { animation-play-state: paused; }
+/* 100vw counts a desktop scrollbar; don't let that extra width scroll the page */
+body.home-page { overflow-x: clip; }
+@keyframes hm-marquee { to { transform: translateX(-50%); } }
+.hm-marquee-toggle {
+  position: absolute;
+  right: max(var(--hm-gutter), calc(50vw - 590px));
+  bottom: -18px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.hm-marquee-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .hm-marquee-toggle:hover { color: var(--text); border-color: var(--line-strong); } }
+.hm-marquee-toggle .hm-marquee-play,
+.hm-marquee-toggle[aria-pressed="true"] .hm-marquee-pause { display: none; }
+.hm-marquee-toggle[aria-pressed="true"] .hm-marquee-play { display: block; }
+@media (max-width: 640px) {
+  .hm-marquee { --mq-w: 220px; --mq-gap: 14px; margin-top: 36px; }
+  .hm-marquee-toggle { bottom: -12px; }
+  .hm-marquee-name { left: 8px; bottom: 8px; padding: 5px 8px; font-size: 0.75rem; }
+  .hm-marquee-name small { font-size: 0.6875rem; }
+}
+@media (forced-colors: active) { .hm-marquee-name { background: Canvas; color: CanvasText; } }
+
 /* ---------- Section titles end in the wordmark's orange square ---------- */
 .hm-section-head h2::after,
 .hm-about h2::after {
