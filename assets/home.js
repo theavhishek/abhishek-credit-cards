@@ -1,4 +1,4 @@
-// Hero card marquee: repeat the cards until one copy is wider than the screen, then
+// Hero card marquee (hero-3 style): repeat the cards until one copy is wider than the screen, then
 // double it so translateX(-50%) loops without a seam. Reduced motion keeps the plain row.
 (() => {
   const root = document.querySelector("[data-hm-marquee]");
@@ -11,7 +11,7 @@
     copy.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
     track.append(copy);
   });
-  const step = originals[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+  const step = originals[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
   const perSet = Math.max(1, Math.ceil(innerWidth * 1.2 / (step * originals.length)));
   for (let i = 1; i < perSet * 2; i++) clone();
   root.style.setProperty("--mq-speed", `${Math.round(step * originals.length * perSet / 45)}s`);
