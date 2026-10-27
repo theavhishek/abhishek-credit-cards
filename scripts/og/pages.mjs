@@ -9,7 +9,11 @@
 //   { logos: [bank-logo files] } a grid of bank logos from assets/bank-logos/
 //   { donut: [a, b] }            an EMI split ring with two labels
 //   { tiles: "latest" }          the three newest /updates fact tiles
+//   { photo: "/assets/…jpg" }    a review's hero photo (glass layout only); position: CSS object-position
 //   (none)                       text only
+//
+// glass: true uses the liquid-glass layout (card reviews and updates): a dark
+// glass panel holds the text over the photo's blurred colour.
 
 export const PAGES = [
   {
@@ -72,6 +76,7 @@ export const PAGES = [
     eyebrow: "Updates",
     title: "Stay ahead of the fine print.",
     subtitle: "Credit card news, devaluations and offers, each linked to its source.",
+    glass: true,
     visual: { tiles: "latest" },
   },
   {
@@ -88,7 +93,8 @@ export const PAGES = [
     title: "Eternal SBI Card",
     subtitle: "10% off Zomato, District and Blinkit beauty; 5% on other Blinkit.",
     stats: [["10%", "Zomato, District"], ["₹2,000", "monthly cap"], ["₹499", "+ GST a year"]],
-    visual: { card: "eternal-sbi-card" },
+    glass: true,
+    visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
     file: "kredit-pe-yes-bank-max-credit-card.jpg",
@@ -97,6 +103,46 @@ export const PAGES = [
     title: "Kredit.Pe YES BANK Max Credit Card",
     subtitle: "Advertised 5% cashback, and the voucher fees that cut its real value.",
     stats: [["5%", "advertised"], ["3%", "UPI, ₹20,000 a month"], ["₹0", "lifetime free"]],
-    visual: { card: "kredit-pe-yes-bank-max-credit-card" },
+    glass: true,
+    visual: { photo: "/assets/reviews/kredit-pe-yes-bank-max-credit-card.jpg" },
+  },
+  {
+    file: "hsbc-live-plus.jpg",
+    alt: "HSBC Live+ Credit Card review by Abhishek Meena: 10% cashback, ₹1,200 cap per cycle, ₹999 fee",
+    eyebrow: "Card review",
+    title: "HSBC Live+ Credit Card",
+    subtitle: "Cashback, eligible MCCs, exclusions, fees, lounges and forex.",
+    stats: [["10%", "cashback"], ["₹1,200", "cap per cycle"], ["₹999", "+ GST a year"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/hsbc-live-plus.jpg" },
+  },
+  {
+    file: "rbl-jalsa-credit-card.jpg",
+    alt: "RBL Bank Jalsa Credit Card review by Abhishek Meena: 5% cashback, ₹500 monthly cap, ₹999 fee",
+    eyebrow: "Card review",
+    title: "RBL Bank Jalsa Credit Card",
+    subtitle: "5% back on nine food and shopping apps, and every cap explained.",
+    stats: [["5%", "on 9 apps"], ["₹500", "monthly cap"], ["₹999", "+ GST a year"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/rbl-jalsa-credit-card.jpg", position: "28% 50%" },
+  },
+  {
+    file: "slice-business-credit-card.jpg",
+    alt: "Slice Business Credit Card pre-launch preview by Abhishek Meena",
+    eyebrow: "Pre-launch preview",
+    title: "Slice Business Credit Card",
+    subtitle: "Launching December 2026 for sole proprietors. What’s confirmed and what isn’t.",
+    stats: [["₹0", "lifetime free"], ["2%", "max cashback"], ["0%", "forex markup"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/slice-business-credit-card.jpg" },
+  },
+  {
+    file: "card-reviews.jpg",
+    alt: "Credit card reviews for India by Abhishek Meena",
+    eyebrow: "Card reviews",
+    title: "Credit card reviews",
+    subtitle: "Rewards, fees and the fine print, from real use.",
+    glass: true,
+    visual: { cards: ["hsbc-live-plus", "kredit-pe-yes-bank-max-credit-card", "eternal-sbi-card", "slice-business-credit-card"] },
   },
 ];

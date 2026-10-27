@@ -108,6 +108,7 @@ function pageJob(page, items) {
   if (v.cards) v.cards.forEach((c) => files.push(`/assets/hero/marquee/${c}.webp`));
   if (v.card) files.push(`/assets/hero/marquee/${v.card}.webp`);
   if (v.logos) v.logos.forEach((l) => files.push(`/assets/bank-logos/${l}`));
+  if (v.photo) files.push(v.photo);
   if (v.tiles === "latest") {
     data.tiles = items
       .filter((i) => i.tile && i.tile.figure && !(i.offer && i.offer.ends && String(i.offer.ends).slice(0, 10) < today))
@@ -178,6 +179,54 @@ h1{margin-top:26px;font-size:60px;line-height:1.08;font-weight:700;letter-spacin
 .mini:nth-child(1){top:0;transform:rotate(-2deg)}
 .mini:nth-child(2){top:178px;transform:rotate(1.5deg) translateX(14px)}
 .mini:nth-child(3){top:356px;transform:rotate(-1deg)}
+
+/* Liquid glass (reviews and updates), after the site's --hd-glass material in
+   assets/header.css and the tinted /updates tiles: a frosted layer over colour,
+   a bright rim on the top-left and bottom-right edges, an inner top highlight.
+   Dark glass carries text; light glass carries the fact tiles. Glass never sits
+   on glass. */
+.ambient{position:absolute;inset:-80px;background-size:cover;background-position:center;filter:blur(70px) saturate(1.5) brightness(.6)}
+.orb{position:absolute;border-radius:50%;filter:blur(30px)}
+.grain{position:absolute;inset:0;background-image:radial-gradient(rgb(255 255 255/.07) 1px,transparent 1.2px);background-size:22px 22px}
+.photo{position:absolute;left:470px;top:58px;width:690px;height:514px;object-fit:cover;border-radius:32px;box-shadow:0 40px 80px -30px rgb(0 0 0/.8),0 0 0 1px rgb(255 255 255/.12)}
+.glass,.glass-light{position:absolute;isolation:isolate;overflow:hidden}
+.glass::after,.glass-light::after{content:"";position:absolute;inset:0;padding:1.5px;border-radius:inherit;pointer-events:none;z-index:3;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor}
+.glass{border-radius:34px;background:linear-gradient(160deg,rgb(255 255 255/.17),rgb(255 255 255/.06) 50%,rgb(255 255 255/.02)),rgb(14 14 18/.56);
+  backdrop-filter:blur(30px) saturate(170%);box-shadow:inset 0 1px 1px rgb(255 255 255/.22),0 1px 2px rgb(0 0 0/.4),0 34px 70px -24px rgb(0 0 0/.75)}
+.glass::after{background:linear-gradient(135deg,rgb(255 255 255/.6),rgb(255 255 255/0) 36%,rgb(255 255 255/0) 64%,rgb(255 255 255/.32))}
+.glass-light{color:#18181b;background:linear-gradient(160deg,rgb(255 255 255/.8),rgb(255 255 255/.5) 55%,rgb(255 255 255/.36)),color-mix(in srgb,var(--glow) 10%,transparent);
+  backdrop-filter:blur(26px) saturate(200%) brightness(1.05);box-shadow:inset 0 1px 1px rgb(255 255 255/.9),inset 0 -1px 1px rgb(0 0 0/.05),0 34px 70px -24px rgb(0 0 0/.7)}
+.glass-light::after{background:linear-gradient(135deg,rgb(255 255 255/1),rgb(255 255 255/0) 38%,rgb(255 255 255/0) 62%,rgb(255 255 255/.75))}
+.glass-light::before{content:"";position:absolute;z-index:-1;right:-28%;bottom:-34%;width:95%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--glow) 50%,transparent),transparent 68%);filter:blur(8px)}
+.panel{left:44px;top:44px;bottom:44px;width:var(--panel,590px);padding:44px 44px 34px;display:flex;flex-direction:column}
+.panel > *{position:relative;z-index:1}
+.gpill{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;font-size:20px;font-weight:600;letter-spacing:.005em;padding:9px 18px 9px 14px;border-radius:999px;
+  background:linear-gradient(180deg,rgb(255 255 255/.2),rgb(255 255 255/.09));box-shadow:inset 0 1px 0 rgb(255 255 255/.25),0 1px 3px rgb(0 0 0/.35)}
+.gpill i{width:11px;height:11px;border-radius:50%;background:var(--dot);box-shadow:0 0 12px var(--dot)}
+.panel h1{margin-top:24px;font-size:56px;letter-spacing:-.03em}
+.panel .sub{color:#d6d3d1;font-size:23px;margin-top:16px}
+.panel .stats{gap:34px;margin-top:auto;padding-top:24px}
+.panel .stat b{font-size:38px}
+.panel .stat span{color:#d6d3d1;font-size:17px}
+.panel .foot{margin-top:auto;border-top-color:rgb(255 255 255/.14);color:#d6d3d1;justify-content:space-between}
+.panel .stats + .foot{margin-top:24px}
+.gtile{right:56px;top:66px;width:380px;height:498px;border-radius:34px;padding:40px 38px;display:flex;flex-direction:column}
+.gtile > *{position:relative;z-index:1}
+.gtile img{height:66px;width:auto;max-width:100%;object-fit:contain;object-position:left center;align-self:flex-start}
+.gtile .name{font-size:30px;font-weight:700}
+.gtile .fig{color:var(--ink)}
+.gtile .cap{color:#3f3f46}
+.gfan .face{width:236px}
+.gfan .face:nth-child(1){left:640px;top:120px;transform:rotate(-14deg)}
+.gfan .face:nth-child(2){left:930px;top:96px;transform:rotate(12deg)}
+.gfan .face:nth-child(3){left:740px;top:70px;transform:rotate(-4deg)}
+.gfan .face:nth-child(4){left:850px;top:110px;transform:rotate(5deg)}
+.gstack{position:absolute;right:56px;top:52px;width:410px;height:526px}
+.gstack .mini{border-radius:26px;height:154px}
+.gstack .mini > *{position:relative;z-index:1}
+.gstack .mini .cap{color:#3f3f46}
 `;
 
 function inkFor(category) {
@@ -187,12 +236,49 @@ function inkFor(category) {
 function updateHtml(d) {
   const [fill, glow] = CATEGORY_COLOURS[d.category] || DEFAULT_COLOURS;
   const mark = d.logo ? `<img src="${fileUrl(d.logo.slice(1))}" alt="">` : `<span class="name">${esc(d.name)}</span>`;
-  return `<body style="--fill:${fill};--glow:${glow};--ink:${fill}"><div class="wrap" style="--side:380px">
-  <div class="left"><div class="top"><span class="pill">${esc(d.label)}</span><span class="when">${esc(d.when)}</span></div>
-  <h1>${esc(d.title)}</h1>
-  <div class="foot"><b>avhishek.in</b><span>· Credit card updates by Abhishek Meena</span></div></div>
-  <div class="right"><div class="tile">${mark}<div class="fig">${esc(d.figure)}</div><div class="cap">${esc(d.caption)}</div></div></div>
-</div></body>`;
+  return `<body style="--fill:${fill};--glow:${glow};--ink:${fill};--dot:${glow}">
+  <div class="orb" style="left:640px;top:-60px;width:520px;height:520px;background:${glow};opacity:.75"></div>
+  <div class="orb" style="left:930px;top:330px;width:340px;height:340px;background:#f2a24a;opacity:.55"></div>
+  <div class="orb" style="left:-120px;top:380px;width:520px;height:360px;background:${fill};opacity:.45"></div>
+  <div class="grain"></div>
+  <div class="glass panel" style="--panel:680px">
+    <div class="top"><span class="gpill"><i></i>${esc(d.label)}</span><span class="when" style="color:#d6d3d1">${esc(d.when)}</span></div>
+    <h1>${esc(d.title)}</h1>
+    <div class="foot"><b>avhishek.in</b><span>Credit card updates by Abhishek Meena</span></div>
+  </div>
+  <div class="glass-light gtile">${mark}<div class="fig">${esc(d.figure)}</div><div class="cap">${esc(d.caption)}</div></div>
+</body>`;
+}
+
+// Reviews and the two hubs: a dark glass panel over colour, with the visual beside it.
+function glassPageHtml(d) {
+  const v = d.visual || {};
+  const stats = d.stats && d.stats.length
+    ? `<div class="stats">${d.stats.map(([b, s]) => `<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}</div>`
+    : "";
+  let back = "";
+  let front = "";
+  let panel = "590px";
+  if (v.photo) {
+    const url = fileUrl(v.photo.slice(1));
+    back = `<div class="ambient" style="background-image:url('${url}')"></div><div class="grain"></div><img class="photo" src="${url}" alt="" style="object-position:${v.position || "center"}">`;
+  } else if (v.cards) {
+    back = `<div class="ambient" style="background-image:url('${fileUrl(`assets/hero/marquee/${v.cards[0]}.webp`)}')"></div><div class="grain"></div>
+    <div class="gfan">${v.cards.map((c) => `<img class="face" src="${fileUrl(`assets/hero/marquee/${c}.webp`)}" alt="">`).join("")}</div>`;
+  } else if (d.tiles) {
+    panel = "640px";
+    back = `<div class="orb" style="left:660px;top:-40px;width:480px;height:480px;background:#3b82f6;opacity:.6"></div>
+    <div class="orb" style="left:900px;top:300px;width:380px;height:380px;background:#ef4444;opacity:.5"></div>
+    <div class="orb" style="left:-100px;top:360px;width:520px;height:380px;background:#f2a24a;opacity:.4"></div><div class="grain"></div>`;
+    front = `<div class="gstack">${d.tiles.map((t) => `<div class="mini glass-light" style="--ink:${inkFor(t.category)};--glow:${(CATEGORY_COLOURS[t.category] || DEFAULT_COLOURS)[1]}">${t.logo ? `<img src="${fileUrl(t.logo.slice(1))}" alt="">` : ""}<div class="fig">${esc(t.figure)}</div><div class="cap">${esc(t.caption)}</div></div>`).join("")}</div>`;
+  }
+  return `<body style="--dot:#f2a24a">${back}
+  <div class="glass panel" style="--panel:${panel}">
+    <div class="top"><span class="gpill"><i></i>${esc(d.eyebrow)}</span></div>
+    <h1>${esc(d.title)}</h1>${d.subtitle ? `<p class="sub">${esc(d.subtitle)}</p>` : ""}${stats}
+    <div class="foot"><b>avhishek.in</b><span>by Abhishek Meena</span></div>
+  </div>${front}
+</body>`;
 }
 
 function visualHtml(d) {
@@ -227,7 +313,7 @@ function pageHtml(d) {
 }
 
 const documentFor = (job) =>
-  `<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${CSS}</style></head>${job.data.kind === "update" ? updateHtml(job.data) : pageHtml(job.data)}</html>`;
+  `<!doctype html><html lang="en"><head><meta charset="utf-8"><style>${CSS}</style></head>${job.data.kind === "update" ? updateHtml(job.data) : job.data.glass ? glassPageHtml(job.data) : pageHtml(job.data)}</html>`;
 
 /* ---------- Run ---------- */
 
@@ -278,7 +364,9 @@ try {
       const last = document.querySelector(".stats") || document.querySelector(".sub") || h;
       const foot = document.querySelector(".foot");
       let size = parseFloat(getComputedStyle(h).fontSize);
-      const fits = () => last.getBoundingClientRect().bottom <= foot.getBoundingClientRect().top - 24;
+      const box = foot.parentElement;
+      const floor = box.getBoundingClientRect().bottom - parseFloat(getComputedStyle(box).paddingBottom) + 1;
+      const fits = () => last.getBoundingClientRect().bottom <= foot.getBoundingClientRect().top - 24 && foot.getBoundingClientRect().bottom <= floor;
       while (!fits() && size > 34) h.style.fontSize = `${(size -= 2)}px`;
       for (const fig of document.querySelectorAll(".fig")) {
         const box = fig.parentElement;
