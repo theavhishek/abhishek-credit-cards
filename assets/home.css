@@ -725,7 +725,8 @@ html[data-theme="dark"] .hm {
 .hm-hero--marquee {
   display: flex;
   flex-direction: column;
-  min-height: calc(100svh - 140px);
+  /* fill the first screen, but not more: on tall screens the copy would sink far below the navbar */
+  min-height: min(calc(100svh - 140px), 760px);
 }
 .hm-hero-copy {
   position: relative;
