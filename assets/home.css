@@ -715,9 +715,9 @@ html[data-theme="dark"] .hm {
 
 
 /* ---------- Card marquee hero (21st.dev hero-3 layout) ----------
-   The hero fills the first screen: copy centred above, a strip of portrait card
-   tiles along the bottom, tilted -2deg / 5deg in turn, drifting right and faded
-   top and bottom. home.js repeats the set so one copy is wider than the screen,
+   The hero fills the first screen: copy centred above, a strip of upright card
+   faces along the bottom that tucks up under the copy, tilted -2deg / 5deg in
+   turn, drifting right and faded top and bottom. home.js repeats the set so one copy is wider than the screen,
    then doubles it so the loop is seamless. Without JS or with reduced motion it
    is a plain scroll row. Pauses on hover, focus and the corner button. */
 .hm-hero--marquee {
@@ -726,17 +726,19 @@ html[data-theme="dark"] .hm {
   min-height: calc(100svh - 140px);
 }
 .hm-hero-copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   justify-items: center;
   margin-block: auto;
 }
 .hm-marquee {
-  --mq-h: clamp(170px, 22svh, 256px);
+  --mq-h: clamp(180px, 27svh, 260px);
   --mq-gap: 16px;
   --mq-speed: 40s;
   position: relative;
   width: 100vw;
-  margin: 28px calc(50% - 50vw) 0;
+  margin: -36px calc(50% - 50vw) 0;
 }
 .hm-marquee-viewport {
   overflow-x: clip;
@@ -755,15 +757,14 @@ html[data-theme="dark"] .hm {
   overflow-x: auto;
   scrollbar-width: none;
 }
-.hm-marquee-item { flex: none; height: var(--mq-h); aspect-ratio: 3 / 4; rotate: -2deg; }
+.hm-marquee-item { flex: none; height: var(--mq-h); aspect-ratio: 400 / 634; rotate: -2deg; }
 .hm-marquee-item:nth-child(even) { rotate: 5deg; }
 .hm-marquee-card {
   display: block;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-lg);
-  background: var(--surface-muted);
+  border-radius: 7.5% / 4.7%;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   transition: transform 320ms var(--hm-ease);
 }
@@ -798,7 +799,7 @@ body.home-page { overflow-x: clip; }
 .hm-marquee-toggle[aria-pressed="true"] .hm-marquee-pause { display: none; }
 .hm-marquee-toggle[aria-pressed="true"] .hm-marquee-play { display: block; }
 @media (max-width: 768px) {
-  .hm-marquee { --mq-h: 192px; margin-top: 24px; }
+  .hm-marquee { --mq-h: 230px; margin-top: -20px; }
 }
 @media (max-width: 640px) {
   .hm-hero--marquee { min-height: 0; }
