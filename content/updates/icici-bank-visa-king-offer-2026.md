@@ -38,7 +38,7 @@ Spend ₹2 lakh or more on one ICICI Bank Visa credit card in November 2026. The
 | Minimum spend | ₹2,00,000 on one card |
 | Top 5 | Meet Bollywood stars (own travel cost) |
 | Next 500 | 2 red-carpet screening tickets each |
-| Register | Missed call to **02269445464** from your registered mobile |
+| Register | Missed call to [**02269445464**](tel:02269445464) from your registered mobile |
 | Winners contacted | 7 to 20 December 2026 |
 | Not eligible | Amazon Pay ICICI card, ICICI employees and family |
 
