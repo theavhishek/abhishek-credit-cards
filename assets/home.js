@@ -16,13 +16,6 @@
   for (let i = 1; i < perSet * 2; i++) clone();
   root.style.setProperty("--mq-speed", `${Math.round(step * originals.length * perSet / 45)}s`);
   root.classList.add("is-looping");
-  const toggle = root.querySelector(".hm-marquee-toggle");
-  toggle.hidden = false;
-  toggle.addEventListener("click", () => {
-    const paused = root.classList.toggle("is-paused");
-    toggle.setAttribute("aria-pressed", String(paused));
-    toggle.setAttribute("aria-label", paused ? "Play the card strip" : "Pause the card strip");
-  });
 })();
 
 // Homepage: live counts and one search across banks, cards, reviews and tools.

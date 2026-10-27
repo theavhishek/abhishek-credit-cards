@@ -721,7 +721,7 @@ html[data-theme="dark"] .hm {
    and masked transparent > black 20% > black 80% > transparent, so the card tops
    fade into the page and the bottoms stay solid. home.js repeats the set so one copy is wider than the screen,
    then doubles it so the loop is seamless. Without JS or with reduced motion it
-   is a plain scroll row. Pauses on hover, focus and the corner button. */
+   is a plain scroll row. Pauses on hover and keyboard focus. */
 .hm-hero--marquee {
   display: flex;
   flex-direction: column;
@@ -777,36 +777,17 @@ html[data-theme="dark"] .hm {
   .hm-marquee-card:hover { transform: scale(1.04); }
 }
 .hm-marquee.is-looping .hm-marquee-track { animation: hm-marquee var(--mq-speed) linear infinite; }
-.hm-marquee.is-looping:is(:hover, .is-paused, :has(.hm-marquee-card:focus-visible)) .hm-marquee-track { animation-play-state: paused; }
+.hm-marquee.is-looping:is(:hover, :has(.hm-marquee-card:focus-visible)) .hm-marquee-track { animation-play-state: paused; }
 /* 100vw counts a desktop scrollbar; don't let that extra width scroll the page */
 body.home-page { overflow-x: clip; }
 @keyframes hm-marquee { from { transform: translateX(-50%); } to { transform: none; } }
-.hm-marquee-toggle {
-  position: absolute;
-  right: max(var(--hm-gutter), calc(50vw - 590px));
-  bottom: 0;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--muted);
-  cursor: pointer;
-}
-.hm-marquee-toggle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-@media (hover: hover) { .hm-marquee-toggle:hover { color: var(--text); border-color: var(--line-strong); } }
-.hm-marquee-toggle .hm-marquee-play,
-.hm-marquee-toggle[aria-pressed="true"] .hm-marquee-pause { display: none; }
-.hm-marquee-toggle[aria-pressed="true"] .hm-marquee-play { display: block; }
 @media (max-width: 768px) {
   .hm-marquee { --mq-h: 200px; --mq-gap: 12px; }
 }
 @media (max-width: 640px) {
-  .hm-hero--marquee { min-height: 0; }
-  .hm-marquee { --mq-h: 168px; --mq-gap: 10px; margin-top: 6px; }
+  /* fill the first screen down to the bottom tab bar, strip resting on it */
+  .hm-hero--marquee { min-height: calc(100svh - 176px); padding-bottom: 0; }
+  .hm-marquee { --mq-h: 184px; --mq-gap: 10px; margin-top: 4px; }
 }
 
 /* ---------- Section titles end in the wordmark's orange square ---------- */
