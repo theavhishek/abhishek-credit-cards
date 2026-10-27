@@ -740,9 +740,9 @@ html[data-theme="dark"] .hm {
   --mq-speed: 40s;
   position: relative;
   width: 100vw;
-  margin: calc(var(--mq-h) * -0.2) calc(50% - 50vw) 0;
+  margin: 14px calc(50% - 50vw) 0;
 }
-/* compact search that sits on the faded card tops, like hero-3's button */
+/* compact search above the card strip */
 .hm-hero--marquee .hm-search { width: min(540px, 100%); }
 .hm-hero--marquee .hm-search-field { min-height: 54px; padding-inline: 18px 10px; gap: 10px; }
 .hm-hero--marquee .hm-search-field input { height: 52px; font-size: 1rem; }
@@ -791,7 +791,7 @@ body.home-page { overflow-x: clip; }
 }
 @media (max-width: 640px) {
   .hm-hero--marquee { min-height: 0; padding-bottom: 0; }
-  .hm-marquee { --mq-h: 184px; --mq-gap: 6px; margin-top: -4px; }
+  .hm-marquee { --mq-h: 184px; --mq-gap: 6px; margin-top: 10px; }
   .hm-hero--marquee .hm-search { width: min(330px, 100%); }
   .hm-hero--marquee .hm-search-field { min-height: 48px; padding-inline: 16px 10px; }
   .hm-hero--marquee .hm-search-field input { height: 46px; font-size: 0.95rem; }
