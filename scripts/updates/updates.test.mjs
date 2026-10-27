@@ -92,6 +92,13 @@ test("markdown escapes HTML and only allows safe links", () => {
   assert.equal(problems.length, 1);
 });
 
+test("markdown allows tap-to-call phone links", () => {
+  const problems = [];
+  const { html } = renderMarkdown("Call [**02269445464**](tel:02269445464) or [x](tel:12ab)", problems);
+  assert.match(html, /<a href="tel:02269445464"><strong>02269445464<\/strong><\/a>/);
+  assert.equal(problems.length, 1);
+});
+
 test("markdown tables render as review-style tables", () => {
   const problems = [];
   const { html } = renderMarkdown("## Fees\n\n| Due | Fee |\n|---|---|\n| ₹500 or less | **NIL** |\n| <b>x</b> | ₹500 |", problems);

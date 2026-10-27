@@ -131,7 +131,7 @@ export function slugify(text) {
 }
 
 function safeUrl(url) {
-  return /^(https:\/\/|\/(?!\/)|#|mailto:)/.test(url) ? url : null;
+  return /^(https:\/\/|\/(?!\/)|#|mailto:|tel:\+?\d+$)/.test(url) ? url : null;
 }
 
 export function inline(text, problems) {
@@ -139,7 +139,7 @@ export function inline(text, problems) {
   let out = esc(text).replace(/`([^`]+)`/g, (_, code) => { codes.push(`<code>${code}</code>`); return `\u0000${codes.length - 1}\u0000`; });
   out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => {
     const raw = href.replace(/&amp;/g, "&");
-    if (!safeUrl(raw)) { problems?.push(`Link "${raw}" must start with https://, / or #.`); return label; }
+    if (!safeUrl(raw)) { problems?.push(`Link "${raw}" must start with https://, /, # or tel:.`); return label; }
     const ext = core.isExternal(raw);
     return `<a href="${href}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ""}>${label}${ext ? '<span class="sr-only"> (opens in a new tab)</span>' : ""}</a>`;
   });
