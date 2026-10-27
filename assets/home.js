@@ -11,11 +11,10 @@
     copy.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
     track.append(copy);
   });
-  // upright and landscape cards differ in width, so measure the whole set
-  const setWidth = track.scrollWidth;
-  const perSet = Math.max(1, Math.ceil(innerWidth * 1.2 / setWidth));
+  const step = originals[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+  const perSet = Math.max(1, Math.ceil(innerWidth * 1.2 / (step * originals.length)));
   for (let i = 1; i < perSet * 2; i++) clone();
-  root.style.setProperty("--mq-speed", `${Math.round(setWidth * perSet / 45)}s`);
+  root.style.setProperty("--mq-speed", `${Math.round(step * originals.length * perSet / 45)}s`);
   root.classList.add("is-looping");
 })();
 
