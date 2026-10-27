@@ -41,5 +41,6 @@ avhishek.in: Abhishek Meena's personal credit-card site (portfolio, card reviews
 - Cache busting: asset URLs carry `?v=N`. When you edit a CSS/JS file, bump its `?v=` in every page that loads it.
 - Header/footer markup is duplicated in each HTML page; a nav or footer change must be applied to every page, and to `scripts/updates/templates/page.html` (then run `pnpm build:updates`).
 - Publishing an update: add or edit `content/updates/<slug>.md`, run `pnpm build:updates` and `pnpm test:updates`, commit the Markdown and generated files. Never invent a rate, cap, date, code or link; an offer without `verified` and an end date never shows as active. Sample data lives in `content/updates/_fixtures/` and only appears in `pnpm preview:updates`.
+- Link-preview (OG) images are rendered by `pnpm build:og` (`scripts/og/`): fixed pages from `scripts/og/pages.mjs`, one card per /updates article. Run it, then `pnpm build:updates`, after publishing an update.
 - New pages or reviews: add to `sitemap.xml`, include JSON-LD, OG image in `assets/og/`, and (for reviews) an entry in `blog-grid-data.ts` plus rebuilt bundle.
 - Local preview: `pnpm dev` (port 3000). Note it serves the portfolio at `/`, unlike production. Check pages in both themes and at phone width before opening a PR.
