@@ -65,6 +65,7 @@ const assetVersions = {
   core: hash(read("assets/updates-core.js")),
   js: hash(read("assets/updates.js")),
   article: hash(read("assets/updates-article.js")),
+  calc: hash(read("assets/updates-calc.js")),
 };
 
 const lastChanged = (item) => item.updated || item.published;
@@ -223,6 +224,48 @@ function offerPanel(item) {
         </section>`;
 }
 
+/* ---------- Fee calculator (calculator: in the frontmatter) ---------- */
+// Same maths and wording as assets/updates-calc.js, so the page reads right before (or without) JavaScript.
+const inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
+const rupees = (n) => inr.format(Math.round(n));
+const feeFor = (s, amount) => (amount > s.threshold ? Math.min(amount * s.rate / 100, s.cap ?? Infinity) : 0);
+const feeText = (s, amount) => {
+  const fee = feeFor(s, amount);
+  if (!fee) return `No fee up to ${rupees(s.threshold)}.`;
+  return `${s.rate}% of ${rupees(amount)}, charged on ${s.chargedOn}${s.cap != null && fee === s.cap ? `, capped at ${rupees(s.cap)}` : ""}.`;
+};
+function calculatorHtml(item) {
+  const c = item.calculator;
+  const rows = c.sliders.map((s, n) => {
+    const id = `fee-calc-${n + 1}`;
+    const pct = (v) => `${+(v / s.max * 100).toFixed(3)}%`;
+    const fee = feeFor(s, s.value);
+    return `<div class="up-calc-row" data-threshold="${s.threshold}" data-rate="${s.rate}"${s.cap != null ? ` data-cap="${s.cap}"` : ""} data-charged-on="${esc(s.chargedOn)}"${fee > 0 ? " data-over" : ""}>
+            <div class="rv-calc-input">
+              <label for="${id}">${esc(s.label)}</label>
+              <output for="${id}">${rupees(s.value)}</output>
+            </div>
+            <div class="rv-meter">
+              <div class="rv-meter-rail">
+                <div class="rv-meter-track" aria-hidden="true">
+                  <span class="rv-meter-earn up-calc-fill" style="inline-size:${pct(s.value)}"></span>
+                  <span class="rv-meter-cap" style="inset-inline-start:${pct(s.threshold)}"></span>
+                </div>
+                <input id="${id}" type="range" min="0" max="${s.max}" step="${s.step}" value="${s.value}" aria-valuetext="${rupees(s.value)}">
+              </div>
+              <div class="rv-meter-scale" aria-hidden="true"><span>₹0</span><span class="rv-meter-cap-label" style="inset-inline-start:${pct(s.threshold)}">${rupees(s.threshold)}</span><span>${rupees(s.max)}</span></div>
+            </div>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Fee <strong>${rupees(fee)}</strong>${c.gst ? '<span class="up-calc-gst"' + (fee > 0 ? "" : " hidden") + "> + GST</span>" : ""}</span><span class="up-calc-why">${esc(feeText(s, s.value))}</span></p>
+          </div>`;
+  }).join("\n          ");
+  return `<section class="rv-calc up-calc" data-calc id="fee-calculator" aria-labelledby="fee-calc-title">
+          <div class="rv-calc-intro">
+            <h2 id="fee-calc-title">${esc(c.title)}</h2>${c.intro ? `\n            <p>${esc(c.intro)}</p>` : ""}
+          </div>
+          ${rows}
+        </section>`;
+}
+
 function buildArticle(item) {
   const canonical = core.itemUrl(item);
   const minutes = Math.max(1, Math.round(item.words / 200));
@@ -293,7 +336,9 @@ function buildArticle(item) {
       <article class="rv-article">
         ${item.offer ? offerPanel(item) : ""}
         <section class="rv-section up-prose">
-          ${item.bodyHtml}
+          ${item.calculator
+            ? (item.bodyHtml.includes("<p>{{calculator}}</p>") ? item.bodyHtml.replace("<p>{{calculator}}</p>", calculatorHtml(item)) : item.bodyHtml + "\n" + calculatorHtml(item))
+            : item.bodyHtml}
         </section>
         ${onSite.length ? `<section class="rv-section" aria-labelledby="onsite-title">
           <h2 id="onsite-title">On this site</h2>
@@ -367,7 +412,7 @@ function buildArticle(item) {
     skipLabel: "Skip to article",
     main,
     coreVersion: assetVersions.core,
-    scripts: `  <script src="/assets/updates-article.js?v=${assetVersions.article}" defer></script>\n  <script src="/assets/follow.js?v=1" defer></script>\n`,
+    scripts: `  <script src="/assets/updates-article.js?v=${assetVersions.article}" defer></script>\n${item.calculator ? `  <script src="/assets/updates-calc.js?v=${assetVersions.calc}" defer></script>\n` : ""}  <script src="/assets/follow.js?v=1" defer></script>\n`,
   });
   return previewise(html);
 }

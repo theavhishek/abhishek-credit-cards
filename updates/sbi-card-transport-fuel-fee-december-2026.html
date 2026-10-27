@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="/assets/follow.css?v=4">
   <link rel="stylesheet" href="/assets/backdrop.css?v=4">
   <link rel="stylesheet" href="/assets/header.css?v=9">
-  <link rel="stylesheet" href="/assets/updates.css?v=fd4773e0">
+  <link rel="stylesheet" href="/assets/updates.css?v=dadc401a">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=4">
@@ -124,9 +124,49 @@
         
         <section class="rv-section up-prose">
           <h2 id="the-two-fees">The two fees</h2>
-<div class="rv-table-wrap" role="region" aria-label="The two fees" tabindex="0"><table class="rv-table"><thead><tr><th scope="col"></th><th scope="col">Transport</th><th scope="col">Fuel</th></tr></thead><tbody><tr><td>Fee</td><td>1%</td><td>1%</td></tr><tr><td>Applies when</td><td>One payment is above ₹30,000</td><td>The cycle&#39;s fuel total is above ₹50,000</td></tr><tr><td>Charged on</td><td>That payment</td><td>All fuel spends in the cycle</td></tr><tr><td>Example</td><td>₹40,000 → ₹400</td><td>₹60,000 → ₹600</td></tr><tr><td>MCCs</td><td>4111 commuter, 4131 bus, 4784 tolls</td><td>5172, 5541, 5542, 5983</td></tr></tbody></table></div>
+<div class="rv-table-wrap" role="region" aria-label="The two fees" tabindex="0"><table class="rv-table"><thead><tr><th scope="col"></th><th scope="col">Transport</th><th scope="col">Fuel</th></tr></thead><tbody><tr><td>Fee</td><td>1%</td><td>1%</td></tr><tr><td>Applies when</td><td>One payment is above ₹30,000</td><td>The cycle&#39;s fuel total is above ₹50,000</td></tr><tr><td>Charged on</td><td>That payment</td><td>All fuel spends in the cycle</td></tr><tr><td>MCCs</td><td>4111 commuter, 4131 bus, 4784 tolls</td><td>5172, 5541, 5542, 5983</td></tr></tbody></table></div>
+<section class="rv-calc up-calc" data-calc id="fee-calculator" aria-labelledby="fee-calc-title">
+          <div class="rv-calc-intro">
+            <h2 id="fee-calc-title">Check your fee</h2>
+            <p>Move a slider to see what SBI Card would charge.</p>
+          </div>
+          <div class="up-calc-row" data-threshold="30000" data-rate="1" data-charged-on="the full payment" data-over>
+            <div class="rv-calc-input">
+              <label for="fee-calc-1">One transport payment</label>
+              <output for="fee-calc-1">₹40,000</output>
+            </div>
+            <div class="rv-meter">
+              <div class="rv-meter-rail">
+                <div class="rv-meter-track" aria-hidden="true">
+                  <span class="rv-meter-earn up-calc-fill" style="inline-size:40%"></span>
+                  <span class="rv-meter-cap" style="inset-inline-start:30%"></span>
+                </div>
+                <input id="fee-calc-1" type="range" min="0" max="100000" step="1000" value="40000" aria-valuetext="₹40,000">
+              </div>
+              <div class="rv-meter-scale" aria-hidden="true"><span>₹0</span><span class="rv-meter-cap-label" style="inset-inline-start:30%">₹30,000</span><span>₹1,00,000</span></div>
+            </div>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Fee <strong>₹400</strong><span class="up-calc-gst"> + GST</span></span><span class="up-calc-why">1% of ₹40,000, charged on the full payment.</span></p>
+          </div>
+          <div class="up-calc-row" data-threshold="50000" data-rate="1" data-charged-on="all fuel spends in the cycle" data-over>
+            <div class="rv-calc-input">
+              <label for="fee-calc-2">Fuel spends in one billing cycle</label>
+              <output for="fee-calc-2">₹60,000</output>
+            </div>
+            <div class="rv-meter">
+              <div class="rv-meter-rail">
+                <div class="rv-meter-track" aria-hidden="true">
+                  <span class="rv-meter-earn up-calc-fill" style="inline-size:40%"></span>
+                  <span class="rv-meter-cap" style="inset-inline-start:33.333%"></span>
+                </div>
+                <input id="fee-calc-2" type="range" min="0" max="150000" step="1000" value="60000" aria-valuetext="₹60,000">
+              </div>
+              <div class="rv-meter-scale" aria-hidden="true"><span>₹0</span><span class="rv-meter-cap-label" style="inset-inline-start:33.333%">₹50,000</span><span>₹1,50,000</span></div>
+            </div>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Fee <strong>₹600</strong><span class="up-calc-gst"> + GST</span></span><span class="up-calc-why">1% of ₹60,000, charged on all fuel spends in the cycle.</span></p>
+          </div>
+        </section>
 <h2 id="good-to-know">Good to know</h2>
-<ul><li><strong>Applies to:</strong> every SBI credit card, from 1 December 2026.</li><li><strong>Not stated by SBI:</strong> GST on the fee, a fee cap, or how it works with the fuel surcharge waiver.</li><li><strong>Not covered:</strong> air, rail and cab bookings aren&#39;t in SBI&#39;s MCC list, so they shouldn&#39;t attract the fee.</li><li><strong>MCCs:</strong> set by the card networks and can change without notice.</li><li><strong>Questions:</strong> call <a href="tel:18601801290">1860 180 1290</a> or 39 02 02 02 with your STD code.</li><li><strong>Tip:</strong> move fuel to another card once the cycle nears the limit, and split big transport payments where the merchant allows it.</li><li><strong>Other fees:</strong> this SBI notice covers only these two new fees, nothing else.</li></ul>
+<ul><li><strong>Applies to:</strong> every SBI credit card, from 1 December 2026.</li><li><strong>GST:</strong> applies on top of the fee.</li><li><strong>Not stated by SBI:</strong> a fee cap, or how it works with the fuel surcharge waiver.</li><li><strong>Not covered:</strong> air, rail and cab bookings aren&#39;t in SBI&#39;s MCC list, so they shouldn&#39;t attract the fee.</li><li><strong>MCCs:</strong> set by the card networks and can change without notice.</li><li><strong>Tip:</strong> move fuel to another card once the cycle nears the limit, and split big transport payments where the merchant allows it.</li><li><strong>Other fees:</strong> this SBI notice covers only these two new fees, nothing else.</li></ul>
         </section>
         <section class="rv-section" aria-labelledby="onsite-title">
           <h2 id="onsite-title">On this site</h2>
@@ -228,6 +268,7 @@
   <script src="/assets/card-reviews.js?v=3"></script>
   <script src="/assets/updates-core.js?v=52979536" defer></script>
   <script src="/assets/updates-article.js?v=10799993" defer></script>
+  <script src="/assets/updates-calc.js?v=6c8adff1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

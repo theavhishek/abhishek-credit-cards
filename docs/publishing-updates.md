@@ -117,6 +117,31 @@ article and in link previews, not in the feed, where their small print can't
 be read. Use the bank's or merchant's own poster or a picture you made; never
 a stock photo. Put the file in `assets/updates/`.
 
+### Fee calculator
+
+A devaluation that adds a percentage fee above a threshold can carry a slider
+that shows the fee for any amount. Add a `calculator:` block and put
+`{{calculator}}` on its own line in the body where it should appear (without
+the marker it goes at the end of the body):
+
+```yaml
+calculator:
+  title: Check your fee                 # optional
+  intro: Move a slider to see what the bank would charge.   # optional
+  gst: true                             # optional; shows "+ GST" after the fee
+  sliders:
+    - label: One transport payment
+      threshold: 30000                  # fee applies above this amount
+      rate: 1                           # percent
+      cap: 2000                         # optional maximum fee
+      max: 100000                       # slider range
+      step: 1000                        # optional, default 1000
+      value: 40000                      # starting value, optional
+      chargedOn: the full payment       # what the percentage is of
+```
+
+Take the threshold, rate and cap from the official source only.
+
 ## How offer status works
 
 Status is worked out in Indian Standard Time, in the visitor's browser, every
