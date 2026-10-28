@@ -44,7 +44,9 @@ function extract(filename) {
   const slug = basename(filename, ".html");
   const hero = match(html, /<header class="rv-hero">([\s\S]*?)<\/header>/, slug + " hero");
   const heading = plain(match(hero, /<h1[^>]*>([\s\S]*?)<\/h1>/, slug + " H1"));
-  const title = slug === "slice-business-credit-card" ? "Slice Business Credit Card" : heading.replace(/(?::\s*the full review|\s+(?:review|preview))$/i, "").trim();
+  // Long article H1s (guides) can set a shorter listing title and image alt in meta tags.
+  const listTitle = decode((html.match(/<meta name="review:list-title" content="([^"]+)"/) || [,""])[1]);
+  const title = listTitle || (slug === "slice-business-credit-card" ? "Slice Business Credit Card" : heading.replace(/(?::\s*the full review|\s+(?:review|preview))$/i, "").trim());
   const byline = match(hero, /<p class="rv-byline">([\s\S]*?)<\/p>/, slug + " byline");
   const date = match(byline, /<time datetime="(\d{4}-\d{2}-\d{2})"/, slug + " updated date");
   // Bylines read "9 min read" (older ones said "About 9 minutes to read").
@@ -58,7 +60,7 @@ function extract(filename) {
   const figure = match(hero, /<figure class="rv-hero-card">([\s\S]*?)<\/figure>/, slug + " hero figure");
   const imgTag = match(figure, /(<img\b[^>]*>)/, slug + " hero image");
   const image = { src: attribute(imgTag,"src"), alt: attribute(imgTag,"alt") || title };
-  const listAlt = title.replace(/(?:\s+Credit)?\s+Card$/i, "") + " credit card";
+  const listAlt = decode((html.match(/<meta name="review:list-alt" content="([^"]+)"/) || [,""])[1]) || title.replace(/(?:\s+Credit)?\s+Card$/i, "") + " credit card";
   if (!image.src.startsWith("/assets/reviews/")) throw new Error(slug + ": expected a local review hero image");
   const img = { src: image.src, alt: image.alt, srcset: attribute(imgTag,"srcset"), width: attribute(imgTag,"width"), height: attribute(imgTag,"height"), referrerpolicy: attribute(imgTag,"referrerpolicy") };
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !readTime || !title || !intro) throw new Error("Invalid review details: " + slug);
@@ -114,7 +116,8 @@ const shortName = (p) => ({
   "eternal-sbi-card":"Eternal SBI Card",
   "hsbc-live-plus":"HSBC Live+",
   "rbl-jalsa-credit-card":"RBL Jalsa Card",
-  "kredit-pe-yes-bank-max-credit-card":"Kredit.Pe YES BANK Max"
+  "kredit-pe-yes-bank-max-credit-card":"Kredit.Pe YES BANK Max",
+  "sbi-debit-card-rewardz":"SBI Rewardz guide"
 }[p.id] || p.title.replace(/ Credit Card$/," Card"));
 const footer = '          <div class="gf-column gf-column-latest">\n' +
   '            <h2 class="gf-heading">Latest reviews</h2>\n            <ul>\n' +

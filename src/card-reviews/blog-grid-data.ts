@@ -6,8 +6,27 @@ export type BlogPost = {
   readTime: number; author: BlogAuthor; image?: { src: string; alt: string; srcset?: string };
   body?: string[]; featured?: boolean;
 };
-export const blogCategories = ["Cashback","Launched","Pre-launch"];
+export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
+  {
+    "id": "sbi-debit-card-rewardz",
+    "title": "SBI Rewardz on Debit Cards: 2026 Guide",
+    "excerpt": "SBI Rewardz isn’t a separate card. It’s SBI’s points programme on every SBI debit card, physical or virtual, and credit card bill payments earn 0.25% to 1% back. Your tier, the ₹1 lakh milestone and your birthday…",
+    "category": "Guide",
+    "date": "2026-10-28",
+    "readTime": 12,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/sbi-debit-card-rewardz.jpg",
+      "alt": "SBI debit card earning SBI Rewardz points",
+      "srcset": "/assets/reviews/sbi-debit-card-rewardz-800.webp 800w, /assets/reviews/sbi-debit-card-rewardz-1200.webp 1200w, /assets/reviews/sbi-debit-card-rewardz.jpg 1600w"
+    },
+    "featured": false
+  },
   {
     "id": "kredit-pe-yes-bank-max-credit-card",
     "title": "Kredit.Pe YES BANK Max Credit Card",
