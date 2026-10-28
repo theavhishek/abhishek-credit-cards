@@ -11,9 +11,9 @@ export const blogPosts: BlogPost[] = [
   {
     "id": "sbi-debit-card-rewardz",
     "title": "SBI Rewardz on Debit Cards: 2026 Guide",
-    "excerpt": "SBI Rewardz isn’t a separate card. It’s SBI’s points programme on every SBI debit card, physical or virtual, and credit card bill payments earn 0.25% to 1% back. Your tier, the ₹1 lakh milestone and your birthday…",
+    "excerpt": "Turn your credit card bill payments into SBI Rewardz points using a physical or virtual SBI debit card. Earn 0.25% to 1% in value back through tier-based rewards, the ₹1 lakh monthly milestone and birthday-month…",
     "category": "Guide",
-    "date": "2026-10-28",
+    "date": "2026-10-29",
     "readTime": 12,
     "author": {
       "name": "Abhishek Meena",
