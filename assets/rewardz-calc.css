@@ -34,3 +34,10 @@
 .rz-break dt span { display: block; font-size: var(--rv-fs-caption); font-weight: 400; color: var(--muted); }
 .rz-break dd { margin: 0; font-size: 1rem; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .rz-break .rz-break-cut dd { color: var(--rv-accent); }
+
+/* Article tables on phones: narrower row headers and tighter cells so text columns get the width. */
+@media (max-width: 560px) {
+  .rz-article .rv-table th,
+  .rz-article .rv-table td { padding: 10px 12px; }
+  .rz-article .rv-table tbody th { min-width: 6.5rem; }
+}
