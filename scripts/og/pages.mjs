@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "sbi-debit-card-rewardz.jpg",
+    alt: "SBI Rewardz on SBI debit cards, a guide by Abhishek Meena: 0.25% to 1% back on credit card bill payments, 1,000 RP milestone, 10,000 RP monthly cap",
+    eyebrow: "Guide",
+    title: "SBI Rewardz on SBI Debit Cards",
+    subtitle: "Points on every SBI debit card: up to 1% back on card bills.",
+    stats: [["1%", "max value back"], ["1,000", "bonus RP at ₹1 lakh"], ["10,000", "RP monthly cap"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/sbi-debit-card-rewardz.jpg", position: "80% 50%" },
+  },
+  {
     file: "kredit-pe-yes-bank-max-credit-card.jpg",
     alt: "Kredit.Pe YES BANK Max Credit Card review by Abhishek Meena: advertised 5% cashback, lifetime free, redemption charges",
     eyebrow: "Card review",

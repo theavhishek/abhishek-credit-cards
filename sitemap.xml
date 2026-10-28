@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://avhishek.in/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://avhishek.in/card-reviews</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -91,6 +91,15 @@
     <priority>0.7</priority>
     <image:image>
       <image:loc>https://avhishek.in/assets/reviews/eternal-sbi-card.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://avhishek.in/card-reviews/sbi-debit-card-rewardz</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://avhishek.in/assets/reviews/sbi-debit-card-rewardz.jpg</image:loc>
     </image:image>
   </url>
   <!-- updates:start -->

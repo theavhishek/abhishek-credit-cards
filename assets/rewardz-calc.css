@@ -1,0 +1,36 @@
+/* SBI Debit Card Rewardz calculator: spend slider, tier picker and birthday toggle.
+   Builds on eternal-calc.css (ec-*) and the review meter (rv-meter-*). */
+.rz .rv-calc-tool { gap: 14px; }
+.rz .rv-calc-input output { font-size: clamp(1.75rem, 1.5rem + 1vw, 2.125rem); }
+
+/* Milestone marker: dashed, so it reads differently from the cap line. */
+.rz .rz-mark {
+  background: none;
+  border-inline-start: 2px dashed var(--muted);
+  inline-size: 0;
+}
+.rz .rz-mark-label { color: var(--muted); }
+.rz .rv-meter-scale { min-height: 2.8em; }
+.rz #rz-cap-label,
+.rz .rz-mark-label { inset-block-start: 1.4em; }
+.rz [hidden] { display: none !important; }
+.rz-scale-note { font-size: var(--rv-fs-caption); line-height: 1.45; color: var(--muted); }
+
+.rz-group { margin-block-start: 24px; }
+.rz-tiers { margin-block-start: 0; }
+.rz-tiers button span { margin-inline-start: 4px; font-variant-numeric: tabular-nums; opacity: 0.7; }
+
+/* Points breakdown */
+.rz-break { display: grid; margin: 0; }
+.rz-break > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-block: 9px;
+  border-block-end: 1px solid var(--line);
+}
+.rz-break dt { font-size: var(--rv-fs-small); font-weight: 600; line-height: 1.35; }
+.rz-break dt span { display: block; font-size: var(--rv-fs-caption); font-weight: 400; color: var(--muted); }
+.rz-break dd { margin: 0; font-size: 1rem; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rz-break .rz-break-cut dd { color: var(--rv-accent); }
