@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "boi-rupay-select-debit-card",
+    "title": "BOI RuPay Select Debit Card: 0.75% on Card Bills",
+    "excerpt": "Pay your credit card bills with a Bank of India debit card and earn Star Points on every payment. On the RuPay Select Debit Card, a payment above ₹10,000 earns 0.75% back, up to 10,000 points a month, along with…",
+    "category": "Guide",
+    "date": "2026-10-29",
+    "readTime": 6,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/boi-rupay-select-debit-card.jpg",
+      "alt": "Bank of India RuPay Select debit card earning Star Points",
+      "srcset": "/assets/reviews/boi-rupay-select-debit-card-800.webp 800w, /assets/reviews/boi-rupay-select-debit-card-1200.webp 1200w, /assets/reviews/boi-rupay-select-debit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "sbi-debit-card-rewardz",
     "title": "SBI Rewardz on Debit Cards: 2026 Guide",
     "excerpt": "Turn your credit card bill payments into SBI Rewardz points using a physical or virtual SBI debit card. Earn 0.25% to 1% in value back through tier-based rewards, the ₹1 lakh monthly milestone and birthday-month…",

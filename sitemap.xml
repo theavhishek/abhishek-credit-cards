@@ -102,6 +102,15 @@
       <image:loc>https://avhishek.in/assets/reviews/sbi-debit-card-rewardz.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://avhishek.in/card-reviews/boi-rupay-select-debit-card</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://avhishek.in/assets/reviews/boi-rupay-select-debit-card.jpg</image:loc>
+    </image:image>
+  </url>
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>
