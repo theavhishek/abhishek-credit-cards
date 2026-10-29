@@ -11,7 +11,7 @@ export const blogPosts: BlogPost[] = [
   {
     "id": "boi-rupay-select-debit-card",
     "title": "BOI RuPay Select Debit Card: 0.75% on Card Bills",
-    "excerpt": "Pay your credit card bills with a Bank of India debit card and earn Star Points on every payment. On the RuPay Select Debit Card, a payment above ₹10,000 earns 0.75% back, up to 10,000 points a month, along with…",
+    "excerpt": "Pay credit card bills with a BOI debit card and earn Star Points. RuPay Select earns 0.75% on payments above ₹10,000, up to 10,000 points a month, plus lounge, insurance and wellness benefits.",
     "category": "Guide",
     "date": "2026-10-29",
     "readTime": 6,
