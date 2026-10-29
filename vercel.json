@@ -15,6 +15,24 @@
       "permanent": true
     },
     {
+      "source": "/instagram",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://www.instagram.com/avhishek.in/",
+      "permanent": false
+    },
+    {
+      "source": "/whatsapp",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://whatsapp.com/channel/0029VbDBLDNL7UVPt9IYC914",
+      "permanent": false
+    },
+    {
+      "source": "/telegram",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://t.me/avhishekin",
+      "permanent": false
+    },
+    {
       "source": "/home",
       "has": [
         {
