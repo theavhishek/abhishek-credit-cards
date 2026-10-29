@@ -104,7 +104,7 @@ export const PAGES = [
     subtitle: "Pay card bills, earn 0.75% back, plus RuPay Select benefits.",
     stats: [["0.75%", "on payments above ₹10,000"], ["10,000", "RP monthly cap"], ["₹944", "card fee a year"]],
     glass: true,
-    visual: { photo: "/assets/reviews/boi-rupay-select-debit-card.jpg", position: "80% 50%" },
+    visual: { photo: "/assets/reviews/boi-rupay-select-debit-card-art.jpg", position: "50% 50%" },
   },
   {
     file: "sbi-debit-card-rewardz.jpg",

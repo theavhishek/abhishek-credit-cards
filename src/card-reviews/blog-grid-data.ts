@@ -21,9 +21,9 @@ export const blogPosts: BlogPost[] = [
       "avatar": "/assets/abhishek-face-96.jpg"
     },
     "image": {
-      "src": "/assets/reviews/boi-rupay-select-debit-card.jpg",
+      "src": "/assets/reviews/boi-rupay-select-debit-card-art.jpg",
       "alt": "Bank of India RuPay Select debit card earning Star Points",
-      "srcset": "/assets/reviews/boi-rupay-select-debit-card-800.webp 800w, /assets/reviews/boi-rupay-select-debit-card-1200.webp 1200w, /assets/reviews/boi-rupay-select-debit-card.jpg 1600w"
+      "srcset": "/assets/reviews/boi-rupay-select-debit-card-art-800.webp 800w, /assets/reviews/boi-rupay-select-debit-card-art-1200.webp 1200w, /assets/reviews/boi-rupay-select-debit-card-art.jpg 1600w"
     },
     "featured": false
   },
