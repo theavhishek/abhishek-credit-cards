@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "boi-rupay-select-debit-card.jpg",
+    alt: "BOI RuPay Select Debit Card guide by Abhishek Meena: 0.75% back on credit card bill payments, 10,000 RP monthly cap, RuPay Select benefits",
+    eyebrow: "Guide",
+    title: "BOI RuPay Select Debit Card",
+    subtitle: "Pay card bills, earn 0.75% back, plus RuPay Select benefits.",
+    stats: [["0.75%", "on payments above ₹10,000"], ["10,000", "RP monthly cap"], ["₹944", "card fee a year"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/boi-rupay-select-debit-card.jpg", position: "80% 50%" },
+  },
+  {
     file: "sbi-debit-card-rewardz.jpg",
     alt: "SBI Rewardz on SBI debit cards, a guide by Abhishek Meena: 0.25% to 1% back on credit card bill payments, 1,000 RP milestone, 10,000 RP monthly cap",
     eyebrow: "Guide",

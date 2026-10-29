@@ -102,18 +102,21 @@
       <image:loc>https://avhishek.in/assets/reviews/sbi-debit-card-rewardz.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://avhishek.in/card-reviews/boi-rupay-select-debit-card</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://avhishek.in/assets/reviews/boi-rupay-select-debit-card.jpg</image:loc>
+    </image:image>
+  </url>
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://avhishek.in/updates/boi-debit-card-star-rewardz-2026</loc>
-    <lastmod>2026-10-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avhishek.in/updates/icici-bank-visa-king-offer-2026</loc>
