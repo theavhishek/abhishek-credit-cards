@@ -55,6 +55,7 @@
   <link rel="stylesheet" href="/assets/backdrop.css?v=4">
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/updates.css?v=dadc401a">
+  <link rel="stylesheet" href="/assets/newsletter.css?v=1">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=4">
@@ -145,6 +146,18 @@
       </div>
 
       <aside class="up-aside" aria-label="About these updates">
+        <section class="nl" id="newsletter" aria-labelledby="nl-title">
+          <h2 id="nl-title">Get updates by email</h2>
+          <p>Devaluations, offers and new reviews, sent to your inbox. No spam, and you can unsubscribe in one click.</p>
+          <form class="nl-form" action="/api/subscribe" method="post" data-newsletter novalidate>
+            <label class="sr-only" for="nl-email">Email address</label>
+            <input class="nl-input" id="nl-email" type="email" name="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="you@example.com" required aria-describedby="nl-status">
+            <div class="nl-hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+            <button type="submit" class="up-btn up-btn-solid nl-submit">Subscribe</button>
+            <p class="nl-status" id="nl-status" role="status" aria-live="polite"></p>
+          </form>
+          <p class="nl-done" role="status" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.25"/><path d="M8 12.5l2.75 2.75L16 9.75"/></svg><span>You’re subscribed. Thanks! Every email has an unsubscribe link at the bottom.</span></p>
+        </section>
         <section aria-labelledby="up-follow-title">
           <h2 id="up-follow-title">Follow along</h2>
           <ul class="up-follow">
@@ -229,6 +242,7 @@
   <script src="/assets/card-reviews.js?v=3" defer></script>
   <script src="/assets/updates-core.js?v=52979536" defer></script>
   <script src="/assets/updates.js?v=a09d22c6" defer></script>
+  <script src="/assets/newsletter.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>
   <script src="/assets/backdrop.js?v=2" defer></script>

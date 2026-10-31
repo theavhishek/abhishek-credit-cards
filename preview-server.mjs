@@ -2,6 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
@@ -25,7 +26,30 @@ const MIME_TYPES = {
   ".xml": "application/xml; charset=utf-8",
 };
 
+// Vercel functions in api/ (CommonJS). Locally, RESEND_API_KEY may be unset:
+// the signup endpoint then answers "Signups open soon".
+const require = createRequire(import.meta.url);
+function runApi(name, req, res) {
+  const file = path.join(__dirname, "api", `${name}.js`);
+  if (!/^[a-z-]+$/.test(name) || !fs.existsSync(file)) return false;
+  let raw = "";
+  req.on("data", (chunk) => { raw += chunk; if (raw.length > 1e5) req.destroy(); });
+  req.on("end", async () => {
+    req.body = raw;
+    try {
+      await require(file)(req, res);
+    } catch (err) {
+      console.error(err);
+      res.statusCode = 500;
+      res.end();
+    }
+  });
+  return true;
+}
+
 const server = http.createServer((req, res) => {
+  const apiMatch = req.url.match(/^\/api\/([^/?#]+)/);
+  if (apiMatch && runApi(apiMatch[1], req, res)) return;
   const urlObj = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   let pathname = decodeURIComponent(urlObj.pathname);
 

@@ -1,0 +1,49 @@
+/* Newsletter signup box. Markup: <section class="nl"> with form[data-newsletter]. */
+.nl-form { display: grid; gap: 10px; margin-block-start: 14px; }
+.nl-form[hidden] { display: none; }
+.nl-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem; /* 16px keeps iOS from zooming */
+  -webkit-appearance: none;
+  appearance: none;
+}
+.nl-input::placeholder { color: var(--muted); opacity: 1; }
+.nl-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.nl-input[aria-invalid="true"] { border-color: #c81e1e; }
+html[data-theme="dark"] .nl-input[aria-invalid="true"] { border-color: #f87171; }
+.nl-submit { width: 100%; }
+.nl-submit[aria-busy="true"] { opacity: 0.7; cursor: progress; }
+/* Honeypot: off-screen for people, still in the form for bots. */
+.nl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.nl-status { min-height: 1.4em; font-size: 0.875rem; line-height: 1.45; color: var(--muted); }
+.nl-status:empty { min-height: 0; }
+.nl-status[data-tone="error"] { color: #c81e1e; }
+html[data-theme="dark"] .nl-status[data-tone="error"] { color: #f87171; }
+.nl-done {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-block-start: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.nl-done svg { flex: none; width: 18px; height: 18px; margin-block-start: 1px; color: #1a7f37; }
+html[data-theme="dark"] .nl-done svg { color: #4ade80; }
+.nl-done[hidden] { display: none; }
+.nl-fine { margin-block-start: 10px; font-size: 0.8125rem; color: var(--muted); line-height: 1.45; }
+@media (prefers-reduced-motion: no-preference) {
+  .nl-done:not([hidden]) { animation: nl-in 260ms var(--ease) both; }
+  @keyframes nl-in { from { opacity: 0; translate: 0 4px; } }
+}
