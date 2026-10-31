@@ -1,0 +1,72 @@
+{
+  "title": "CRED gift card deals of the day",
+  "date": "1 November 2026",
+  "shortDate": "1 Nov",
+  "appLink": "https://app.cred.club/spQx/xtu7b6sv",
+  "deals": [
+    {
+      "brand": "Flipkart",
+      "value": 3000,
+      "discount": 4,
+      "logo": "flipkart"
+    },
+    {
+      "brand": "Uber",
+      "value": 1500,
+      "discount": 6,
+      "logo": "uber"
+    },
+    {
+      "brand": "Yatra",
+      "note": "Flights",
+      "value": 1000,
+      "discount": 25,
+      "logo": "yatra"
+    },
+    {
+      "brand": "Decathlon",
+      "value": 3000,
+      "discount": 5.5,
+      "logo": "decathlon"
+    },
+    {
+      "brand": "Bigbasket",
+      "value": 1000,
+      "discount": 3.5,
+      "logo": "bigbasket"
+    },
+    {
+      "brand": "Goibibo",
+      "note": "Hotels",
+      "value": 3000,
+      "discount": 17,
+      "logo": "goibibo"
+    },
+    {
+      "brand": "Zomato",
+      "value": 1000,
+      "discount": 5,
+      "logo": "zomato"
+    },
+    {
+      "brand": "Starbucks",
+      "value": 250,
+      "discount": 18,
+      "logo": "starbucks"
+    }
+  ],
+  "tips": [
+    {
+      "kind": "plus",
+      "text": "Get up to 5% extra cashback with cards like <b>Axis Cashback</b>, <b>IDFC FIRST Hello Cashback</b>, <b>BOBCARD Cashback</b> or <b>SBI Cashback</b>."
+    },
+    {
+      "kind": "ok",
+      "text": "Pay through <b>Razorpay PG (MCC 7311)</b> to potentially earn additional cashback."
+    },
+    {
+      "kind": "no",
+      "text": "Avoid other payment gateways <b>(MCC 5947)</b>: this category is excluded on all cashback cards."
+    }
+  ]
+}
