@@ -17,7 +17,8 @@
     "build:search": "node scripts/search/build.mjs",
     "check:search": "node scripts/search/build.mjs --check",
     "build:og": "node scripts/og/build.mjs",
-    "check:og": "node scripts/og/build.mjs --check"
+    "check:og": "node scripts/og/build.mjs --check",
+    "test:newsletter": "node --test scripts/newsletter/subscribe.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",
