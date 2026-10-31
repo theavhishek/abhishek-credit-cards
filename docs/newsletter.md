@@ -29,3 +29,7 @@ Resend → Contacts → filter by segment → Export CSV (email, unsubscribed st
 - To add the box to another page: copy the `<section class="nl" id="newsletter">` block from `updates.html`, and load `newsletter.css` and `newsletter.js` on that page. Give each copy unique `id`s.
 - Tests: `pnpm test:newsletter` (mocked Resend API). `pnpm dev` runs `api/` locally too.
 - CSP needs no change: the browser only talks to `/api/subscribe` (same origin); the function talks to Resend.
+
+## Deals email template
+
+`scripts/newsletter/email/build.mjs deals-YYYY-MM-DD.json` writes the broadcast HTML (paste into Resend → Broadcasts → HTML). Deals are sorted by discount; "pay"/"save" are computed from value and %. Brand logos are 128px PNGs in `assets/email/brands/<slug>.png` (set `"logo": "<slug>"` on a deal; no logo falls back to a letter tile). Images and the Geist font load from https://avhishek.in, so new logos must be merged and live before sending. `ASSET_BASE=file://$PWD` previews locally.
