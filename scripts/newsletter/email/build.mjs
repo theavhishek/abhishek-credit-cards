@@ -26,7 +26,7 @@ const row = (x, i) => {
       </td>
       <td style="padding:16px 12px" valign="middle">
         <div class="t1" style="font:650 16px/1.3 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#1d1d1f">${esc(x.brand)}${x.note ? ` <span class="t2" style="font-weight:500;color:#6e6e73">· ${esc(x.note)}</span>` : ""}</div>
-        <div class="t2" style="font:400 13px/1.45 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73;padding-top:3px"><span style="white-space:nowrap">${inr(x.value)} card</span> · <span style="white-space:nowrap">pay ${inr(pay)}</span> · <span style="white-space:nowrap">save ${inr(save)}</span></div>
+        <div class="t2" style="font:400 13px/1.45 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73;padding-top:3px"><span style="white-space:nowrap">${inr(x.value)} card</span> · <span style="white-space:nowrap">pay ${inr(pay)}</span></div>
       </td>
       <td style="padding:16px 18px 16px 0;text-align:right;white-space:nowrap" valign="middle">
         <span style="display:inline-block;padding:6px 11px;border-radius:999px;background:${top ? ORANGE : "#15803d"};color:#ffffff;font:700 14px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">${x.discount}% off</span>
@@ -97,7 +97,7 @@ const html = `<!doctype html>
     </table>
   </td></tr>
   <tr><td class="t2" style="padding:0 28px 28px;font:400 12px/1.55 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#86868b">
-    Prices and discounts change through the day; check the final amount in the CRED app before you pay. “Pay” and “save” assume the full listed discount.
+    Prices and discounts change through the day; check the final amount in the CRED app before you pay. “Pay” assumes the full listed discount.
   </td></tr>
 </table>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">
