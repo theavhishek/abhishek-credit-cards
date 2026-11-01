@@ -60,6 +60,8 @@ const html = `<!doctype html>
     .tips{background:#1c1c1e !important;border-color:#2c2c2e !important}
     .mono{background:#2c2c2e !important;color:#f5f5f7 !important}
     .cta{background:#f5f5f7 !important;color:#111113 !important}
+    .wm-light{display:none !important}
+    .wm-dark{display:inline-block !important;max-height:none !important}
     .t1{color:#f5f5f7 !important} .t2{color:#a1a1a6 !important}
   }
 </style>
@@ -103,7 +105,10 @@ const html = `<!doctype html>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">
   <tr><td align="center" style="padding:28px 16px 0">
     <a href="https://avhishek.in/" style="text-decoration:none"><img src="${BASE}/assets/icon-192.png" width="44" height="44" alt="avhishek.in" style="display:block;width:44px;height:44px;border-radius:12px;margin:0 auto"></a>
-    <div class="t1" style="padding-top:10px;font:700 18px/1 ${FONT};letter-spacing:-0.03em;color:#1d1d1f">abhishek<span style="color:${ORANGE}">.</span></div>
+    <div style="padding-top:10px;line-height:0">
+      <img class="wm-light" src="${BASE}/assets/email/abhishek-wordmark.png" width="145" height="36" alt="abhishek." style="display:inline-block;width:145px;height:36px">
+      <!--[if !mso]><!--><img class="wm-dark" src="${BASE}/assets/email/abhishek-wordmark-dark.png" width="145" height="36" alt="abhishek." style="display:none;width:145px;height:36px;max-height:0;overflow:hidden"><!--<![endif]-->
+    </div>
     <div class="t2" style="padding-top:6px;font:400 13px/1.5 ${FONT};color:#6e6e73">There’s more to your credit card.</div>
     <div style="padding-top:12px;font:600 13px/1 ${FONT}">
       <a href="https://avhishek.in/updates" class="t1" style="color:#1d1d1f;text-decoration:none">Updates</a>
