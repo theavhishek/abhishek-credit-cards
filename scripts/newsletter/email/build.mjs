@@ -71,7 +71,9 @@ const html = `<!doctype html>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="sheet" style="max-width:560px;background:#ffffff;border:1px solid #e8e8ed;border-radius:24px">
   <tr><td style="padding:28px 28px 0">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td class="t1" style="font:700 22px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.03em;color:#1d1d1f">abhishek<span style="color:${ORANGE}">.</span></td>
+      <td>${d.headerLogo
+        ? `<table role="presentation" cellpadding="0" cellspacing="0"><tr><td><img src="${BASE}/assets/email/brands/${d.headerLogo}.png" width="40" height="40" alt="${esc(d.headerName || "")}" style="display:block;width:40px;height:40px;border-radius:11px;border:1px solid #e8e8ed"></td>${d.headerName ? `<td class="t1" style="padding-left:10px;font:800 20px/1 ${FONT};letter-spacing:0.08em;color:#1d1d1f">${esc(d.headerName)}</td>` : ""}</tr></table>`
+        : `<span class="t1" style="font:700 22px/1 ${FONT};letter-spacing:-0.03em;color:#1d1d1f">abhishek<span style="color:${ORANGE}">.</span></span>`}</td>
       <td align="right"><span style="display:inline-block;padding:6px 12px;border-radius:999px;background:#fff1e8;color:#c2410c;font:600 12px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">${esc(d.date)}</span></td>
     </tr></table>
   </td></tr>
