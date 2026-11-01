@@ -820,3 +820,42 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
 @media print {
   .rv-toc, .rv-calc input, .rv-actions, .rv-apply .rv-btn { display: none; }
 }
+
+/* Sources: closed dropdown; opens on tap or when a link jumps to #sources. */
+.rv-src-box > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+}
+.rv-src-box > summary::-webkit-details-marker { display: none; }
+.rv-src-box > summary h2 { margin: 0; }
+.rv-src-box > summary::after {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-inline-end: 6px;
+  border-inline-end: 1.75px solid currentColor;
+  border-block-end: 1.75px solid currentColor;
+  rotate: 45deg;
+  translate: 0 -3px;
+  color: var(--muted);
+  transition: rotate 200ms var(--rv-ease, ease), translate 200ms var(--rv-ease, ease);
+}
+.rv-src-box[open] > summary::after { rotate: 225deg; translate: 0 3px; color: var(--rv-accent); }
+.rv-src-box > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 8px; }
+.rv-src-box[open] > summary { margin-block-end: 12px; }
+@media (hover: hover) {
+  .rv-src-box > summary:hover h2,
+  .rv-src-box > summary:hover::after { color: var(--rv-accent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-src-box > summary::after { transition: none; }
+}
+@media print {
+  .rv-src-box > summary::after { display: none; }
+}
