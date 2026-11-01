@@ -1,0 +1,34 @@
+/* Swiggy HDFC Ornge vs BLCK review: two result cards side by side, and the comparison table.
+   The calculator reuses eternal-calc.css; the fee tabs reuse jalsa-review.css. */
+.sw-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.sw-totals .ec-total { padding: 16px; }
+.sw-totals .ec-total-value { font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem); }
+.sw-totals .ec-total dl { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+.sw-totals .ec-total dd { font-size: 1.0625rem; }
+.sw-chip {
+  display: inline-block;
+  inline-size: 10px;
+  block-size: 10px;
+  margin-inline-end: 6px;
+  border-radius: 3px;
+  vertical-align: 0;
+}
+.sw-chip--ornge { background: #fc6e20; }
+.sw-chip--blck { background: #111113; box-shadow: inset 0 0 0 1px var(--line-strong); }
+html[data-theme="dark"] .sw-chip--blck { background: #000; box-shadow: inset 0 0 0 1px var(--muted); }
+
+.sw-compare th[scope="col"]:not(:first-child),
+.sw-compare td { min-width: 10rem; }
+.sw-compare tbody th { min-width: 9rem; }
+.sw-compare td strong { font-weight: 650; }
+.sw-compare .sw-win { color: var(--rv-accent); font-weight: 650; }
+
+@media (max-width: 560px) {
+  .sw-compare { table-layout: fixed; inline-size: 100%; }
+  .sw-compare th[scope="col"]:not(:first-child),
+  .sw-compare td,
+  .sw-compare tbody th { min-width: 0; padding: 10px 8px; font-size: var(--rv-fs-small); overflow-wrap: anywhere; }
+  .sw-compare thead th:first-child { inline-size: 32%; }
+  .sw-totals { grid-template-columns: minmax(0, 1fr); }
+  .sw-totals .ec-total dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+}

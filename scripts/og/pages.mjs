@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "swiggy-hdfc-ornge-blck-credit-card.jpg",
+    alt: "Swiggy HDFC Bank Ornge and BLCK credit card review by Abhishek Meena: 5% or 10% on Swiggy, ₹1,500 caps, ₹500 or ₹1,000 fee",
+    eyebrow: "Card review",
+    title: "Swiggy HDFC Ornge vs BLCK",
+    subtitle: "5% or 10% on Swiggy, 5% online, 1% elsewhere. Which to pick.",
+    stats: [["10%", "Swiggy on BLCK"], ["₹4,000", "BLCK monthly max"], ["₹500", "Ornge fee + GST"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg", position: "70% 50%" },
+  },
+  {
     file: "boi-rupay-select-debit-card.jpg",
     alt: "BOI RuPay Select Debit Card guide by Abhishek Meena: 0.75% back on credit card bill payments, 10,000 RP monthly cap, RuPay Select benefits",
     eyebrow: "Guide",

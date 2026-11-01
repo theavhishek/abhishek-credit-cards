@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "swiggy-hdfc-ornge-blck-credit-card",
+    "title": "Swiggy HDFC Ornge and BLCK Credit Cards",
+    "excerpt": "HDFC Bank has split the Swiggy card in two. Ornge (₹500) pays 5% on Swiggy and select online shopping, sharing one ₹1,500 monthly cap. BLCK (₹1,000) pays 10% on Swiggy and 5% online, each with its own ₹1,500 cap.…",
+    "category": "Cashback",
+    "date": "2026-11-01",
+    "readTime": 9,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg",
+      "alt": "Swiggy HDFC Ornge and BLCK Credit Cards credit card",
+      "srcset": "/assets/reviews/swiggy-hdfc-ornge-blck-credit-card-800.webp 800w, /assets/reviews/swiggy-hdfc-ornge-blck-credit-card-1200.webp 1200w, /assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "boi-rupay-select-debit-card",
     "title": "BOI RuPay Select Debit Card: 0.75% on Card Bills",
     "excerpt": "Pay credit card bills with a BOI debit card and earn Star Points. RuPay Select earns 0.75% on payments above ₹10,000, up to 10,000 points a month, plus lounge, insurance and wellness benefits.",
