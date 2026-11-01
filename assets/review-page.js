@@ -124,3 +124,17 @@
     sections.forEach((section) => observer.observe(section));
   }
 })();
+
+// Sources dropdown: open it when a link (like "On this page") jumps to #sources.
+(() => {
+  const box = document.querySelector("#sources .rv-src-box");
+  if (!box) return;
+  const openIfTarget = () => { if (location.hash === "#sources") box.open = true; };
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href="#sources"]');
+    if (link) box.open = true;
+  });
+  window.addEventListener("hashchange", openIfTarget);
+  openIfTarget();
+  window.addEventListener("beforeprint", () => { box.open = true; });
+})();
