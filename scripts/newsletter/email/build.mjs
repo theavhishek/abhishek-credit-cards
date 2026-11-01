@@ -19,7 +19,7 @@ const logoOf = (x) => x.logo ?? LOGOS[x.brand.toLowerCase()] ?? x.brand.toLowerC
 const row = (x, i) => {
   const save = (x.value * x.discount) / 100;
   const pay = x.value - save;
-  const top = i === 0 || FEATURED.includes(logoOf(x));
+  const top = FEATURED.includes(logoOf(x));
   return `
 <tr><td style="padding:0 0 10px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="card" style="border:1px solid ${top ? "#fdd3bb" : "#e8e8ed"};border-radius:16px;background:${top ? "#fff7f2" : "#ffffff"}">
