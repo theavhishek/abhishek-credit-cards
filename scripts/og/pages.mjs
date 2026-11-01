@@ -104,7 +104,7 @@ export const PAGES = [
     subtitle: "5% or 10% on Swiggy, 5% online, 1% elsewhere. Which to pick.",
     stats: [["10%", "Swiggy on BLCK"], ["₹4,000", "BLCK monthly max"], ["₹500", "Ornge fee + GST"]],
     glass: true,
-    visual: { photo: "/assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg", position: "60% 50%" },
+    visual: { photo: "/assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg", position: "70% 50%" },
   },
   {
     file: "boi-rupay-select-debit-card.jpg",
