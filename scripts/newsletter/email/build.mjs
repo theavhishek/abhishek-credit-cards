@@ -10,23 +10,28 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const deals = [...d.deals].sort((a, b) => b.discount - a.discount);
 const best = deals[0];
 const ORANGE = "#fc6e20";
+// Always shown in the orange "featured" style, whatever their discount (Abhishek, 1 Nov 2026).
+const FEATURED = ["flipkart", "amazon-pay", "amazon"];
+// Logo file in assets/email/brands/: explicit "logo", else from the brand name.
+const LOGOS = { "amazon pay": "amazon-pay", "amazon shopping voucher": "amazon", "amazon": "amazon" };
+const logoOf = (x) => x.logo ?? LOGOS[x.brand.toLowerCase()] ?? x.brand.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 const row = (x, i) => {
   const save = (x.value * x.discount) / 100;
   const pay = x.value - save;
-  const top = i === 0;
+  const top = FEATURED.includes(logoOf(x));
   return `
 <tr><td style="padding:0 0 10px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="card" style="border:1px solid ${top ? "#fdd3bb" : "#e8e8ed"};border-radius:16px;background:${top ? "#fff7f2" : "#ffffff"}">
     <tr>
       <td style="padding:16px 0 16px 18px;width:44px" valign="middle">
-        ${x.logo
-          ? `<img src="${BASE}/assets/email/brands/${x.logo}.png" width="44" height="44" alt="${esc(x.brand)}" style="display:block;width:44px;height:44px;border-radius:12px;border:1px solid #e8e8ed">`
+        ${logoOf(x)
+          ? `<img src="${BASE}/assets/email/brands/${logoOf(x)}.png" width="44" height="44" alt="${esc(x.brand)}" style="display:block;width:44px;height:44px;border-radius:12px;border:1px solid #e8e8ed">`
           : `<div class="mono" style="width:44px;height:44px;border-radius:12px;background:#f2f2f7;color:#1d1d1f;font:700 18px/44px ${FONT};text-align:center">${esc(x.brand[0])}</div>`}
       </td>
       <td style="padding:16px 12px" valign="middle">
         <div class="t1" style="font:650 16px/1.3 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#1d1d1f">${esc(x.brand)}${x.note ? ` <span class="t2" style="font-weight:500;color:#6e6e73">· ${esc(x.note)}</span>` : ""}</div>
-        <div class="t2" style="font:400 13px/1.45 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73;padding-top:3px"><span style="white-space:nowrap">${inr(x.value)} card</span> · <span style="white-space:nowrap">pay ${inr(pay)}</span> · <span style="white-space:nowrap">save ${inr(save)}</span></div>
+        <div class="t2" style="font:400 13px/1.45 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73;padding-top:3px"><span style="white-space:nowrap">${inr(x.value)} card</span> · <span style="white-space:nowrap">pay ${inr(pay)}</span></div>
       </td>
       <td style="padding:16px 18px 16px 0;text-align:right;white-space:nowrap" valign="middle">
         <span style="display:inline-block;padding:6px 11px;border-radius:999px;background:${top ? ORANGE : "#15803d"};color:#ffffff;font:700 14px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">${x.discount}% off</span>
@@ -60,12 +65,14 @@ const html = `<!doctype html>
     .tips{background:#1c1c1e !important;border-color:#2c2c2e !important}
     .mono{background:#2c2c2e !important;color:#f5f5f7 !important}
     .cta{background:#f5f5f7 !important;color:#111113 !important}
+    .wm-light{display:none !important}
+    .wm-dark{display:inline-block !important;max-height:none !important}
     .t1{color:#f5f5f7 !important} .t2{color:#a1a1a6 !important}
   }
 </style>
 </head>
 <body class="bg" style="margin:0;padding:0;background:#f5f5f7;font-family:${FONT}">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(best.brand)} at ${best.discount}% off tops today’s ${deals.length} CRED gift card deals. Pay via Razorpay for extra cashback.</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${deals.length} CRED gift cards on discount today, plus how to stack extra cashback.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg" style="background:#f5f5f7">
 <tr><td align="center" class="wrap" style="padding:32px 16px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="sheet" style="max-width:560px;background:#ffffff;border:1px solid #e8e8ed;border-radius:24px">
@@ -80,7 +87,7 @@ const html = `<!doctype html>
   <tr><td style="padding:28px 28px 6px">
     <div style="font:600 13px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#c2410c;letter-spacing:.02em">🚨 DEALS OF THE DAY</div>
     <h1 class="h1 t1" style="margin:10px 0 0;font:700 30px/1.15 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.03em;color:#1d1d1f">CRED gift card deals<span style="color:${ORANGE}">.</span></h1>
-    <p class="t2" style="margin:10px 0 0;font:400 15px/1.5 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73">${deals.length} gift cards on discount today. Best deal: <b class="t1" style="color:#1d1d1f">${esc(best.brand)} at ${best.discount}% off</b>.</p>
+    <p class="t2" style="margin:10px 0 0;font:400 15px/1.5 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73">${deals.length} gift cards on discount today.</p>
   </td></tr>
   <tr><td style="padding:20px 28px 8px">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${deals.map(row).join("")}</table>
@@ -97,13 +104,16 @@ const html = `<!doctype html>
     </table>
   </td></tr>
   <tr><td class="t2" style="padding:0 28px 28px;font:400 12px/1.55 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#86868b">
-    Prices and discounts change through the day; check the final amount in the CRED app before you pay. “Pay” and “save” assume the full listed discount.
+    Prices and discounts change through the day; check the final amount in the CRED app before you pay. “Pay” assumes the full listed discount.
   </td></tr>
 </table>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">
   <tr><td align="center" style="padding:28px 16px 0">
     <a href="https://avhishek.in/" style="text-decoration:none"><img src="${BASE}/assets/icon-192.png" width="44" height="44" alt="avhishek.in" style="display:block;width:44px;height:44px;border-radius:12px;margin:0 auto"></a>
-    <div class="t1" style="padding-top:10px;font:700 18px/1 ${FONT};letter-spacing:-0.03em;color:#1d1d1f">abhishek<span style="color:${ORANGE}">.</span></div>
+    <div style="padding-top:10px;line-height:0">
+      <img class="wm-light" src="${BASE}/assets/email/abhishek-wordmark.png" width="145" height="36" alt="abhishek." style="display:inline-block;width:145px;height:36px">
+      <!--[if !mso]><!--><img class="wm-dark" src="${BASE}/assets/email/abhishek-wordmark-dark.png" width="145" height="36" alt="abhishek." style="display:none;width:145px;height:36px;max-height:0;overflow:hidden"><!--<![endif]-->
+    </div>
     <div class="t2" style="padding-top:6px;font:400 13px/1.5 ${FONT};color:#6e6e73">There’s more to your credit card.</div>
     <div style="padding-top:12px;font:600 13px/1 ${FONT}">
       <a href="https://avhishek.in/updates" class="t1" style="color:#1d1d1f;text-decoration:none">Updates</a>
