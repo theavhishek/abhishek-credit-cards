@@ -1,0 +1,189 @@
+/* UPI ID page hero: a UPI app paying a card bill. Site orange, Geist. */
+.up {
+  --up-accent: #fc6e20;
+  --up-bg: #f6f5f3;
+  --up-card: #ffffff;
+  --up-line: rgba(17, 17, 17, 0.08);
+  --up-ink: #111111;
+  --up-muted: #6b6b6b;
+  --up-key: #ffffff;
+  --up-green: #16a34a;
+
+  & .ss-stage {
+    --ss-accent: #fc6e20;
+    background: transparent;
+    overflow: hidden;
+    font-family: var(--site-font, 'Geist', ui-sans-serif, system-ui, sans-serif);
+  }
+
+  /* Pinned top, runs off the bottom; centered in its column */
+  .up-phone {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .up-app {
+    position: absolute;
+    inset: 0;
+    background: var(--up-bg);
+    color: var(--up-ink);
+  }
+
+  .up-head {
+    position: absolute;
+    top: 64px;
+    left: 20px;
+    right: 20px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .up-back {
+    width: 12px;
+    height: 12px;
+    border-left: 2.5px solid var(--up-ink);
+    border-bottom: 2.5px solid var(--up-ink);
+    rotate: 45deg;
+    margin-left: 6px;
+  }
+  .up-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .up-field {
+    position: absolute;
+    top: 128px;
+    left: 20px;
+    right: 20px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: var(--up-card);
+    border: 1.5px solid var(--up-line);
+    display: grid;
+    gap: 8px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .up-field[data-on] {
+    border-color: var(--up-accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--up-accent) 16%, transparent);
+  }
+  .up-label { font-size: 14px; color: var(--up-muted); font-weight: 500; }
+  .up-vpa {
+    font-family: var(--site-mono, 'Geist Mono', ui-monospace, monospace);
+    font-size: 17px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .up-vpa[data-shown] { animation: up-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+  .up-payee {
+    position: absolute;
+    top: 232px;
+    left: 20px;
+    right: 20px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    background: var(--up-card);
+    border: 1.5px solid var(--up-line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    translate: 0 -8px;
+    transition: opacity 0.4s ease, translate 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .up-payee[data-shown] { opacity: 1; translate: 0 0; }
+  .up-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--up-line);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .up-payee__text { display: grid; gap: 8px; flex: 1; }
+  .up-payee__name { font-size: 18px; font-weight: 600; }
+  .up-ok { color: var(--up-green); }
+
+  .up-amount {
+    position: absolute;
+    top: 340px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 4px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .up-rupee { font-size: 34px; }
+  .up-figure { font-size: 56px; }
+  .up-amount[data-empty] { color: var(--up-muted); opacity: 0.55; }
+  .up-note { position: absolute; top: 424px; left: 0; right: 0; display: flex; justify-content: center; }
+
+  .up-pay {
+    position: absolute;
+    top: 470px;
+    left: 20px;
+    right: 20px;
+    height: 58px;
+    border: 0;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--up-accent) 45%, var(--up-bg));
+    color: #fff;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.35s ease, scale 0.15s ease;
+  }
+  .up-pay[data-ready] { background: var(--up-accent); }
+  .up-pay[data-phase="paid"] { background: var(--up-green); }
+  .up-pay[data-pressed] { scale: 0.97; }
+  .up-pay__row { display: inline-flex; align-items: center; gap: 10px; }
+  .up-pay .ss-check { color: #fff; }
+
+  .up-keys {
+    position: absolute;
+    top: 560px;
+    left: 20px;
+    right: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .up-key { height: 52px; border-radius: 12px; background: var(--up-key); border: 1px solid var(--up-line); }
+}
+
+@keyframes up-in {
+  from { opacity: 0; translate: 0 6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* Site dark theme */
+html[data-theme="dark"] .up,
+.up.up--dark {
+  --up-bg: #0f0f10;
+  --up-card: #1b1b1d;
+  --up-line: rgba(255, 255, 255, 0.1);
+  --up-ink: #f2f2f2;
+  --up-muted: #9a9a9a;
+  --up-key: #1b1b1d;
+  --up-green: #22a855;
+}
+
+html[data-theme="dark"] .up .ss-phone__status,
+.up.up--dark .ss-phone__status { color: #f2f2f2; }
+/* Soft foot instead of a hard cut where the phone runs off the stage */
+.up .ss-stage {
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent);
+}
