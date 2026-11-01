@@ -34,7 +34,7 @@ const row = (x, i) => {
         <div class="t2" style="font:400 13px/1.45 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73;padding-top:3px"><span style="white-space:nowrap">${inr(x.value)} card</span> · <span style="white-space:nowrap">pay ${inr(pay)}</span></div>
       </td>
       <td style="padding:16px 18px 16px 0;text-align:right;white-space:nowrap" valign="middle">
-        <span style="display:inline-block;padding:6px 11px;border-radius:999px;background:${top ? ORANGE : "#15803d"};color:#ffffff;font:700 14px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">${x.discount}% off</span>
+        <span style="display:inline-block;padding:6px 11px;border-radius:999px;background-color:${top ? ORANGE : "#15803d"};background-image:linear-gradient(${top ? ORANGE : "#15803d"},${top ? ORANGE : "#15803d"});color:#ffffff;font:700 14px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif"><span class="gm-s"><span class="gm-d">${x.discount}% off</span></span></span>
       </td>
     </tr>
   </table>
@@ -58,7 +58,12 @@ const html = `<!doctype html>
   body{margin:0;padding:0;background:#f5f5f7}
   a{color:inherit}
   @media (max-width:520px){ .wrap{padding:20px 12px !important} .h1{font-size:26px !important} }
+  /* Gmail app dark mode inverts colours but not background images: badges keep a gradient
+     background, and these blend layers keep their white text white (u + .body = Gmail only). */
+  u + .body .gm-s{background:#000;mix-blend-mode:screen}
+  u + .body .gm-d{background:#000;mix-blend-mode:difference}
   @media (prefers-color-scheme:dark){
+    .wm-chip{background:none !important}
     body,.bg{background:#000000 !important}
     .sheet{background:#111113 !important;border-color:#2c2c2e !important}
     .card{background:#1c1c1e !important;border-color:#2c2c2e !important}
@@ -71,7 +76,7 @@ const html = `<!doctype html>
   }
 </style>
 </head>
-<body class="bg" style="margin:0;padding:0;background:#f5f5f7;font-family:${FONT}">
+<body class="bg body" style="margin:0;padding:0;background:#f5f5f7;font-family:${FONT}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">${deals.length} CRED gift cards on discount today, plus how to stack extra cashback.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg" style="background:#f5f5f7">
 <tr><td align="center" class="wrap" style="padding:32px 16px">
@@ -111,8 +116,9 @@ const html = `<!doctype html>
   <tr><td align="center" style="padding:28px 16px 0">
     <a href="https://avhishek.in/" style="text-decoration:none"><img src="${BASE}/assets/icon-192.png" width="44" height="44" alt="avhishek.in" style="display:block;width:44px;height:44px;border-radius:12px;margin:0 auto"></a>
     <div style="padding-top:10px;line-height:0">
-      <img class="wm-light" src="${BASE}/assets/email/abhishek-wordmark.png" width="145" height="36" alt="abhishek." style="display:inline-block;width:145px;height:36px">
-      <!--[if !mso]><!--><img class="wm-dark" src="${BASE}/assets/email/abhishek-wordmark-dark.png" width="145" height="36" alt="abhishek." style="display:none;width:145px;height:36px;max-height:0;overflow:hidden"><!--<![endif]-->
+      <!-- Light chip behind the dark wordmark: invisible on the light page, keeps it readable when Gmail darkens the page. -->
+      <span class="wm-chip" style="display:inline-block;padding:6px 12px;border-radius:12px;background-color:#f5f5f7;background-image:linear-gradient(#f5f5f7,#f5f5f7)"><img class="wm-light" src="${BASE}/assets/email/abhishek-wordmark.png" width="145" height="36" alt="abhishek." style="display:inline-block;width:145px;height:36px">
+      <!--[if !mso]><!--><img class="wm-dark" src="${BASE}/assets/email/abhishek-wordmark-dark.png" width="145" height="36" alt="abhishek." style="display:none;width:145px;height:36px;max-height:0;overflow:hidden"><!--<![endif]--></span>
     </div>
     <div class="t2" style="padding-top:6px;font:400 13px/1.5 ${FONT};color:#6e6e73">There’s more to your credit card.</div>
     <div style="padding-top:12px;font:600 13px/1 ${FONT}">
