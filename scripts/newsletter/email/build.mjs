@@ -10,18 +10,23 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const deals = [...d.deals].sort((a, b) => b.discount - a.discount);
 const best = deals[0];
 const ORANGE = "#fc6e20";
+// Always shown in the orange "featured" style, whatever their discount (Abhishek, 1 Nov 2026).
+const FEATURED = ["flipkart", "amazon-pay", "amazon"];
+// Logo file in assets/email/brands/: explicit "logo", else from the brand name.
+const LOGOS = { "amazon pay": "amazon-pay", "amazon shopping voucher": "amazon", "amazon": "amazon" };
+const logoOf = (x) => x.logo ?? LOGOS[x.brand.toLowerCase()] ?? x.brand.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 const row = (x, i) => {
   const save = (x.value * x.discount) / 100;
   const pay = x.value - save;
-  const top = i === 0;
+  const top = i === 0 || FEATURED.includes(logoOf(x));
   return `
 <tr><td style="padding:0 0 10px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="card" style="border:1px solid ${top ? "#fdd3bb" : "#e8e8ed"};border-radius:16px;background:${top ? "#fff7f2" : "#ffffff"}">
     <tr>
       <td style="padding:16px 0 16px 18px;width:44px" valign="middle">
-        ${x.logo
-          ? `<img src="${BASE}/assets/email/brands/${x.logo}.png" width="44" height="44" alt="${esc(x.brand)}" style="display:block;width:44px;height:44px;border-radius:12px;border:1px solid #e8e8ed">`
+        ${logoOf(x)
+          ? `<img src="${BASE}/assets/email/brands/${logoOf(x)}.png" width="44" height="44" alt="${esc(x.brand)}" style="display:block;width:44px;height:44px;border-radius:12px;border:1px solid #e8e8ed">`
           : `<div class="mono" style="width:44px;height:44px;border-radius:12px;background:#f2f2f7;color:#1d1d1f;font:700 18px/44px ${FONT};text-align:center">${esc(x.brand[0])}</div>`}
       </td>
       <td style="padding:16px 12px" valign="middle">
