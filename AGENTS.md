@@ -14,8 +14,8 @@
 - Do not repeat the author portrait, name, bio, or “Read more reviews” in a separate author block at the bottom of review articles; keep author attribution in the top byline only.
 
 ## Affiliate Links
-- Every affiliate link must use `rel="sponsored noopener noreferrer"` and show the visible label `<span class="aff-tag">Affiliate link</span>` next to it (styled in `assets/header.css`).
-- The disclaimer page promises that links without this label earn nothing, so never add an unlabelled affiliate link.
+- Every affiliate link must use `rel="sponsored noopener noreferrer"`. Abhishek decided on 2026-11-01 not to show a visible "Affiliate link" label next to new Apply buttons (the `.aff-tag` style in `assets/header.css` stays for pages that still use it).
+- The disclaimer page says "Apply" buttons on card reviews may be affiliate links and that sources, bank websites and internal links earn nothing. Only use affiliate links on "Apply" buttons, and update the disclaimer if that ever changes.
 
 ## Site Architecture and SEO
 - This checkout is a static HTML site on Vercel, not a Next.js app. `vercel.json` maps clean URLs and serves `/` from `home.html` on avhishek.in and `portfolio.html` on cards.avhishek.in. Do not add Next.js metadata routes unless the project is actually migrated.
