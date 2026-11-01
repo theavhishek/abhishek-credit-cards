@@ -72,7 +72,7 @@ const html = `<!doctype html>
 </style>
 </head>
 <body class="bg" style="margin:0;padding:0;background:#f5f5f7;font-family:${FONT}">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(best.brand)} at ${best.discount}% off tops today’s ${deals.length} CRED gift card deals. Pay via Razorpay for extra cashback.</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${deals.length} CRED gift cards on discount today, plus how to stack extra cashback.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg" style="background:#f5f5f7">
 <tr><td align="center" class="wrap" style="padding:32px 16px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="sheet" style="max-width:560px;background:#ffffff;border:1px solid #e8e8ed;border-radius:24px">
@@ -87,7 +87,7 @@ const html = `<!doctype html>
   <tr><td style="padding:28px 28px 6px">
     <div style="font:600 13px/1 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#c2410c;letter-spacing:.02em">🚨 DEALS OF THE DAY</div>
     <h1 class="h1 t1" style="margin:10px 0 0;font:700 30px/1.15 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.03em;color:#1d1d1f">CRED gift card deals<span style="color:${ORANGE}">.</span></h1>
-    <p class="t2" style="margin:10px 0 0;font:400 15px/1.5 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73">${deals.length} gift cards on discount today. Best deal: <b class="t1" style="color:#1d1d1f">${esc(best.brand)} at ${best.discount}% off</b>.</p>
+    <p class="t2" style="margin:10px 0 0;font:400 15px/1.5 Geist,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#6e6e73">${deals.length} gift cards on discount today.</p>
   </td></tr>
   <tr><td style="padding:20px 28px 8px">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${deals.map(row).join("")}</table>
