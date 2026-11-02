@@ -9,11 +9,16 @@
    Drawn on one fixed, transparent <canvas> behind the page. The loop runs
    only while something moves, and stops while the tab is hidden. With
    prefers-reduced-motion the grid is drawn once, flat, with no interaction.
+   Phones and touch screens get the flat CSS grid only (no canvas).
    ========================================================================== */
 (() => {
   const CELL = 50;          // grid cell size in px
   const DEPTH = 1.0;        // dent and wave strength multiplier
   const INTERACTIVE = true; // pointer dent + click waves
+
+  // Phones and other touch screens keep the flat CSS grid from backdrop.css:
+  // the live canvas made scrolling feel laggy there.
+  if (!matchMedia("(hover: hover) and (pointer: fine)").matches || innerWidth <= 640) return;
 
   const root = document.documentElement;
   const canvas = document.createElement("canvas");
