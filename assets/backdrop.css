@@ -1,74 +1,50 @@
 /* ==========================================================================
-   Site backdrop: a fine dot matrix ruled into 120px squares, like ledger or
-   graph paper, with small crosshair marks where the rules meet. Neutral grey,
-   no colour washes. On devices with a mouse, the dots and rules near the
-   pointer light up in the brand orange (backdrop.js tracks the pointer).
-   Fixed behind the page; it fades softly towards the edges and bottom so long
-   text stays easy to read. The footer keeps its own solid background.
+   Site backdrop: a fine 50px grid that behaves like a stretched membrane.
+   backdrop.js draws it on a fixed, transparent canvas behind the page: the
+   pointer presses a dent, a click sends a wave, and the sheet springs back.
+   Neutral grey lines; the stretched parts glow in the brand orange.
+   It fades softly towards the edges and bottom so long text stays easy to
+   read. The footer keeps its own solid background.
+   Without JavaScript, the same grid is drawn flat in CSS (body::before).
    ========================================================================== */
 body {
-  --bd-dot: rgb(0 0 0 / .12);
-  --bd-rule: rgb(0 0 0 / .032);
-  --bd-mark: rgb(0 0 0 / .16);
+  --bd-line: rgb(0 0 0 / .055);
   --bd-hot: #fc6e20;
-  --bd-hot-rule: rgb(252 110 32 / .28);
 }
 html[data-theme="dark"] body {
-  --bd-dot: rgb(255 255 255 / .1);
-  --bd-rule: rgb(255 255 255 / .035);
-  --bd-mark: rgb(255 255 255 / .16);
+  --bd-line: rgb(255 255 255 / .05);
   --bd-hot: #ff8a3d;
-  --bd-hot-rule: rgb(255 138 61 / .3);
 }
-body::before,
-body::after {
-  content: "";
+
+.bd-membrane,
+body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* Every layer is centred on the screen, so a rule always runs down the middle. */
-  background-position: 50% 0;
-}
-body::before {
-  --bd-d: var(--bd-dot);
-  --bd-r: var(--bd-rule);
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23000' stroke-opacity='.16'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 12px 12px, var(--bd-d) .9px, transparent 1.3px),
-    linear-gradient(transparent 60px, var(--bd-r) 60px 61px, transparent 61px),
-    linear-gradient(90deg, transparent 60px, var(--bd-r) 60px 61px, transparent 61px);
-  background-size: 120px 120px, 24px 24px, 120px 120px, 120px 120px;
   -webkit-mask-image: radial-gradient(130% 95% at 50% 0%, #000 45%, rgb(0 0 0 / .3) 100%);
   mask-image: radial-gradient(130% 95% at 50% 0%, #000 45%, rgb(0 0 0 / .3) 100%);
 }
-html[data-theme="dark"] body::before {
+.bd-membrane {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Flat fallback while the script loads or if it doesn't run. */
+body::before {
+  content: "";
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M54 60.5h13M60.5 54v13' stroke='%23fff' stroke-opacity='.16'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 12px 12px, var(--bd-d) .9px, transparent 1.3px),
-    linear-gradient(transparent 60px, var(--bd-r) 60px 61px, transparent 61px),
-    linear-gradient(90deg, transparent 60px, var(--bd-r) 60px 61px, transparent 61px);
+    linear-gradient(var(--bd-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bd-line) 1px, transparent 1px);
+  background-size: 50px 50px;
+  /* Centred, so a line always runs down the middle (matches the canvas). */
+  background-position: calc(50% + 25px) 0;
 }
-/* The pointer light: the same pattern in orange, shown only in a circle round the pointer. */
-body::after {
-  --bd-d: var(--bd-hot);
-  --bd-r: var(--bd-hot-rule);
-  background-image:
-    radial-gradient(circle at 12px 12px, var(--bd-d) 1px, transparent 1.4px),
-    linear-gradient(transparent 60px, var(--bd-r) 60px 61px, transparent 61px),
-    linear-gradient(90deg, transparent 60px, var(--bd-r) 60px 61px, transparent 61px);
-  background-size: 24px 24px, 120px 120px, 120px 120px;
-  opacity: 0;
-  transition: opacity .4s var(--ease);
-  -webkit-mask-image: radial-gradient(170px circle at var(--bd-x, 50%) var(--bd-y, 30%), #000, transparent 75%);
-  mask-image: radial-gradient(170px circle at var(--bd-x, 50%) var(--bd-y, 30%), #000, transparent 75%);
-}
-html.bd-pointer body::after { opacity: .6; }
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  body::after { display: none; }
-}
-@media (forced-colors: active) {
-  body::before, body::after { display: none; }
+html.bd-has-membrane body::before { content: none; }
+
+@media (forced-colors: active), print {
+  .bd-membrane, body::before { display: none; }
 }
 
 /* The card-reviews React grid paints its section with the page colour;
