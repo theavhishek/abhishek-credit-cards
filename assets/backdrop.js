@@ -11,7 +11,7 @@
    prefers-reduced-motion the grid is drawn once, flat, with no interaction.
    ========================================================================== */
 (() => {
-  const CELL = 28;          // grid cell size in px
+  const CELL = 50;          // grid cell size in px
   const DEPTH = 1.0;        // dent and wave strength multiplier
   const INTERACTIVE = true; // pointer dent + click waves
 

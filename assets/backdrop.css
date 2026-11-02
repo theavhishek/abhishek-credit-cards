@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Site backdrop: a fine 28px grid that behaves like a stretched membrane.
+   Site backdrop: a fine 50px grid that behaves like a stretched membrane.
    backdrop.js draws it on a fixed, transparent canvas behind the page: the
    pointer presses a dent, a click sends a wave, and the sheet springs back.
    Neutral grey lines; the stretched parts glow in the brand orange.
@@ -37,9 +37,9 @@ body::before {
   background-image:
     linear-gradient(var(--bd-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--bd-line) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 50px 50px;
   /* Centred, so a line always runs down the middle (matches the canvas). */
-  background-position: calc(50% + 14px) 0;
+  background-position: calc(50% + 25px) 0;
 }
 html.bd-has-membrane body::before { content: none; }
 
