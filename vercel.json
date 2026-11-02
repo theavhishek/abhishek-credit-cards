@@ -33,6 +33,12 @@
       "permanent": false
     },
     {
+      "source": "/youtube",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://www.youtube.com/@avhishekin",
+      "permanent": false
+    },
+    {
       "source": "/home",
       "has": [
         {
