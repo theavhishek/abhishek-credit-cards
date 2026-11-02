@@ -39,6 +39,18 @@
       "permanent": false
     },
     {
+      "source": "/x",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://x.com/the_avhishek",
+      "permanent": false
+    },
+    {
+      "source": "/twitter",
+      "has": [{ "type": "host", "value": "avhishek\\.in" }],
+      "destination": "https://x.com/the_avhishek",
+      "permanent": false
+    },
+    {
       "source": "/home",
       "has": [
         {
