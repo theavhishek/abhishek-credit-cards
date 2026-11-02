@@ -86,7 +86,13 @@ html[data-theme="dark"] .ui { --ui-warn-bg: color-mix(in srgb, #f59e0b 12%, var(
 .ui-state::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: currentColor; opacity: 0.7; }
 .ui-state[data-state="ready"] { background: color-mix(in srgb, var(--ui-ok) 14%, var(--surface)); color: var(--ui-ok); }
 .ui-state[data-state="error"] { background: color-mix(in srgb, var(--ce-bad) 12%, var(--surface)); color: var(--ce-bad); }
-@media (max-width: 420px) { .ui-state { grid-column: 1 / -1; justify-self: start; } }
+@media (max-width: 640px) {
+  .ui .sp-verified { display: block; }
+  .ui .sp-verified-dot { display: inline-block; margin-inline-end: 8px; vertical-align: 0.05em; }
+  .ui-slip-head { grid-template-columns: auto minmax(0, 1fr); }
+  .ui-state { grid-column: 1 / -1; justify-self: start; max-inline-size: 100%; white-space: normal; }
+  .ui-state::before { flex: none; }
+}
 
 /* The UPI ID itself: fixed parts in grey, your parts in slots that fill as you type. */
 .ui-vpa {
