@@ -7,15 +7,14 @@
    hairline below the lip and a soft cast shadow on the ground.
 
    These are display-only labels, so the block's hover lift, press travel,
-   selection and sounds are left out. Light mode uses soft tinted chips
-   with the fee colour on the text; dark mode keeps the site's
+   selection and sounds are left out. Light mode uses bright coloured chips
+   with white text and a pale lip; dark mode keeps the site's
    coloured fee chips (white text kept at 4.5:1, see ui.css).
    Loaded after ui.css, so it wins over the older pill rules.
 =========================================================================== */
 
 html body .fee-pill {
   --lift: 3px;
-  /* light mode: the block's paper chips, fee colour carried by the text */
   --chip-top: #ffffff;
   --chip-bottom: #f4f2ee;
   --chip-lip: #d8d4cc;
@@ -48,11 +47,16 @@ html body .fee-pill:is(.fee-ltf, .fee-waiver, .fee-paid, .fee-unknown) {
   background: linear-gradient(180deg, var(--chip-top) 0%, var(--chip-bottom) 100%) !important;
 }
 
-/* light mode: soft tinted chips, darker text in the same colour */
-html body .fee-pill.fee-ltf { --chip-top: #e9f9ef; --chip-bottom: #d3f2df; --chip-lip: #9fd9b6; --chip-ink: #035c43; }
-html body .fee-pill.fee-waiver { --chip-top: #eef3ff; --chip-bottom: #dbe6fe; --chip-lip: #a9c1f7; --chip-ink: #1a44c2; }
-html body .fee-pill.fee-paid { --chip-top: #eef0f2; --chip-bottom: #dfe2e6; --chip-lip: #b4bac1; --chip-ink: #2c3237; }
-html body .fee-pill.fee-unknown { --chip-top: #f6f6f7; --chip-bottom: #eceded; --chip-lip: #cfd2d6; --chip-ink: #5f6670; }
+/* light mode: bright coloured chips, white text, pale lip */
+html body .fee-pill:is(.fee-ltf, .fee-waiver, .fee-paid, .fee-unknown) {
+  --chip-ink: #fff;
+  --chip-sheen: rgb(255 255 255 / 0.28);
+  --chip-text-shadow: 0 1px 0 rgb(0 0 0 / 0.15);
+}
+html body .fee-pill.fee-ltf { --chip-top: #0a9a6e; --chip-bottom: #047857; --chip-lip: #9fd9b6; }
+html body .fee-pill.fee-waiver { --chip-top: #3b74f0; --chip-bottom: #1d4ed8; --chip-lip: #a9c1f7; }
+html body .fee-pill.fee-paid { --chip-top: #59616a; --chip-bottom: #3c4349; --chip-lip: #b4bac1; }
+html body .fee-pill.fee-unknown { --chip-top: #7a818b; --chip-bottom: #5f6670; --chip-lip: #cfd2d6; }
 
 /* the key above the list uses smaller chips */
 html body .legend .fee-pill {
