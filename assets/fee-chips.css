@@ -7,24 +7,28 @@
    hairline below the lip and a soft cast shadow on the ground.
 
    These are display-only labels, so the block's hover lift, press travel,
-   selection and sounds are left out. Colours stay the site's existing fee
-   colours (white text kept at 4.5:1, see ui.css).
+   selection and sounds are left out. Light mode uses the block's paper
+   chips with the fee colour on the text; dark mode keeps the site's
+   coloured fee chips (white text kept at 4.5:1, see ui.css).
    Loaded after ui.css, so it wins over the older pill rules.
 =========================================================================== */
 
 html body .fee-pill {
   --lift: 3px;
-  --chip-top: #5f6670;
-  --chip-bottom: #555c66;
-  --chip-lip: #3b4148;
-  --chip-sheen: rgb(255 255 255 / 0.24);
-  --chip-edge-line: rgb(0 0 0 / 0.06);
+  /* light mode: the block's paper chips, fee colour carried by the text */
+  --chip-top: #ffffff;
+  --chip-bottom: #f4f2ee;
+  --chip-lip: #d8d4cc;
+  --chip-ink: #5f6670;
+  --chip-sheen: rgb(255 255 255 / 0.9);
+  --chip-edge-line: rgb(0 0 0 / 0.04);
   --chip-cast: rgb(40 36 28 / 0.22);
+  --chip-text-shadow: none;
 
   position: relative;
   border-radius: 9px !important;
   background: linear-gradient(180deg, var(--chip-top) 0%, var(--chip-bottom) 100%) !important;
-  color: #fff;
+  color: var(--chip-ink) !important;
   /* sits on its lip, so lift the face to keep the chip centred in the row */
   transform: translateY(calc(var(--lift) / -2));
   box-shadow:
@@ -32,36 +36,22 @@ html body .fee-pill {
     0 var(--lift) 0 0 var(--chip-lip),
     0 calc(var(--lift) + 1px) 0 0 var(--chip-edge-line),
     0 calc(var(--lift) + 4px) 8px -3px var(--chip-cast) !important;
-  text-shadow: 0 1px 0 rgb(0 0 0 / 0.18);
+  text-shadow: var(--chip-text-shadow);
   cursor: default;
   user-select: none;
   -webkit-user-select: none;
   transition: none;
 }
 
-html body .fee-pill.fee-ltf {
-  --chip-top: #04805e;
-  --chip-bottom: #036c4e;
-  --chip-lip: #024b36;
+/* matches ui.css's per-fee background rules so this later sheet wins */
+html body .fee-pill:is(.fee-ltf, .fee-waiver, .fee-paid, .fee-unknown) {
+  background: linear-gradient(180deg, var(--chip-top) 0%, var(--chip-bottom) 100%) !important;
 }
 
-html body .fee-pill.fee-waiver {
-  --chip-top: #2563eb;
-  --chip-bottom: #1d4ed8;
-  --chip-lip: #1a3a9c;
-}
-
-html body .fee-pill.fee-paid {
-  --chip-top: #4a5258;
-  --chip-bottom: #3c4349;
-  --chip-lip: #24292d;
-}
-
-html body .fee-pill.fee-unknown {
-  --chip-top: #656c76;
-  --chip-bottom: #575e67;
-  --chip-lip: #3b4148;
-}
+html body .fee-pill.fee-ltf { --chip-ink: #036c4e; }
+html body .fee-pill.fee-waiver { --chip-ink: #1d4ed8; }
+html body .fee-pill.fee-paid { --chip-ink: #2c3237; }
+html body .fee-pill.fee-unknown { --chip-ink: #5f6670; }
 
 /* the key above the list uses smaller chips */
 html body .legend .fee-pill {
@@ -69,17 +59,22 @@ html body .legend .fee-pill {
   border-radius: 8px !important;
 }
 
-/* graphite ground: darker lip line and a black cast, as in the block's dark theme */
+/* dark mode: coloured chips on graphite, darker lip and a black cast */
 html[data-theme="dark"] body .fee-pill {
+  --chip-top: #656c76;
+  --chip-bottom: #575e67;
+  --chip-lip: #2a2f35;
+  --chip-ink: #fff;
   --chip-sheen: rgb(255 255 255 / 0.16);
   --chip-edge-line: rgb(0 0 0 / 0.35);
   --chip-cast: rgb(0 0 0 / 0.5);
+  --chip-text-shadow: 0 1px 0 rgb(0 0 0 / 0.18);
 }
 
-html[data-theme="dark"] body .fee-pill.fee-ltf { --chip-lip: #01301f; }
-html[data-theme="dark"] body .fee-pill.fee-waiver { --chip-lip: #142b73; }
-html[data-theme="dark"] body .fee-pill.fee-paid { --chip-lip: #15181b; }
-html[data-theme="dark"] body .fee-pill.fee-unknown { --chip-lip: #2a2f35; }
+html[data-theme="dark"] body .fee-pill.fee-ltf { --chip-top: #04805e; --chip-bottom: #036c4e; --chip-lip: #01301f; --chip-ink: #fff; }
+html[data-theme="dark"] body .fee-pill.fee-waiver { --chip-top: #2563eb; --chip-bottom: #1d4ed8; --chip-lip: #142b73; --chip-ink: #fff; }
+html[data-theme="dark"] body .fee-pill.fee-paid { --chip-top: #4a5258; --chip-bottom: #3c4349; --chip-lip: #15181b; --chip-ink: #fff; }
+html[data-theme="dark"] body .fee-pill.fee-unknown { --chip-ink: #fff; }
 
 @media (max-width: 640px) {
   html body .fee-pill { border-radius: 8px !important; }
