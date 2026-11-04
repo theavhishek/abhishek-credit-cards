@@ -1,21 +1,104 @@
-// Hero card marquee (hero-3 style): repeat the cards until one copy is wider than the screen, then
-// double it so translateX(-50%) loops without a seam. Reduced motion keeps the plain row.
+// Hero card field (PartyLabs hero layout): the card faces float at five depths around the copy.
+// Each breakpoint has its own hand-placed layout, [x%, y%, depth 0..1, rotation°]; the nearest
+// spots take the first cards in the markup. On arrival the cards fly out from the headline,
+// nearest first; on a desktop mouse they shift with the pointer by depth. Reduced motion keeps
+// the field still.
 (() => {
-  const root = document.querySelector("[data-hm-marquee]");
-  const track = root?.querySelector(".hm-marquee-track");
-  if (!track || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const originals = [...track.children];
-  const clone = () => originals.forEach(item => {
-    const copy = item.cloneNode(true);
-    copy.setAttribute("aria-hidden", "true");
-    copy.querySelectorAll("a").forEach(a => a.setAttribute("tabindex", "-1"));
-    track.append(copy);
-  });
-  const step = originals[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
-  const perSet = Math.max(1, Math.ceil(innerWidth * 1.2 / (step * originals.length)));
-  for (let i = 1; i < perSet * 2; i++) clone();
-  root.style.setProperty("--mq-speed", `${Math.round(step * originals.length * perSet / 45)}s`);
-  root.classList.add("is-looping");
+  const field = document.querySelector("[data-hm-field]");
+  const hero = field?.closest(".hm-hero");
+  if (!field || !hero) return;
+  const cards = [...field.querySelectorAll(".hm-fc")];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const LAYOUTS = {
+    desktop: { u: 0.092, max: 150, spots: [
+      [7, 18, 0.9, -10], [93, 20, 0.95, 10], [12, 62, 1, 7], [89, 64, 0.85, -8], [20, 36, 0.6, 12],
+      [81, 40, 0.65, -12], [5, 88, 0.75, -6], [96, 86, 0.7, 9], [22, 85, 0.5, -14], [79, 88, 0.5, 12],
+      [26, 9, 0.4, -8], [73, 8, 0.4, 8], [2, 42, 0.42, 6], [98, 46, 0.45, -6], [38, 19, 0.26, -6],
+      [62, 18, 0.26, 8], [16, 4, 0.28, 10], [85, 3, 0.3, -10], [36, 97, 0.26, 6], [63, 98, 0.26, -8], [50, 2, 0.22, 4]
+    ] },
+    tablet: { u: 0.15, max: 140, spots: [
+      [10, 13, 0.9, -10], [90, 14, 0.85, 12], [8, 86, 0.85, 10], [91, 85, 0.9, -10], [30, 7, 0.45, 8],
+      [70, 8, 0.5, -8], [3, 50, 0.5, 6], [97, 52, 0.5, -8], [28, 94, 0.45, -6], [72, 95, 0.45, 8],
+      [50, 3, 0.3, -4], [50, 99, 0.3, 6], [18, 30, 0.3, 10], [82, 32, 0.3, -12]
+    ] },
+    mobile: { u: 0.27, max: 130, spots: [
+      [14, 9, 0.85, -10], [86, 10, 0.9, 10], [50, 5, 0.4, 6], [32, 13, 0.3, -8], [68, 14, 0.3, 8],
+      [13, 92, 0.85, 10], [86, 91, 0.8, -10], [50, 96, 0.4, -6], [32, 88, 0.3, 8], [68, 87, 0.3, -8]
+    ] }
+  };
+  const pick = (w, h) => (w < 640 ? "mobile" : w < 1024 || h > w * 1.05 ? "tablet" : "desktop");
+
+  let current = "";
+  let first = true;
+  const place = () => {
+    const w = field.clientWidth;
+    const h = field.clientHeight;
+    const name = pick(w, h);
+    const L = LAYOUTS[name];
+    field.style.setProperty("--unit", `${(Math.min(w * L.u, L.max) * Math.max(0.72, Math.min(1.1, h / 860))).toFixed(1)}px`);
+    if (name === current) return;
+    current = name;
+    // nearest spots get the first (best) cards
+    const order = L.spots.map((s, i) => i).sort((a, b) => L.spots[b][2] - L.spots[a][2]);
+    cards.forEach((card, i) => {
+      const spot = L.spots[order[i]];
+      card.hidden = !spot;
+      if (!spot) return;
+      const [x, y, d, r] = spot;
+      const set = (k, v) => card.style.setProperty(k, v);
+      set("--x", `${x}%`); set("--y", `${y}%`); set("--d", d); set("--r", `${r}deg`);
+      set("--o", (0.28 + d * 0.72).toFixed(2));
+      set("--b", finePointer && d < 0.6 ? `${((0.6 - d) * 6).toFixed(1)}px` : "0px");
+      set("--s", (0.55 + d * 0.5).toFixed(2));
+      set("--z", Math.round(d * 10));
+      set("--dur", `${7 + (i % 5) * 1.3}s`);
+      set("--delay", `-${(i * 0.7).toFixed(1)}s`);
+      set("--amp", `${(4 + d * 7).toFixed(1)}px`);
+      set("--w", `calc(var(--unit) * ${((0.55 + d * 0.65) * 0.78).toFixed(3)})`);
+      card.classList.toggle("is-near", d > 0.65);
+      card.dataset.dist = Math.hypot(x - 50, (y - 50) * 1.3);
+    });
+    field.classList.add("is-ready");
+    if (reduce) return;
+    // fly out from the headline into place, nearest the headline first
+    const shown = cards.filter(c => !c.hidden).sort((a, b) => a.dataset.dist - b.dataset.dist);
+    shown.forEach((card, n) => {
+      const x = parseFloat(card.style.getPropertyValue("--x"));
+      const y = parseFloat(card.style.getPropertyValue("--y"));
+      const dx = ((50 - x) * 0.6 * w / 100) * 0.35;
+      const dy = ((50 - y) * 0.6 * h / 100) * 0.35;
+      card.querySelector(".hm-fc-in").animate([
+        { opacity: 0, transform: `translate(${dx}px, ${dy}px) scale(0.55)`, filter: finePointer ? "blur(10px)" : "none" },
+        { opacity: 1, transform: "none", filter: "none" }
+      ], { duration: first ? 1400 : 800, delay: (first ? 350 : 0) + n * 35, easing: EASE, fill: "backwards" });
+    });
+    first = false;
+  };
+  place();
+  let t = 0;
+  new ResizeObserver(() => { clearTimeout(t); t = setTimeout(place, 120); }).observe(field);
+
+  // pointer parallax: one rAF loop easing toward the pointer, asleep when settled or off screen
+  if (reduce || !finePointer) return;
+  let tx = 0, ty = 0, mx = 0, my = 0, raf = 0, visible = true;
+  const loop = () => {
+    mx += (tx - mx) * 0.06;
+    my += (ty - my) * 0.06;
+    field.style.setProperty("--mx", mx.toFixed(4));
+    field.style.setProperty("--my", my.toFixed(4));
+    raf = Math.abs(tx - mx) + Math.abs(ty - my) > 0.0005 ? requestAnimationFrame(loop) : 0;
+  };
+  const wake = () => { if (!raf && visible) raf = requestAnimationFrame(loop); };
+  addEventListener("pointermove", e => {
+    const r = field.getBoundingClientRect();
+    tx = (e.clientX - r.left) / r.width - 0.5;
+    ty = (e.clientY - r.top) / r.height - 0.5;
+    wake();
+  }, { passive: true });
+  document.documentElement.addEventListener("pointerleave", () => { tx = 0; ty = 0; wake(); });
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) wake(); }).observe(hero);
 })();
 
 // Homepage: live counts and one search across banks, cards, reviews and tools.
