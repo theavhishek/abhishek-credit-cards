@@ -724,8 +724,8 @@ html[data-theme="dark"] .hm {
 .hm-hero--field {
   display: grid;
   place-items: center;
-  min-height: max(560px, min(calc(100svh - 112px), 860px));
-  padding-block: 24px 40px;
+  min-height: max(560px, min(calc(100svh - 140px), 860px));
+  padding-block: 48px;
 }
 .hm-hero--field .hm-hero-copy {
   position: relative;
@@ -756,13 +756,12 @@ html[data-theme="dark"] .hm {
   --unit: 120px;
   position: absolute;
   z-index: 1;
-  inset: -64px 0 0;
+  inset: 0;
   left: calc(50% - 50vw);
   width: 100vw;
   overflow: clip;
+  overflow-clip-margin: 32px; /* room for the card shadows; body clips the sides */
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 88%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 9%, #000 88%, transparent);
 }
 .hm-field:not(.is-ready) { visibility: hidden; }
 .hm-fc {
@@ -787,11 +786,16 @@ html[data-theme="dark"] .hm {
   pointer-events: auto;
   transition: scale 500ms var(--hm-ease), box-shadow 500ms;
 }
-.hm-fc.is-near .hm-fc-card {
-  box-shadow: 0 calc(var(--d) * 22px) calc(var(--d) * 40px) calc(var(--d) * -14px) rgb(28 18 10 / calc(0.18 + var(--d) * 0.3));
+/* every card gets a hairline edge and a shadow that grows with depth */
+.hm-fc-card {
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.06),
+    0 calc(2px + var(--d) * 18px) calc(6px + var(--d) * 34px) calc(var(--d) * -12px) rgb(28 18 10 / calc(0.1 + var(--d) * 0.28));
 }
-html[data-theme="dark"] .hm-fc.is-near .hm-fc-card {
-  box-shadow: 0 calc(var(--d) * 22px) calc(var(--d) * 40px) calc(var(--d) * -14px) rgb(0 0 0 / calc(0.35 + var(--d) * 0.4));
+html[data-theme="dark"] .hm-fc-card {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08),
+    0 calc(2px + var(--d) * 18px) calc(6px + var(--d) * 34px) calc(var(--d) * -12px) rgb(0 0 0 / calc(0.3 + var(--d) * 0.4));
 }
 .hm-fc-card img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 /* a glossy print edge */
@@ -814,8 +818,7 @@ html[data-theme="dark"] .hm-fc.is-near .hm-fc-card {
 /* 100vw counts a desktop scrollbar; don't let that extra width scroll the page */
 body.home-page { overflow-x: clip; }
 @media (max-width: 640px) {
-  .hm-hero--field { min-height: max(620px, calc(100svh - 150px)); padding-block: 16px 24px; }
-  .hm-field { inset-block: -24px 0; }
+  .hm-hero--field { min-height: 0; padding-block: 190px 200px; }
   .hm-hero--field .hm-search { width: min(330px, 100%); }
   .hm-hero--field .hm-search-field { min-height: 48px; padding-inline: 16px 10px; }
   .hm-hero--field .hm-search-field input { height: 46px; font-size: 0.95rem; }

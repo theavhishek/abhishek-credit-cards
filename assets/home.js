@@ -1,68 +1,130 @@
 // Hero card field (PartyLabs hero layout): the card faces float at five depths around the copy.
 // Each breakpoint has its own hand-placed layout, [x%, y%, depth 0..1, rotation°]; the nearest
-// spots take the first cards in the markup. On arrival the cards fly out from the headline,
-// nearest first; on a desktop mouse they shift with the pointer by depth. Reduced motion keeps
-// the field still.
+// spots take the first cards in the markup. The spots are then settled for the actual screen:
+// every card is kept clear of the copy, inside the hero and apart
+// from its neighbours, and a card that can't fit is left out. On arrival the cards fly out from
+// the headline, nearest first; on a desktop mouse they shift with the pointer by depth. Reduced
+// motion keeps the field still.
 (() => {
   const field = document.querySelector("[data-hm-field]");
   const hero = field?.closest(".hm-hero");
-  if (!field || !hero) return;
+  const copy = hero?.querySelector(".hm-hero-copy");
+  if (!field || !hero || !copy) return;
   const cards = [...field.querySelectorAll(".hm-fc")];
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+  const RATIO = 634 / 400;
   const LAYOUTS = {
     desktop: { u: 0.092, max: 150, spots: [
-      [7, 18, 0.9, -10], [93, 20, 0.95, 10], [12, 62, 1, 7], [89, 64, 0.85, -8], [20, 36, 0.6, 12],
-      [81, 40, 0.65, -12], [5, 88, 0.75, -6], [96, 86, 0.7, 9], [22, 85, 0.5, -14], [79, 88, 0.5, 12],
-      [26, 9, 0.4, -8], [73, 8, 0.4, 8], [2, 42, 0.42, 6], [98, 46, 0.45, -6], [38, 19, 0.26, -6],
-      [62, 18, 0.26, 8], [16, 4, 0.28, 10], [85, 3, 0.3, -10], [36, 97, 0.26, 6], [63, 98, 0.26, -8], [50, 2, 0.22, 4],
-      [1, 70, 0.34, -8], [99, 70, 0.34, 8]
+      [8, 26, 0.95, -9], [92, 28, 0.95, 9], [13, 72, 1, 7], [87, 72, 0.9, -8], [24, 48, 0.6, 11],
+      [76, 50, 0.62, -11], [29, 14, 0.42, -7], [71, 12, 0.45, 7], [27, 86, 0.48, -12], [73, 88, 0.5, 12],
+      [3, 50, 0.38, 6], [97, 52, 0.38, -6], [15, 8, 0.3, 10], [86, 7, 0.3, -10], [42, 9, 0.24, -5],
+      [58, 92, 0.24, 6], [3, 94, 0.3, -8], [97, 94, 0.3, 8]
     ] },
-    tablet: { u: 0.15, max: 140, spots: [
-      [10, 13, 0.9, -10], [90, 14, 0.85, 12], [8, 86, 0.85, 10], [91, 85, 0.9, -10], [30, 7, 0.45, 8],
-      [70, 8, 0.5, -8], [3, 50, 0.5, 6], [97, 52, 0.5, -8], [28, 94, 0.45, -6], [72, 95, 0.45, 8],
-      [50, 3, 0.3, -4], [50, 99, 0.3, 6], [18, 30, 0.3, 10], [82, 32, 0.3, -12]
+    tablet: { u: 0.14, max: 130, spots: [
+      [11, 12, 0.9, -9], [89, 14, 0.85, 10], [12, 88, 0.85, 9], [88, 87, 0.9, -9], [31, 16, 0.4, 7],
+      [69, 8, 0.48, -7], [33, 85, 0.48, -6], [67, 93, 0.4, 7], [50, 10, 0.26, -4], [50, 90, 0.26, 5]
     ] },
-    mobile: { u: 0.27, max: 130, spots: [
-      [14, 9, 0.85, -10], [86, 10, 0.9, 10], [50, 5, 0.4, 6], [32, 13, 0.3, -8], [68, 14, 0.3, 8],
-      [13, 92, 0.85, 10], [86, 91, 0.8, -10], [50, 96, 0.4, -6], [32, 88, 0.3, 8], [68, 87, 0.3, -8]
+    mobile: { u: 0.25, max: 112, spots: [
+      [15, 11, 0.85, -9], [84, 12, 0.9, 9], [50, 8, 0.5, 4], [31, 17, 0.3, -7], [69, 18, 0.3, 8],
+      [16, 90, 0.85, 8], [84, 89, 0.8, -9], [50, 93, 0.5, -4], [32, 84, 0.3, 7], [68, 84, 0.3, -7]
     ] }
   };
   const pick = (w, h) => (w < 640 ? "mobile" : w < 1024 || h > w * 1.05 ? "tablet" : "desktop");
+  const sizeOf = d => (0.55 + d * 0.65) * 0.78; // card width in units
 
-  let current = "";
+  // move the spots apart until no card touches the copy, the edges or a neighbour
+  function settle(spots, w, h, unit) {
+    const f = field.getBoundingClientRect();
+    const pad = w < 640 ? 10 : 18;
+    const blocks = [...copy.children].filter(el => el.offsetParent && !el.classList.contains("sr-only")).map(el => {
+      const r = el.getBoundingClientRect();
+      return { l: r.left - f.left - pad, t: r.top - f.top - pad, r: r.right - f.left + pad, b: r.bottom - f.top + pad };
+    });
+    const floor = h;
+    const items = spots.map(([x, y, d, r]) => {
+      const cw = unit * sizeOf(d), ch = cw * RATIO, a = Math.abs(r) * Math.PI / 180;
+      const slack = 4 + d * 7 + (finePointer ? d * 12 : 0); // drift and parallax room
+      return { x: x / 100 * w, y: y / 100 * h, d, hw: (cw * Math.cos(a) + ch * Math.sin(a)) / 2 + slack, hh: (cw * Math.sin(a) + ch * Math.cos(a)) / 2 + slack };
+    });
+    const gap = w < 640 ? 6 : 12;
+    // a far card may tuck a little behind a much nearer one, the way the depth reads anyway
+    const tuck = (a, c) => (Math.abs(a.d - c.d) >= 0.4 ? 0.72 : 1);
+    for (let k = 0; k < 80; k++) {
+      for (const c of items) {
+        for (const b of blocks) {
+          const ox = Math.min(c.x + c.hw, b.r) - Math.max(c.x - c.hw, b.l);
+          const oy = Math.min(c.y + c.hh, b.b) - Math.max(c.y - c.hh, b.t);
+          if (ox > 0 && oy > 0) {
+            if (ox < oy) c.x += c.x < (b.l + b.r) / 2 ? -ox : ox;
+            else c.y += c.y < (b.t + b.b) / 2 ? -oy : oy;
+          }
+        }
+      }
+      for (let i = 0; i < items.length; i++) for (let j = i + 1; j < items.length; j++) {
+        const a = items[i], c = items[j];
+        const k2 = tuck(a, c);
+        const ox = (a.hw + c.hw) * k2 + gap * (k2 === 1) - Math.abs(a.x - c.x);
+        const oy = (a.hh + c.hh) * k2 + gap * (k2 === 1) - Math.abs(a.y - c.y);
+        if (ox <= 0 || oy <= 0) continue;
+        const wa = c.d / (a.d + c.d), wc = 1 - wa; // the nearer card moves less
+        if (ox < oy) { const s = a.x < c.x ? -1 : 1; a.x += s * ox * wa; c.x -= s * ox * wc; }
+        else { const s = a.y < c.y ? -1 : 1; a.y += s * oy * wa; c.y -= s * oy * wc; }
+      }
+      for (const c of items) {
+        c.x = Math.min(Math.max(c.x, c.hw), w - c.hw);
+        c.y = Math.min(Math.max(c.y, c.hh), floor - c.hh);
+      }
+    }
+    // anything still sitting on the copy or a nearer card is left out
+    return items.map((c, i) => {
+      const hitsCopy = blocks.some(b => c.x + c.hw > b.l && c.x - c.hw < b.r && c.y + c.hh > b.t && c.y - c.hh < b.b);
+      const hitsCard = items.some((o, j) => j !== i && o.d >= c.d && !o.out &&
+        Math.abs(o.x - c.x) < (o.hw + c.hw) * tuck(o, c) - 2 && Math.abs(o.y - c.y) < (o.hh + c.hh) * tuck(o, c) - 2);
+      c.out = hitsCopy || hitsCard || c.hh * 2 > floor;
+      return c;
+    });
+  }
+
   let first = true;
+  let lastKey = "";
   const place = () => {
     const w = field.clientWidth;
     const h = field.clientHeight;
-    const name = pick(w, h);
-    const L = LAYOUTS[name];
-    field.style.setProperty("--unit", `${(Math.min(w * L.u, L.max) * Math.max(0.72, Math.min(1.1, h / 860))).toFixed(1)}px`);
-    if (name === current) return;
-    current = name;
+    const key = `${w}x${h}`;
+    if (key === lastKey) return;
+    lastKey = key;
+    const L = LAYOUTS[pick(w, h)];
+    const unit = Math.min(w * L.u, L.max) * Math.max(0.72, Math.min(1.1, h / 860));
+    field.style.setProperty("--unit", `${unit.toFixed(1)}px`);
     // nearest spots get the first (best) cards
-    const order = L.spots.map((s, i) => i).sort((a, b) => L.spots[b][2] - L.spots[a][2]);
+    const spots = [...L.spots].sort((a, b) => b[2] - a[2]);
+    // spots that fit this screen, nearest first; the cards fill them in order, so a spot that
+    // can't fit drops the last card rather than one near the top of the list
+    const fits = settle(spots, w, h, unit).map((s, i) => ({ ...s, spot: spots[i] })).filter(s => !s.out);
     cards.forEach((card, i) => {
-      const spot = L.spots[order[i]];
-      card.hidden = !spot;
-      if (!spot) return;
-      const [x, y, d, r] = spot;
+      const s = fits[i];
+      card.hidden = !s;
+      if (card.hidden) return;
+      const [, , d, r] = s.spot;
       const set = (k, v) => card.style.setProperty(k, v);
-      set("--x", `${x}%`); set("--y", `${y}%`); set("--d", d); set("--r", `${r}deg`);
-      set("--o", (0.28 + d * 0.72).toFixed(2));
-      set("--b", finePointer && d < 0.6 ? `${((0.6 - d) * 6).toFixed(1)}px` : "0px");
-      set("--s", (0.55 + d * 0.5).toFixed(2));
+      set("--x", `${(s.x / w * 100).toFixed(2)}%`); set("--y", `${(s.y / h * 100).toFixed(2)}%`);
+      set("--d", d); set("--r", `${r}deg`);
+      set("--o", (0.6 + d * 0.4).toFixed(2));
+      set("--b", finePointer && d < 0.35 ? `${((0.35 - d) * 6).toFixed(1)}px` : "0px");
+      set("--s", (0.82 + d * 0.2).toFixed(2));
       set("--z", Math.round(d * 10));
       set("--dur", `${7 + (i % 5) * 1.3}s`);
       set("--delay", `-${(i * 0.7).toFixed(1)}s`);
       set("--amp", `${(4 + d * 7).toFixed(1)}px`);
-      set("--w", `calc(var(--unit) * ${((0.55 + d * 0.65) * 0.78).toFixed(3)})`);
+      set("--w", `calc(var(--unit) * ${sizeOf(d).toFixed(3)})`);
       card.classList.toggle("is-near", d > 0.65);
-      card.dataset.dist = Math.hypot(x - 50, (y - 50) * 1.3);
+      card.dataset.dist = Math.hypot(s.x / w * 100 - 50, (s.y / h * 100 - 50) * 1.3);
     });
     field.classList.add("is-ready");
-    if (reduce) return;
+    if (reduce || !first) return;
+    first = false;
     // fly out from the headline into place, nearest the headline first
     const shown = cards.filter(c => !c.hidden).sort((a, b) => a.dataset.dist - b.dataset.dist);
     shown.forEach((card, n) => {
@@ -73,11 +135,11 @@
       card.querySelector(".hm-fc-in").animate([
         { opacity: 0, transform: `translate(${dx}px, ${dy}px) scale(0.55)`, filter: finePointer ? "blur(10px)" : "none" },
         { opacity: 1, transform: "none", filter: "none" }
-      ], { duration: first ? 1400 : 800, delay: (first ? 350 : 0) + n * 35, easing: EASE, fill: "backwards" });
+      ], { duration: 1400, delay: 350 + n * 35, easing: EASE, fill: "backwards" });
     });
-    first = false;
   };
-  place();
+  // fonts change the copy's size, so place once they are in
+  (document.fonts?.ready || Promise.resolve()).then(() => { lastKey = ""; place(); });
   let t = 0;
   new ResizeObserver(() => { clearTimeout(t); t = setTimeout(place, 120); }).observe(field);
 
