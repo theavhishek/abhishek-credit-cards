@@ -402,6 +402,7 @@ function buildArticle(item) {
   };
 
   const seoTitles = {
+    "bobcard-airport-lounge-list-33": "BOBCARD Lounge List 2026: 83 to 33 Lounges | Full List",
     "hdfc-tata-neu-neucoins-manual-claim-november-2026": "Tata Neu NeuCoins: Manual Claims | Avhishek",
     "pnb-credit-card-charges-revised-november-2026": "PNB Card Charges from Nov 2026 | Avhishek",
     "pnb-navratri-dussehra-cashback-2026": "PNB Card Navratri Cashback | Avhishek",
