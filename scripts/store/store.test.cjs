@@ -44,6 +44,9 @@ test("store requires a server validated PIN and hides the catalog before access"
   assert.match(catalog.body, /Amazon Pay Gift Card/);
   assert.match(catalog.body, /Flipkart Gift Card/);
   assert.match(catalog.body, /₹10,000/);
+  assert.match(catalog.body, /id="deliveryEmail"[^>]*placeholder="you@example.com"/);
+  assert.doesNotMatch(catalog.body, /id="deliveryEmail"[^>]*disabled/);
+  assert.match(catalog.body, /id="storeCheckout"[^>]*disabled/);
 });
 
 test("checkout rejects invalid products and stays closed without a gateway", async () => {
