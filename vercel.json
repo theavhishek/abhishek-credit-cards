@@ -199,10 +199,6 @@
   ],
   "rewrites": [
     {
-      "source": "/store",
-      "destination": "/api/store"
-    },
-    {
       "source": "/",
       "has": [
         {
