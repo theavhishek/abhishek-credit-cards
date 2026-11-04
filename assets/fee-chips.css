@@ -7,8 +7,8 @@
    hairline below the lip and a soft cast shadow on the ground.
 
    These are display-only labels, so the block's hover lift, press travel,
-   selection and sounds are left out. Light mode uses the block's paper
-   chips with the fee colour on the text; dark mode keeps the site's
+   selection and sounds are left out. Light mode uses soft tinted chips
+   with the fee colour on the text; dark mode keeps the site's
    coloured fee chips (white text kept at 4.5:1, see ui.css).
    Loaded after ui.css, so it wins over the older pill rules.
 =========================================================================== */
@@ -48,10 +48,11 @@ html body .fee-pill:is(.fee-ltf, .fee-waiver, .fee-paid, .fee-unknown) {
   background: linear-gradient(180deg, var(--chip-top) 0%, var(--chip-bottom) 100%) !important;
 }
 
-html body .fee-pill.fee-ltf { --chip-ink: #036c4e; }
-html body .fee-pill.fee-waiver { --chip-ink: #1d4ed8; }
-html body .fee-pill.fee-paid { --chip-ink: #2c3237; }
-html body .fee-pill.fee-unknown { --chip-ink: #5f6670; }
+/* light mode: soft tinted chips, darker text in the same colour */
+html body .fee-pill.fee-ltf { --chip-top: #e9f9ef; --chip-bottom: #d3f2df; --chip-lip: #9fd9b6; --chip-ink: #035c43; }
+html body .fee-pill.fee-waiver { --chip-top: #eef3ff; --chip-bottom: #dbe6fe; --chip-lip: #a9c1f7; --chip-ink: #1a44c2; }
+html body .fee-pill.fee-paid { --chip-top: #eef0f2; --chip-bottom: #dfe2e6; --chip-lip: #b4bac1; --chip-ink: #2c3237; }
+html body .fee-pill.fee-unknown { --chip-top: #f6f6f7; --chip-bottom: #eceded; --chip-lip: #cfd2d6; --chip-ink: #5f6670; }
 
 /* the key above the list uses smaller chips */
 html body .legend .fee-pill {
