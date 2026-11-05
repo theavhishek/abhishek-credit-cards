@@ -212,7 +212,7 @@ something to explain.
   The page labels these clearly.
 - Never fill in a rate, cap, minimum spend, date, code, eligibility or link that
   the source doesn't state. Leave the field out instead.
-- Affiliate links must follow the rule in `AGENTS.md` (labelled, `rel="sponsored"`).
+- Affiliate links must follow the rule in `AGENTS.md` (only on "Apply" buttons, `rel="sponsored"`).
   The feed doesn't add affiliate links on its own.
 
 ## Sharing
