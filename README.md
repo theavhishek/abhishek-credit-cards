@@ -5,7 +5,7 @@
   </picture>
 </a>
 
-### The credit card toolkit for India.
+### There’s more to your credit card.
 
 avhishek.in is an independent website for people who use credit cards in India. It collects the things that are tedious to find on bank websites (helplines, escalation contacts and bill-payment details for 26 issuers) next to firsthand card reviews and the cards Abhishek Meena actually holds.
 
@@ -15,7 +15,7 @@ avhishek.in is an independent website for people who use credit cards in India. 
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/readme/preview-home-dark.webp">
-  <img src="docs/readme/preview-home-light.webp" alt="The avhishek.in homepage: the headline “The credit card toolkit for India.”, a short introduction, and a search box for banks, cards and helpline numbers." width="100%">
+  <img src="docs/readme/preview-home-light.webp" alt="The avhishek.in homepage: the headline “There’s more to your credit card.”, a short introduction and a search box, with credit card faces floating around the text." width="100%">
 </picture>
 
 <br>
@@ -29,7 +29,7 @@ One search box across banks, cards, helpline numbers and reviews, with live coun
 The 51 cards from 22 issuers that Abhishek holds, grouped by bank. Search by card, bank or use case, or narrow the list to lifetime-free, RuPay, cashback or partner cards.
 
 **[Card reviews](https://avhishek.in/card-reviews)** &nbsp;`/card-reviews`<br>
-Long-form reviews written from use, not press releases: rewards, fees, exclusions and the fine print. Currently HSBC Live+, Eternal SBI and the Slice Business card.
+Long-form reviews written from use, not press releases: rewards, fees, exclusions and the fine print. Currently Swiggy HDFC Ornge vs BLCK, Kredit.Pe YES BANK Max, RBL Jalsa, Eternal SBI, HSBC Live+ and Slice Business, plus guides to SBI Rewardz and the BOI RuPay Select debit card.
 
 **[Bank support directory](https://avhishek.in/bank-support)** &nbsp;`/bank-support`<br>
 Customer care numbers and complaint emails for 26 card issuers, laid out in the order you should escalate: customer care, the nodal officer, the principal nodal officer, and finally the RBI Ombudsman.

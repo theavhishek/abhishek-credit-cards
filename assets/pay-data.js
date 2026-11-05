@@ -16,6 +16,7 @@ window.PAY_BBPS_OTHERS = [
 ];
 window.PAY_METHODS = {
   "Axis Bank": {
+    checked: "2026-11-05",
     bbps: ["Axis Bank Credit Card"],
     methods: [
       { kind: "neft", title: "NEFT from another bank",
@@ -28,9 +29,8 @@ window.PAY_METHODS = {
       { kind: "upi", title: "Pay to a UPI ID",
         fields: [{ label: "UPI ID", pattern: ["cc.91", { ph: "registered mobile number" }, { ph: "last 4 card digits" }, "@axisbank"],
           keys: [["registered mobile number", "Your 10-digit registered mobile number, typed straight after cc.91."], ["last 4 card digits", "The last 4 digits of your credit card number."]] }],
-        note: "Axis Bank publishes this UPI ID in the terms of its October 2020 pay-by-UPI offer. Its current payment help page doesn’t list a UPI ID, so check that your UPI app shows Axis Bank as the payee.",
-        verify: true, time: "Time not stated", speed: "",
-        src: { label: "Axis Bank pay-by-UPI terms (PDF)", url: "https://www.axisbank.com/docs/default-source/default-document-library/tncs-pay-credit-card-bills-via-upi.pdf" } },
+        verify: true, time: "Clears in 2 working days", speed: "slow",
+        src: { label: "Axis Bank: Credit card services", url: "https://www.axis.bank.in/important-links/credit-card/card-services" } },
       { kind: "app", title: "Axis Mobile app", how: "Pay Last Bill, then Pay Now.", time: "Same day with Pay Now", speed: "fast" },
       { kind: "app", title: "Axis internet banking", how: "Accounts › My Credit Cards › Pay Bill." },
       { kind: "other", title: "Axis ATM, branch or cheque", how: "Cash at a branch costs ₹100 + tax. Cheques go in Axis drop boxes and can’t be post-dated.", time: "ATM and cash same day, cheque 1 working day", speed: "mid" }

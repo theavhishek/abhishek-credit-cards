@@ -21,7 +21,7 @@ const MIN_PAGE_WORDS = 150;
 const TOP_KEYS = new Set([
   "type", "title", "summary", "category", "published", "updated", "issuer", "merchant", "cards", "tags",
   "confirmation", "sources", "link", "related", "image", "imageAlt", "tile", "page", "archived", "draft", "offer",
-  "calculator",
+  "calculator", "reviews",
 ]);
 const OFFER_KEYS = new Set(["value", "cap", "minSpend", "starts", "ends", "eligibility", "code", "link", "terms", "verified"]);
 const SOURCE_KEYS = new Set(["label", "url", "kind"]);
@@ -344,8 +344,11 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
     if (core.isValidDate(d.published) && core.isValidDate(d.updated) && core.toMs(d.updated, "start") < core.toMs(d.published, "start")) {
       fail(`"updated" is earlier than "published".`);
     }
-    for (const key of ["cards", "tags", "related"]) {
+    for (const key of ["cards", "tags", "related", "reviews"]) {
       if (d[key] != null && (!Array.isArray(d[key]) || d[key].some((v) => typeof v !== "string"))) fail(`"${key}" must be a list, like [one, two].`);
+    }
+    if (Array.isArray(d.reviews)) for (const rv of d.reviews) {
+      if (typeof rv === "string" && !fs.existsSync(path.join(ROOT, "card-reviews", `${rv}.html`))) fail(`reviews "${rv}" doesn't match a page in card-reviews/.`);
     }
     for (const key of ["page", "archived", "draft"]) {
       if (d[key] != null && typeof d[key] !== "boolean") fail(`"${key}" must be true or false.`);
@@ -511,6 +514,7 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       sources: Array.isArray(sources) ? sources : [],
       link: d.link || null,
       related: d.related || [],
+      reviews: Array.isArray(d.reviews) ? d.reviews : [],
       image,
       tile,
       page,

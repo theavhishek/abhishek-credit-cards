@@ -423,7 +423,7 @@ function buildArticle(item) {
     articleMeta: `  <meta property="article:published_time" content="${articleDateTime(item.published)}">\n  <meta property="article:modified_time" content="${articleDateTime(modified)}">\n`,
     title: esc(title),
     jsonld: json(graph),
-    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=9">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n',
+    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=10">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n',
     cssVersion: assetVersions.css,
     bodyClass: "reviews-page up-page",
     skipTarget: "article",
@@ -559,6 +559,47 @@ ${rows.join("\n")}
   return previewise(replaceBetween(read("home.html"), "updates:latest", block, "home.html"));
 }
 
+/* ---------- "Latest on this card" on card reviews ---------- */
+// An update lists the reviews it affects in `reviews: [slug]`; each review page that has the
+// <!-- updates:related --> markers shows the current ones, newest first.
+const REVIEW_NEWS_COUNT = 3;
+function buildReviewNews() {
+  const out = new Map();
+  const dir = path.join(ROOT, "card-reviews");
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".html")).sort()) {
+    const rel = `card-reviews/${f}`;
+    const html = read(rel);
+    if (!html.includes("<!-- updates:related:start -->")) continue;
+    const slug = f.replace(/\.html$/, "");
+    const related = items
+      .filter((i) => i.reviews.includes(slug) && core.isCurrent(i, NOW))
+      .sort((a, b) => core.toMs(b.published, "start") - core.toMs(a.published, "start"))
+      .slice(0, REVIEW_NEWS_COUNT);
+    let block = "";
+    if (related.length) {
+      const rows = related.map((i) => {
+        const href = i.page ? `/updates/${i.slug}` : `/updates#${i.slug}`;
+        const ends = i.offer && i.offer.ends && i.offer.ends !== "ongoing" ? ` data-ends-at="${core.toMs(i.offer.ends, "end")}"` : "";
+        return `            <li${ends}><a class="rv-news-item" href="${esc(href)}"><span class="rv-news-kicker" data-cat="${esc(i.category)}">${esc(core.categoryLabel(i.category))}</span><span class="rv-news-title">${esc(i.title)}</span><time class="rv-news-date" datetime="${core.isoDate(i.published)}">${esc(core.fmtDate(i.published))}</time></a></li>`;
+      });
+      block = `
+      <section id="latest-news" class="rv-section rv-news" aria-labelledby="latest-news-title">
+        <h2 id="latest-news-title">Latest on this card</h2>
+        <ol class="rv-news-list">
+${rows.join("\n")}
+        </ol>${rows.some((r) => r.includes("data-ends-at")) ? `
+        <script>
+          // Hide offers that have ended since this list was built (times are IST, stored as UTC milliseconds).
+          document.querySelectorAll(".rv-news-list [data-ends-at]").forEach((li) => { if (Date.now() > Number(li.dataset.endsAt)) li.hidden = true; });
+        </script>` : ""}
+      </section>
+      `;
+    }
+    out.set(rel, previewise(replaceBetween(html, "updates:related", block, rel)));
+  }
+  return out;
+}
+
 /* ---------- Write or check ---------- */
 
 const outputs = new Map();
@@ -567,6 +608,7 @@ outputs.set("updates/archive.html", buildArchive());
 outputs.set("updates/feed.xml", buildFeed());
 outputs.set("assets/updates-index.json", indexJson);
 outputs.set("home.html", buildHome());
+for (const [rel, html] of buildReviewNews()) outputs.set(rel, html);
 if (!PREVIEW) outputs.set("sitemap.xml", buildSitemap());
 for (const item of pages) outputs.set(`updates/${item.slug}.html`, buildArticle(item));
 

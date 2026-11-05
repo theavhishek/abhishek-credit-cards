@@ -6,6 +6,7 @@ category: devaluation
 confirmation: official
 published: 2026-10-27
 issuer: SBI Card
+reviews: [eternal-sbi-card]
 tags: [sbi card, fees and charges, fuel, transport, tolls, devaluation]
 tile:
   figure: 1%

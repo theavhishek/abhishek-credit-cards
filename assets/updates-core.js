@@ -241,7 +241,7 @@
     var t = item.tile;
     if (!t || !t.figure) return "";
     var mark = t.logo
-      ? '<img class="up-tile-logo" src="' + esc(t.logo) + '" alt="" loading="lazy" decoding="async"' + (t.invertOnDark ? " data-invert-dark" : "") + ">"
+      ? '<img class="up-tile-logo" src="' + esc(t.logo) + '" alt="" width="64" height="64" loading="lazy" decoding="async"' + (t.invertOnDark ? " data-invert-dark" : "") + ">"
       : '<span class="up-tile-name">' + esc(item.issuer || item.merchant || "") + "</span>";
     var inner = '<span class="up-tile-mark">' + mark + '</span><span class="up-tile-figure">' + esc(t.figure) + "</span>" +
       (t.caption ? '<span class="up-tile-caption">' + esc(t.caption) + "</span>" : "");

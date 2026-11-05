@@ -7,6 +7,7 @@ confirmation: official
 published: 2026-10-13
 issuer: Slice
 cards: [Slice Business Credit Card]
+reviews: [slice-business-credit-card]
 tags: [business card, sole proprietor, cashback, zero forex, waitlist]
 tile:
   figure: Dec
