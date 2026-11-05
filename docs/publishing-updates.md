@@ -63,6 +63,7 @@ tags: [smartbuy, reward points]            # optional extra search words
 confirmation: official          # news only: official, reported or unconfirmed
 link: /card-reviews/hsbc-live-plus         # optional: a related page on this site
 related: [another-update-file-name]        # optional: pin related updates
+reviews: [eternal-sbi-card]                 # optional: card reviews this affects; shows under "Latest on this card" there
 image: /assets/updates/infinia.webp        # optional, with imageAlt; shown at the top of the article
 imageAlt: What the image shows
 tile:                           # the fact tile beside the headline in the feed

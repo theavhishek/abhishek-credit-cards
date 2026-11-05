@@ -63,50 +63,50 @@ export default function UpiPay() {
       poster={{ field: false, vpa: true, payee: true, amt: AMOUNTS.length - 1, phase: 'paid' }}
       script={script}
       cursor={{ at: REST, style: 'touch' }}
-      className="up"
+      className="ssu"
     >
       {(s, _rect, layout) => {
         const amount = AMOUNTS[s.amt]
         return (
-          <Phone width={layout === 'compact' ? 270 : 290} className="up-phone" data-phase={s.phase}>
-            <div className="up-app">
-              <header className="up-head">
-                <span className="up-back" aria-hidden />
-                <span className="up-title">Pay to UPI ID</span>
+          <Phone width={layout === 'compact' ? 270 : 290} className="ssu-phone" data-phase={s.phase}>
+            <div className="ssu-app">
+              <header className="ssu-head">
+                <span className="ssu-back" aria-hidden />
+                <span className="ssu-title">Pay to UPI ID</span>
               </header>
 
-              <div className="up-field" data-target="field" data-on={s.field || undefined}>
-                <span className="up-label">UPI ID</span>
-                <span className="up-vpa" data-shown={s.vpa || undefined}>
+              <div className="ssu-field" data-target="field" data-on={s.field || undefined}>
+                <span className="ssu-label">UPI ID</span>
+                <span className="ssu-vpa" data-shown={s.vpa || undefined}>
                   {s.vpa ? VPA : <Bar w={190} h={10} r={5} tone={3} />}
                 </span>
               </div>
 
-              <div className="up-payee" data-shown={s.payee || undefined}>
-                <span className="up-logo"><img src={icici} alt="" width={30} height={30} /></span>
-                <span className="up-payee__text">
-                  <span className="up-payee__name">ICICI Bank</span>
+              <div className="ssu-payee" data-shown={s.payee || undefined}>
+                <span className="ssu-logo"><img src={icici} alt="" width={30} height={30} /></span>
+                <span className="ssu-payee__text">
+                  <span className="ssu-payee__name">ICICI Bank</span>
                   <Bar w={112} h={8} r={4} tone={3} />
                 </span>
-                <Check on={s.payee} size={20} className="up-ok" />
+                <Check on={s.payee} size={20} className="ssu-ok" />
               </div>
 
-              <div className="up-amount" data-target="amount" data-empty={!amount || undefined}>
-                <span className="up-rupee">₹</span>
-                <span className="up-figure">{amount || '0'}</span>
+              <div className="ssu-amount" data-target="amount" data-empty={!amount || undefined}>
+                <span className="ssu-rupee">₹</span>
+                <span className="ssu-figure">{amount || '0'}</span>
               </div>
-              <div className="up-note"><Bar w={140} h={8} r={4} tone={3} /></div>
+              <div className="ssu-note"><Bar w={140} h={8} r={4} tone={3} /></div>
 
-              <button type="button" className="up-pay" data-target="pay" data-phase={s.phase} data-ready={(s.payee && !!amount) || undefined} tabIndex={-1}>
+              <button type="button" className="ssu-pay" data-target="pay" data-phase={s.phase} data-ready={(s.payee && !!amount) || undefined} tabIndex={-1}>
                 <Swap id={s.phase}>
                   {s.phase === 'idle' && <span>Pay ₹{amount || '0'}</span>}
-                  {s.phase === 'paying' && <span className="up-pay__row"><Spinner size={18} /> Paying</span>}
-                  {s.phase === 'paid' && <span className="up-pay__row"><Check on size={18} /> Paid</span>}
+                  {s.phase === 'paying' && <span className="ssu-pay__row"><Spinner size={18} /> Paying</span>}
+                  {s.phase === 'paid' && <span className="ssu-pay__row"><Check on size={18} /> Paid</span>}
                 </Swap>
               </button>
 
-              <div className="up-keys" aria-hidden>
-                {Array.from({ length: 12 }, (_, i) => <span key={i} className="up-key" />)}
+              <div className="ssu-keys" aria-hidden>
+                {Array.from({ length: 12 }, (_, i) => <span key={i} className="ssu-key" />)}
               </div>
             </div>
           </Phone>

@@ -167,12 +167,13 @@ test("validation catches common mistakes", () => {
   const file = path.join(ROOT, "content/updates", `zz-test-${path.basename(dir)}.md`);
   const write = (text) => fs.writeFileSync(file, text);
   try {
-    write(`---\ntype: offer\ntitle: Test offer for validation\nsummary: A summary long enough to pass the length warning check.\ncategory: devaluation\npublished: 2026-10-14\nexpires: 2026-10-20\noffer:\n  verified: 2026-10-14\n---\n`);
+    write(`---\ntype: offer\ntitle: Test offer for validation\nsummary: A summary long enough to pass the length warning check.\ncategory: devaluation\npublished: 2026-10-14\nexpires: 2026-10-20\nreviews: [no-such-review]\noffer:\n  verified: 2026-10-14\n---\n`);
     const { errors } = loadItems();
     const text = errors.join("\n");
     assert.match(text, /Unknown field "expires"/);
     assert.match(text, /Category "devaluation" is for news items/);
     assert.match(text, /verified offer needs the official offer.link or offer.terms/);
+    assert.match(text, /reviews "no-such-review" doesn't match a page in card-reviews/);
   } finally {
     fs.rmSync(file, { force: true });
     fs.rmSync(dir, { recursive: true, force: true });
@@ -193,4 +194,12 @@ test("fee calculator: read from the frontmatter and baked into the article", () 
   assert.match(html, /Fee <strong>₹600<\/strong>/);
   assert.match(html, /<script src="\/assets\/updates-calc\.js\?v=/);
   assert.doesNotMatch(html, /\{\{calculator\}\}/);
+});
+
+test("reviews show the updates that list them under \"Latest on this card\"", () => {
+  const html = fs.readFileSync(path.join(ROOT, "card-reviews/eternal-sbi-card.html"), "utf8");
+  assert.match(html, /<!-- updates:related:start -->\s*<section id="latest-news" class="rv-section rv-news"/);
+  assert.match(html, /href="\/updates\/sbi-card-transport-fuel-fee-december-2026"/);
+  const other = fs.readFileSync(path.join(ROOT, "card-reviews/hsbc-live-plus.html"), "utf8");
+  assert.match(other, /<!-- updates:related:start --><!-- updates:related:end -->/);
 });

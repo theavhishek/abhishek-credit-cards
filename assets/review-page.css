@@ -859,3 +859,57 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
 @media print {
   .rv-src-box > summary::after { display: none; }
 }
+
+/* ---------- Latest on this card (generated from /updates by scripts/updates/build.mjs) ----------
+   Same rows and category badges as the homepage "Latest updates" list. */
+.rv-news-list { padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.rv-news-list > li { border-bottom: 1px solid var(--line); }
+.rv-article a.rv-news-item {
+  display: grid;
+  gap: 6px;
+  padding: 14px 4px;
+  color: inherit;
+  text-decoration: none;
+}
+.rv-news-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 12px; }
+.rv-news-kicker {
+  justify-self: start;
+  width: max-content;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--rv-brand) 12%, transparent);
+  color: var(--rv-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.rv-news-title { font-size: var(--rv-fs-body); font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; text-wrap: balance; }
+.rv-news-date { color: var(--muted); font-size: var(--rv-fs-caption); font-variant-numeric: tabular-nums; }
+@media (hover: hover) {
+  .rv-news-item:hover .rv-news-title { opacity: 0.72; }
+}
+/* Devaluation, Card launch, Cashback deal and Spend-based offer are solid badges with an icon. */
+.rv-news-kicker[data-cat="devaluation"] { --rv-badge: #dc2626; --rv-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E"); }
+.rv-news-kicker[data-cat="launch"] { --rv-badge: #4f46e5; --rv-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 2l2.4 7.1L21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.9z'/%3E%3C/svg%3E"); }
+.rv-news-kicker[data-cat="cashback"] { --rv-badge: #15803d; --rv-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='2.5'/%3E%3Ccircle cx='17' cy='17' r='2.5'/%3E%3Cpath d='M19 5L5 19'/%3E%3C/svg%3E"); }
+.rv-news-kicker[data-cat="spend-offer"] { --rv-badge: #1d4ed8; --rv-badge-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8h14l-1 13H6z'/%3E%3Cpath d='M9 10V6a3 3 0 0 1 6 0v4'/%3E%3C/svg%3E"); }
+.rv-news-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"], [data-cat="spend-offer"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding-inline-start: 8px;
+  background: var(--rv-badge);
+  color: #fff;
+  font-weight: 700;
+}
+.rv-news-kicker:is([data-cat="devaluation"], [data-cat="launch"], [data-cat="cashback"], [data-cat="spend-offer"])::before {
+  content: "";
+  flex: none;
+  width: 13px;
+  height: 13px;
+  background: currentColor;
+  -webkit-mask: var(--rv-badge-icon) center / contain no-repeat;
+  mask: var(--rv-badge-icon) center / contain no-repeat;
+}
+@media (min-width: 720px) {
+  .rv-news-item { grid-template-columns: max-content minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+}

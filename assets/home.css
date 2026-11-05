@@ -764,6 +764,8 @@ html[data-theme="dark"] .hm {
   pointer-events: none;
 }
 .hm-field:not(.is-ready) { visibility: hidden; }
+/* cards stay out of layout until placed, so their lazy images load only for the cards a screen shows */
+.hm-field:not(.is-ready) .hm-fc { display: none; }
 .hm-fc {
   position: absolute;
   left: var(--x);

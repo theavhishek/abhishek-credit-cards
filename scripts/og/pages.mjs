@@ -173,6 +173,6 @@ export const PAGES = [
     title: "Credit card reviews",
     subtitle: "Rewards, fees and the fine print, from real use.",
     glass: true,
-    visual: { cards: ["hsbc-live-plus", "kredit-pe-yes-bank-max-credit-card", "eternal-sbi-card", "slice-business-credit-card"] },
+    visual: { cards: ["hsbc-live-plus", "swiggy-hdfc", "eternal-sbi-card", "slice-business-credit-card"] },
   },
 ];

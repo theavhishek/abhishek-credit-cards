@@ -406,8 +406,8 @@ export function DonutChart({ data, label, unit = "", formatValue = value => grou
             <span className={styles.rowText}>
               <span className={styles.rowLabel}>{item.label}</span>
               {item.members && <span className={styles.rowMembers}>{members(item)}</span>}
-            </span>
-            <span className={styles.rowValue} aria-hidden="true"><Count value={item.value} format={formatValue} reduced={reduced} /></span>
+            </span>{" "}
+            <span className={styles.rowValue} aria-hidden="true"><Count value={item.value} format={formatValue} reduced={reduced} /></span>{" "}
             <span className={styles.rowShare} aria-hidden="true"><Count value={off || !total ? 0 : item.value / total} format={shareText} reduced={reduced} /></span>
           </button>
         </motion.li>;
