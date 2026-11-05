@@ -9,6 +9,43 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "eternal-sbi-card",
+    "title": "Eternal SBI Credit Card",
+    "excerpt": "A ₹499 card that takes 10% off Zomato, District and Blinkit beauty and electronics, 5% off the rest of Blinkit, and pays cashback on Uber, ixigo, Apollo, Urban Company and everyday spends. Three separate caps decide…",
+    "category": "Launched",
+    "date": "2026-11-05",
+    "readTime": 9,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/eternal-sbi-card.jpg",
+      "alt": "Eternal SBI credit card",
+      "srcset": "/assets/reviews/eternal-sbi-card-800.webp 800w, /assets/reviews/eternal-sbi-card-1200.webp 1200w, /assets/reviews/eternal-sbi-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
+    "id": "hsbc-live-plus",
+    "title": "HSBC Live+ Credit Card",
+    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
+    "category": "Cashback",
+    "date": "2026-11-05",
+    "readTime": 6,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/hsbc-live-plus.jpg",
+      "alt": "HSBC Live+ credit card"
+    },
+    "featured": false
+  },
+  {
     "id": "swiggy-hdfc-ornge-blck-credit-card",
     "title": "Swiggy HDFC Ornge and BLCK Credit Cards",
     "excerpt": "HDFC Bank has split the Swiggy card in two. Ornge (₹500) pays 5% on Swiggy and select online shopping, sharing one ₹1,500 monthly cap. BLCK (₹1,000) pays 10% on Swiggy and 5% online, each with its own ₹1,500 cap.…",
@@ -100,43 +137,6 @@ export const blogPosts: BlogPost[] = [
       "src": "/assets/reviews/rbl-jalsa-credit-card.jpg",
       "alt": "RBL Bank Jalsa credit card",
       "srcset": "/assets/reviews/rbl-jalsa-credit-card-800.webp 800w, /assets/reviews/rbl-jalsa-credit-card-1200.webp 1200w, /assets/reviews/rbl-jalsa-credit-card.jpg 1600w"
-    },
-    "featured": false
-  },
-  {
-    "id": "eternal-sbi-card",
-    "title": "Eternal SBI Credit Card",
-    "excerpt": "A ₹499 card that takes 10% off Zomato, District and Blinkit beauty and electronics, 5% off the rest of Blinkit, and pays cashback on Uber, ixigo, Apollo, Urban Company and everyday spends. Three separate caps decide…",
-    "category": "Launched",
-    "date": "2026-10-15",
-    "readTime": 9,
-    "author": {
-      "name": "Abhishek Meena",
-      "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face-96.jpg"
-    },
-    "image": {
-      "src": "/assets/reviews/eternal-sbi-card.jpg",
-      "alt": "Eternal SBI credit card",
-      "srcset": "/assets/reviews/eternal-sbi-card-800.webp 800w, /assets/reviews/eternal-sbi-card-1200.webp 1200w, /assets/reviews/eternal-sbi-card.jpg 1600w"
-    },
-    "featured": false
-  },
-  {
-    "id": "hsbc-live-plus",
-    "title": "HSBC Live+ Credit Card",
-    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
-    "category": "Cashback",
-    "date": "2026-10-13",
-    "readTime": 6,
-    "author": {
-      "name": "Abhishek Meena",
-      "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face-96.jpg"
-    },
-    "image": {
-      "src": "/assets/reviews/hsbc-live-plus.jpg",
-      "alt": "HSBC Live+ credit card"
     },
     "featured": false
   },
