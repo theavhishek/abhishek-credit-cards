@@ -822,6 +822,17 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
   .rv-toc.has-dot ol { position: relative; padding-inline-start: 14px; }
   .rv-toc.has-dot a { border-inline-start: 0; }
   .rv-toc.has-dot a[aria-current="true"] { border-radius: 8px; }
+  /* Outline rail the dot rides on, from the first item to the last. */
+  .rv-toc.has-dot ol::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 4.5px;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+  }
   .rv-toc-dot {
     position: absolute;
     top: 0;
@@ -830,6 +841,7 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
     height: 6px;
     border-radius: 50%;
     background: var(--rv-brand);
+    box-shadow: 0 0 0 3px var(--page);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s var(--ease, ease);
