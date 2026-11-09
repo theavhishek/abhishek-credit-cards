@@ -59,6 +59,9 @@ html { scroll-padding-top: 112px; }
   line-height: 1.6;
 }
 .rv:focus { outline: none; }
+/* card-reviews.css sets overflow: hidden on main, which stops the sticky
+   "On this page" list. clip trims the same overflow without that side effect. */
+.reviews-page main.rv { overflow: clip; }
 .rv :where(h1, h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; }
 .rv :where(a):focus-visible,
 .rv :where(button, summary, input, [tabindex="0"]):focus-visible {
