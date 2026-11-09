@@ -1,52 +1,9 @@
 /* ==========================================================================
-   Site backdrop: silk lines. A ribbon of fine lines sweeps across the page
-   from the lower left to the top right and twists slowly, like fabric.
-   Grey on the left, warming to the brand orange on the right.
-   backdrop.js draws it once (after page load, when the browser is idle) on
-   one fixed, transparent canvas behind the page. On desktop the canvas
-   drifts slowly with a CSS transform (compositor only, no redrawing);
-   phones, touch screens and reduced motion keep it still. Without
-   JavaScript the page shows its plain colour.
+   Site backdrop: none for now (2026-11-09). Every page shows the plain page
+   colour (--page in site.css: #f5f5f7 light, #000 dark). Earlier backdrops
+   (membrane grid, silk lines) live in git history.
    ========================================================================== */
-body {
-  --bd-line: rgb(0 0 0 / .085);
-  --bd-dot: rgb(0 0 0 / .16);
-  --bd-hot: #fc6e20;
-}
-html[data-theme="dark"] body {
-  --bd-line: rgb(255 255 255 / .075);
-  --bd-dot: rgb(255 255 255 / .13);
-  --bd-hot: #ff8a3d;
-}
-
-.bd-fx {
-  position: fixed;
-  /* a little larger than the screen, so the drift never shows an edge */
-  top: -24px;
-  left: -24px;
-  z-index: -1;
-  pointer-events: none;
-  display: block;
-  width: calc(100vw + 48px);
-  height: calc(100vh + 48px);
-  height: calc(100lvh + 48px);
-  opacity: 0;
-  transition: opacity .8s ease;
-}
-.bd-fx.is-on { opacity: 1; }
-
-@media (hover: hover) and (pointer: fine) and (min-width: 641px) and (prefers-reduced-motion: no-preference) {
-  .bd-fx.is-on { animation: bd-drift 18s ease-in-out infinite alternate; }
-}
-@keyframes bd-drift {
-  from { transform: translate3d(-14px, 10px, 0) scale(1.01); }
-  to   { transform: translate3d(14px, -10px, 0) scale(1.03); }
-}
-
-@media (forced-colors: active), print {
-  .bd-fx { display: none; }
-}
 
 /* The card-reviews React grid paints its section with the page colour;
-   let the backdrop show through instead. */
+   keep it transparent so it matches the page exactly. */
 #card-reviews-root > section { background: transparent; }
