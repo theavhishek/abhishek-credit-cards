@@ -821,13 +821,13 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
   /* Bounce dot (review-page.js) replaces the left bar on desktop: an outline
      box frames the active item and the dot sits inside it. */
   .rv-toc.has-dot ol { position: relative; }
-  .rv-toc.has-dot a { position: relative; z-index: 1; padding-inline-start: 26px; border-inline-start: 0; }
+  .rv-toc.has-dot a { position: relative; z-index: 1; width: fit-content; max-width: 100%; padding-inline: 26px 14px; border-inline-start: 0; }
   .rv-toc.has-dot a[aria-current="true"] { border-radius: 8px; }
   .rv-toc-frame {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
+    width: 0;
     height: 0;
     border: 1px solid var(--line);
     border-radius: 8px;
