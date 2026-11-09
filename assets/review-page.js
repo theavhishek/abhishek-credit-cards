@@ -115,29 +115,40 @@
     dot.className = "rv-toc-dot";
     dot.setAttribute("aria-hidden", "true");
     dot.setAttribute("role", "presentation");
-    tocList.prepend(dot);
+    const box = document.createElement("li");
+    box.className = "rv-toc-frame";
+    box.setAttribute("aria-hidden", "true");
+    box.setAttribute("role", "presentation");
+    tocList.prepend(box, dot);
     tocList.parentElement.closest(".rv-toc").classList.add("has-dot");
-    let y = 0, x = 0, placed = false, frame = 0;
-    const draw = () => { dot.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`; };
-    const targetY = () => {
+    let x = 0, by = 0, bh = 0, placed = false, frame = 0;
+    const draw = () => {
+      dot.style.transform = `translate(${x.toFixed(2)}px, ${(by + (bh - DOT) / 2).toFixed(2)}px)`;
+      box.style.transform = `translateY(${by.toFixed(2)}px)`;
+      box.style.height = `${bh.toFixed(2)}px`;
+    };
+    const target = () => {
       const link = tocList.querySelector("a[aria-current='true']");
       if (!link) return null;
       const li = link.closest("li");
-      return li.offsetTop + (li.offsetHeight - DOT) / 2;
+      return { top: li.offsetTop, h: li.offsetHeight };
     };
     const snap = () => {
-      const to = targetY();
-      if (to == null) return;
+      const t = target();
+      if (!t) return;
       cancelAnimationFrame(frame);
-      y = to; x = 0; placed = true;
+      by = t.top; bh = t.h; x = 0; placed = true;
       dot.classList.add("is-on");
+      box.classList.add("is-on");
       draw();
     };
     const move = () => {
-      const to = targetY();
-      if (to == null) return;
+      const t = target();
+      if (!t) return;
       if (!placed || reduce.matches || !wide.matches) return snap();
-      const from = y, dist = to - from, travel = Math.abs(dist);
+      const fromTop = by, fromH = bh;
+      const from = fromTop + fromH / 2, to = t.top + t.h / 2;
+      const dist = to - from, travel = Math.abs(dist);
       if (travel < 0.5) return;
       // Same tuning as the original: longer jumps get a softer spring, and the
       // sideways hop (away from the labels) is capped near 20px.
@@ -155,10 +166,11 @@
           p += v * h;
           dt -= h;
         }
-        y = from + dist * p;
+        by = fromTop + (t.top - fromTop) * p;
+        bh = fromH + (t.h - fromH) * Math.min(Math.max(p, 0), 1);
         x = -bulge * Math.max(0, Math.sin(Math.PI * Math.min(p, 1)));
         draw();
-        if (Math.abs(p - 1) < 0.001 && Math.abs(v) < 0.01) { y = to; x = 0; draw(); return; }
+        if (Math.abs(p - 1) < 0.001 && Math.abs(v) < 0.01) { by = t.top; bh = t.h; x = 0; draw(); return; }
         frame = requestAnimationFrame(step);
       };
       frame = requestAnimationFrame(step);
