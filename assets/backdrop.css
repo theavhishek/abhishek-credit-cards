@@ -1,50 +1,35 @@
 /* ==========================================================================
-   Site backdrop: a fine 50px grid that behaves like a stretched membrane.
-   backdrop.js draws it on a fixed, transparent canvas behind the page: the
-   pointer presses a dent, a click sends a wave, and the sheet springs back.
-   Neutral grey lines; the stretched parts glow in the brand orange.
-   It fades softly towards the edges and bottom so long text stays easy to
-   read. The footer keeps its own solid background.
-   Without JavaScript, the same grid is drawn flat in CSS (body::before).
+   Site backdrop: silk lines. A ribbon of fine lines sweeps across the page
+   from the lower left to the top right and twists slowly, like fabric.
+   Grey on the left, warming to the brand orange on the right.
+   backdrop.js draws it on one fixed, transparent canvas behind the page.
+   Desktop animates gently; phones, touch screens and reduced motion get a
+   single still drawing (no animation loop). Without JavaScript the page
+   shows its plain colour.
    ========================================================================== */
 body {
-  --bd-line: rgb(0 0 0 / .055);
+  --bd-line: rgb(0 0 0 / .085);
+  --bd-dot: rgb(0 0 0 / .16);
   --bd-hot: #fc6e20;
 }
 html[data-theme="dark"] body {
-  --bd-line: rgb(255 255 255 / .05);
+  --bd-line: rgb(255 255 255 / .075);
+  --bd-dot: rgb(255 255 255 / .13);
   --bd-hot: #ff8a3d;
 }
 
-.bd-membrane,
-body::before {
+.bd-fx {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(130% 95% at 50% 0%, #000 45%, rgb(0 0 0 / .3) 100%);
-  mask-image: radial-gradient(130% 95% at 50% 0%, #000 45%, rgb(0 0 0 / .3) 100%);
-}
-.bd-membrane {
   display: block;
   width: 100vw;
   height: 100vh;
 }
 
-/* Flat fallback while the script loads or if it doesn't run. */
-body::before {
-  content: "";
-  background-image:
-    linear-gradient(var(--bd-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bd-line) 1px, transparent 1px);
-  background-size: 50px 50px;
-  /* Centred, so a line always runs down the middle (matches the canvas). */
-  background-position: calc(50% + 25px) 0;
-}
-html.bd-has-membrane body::before { content: none; }
-
 @media (forced-colors: active), print {
-  .bd-membrane, body::before { display: none; }
+  .bd-fx { display: none; }
 }
 
 /* The card-reviews React grid paints its section with the page colour;
