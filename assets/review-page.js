@@ -104,19 +104,96 @@
     if (!wide.matches) tocBox.open = false;
   }));
 
+  /* ---------- Bounce dot (desktop) ----------
+     Port of BeUI "bounce-sidebar": the active dot hops to the next section on
+     a sideways arc with a light spring. Phones keep the plain list. */
+  const tocList = document.querySelector(".rv-toc ol");
+  const tocDot = tocList && (() => {
+    const DOT = 6;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const dot = document.createElement("li");
+    dot.className = "rv-toc-dot";
+    dot.setAttribute("aria-hidden", "true");
+    dot.setAttribute("role", "presentation");
+    tocList.prepend(dot);
+    tocList.parentElement.closest(".rv-toc").classList.add("has-dot");
+    let y = 0, x = 0, placed = false, frame = 0;
+    const draw = () => { dot.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px)`; };
+    const targetY = () => {
+      const link = tocList.querySelector("a[aria-current='true']");
+      if (!link) return null;
+      const li = link.closest("li");
+      return li.offsetTop + (li.offsetHeight - DOT) / 2;
+    };
+    const snap = () => {
+      const to = targetY();
+      if (to == null) return;
+      cancelAnimationFrame(frame);
+      y = to; x = 0; placed = true;
+      dot.classList.add("is-on");
+      draw();
+    };
+    const move = () => {
+      const to = targetY();
+      if (to == null) return;
+      if (!placed || reduce.matches || !wide.matches) return snap();
+      const from = y, dist = to - from, travel = Math.abs(dist);
+      if (travel < 0.5) return;
+      // Same tuning as the original: longer jumps get a softer spring, and the
+      // sideways hop (away from the labels) is capped near 20px.
+      const long = Math.min(1, Math.max(0, (travel - 48) / 120));
+      const k = 280 - 60 * long, c = 18 + long, m = 0.3 + 0.15 * long;
+      const bulge = Math.min(0.26 * travel, 40) / 2;
+      let p = 0, v = 0, last = performance.now();
+      cancelAnimationFrame(frame);
+      const step = (now) => {
+        let dt = Math.min(0.032, (now - last) / 1000);
+        last = now;
+        while (dt > 0) {
+          const h = Math.min(dt, 1 / 240);
+          v += ((-k * (p - 1) - c * v) / m) * h;
+          p += v * h;
+          dt -= h;
+        }
+        y = from + dist * p;
+        x = -bulge * Math.max(0, Math.sin(Math.PI * Math.min(p, 1)));
+        draw();
+        if (Math.abs(p - 1) < 0.001 && Math.abs(v) < 0.01) { y = to; x = 0; draw(); return; }
+        frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    };
+    if ("ResizeObserver" in window) new ResizeObserver(snap).observe(tocList);
+    wide.addEventListener?.("change", snap);
+    return { move };
+  })();
+
   /* ---------- Highlight the section in view ---------- */
   const links = [...document.querySelectorAll(".rv-toc a[href^='#']")];
   const sections = links.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
   if ("IntersectionObserver" in window && sections.length) {
     const visible = new Map();
-    const mark = () => {
-      const current = sections.find((section) => visible.get(section));
-      if (!current) return;
+    let lockUntil = 0;
+    const setCurrent = (id) => {
       links.forEach((link) => {
-        if (link.getAttribute("href") === `#${current.id}`) link.setAttribute("aria-current", "true");
+        if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "true");
         else link.removeAttribute("aria-current");
       });
+      tocDot?.move();
     };
+    const mark = () => {
+      if (Date.now() < lockUntil) return;
+      const current = sections.find((section) => visible.get(section));
+      if (!current) return;
+      setCurrent(current.id);
+    };
+    // A click jumps the dot straight to its section instead of stepping
+    // through every heading the page scrolls past.
+    links.forEach((link) => link.addEventListener("click", () => {
+      if (!wide.matches) return;
+      lockUntil = Date.now() + 1200;
+      setCurrent(link.getAttribute("href").slice(1));
+    }));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => visible.set(entry.target, entry.isIntersecting));
       mark();

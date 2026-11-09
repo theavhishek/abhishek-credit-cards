@@ -818,6 +818,26 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
   }
   .rv-toc-box summary::after { display: none; }
   .rv-toc ol { padding: 0; }
+  /* Bounce dot (review-page.js) replaces the left bar on desktop. */
+  .rv-toc.has-dot ol { position: relative; padding-inline-start: 14px; }
+  .rv-toc.has-dot a { border-inline-start: 0; }
+  .rv-toc.has-dot a[aria-current="true"] { border-radius: 8px; }
+  .rv-toc-dot {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rv-brand);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease, ease);
+  }
+  .rv-toc-dot.is-on { opacity: 1; }
+}
+@media (max-width: 959.98px) {
+  .rv-toc-dot { display: none; }
 }
 
 @media print {
