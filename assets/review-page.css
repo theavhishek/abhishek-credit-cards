@@ -59,6 +59,9 @@ html { scroll-padding-top: 112px; }
   line-height: 1.6;
 }
 .rv:focus { outline: none; }
+/* card-reviews.css sets overflow: hidden on main, which stops the sticky
+   "On this page" list. clip trims the same overflow without that side effect. */
+.reviews-page main.rv { overflow: clip; }
 .rv :where(h1, h2, h3, p, ul, ol, dl, dd, figure) { margin: 0; }
 .rv :where(a):focus-visible,
 .rv :where(button, summary, input, [tabindex="0"]):focus-visible {
@@ -815,6 +818,57 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
   }
   .rv-toc-box summary::after { display: none; }
   .rv-toc ol { padding: 0; }
+  /* Bounce dot (review-page.js) replaces the left bar on desktop: an outline
+     box frames the active item and the dot sits inside it. */
+  .rv-toc.has-dot ol { position: relative; }
+  .rv-toc.has-dot a { position: relative; z-index: 1; width: fit-content; max-width: 100%; padding-inline: 26px 14px; border-inline-start: 0; }
+  .rv-toc.has-dot a[aria-current="true"] { border-radius: 8px; }
+  .rv-toc-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease, ease);
+  }
+  .rv-toc-dot {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 11px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rv-brand);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease, ease);
+  }
+  .rv-toc-dot.is-on, .rv-toc-frame.is-on { opacity: 1; }
+  /* Live ping: a soft ring pulses out from the dot. */
+  .rv-toc-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--rv-brand);
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rv-toc-dot::after { animation: rv-toc-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  }
+  @keyframes rv-toc-ping {
+    0% { transform: scale(1); opacity: 0.55; }
+    75%, 100% { transform: scale(3.2); opacity: 0; }
+  }
+}
+@media (max-width: 959.98px) {
+  .rv-toc-dot, .rv-toc-frame { display: none; }
 }
 
 @media print {
