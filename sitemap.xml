@@ -120,6 +120,15 @@
       <image:loc>https://avhishek.in/assets/reviews/swiggy-hdfc-ornge-blck-credit-card.jpg</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://avhishek.in/card-reviews/unity-bank-vibe-zero-credit-card</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://avhishek.in/assets/reviews/unity-bank-vibe-zero-credit-card.jpg</image:loc>
+    </image:image>
+  </url>
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>

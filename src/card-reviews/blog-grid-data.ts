@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "unity-bank-vibe-zero-credit-card",
+    "title": "Unity Bank Vibe and Zero Credit Cards",
+    "excerpt": "Two RuPay credit cards from Unity Small Finance Bank, both backed by a fixed deposit, with 0% bank forex markup and rewards on UPI. Zero is free and pays up to 1% by category. Vibe costs ₹249 once, pays up to 1.5% on…",
+    "category": "Cashback",
+    "date": "2026-11-10",
+    "readTime": 10,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/unity-bank-vibe-zero-credit-card.jpg",
+      "alt": "Unity Bank Vibe and Zero Credit Cards credit card",
+      "srcset": "/assets/reviews/unity-bank-vibe-zero-credit-card-800.webp 800w, /assets/reviews/unity-bank-vibe-zero-credit-card-1200.webp 1200w, /assets/reviews/unity-bank-vibe-zero-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "eternal-sbi-card",
     "title": "Eternal SBI Credit Card",
     "excerpt": "A ₹499 card that takes 10% off Zomato, District and Blinkit beauty and electronics, 5% off the rest of Blinkit, and pays cashback on Uber, ixigo, Apollo, Urban Company and everyday spends. Three separate caps decide…",
