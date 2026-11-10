@@ -1,8 +1,8 @@
 /* Unity Bank Vibe vs Zero review: card chips, four result cards and the wide rates table.
    Builds on swiggy-review.css (.sw-totals, .sw-compare, .sw-chip) and eternal-calc.css. */
-.un-chip--zero { background: #f1eee6; box-shadow: inset 0 0 0 1px var(--line-strong); }
-.un-chip--vibe { background: linear-gradient(135deg, #5b2bd6, #b0217a); }
-html[data-theme="dark"] .un-chip--zero { box-shadow: inset 0 0 0 1px var(--muted); }
+.un-chip--zero { background: #45d62f; }
+.un-chip--vibe { background: #111113; box-shadow: inset 0 0 0 1px var(--line-strong); }
+html[data-theme="dark"] .un-chip--vibe { background: #000; box-shadow: inset 0 0 0 1px var(--muted); }
 
 .un-totals .ec-total { transition: box-shadow .2s var(--ease, ease); }
 .un-totals .ec-total[data-best="true"] { box-shadow: inset 0 0 0 2px var(--rv-accent); }

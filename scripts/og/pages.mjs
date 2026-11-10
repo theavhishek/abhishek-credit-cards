@@ -104,7 +104,7 @@ export const PAGES = [
     subtitle: "Three Vibe reward plans vs a free Zero card, both FD-backed RuPay.",
     stats: [["1.5%", "top Vibe plan rate"], ["0%", "bank forex markup"], ["₹249", "Vibe fee, once"]],
     glass: true,
-    visual: { photo: "/assets/reviews/unity-bank-vibe-zero-credit-card.jpg", position: "75% 50%" },
+    visual: { photo: "/assets/reviews/unity-bank-vibe-zero-credit-card.jpg", position: "60% 50%" },
   },
   {
     file: "swiggy-hdfc-ornge-blck-credit-card.jpg",
