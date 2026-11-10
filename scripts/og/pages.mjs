@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "unity-bank-vibe-zero-credit-card.jpg",
+    alt: "Unity Bank Vibe and Zero credit card review by Abhishek Meena: up to 1.5% on Vibe plans, 1% on Zero, 0% forex, ₹249 one-time Vibe fee",
+    eyebrow: "Card review",
+    title: "Unity Bank Vibe vs Zero",
+    subtitle: "Three Vibe reward plans vs a free Zero card, both FD-backed RuPay.",
+    stats: [["1.5%", "top Vibe plan rate"], ["0%", "bank forex markup"], ["₹249", "Vibe fee, once"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/unity-bank-vibe-zero-credit-card.jpg", position: "75% 50%" },
+  },
+  {
     file: "swiggy-hdfc-ornge-blck-credit-card.jpg",
     alt: "Swiggy HDFC Bank Ornge and BLCK credit card review by Abhishek Meena: 5% or 10% on Swiggy, ₹1,500 caps, ₹500 or ₹1,000 fee",
     eyebrow: "Card review",

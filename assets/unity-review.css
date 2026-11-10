@@ -1,0 +1,21 @@
+/* Unity Bank Vibe vs Zero review: card chips, four result cards and the wide rates table.
+   Builds on swiggy-review.css (.sw-totals, .sw-compare, .sw-chip) and eternal-calc.css. */
+.un-chip--zero { background: #f1eee6; box-shadow: inset 0 0 0 1px var(--line-strong); }
+.un-chip--vibe { background: linear-gradient(135deg, #5b2bd6, #b0217a); }
+html[data-theme="dark"] .un-chip--zero { box-shadow: inset 0 0 0 1px var(--muted); }
+
+.un-totals .ec-total { transition: box-shadow .2s var(--ease, ease); }
+.un-totals .ec-total[data-best="true"] { box-shadow: inset 0 0 0 2px var(--rv-accent); }
+.un-totals .ec-total-value { font-size: clamp(1.5rem, 1.3rem + .8vw, 2rem); }
+
+.un-rates th[scope="col"] { min-width: 6.5rem; }
+.un-rates tbody th { min-width: 9rem; }
+.un-rates .sw-win { color: var(--rv-accent); font-weight: 650; }
+
+@media (max-width: 560px) {
+  .un-rates { font-size: var(--rv-fs-small); }
+  .un-rates th, .un-rates td { padding: 10px 8px; }
+  .un-rates th[scope="col"] { min-width: 5.25rem; }
+  .un-rates tbody th { min-width: 7rem; }
+}
+.un-legend-note { font-weight: 400; }
