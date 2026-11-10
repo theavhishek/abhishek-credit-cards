@@ -780,7 +780,13 @@ html[data-theme="dark"] .hm-wc { box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08), 
   .hm-wall.is-paused .hm-wall-track { animation-play-state: paused; }
 }
 @media (hover: hover) { .hm-wall:hover .hm-wall-track { animation-play-state: paused; } }
-@keyframes hm-wall-move { to { transform: translateY(calc(-50% - var(--gap) / 2)); } }
+/* Every column holds the same number of cards (two identical halves). The loop runs
+   from +¼ to -¼ of the track (one half's height) so the middle of each column, where
+   the visible window sits, always has cards above and below it: no empty stretch. */
+@keyframes hm-wall-move {
+  from { transform: translateY(calc((100% + var(--gap)) / 4)); }
+  to { transform: translateY(calc((100% + var(--gap)) / -4)); }
+}
 /* the wall bleeds to the right edge on desktop; don't let that scroll the page */
 body.home-page { overflow-x: clip; }
 @media (min-width: 960px) {
