@@ -1,0 +1,62 @@
+/* IDFC FIRST Hello Cashback review: zero-forex banner under the hero.
+   Always dark in both themes, like the bank's own banner; the gold artwork is IDFC FIRST Bank's. */
+.hc-forex {
+  position: relative;
+  display: grid;
+  gap: 8px 40px;
+  align-items: center;
+  margin-block-end: 40px;
+  padding: 28px 24px;
+  overflow: hidden;
+  border-radius: var(--rv-radius-lg);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background-color: #0b0b0c;
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.hc-forex-art { justify-self: center; width: min(100%, 300px); height: auto; }
+.hc-forex-copy { display: grid; gap: 20px; }
+.hc-forex h2 {
+  max-width: 20ch;
+  font-size: clamp(1.625rem, 1.2rem + 1.9vw, 2.75rem);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hc-forex-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.hc-forex-apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding-inline: 24px;
+  border-radius: var(--radius-full, 999px);
+  background: #fff;
+  color: #0b0b0c;
+  font-weight: 600;
+  text-decoration: none;
+  transition: scale 150ms ease-out, background-color 150ms ease-out;
+}
+.hc-forex-more {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 0.5);
+  text-underline-offset: 4px;
+}
+.hc-forex-note { font-size: var(--rv-fs-small); color: rgb(255 255 255 / 0.72); }
+.hc-forex :where(a):focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 6px; }
+@media (hover: hover) {
+  .hc-forex-apply:hover { background: #e8e6e1; }
+  .hc-forex-more:hover { text-decoration-color: #fff; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hc-forex-apply:active { scale: 0.96; }
+}
+@media (min-width: 760px) {
+  .hc-forex { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); padding: 40px 48px; }
+  .hc-forex-art { order: 2; width: min(100%, 360px); }
+}
