@@ -235,7 +235,19 @@
      a third tap starts again. Days with a dot have updates for the current tab and filters. */
 
   const CHEVRON = (d) => `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
-  const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; // weeks start on Monday
+  const weekday = (key) => (dateOf(key).getDay() + 6) % 7; // 0 = Monday
+  // Day colours follow the feed badges. A day is filled in its main kind's colour (the first in this
+  // list it has); any other kinds posted that day show as small dots under the number.
+  const KINDS = [
+    ["devaluation", "Devaluation"],
+    ["launch", "Card launch"],
+    ["spend-offer", "Spend offer"],
+    ["cashback", "Cashback"],
+    ["news", "Other news"],
+    ["offer", "Other offer"],
+  ];
+  const kindOf = (item) => (KINDS.some(([k]) => k === item.category) ? item.category : item.type === "offer" ? "offer" : "news");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let month = null; // first day of the shown month, as a key
   let focusKey = null; // the day that holds the grid's single tab stop
@@ -250,7 +262,11 @@
     const now = Date.now();
     const days = new Map();
     (items || []).forEach((item) => {
-      if (core.matches(item, state, now)) days.set(item.published, (days.get(item.published) || 0) + 1);
+      if (!core.matches(item, state, now)) return;
+      const day = days.get(item.published) || { n: 0, kinds: new Set() };
+      day.n += 1;
+      day.kinds.add(kindOf(item));
+      days.set(item.published, day);
     });
     return days;
   }
@@ -262,7 +278,7 @@
     if (!focusKey || monthKey(focusKey) !== month) focusKey = state.to && monthKey(state.to) === month ? state.to : month === monthKey(today) ? today : month;
     const days = postedDays();
     const start = dateOf(month);
-    const lead = start.getDay();
+    const lead = weekday(month);
     const total = new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate();
     const cells = [];
     for (let i = 0; i < lead; i++) cells.push("");
@@ -273,7 +289,10 @@
     for (let r = 0; r < cells.length; r += 7) {
       rows.push(`<tr>${cells.slice(r, r + 7).map((key) => {
         if (!key) return '<td role="gridcell"></td>';
-        const n = days.get(key) || 0;
+        const info = days.get(key);
+        const n = info ? info.n : 0;
+        const kinds = info ? KINDS.map(([k]) => k).filter((k) => info.kinds.has(k)) : [];
+        const dots = kinds.slice(1, 4).map((k) => `<span class="up-cal-dot" data-kind="${k}"></span>`).join("");
         const future = key > today;
         const picked = state.from && (key === state.from || key === state.to);
         const between = state.from && key > state.from && key < state.to;
@@ -281,11 +300,16 @@
           between && "is-between",
           state.from && state.from !== state.to && key === state.from && "is-start",
           state.from && state.from !== state.to && key === state.to && "is-end"].filter(Boolean).join(" ");
-        const label = `${fmt(key, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}, ${n ? `${n} ${n === 1 ? "update" : "updates"}` : "no updates"}${key === today ? ", today" : ""}`;
-        return `<td role="gridcell" class="${cls}" aria-selected="${Boolean(picked || between)}"><button type="button" class="up-cal-day${picked ? " is-picked" : ""}${key === today ? " is-today" : ""}${n ? " has-posts" : ""}" data-day="${key}" tabindex="${key === focusKey ? 0 : -1}" aria-label="${label}"${future ? " disabled" : ""}>${Number(key.slice(8))}</button></td>`;
+        const kindNames = kinds.map((k) => KINDS.find(([kk]) => kk === k)[1].toLowerCase()).join(", ");
+        const label = `${fmt(key, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}, ${n ? `${n} ${n === 1 ? "update" : "updates"}: ${kindNames}` : "no updates"}${key === today ? ", today" : ""}`;
+        return `<td role="gridcell" class="${cls}" aria-selected="${Boolean(picked || between)}"><button type="button" class="up-cal-day${picked ? " is-picked" : ""}${key === today ? " is-today" : ""}${n ? " has-posts" : ""}"${kinds.length ? ` data-kind="${kinds[0]}"` : ""} data-day="${key}" tabindex="${key === focusKey ? 0 : -1}" aria-label="${label}"${future ? " disabled" : ""}><span class="up-cal-num">${Number(key.slice(8))}</span>${dots ? `<span class="up-cal-dots" aria-hidden="true">${dots}</span>` : ""}</button></td>`;
       }).join("")}</tr>`);
     }
 
+    const monthKinds = new Set();
+    days.forEach((info, key) => { if (monthKey(key) === month) info.kinds.forEach((k) => monthKinds.add(k)); });
+    const legend = KINDS.filter(([k]) => monthKinds.has(k))
+      .map(([k, label]) => `<li><span class="up-cal-dot" data-kind="${k}"></span>${label}</li>`).join("");
     const canPrev = month > firstMonth();
     const canNext = month < lastMonth();
     const summary = state.from ? rangeText(state.from, state.to) : "All dates";
@@ -303,6 +327,7 @@
         <thead><tr>${WEEKDAYS.map((w) => `<th scope="col" abbr="${w}"><span aria-hidden="true">${w.slice(0, 2)}</span></th>`).join("")}</tr></thead>
         <tbody>${rows.join("")}</tbody>
       </table>
+      ${legend ? `<ul class="up-cal-legend" aria-label="Colour key">${legend}</ul>` : '<p class="up-cal-legend up-cal-muted">Nothing posted this month</p>'}
       <div class="up-cal-summary">
         <span class="up-cal-muted">Showing</span>
         <strong>${summary}</strong>
@@ -367,8 +392,8 @@
     const steps = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
     let next = null;
     if (steps[event.key]) next = addDays(day.dataset.day, steps[event.key]);
-    else if (event.key === "Home") next = addDays(day.dataset.day, -dateOf(day.dataset.day).getDay());
-    else if (event.key === "End") next = addDays(day.dataset.day, 6 - dateOf(day.dataset.day).getDay());
+    else if (event.key === "Home") next = addDays(day.dataset.day, -weekday(day.dataset.day));
+    else if (event.key === "End") next = addDays(day.dataset.day, 6 - weekday(day.dataset.day));
     else if (event.key === "PageUp" || event.key === "PageDown") {
       const d = dateOf(day.dataset.day);
       const moved = new Date(d.getFullYear(), d.getMonth() + (event.key === "PageUp" ? -1 : 1), 1);

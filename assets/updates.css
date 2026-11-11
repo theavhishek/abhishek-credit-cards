@@ -366,23 +366,53 @@ html[data-theme="dark"] .up-cal-card { box-shadow: 0 8px 24px rgb(0 0 0 / 0.4); 
 }
 .up-cal-day:not(.has-posts):not(.is-picked) { color: var(--muted); }
 .up-cal-day.is-today { box-shadow: inset 0 0 0 1px var(--line-strong); font-weight: 600; }
-/* Days with updates carry a small orange dot. */
-.up-cal-day.has-posts::after {
-  content: "";
+/* Kind colours, the same as the feed badges. */
+:is(.up-cal-day, .up-cal-dot)[data-kind="devaluation"] { --up-kind: var(--up-danger-fill); }
+:is(.up-cal-day, .up-cal-dot)[data-kind="launch"] { --up-kind: #4f46e5; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="spend-offer"] { --up-kind: #1d4ed8; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="cashback"] { --up-kind: #15803d; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="news"] { --up-kind: #c2410c; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="offer"] { --up-kind: #b45309; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="launch"] { --up-kind: #6366f1; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="spend-offer"] { --up-kind: #2563eb; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="cashback"] { --up-kind: #16a34a; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="news"] { --up-kind: #ea580c; }
+/* A day with updates is filled in its main kind's colour; other kinds that day are dots under the number. */
+.up-cal-day[data-kind] { background: var(--up-kind); color: #fff; font-weight: 600; }
+.up-cal-num { line-height: 1; }
+.up-cal-dots {
   position: absolute;
-  inset-block-end: 5px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin-inline-start: -2px;
-  border-radius: 999px;
-  background: var(--up-brand);
+  inset-block-end: 4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
 }
-.up-cal-day.is-picked { background: var(--text); color: var(--page); font-weight: 600; box-shadow: none; }
-.up-cal-day.is-picked.has-posts::after { background: currentColor; }
+.up-cal-dots .up-cal-dot { width: 5px; height: 5px; box-shadow: 0 0 0 1px #fff; }
+.up-cal-dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--up-kind, var(--up-brand)); }
+.up-cal-day.is-picked:not([data-kind]) { background: var(--text); color: var(--page); font-weight: 600; box-shadow: none; }
+/* A picked day keeps its colour and gets a ring. */
+.up-cal-day.is-picked[data-kind] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text); }
+.up-cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.up-cal-legend li { display: inline-flex; align-items: center; gap: 6px; }
+p.up-cal-legend { justify-content: center; }
 .up-cal-day:disabled { opacity: 0.35; cursor: default; }
 .up-cal-day:not(:disabled):active { scale: 0.9; }
-@media (hover: hover) { .up-cal-day:not(:disabled):not(.is-picked):hover { background: var(--up-fill-strong); color: var(--text); } }
+@media (hover: hover) {
+  .up-cal-day:not(:disabled):not(.is-picked):not([data-kind]):hover { background: var(--up-fill-strong); color: var(--text); }
+  .up-cal-day[data-kind]:not(.is-picked):hover { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px color-mix(in srgb, var(--up-kind) 45%, transparent); }
+}
 
 .up-cal-summary {
   display: flex;
@@ -396,7 +426,9 @@ html[data-theme="dark"] .up-cal-card { box-shadow: 0 8px 24px rgb(0 0 0 / 0.4); 
 .up-cal-summary strong { font-size: 0.9375rem; font-weight: 500; font-variant-numeric: tabular-nums; }
 .up-cal-muted { font-size: 0.8125rem; color: var(--muted); }
 .up-cal-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-.up-cal-hint { margin-inline-end: auto; }
+/* The hint gets its own line; Clear dates and Done sit together on the right. */
+.up-cal-hint { flex-basis: 100%; }
+.up-cal-foot > button:first-of-type { margin-inline-start: auto; }
 .up-cal-link {
   min-height: 36px;
   padding-inline: 4px;
@@ -430,7 +462,7 @@ html[data-theme="dark"] .up-cal-card { box-shadow: 0 8px 24px rgb(0 0 0 / 0.4); 
 }
 @media (forced-colors: active) {
   .up-cal-day.is-picked { outline: 2px solid CanvasText; }
-  .up-cal-day.has-posts::after { background: CanvasText; }
+  .up-cal-day[data-kind] { border: 1px solid CanvasText; }
 }
 
 .up-results-bar {
