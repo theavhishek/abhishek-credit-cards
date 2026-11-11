@@ -746,7 +746,7 @@ html[data-theme="dark"] .rv-byline img { outline-color: oklch(1 0 0 / 0.1); }
 @media (min-width: 960px) {
   .rv-hero {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: center;
+    align-items: start;
     gap: 56px;
     padding-block: 0 56px;
   }
