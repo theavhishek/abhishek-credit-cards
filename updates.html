@@ -54,7 +54,7 @@
   <link rel="stylesheet" href="/assets/typography.css?v=1">
   <link rel="stylesheet" href="/assets/backdrop.css?v=9">
   <link rel="stylesheet" href="/assets/header.css?v=9">
-  <link rel="stylesheet" href="/assets/updates.css?v=dadc401a">
+  <link rel="stylesheet" href="/assets/updates.css?v=0193b3c9">
   <link rel="stylesheet" href="/assets/stageshow-demos.css?v=3">
   <link rel="stylesheet" href="/assets/newsletter.css?v=1">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
@@ -123,6 +123,10 @@
             <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
             Filters<span class="up-filter-count" id="up-filter-count"></span>
           </button>
+          <button type="button" class="up-filter-btn up-date-btn" id="up-date-btn" aria-expanded="false" aria-controls="up-cal">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+            <span id="up-date-label">Date</span>
+          </button>
         </div>
         <div class="up-filters" id="up-filters" hidden>
           <label class="up-field" for="up-cat">Category<span class="up-select"><select id="up-cat"><option value="">All categories</option></select></span></label>
@@ -133,6 +137,7 @@
             <option value="all">Everything, including unverified offers</option>
           </select></span></label>
         </div>
+        <div class="up-cal" id="up-cal" role="group" aria-labelledby="up-cal-title" hidden></div>
         <div class="up-results-bar" id="up-results-bar">
           <p class="up-count" id="up-count" role="status" aria-live="polite"></p>
           <span class="up-chips" id="up-chips"></span>
@@ -245,7 +250,7 @@
 
   <script src="/assets/card-reviews.js?v=3" defer></script>
   <script src="/assets/updates-core.js?v=e782a42a" defer></script>
-  <script src="/assets/updates.js?v=a09d22c6" defer></script>
+  <script src="/assets/updates.js?v=ad8be5ba" defer></script>
   <script src="/assets/newsletter.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

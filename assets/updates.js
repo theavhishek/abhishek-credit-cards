@@ -21,6 +21,41 @@
   const count = $("#up-count");
   const chips = $("#up-chips");
   const moreBtn = $("#up-more-btn");
+  const dateBtn = $("#up-date-btn");
+  const dateLabel = $("#up-date-label");
+  const cal = $("#up-cal");
+
+  /* ---------- Dates (calendar filter on the published day) ---------- */
+
+  const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+  const pad = (n) => String(n).padStart(2, "0");
+  const keyOf = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const dateOf = (key) => { const [y, m, d] = key.split("-").map(Number); return new Date(y, m - 1, d); };
+  const addDays = (key, n) => { const d = dateOf(key); d.setDate(d.getDate() + n); return keyOf(d); };
+  const todayKey = () => keyOf(new Date());
+  const fmt = (key, opts) => dateOf(key).toLocaleDateString("en-IN", opts);
+  const DAY_FMT = { day: "numeric", month: "short", year: "numeric" };
+
+  function readDates(p) {
+    let from = p.get("date") || p.get("from") || "";
+    let to = p.get("date") || p.get("to") || from;
+    if (!DAY_RE.test(from) || !DAY_RE.test(to)) return { from: "", to: "" };
+    if (to < from) [from, to] = [to, from];
+    return { from, to };
+  }
+
+  // "4 Nov 2026", "4–11 Nov 2026", "28 Oct – 4 Nov 2026", "28 Dec 2025 – 4 Jan 2026"
+  function rangeText(from, to) {
+    if (!from) return "";
+    if (from === to) return fmt(from, DAY_FMT);
+    const a = dateOf(from), b = dateOf(to);
+    if (a.getFullYear() !== b.getFullYear()) return `${fmt(from, DAY_FMT)} – ${fmt(to, DAY_FMT)}`;
+    if (a.getMonth() !== b.getMonth()) return `${fmt(from, { day: "numeric", month: "short" })} – ${fmt(to, DAY_FMT)}`;
+    return `${a.getDate()}–${fmt(to, DAY_FMT)}`;
+  }
+
+  const inDates = (item, st) => !st.from || (item.published >= st.from && item.published <= st.to);
+  const matchesAll = (item, st, now) => core.matches(item, st, now) && inDates(item, st);
 
   const SHOW_LABEL = { archive: "Ended and archived", all: "Everything" };
   const params = new URLSearchParams(location.search);
@@ -30,6 +65,7 @@
     cat: core.CATEGORIES[params.get("category")] ? params.get("category") : "",
     bank: params.get("bank") || "",
     show: ["archive", "all"].includes(params.get("show")) ? params.get("show") : "current",
+    ...readDates(params),
   };
   let items = null;
   let limit = PAGE;
@@ -75,6 +111,9 @@
     const n = activeFilters();
     filterCount.textContent = n ? String(n) : "";
     filterBtn.setAttribute("aria-label", n ? `Filters, ${n} active` : "Filters");
+    dateLabel.textContent = "Date";
+    dateBtn.classList.toggle("is-set", Boolean(state.from));
+    dateBtn.setAttribute("aria-label", state.from ? `Date: ${rangeText(state.from, state.to)}` : "Filter by date");
   }
 
   function writeUrl() {
@@ -84,6 +123,8 @@
     if (state.cat) p.set("category", state.cat);
     if (state.bank) p.set("bank", state.bank);
     if (state.show !== "current") p.set("show", state.show);
+    if (state.from && state.from === state.to) p.set("date", state.from);
+    else if (state.from) { p.set("from", state.from); p.set("to", state.to); }
     const qs = p.toString();
     history.replaceState(null, "", location.pathname + (qs ? `?${qs}` : "") + location.hash);
   }
@@ -107,6 +148,7 @@
     if (state.cat) list.push(["cat", core.CATEGORIES[state.cat].plural]);
     if (state.bank) list.push(["bank", state.bank]);
     if (state.show !== "current") list.push(["show", SHOW_LABEL[state.show]]);
+    if (state.from) list.push(["date", rangeText(state.from, state.to)]);
     chips.innerHTML = list.map(([key, label]) =>
       `<button type="button" class="up-chip" data-remove="${key}" aria-label="Remove filter: ${core.esc(label)}">${core.esc(label)}${x}</button>`).join("") +
       (list.length > 1 ? '<button type="button" class="up-clear" data-clear>Clear all</button>' : "");
@@ -116,10 +158,10 @@
     if (!items.length) {
       return `<div class="up-empty"><h2>Nothing new right now</h2><p>New card launches, devaluations and offers appear here once they’re checked against their source.</p></div>`;
     }
-    const wider = state.show === "current" && items.some((item) => core.matches(item, { ...state, show: "all" }, now));
+    const wider = state.show === "current" && items.some((item) => matchesAll(item, { ...state, show: "all" }, now));
     return `<div class="up-empty">
       <h2>No ${state.view === "offers" ? "offers" : state.view === "news" ? "news" : state.view === "devaluations" ? "devaluations" : "updates"} match</h2>
-      <p>${wider ? "Nothing current matches, but some ended or unverified items do." : "Try a bank, card or merchant name, or clear the filters."}</p>
+      <p>${wider ? "Nothing current matches, but some ended or unverified items do." : state.from ? "Nothing was posted on these dates. Days with a dot in the calendar have updates." : "Try a bank, card or merchant name, or clear the filters."}</p>
       ${wider ? '<button type="button" class="up-btn up-btn-solid" data-show-all>Include ended offers</button>' : ""}
       <button type="button" class="up-btn" data-clear>Clear filters</button>
     </div>`;
@@ -127,7 +169,7 @@
 
   function render() {
     const now = Date.now();
-    const list = items.filter((item) => core.matches(item, state, now));
+    const list = items.filter((item) => matchesAll(item, state, now));
     const shown = list.slice(0, limit);
     feed.innerHTML = shown.length ? core.renderFeed(shown, { now }) : emptyState(now);
     moreBtn.hidden = list.length <= limit;
@@ -135,12 +177,13 @@
     count.textContent = countText(list.length);
     renderChips();
     syncControls();
+    renderCalendar();
   }
 
   function update(changes, { resetPage = true, url = true } = {}) {
     Object.assign(state, changes);
     if (resetPage) limit = PAGE;
-    if (items) render(); else syncControls();
+    if (items) render(); else { syncControls(); renderCalendar(); }
     if (url) writeUrl();
   }
 
@@ -175,16 +218,197 @@
     const remove = event.target.closest("[data-remove]");
     if (remove) {
       const key = remove.dataset.remove;
-      update({ [key]: key === "show" ? "current" : "" });
+      update(key === "date" ? { from: "", to: "" } : { [key]: key === "show" ? "current" : "" });
       (chips.querySelector("button") || search).focus();
       return;
     }
     if (event.target.closest("[data-clear]")) {
-      update({ q: "", cat: "", bank: "", show: "current" });
+      update({ q: "", cat: "", bank: "", show: "current", from: "", to: "" });
       search.focus();
       return;
     }
     if (event.target.closest("[data-show-all]")) update({ show: "all" });
+  });
+
+  /* ---------- Calendar ----------
+     Tap a day to see what was posted that day; tap a second day to stretch it into a range;
+     a third tap starts again. Days with a dot have updates for the current tab and filters. */
+
+  const CHEVRON = (d) => `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+  const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; // weeks start on Monday
+  const weekday = (key) => (dateOf(key).getDay() + 6) % 7; // 0 = Monday
+  // Day colours follow the feed badges. A day is filled in its main kind's colour (the first in this
+  // list it has); any other kinds posted that day show as small dots under the number.
+  const KINDS = [
+    ["devaluation", "Devaluation"],
+    ["launch", "Card launch"],
+    ["spend-offer", "Spend offer"],
+    ["cashback", "Cashback"],
+    ["news", "Other news"],
+    ["offer", "Other offer"],
+  ];
+  const kindOf = (item) => (KINDS.some(([k]) => k === item.category) ? item.category : item.type === "offer" ? "offer" : "news");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let month = null; // first day of the shown month, as a key
+  let focusKey = null; // the day that holds the grid's single tab stop
+  let slide = 0; // -1 or 1 while the month changes, for the slide-in
+
+  const monthKey = (key) => `${key.slice(0, 7)}-01`;
+  const shiftMonth = (key, n) => { const d = dateOf(key); return keyOf(new Date(d.getFullYear(), d.getMonth() + n, 1)); };
+  const firstMonth = () => monthKey(items && items.length ? items.reduce((min, it) => (it.published < min ? it.published : min), todayKey()) : todayKey());
+  const lastMonth = () => monthKey(todayKey());
+
+  function postedDays() {
+    const now = Date.now();
+    const days = new Map();
+    (items || []).forEach((item) => {
+      if (!core.matches(item, state, now)) return;
+      const day = days.get(item.published) || { n: 0, kinds: new Set() };
+      day.n += 1;
+      day.kinds.add(kindOf(item));
+      days.set(item.published, day);
+    });
+    return days;
+  }
+
+  function renderCalendar(refocus) {
+    if (cal.hidden) return;
+    const today = todayKey();
+    if (!month) month = monthKey(state.to || today);
+    if (!focusKey || monthKey(focusKey) !== month) focusKey = state.to && monthKey(state.to) === month ? state.to : month === monthKey(today) ? today : month;
+    const days = postedDays();
+    const start = dateOf(month);
+    const lead = weekday(month);
+    const total = new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < lead; i++) cells.push("");
+    for (let d = 1; d <= total; d++) cells.push(`${month.slice(0, 8)}${pad(d)}`);
+    while (cells.length % 7) cells.push("");
+
+    const rows = [];
+    for (let r = 0; r < cells.length; r += 7) {
+      rows.push(`<tr>${cells.slice(r, r + 7).map((key) => {
+        if (!key) return '<td role="gridcell"></td>';
+        const info = days.get(key);
+        const n = info ? info.n : 0;
+        const kinds = info ? KINDS.map(([k]) => k).filter((k) => info.kinds.has(k)) : [];
+        const dots = kinds.slice(1, 4).map((k) => `<span class="up-cal-dot" data-kind="${k}"></span>`).join("");
+        const future = key > today;
+        const picked = state.from && (key === state.from || key === state.to);
+        const between = state.from && key > state.from && key < state.to;
+        const cls = ["up-cal-cell",
+          between && "is-between",
+          state.from && state.from !== state.to && key === state.from && "is-start",
+          state.from && state.from !== state.to && key === state.to && "is-end"].filter(Boolean).join(" ");
+        const kindNames = kinds.map((k) => KINDS.find(([kk]) => kk === k)[1].toLowerCase()).join(", ");
+        const label = `${fmt(key, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}, ${n ? `${n} ${n === 1 ? "update" : "updates"}: ${kindNames}` : "no updates"}${key === today ? ", today" : ""}`;
+        return `<td role="gridcell" class="${cls}" aria-selected="${Boolean(picked || between)}"><button type="button" class="up-cal-day${picked ? " is-picked" : ""}${key === today ? " is-today" : ""}${n ? " has-posts" : ""}"${kinds.length ? ` data-kind="${kinds[0]}"` : ""} data-day="${key}" tabindex="${key === focusKey ? 0 : -1}" aria-label="${label}"${future ? " disabled" : ""}><span class="up-cal-num">${Number(key.slice(8))}</span>${dots ? `<span class="up-cal-dots" aria-hidden="true">${dots}</span>` : ""}</button></td>`;
+      }).join("")}</tr>`);
+    }
+
+    const monthKinds = new Set();
+    days.forEach((info, key) => { if (monthKey(key) === month) info.kinds.forEach((k) => monthKinds.add(k)); });
+    const legend = KINDS.filter(([k]) => monthKinds.has(k))
+      .map(([k, label]) => `<li><span class="up-cal-dot" data-kind="${k}"></span>${label}</li>`).join("");
+    const canPrev = month > firstMonth();
+    const canNext = month < lastMonth();
+    const summary = state.from ? rangeText(state.from, state.to) : "All dates";
+    const hint = !state.from ? "Tap a day, or two days for a range" : state.from === state.to ? "Tap another day to make a range" : "Tap any day to start again";
+    cal.innerHTML = `<div class="up-cal-card">
+      <div class="up-cal-top">
+        <h2 class="up-cal-title" id="up-cal-title">Posted on</h2>
+        <div class="up-cal-nav">
+          <button type="button" class="up-cal-arrow" data-month="-1" aria-label="Previous month"${canPrev ? "" : " disabled"}>${CHEVRON("m15 18-6-6 6-6")}</button>
+          <p class="up-cal-month" aria-live="polite">${fmt(month, { month: "long", year: "numeric" })}</p>
+          <button type="button" class="up-cal-arrow" data-month="1" aria-label="Next month"${canNext ? "" : " disabled"}>${CHEVRON("m9 18 6-6-6-6")}</button>
+        </div>
+      </div>
+      <table class="up-cal-grid${slide ? ` is-sliding" style="--up-cal-from:${slide * 14}px` : ""}" role="grid" aria-label="${fmt(month, { month: "long", year: "numeric" })}">
+        <thead><tr>${WEEKDAYS.map((w) => `<th scope="col" abbr="${w}"><span aria-hidden="true">${w.slice(0, 2)}</span></th>`).join("")}</tr></thead>
+        <tbody>${rows.join("")}</tbody>
+      </table>
+      ${legend ? `<ul class="up-cal-legend" aria-label="Colour key">${legend}</ul>` : '<p class="up-cal-legend up-cal-muted">Nothing posted this month</p>'}
+      <div class="up-cal-summary">
+        <span class="up-cal-muted">Showing</span>
+        <strong>${summary}</strong>
+      </div>
+      <div class="up-cal-foot">
+        <span class="up-cal-muted up-cal-hint">${hint}</span>
+        ${state.from ? '<button type="button" class="up-cal-link" data-cal-clear>Clear dates</button>' : ""}
+        <button type="button" class="up-cal-done" data-cal-done>Done</button>
+      </div>
+    </div>`;
+    slide = 0;
+    if (refocus) cal.querySelector(`[data-day="${focusKey}"]`)?.focus();
+  }
+
+  function pickDay(key) {
+    let next;
+    if (!state.from || state.from !== state.to) next = { from: key, to: key };
+    else next = key < state.from ? { from: key, to: state.from } : { from: state.from, to: key };
+    focusKey = key;
+    update(next);
+    cal.querySelector(`[data-day="${key}"]`)?.focus();
+  }
+
+  function goMonth(n, keepFocusOnDay) {
+    const target = shiftMonth(month, n);
+    if (target < firstMonth() || target > lastMonth()) return false;
+    slide = reduceMotion.matches ? 0 : n;
+    month = target;
+    if (!keepFocusOnDay) focusKey = null;
+    return true;
+  }
+
+  function openCalendar(open) {
+    dateBtn.setAttribute("aria-expanded", String(open));
+    cal.hidden = !open;
+    if (open) { month = null; focusKey = null; renderCalendar(); }
+  }
+
+  dateBtn.addEventListener("click", () => openCalendar(dateBtn.getAttribute("aria-expanded") !== "true"));
+
+  cal.addEventListener("click", (event) => {
+    const day = event.target.closest("[data-day]");
+    if (day && !day.disabled) { pickDay(day.dataset.day); return; }
+    const arrow = event.target.closest("[data-month]");
+    if (arrow && !arrow.disabled) {
+      if (goMonth(Number(arrow.dataset.month))) renderCalendar();
+      cal.querySelector(`[data-month="${arrow.dataset.month}"]:not([disabled])`)?.focus();
+      return;
+    }
+    if (event.target.closest("[data-cal-clear]")) {
+      update({ from: "", to: "" });
+      cal.querySelector("[data-cal-done]")?.focus();
+      return;
+    }
+    if (event.target.closest("[data-cal-done]")) { openCalendar(false); dateBtn.focus(); }
+  });
+
+  cal.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") { openCalendar(false); dateBtn.focus(); return; }
+    const day = event.target.closest("[data-day]");
+    if (!day) return;
+    const steps = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
+    let next = null;
+    if (steps[event.key]) next = addDays(day.dataset.day, steps[event.key]);
+    else if (event.key === "Home") next = addDays(day.dataset.day, -weekday(day.dataset.day));
+    else if (event.key === "End") next = addDays(day.dataset.day, 6 - weekday(day.dataset.day));
+    else if (event.key === "PageUp" || event.key === "PageDown") {
+      const d = dateOf(day.dataset.day);
+      const moved = new Date(d.getFullYear(), d.getMonth() + (event.key === "PageUp" ? -1 : 1), 1);
+      const last = new Date(moved.getFullYear(), moved.getMonth() + 1, 0).getDate();
+      moved.setDate(Math.min(d.getDate(), last));
+      next = keyOf(moved);
+    }
+    if (!next) return;
+    event.preventDefault();
+    if (next > todayKey()) next = todayKey();
+    if (monthKey(next) < firstMonth()) return;
+    if (monthKey(next) !== month) goMonth(monthKey(next) < month ? -1 : 1, true);
+    month = monthKey(next);
+    focusKey = next;
+    renderCalendar(true);
   });
 
   /* ---------- Share ---------- */
@@ -255,6 +479,7 @@
 
   syncControls();
   if (activeFilters()) { filterBtn.setAttribute("aria-expanded", "true"); panel.hidden = false; }
+  if (state.from) openCalendar(true);
 
   fetch(root.dataset.index)
     .then((response) => (response.ok ? response.json() : Promise.reject(new Error(response.status))))
@@ -264,9 +489,9 @@
       // A shared link to an item that is no longer current: widen the view so it shows.
       const slug = decodeURIComponent(location.hash.slice(1));
       const target = slug && items.find((item) => item.slug === slug);
-      if (target && !core.matches(target, state, Date.now())) Object.assign(state, { view: "all", q: "", cat: "", bank: "", show: "all" });
+      if (target && !matchesAll(target, state, Date.now())) Object.assign(state, { view: "all", q: "", cat: "", bank: "", show: "all", from: "", to: "" });
       if (target) {
-        const index = items.filter((item) => core.matches(item, state, Date.now())).indexOf(target);
+        const index = items.filter((item) => matchesAll(item, state, Date.now())).indexOf(target);
         while (index >= limit) limit += PAGE;
       }
       render();

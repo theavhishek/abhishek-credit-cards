@@ -173,7 +173,7 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
 
 .up-search {
   position: relative;
-  flex: 1 1 220px;
+  flex: 1 1 140px;
   min-width: 0;
 }
 .up-search svg {
@@ -272,6 +272,197 @@ html:not(.up-js) :is(.up-toolbar, .up-results-bar),
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
+}
+
+/* ---------- Date filter: a month calendar on the published day ---------- */
+/* The calendar icon turns orange while a date is picked (the dates themselves show as a chip). */
+.up-date-btn.is-set svg { color: var(--up-accent); }
+/* Phones: the Date button is icon-only so search, Filters and Date share one row. */
+@media (max-width: 560px) {
+  .up-date-btn { padding-inline: 13px; }
+  .up-date-btn #up-date-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+.up-toolbar .up-cal[hidden], .up-cal[hidden] { display: none; }
+.up-cal {
+  padding-block: 16px;
+  border-block-end: 1px solid var(--line);
+}
+.up-cal-card {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 380px);
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.05);
+}
+html[data-theme="dark"] .up-cal-card { box-shadow: 0 8px 24px rgb(0 0 0 / 0.4); }
+.up-cal-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.up-cal-title { font-size: 0.9375rem; font-weight: 400; color: var(--text); }
+.up-cal-nav { display: flex; align-items: center; gap: 2px; }
+.up-cal-month {
+  min-width: 8.5em;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.up-cal-arrow {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 150ms ease-out, scale 120ms var(--up-ease);
+}
+.up-cal-arrow:disabled { color: var(--muted); opacity: 0.4; cursor: default; }
+.up-cal-arrow:not(:disabled):active { scale: 0.92; }
+@media (hover: hover) { .up-cal-arrow:not(:disabled):hover { background: var(--up-fill); } }
+
+.up-cal-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  table-layout: fixed;
+}
+.up-cal-grid.is-sliding tbody { animation: up-cal-in 220ms var(--up-ease) both; }
+@keyframes up-cal-in { from { opacity: 0; transform: translateX(var(--up-cal-from, 0)); } }
+.up-cal-grid th {
+  padding-block: 0 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-align: center;
+}
+.up-cal-grid td { padding: 0; text-align: center; }
+/* A soft band joins the days of a range. */
+.up-cal-cell.is-between { background: var(--up-fill-strong); }
+.up-cal-cell.is-start { background: linear-gradient(to right, transparent 50%, var(--up-fill-strong) 50%); }
+.up-cal-cell.is-end { background: linear-gradient(to left, transparent 50%, var(--up-fill-strong) 50%); }
+.up-cal-grid tr > .is-between:first-child, .up-cal-grid tr > .is-end:first-child { border-start-start-radius: 999px; border-end-start-radius: 999px; }
+.up-cal-grid tr > .is-between:last-child, .up-cal-grid tr > .is-start:last-child { border-start-end-radius: 999px; border-end-end-radius: 999px; }
+.up-cal-day {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 100%;
+  max-width: 44px;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 150ms ease-out, color 150ms ease-out, scale 120ms var(--up-ease);
+}
+.up-cal-day:not(.has-posts):not(.is-picked) { color: var(--muted); }
+.up-cal-day.is-today { box-shadow: inset 0 0 0 1px var(--line-strong); font-weight: 600; }
+/* Kind colours, the same as the feed badges. */
+:is(.up-cal-day, .up-cal-dot)[data-kind="devaluation"] { --up-kind: var(--up-danger-fill); }
+:is(.up-cal-day, .up-cal-dot)[data-kind="launch"] { --up-kind: #4f46e5; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="spend-offer"] { --up-kind: #1d4ed8; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="cashback"] { --up-kind: #15803d; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="news"] { --up-kind: #c2410c; }
+:is(.up-cal-day, .up-cal-dot)[data-kind="offer"] { --up-kind: #b45309; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="launch"] { --up-kind: #6366f1; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="spend-offer"] { --up-kind: #2563eb; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="cashback"] { --up-kind: #16a34a; }
+html[data-theme="dark"] :is(.up-cal-day, .up-cal-dot)[data-kind="news"] { --up-kind: #ea580c; }
+/* A day with updates is filled in its main kind's colour; other kinds that day are dots under the number. */
+.up-cal-day[data-kind] { background: var(--up-kind); color: #fff; font-weight: 600; }
+.up-cal-num { line-height: 1; }
+.up-cal-dots {
+  position: absolute;
+  inset-block-end: 4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+.up-cal-dots .up-cal-dot { width: 5px; height: 5px; box-shadow: 0 0 0 1px #fff; }
+.up-cal-dot { display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--up-kind, var(--up-brand)); }
+.up-cal-day.is-picked:not([data-kind]) { background: var(--text); color: var(--page); font-weight: 600; box-shadow: none; }
+/* A picked day keeps its colour and gets a ring. */
+.up-cal-day.is-picked[data-kind] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text); }
+.up-cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.up-cal-legend li { display: inline-flex; align-items: center; gap: 6px; }
+p.up-cal-legend { justify-content: center; }
+.up-cal-day:disabled { opacity: 0.35; cursor: default; }
+.up-cal-day:not(:disabled):active { scale: 0.9; }
+@media (hover: hover) {
+  .up-cal-day:not(:disabled):not(.is-picked):not([data-kind]):hover { background: var(--up-fill-strong); color: var(--text); }
+  .up-cal-day[data-kind]:not(.is-picked):hover { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px color-mix(in srgb, var(--up-kind) 45%, transparent); }
+}
+
+.up-cal-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 12px;
+  padding-block-start: 12px;
+  border-block-start: 1px solid var(--line);
+}
+.up-cal-summary strong { font-size: 0.9375rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.up-cal-muted { font-size: 0.8125rem; color: var(--muted); }
+.up-cal-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+/* The hint gets its own line; Clear dates and Done sit together on the right. */
+.up-cal-hint { flex-basis: 100%; }
+.up-cal-foot > button:first-of-type { margin-inline-start: auto; }
+.up-cal-link {
+  min-height: 36px;
+  padding-inline: 4px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.up-cal-done {
+  min-height: 36px;
+  padding-inline: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: scale 120ms var(--up-ease), opacity 150ms ease-out;
+}
+.up-cal-done:active { scale: 0.96; }
+@media (hover: hover) { .up-cal-link:hover { color: var(--muted); } .up-cal-done:hover { opacity: 0.88; } }
+@media (max-width: 560px) {
+  .up-cal-card { width: 100%; padding: 14px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .up-cal-grid.is-sliding tbody { animation: none; }
+  .up-cal-day, .up-cal-arrow, .up-cal-done { transition: none; }
+}
+@media (forced-colors: active) {
+  .up-cal-day.is-picked { outline: 2px solid CanvasText; }
+  .up-cal-day[data-kind] { border: 1px solid CanvasText; }
 }
 
 .up-results-bar {
