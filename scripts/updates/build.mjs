@@ -377,7 +377,7 @@ function buildArticle(item) {
         </section>` : "";
 
   const main = `<main id="article" class="rv up-article" tabindex="-1">
-    <nav class="rv-crumbs" aria-label="Breadcrumb">
+    <nav class="site-crumbs" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
         <li><a href="/updates">Updates</a></li>
@@ -474,7 +474,7 @@ function buildArticle(item) {
     articleMeta: `  <meta property="article:published_time" content="${articleDateTime(item.published)}">\n  <meta property="article:modified_time" content="${articleDateTime(modified)}">\n`,
     title: esc(title),
     jsonld: json(graph),
-    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=16">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n',
+    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=17">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">\n',
     cssVersion: assetVersions.css,
     bodyClass: "reviews-page up-page",
     skipTarget: "article",
