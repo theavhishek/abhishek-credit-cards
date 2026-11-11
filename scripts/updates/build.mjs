@@ -72,6 +72,7 @@ const assetVersions = {
   js: hash(read("assets/updates.js")),
   article: hash(read("assets/updates-article.js")),
   calc: hash(read("assets/updates-calc.js")),
+  limit: hash(read("assets/updates-limit.js")),
 };
 
 const lastChanged = (item) => item.updated || item.published;
@@ -274,6 +275,54 @@ function calculatorHtml(item) {
         </section>`;
 }
 
+/* ---------- Credit limit checker (limitChecker: in the frontmatter) ---------- */
+// Same maths and wording as assets/updates-limit.js, so the page reads right before (or without) JavaScript.
+const limitFor = (c, fd) => Math.floor(fd * c.ratio / 100);
+const limitCardHtml = (c, card, fd) => {
+  const ok = fd >= card.minFd;
+  const limit = Math.min(limitFor(c, fd), card.maxLimit);
+  const capped = ok && limitFor(c, fd) > card.maxLimit;
+  const value = ok ? `${rupees(limit)}${capped ? " (card max)" : ""}` : `Add ${rupees(card.minFd - fd)} to your FD`;
+  return `<li${ok ? " data-ok" : ""} data-min-fd="${card.minFd}" data-max-limit="${card.maxLimit}"><span class="up-limit-name">${esc(card.name)}</span><span class="up-limit-val">${value}</span></li>`;
+};
+const limitHeadText = (c, fd) => {
+  const n = c.cards.filter((card) => fd >= card.minFd).length;
+  return n ? `${c.ratio}% of your FD. You can apply for ${n} of ${c.cards.length} cards.` : `${c.ratio}% of your FD, but it's below every card's minimum.`;
+};
+function withLimitChecker(item, html) {
+  if (!item.limitChecker) return html;
+  return html.includes("<p>{{limit-checker}}</p>") ? html.replace("<p>{{limit-checker}}</p>", limitCheckerHtml(item)) : html + "\n" + limitCheckerHtml(item);
+}
+function limitCheckerHtml(item) {
+  const c = item.limitChecker;
+  const id = "limit-calc-fd";
+  const pct = (v) => `${+((v - c.min) / (c.max - c.min) * 100).toFixed(3)}%`;
+  return `<section class="rv-calc up-calc up-limit" data-limit data-ratio="${c.ratio}" id="limit-checker" aria-labelledby="limit-calc-title">
+          <div class="rv-calc-intro">
+            <h2 id="limit-calc-title">${esc(c.title)}</h2>${c.intro ? `\n            <p>${esc(c.intro)}</p>` : ""}
+          </div>
+          <div class="up-calc-row">
+            <div class="rv-calc-input">
+              <label for="${id}">Your FD amount</label>
+              <output for="${id}">${rupees(c.value)}</output>
+            </div>
+            <div class="rv-meter">
+              <div class="rv-meter-rail">
+                <div class="rv-meter-track" aria-hidden="true">
+                  <span class="rv-meter-earn up-calc-fill" style="inline-size:${pct(c.value)}"></span>
+                </div>
+                <input id="${id}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.value}" aria-valuetext="${rupees(c.value)}">
+              </div>
+              <div class="rv-meter-scale" aria-hidden="true"><span>${rupees(c.min)}</span><span>${rupees(c.max)}</span></div>
+            </div>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Credit limit <strong class="up-limit-total">${rupees(limitFor(c, c.value))}</strong></span><span class="up-calc-why">${esc(limitHeadText(c, c.value))}</span></p>
+            <ul class="up-limit-cards">
+              ${c.cards.map((card) => limitCardHtml(c, card, c.value)).join("\n              ")}
+            </ul>
+          </div>
+        </section>`;
+}
+
 // A post's own 1200×630 card when one has been rendered, else its poster, else the hub image.
 function ogImage(item) {
   const file = `updates/${item.slug}.jpg`;
@@ -353,9 +402,9 @@ function buildArticle(item) {
       <article class="rv-article">
         ${item.offer ? offerPanel(item) : ""}
         <section class="rv-section up-prose">
-          ${item.calculator
+          ${withLimitChecker(item, item.calculator
             ? (item.bodyHtml.includes("<p>{{calculator}}</p>") ? item.bodyHtml.replace("<p>{{calculator}}</p>", calculatorHtml(item)) : item.bodyHtml + "\n" + calculatorHtml(item))
-            : item.bodyHtml}
+            : item.bodyHtml)}
         </section>
         ${onSite.length ? `<section class="rv-section" aria-labelledby="onsite-title">
           <h2 id="onsite-title">On this site</h2>
@@ -432,7 +481,7 @@ function buildArticle(item) {
     skipLabel: "Skip to article",
     main,
     coreVersion: assetVersions.core,
-    scripts: `  <script src="/assets/updates-article.js?v=${assetVersions.article}" defer></script>\n${item.calculator ? `  <script src="/assets/updates-calc.js?v=${assetVersions.calc}" defer></script>\n` : ""}  <script src="/assets/follow.js?v=1" defer></script>\n`,
+    scripts: `  <script src="/assets/updates-article.js?v=${assetVersions.article}" defer></script>\n${item.calculator ? `  <script src="/assets/updates-calc.js?v=${assetVersions.calc}" defer></script>\n` : ""}${item.limitChecker ? `  <script src="/assets/updates-limit.js?v=${assetVersions.limit}" defer></script>\n` : ""}  <script src="/assets/follow.js?v=1" defer></script>\n`,
   });
   return previewise(html);
 }

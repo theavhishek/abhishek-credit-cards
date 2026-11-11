@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="/assets/follow.css?v=4">
   <link rel="stylesheet" href="/assets/backdrop.css?v=9">
   <link rel="stylesheet" href="/assets/header.css?v=9">
-  <link rel="stylesheet" href="/assets/updates.css?v=0193b3c9">
+  <link rel="stylesheet" href="/assets/updates.css?v=cc6e548c">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=4">
@@ -123,17 +123,51 @@
       <article class="rv-article">
         
         <section class="rv-section up-prose">
-          <p>HDFC&#39;s FD-backed credit card portal now lists nine cards, and it isn&#39;t just the entry-level ones. Diners Club Black Metal, Regalia Gold and BizBlack are all on it. Your fixed deposit sits as security against the card&#39;s limit.</p>
-<p>This is mainly for people who don&#39;t have an HDFC credit card yet. If you already hold one, check whether you&#39;re eligible before you apply.</p>
+          <p>Getting an HDFC credit card used to mean income proof and a good credit score. Now there&#39;s another way in: put money in a fixed deposit and HDFC gives you a card against it. The FD is the security for your limit.</p>
+<p>What surprised me is the list. It&#39;s not just starter cards. Diners Club Black Metal, Regalia Gold and BizBlack are all on HDFC&#39;s FD card portal.</p>
+<p>It&#39;s mainly meant for people who don&#39;t have an HDFC credit card yet. If you already have one, check your eligibility before you apply.</p>
 <h2 id="the-cards-and-the-fd-you-need">The cards and the FD you need</h2>
 <div class="rv-table-wrap" role="region" aria-label="The cards and the FD you need" tabindex="0"><table class="rv-table"><thead><tr><th scope="col">Card</th><th scope="col">Minimum FD</th><th scope="col">Joining fee</th></tr></thead><tbody><tr><td><strong>Diners Club Black Metal</strong></td><td>₹5,55,556</td><td>₹10,000</td></tr><tr><td><strong>BizBlack</strong></td><td>₹5,55,556</td><td>₹10,000</td></tr><tr><td><strong>Regalia Gold</strong></td><td>₹3,33,334</td><td>₹2,500</td></tr><tr><td><strong>BizPower</strong></td><td>₹3,33,334</td><td>₹2,500</td></tr><tr><td><strong>Millennia</strong></td><td>₹1,11,112</td><td>₹1,000</td></tr><tr><td><strong>MoneyBack+</strong></td><td>₹33,334</td><td>₹500</td></tr><tr><td><strong>BizGrow</strong></td><td>₹33,334</td><td>₹500</td></tr><tr><td><strong>IndianOil</strong></td><td>₹16,667</td><td>₹500</td></tr><tr><td><strong>Pixel Go</strong></td><td>₹12,200</td><td>₹1</td></tr></tbody></table></div>
-<h2 id="what-each-card-is-about">What each card is about</h2>
-<p>The limit here is the most the card can go up to, not what you&#39;ll get on day one.</p>
-<ul><li><strong>Diners Club Black Metal</strong> (limit up to ₹10 lakh): metal card with unlimited airport lounge access.</li><li><strong>BizBlack</strong> (limit up to ₹10 lakh): 5X reward points on selected business spends.</li><li><strong>Regalia Gold</strong> (limit up to ₹10 lakh): 4 reward points per ₹150 spent.</li><li><strong>BizPower</strong> (limit up to ₹10 lakh): HDFC advertises savings of up to 8.7% on selected business spends.</li><li><strong>Millennia</strong> (limit up to ₹5 lakh): 5% cashback on selected online merchants.</li><li><strong>MoneyBack+</strong> (limit up to ₹3 lakh): 10X CashPoints on selected merchants.</li><li><strong>BizGrow</strong> (limit up to ₹5 lakh): up to 55 days of interest-free credit.</li><li><strong>IndianOil</strong> (limit up to ₹10 lakh): fuel rewards, and it&#39;s a RuPay card.</li><li><strong>Pixel Go</strong> (limit up to ₹10 lakh): digital-first, you manage it in PayZapp.</li></ul>
+<section class="rv-calc up-calc up-limit" data-limit data-ratio="90" id="limit-checker" aria-labelledby="limit-calc-title">
+          <div class="rv-calc-intro">
+            <h2 id="limit-calc-title">Know your credit limit</h2>
+            <p>Slide to your FD amount. HDFC&#39;s minimums all work out to a limit of 90% of the FD, so that&#39;s what this uses. The limit HDFC actually gives you can be lower.</p>
+          </div>
+          <div class="up-calc-row">
+            <div class="rv-calc-input">
+              <label for="limit-calc-fd">Your FD amount</label>
+              <output for="limit-calc-fd">₹1,50,000</output>
+            </div>
+            <div class="rv-meter">
+              <div class="rv-meter-rail">
+                <div class="rv-meter-track" aria-hidden="true">
+                  <span class="rv-meter-earn up-calc-fill" style="inline-size:11.765%"></span>
+                </div>
+                <input id="limit-calc-fd" type="range" min="10000" max="1200000" step="1000" value="150000" aria-valuetext="₹1,50,000">
+              </div>
+              <div class="rv-meter-scale" aria-hidden="true"><span>₹10,000</span><span>₹12,00,000</span></div>
+            </div>
+            <p class="up-calc-result" role="status"><span class="up-calc-fee">Credit limit <strong class="up-limit-total">₹1,35,000</strong></span><span class="up-calc-why">90% of your FD. You can apply for 5 of 9 cards.</span></p>
+            <ul class="up-limit-cards">
+              <li data-min-fd="555556" data-max-limit="1000000"><span class="up-limit-name">Diners Club Black Metal</span><span class="up-limit-val">Add ₹4,05,556 to your FD</span></li>
+              <li data-min-fd="555556" data-max-limit="1000000"><span class="up-limit-name">BizBlack</span><span class="up-limit-val">Add ₹4,05,556 to your FD</span></li>
+              <li data-min-fd="333334" data-max-limit="1000000"><span class="up-limit-name">Regalia Gold</span><span class="up-limit-val">Add ₹1,83,334 to your FD</span></li>
+              <li data-min-fd="333334" data-max-limit="1000000"><span class="up-limit-name">BizPower</span><span class="up-limit-val">Add ₹1,83,334 to your FD</span></li>
+              <li data-ok data-min-fd="111112" data-max-limit="500000"><span class="up-limit-name">Millennia</span><span class="up-limit-val">₹1,35,000</span></li>
+              <li data-ok data-min-fd="33334" data-max-limit="300000"><span class="up-limit-name">MoneyBack+</span><span class="up-limit-val">₹1,35,000</span></li>
+              <li data-ok data-min-fd="33334" data-max-limit="500000"><span class="up-limit-name">BizGrow</span><span class="up-limit-val">₹1,35,000</span></li>
+              <li data-ok data-min-fd="16667" data-max-limit="1000000"><span class="up-limit-name">IndianOil</span><span class="up-limit-val">₹1,35,000</span></li>
+              <li data-ok data-min-fd="12200" data-max-limit="1000000"><span class="up-limit-name">Pixel Go</span><span class="up-limit-val">₹1,35,000</span></li>
+            </ul>
+          </div>
+        </section>
+<h2 id="what-each-card-gives-you">What each card gives you</h2>
+<p>The limit here is the most the card can go up to. It isn&#39;t what you&#39;ll get on day one.</p>
+<ul><li><strong>Diners Club Black Metal</strong>, up to ₹10 lakh: metal card with unlimited airport lounge access.</li><li><strong>BizBlack</strong>, up to ₹10 lakh: 5X reward points on selected business spends.</li><li><strong>Regalia Gold</strong>, up to ₹10 lakh: 4 reward points per ₹150 spent.</li><li><strong>BizPower</strong>, up to ₹10 lakh: HDFC advertises savings of up to 8.7% on selected business spends.</li><li><strong>Millennia</strong>, up to ₹5 lakh: 5% cashback on selected online merchants.</li><li><strong>MoneyBack+</strong>, up to ₹3 lakh: 10X CashPoints on selected merchants.</li><li><strong>BizGrow</strong>, up to ₹5 lakh: up to 55 days of interest-free credit.</li><li><strong>IndianOil</strong>, up to ₹10 lakh: fuel rewards, and it&#39;s a RuPay card.</li><li><strong>Pixel Go</strong>, up to ₹10 lakh: digital-first, you manage it in PayZapp.</li></ul>
 <h2 id="already-have-an-hdfc-fd">Already have an HDFC FD?</h2>
-<p>Open the HDFC Bank app, go to <strong>Fixed Deposits</strong>, pick your FD and open <strong>FD Details</strong>. If you see the <strong>Credit Card on FD</strong> option, you can apply from there.</p>
+<p>Open the HDFC Bank app, go to <strong>Fixed Deposits</strong>, pick your FD and open <strong>FD Details</strong>. If you see <strong>Credit Card on FD</strong>, you can apply right there.</p>
 <h2 id="what-i-d-do">What I&#39;d do</h2>
-<ul><li>The FD backs your card, so only use money you won&#39;t need for a while.</li><li>Approval, rewards and fees are still HDFC&#39;s call. Read the card&#39;s terms on the application page before you pay a joining fee.</li><li>If you&#39;ve applied, tell me on <a href="https://t.me/avhishekin" target="_blank" rel="noopener noreferrer">Telegram<span class="sr-only"> (opens in a new tab)</span></a>: which card, your FD amount, and whether you already had an HDFC card. It&#39;ll show others how approvals actually go.</li></ul>
+<ul><li>Only use money you won&#39;t need for a while. The FD is tied to your card.</li><li>Don&#39;t pay ₹10,000 for Diners Black just because it&#39;s open now. Pick the card whose rewards match how you spend.</li><li>Approval, rewards and fees are still HDFC&#39;s call, so read the card&#39;s terms on the application page before you pay.</li><li>Applied already? Tell me on <a href="https://x.com/the_avhishek" target="_blank" rel="noopener noreferrer">X<span class="sr-only"> (opens in a new tab)</span></a>: which card, your FD amount, and whether you already had an HDFC card. It&#39;ll show everyone how approvals actually go.</li></ul>
         </section>
         <section class="rv-section" aria-labelledby="onsite-title">
           <h2 id="onsite-title">On this site</h2>
@@ -234,6 +268,7 @@
   <script src="/assets/card-reviews.js?v=3"></script>
   <script src="/assets/updates-core.js?v=e782a42a" defer></script>
   <script src="/assets/updates-article.js?v=10799993" defer></script>
+  <script src="/assets/updates-limit.js?v=414944ff" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

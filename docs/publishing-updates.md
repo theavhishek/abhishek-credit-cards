@@ -161,6 +161,30 @@ calculator:
 
 Take the threshold, rate and cap from the official source only.
 
+### Credit limit checker
+
+Cards issued against a fixed deposit can carry an FD slider that shows the
+credit limit and which cards that FD qualifies for. Add a `limitChecker:` block
+and put `{{limit-checker}}` on its own line in the body:
+
+```yaml
+limitChecker:
+  title: Know your credit limit         # optional
+  intro: Slide to your FD amount.       # optional
+  ratio: 90                             # limit as a percent of the FD
+  min: 10000                            # slider range
+  max: 1200000
+  step: 1000                            # optional, default 1000
+  value: 150000                         # starting value, optional
+  cards:
+    - name: Millennia
+      minFd: 111112                     # minimum FD for this card
+      maxLimit: 500000                  # the card's highest limit
+```
+
+Take the minimum FD and maximum limit from the bank's own page, and say in the
+intro where the ratio comes from.
+
 ## How offer status works
 
 Status is worked out in Indian Standard Time, in the visitor's browser, every

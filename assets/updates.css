@@ -1119,3 +1119,12 @@ a.up-thumb { transition: opacity 150ms ease-out; }
 .up-calc-fee strong { margin-inline-start: 4px; font-size: 1.375rem; font-weight: 650; font-variant-numeric: tabular-nums; }
 .up-calc-row[data-over] .up-calc-fee strong { color: var(--up-danger); }
 .up-calc-gst { margin-inline-start: 4px; font-weight: 500; }
+
+/* ---------- Credit limit checker on update articles (limitChecker: in the frontmatter) ---------- */
+.up-limit-cards, .up-prose .up-limit-cards { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; font-size: var(--rv-fs-small); line-height: 1.45; }
+.up-limit-cards li, .up-prose .up-limit-cards li { display: flex; margin: 0; list-style: none; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; padding-block: 10px; border-block-start: 1px solid var(--line); color: var(--muted); }
+.up-limit-cards li:first-child { border-block-start: 0; }
+.up-limit-name { font-weight: 500; }
+.up-limit-val { font-variant-numeric: tabular-nums; }
+.up-limit-cards li[data-ok] { color: var(--text); }
+.up-limit-cards li[data-ok] .up-limit-val { font-weight: 650; }

@@ -21,7 +21,7 @@ const MIN_PAGE_WORDS = 150;
 const TOP_KEYS = new Set([
   "type", "title", "summary", "category", "published", "updated", "issuer", "merchant", "cards", "tags",
   "confirmation", "sources", "link", "related", "image", "imageAlt", "tile", "page", "archived", "draft", "offer",
-  "calculator", "reviews",
+  "calculator", "limitChecker", "reviews",
 ]);
 const OFFER_KEYS = new Set(["value", "cap", "minSpend", "starts", "ends", "eligibility", "code", "link", "terms", "verified"]);
 const SOURCE_KEYS = new Set(["label", "url", "kind"]);
@@ -29,6 +29,9 @@ const TILE_KEYS = new Set(["figure", "caption", "logo", "invertOnDark"]);
 const CALC_KEYS = new Set(["title", "intro", "gst", "sliders"]);
 const SLIDER_KEYS = new Set(["label", "threshold", "rate", "cap", "max", "step", "value", "chargedOn"]);
 const CALC_MARKER = "{{calculator}}";
+const LIMIT_KEYS = new Set(["title", "intro", "ratio", "min", "max", "step", "value", "cards"]);
+const LIMIT_CARD_KEYS = new Set(["name", "minFd", "maxLimit"]);
+const LIMIT_MARKER = "{{limit-checker}}";
 const TILE_FIGURE_MAX = 6;
 const TILE_CAPTION_MAX = 20;
 
@@ -479,6 +482,42 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
     }
     if (parsed.body.includes(CALC_MARKER) && d.calculator == null) fail(`The body has ${CALC_MARKER} but there's no "calculator" block.`);
 
+    // Credit limit checker: an FD slider that shows the limit (ratio % of the FD, up to each card's max)
+    // and which cards that FD qualifies for.
+    let limitChecker = null;
+    if (d.limitChecker != null) {
+      const c = d.limitChecker;
+      if (typeof c !== "object" || Array.isArray(c)) fail(`"limitChecker" must be a block with ratio and cards.`);
+      else {
+        for (const key of Object.keys(c)) if (!LIMIT_KEYS.has(key)) fail(`limitChecker: unknown field "${key}".`);
+        const num = {};
+        for (const key of ["ratio", "min", "max", "step", "value"]) {
+          if (c[key] == null) continue;
+          num[key] = Number(c[key]);
+          if (!Number.isFinite(num[key]) || num[key] <= 0) fail(`limitChecker.${key} must be a positive number.`);
+        }
+        for (const key of ["ratio", "max"]) if (num[key] == null) fail(`limitChecker.${key} is required.`);
+        if (num.ratio > 100) fail(`limitChecker.ratio is a percentage of the FD, 100 or less.`);
+        const min = num.min ?? 0;
+        const value = num.value ?? min;
+        if (value < min || value > num.max) fail(`limitChecker.value must be between min and max.`);
+        if (!Array.isArray(c.cards) || !c.cards.length) fail(`limitChecker.cards needs at least one card.`);
+        else {
+          const cards = c.cards.map((raw, n) => {
+            const at = `limitChecker.cards[${n + 1}]`;
+            for (const key of Object.keys(raw)) if (!LIMIT_CARD_KEYS.has(key)) fail(`${at}: unknown field "${key}".`);
+            if (!raw.name || typeof raw.name !== "string") fail(`${at}.name is required.`);
+            const minFd = Number(raw.minFd), maxLimit = Number(raw.maxLimit);
+            if (!Number.isFinite(minFd) || minFd <= 0) fail(`${at}.minFd must be a number.`);
+            if (!Number.isFinite(maxLimit) || maxLimit <= 0) fail(`${at}.maxLimit must be a number.`);
+            return { name: raw.name, minFd, maxLimit };
+          });
+          limitChecker = { title: c.title || "Know your credit limit", intro: c.intro || "", ratio: num.ratio, min, max: num.max, step: num.step || 1000, value, cards };
+        }
+      }
+    }
+    if (parsed.body.includes(LIMIT_MARKER) && d.limitChecker == null) fail(`The body has ${LIMIT_MARKER} but there's no "limitChecker" block.`);
+
     // Body and page
     const bodyProblems = [];
     const body = parsed.body.trim();
@@ -486,7 +525,8 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
     bodyProblems.forEach(fail);
     // The fee calculator's title, intro and slider wording are part of the article's text too.
     const calcText = calculator ? [calculator.title, calculator.intro, ...calculator.sliders.flatMap((sl) => [sl.label, sl.chargedOn])].join(" ") : "";
-    const words = body ? wordCount(body) + (calcText ? wordCount(calcText) : 0) : 0;
+    const limitText = limitChecker ? [limitChecker.title, limitChecker.intro].join(" ") : "";
+    const words = body ? wordCount(body) + (calcText ? wordCount(calcText) : 0) + (limitText ? wordCount(limitText) : 0) : 0;
     const page = d.page == null ? words >= MIN_PAGE_WORDS : d.page;
     if (d.page === true && words < MIN_PAGE_WORDS) fail(`"page: true" needs a body of at least ${MIN_PAGE_WORDS} words (has ${words}); short items stay in the feed.`);
     if (body && !page) warn(`Has a body of ${words} words but no page of its own; only the summary is shown.`);
@@ -521,6 +561,7 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       archived: !!d.archived,
       offer,
       calculator,
+      limitChecker,
       words,
       bodyHtml: rendered.html,
       headings: rendered.headings,
