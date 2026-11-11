@@ -402,6 +402,7 @@ function buildArticle(item) {
   };
 
   const seoTitles = {
+    "hdfc-credit-cards-against-fixed-deposit-2026": "HDFC Credit Cards Against FD: 9 Cards | Avhishek",
     "bobcard-airport-lounge-list-33": "BOBCARD Lounge List 2026: 83 to 33 Lounges | Full List",
     "icici-credit-card-changes-december-2026": "ICICI Card Changes Dec 2026: INOX, Fees | Avhishek",
     "hdfc-tata-neu-neucoins-manual-claim-november-2026": "Tata Neu NeuCoins: Manual Claims | Avhishek",
