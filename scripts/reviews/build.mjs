@@ -103,10 +103,11 @@ const reviewItem = (p) => {
     '            <span class="hm-review-meta"><span class="hm-review-tag">' + escape(p.category) + '</span> <time datetime="' + p.date + '">' + formatDate(p.date) + '</time> <span aria-hidden="true">·</span> ' + p.readTime + ' min read</span>\n' +
     '            <span class="hm-review-title">' + escape(p.title) + '</span>\n' +
     '            <span class="hm-review-text">' + escape(p.excerpt) + '</span>\n' +
+    '            <span class="hm-review-cta" aria-hidden="true">' + (p.category === "Guide" ? "Read guide" : "Read review") + '<span class="hm-review-cta-arrow"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>\n' +
     '          </a>\n        </li>';
 };
 let home = read("home.html");
-// The homepage row scrolls sideways, so it lists every review, newest first.
+// The homepage deck (a sideways row with reduced motion) lists every review, newest first.
 const homeBlock = '      <ul class="hm-reviews" id="hm-reviews" aria-label="Card reviews">\n' + posts.map(reviewItem).join("\n") + '\n      </ul>';
 const homeRegex = /<ul class="hm-reviews"[^>]*>[\s\S]*?<\/ul>/g;
 if ([...home.matchAll(homeRegex)].length!==1) throw new Error("Expected exactly one homepage review list");

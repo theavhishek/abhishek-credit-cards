@@ -1,0 +1,206 @@
+/* Homepage "Latest reviews" as a pinned stack of cards (assets/review-stack.js).
+   The section gets .is-stack from an inline script unless the visitor prefers
+   reduced motion; without it the sideways row in home.css stays as it is.
+   Scrolling through the pinned stage slides the cards up into a stack, then the
+   front card flies out top-left and the ones behind move forward. */
+
+/* Hidden in the sideways row; shown on the stacked cards. */
+.hm-review-cta { display: none; }
+
+.hm-latest.is-stack {
+  --stack-peek: 42px;
+  --stack-scale: 0.045;
+  --stack-deck-h: clamp(340px, calc(100svh - 380px), 480px);
+  /* Soft card tones, mixed into the surface so they follow the theme. */
+  --tone-1: color-mix(in srgb, #fc6e20 9%, var(--surface));
+  --tone-2: color-mix(in srgb, #2563eb 8%, var(--surface));
+  --tone-3: color-mix(in srgb, #16a34a 8%, var(--surface));
+  --tone-4: color-mix(in srgb, #7c3aed 8%, var(--surface));
+  --tone-5: color-mix(in srgb, #d97706 9%, var(--surface));
+}
+html[data-theme="dark"] .hm-latest.is-stack {
+  --tone-1: color-mix(in srgb, #fc6e20 12%, var(--surface));
+  --tone-2: color-mix(in srgb, #3b82f6 13%, var(--surface));
+  --tone-3: color-mix(in srgb, #22c55e 11%, var(--surface));
+  --tone-4: color-mix(in srgb, #8b5cf6 14%, var(--surface));
+  --tone-5: color-mix(in srgb, #f59e0b 9%, var(--surface));
+}
+
+/* The track is tall; the stage sticks to the viewport while it scrolls past.
+   The stage spans the full window width so a card can fly out past the column. */
+.hm-latest.is-stack .hm-stack-track { position: relative; }
+.hm-latest.is-stack .hm-stack-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  overflow: clip;
+}
+.hm-latest.is-stack .hm-stack-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(20px, 4vh, 40px);
+  width: min(1180px, 100% - 2 * var(--hm-gutter));
+  height: 100%;
+  margin-inline: auto;
+  /* Room for the floating header above and the peeking cards below. */
+  padding-block: 88px calc(var(--stack-peek) * 3 + 24px);
+}
+.hm-latest.is-stack .hm-scroll-btns { display: none; }
+/* The heading stays above the cards, so a card flying out passes behind it. */
+.hm-latest.is-stack .hm-section-head { position: relative; z-index: 50; }
+
+.hm-latest.is-stack .hm-reviews,
+.hm .hm-latest.is-stack .hm-reviews {
+  position: relative;
+  display: block;
+  height: var(--stack-deck-h);
+  margin: 0 !important;
+  padding: 0;
+  overflow: visible;
+  scroll-snap-type: none;
+  counter-reset: hm-stack;
+}
+.hm-latest.is-stack .hm-reviews > li,
+.hm .hm-latest.is-stack .hm-reviews > li {
+  position: absolute;
+  inset: 0;
+  display: block;
+  counter-increment: hm-stack;
+  transform-origin: 50% 0%;
+  will-change: transform;
+  pointer-events: none;
+}
+.hm-latest.is-stack .hm-reviews > li.is-front { pointer-events: auto; }
+.hm-latest.is-stack .hm-reviews > li:nth-child(5n + 1) { --tone: var(--tone-1); }
+.hm-latest.is-stack .hm-reviews > li:nth-child(5n + 2) { --tone: var(--tone-2); }
+.hm-latest.is-stack .hm-reviews > li:nth-child(5n + 3) { --tone: var(--tone-3); }
+.hm-latest.is-stack .hm-reviews > li:nth-child(5n + 4) { --tone: var(--tone-4); }
+.hm-latest.is-stack .hm-reviews > li:nth-child(5n + 5) { --tone: var(--tone-5); }
+
+/* Card: words on the left, card art on the right. */
+.hm-latest.is-stack .hm-review {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-areas:
+    "meta  media"
+    "title media"
+    "text  media"
+    ".     media"
+    "cta   media";
+  column-gap: clamp(20px, 3vw, 40px);
+  height: 100%;
+  padding: clamp(20px, 2.6vw, 32px);
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  background: var(--tone, var(--surface));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 24px 60px -28px rgb(0 0 0 / 0.35);
+  translate: none;
+}
+html[data-theme="dark"] .hm-latest.is-stack .hm-review { box-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 28px 70px -24px rgb(0 0 0 / 0.8); }
+.hm-latest.is-stack .hm-review > :not(.hm-review-media) { padding-inline: 0; }
+.hm-latest.is-stack .hm-review::after {
+  content: counter(hm-stack, decimal-leading-zero);
+  grid-area: meta;
+  justify-self: end;
+  align-self: start;
+  color: var(--muted);
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.45;
+}
+.hm-latest.is-stack .hm-review-media {
+  grid-area: media;
+  align-self: stretch;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 22px;
+}
+.hm-latest.is-stack .hm-review-meta { grid-area: meta; margin: 0 0 14px; padding-right: 3.5rem; }
+.hm-latest.is-stack .hm-review-tag { background: color-mix(in srgb, var(--hm-orange) 14%, var(--surface)); }
+.hm-latest.is-stack .hm-review-title {
+  grid-area: title;
+  font-size: clamp(1.625rem, 1.1rem + 1.8vw, 2.625rem);
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.hm-latest.is-stack .hm-review-text {
+  grid-area: text;
+  display: -webkit-box;
+  max-width: 44ch;
+  margin-top: 14px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  font-size: clamp(0.9375rem, 0.85rem + 0.3vw, 1.0625rem);
+}
+.hm-latest.is-stack .hm-review > .hm-review-cta {
+  grid-area: cta;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 6px 6px 6px 18px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--page);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: scale 160ms var(--hm-ease);
+}
+.hm-review-cta-arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--hm-orange);
+  color: #1a1206;
+  transition: translate 200ms var(--hm-ease);
+}
+@media (hover: hover) {
+  .hm-latest.is-stack .hm-review:hover { border-color: var(--line); }
+  .hm-latest.is-stack .hm-review:hover .hm-review-title { text-decoration: none; }
+  .hm-latest.is-stack .hm-review:hover .hm-review-cta-arrow { translate: 3px 0; }
+  .hm-latest.is-stack .hm-review:hover .hm-review-media img { scale: 1.03; }
+}
+.hm-latest.is-stack .hm-review:active .hm-review-cta { scale: 0.97; }
+
+/* Phones and narrow tablets: art on top, words below. */
+@media (max-width: 719px) {
+  .hm-latest.is-stack {
+    --stack-peek: 28px;
+    --stack-scale: 0.025;
+    --stack-deck-h: clamp(380px, calc(100svh - 300px), 540px);
+  }
+  .hm-latest.is-stack .hm-stack-inner { gap: 16px; padding-block: 76px calc(var(--stack-peek) * 3 + 64px); }
+  .hm-latest.is-stack .hm-review {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto 1fr auto;
+    grid-template-areas: "media" "meta" "title" "text" "." "cta";
+    padding: 12px 12px 18px;
+    border-radius: 28px;
+  }
+  .hm-latest.is-stack .hm-review > :not(.hm-review-media) { padding-inline: 8px; }
+  .hm-latest.is-stack .hm-review-media { height: auto; aspect-ratio: 16 / 9; margin-bottom: 14px; border-radius: 20px; }
+  .hm-latest.is-stack .hm-review::after { display: none; }
+  .hm-latest.is-stack .hm-review-meta { margin-bottom: 8px; padding-right: 0; }
+  .hm-latest.is-stack .hm-review-title { font-size: 1.5rem; }
+  .hm-latest.is-stack .hm-review-text { margin-top: 8px; font-size: 0.9375rem; -webkit-line-clamp: 3; line-clamp: 3; }
+  .hm-latest.is-stack .hm-review > .hm-review-cta { margin-top: 12px; padding-inline-start: 18px; }
+}
+/* Short phones (landscape or small screens): drop the summary to keep the card readable. */
+@media (max-width: 719px) and (max-height: 640px) {
+  .hm-latest.is-stack .hm-review-text { display: none; }
+}
