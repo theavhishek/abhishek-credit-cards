@@ -1,7 +1,7 @@
 ---
 type: news
-title: "ICICI credit card changes: INOX and insurance benefits end, replacement fees rise"
-summary: From 25 November to 15 December 2026, ICICI Bank ends INOX movie offers and complimentary insurance on select cards, raises the card replacement fee to ₹300 + GST and starts charging for Priority Pass replacement.
+title: "ICICI drops INOX and insurance perks, card replacement now costs ₹300"
+summary: ICICI is taking away INOX movie offers and free insurance on several cards, and losing your card or Priority Pass will now cost ₹300 + GST. The changes kick in between 25 November and 15 December 2026.
 category: devaluation
 confirmation: official
 published: 2026-11-11
@@ -16,32 +16,38 @@ sources:
     url: https://www.icici.bank.in/content/dam/icicibank/india/managed-assets/revamp-page-images/docs/pdf/credit-card-charges-updated-notice.pdf
     kind: official
 ---
+ICICI has sent out another round of changes, and none of them work in our favour. Here's what's changing, card by card, sorted by the date it starts.
+
 ## From 25 November 2026
 
-| Change and cards | Old | New |
+This one is only for business and corporate cards. Personal cards aren't touched.
+
+| What's changing | Before | After |
 |---|---|---|
-| **DCC fee** on business and corporate cards only | 1% | 3.50% |
-| **Card replacement fee** on business and corporate cards | ₹200 + GST | ₹300 + GST |
+| **DCC fee** (paying in rupees abroad or on a foreign website) | 1% | 3.50% |
+| **Card replacement** | ₹200 + GST | ₹300 + GST |
 
 ## From 11 December 2026
 
-| Change and cards | Old | New |
+| What's changing | Before | After |
 |---|---|---|
-| **Card replacement fee** on all personal ICICI credit cards, except Emeralde Private Metal, Times Black and 1838 Reserve | ₹200 + GST | ₹300 + GST |
-| **Priority Pass replacement** on premium and travel cards with Priority Pass, such as Sapphiro, Emeralde and Times Black | Free | ₹300 + GST |
+| **Card replacement** on every personal ICICI credit card, except Emeralde Private Metal, Times Black and 1838 Reserve | ₹200 + GST | ₹300 + GST |
+| **Priority Pass replacement** on cards that come with one, like Sapphiro, Emeralde and Times Black | Free | ₹300 + GST |
+
+So if you lose your card, that's ₹354 once GST is added.
 
 ## From 15 December 2026
 
-| Benefit and cards | Old | New |
-|---|---|---|
-| **INOX movie offers** on Coral, Rubyx, Expressions, CSK, HPCL Super Saver, MakeMyTrip and some Emirates variants | Yes | Removed |
-| **Air accident and related insurance** on Rubyx, Sapphiro, Emeralde, Diamant and Times Black | Yes | Removed |
-| **Cancellation For Any Reason (CFAR) cover** on some Emeralde variants and Times Black | Yes | Removed |
-| **Personal and air accident cover** on Parakram and Parakram Select | Yes | Removed |
+| Perk going away | Cards |
+|---|---|
+| **INOX movie offers** | Coral, Rubyx, Expressions, CSK, HPCL Super Saver, MakeMyTrip and some Emirates cards |
+| **Air accident and related insurance** | Rubyx, Sapphiro, Emeralde, Diamant and Times Black |
+| **Cancellation For Any Reason (CFAR) cover** | Some Emeralde variants and Times Black |
+| **Personal and air accident cover** | Parakram and Parakram Select |
 
-## Good to know
+## What I'd do
 
-- **Replacement fee with GST:** ₹300 + 18% GST comes to ₹354.
-- **DCC:** charged when you pay in rupees abroad or to a merchant registered outside India. The DCC fee on personal cards doesn't change.
-- **Card not in the table?** None of these changes apply to it, but ICICI's notice has the full card lists, so check it if you're unsure.
-- **Before 15 December:** use any INOX offers left on your card while they still work.
+- If you have INOX offers left on your card, use them before 15 December.
+- If you were counting on the card's air accident cover, look at a standalone policy or another card that still gives one.
+- Paying a foreign merchant with an ICICI business card? Always pick the local currency at checkout, not rupees.
+- Your card isn't listed here? Then nothing changes for you. ICICI's notice has the full list if you want to double-check.
