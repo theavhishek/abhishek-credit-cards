@@ -27,58 +27,60 @@ html[data-theme="dark"] .hm { --hm-orange-text: #ff9a5c; }
   padding-block: 40px 8px;
   text-align: center;
 }
-/* Announcement pill above the headline, linked to the follow section. */
+/* Announcement pill above the headline, linked to the follow section: orange "New" text,
+   a hairline divider, the message and an arrow. A thin orange light travels round the
+   border (conic gradient on an animated @property angle); reduced motion keeps it still. */
+@property --hm-soon-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .hm-soon {
+  --soon-bg: var(--surface);
+  --soon-edge: var(--line-strong);
   display: inline-flex;
   box-sizing: border-box;
   align-items: center;
-  gap: 8px;
   max-width: 100%;
-  min-height: 32px;
+  min-height: 34px;
   margin-bottom: 16px !important;
-  padding: 2px 9px 2px 2px;
-  border: 1px solid color-mix(in srgb, var(--line) 80%, var(--text) 20%);
+  padding: 0 13px 0 0;
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
-  background: var(--surface);
-  box-shadow: 0 2px 14px rgb(0 0 0 / 0.08);
-  color: var(--muted);
-  font-size: 0.75rem;
+  background:
+    linear-gradient(var(--soon-bg), var(--soon-bg)) padding-box,
+    conic-gradient(from var(--hm-soon-a), var(--soon-edge) 0deg, var(--soon-edge) 250deg, var(--hm-orange) 300deg, #ffd2b0 320deg, var(--soon-edge) 360deg) border-box;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  color: var(--text);
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -0.01em;
   text-align: left;
   text-decoration: none;
 }
+html[data-theme="dark"] .hm-soon { --soon-bg: #111113; --soon-edge: #2a2a2e; box-shadow: none; }
 .hm-soon-label {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   align-self: stretch;
   flex: none;
-  padding-inline: 9px;
-  border-radius: var(--radius-full);
-  background: var(--hm-orange);
-  box-shadow: 0 0 0 1px rgb(252 110 32 / 0.16), 0 0 15px 2px rgb(252 110 32 / 0.24);
-  color: #17110d;
+  margin-right: 10px;
+  padding: 0 10px 0 13px;
+  border-right: 1px solid var(--line);
+  color: var(--hm-orange-text);
   font-weight: 600;
 }
 .hm-soon-text { white-space: nowrap; }
-html[data-theme="dark"] .hm-soon {
-  border-color: #303038;
-  background: #101014;
-  box-shadow: 0 2px 16px rgb(0 0 0 / 0.28);
-}
-html[data-theme="dark"] .hm-soon-label { box-shadow: 0 0 0 1px rgb(252 110 32 / 0.28), 0 0 18px 3px rgb(252 110 32 / 0.35); }
+.hm-soon-arrow { flex: none; width: 14px; height: 14px; margin-left: 8px; color: var(--muted); transition: transform 200ms var(--hm-ease), color 200ms var(--hm-ease); }
 @media (hover: hover) {
-  .hm-soon:hover { border-color: color-mix(in srgb, var(--hm-orange) 55%, var(--line)); color: var(--text); }
+  .hm-soon:hover .hm-soon-arrow { transform: translateX(2px); color: var(--text); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hm-soon { animation: hm-soon-in 640ms var(--hm-ease) both; }
+  .hm-soon { animation: hm-soon-in 640ms var(--hm-ease) both, hm-soon-spin 4s linear infinite; }
 }
 @media (max-width: 640px) {
-  .hm-soon { gap: 7px; min-height: 30px; margin-bottom: 12px !important; padding: 2px 8px 2px 2px; font-size: 0.6875rem; }
-  .hm-soon-label { padding-inline: 8px; }
+  .hm-soon { min-height: 32px; margin-bottom: 12px !important; padding-right: 11px; font-size: 0.75rem; }
+  .hm-soon-label { margin-right: 8px; padding: 0 8px 0 11px; }
+  .hm-soon-arrow { width: 13px; height: 13px; margin-left: 6px; }
 }
+@keyframes hm-soon-spin { to { --hm-soon-a: 360deg; } }
 @keyframes hm-soon-in { from { opacity: 0; transform: translateY(6px) scale(0.97); } }
 .hm-title {
   max-width: 14ch;
