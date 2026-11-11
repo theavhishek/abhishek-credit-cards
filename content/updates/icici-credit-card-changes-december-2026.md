@@ -18,26 +18,26 @@ sources:
 ---
 ## From 25 November 2026
 
-| Change | Which cards | Old → New |
+| Change and cards | Old | New |
 |---|---|---|
-| DCC fee | Business and corporate cards only | 1% → 3.50% |
-| Card replacement fee | Business and corporate cards | ₹200 → ₹300 + GST |
+| **DCC fee** on business and corporate cards only | 1% | 3.50% |
+| **Card replacement fee** on business and corporate cards | ₹200 + GST | ₹300 + GST |
 
 ## From 11 December 2026
 
-| Change | Which cards | Old → New |
+| Change and cards | Old | New |
 |---|---|---|
-| Card replacement fee | All personal ICICI credit cards **except** Emeralde Private Metal, Times Black and 1838 Reserve | ₹200 → ₹300 + GST |
-| Priority Pass replacement | Premium and travel cards that come with Priority Pass, such as Sapphiro, Emeralde and Times Black | Free → ₹300 + GST |
+| **Card replacement fee** on all personal ICICI credit cards, except Emeralde Private Metal, Times Black and 1838 Reserve | ₹200 + GST | ₹300 + GST |
+| **Priority Pass replacement** on premium and travel cards with Priority Pass, such as Sapphiro, Emeralde and Times Black | Free | ₹300 + GST |
 
 ## From 15 December 2026
 
-| Benefit that ends | Which cards |
-|---|---|
-| INOX movie offers | Coral, Rubyx, Expressions, CSK, HPCL Super Saver, MakeMyTrip and some Emirates variants |
-| Air accident and related insurance | Rubyx, Sapphiro, Emeralde, Diamant, Times Black |
-| Cancellation For Any Reason (CFAR) cover | Some Emeralde variants, Times Black |
-| Personal and air accident cover | Parakram, Parakram Select |
+| Benefit and cards | Old | New |
+|---|---|---|
+| **INOX movie offers** on Coral, Rubyx, Expressions, CSK, HPCL Super Saver, MakeMyTrip and some Emirates variants | Yes | Removed |
+| **Air accident and related insurance** on Rubyx, Sapphiro, Emeralde, Diamant and Times Black | Yes | Removed |
+| **Cancellation For Any Reason (CFAR) cover** on some Emeralde variants and Times Black | Yes | Removed |
+| **Personal and air accident cover** on Parakram and Parakram Select | Yes | Removed |
 
 ## Good to know
 
