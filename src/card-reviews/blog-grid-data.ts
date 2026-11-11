@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "idfc-first-hello-cashback-credit-card",
+    "title": "IDFC FIRST Hello Cashback Credit Card",
+    "excerpt": "A secured RuPay credit card from IDFC FIRST Bank, backed by an FD from ₹10,000. It pays 3% online, 5% on online spend above ₹10,000, and 1% on offline, UPI in the IDFC FIRST app and essentials, with 0% forex markup.…",
+    "category": "Cashback",
+    "date": "2026-11-12",
+    "readTime": 11,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/idfc-first-hello-cashback-credit-card.jpg",
+      "alt": "IDFC FIRST Hello Cashback credit card",
+      "srcset": "/assets/reviews/idfc-first-hello-cashback-credit-card-800.webp 800w, /assets/reviews/idfc-first-hello-cashback-credit-card-1200.webp 1200w, /assets/reviews/idfc-first-hello-cashback-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "unity-bank-vibe-zero-credit-card",
     "title": "Unity Bank Vibe and Zero Credit Cards",
     "excerpt": "Two RuPay credit cards from Unity Small Finance Bank, both backed by a fixed deposit, with 0% bank forex markup and rewards on UPI. Zero is free and pays up to 1% by category. Vibe costs ₹249 once, pays up to 1.5% on…",
