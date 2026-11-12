@@ -581,7 +581,8 @@ html[data-theme="dark"] .sp-verified.sp-date-pill { --pill-bg: #111113; --pill-e
   .sp-verified.sp-date-pill { animation: sp-pill-spin 4s linear infinite; }
 }
 @media (max-width: 640px) {
-  .sp-verified.sp-date-pill { min-height: 32px; padding-right: 11px; font-size: 0.75rem; }
-  .sp-date-pill-label { margin-right: 8px; padding: 0 8px 0 11px; }
+  .sp-verified.sp-date-pill { min-height: 28px; margin-bottom: 14px !important; padding-right: 10px; font-size: 0.6875rem; }
+  .sp-date-pill-label { margin-right: 7px; padding: 0 7px 0 10px; }
+  .sp-date-pill-long { display: none; }
 }
 @keyframes sp-pill-spin { to { --sp-pill-a: 360deg; } }
