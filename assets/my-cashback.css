@@ -1,4 +1,4 @@
-/* My cashback on HSBC Live+: one panel with the total, a bar per statement and year totals. */
+/* "My cashback on this card" on reviews: one panel with the total, a bar per statement and period totals. */
 .lp-cb { --lp-cols: 28; padding: clamp(16px, 3vw, 24px); border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
 .lp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
 .lp-total { display: grid; gap: 4px; margin: 0; }
@@ -25,7 +25,6 @@
 .lp-bars li:nth-last-child(-n+3):hover .lp-tip, .lp-bars li:nth-last-child(-n+3):focus .lp-tip { translate: 0 0; }
 
 .lp-avg { position: absolute; z-index: 1; inset-inline: 0; bottom: var(--h); border-block-start: 1px dashed var(--muted); opacity: 0.7; pointer-events: none; }
-.lp-avg span { position: absolute; right: 0; bottom: 3px; padding-inline: 4px; border-radius: 4px; background: var(--surface); font-size: 0.6875rem; color: var(--muted); }
 
 .lp-yrs { display: grid; grid-template-columns: repeat(var(--lp-cols), minmax(0, 1fr)); gap: 3px; margin: 10px 0 0; padding: 0; list-style: none; }
 .lp-yrs li { grid-column: span var(--n); display: grid; gap: 1px; padding-inline: 6px; border-inline-start: 1px solid var(--line); }
@@ -42,3 +41,7 @@
   }
 }
 @keyframes lp-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* Month labels under the bars when every bar sits in one year. */
+.lp-mos li { padding-inline: 0; border: 0; text-align: center; }
+@media (min-width: 640px) { .lp-few .lp-bars, .lp-few .lp-yrs { gap: 14px; } }
