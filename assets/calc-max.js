@@ -4,7 +4,7 @@
 //   data-preset: the page's own calculator script fills the inputs, like the other example buttons.
 //   data-max-click="sel,sel": clicks those buttons in the calculator (tier, card, payment count).
 //   data-max-check="sel": ticks those checkboxes.
-//   data-max-range="sel=value": sets those range inputs.
+//   data-max-range="sel=value": sets those range inputs, or a text amount field (shown with Indian grouping).
 // The plan hides again as soon as the reader changes anything in the calculator.
 (() => {
   const fire = (el, type) => el.dispatchEvent(new Event(type, { bubbles: true }));
@@ -26,7 +26,10 @@
       list(d.maxRange).forEach((pair) => {
         const [sel, value] = pair.split("=");
         const range = calc.querySelector(sel);
-        if (range) { range.value = value; fire(range, "input"); }
+        if (range) {
+          range.value = range.type === "range" ? value : new Intl.NumberFormat("en-IN").format(Number(value));
+          fire(range, "input");
+        }
       });
       button.setAttribute("aria-pressed", "true");
     });
