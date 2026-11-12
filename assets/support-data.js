@@ -674,6 +674,38 @@ window.SUPPORT_CONTACTS = {
     contacts["Canara Bank"].l2Email = [];
   }
 
+  /* 13 Nov 2026: from Abhishek's research doc, checked on official pages. */
+
+  // Kotak: toll-free customer care on kotak.bank.in contact page.
+  if (contacts["Kotak Mahindra Bank"]) {
+    contacts["Kotak Mahindra Bank"].care = ["1800-4100", ...(contacts["Kotak Mahindra Bank"].care || [])];
+  }
+
+  // SBI Card: dedicated mailboxes in its grievance redressal policy (sbicard.com).
+  if (contacts["SBI Card"]) {
+    contacts["SBI Card"].l1Extras = [
+      { label: "Disputes / chargeback", emails: ["chargeback@sbicard.com"] },
+      { label: "Mis-selling / harassment", emails: ["salesgrievance@sbicard.com"] },
+      { label: "Card closure", emails: ["closurerequest@sbicard.com"] }
+    ];
+  }
+
+  // OneCard: general help line and grievance desk (issuer KFS / CSB policy page);
+  // Federal OneCard line from federal.bank.in contact centre.
+  if (contacts["OneCard"]) {
+    contacts["OneCard"].care = ["1800-210-9111", ...(contacts["OneCard"].care || [])];
+    contacts["OneCard"].l1Email = ["help@getonecard.app"];
+    contacts["OneCard"].l2Email = ["grievances@fplabs.tech"];
+    contacts["OneCard"].helplineExtras = [
+      ...(contacts["OneCard"].helplineExtras || []),
+      { label: "Federal OneCard", values: ["1800-268-3111"] }
+    ];
+    contacts["OneCard"].l1Extras = [
+      ...(contacts["OneCard"].l1Extras || []),
+      { label: "Federal OneCard", emails: ["fedone@getonecard.app"] }
+    ];
+  }
+
   // RBL Bank: additional official contact number.
   if (contacts["RBL Bank"]) {
     contacts["RBL Bank"].care = [...(contacts["RBL Bank"].care || []), "1800-102-6222"];
