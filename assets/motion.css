@@ -71,7 +71,7 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
   /* The fade replaces the old hover underlines (footer, breadcrumbs, thicker review links). */
   .gf-column a:hover,
   .gf-bottom-links a:hover,
-  .rv-crumbs a:hover { text-decoration-color: transparent !important; }
+  .site-crumbs a:hover { text-decoration-color: transparent !important; }
   .rv-article a:not(.rv-btn):hover { text-decoration-thickness: from-font !important; }
 }
 /* The footer link for the open page shows as selected by its full text colour, not an underline. */

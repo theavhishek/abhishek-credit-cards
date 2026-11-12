@@ -2,7 +2,7 @@
 /* Stageshow hero demos (appended to the bundle CSS by pnpm build:stageshow): copy left, demo right; desktop/tablet only */
 .ss-hero-demo { display: none; }
 @media (min-width: 900px) {
-  .ce .sp-hero.ce-hero.has-demo { grid-template-columns: minmax(0, 1fr) 440px; align-items: center; gap: 32px; }
+  .ce .sp-hero.ce-hero.has-demo { grid-template-columns: minmax(0, 1fr) 440px; align-items: start; gap: 32px; }
   .up-hero.has-demo { max-width: none; display: grid; grid-template-columns: minmax(0, 1fr) 440px; align-items: center; gap: 32px; }
   .ss-hero-demo { display: block; width: 440px; min-height: 440px; }
 }
