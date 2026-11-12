@@ -1,0 +1,11 @@
+/* My cashback on HSBC Live+: one compact grid per year, each bar scaled to the best month. */
+.lp-year { margin-block: 16px 6px; font-size: var(--rv-fs-small); font-weight: 650; color: var(--muted); }
+.lp-months { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.lp-months li { display: grid; gap: 2px; padding: 8px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.lp-m { font-size: var(--rv-fs-caption); color: var(--muted); }
+.lp-v { font-size: var(--rv-fs-caption); font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lp-bar { display: block; height: 4px; width: var(--w); margin-block-start: 4px; border-radius: 999px; background: var(--rv-brand); }
+.lp-note { margin-block-start: 12px; font-size: var(--rv-fs-small); color: var(--muted); }
+@media (min-width: 900px) {
+  .lp-months { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
