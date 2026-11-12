@@ -58,6 +58,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/calc-max.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=5">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=1">
@@ -139,6 +140,18 @@
     <div class="rv-calc-intro">
       <h2 id="calc-title">Where the ₹1,200 cap kicks in</h2>
       <p>Set your usual monthly spend on eligible groceries, dining, food delivery, shopping and utilities.</p>
+      <div class="cm-row">
+        <span>Try:</span>
+        <button type="button" class="cm-btn" data-max data-max-range="#calc-spend=12000" aria-controls="cm-plan" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></svg>Max benefits</button>
+      </div>
+      <div class="cm-plan" id="cm-plan" hidden>
+        <p class="cm-plan-title">The most this card pays in a cycle</p>
+        <ol class="cm-steps">
+          <li><span><strong>₹12,000</strong> in the 10% categories. Fills the shared ₹1,200 cap</span><b>₹1,200</b></li>
+          <li><span><strong>₹5,000</strong> of other eligible spend at 1.5%</span><b>₹75</b></li>
+        </ol>
+        <p class="cm-sum"><strong>₹1,275 a cycle, ₹15,300 a year.</strong> ₹17,000 a month is ₹2,04,000 a year, above the ₹2,00,000 that gets the renewal fee reversed. 10% spend past ₹12,000 earns nothing extra, so put it on another card. The slider shows the 10% part.</p>
+      </div>
     </div>
     <div class="rv-calc-tool">
       <div class="rv-calc-input">
@@ -390,6 +403,7 @@
     })();
   </script>
   
+  <script src="/assets/calc-max.js?v=1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

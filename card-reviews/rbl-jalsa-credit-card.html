@@ -62,6 +62,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/calc-max.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=5">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=1">
@@ -149,6 +150,17 @@
         <button type="button" data-preset="3000,400,5000" aria-pressed="false">Light</button>
         <button type="button" data-preset="6000,600,10000" aria-pressed="true">Regular</button>
         <button type="button" data-preset="15000,900,15000" aria-pressed="false">Heavy</button>
+        <button type="button" class="cm-btn" data-max data-preset="10000,1000,15000" aria-controls="cm-plan" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></svg>Max benefits</button>
+      </div>
+      <div class="cm-plan" id="cm-plan" hidden>
+        <p class="cm-plan-title">The most this card pays in a month</p>
+        <ol class="cm-steps">
+          <li><span><strong>₹10,000</strong> on the nine partner apps, in orders of ₹1,000 or less, so each earns the full 5% (up to ₹50)</span><b>₹500</b></li>
+          <li><span><strong>₹15,000</strong> of other card spend. Earns nothing, but with the app spend makes ₹3 lakh a year</span><b>₹0</b></li>
+          <li><span><strong>₹3 lakh a year</strong> unlocks the milestone voucher</span><b>₹500 voucher</b></li>
+          <li><span><strong>Card used within 30 days</strong> of issue, first year only</span><b>₹1,000 voucher</b></li>
+        </ol>
+        <p class="cm-sum"><strong>₹500 a month, ₹6,000 a year in cashback</strong>, the ₹500 monthly cap, plus both vouchers. The results below take off the annual fee and the voucher redemption fees. Partner-app spend beyond ₹10,000 earns nothing more that month.</p>
       </div>
     </div>
     <div class="ec-layout">
@@ -475,6 +487,7 @@
   <script src="/assets/preview-page.js?v=6" defer></script>
   <script src="/assets/jalsa-review.js?v=1" defer></script>
   
+  <script src="/assets/calc-max.js?v=1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

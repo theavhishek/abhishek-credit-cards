@@ -63,6 +63,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/calc-max.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=5">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=1">
@@ -150,6 +151,16 @@
         <button type="button" data-preset="15000,0,3000,2000,2000,0,1000" aria-pressed="true">Online shopper</button>
         <button type="button" data-preset="4000,0,3000,3000,25000,20000,2000" aria-pressed="false">Bills and rent</button>
         <button type="button" data-preset="8000,15000,2000,1000,0,0,0" aria-pressed="false">Traveller</button>
+        <button type="button" class="cm-btn" data-max data-preset="0,24000,13000,13000,0,0,0" aria-controls="cm-plan" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></svg>Max benefits</button>
+      </div>
+      <div class="cm-plan" id="cm-plan" hidden>
+        <p class="cm-plan-title">The most this card pays in a cycle</p>
+        <ol class="cm-steps">
+          <li><span><strong>₹24,000</strong> of flights and hotels in the IDFC FIRST app: 3% / 5% fills the ₹1,000 online cap, plus the extra 1%</span><b>₹1,240</b></li>
+          <li><span><strong>₹26,000</strong> of offline swipes and UPI in the IDFC FIRST app at 1%. Fills the ₹1,500 overall cap</span><b>₹260</b></li>
+          <li><span><strong>No rent, and utility bills under ₹20,000</strong>, so there are no bank fees to pay</span><b>₹0 fees</b></li>
+        </ol>
+        <p class="cm-sum"><strong>₹1,500 a cycle, ₹18,000 a year</strong> (₹16,820 after the joining fee). ₹6 lakh a year also gets the renewal fee reversed in full. It needs a credit limit (your FD) of at least ₹50,000, and spend beyond this earns nothing more.</p>
       </div>
     </div>
     <div class="ec-layout">
@@ -654,6 +665,7 @@
   <script src="/assets/preview-page.js?v=6" defer></script>
   <script src="/assets/hello-calc.js?v=1" defer></script>
   
+  <script src="/assets/calc-max.js?v=1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

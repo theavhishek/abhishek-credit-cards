@@ -67,6 +67,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/calc-max.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=5">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=1">
@@ -145,6 +146,18 @@
     <div class="rv-calc-intro">
       <h2 id="calc-title">How many Star Points will you earn?</h2>
       <p>Set one credit card bill payment, how many you make in a month and which BOI debit card you pay with. The calculator applies the slab for that payment size, the 10,000-point cap and the monthly bonus.</p>
+      <div class="cm-row">
+        <span>Try:</span>
+        <button type="button" class="cm-btn" data-max data-max-click="[data-count=&quot;4&quot;],[data-card=&quot;select&quot;]" data-max-range="#bc-amount=83500" aria-controls="cm-plan" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></svg>Max benefits</button>
+      </div>
+      <div class="cm-plan" id="cm-plan" hidden>
+        <p class="cm-plan-title">The most this card pays in a month</p>
+        <ol class="cm-steps">
+          <li><span><strong>₹3,34,000</strong> of credit card bills with the RuPay Select card, here as four payments of ₹83,500. Each is above ₹10,000, so it earns 3 RP per ₹100 and fills the cap</span><b>10,000 RP</b></li>
+          <li><span><strong>Above ₹50,000</strong> in the month adds the bonus, outside the cap</span><b>100 RP</b></li>
+        </ol>
+        <p class="cm-sum"><strong>10,100 RP a month, worth ₹2,525.</strong> Points past the 10,000 cap aren’t credited, so more spend earns only the 100-point bonus. On another BOI debit card the top rate is 2 RP per ₹100.</p>
+      </div>
     </div>
     <div class="ec-layout">
       <div class="ec-in">
@@ -433,6 +446,7 @@
   <script src="/assets/preview-page.js?v=6" defer></script>
   <script src="/assets/boi-calc.js?v=1" defer></script>
   
+  <script src="/assets/calc-max.js?v=1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>

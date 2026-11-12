@@ -60,6 +60,7 @@
   <link rel="stylesheet" href="/assets/header.css?v=9">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/calc-max.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=4">
   <link rel="stylesheet" href="/assets/motion.css?v=5">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=1">
@@ -147,6 +148,17 @@
         <button type="button" data-preset="1500,500,0,1500,500,5000" aria-pressed="false">Light</button>
         <button type="button" data-preset="4000,1500,1000,3000,2000,15000" aria-pressed="true">Regular</button>
         <button type="button" data-preset="12000,4000,4000,8000,25000,60000" aria-pressed="false">Heavy</button>
+        <button type="button" class="cm-btn" data-max data-preset="12000,4000,4000,0,20000,50000" data-max-check="#ec-movie" aria-controls="cm-plan" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></svg>Max benefits</button>
+      </div>
+      <div class="cm-plan" id="cm-plan" hidden>
+        <p class="cm-plan-title">The most this card pays in a month</p>
+        <ol class="cm-steps">
+          <li><span><strong>₹20,000</strong> on Zomato, District and Blinkit beauty and electronics at 10%. Fills the ₹2,000 discount cap</span><b>₹2,000</b></li>
+          <li><span><strong>₹20,000</strong> on Apollo, ixigo, Uber and Urban Company at 5%. Fills the ₹1,000 cap</span><b>₹1,000</b></li>
+          <li><span><strong>₹50,000</strong> on other eligible spends at 1%. Fills the ₹500 cap</span><b>₹500</b></li>
+          <li><span><strong>One District 1+1 movie booking</strong>, outside the caps</span><b>₹200</b></li>
+        </ol>
+        <p class="cm-sum"><strong>₹3,700 a month, ₹44,400 a year</strong> (₹43,811 after the first-year fee). At ₹90,000 a month you’re well past the ₹2 lakh a year that waives the renewal fee. Spend beyond these amounts earns nothing more, so put it on another card.</p>
       </div>
     </div>
     <div class="ec-layout">
@@ -471,6 +483,7 @@
   <script src="/assets/preview-page.js?v=6" defer></script>
   <script src="/assets/eternal-calc.js?v=1" defer></script>
   
+  <script src="/assets/calc-max.js?v=1" defer></script>
   <script src="/assets/follow.js?v=1" defer></script>
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>
