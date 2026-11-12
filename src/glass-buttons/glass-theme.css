@@ -49,6 +49,18 @@ html[data-theme="dark"] .lg-button[data-glass="solid"] {
   --lg-button-fill-hover: transparent;
 }
 
+/* "Increase contrast" and "Reduce transparency" (iOS, macOS, Windows): the registry swaps every button's
+   fill for its opaque white or grey surface, with !important inside its cascade layer, which no
+   unlayered custom property can beat. Solid CTAs keep light text, so they turned white with unreadable
+   labels. Paint the fill layer itself instead: their own ink (opaque), and the brand button's own colour. */
+@media (prefers-contrast: more), (prefers-reduced-transparency: reduce) {
+  .lg-button[data-glass="solid"] > .lg-button__layers > .lg-button__distortion { background: var(--text); }
+  .lg-button[data-glass="brand"] > .lg-button__layers > .lg-button__distortion { background: transparent; }
+  @media (hover: hover) {
+    .lg-button[data-glass="solid"]:hover > .lg-button__layers > .lg-button__distortion { background: color-mix(in oklab, var(--text) 86%, var(--page)); }
+  }
+}
+
 /* Outlined buttons keep their outline; open menus keep their filled look. */
 .lg-button.up-filter-btn[aria-expanded="true"],
 .lg-button.up-share[aria-expanded="true"] {
