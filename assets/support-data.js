@@ -515,6 +515,170 @@ window.SUPPORT_CONTACTS = {
     delete contacts["SBI Card"].extras;
   }
 
+  /* 12 Nov 2026 audit: each change below was checked on the bank's own page. */
+
+  // Union Bank: card helpdesk from unionbankofindia.bank.in card pages;
+  // CGO / Principal Nodal Officer from its Citizen Charter 2025-26.
+  if (contacts["Union Bank of India"]) {
+    contacts["Union Bank of India"].l1Email = ["ccdhelpdesk@unionbankofindia.bank.in"];
+    contacts["Union Bank of India"].l3Email = ["cgo@unionbankofindia.bank.in"];
+  }
+
+  // DBS: dbs.bank.in "Redressal of complaints and grievances" (card care, Vantage, PNO);
+  // card nodal mailbox from the audit, confirmed by Abhishek.
+  if (contacts["DBS Bank"]) {
+    contacts["DBS Bank"].l1Email = ["cardcareindia@dbs.com"];
+    contacts["DBS Bank"].l1Extras = [{ label: "Vantage", emails: ["vantagecareindia@dbs.com"] }];
+    contacts["DBS Bank"].l2Email = ["creditcardnodal@dbs.com"]; // from audit, confirmed by Abhishek
+    contacts["DBS Bank"].l3Email = ["supercardnodal@dbs.com"];
+    contacts["DBS Bank"].helplineExtras = [
+      { label: "Credit Card", values: ["1860-267-6789"] },
+      { label: "Vantage", values: ["1800-209-4555"] }
+    ];
+  }
+
+  // American Express: five internal levels on its India grievance redressal policy page.
+  if (contacts["American Express"]) {
+    contacts["American Express"].l3Email = ["Head-Customerservicesindia@aexp.com"];
+    contacts["American Express"].l4Email = ["AEBCNodalOfficer@aexp.com"];
+    contacts["American Express"].l5Email = ["pnoindia@aexp.com"];
+  }
+
+  // HDFC Bank: card Grievance Redressal Officer (credit-card-specific complaints page)
+  // and Principal Nodal Officer (grievance redressal page), both on hdfc.bank.in.
+  if (contacts["HDFC Bank"]) {
+    contacts["HDFC Bank"].l2Email = ["Grievance.Redressal@hdfc.bank.in"];
+    contacts["HDFC Bank"].l3Email = ["Pnohdfcbank@hdfc.bank.in"];
+  }
+
+  // YES BANK: yestouchcc is the credit card mailbox; yestouch is for banking.
+  if (contacts["YES BANK"]) {
+    contacts["YES BANK"].l1Email = ["yestouchcc@yes.bank.in"]; // .bank.in address confirmed by Abhishek
+  }
+
+  // Indian Bank: nodalofficer@ is its Principal Nodal Officer; level 2 is zonal nodal officers.
+  if (contacts["Indian Bank"]) {
+    contacts["Indian Bank"].l2Email = [];
+    contacts["Indian Bank"].l2Note = "Zonal nodal officers. The list by zone is on indianbank.bank.in.";
+    contacts["Indian Bank"].l3Email = ["nodalofficer@indianbank.bank.in"];
+  }
+
+  // Canara Bank: Principal Nodal Officer publishes a landline, not an email.
+  if (contacts["Canara Bank"]) {
+    contacts["Canara Bank"].l3Note = "No email published. Call the Principal Nodal Officer on 080-22239011.";
+  }
+
+  // IndusInd Bank: level 2 Nodal Officer, level 3 Principal Nodal Officer (indusind.bank.in).
+  if (contacts["IndusInd Bank"]) {
+    contacts["IndusInd Bank"].l2Email = ["nodal.officer@indusind.com"];
+    contacts["IndusInd Bank"].l3Email = ["pno@indusind.com"];
+  }
+
+  // HSBC India: level 2 is the nodal desk or the credit card Code Compliance Officer;
+  // the Principal Nodal Officer has its own mailbox (hsbc.bank.in).
+  if (contacts["HSBC India"]) {
+    contacts["HSBC India"].l2Email = ["nodalofficerinm@hsbc.bank.in", "complaints.india@hsbc.bank.in"];
+    contacts["HSBC India"].l3Email = ["pnohsbcbank@hsbc.bank.in"];
+  }
+
+  // CSB Bank: current Principal Nodal Officer address on csb.bank.in.
+  if (contacts["CSB Bank"]) {
+    contacts["CSB Bank"].l3Email = ["pno@csb.bank.in"];
+  }
+
+  // SBM Bank India: toll-free numbers on its grievance redressal page.
+  if (contacts["SBM Bank India"]) {
+    contacts["SBM Bank India"].care = ["1800-103-3817", "1800-209-9335"];
+  }
+
+  /* 12 Nov 2026: from Abhishek's ChatGPT audit, added on his instruction. These
+     banks' sites block automated checks, so these entries are not yet verified
+     on the bank's own page. */
+
+  // AU Small Finance Bank: card helpline, premium-card mailbox and Principal Nodal Officer.
+  if (contacts["AU Small Finance Bank"]) {
+    contacts["AU Small Finance Bank"].care = ["1800-1200-1500", "1800-1200-1200"];
+    contacts["AU Small Finance Bank"].l1Extras = [{ label: "Premium cards", emails: ["creditcard.priority@aubank.in"] }];
+    contacts["AU Small Finance Bank"].l3Email = ["pno@aubank.in"];
+    contacts["AU Small Finance Bank"].helplineExtras = [{ label: "Principal nodal officer", values: ["0141-6660645"] }];
+  }
+
+  // Bank of India: grievance email and Principal Nodal Officer phone.
+  if (contacts["Bank of India"]) {
+    contacts["Bank of India"].l3Email = ["cgro.boi@bankofindia.co.in"];
+    contacts["Bank of India"].helplineExtras = [{ label: "Principal nodal officer", values: ["022-61319840"] }];
+  }
+
+  // BOBCARD: Level 1 CRM, Level 2 grievance escalations, then nodal and principal nodal.
+  if (contacts["BOBCARD"]) {
+    contacts["BOBCARD"].l1Email = ["crm@bobcard.co.in"];
+    contacts["BOBCARD"].l2Email = ["escalations@bobcard.co.in"];
+    contacts["BOBCARD"].l3Email = ["nodal@bobcard.co.in"];
+    contacts["BOBCARD"].l4Email = ["pno@bobcard.co.in"];
+  }
+
+  // OneCard: a programme run with several issuers; route by the bank on your card.
+  if (contacts["OneCard"]) {
+    contacts["OneCard"].helplineExtras = [
+      { label: "BOBCARD OneCard", values: ["1800-268-7111"] },
+      { label: "CSB OneCard", values: ["1800-210-9111"] },
+      { label: "SBM OneCard", values: ["1800-209-2111"] }
+    ];
+    contacts["OneCard"].l1Extras = [
+      { label: "BOBCARD OneCard", emails: ["bobcardone@getonecard.app"] },
+      { label: "CSB OneCard", emails: ["csbone@getonecard.app"] },
+      { label: "SBM OneCard", emails: ["sbmone@getonecard.app"] }
+    ];
+    contacts["OneCard"].l2Extras = [{ label: "BOBCARD OneCard", emails: ["onecard@bobcard.co.in"] }];
+    contacts["OneCard"].l2Note = "Escalate with the bank that issued your card.";
+    contacts["OneCard"].l3Note = "Use the issuing bank’s principal nodal officer: BOBCARD, CSB, SBM or Federal Bank.";
+  }
+
+  // Federal Bank: Scapia and Fi co-branded cards have their own support.
+  if (contacts["Federal Bank"]) {
+    contacts["Federal Bank"].helplineExtras = [
+      ...(contacts["Federal Bank"].helplineExtras || []),
+      { label: "Scapia / Fi", values: ["1800-296-1199"] }
+    ];
+    contacts["Federal Bank"].l1Extras = [
+      { label: "Scapia", emails: ["scapiafederalcards@federalbank.co.in"] },
+      { label: "Fi", emails: ["federalficards@federalbank.co.in"] }
+    ];
+  }
+
+  // YES BANK: YES Private and YES First / Marquee / Reserv card support.
+  if (contacts["YES BANK"]) {
+    contacts["YES BANK"].helplineExtras = [
+      { label: "YES Private", values: ["1800-121-4444"] },
+      { label: "YES FIRST / Premia / Marquee / Reserv", values: ["1800-103-6000"] }
+    ];
+    contacts["YES BANK"].l1Extras = [
+      { label: "YES Private", emails: ["yesprivatecc@yes.bank.in"] },
+      { label: "YES FIRST / Marquee / Reserv", emails: ["yesfirstcc@yes.bank.in"] }
+    ];
+  }
+
+  // Punjab National Bank: newer pnb.bank.in card mailbox first, older one kept.
+  if (contacts["Punjab National Bank"]) {
+    contacts["Punjab National Bank"].l1Email = ["creditcardpnb@pnb.bank.in", "creditcardpnb@pnb.co.in"];
+  }
+
+  // Union Bank of India: card grievance mailbox on the .bank.in domain.
+  if (contacts["Union Bank of India"]) {
+    contacts["Union Bank of India"].l2Email = ["ccd.grievances@unionbankofindia.bank.in"];
+  }
+
+  // Canara Bank: hocss1 is a published customer-service contact, so it goes at step 1.
+  if (contacts["Canara Bank"]) {
+    contacts["Canara Bank"].l1Email = ["hocss1@canarabank.com"];
+    contacts["Canara Bank"].l2Email = [];
+  }
+
+  // RBL Bank: additional official contact number.
+  if (contacts["RBL Bank"]) {
+    contacts["RBL Bank"].care = [...(contacts["RBL Bank"].care || []), "1800-102-6222"];
+  }
+
 
   /* ==========================================================================
      Bank support page: logo picker, search, and one card per bank.

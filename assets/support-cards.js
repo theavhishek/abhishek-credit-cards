@@ -29,7 +29,10 @@
     "Union Bank of India":"Union Bank", "DBS Bank":"DBS"
   };
   const extraLabels = { "Intl":"International", "L4":"Level 4" };
-  const level4Labels = { "SBI Card":"Customer service head", "American Express":"Nodal officer" };
+  const level2Labels = { "IDFC FIRST Bank":"Regional nodal officer", "American Express":"Manager, customer service", "HDFC Bank":"Grievance redressal officer", "Indian Bank":"Zonal nodal officer", "BOBCARD":"Grievance redressal officer", "ICICI Bank":"Head, credit cards", "Unity Small Finance Bank":"Level 2 escalation officer" };
+  const level3Labels = { "American Express":"Head of customer service", "BOBCARD":"Nodal officer" };
+  const level4Labels = { "SBI Card":"Customer service head", "American Express":"Nodal officer", "BOBCARD":"Principal nodal officer" };
+  const level5Labels = { "American Express":"Principal nodal officer" };
 
   const esc = (value = "") => String(value).replace(/[&<>"']/g, char => ({
     "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
@@ -57,8 +60,8 @@
 
   function getCounts(entry) {
     const numbers = arr(entry.care).length + arr(entry.helplineExtras).reduce((total, item) => total + arr(item.values).length, 0);
-    const emails = [entry.l1Email, entry.l2Email, entry.l3Email, entry.l4Email].reduce((total, values) => total + arr(values).length, 0)
-      + [...arr(entry.l1Extras), ...arr(entry.extras)].reduce((total, item) => total + arr(item.emails).length, 0);
+    const emails = [entry.l1Email, entry.l2Email, entry.l3Email, entry.l4Email, entry.l5Email].reduce((total, values) => total + arr(values).length, 0)
+      + [...arr(entry.l1Extras), ...arr(entry.l2Extras), ...arr(entry.extras)].reduce((total, item) => total + arr(item.emails).length, 0);
     return { numbers, emails };
   }
   const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -85,6 +88,7 @@
   const labelled = (label, values, kind) => arr(values).length
     ? `<div class="sp-subgroup"><p class="sp-sublabel">${esc(extraLabels[label] || label)}</p>${rows(values, kind)}</div>` : "";
   const notPublished = '<p class="sp-missing">Not published by the bank</p>';
+  const note = text => text ? `<p class="sp-missing">${esc(text)}</p>` : notPublished;
 
   function step(n, title, body, modifier = "") {
     return `<li class="sp-step${modifier}"><span class="sp-step-num" aria-hidden="true">${n}</span>
@@ -103,13 +107,14 @@
       const level4 = [...arr(entry.l4Email), ...arr(entry.extras).filter(item => item.label === "L4").flatMap(item => arr(item.emails))];
       const steps = [
         step(1, "Customer care", [rows(entry.l1Email, "email"), ...arr(entry.l1Extras).map(item => labelled(item.label, item.emails, "email"))].join("") || notPublished),
-        step(2, bank === "IDFC FIRST Bank" ? "Regional nodal officer" : "Nodal officer", rows(entry.l2Email, "email") || notPublished),
-        step(3, "Principal nodal officer", [rows(entry.l3Email, "email"), ...level3Extras.map(item => labelled(item.label, item.emails, "email"))].join("") || notPublished)
+        step(2, esc(level2Labels[bank] || "Nodal officer"), [rows(entry.l2Email, "email"), ...arr(entry.l2Extras).map(item => labelled(item.label, item.emails, "email"))].join("") + (arr(entry.l2Email).length ? "" : note(entry.l2Note))),
+        step(3, esc(level3Labels[bank] || "Principal nodal officer"), [rows(entry.l3Email, "email"), ...level3Extras.map(item => labelled(item.label, item.emails, "email"))].join("") || note(entry.l3Note))
       ];
       if (level4.length) steps.push(step(4, esc(level4Labels[bank] || "Senior escalation"), rows(level4, "email")));
+      if (arr(entry.l5Email).length) steps.push(step(steps.length + 1, esc(level5Labels[bank] || "Senior escalation"), rows(entry.l5Email, "email")));
       const rbiN = steps.length + 1;
       steps.push(step(rbiN, "RBI Ombudsman",
-        `<p class="sp-step-note">If ${esc(shortNames[bank] || bank)} rejects your written complaint or doesn’t reply within 30 days.</p>
+        `<p class="sp-step-note">If ${esc(shortNames[bank] || bank)} doesn’t reply within 30 days, or you’re not happy with its reply. File within 90 days.</p>
          <a class="sp-rbi-link" href="https://cms.rbi.org.in" target="_blank" rel="noopener noreferrer">File on cms.rbi.org.in${icons.external}<span class="sr-only"> (opens in a new tab)</span></a>`, " sp-step-rbi"));
       body = `<section class="sp-call" aria-label="Phone numbers for ${esc(bank)}">
           <h3 class="sp-col-title">Call</h3>${call || notPublished}
