@@ -29,9 +29,9 @@
     "Union Bank of India":"Union Bank", "DBS Bank":"DBS"
   };
   const extraLabels = { "Intl":"International", "L4":"Level 4" };
-  const level2Labels = { "IDFC FIRST Bank":"Regional nodal officer", "American Express":"Manager, customer service", "HDFC Bank":"Grievance redressal officer", "DBS Bank":"Regional heads", "Indian Bank":"Zonal nodal officer" };
-  const level3Labels = { "American Express":"Head of customer service" };
-  const level4Labels = { "SBI Card":"Customer service head", "American Express":"Nodal officer" };
+  const level2Labels = { "IDFC FIRST Bank":"Regional nodal officer", "American Express":"Manager, customer service", "HDFC Bank":"Grievance redressal officer", "DBS Bank":"Regional heads", "Indian Bank":"Zonal nodal officer", "BOBCARD":"Grievance redressal officer", "ICICI Bank":"Head, credit cards", "Unity Small Finance Bank":"Level 2 escalation officer" };
+  const level3Labels = { "American Express":"Head of customer service", "BOBCARD":"Nodal officer" };
+  const level4Labels = { "SBI Card":"Customer service head", "American Express":"Nodal officer", "BOBCARD":"Principal nodal officer" };
   const level5Labels = { "American Express":"Principal nodal officer" };
 
   const esc = (value = "") => String(value).replace(/[&<>"']/g, char => ({
@@ -61,7 +61,7 @@
   function getCounts(entry) {
     const numbers = arr(entry.care).length + arr(entry.helplineExtras).reduce((total, item) => total + arr(item.values).length, 0);
     const emails = [entry.l1Email, entry.l2Email, entry.l3Email, entry.l4Email, entry.l5Email].reduce((total, values) => total + arr(values).length, 0)
-      + [...arr(entry.l1Extras), ...arr(entry.extras)].reduce((total, item) => total + arr(item.emails).length, 0);
+      + [...arr(entry.l1Extras), ...arr(entry.l2Extras), ...arr(entry.extras)].reduce((total, item) => total + arr(item.emails).length, 0);
     return { numbers, emails };
   }
   const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
@@ -107,7 +107,7 @@
       const level4 = [...arr(entry.l4Email), ...arr(entry.extras).filter(item => item.label === "L4").flatMap(item => arr(item.emails))];
       const steps = [
         step(1, "Customer care", [rows(entry.l1Email, "email"), ...arr(entry.l1Extras).map(item => labelled(item.label, item.emails, "email"))].join("") || notPublished),
-        step(2, esc(level2Labels[bank] || "Nodal officer"), rows(entry.l2Email, "email") || note(entry.l2Note)),
+        step(2, esc(level2Labels[bank] || "Nodal officer"), [rows(entry.l2Email, "email"), ...arr(entry.l2Extras).map(item => labelled(item.label, item.emails, "email"))].join("") + (arr(entry.l2Email).length ? "" : note(entry.l2Note))),
         step(3, esc(level3Labels[bank] || "Principal nodal officer"), [rows(entry.l3Email, "email"), ...level3Extras.map(item => labelled(item.label, item.emails, "email"))].join("") || note(entry.l3Note))
       ];
       if (level4.length) steps.push(step(4, esc(level4Labels[bank] || "Senior escalation"), rows(level4, "email")));
