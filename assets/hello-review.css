@@ -72,3 +72,8 @@
 
 /* Give the next section its usual gap after the banner. */
 .hc-forex + .rv-section { margin-block-start: 56px; }
+
+/* My cashback table: a thin bar per statement, scaled to the ₹1,500 cap. */
+.hc-mine :is(th, td) { vertical-align: middle; }
+.hc-mine td:last-child { width: 40%; min-width: 6rem; }
+.hc-bar { display: block; height: 8px; width: var(--w); border-radius: 999px; background: var(--rv-brand); }
