@@ -120,7 +120,8 @@ const shortName = (p) => ({
   "sbi-debit-card-rewardz":"SBI Rewardz guide",
   "boi-rupay-select-debit-card":"BOI RuPay Select guide",
   "swiggy-hdfc-ornge-blck-credit-card":"Swiggy HDFC Ornge and BLCK",
-  "unity-bank-vibe-zero-credit-card":"Unity Bank Vibe and Zero"
+  "unity-bank-vibe-zero-credit-card":"Unity Bank Vibe and Zero",
+  "idfc-first-hello-cashback-credit-card":"IDFC FIRST Hello Cashback"
 }[p.id] || p.title.replace(/ Credit Card$/," Card"));
 const footer = '          <div class="gf-column gf-column-latest">\n' +
   '            <h2 class="gf-heading">Latest reviews</h2>\n            <ul>\n' +

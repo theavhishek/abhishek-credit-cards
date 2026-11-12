@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "idfc-first-hello-cashback-credit-card.jpg",
+    alt: "IDFC FIRST Hello Cashback credit card review by Abhishek Meena: 3% then 5% online, ₹1,000 online cap, 0% forex, FD from ₹10,000",
+    eyebrow: "Card review",
+    title: "IDFC FIRST Hello Cashback",
+    subtitle: "An FD-backed RuPay card: 3% online, 5% above ₹10,000, 0% forex.",
+    stats: [["5%", "online above ₹10,000"], ["₹1,500", "cashback cap a cycle"], ["0%", "forex markup"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/idfc-first-hello-cashback-credit-card.jpg" },
+  },
+  {
     file: "unity-bank-vibe-zero-credit-card.jpg",
     alt: "Unity Bank Vibe and Zero credit card review by Abhishek Meena: up to 1.5% on Vibe plans, 1% on Zero, 0% forex, ₹249 one-time Vibe fee",
     eyebrow: "Card review",

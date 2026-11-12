@@ -1,0 +1,74 @@
+/* IDFC FIRST Hello Cashback review: zero-forex banner in the middle of the article.
+   Always dark in both themes, like the bank's own banner; the gold artwork is IDFC FIRST Bank's.
+   Lays itself out by its own width (container query), so it fits the article column. */
+.hc-forex {
+  container-type: inline-size;
+  margin-block: 56px 0;
+  overflow: hidden;
+  border-radius: var(--rv-radius-lg);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background-color: #0b0b0c;
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.hc-forex-in {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  padding: 24px 20px 28px;
+  text-align: center;
+}
+.hc-forex-art { width: min(100%, 210px); height: auto; margin-block-end: 8px; }
+.hc-forex-copy { display: grid; gap: 18px; justify-items: center; }
+.hc-forex h2 {
+  max-width: 18ch;
+  font-size: 1.5rem;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-wrap: balance;
+}
+.hc-forex-actions { display: flex; justify-content: center; width: 100%; }
+.rv-article a.hc-forex-apply {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  min-width: 160px;
+  padding-inline: 28px;
+  border-radius: var(--radius-full, 999px);
+  background: #fff;
+  color: #0b0b0c;
+  font-weight: 600;
+  text-decoration: none;
+  text-decoration-thickness: initial;
+  transition: scale 150ms ease-out, background-color 150ms ease-out;
+}
+.hc-forex-note { font-size: var(--rv-fs-small); line-height: 1.45; color: rgb(255 255 255 / 0.72); }
+.hc-forex :where(a):focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 999px; }
+@media (hover: hover) {
+  .rv-article a.hc-forex-apply:hover { background: #e8e6e1; text-decoration: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hc-forex-apply:active { scale: 0.96; }
+}
+@container (min-width: 600px) {
+  .hc-forex-in {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px 32px;
+    padding: 36px 40px;
+    text-align: start;
+    justify-items: stretch;
+  }
+  .hc-forex-art { order: 2; justify-self: center; width: min(100%, 300px); }
+  .hc-forex-copy { justify-items: start; }
+  .hc-forex-actions { justify-content: flex-start; }
+  .hc-forex h2 { font-size: clamp(1.625rem, 1.1rem + 2.2cqi, 2.25rem); }
+}
+
+/* Give the next section its usual gap after the banner. */
+.hc-forex + .rv-section { margin-block-start: 56px; }
