@@ -1,23 +1,44 @@
-/* My cashback on HSBC Live+: three year tiles, every statement folded into a dropdown. */
-.lp-years, .lp-months { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.lp-years { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: 12px; }
-.lp-months { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.lp-years li, .lp-months li { display: grid; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
-.lp-m { font-size: var(--rv-fs-caption); color: var(--muted); }
-.lp-v { font-size: var(--rv-fs-small); font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.lp-months .lp-v { font-size: var(--rv-fs-caption); }
-.lp-bar { display: block; height: 4px; width: var(--w); margin-block-start: 4px; border-radius: 999px; background: var(--rv-brand); }
-.lp-all { margin-block-start: 10px; }
-.lp-all > summary { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: var(--rv-fs-small); font-weight: 600; color: var(--muted); list-style: none; }
-.lp-all > summary::-webkit-details-marker { display: none; }
-.lp-all > summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; translate: 0 -2px; transition: rotate 200ms var(--ease, ease); }
-.lp-all[open] > summary::after { rotate: 225deg; translate: 0 2px; }
-.lp-all > summary:hover { color: var(--text); }
-.lp-year { margin-block: 12px 6px; font-size: var(--rv-fs-caption); font-weight: 650; color: var(--muted); }
+/* My cashback on HSBC Live+: one panel with the total, a bar per statement and year totals. */
+.lp-cb { --lp-cols: 28; padding: clamp(16px, 3vw, 24px); border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.lp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; }
+.lp-total { display: grid; gap: 4px; margin: 0; }
+.lp-total-v { font-size: clamp(2rem, 1.5rem + 2.4vw, 2.75rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.lp-total-l { font-size: var(--rv-fs-small); color: var(--muted); }
+.lp-stats { display: flex; gap: 24px; margin: 0; }
+.lp-stats div { display: grid; gap: 2px; }
+.lp-stats dt { font-size: var(--rv-fs-caption); color: var(--muted); }
+.lp-stats dd { margin: 0; font-size: var(--rv-fs-lead); font-weight: 650; font-variant-numeric: tabular-nums; }
+
+.lp-chart { position: relative; height: 150px; margin-block-start: 28px; border-block-end: 1px solid var(--line); }
+.lp-bars { display: grid; grid-template-columns: repeat(var(--lp-cols), minmax(0, 1fr)); align-items: end; gap: 3px; height: 100%; margin: 0; padding: 0; list-style: none; }
+.lp-bars li { position: relative; height: var(--h); min-height: 2px; border-radius: 4px 4px 1px 1px; background: var(--rv-brand); opacity: 0.88; cursor: default; outline: none; transform-origin: bottom; transition: opacity 160ms var(--ease, ease); }
+
+.lp-bars:hover li { opacity: 0.4; }
+.lp-bars li:hover, .lp-bars li:focus-visible { opacity: 1; }
+.lp-bars li:focus-visible { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--focus); }
+.lp-tip { position: absolute; z-index: 2; bottom: calc(100% + 8px); left: 50%; translate: -50% 4px; padding: 5px 8px; border-radius: 8px; background: var(--text); color: var(--page); font-size: var(--rv-fs-caption); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 140ms var(--ease, ease), translate 140ms var(--ease, ease); }
+.lp-tip b { margin-inline-start: 4px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.lp-bars li:hover .lp-tip, .lp-bars li:focus .lp-tip { opacity: 1; translate: -50% 0; }
+.lp-bars li:nth-child(-n+3) .lp-tip { left: 0; translate: 0 4px; }
+.lp-bars li:nth-child(-n+3):hover .lp-tip, .lp-bars li:nth-child(-n+3):focus .lp-tip { translate: 0 0; }
+.lp-bars li:nth-last-child(-n+3) .lp-tip { left: auto; right: 0; translate: 0 4px; }
+.lp-bars li:nth-last-child(-n+3):hover .lp-tip, .lp-bars li:nth-last-child(-n+3):focus .lp-tip { translate: 0 0; }
+
+.lp-avg { position: absolute; z-index: 1; inset-inline: 0; bottom: var(--h); border-block-start: 1px dashed var(--muted); opacity: 0.7; pointer-events: none; }
+.lp-avg span { position: absolute; right: 0; bottom: 3px; padding-inline: 4px; border-radius: 4px; background: var(--surface); font-size: 0.6875rem; color: var(--muted); }
+
+.lp-yrs { display: grid; grid-template-columns: repeat(var(--lp-cols), minmax(0, 1fr)); gap: 3px; margin: 10px 0 0; padding: 0; list-style: none; }
+.lp-yrs li { grid-column: span var(--n); display: grid; gap: 1px; padding-inline: 6px; border-inline-start: 1px solid var(--line); }
+.lp-yrs li:first-child { padding-inline-start: 0; border: 0; }
+.lp-yr { font-size: var(--rv-fs-caption); color: var(--muted); }
+.lp-yr-v { font-size: var(--rv-fs-small); font-weight: 650; font-variant-numeric: tabular-nums; }
 .lp-note { margin-block-start: 10px; font-size: var(--rv-fs-caption); color: var(--muted); }
-@media (min-width: 900px) {
-  .lp-months { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-  .lp-months li { padding: 6px 5px; }
-  .lp-months .lp-v { font-size: 0.6875rem; letter-spacing: -0.01em; }
+
+@media (min-width: 640px) { .lp-chart { height: 180px; } .lp-bars, .lp-yrs { gap: 5px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .lp-bars li { animation: lp-grow linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
+  }
 }
-@media (prefers-reduced-motion: reduce) { .lp-all > summary::after { transition: none; } }
+@keyframes lp-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
