@@ -1,0 +1,76 @@
+/* "Max benefits" on review calculators (calc-max.js): the button and the plan it reveals.
+   The button matches the example pills (.ec-presets button) so it also works on calculators without them. */
+.cm-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-block-start: 16px; }
+.cm-row > span { font-size: var(--rv-fs-caption); color: var(--muted); margin-inline-end: 4px; }
+
+.rv-calc .cm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding-inline: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--rv-fs-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+.cm-btn svg { flex: none; color: var(--rv-accent); }
+.rv-calc .cm-btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--surface); }
+.cm-btn[aria-pressed="true"] svg { color: var(--rv-brand); }
+.cm-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) {
+  .rv-calc .cm-btn[aria-pressed="false"]:hover { border-color: var(--muted); }
+}
+
+/* The plan: what to spend where, and what it pays. */
+.cm-plan {
+  max-inline-size: 46rem;
+  margin-block-start: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--rv-radius-md, var(--radius-md));
+  background: var(--page);
+  font-size: var(--rv-fs-small);
+  line-height: 1.45;
+}
+.cm-plan[hidden] { display: none; }
+.cm-plan-title { margin: 0 0 6px; font-weight: 650; color: var(--text); }
+.cm-steps { display: grid; margin: 0; padding: 0; list-style: none; counter-reset: cm; }
+.cm-steps li {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: baseline;
+  padding-block: 8px;
+  border-block-end: 1px solid var(--line);
+  counter-increment: cm;
+}
+.cm-steps li::before {
+  content: counter(cm);
+  font-size: var(--rv-fs-caption);
+  font-weight: 600;
+  color: var(--rv-accent);
+  font-variant-numeric: tabular-nums;
+}
+.cm-steps li > span { color: var(--muted); }
+.cm-steps li > span strong { color: var(--text); font-weight: 600; }
+.cm-steps li > b { font-weight: 650; color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cm-sum { margin: 10px 0 0; color: var(--muted); }
+@media (max-width: 560px) {
+  .cm-plan { padding: 14px; }
+  .cm-steps li { grid-template-columns: 1.25rem minmax(0, 1fr); }
+  .cm-steps li > b { grid-column: 2; }
+}
+.cm-sum strong { color: var(--text); font-weight: 650; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .cm-plan:not([hidden]) { animation: cm-in 220ms var(--rv-ease, ease-out); }
+  @keyframes cm-in { from { opacity: 0; transform: translateY(-4px); } }
+}
+@media print {
+  .cm-row, .rv-calc .cm-btn { display: none; }
+}
