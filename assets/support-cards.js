@@ -29,7 +29,7 @@
     "Union Bank of India":"Union Bank", "DBS Bank":"DBS"
   };
   const extraLabels = { "Intl":"International", "L4":"Level 4" };
-  const level2Labels = { "IDFC FIRST Bank":"Regional nodal officer", "American Express":"Manager, customer service", "HDFC Bank":"Grievance redressal officer", "DBS Bank":"Regional heads", "Indian Bank":"Zonal nodal officer", "BOBCARD":"Grievance redressal officer", "ICICI Bank":"Head, credit cards", "Unity Small Finance Bank":"Level 2 escalation officer" };
+  const level2Labels = { "IDFC FIRST Bank":"Regional nodal officer", "American Express":"Manager, customer service", "HDFC Bank":"Grievance redressal officer", "Indian Bank":"Zonal nodal officer", "BOBCARD":"Grievance redressal officer", "ICICI Bank":"Head, credit cards", "Unity Small Finance Bank":"Level 2 escalation officer" };
   const level3Labels = { "American Express":"Head of customer service", "BOBCARD":"Nodal officer" };
   const level4Labels = { "SBI Card":"Customer service head", "American Express":"Nodal officer", "BOBCARD":"Principal nodal officer" };
   const level5Labels = { "American Express":"Principal nodal officer" };

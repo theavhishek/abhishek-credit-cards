@@ -524,12 +524,12 @@ window.SUPPORT_CONTACTS = {
     contacts["Union Bank of India"].l3Email = ["cgo@unionbankofindia.bank.in"];
   }
 
-  // DBS: dbs.bank.in "Redressal of complaints and grievances". Level 2 is regional
-  // and cluster heads (no shared email); Principal Nodal Officer for cards is supercardnodal.
+  // DBS: dbs.bank.in "Redressal of complaints and grievances" (card care, Vantage, PNO);
+  // card nodal mailbox from the audit, confirmed by Abhishek.
   if (contacts["DBS Bank"]) {
     contacts["DBS Bank"].l1Email = ["cardcareindia@dbs.com"];
     contacts["DBS Bank"].l1Extras = [{ label: "Vantage", emails: ["vantagecareindia@dbs.com"] }];
-    contacts["DBS Bank"].l2Note = "No shared email. Reply to your Level 1 complaint and quote its reference number.";
+    contacts["DBS Bank"].l2Email = ["creditcardnodal@dbs.com"]; // from audit, confirmed by Abhishek
     contacts["DBS Bank"].l3Email = ["supercardnodal@dbs.com"];
     contacts["DBS Bank"].helplineExtras = [
       { label: "Credit Card", values: ["1860-267-6789"] },
@@ -551,9 +551,9 @@ window.SUPPORT_CONTACTS = {
     contacts["HDFC Bank"].l3Email = ["Pnohdfcbank@hdfc.bank.in"];
   }
 
-  // YES BANK: contact-us lists yestouchcc for credit cards; yestouch is for banking.
+  // YES BANK: yestouchcc is the credit card mailbox; yestouch is for banking.
   if (contacts["YES BANK"]) {
-    contacts["YES BANK"].l1Email = ["yestouchcc@yesbank.in"];
+    contacts["YES BANK"].l1Email = ["yestouchcc@yes.bank.in"]; // .bank.in address confirmed by Abhishek
   }
 
   // Indian Bank: nodalofficer@ is its Principal Nodal Officer; level 2 is zonal nodal officers.
