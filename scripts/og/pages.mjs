@@ -38,7 +38,7 @@ export const PAGES = [
     file: "bank-support.jpg",
     alt: "Bank support: customer care, complaint and nodal officer contacts for 26 Indian banks",
     eyebrow: "Bank support",
-    title: "Bank support, without the runaround.",
+    title: "Reach the right person, first time.",
     subtitle: "Customer care, complaint emails, nodal officers and the RBI Ombudsman step.",
     stats: [["26", "banks and issuers"]],
     visual: { logos: ["hdfc.svg", "sbin.svg", "icic.svg", "utib.svg", "kkbk.svg", "americanexpress.svg", "hsbc.svg", "idfb.svg", "yesb.svg"] },
