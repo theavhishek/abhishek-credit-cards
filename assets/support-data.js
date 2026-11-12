@@ -515,6 +515,82 @@ window.SUPPORT_CONTACTS = {
     delete contacts["SBI Card"].extras;
   }
 
+  /* 12 Nov 2026 audit: each change below was checked on the bank's own page. */
+
+  // Union Bank: card helpdesk from unionbankofindia.bank.in card pages;
+  // CGO / Principal Nodal Officer from its Citizen Charter 2025-26.
+  if (contacts["Union Bank of India"]) {
+    contacts["Union Bank of India"].l1Email = ["ccdhelpdesk@unionbankofindia.bank.in"];
+    contacts["Union Bank of India"].l3Email = ["cgo@unionbankofindia.bank.in"];
+  }
+
+  // DBS: dbs.bank.in "Redressal of complaints and grievances". Level 2 is regional
+  // and cluster heads (no shared email); Principal Nodal Officer for cards is supercardnodal.
+  if (contacts["DBS Bank"]) {
+    contacts["DBS Bank"].l1Email = ["cardcareindia@dbs.com"];
+    contacts["DBS Bank"].l1Extras = [{ label: "Vantage", emails: ["vantagecareindia@dbs.com"] }];
+    contacts["DBS Bank"].l2Note = "No shared email. Reply to your Level 1 complaint and quote its reference number.";
+    contacts["DBS Bank"].l3Email = ["supercardnodal@dbs.com"];
+    contacts["DBS Bank"].helplineExtras = [
+      { label: "Credit Card", values: ["1860-267-6789"] },
+      { label: "Vantage", values: ["1800-209-4555"] }
+    ];
+  }
+
+  // American Express: five internal levels on its India grievance redressal policy page.
+  if (contacts["American Express"]) {
+    contacts["American Express"].l3Email = ["Head-Customerservicesindia@aexp.com"];
+    contacts["American Express"].l4Email = ["AEBCNodalOfficer@aexp.com"];
+    contacts["American Express"].l5Email = ["pnoindia@aexp.com"];
+  }
+
+  // HDFC Bank: card Grievance Redressal Officer (credit-card-specific complaints page)
+  // and Principal Nodal Officer (grievance redressal page), both on hdfc.bank.in.
+  if (contacts["HDFC Bank"]) {
+    contacts["HDFC Bank"].l2Email = ["Grievance.Redressal@hdfc.bank.in"];
+    contacts["HDFC Bank"].l3Email = ["Pnohdfcbank@hdfc.bank.in"];
+  }
+
+  // YES BANK: contact-us lists yestouchcc for credit cards; yestouch is for banking.
+  if (contacts["YES BANK"]) {
+    contacts["YES BANK"].l1Email = ["yestouchcc@yesbank.in"];
+  }
+
+  // Indian Bank: nodalofficer@ is its Principal Nodal Officer; level 2 is zonal nodal officers.
+  if (contacts["Indian Bank"]) {
+    contacts["Indian Bank"].l2Email = [];
+    contacts["Indian Bank"].l2Note = "Zonal nodal officers. The list by zone is on indianbank.bank.in.";
+    contacts["Indian Bank"].l3Email = ["nodalofficer@indianbank.bank.in"];
+  }
+
+  // Canara Bank: Principal Nodal Officer publishes a landline, not an email.
+  if (contacts["Canara Bank"]) {
+    contacts["Canara Bank"].l3Note = "No email published. Call the Principal Nodal Officer on 080-22239011.";
+  }
+
+  // IndusInd Bank: level 2 Nodal Officer, level 3 Principal Nodal Officer (indusind.bank.in).
+  if (contacts["IndusInd Bank"]) {
+    contacts["IndusInd Bank"].l2Email = ["nodal.officer@indusind.com"];
+    contacts["IndusInd Bank"].l3Email = ["pno@indusind.com"];
+  }
+
+  // HSBC India: level 2 is the nodal desk or the credit card Code Compliance Officer;
+  // the Principal Nodal Officer has its own mailbox (hsbc.bank.in).
+  if (contacts["HSBC India"]) {
+    contacts["HSBC India"].l2Email = ["nodalofficerinm@hsbc.bank.in", "complaints.india@hsbc.bank.in"];
+    contacts["HSBC India"].l3Email = ["pnohsbcbank@hsbc.bank.in"];
+  }
+
+  // CSB Bank: current Principal Nodal Officer address on csb.bank.in.
+  if (contacts["CSB Bank"]) {
+    contacts["CSB Bank"].l3Email = ["pno@csb.bank.in"];
+  }
+
+  // SBM Bank India: toll-free numbers on its grievance redressal page.
+  if (contacts["SBM Bank India"]) {
+    contacts["SBM Bank India"].care = ["1800-103-3817", "1800-209-9335"];
+  }
+
 
   /* ==========================================================================
      Bank support page: logo picker, search, and one card per bank.
