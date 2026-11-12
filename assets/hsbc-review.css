@@ -1,0 +1,23 @@
+/* My cashback on HSBC Live+: three year tiles, every statement folded into a dropdown. */
+.lp-years, .lp-months { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.lp-years { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-block-start: 12px; }
+.lp-months { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.lp-years li, .lp-months li { display: grid; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.lp-m { font-size: var(--rv-fs-caption); color: var(--muted); }
+.lp-v { font-size: var(--rv-fs-small); font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lp-months .lp-v { font-size: var(--rv-fs-caption); }
+.lp-bar { display: block; height: 4px; width: var(--w); margin-block-start: 4px; border-radius: 999px; background: var(--rv-brand); }
+.lp-all { margin-block-start: 10px; }
+.lp-all > summary { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: var(--rv-fs-small); font-weight: 600; color: var(--muted); list-style: none; }
+.lp-all > summary::-webkit-details-marker { display: none; }
+.lp-all > summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; translate: 0 -2px; transition: rotate 200ms var(--ease, ease); }
+.lp-all[open] > summary::after { rotate: 225deg; translate: 0 2px; }
+.lp-all > summary:hover { color: var(--text); }
+.lp-year { margin-block: 12px 6px; font-size: var(--rv-fs-caption); font-weight: 650; color: var(--muted); }
+.lp-note { margin-block-start: 10px; font-size: var(--rv-fs-caption); color: var(--muted); }
+@media (min-width: 900px) {
+  .lp-months { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .lp-months li { padding: 6px 5px; }
+  .lp-months .lp-v { font-size: 0.6875rem; letter-spacing: -0.01em; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-all > summary::after { transition: none; } }

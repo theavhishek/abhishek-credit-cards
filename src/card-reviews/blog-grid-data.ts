@@ -9,6 +9,24 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "hsbc-live-plus",
+    "title": "HSBC Live+ Credit Card",
+    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
+    "category": "Cashback",
+    "date": "2026-11-12",
+    "readTime": 6,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/hsbc-live-plus.jpg",
+      "alt": "HSBC Live+ credit card"
+    },
+    "featured": false
+  },
+  {
     "id": "idfc-first-hello-cashback-credit-card",
     "title": "IDFC FIRST Hello Cashback Credit Card",
     "excerpt": "A secured RuPay credit card from IDFC FIRST Bank, backed by an FD from ₹10,000. It pays 3% online, 5% on online spend above ₹10,000, and 1% on offline, UPI in the IDFC FIRST app and essentials, with 0% forex markup.…",
@@ -62,24 +80,6 @@ export const blogPosts: BlogPost[] = [
       "src": "/assets/reviews/eternal-sbi-card.jpg",
       "alt": "Eternal SBI credit card",
       "srcset": "/assets/reviews/eternal-sbi-card-800.webp 800w, /assets/reviews/eternal-sbi-card-1200.webp 1200w, /assets/reviews/eternal-sbi-card.jpg 1600w"
-    },
-    "featured": false
-  },
-  {
-    "id": "hsbc-live-plus",
-    "title": "HSBC Live+ Credit Card",
-    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
-    "category": "Cashback",
-    "date": "2026-11-05",
-    "readTime": 6,
-    "author": {
-      "name": "Abhishek Meena",
-      "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face-96.jpg"
-    },
-    "image": {
-      "src": "/assets/reviews/hsbc-live-plus.jpg",
-      "alt": "HSBC Live+ credit card"
     },
     "featured": false
   },
