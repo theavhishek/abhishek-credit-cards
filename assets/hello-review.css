@@ -73,7 +73,14 @@
 /* Give the next section its usual gap after the banner. */
 .hc-forex + .rv-section { margin-block-start: 56px; }
 
-/* My cashback table: a thin bar per statement, scaled to the ₹1,500 cap. */
-.hc-mine :is(th, td) { vertical-align: middle; }
-.hc-mine td:last-child { width: 40%; min-width: 6rem; }
-.hc-bar { display: block; height: 8px; width: var(--w); border-radius: 999px; background: var(--rv-brand); }
+/* My cashback: a compact grid of statements, each bar scaled to the ₹1,500 cap. */
+.hc-months { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 0; list-style: none; }
+.hc-months li { display: grid; gap: 2px; padding: 8px 10px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.hc-m { font-size: var(--rv-fs-caption); color: var(--muted); }
+.hc-v { font-size: var(--rv-fs-small); font-weight: 650; font-variant-numeric: tabular-nums; }
+.hc-bar { display: block; height: 4px; width: var(--w); margin-block-start: 4px; border-radius: 999px; background: var(--rv-brand); }
+@media (min-width: 900px) {
+  .hc-months { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+  .hc-months li { padding: 8px; }
+  .hc-v { font-size: var(--rv-fs-caption); }
+}
