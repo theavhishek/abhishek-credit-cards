@@ -5,6 +5,7 @@ summary: HDFC's FD-backed credit card portal now lists nine cards, from Pixel Go
 category: announcement
 confirmation: official
 published: 2026-11-11
+updated: 2026-11-13
 issuer: HDFC Bank
 cards: [HDFC Diners Club Black Metal, HDFC BizBlack, HDFC Regalia Gold, HDFC BizPower, HDFC Millennia, HDFC MoneyBack+, HDFC BizGrow, IndianOil HDFC Bank, HDFC Pixel Go]
 tags: [hdfc, fixed deposit, fd, secured credit card, credit card against fd, diners club black metal, regalia gold, millennia, pixel go]
@@ -14,7 +15,7 @@ tile:
   logo: /assets/bank-logos/hdfc.svg
 limitChecker:
   title: Know your credit limit
-  intro: Slide to your FD amount. HDFC's minimums all work out to a limit of 90% of the FD, so that's what this uses. The limit HDFC actually gives you can be lower.
+  intro: Slide to your FD amount. HDFC's FD card page says you get 90% of your deposit as the limit, so that's what this uses. HDFC also says the limit can vary by card and its own policy.
   ratio: 90
   min: 10000
   max: 1200000
@@ -52,12 +53,15 @@ sources:
   - label: HDFC Bank, credit card on fixed deposit application
     url: https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc
     kind: official
+  - label: HDFC Bank, secured credit card on FD form (90% limit, account holders only)
+    url: https://prod-cards-unified-fdcc--forms-engine-prod--hdfc-forms.aem.live/digital/unified-fixed-deposit-cc
+    kind: official
 ---
 Getting an HDFC credit card used to mean income proof and a good credit score. Now there's another way in: put money in a fixed deposit and HDFC gives you a card against it. The FD is the security for your limit.
 
 What surprised me is the list. It's not just starter cards. Diners Club Black Metal, Regalia Gold and BizBlack are all on HDFC's FD card portal.
 
-It's mainly meant for people who don't have an HDFC credit card yet. If you already have one, check your eligibility before you apply.
+You need an HDFC Bank account for this; HDFC's page says it's only for account holders. It's mainly meant for people who don't have an HDFC credit card yet. If you already have one, check your eligibility before you apply.
 
 ## The cards and the FD you need
 
@@ -95,7 +99,8 @@ Open the HDFC Bank app, go to **Fixed Deposits**, pick your FD and open **FD Det
 
 ## What I'd do
 
-- Only use money you won't need for a while. The FD is tied to your card.
+- Only use money you won't need for a while. HDFC says you can't break the FD while your card is linked to it.
+- Update your PAN with HDFC first. Without it, you can only book an FD of up to ₹49,999.
 - Don't pay ₹10,000 for Diners Black just because it's open now. Pick the card whose rewards match how you spend.
 - Approval, rewards and fees are still HDFC's call, so read the card's terms on the application page before you pay.
 - Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card. It'll show everyone how approvals actually go.
