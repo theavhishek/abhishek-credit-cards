@@ -1,101 +1,112 @@
 ---
 type: news
-title: "HDFC Bank now gives premium credit cards against an FD, Diners Club Black Metal included"
-summary: HDFC's FD-backed credit card portal now lists nine cards, from Pixel Go on a ₹12,200 FD up to Diners Club Black Metal and BizBlack on ₹5,55,556. Mainly meant for people who don't hold an HDFC credit card yet.
+title: "HDFC Bank now gives credit cards against an FD, Regalia Gold and Marriott Bonvoy included"
+summary: HDFC's FD credit card page lists 12 cards, from Pixel Go and Freedom on an ₹11,111 FD up to Regalia Gold and Marriott Bonvoy on ₹3,33,333. You get 90% of the FD as your limit, and you need an HDFC Bank account.
 category: announcement
 confirmation: official
 published: 2026-11-11
+updated: 2026-11-13
 issuer: HDFC Bank
-cards: [HDFC Diners Club Black Metal, HDFC BizBlack, HDFC Regalia Gold, HDFC BizPower, HDFC Millennia, HDFC MoneyBack+, HDFC BizGrow, IndianOil HDFC Bank, HDFC Pixel Go]
-tags: [hdfc, fixed deposit, fd, secured credit card, credit card against fd, diners club black metal, regalia gold, millennia, pixel go]
+cards: [HDFC Pixel Go, HDFC MoneyBack+, HDFC Millennia, HDFC Regalia Gold, HDFC Diners Club Privilege, IndianOil HDFC Bank, Swiggy HDFC Bank Ornge, HDFC Pixel Play, Marriott Bonvoy HDFC Bank, HDFC Freedom, HDFC Biz First, HDFC Giga Business]
+tags: [hdfc, fixed deposit, fd, secured credit card, credit card against fd, regalia gold, marriott bonvoy, diners privilege, millennia, swiggy, pixel go, business card]
 tile:
-  figure: "9"
+  figure: "12"
   caption: cards against an FD
   logo: /assets/bank-logos/hdfc.svg
 limitChecker:
   title: Know your credit limit
-  intro: Slide to your FD amount. HDFC's minimums all work out to a limit of 90% of the FD, so that's what this uses. The limit HDFC actually gives you can be lower.
+  intro: Slide to your FD amount. HDFC's FD card page says you get 90% of your deposit as the limit, so that's what this uses. HDFC also says the limit can vary by card and its own policy.
   ratio: 90
   min: 10000
-  max: 1200000
+  max: 1000000
   step: 1000
   value: 150000
   cards:
-    - name: Diners Club Black Metal
-      minFd: 555556
-      maxLimit: 1000000
-    - name: BizBlack
-      minFd: 555556
-      maxLimit: 1000000
-    - name: Regalia Gold
-      minFd: 333334
-      maxLimit: 1000000
-    - name: BizPower
-      minFd: 333334
-      maxLimit: 1000000
-    - name: Millennia
-      minFd: 111112
-      maxLimit: 500000
-    - name: MoneyBack+
-      minFd: 33334
-      maxLimit: 300000
-    - name: BizGrow
-      minFd: 33334
-      maxLimit: 500000
+    - name: Pixel Go
+      minFd: 11111
+      maxLimit: 49000
+    - name: Freedom
+      minFd: 11111
+      maxLimit: 49000
     - name: IndianOil
       minFd: 16667
-      maxLimit: 1000000
-    - name: Pixel Go
-      minFd: 12200
-      maxLimit: 1000000
+      maxLimit: 800000
+    - name: Swiggy Ornge
+      minFd: 27778
+      maxLimit: 150000
+    - name: Biz First
+      minFd: 27778
+      maxLimit: 500000
+    - name: Giga Business
+      minFd: 27778
+      maxLimit: 800000
+    - name: MoneyBack+
+      minFd: 33333
+      maxLimit: 300000
+    - name: Pixel Play
+      minFd: 55556
+      maxLimit: 800000
+    - name: Millennia
+      minFd: 111111
+      maxLimit: 800000
+    - name: Diners Privilege
+      minFd: 166667
+      maxLimit: 800000
+    - name: Regalia Gold
+      minFd: 333333
+      maxLimit: 800000
+    - name: Marriott Bonvoy
+      minFd: 333333
+      maxLimit: 800000
 sources:
   - label: HDFC Bank, credit card on fixed deposit application
     url: https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc
     kind: official
+  - label: HDFC Bank, secured credit card on FD form (90% limit, account holders only)
+    url: https://prod-cards-unified-fdcc--forms-engine-prod--hdfc-forms.aem.live/digital/unified-fixed-deposit-cc
+    kind: official
 ---
-Getting an HDFC credit card used to mean income proof and a good credit score. Now there's another way in: put money in a fixed deposit and HDFC gives you a card against it. The FD is the security for your limit.
+Got an HDFC Bank account but no credit card? Put money in a fixed deposit and HDFC gives you a card against it, with 90% of the FD as your limit. Even Regalia Gold and Marriott Bonvoy are on the list.
 
-What surprised me is the list. It's not just starter cards. Diners Club Black Metal, Regalia Gold and BizBlack are all on HDFC's FD card portal.
+If you already hold an HDFC credit card, check your eligibility before you apply.
 
-It's mainly meant for people who don't have an HDFC credit card yet. If you already have one, check your eligibility before you apply.
+## The cards
 
-## The cards and the FD you need
-
-| Card | Minimum FD | Joining fee |
+| Card | Min FD | Max limit |
 |---|---|---|
-| **Diners Club Black Metal** | ₹5,55,556 | ₹10,000 |
-| **BizBlack** | ₹5,55,556 | ₹10,000 |
-| **Regalia Gold** | ₹3,33,334 | ₹2,500 |
-| **BizPower** | ₹3,33,334 | ₹2,500 |
-| **Millennia** | ₹1,11,112 | ₹1,000 |
-| **MoneyBack+** | ₹33,334 | ₹500 |
-| **BizGrow** | ₹33,334 | ₹500 |
-| **IndianOil** | ₹16,667 | ₹500 |
-| **Pixel Go** | ₹12,200 | ₹1 |
+| ![Pixel Go card](/assets/updates/hdfc-fd/pixel-go.webp) **Pixel Go** _Lifetime free · 10% off via Swiggy Dineout_ | ₹11,111 | ₹49,000 |
+| ![Freedom card](/assets/updates/hdfc-fd/freedom.webp) **Freedom** _Fee ₹500 · 10X on Swiggy, Uber, BigBasket_ | ₹11,111 | ₹49,000 |
+| ![IndianOil card](/assets/updates/hdfc-fd/indianoil.webp) **IndianOil** _Fee ₹500 · up to 50 L free fuel a year_ | ₹16,667 | ₹8 lakh |
+| ![Swiggy Ornge card](/assets/updates/hdfc-fd/swiggy-ornge.webp) **Swiggy Ornge** _Fee ₹500 · 5% back on Swiggy_ | ₹27,778 | ₹1.5 lakh |
+| ![MoneyBack+ card](/assets/updates/hdfc-fd/moneyback-plus.webp) **MoneyBack+** _Fee ₹500 · 10X on Amazon, Flipkart_ | ₹33,333 | ₹3 lakh |
+| ![Pixel Play card](/assets/updates/hdfc-fd/pixel-play.webp) **Pixel Play** _Lifetime free · managed in PayZapp_ | ₹55,556 | ₹8 lakh |
+| ![Millennia card](/assets/updates/hdfc-fd/millennia.webp) **Millennia** _Fee ₹1,000 · 5% on top apps, 1% elsewhere_ | ₹1,11,111 | ₹8 lakh |
+| ![Diners Privilege card](/assets/updates/hdfc-fd/diners-privilege.webp) **Diners Privilege** _Fee ₹1,000 · buy 1 get 1 movie tickets_ | ₹1,66,667 | ₹8 lakh |
+| ![Regalia Gold card](/assets/updates/hdfc-fd/regalia-gold.webp) **Regalia Gold** _Fee ₹2,500 · 4 points per ₹150_ | ₹3,33,333 | ₹8 lakh |
+| ![Marriott Bonvoy card](/assets/updates/hdfc-fd/marriott-bonvoy.webp) **Marriott Bonvoy** _Fee ₹3,000 · Bonvoy points on travel_ | ₹3,33,333 | ₹8 lakh |
+
+For business owners:
+
+| Card | Min FD | Max limit |
+|---|---|---|
+| ![Biz First card](/assets/updates/hdfc-fd/biz-first.webp) **Biz First** _Fee ₹500 · 55 days interest-free_ | ₹27,778 | ₹5 lakh |
+| ![Giga Business card](/assets/updates/hdfc-fd/giga-business.webp) **Giga Business** _Fee ₹500 · 3X on tax and GST payments_ | ₹27,778 | ₹8 lakh |
+
+Max limit is the most a card can go up to, not what you get on day one.
 
 {{limit-checker}}
 
-## What each card gives you
+## How to apply
 
-The limit here is the most the card can go up to. It isn't what you'll get on day one.
+Apply on [HDFC's FD credit card page](https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc): pick a card, then book a new FD or link one you have.
 
-- **Diners Club Black Metal**, up to ₹10 lakh: metal card with unlimited airport lounge access.
-- **BizBlack**, up to ₹10 lakh: 5X reward points on selected business spends.
-- **Regalia Gold**, up to ₹10 lakh: 4 reward points per ₹150 spent.
-- **BizPower**, up to ₹10 lakh: HDFC advertises savings of up to 8.7% on selected business spends.
-- **Millennia**, up to ₹5 lakh: 5% cashback on selected online merchants.
-- **MoneyBack+**, up to ₹3 lakh: 10X CashPoints on selected merchants.
-- **BizGrow**, up to ₹5 lakh: up to 55 days of interest-free credit.
-- **IndianOil**, up to ₹10 lakh: fuel rewards, and it's a RuPay card.
-- **Pixel Go**, up to ₹10 lakh: digital-first, you manage it in PayZapp.
-
-## Already have an HDFC FD?
-
-Open the HDFC Bank app, go to **Fixed Deposits**, pick your FD and open **FD Details**. If you see **Credit Card on FD**, you can apply right there.
+Already have an HDFC FD? In the HDFC Bank app, open **Fixed Deposits**, pick your FD, then **FD Details**, and look for **Credit Card on FD**.
 
 ## What I'd do
 
-- Only use money you won't need for a while. The FD is tied to your card.
-- Don't pay ₹10,000 for Diners Black just because it's open now. Pick the card whose rewards match how you spend.
-- Approval, rewards and fees are still HDFC's call, so read the card's terms on the application page before you pay.
-- Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card. It'll show everyone how approvals actually go.
+- Use money you won't need for a while. You can't break the FD while the card is linked to it.
+- Update your PAN with HDFC first. Without it, the FD can't go above ₹49,999.
+- Pick the card that fits how you spend, not the biggest limit.
+- Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card.
+
+**Correction, 13 November:** the first version of this post used a list going around with Diners Club Black Metal, BizBlack, BizPower and BizGrow. HDFC's own page doesn't show those cards, so I've rewritten it from HDFC's page.

@@ -1128,3 +1128,9 @@ a.up-thumb { transition: opacity 150ms ease-out; }
 .up-limit-val { font-variant-numeric: tabular-nums; }
 .up-limit-cards li[data-ok] { color: var(--text); }
 .up-limit-cards li[data-ok] .up-limit-val { font-weight: 650; }
+
+/* ---------- Small images inside update tables (card thumbnails) ---------- */
+.up-prose .up-inline-img { display: block; inline-size: 72px; block-size: auto; aspect-ratio: 1.586; object-fit: contain; margin-block-end: 8px; border-radius: 5px; }
+.up-prose .rv-table td em { display: block; margin-block-start: 2px; font-style: normal; font-size: var(--rv-fs-small, 0.875rem); line-height: 1.4; color: var(--muted); }
+.up-prose .rv-table td { vertical-align: top; }
+.up-prose .rv-table:has(.up-inline-img) td:not(:first-child), .up-prose .rv-table:has(.up-inline-img) th { white-space: nowrap; }

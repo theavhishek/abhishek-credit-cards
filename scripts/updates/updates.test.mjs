@@ -200,12 +200,12 @@ test("credit limit checker: read from the frontmatter and baked into the article
   const { items } = loadItems();
   const item = items.find((i) => i.slug === "hdfc-credit-cards-against-fixed-deposit-2026");
   assert.equal(item.limitChecker.ratio, 90);
-  assert.equal(item.limitChecker.cards.length, 9);
+  assert.equal(item.limitChecker.cards.length, 12);
   const html = fs.readFileSync(path.join(ROOT, "updates/hdfc-credit-cards-against-fixed-deposit-2026.html"), "utf8");
   assert.match(html, /<section class="rv-calc up-calc up-limit" data-limit data-ratio="90" id="limit-checker"/);
   assert.match(html, /Credit limit <strong class="up-limit-total">₹1,35,000<\/strong>/);
-  assert.match(html, /<li data-ok data-min-fd="111112" data-max-limit="500000"><span class="up-limit-name">Millennia<\/span><span class="up-limit-val">₹1,35,000<\/span><\/li>/);
-  assert.match(html, /<li data-min-fd="555556" data-max-limit="1000000"><span class="up-limit-name">Diners Club Black Metal<\/span><span class="up-limit-val">Add ₹4,05,556 to your FD<\/span><\/li>/);
+  assert.match(html, /<li data-ok data-min-fd="111111" data-max-limit="800000"><span class="up-limit-name">Millennia<\/span><span class="up-limit-val">₹1,35,000<\/span><\/li>/);
+  assert.match(html, /<li data-min-fd="333333" data-max-limit="800000"><span class="up-limit-name">Regalia Gold<\/span><span class="up-limit-val">Add ₹1,83,333 to your FD<\/span><\/li>/);
   assert.match(html, /<script src="\/assets\/updates-limit\.js\?v=/);
   assert.doesNotMatch(html, /\{\{limit-checker\}\}/);
 });
