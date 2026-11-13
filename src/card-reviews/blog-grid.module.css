@@ -16,7 +16,6 @@
 }
 
 .index { display: grid; gap: var(--space-8); }
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-8); }
 .header { display: grid; max-width: 720px; }
 /* Hero matches the site's other page heroes: orange label like /updates, heavy display title whose last word takes the site foil (orange by day, gold by night; colours and shine come from polish.css .sp-title-foil), larger lead. */
 .eyebrow { margin: 0 0 var(--space-3); color: #c2410c; font-size: var(--text-sm); font-weight: 600; letter-spacing: normal; }
@@ -24,14 +23,6 @@
 .title { margin: 0; font-family: var(--font-display); font-size: clamp(3.5rem, 1.6rem + 6cqi, 6rem); font-weight: 700; letter-spacing: -.045em; line-height: .98; text-wrap: balance; }
 .foil { padding-bottom: .06em; background: linear-gradient(180deg, #ea5a12, #c2410c); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (forced-colors: active) { .foil { background: none; color: CanvasText; } }
-/* Fan of reviewed cards beside the title. */
-.fan { position: relative; width: 360px; height: 250px; margin-right: var(--space-6); }
-.fanCard { position: absolute; left: calc(50% - 60px); bottom: 0; width: 120px; height: auto; border-radius: 10px; transform-origin: 50% 120%; transform: translateX(calc(var(--i) * 44px)) rotate(calc(var(--i) * 9deg)); filter: drop-shadow(0 10px 18px rgb(0 0 0 / .18)); transition: transform var(--duration-considered) var(--ease-standard); }
-.fanCard:nth-child(3) { z-index: 1; }
-@media (hover: hover) and (pointer: fine) { .fan:hover .fanCard { transform: translateX(calc(var(--i) * 58px)) rotate(calc(var(--i) * 12deg)) translateY(-6px); } }
-@media (prefers-reduced-motion: no-preference) { .fanCard { animation: fanIn 900ms var(--ease-standard) both; animation-delay: calc(120ms + (var(--i) + 2) * 60ms); } }
-@keyframes fanIn { from { opacity: 0; transform: translateY(24px) rotate(0deg); } }
-@media (prefers-reduced-motion: reduce) { .fanCard { transition: none; } }
 .description { max-width: 54ch; margin: 18px 0 0; color: var(--text-secondary); font-size: clamp(1.0625rem, 1rem + .3cqi, 1.25rem); line-height: 1.5; text-wrap: pretty; }
 .filters { display: flex; gap: 2px; margin: 0 calc(var(--space-6) * -1); overflow-x: auto; padding: 0 var(--space-6); scrollbar-width: none; }
 .filters::-webkit-scrollbar { display: none; }
@@ -86,7 +77,7 @@
 .readerBody p { margin: 0; color: var(--text-secondary); font-size: var(--text-lg); line-height: 1.65; text-wrap: pretty; }
 .readerBody .lead { color: var(--foreground); font-size: var(--text-xl); line-height: 1.5; }
 .readerBody a { color: var(--foreground); text-underline-offset: 4px; }
-@container blog (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); gap: var(--space-6); } .fan { order: -1; width: 280px; height: 150px; margin: 0; } .fanCard { left: 90px; width: 76px; border-radius: 6px; transform: translateX(calc(var(--i) * 30px)) rotate(calc(var(--i) * 8deg)); } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .featured { gap: var(--space-6); } }
+@container blog (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .featured { gap: var(--space-6); } }
 @container blog (max-width: 680px) { .inner { padding: var(--space-12) var(--space-4); } .filters { margin: 0 calc(var(--space-4) * -1); padding: 0 var(--space-4); } .featured { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); } .featured .imageFrame { aspect-ratio: 3 / 2; border-radius: 20px; } .page { gap: var(--space-10); } .grid { gap: var(--space-10) var(--space-4); } .readerBody p { font-size: var(--text-base); } .readerBody .lead { font-size: var(--text-lg); } }
 @container blog (max-width: 540px) { .grid { grid-template-columns: minmax(0, 1fr); } .pageStep span { display: none; } .pageStep { padding: 0; } }
 @media (prefers-reduced-motion: reduce) { .image, .imageFrame { transition: none; } .card:hover .image, .featured:hover .image { transform: none; } }
