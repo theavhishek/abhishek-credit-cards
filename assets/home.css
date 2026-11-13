@@ -118,16 +118,17 @@ html[data-theme="dark"] .hm-title-foil { background-image: linear-gradient(180de
   .hm-hero .hm-title { animation: none; }
   .hm-w > span { animation: hm-word-rise 900ms var(--ease-out) calc(80ms + var(--i) * 75ms) backwards; }
   /* The foil line is painted with background-clip: text on its parent. Safari leaves
-     transformed or fading children out of that text mask until their animation ends,
-     so these words rise with top (not composited, no opacity) and show from the start. */
-  .hm-title-foil .hm-w > span { position: relative; animation-name: hm-word-rise-foil; }
+     children with their own layer (transform, opacity, position) out of that text mask,
+     so these words rise with margins only: no layer, and the paired negative margin
+     keeps the line height still while they move. */
+  .hm-title-foil .hm-w > span { vertical-align: top; animation-name: hm-word-rise-foil; }
   html[data-theme] .hm-hero .hm-title-foil { animation: hm-foil-loop 6s ease-out 1.4s infinite backwards; }
 }
 @keyframes hm-word-rise {
   from { opacity: 0; transform: translateY(105%); }
 }
 @keyframes hm-word-rise-foil {
-  from { top: 1.05em; }
+  from { margin-top: 1.05em; margin-bottom: -1.05em; }
 }
 @keyframes hm-foil-loop {
   0% { background-position: 100% 0, 0 0; }
