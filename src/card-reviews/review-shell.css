@@ -1,5 +1,5 @@
 #card-reviews-root {
-  --background: var(--page, #eef1f3);
+  --background: var(--page, #fafafa);
   --foreground: var(--text, #171717);
   --text-secondary: var(--muted, #626262);
   /* Opaque so dates and read times meet 4.5:1 in both themes. */

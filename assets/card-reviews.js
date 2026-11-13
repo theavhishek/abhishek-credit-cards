@@ -13,7 +13,7 @@
     }
 
     document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
-      meta.setAttribute("content", dark ? "#000000" : "#eef1f3");
+      meta.setAttribute("content", dark ? "#0a0b0c" : "#fafafa");
     });
 
     if (persist) localStorage.setItem("abhishek-card-stack-theme", theme);

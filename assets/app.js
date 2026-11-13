@@ -17,7 +17,7 @@
       themeSwitch.setAttribute("aria-label", dark ? "Switch to day mode" : "Switch to night mode");
     }
     document.querySelectorAll('meta[name="theme-color"]').forEach(m => {
-      m.setAttribute("content", dark ? "#000000" : "#eef1f3");
+      m.setAttribute("content", dark ? "#0a0b0c" : "#fafafa");
     });
     if (persist) localStorage.setItem("abhishek-card-stack-theme", theme);
   }
