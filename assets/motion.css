@@ -92,3 +92,40 @@ html.mo-theme-vt::view-transition-new(root) { animation: none; mix-blend-mode: n
 @media print {
   .mo-reveal { opacity: 1 !important; translate: none !important; }
 }
+
+/* Shotcraft "digit roll" (motion.js): each digit is a 0-9 strip that rolls to its value. */
+.mo-roll { display: inline-flex; align-items: flex-end; }
+.mo-roll-d { display: inline-block; height: 1em; overflow: hidden; }
+.mo-roll-s > span { display: block; height: 1em; line-height: 1em; }
+.mo-roll-s {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--to, 0) * -1em));
+  transition: transform 1100ms cubic-bezier(0.25, 0.8, 0.25, 1) calc(var(--d, 0) * 70ms);
+}
+
+/* Shotcraft "sheen": one light band across the review card image, once (motion.js). */
+.rv-hero-card .mo-sheen {
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  pointer-events: none;
+}
+.rv-hero-card .mo-sheen::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  left: -80%;
+  width: 60%;
+  background: linear-gradient(105deg, transparent 0%, rgb(255 255 255 / 0.1) 35%, rgb(255 255 255 / 0.55) 50%, rgb(255 255 255 / 0.1) 65%, transparent 100%);
+  mix-blend-mode: screen;
+  transform: skewX(-12deg);
+}
+.rv-hero-card .mo-sheen.is-on::before { animation: mo-sheen 1100ms cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes mo-sheen { to { left: 140%; } }
+@media (prefers-reduced-motion: reduce) {
+  .mo-roll-s { transition: none; }
+  .rv-hero-card .mo-sheen { display: none; }
+}
