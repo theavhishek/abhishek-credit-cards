@@ -16,9 +16,13 @@
 }
 
 .index { display: grid; gap: var(--space-8); }
-.header { display: grid; gap: var(--space-3); max-width: 600px; }
-.title { margin: 0; font-family: var(--font-display); font-size: clamp(1.75rem, 1rem + 3cqi, var(--text-4xl)); font-weight: 500; letter-spacing: var(--tracking-display); line-height: var(--leading-display); }
-.description { margin: 0; color: var(--text-secondary); font-size: var(--text-base); line-height: var(--leading-body); text-wrap: pretty; }
+.header { display: grid; max-width: 720px; }
+/* Hero matches the site's other page heroes (/updates): orange label, heavy display title with a brand-orange full stop, larger lead. */
+.eyebrow { margin: 0 0 var(--space-3); color: #c2410c; font-size: var(--text-sm); font-weight: 600; letter-spacing: normal; }
+:global(html[data-theme="dark"]) .eyebrow { color: #ff7a33; }
+.title { margin: 0; font-family: var(--font-display); font-size: clamp(2.5rem, 1.45rem + 4.2cqi, 4.5rem); font-weight: 650; letter-spacing: -.04em; line-height: 1.02; text-wrap: balance; }
+.dot { color: #fc6e20; }
+.description { max-width: 54ch; margin: 18px 0 0; color: var(--text-secondary); font-size: clamp(1.0625rem, 1rem + .3cqi, 1.25rem); line-height: 1.5; text-wrap: pretty; }
 .filters { display: flex; gap: 2px; margin: 0 calc(var(--space-6) * -1); overflow-x: auto; padding: 0 var(--space-6); scrollbar-width: none; }
 .filters::-webkit-scrollbar { display: none; }
 .filter { position: relative; isolation: isolate; flex: none; height: 36px; border: 0; border-radius: var(--radius-pill); padding: 0 var(--space-4); background: none; color: var(--text-secondary); font: inherit; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: color var(--duration-fast) var(--ease-standard); }

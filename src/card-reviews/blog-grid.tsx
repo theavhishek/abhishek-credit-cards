@@ -13,6 +13,8 @@ import styles from "./blog-grid.module.css";
 export type { BlogAuthor, BlogPost } from "./blog-grid-data";
 
 export interface BlogGridProps {
+  /** Small orange label above the title, as on the /updates hero. */
+  eyebrow?: string;
   title?: string;
   description?: string;
   posts?: BlogPost[];
@@ -95,6 +97,7 @@ function Byline({ post }: { post: BlogPost }) {
 }
 
 export function BlogGrid({
+  eyebrow,
   title = "Journal",
   description = "Product news, design notes and engineering deep dives from the team.",
   posts = blogPosts,
@@ -216,7 +219,8 @@ export function BlogGrid({
             </motion.div>
           </motion.article> : <motion.div key="index" className={styles.index} exit={{ opacity: 0, transition: { duration: motionTokens.duration.exit, ease: standard } }}>
             <motion.header className={styles.header} {...enterFade(back)}>
-              <h1 className={styles.title}>{title}</h1>
+              {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+              <h1 className={styles.title}>{title}<span className={styles.dot}>.</span></h1>
               {description && <p className={styles.description}>{description}</p>}
             </motion.header>
 
