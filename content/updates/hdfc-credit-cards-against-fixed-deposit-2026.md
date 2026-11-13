@@ -66,65 +66,47 @@ sources:
     url: https://prod-cards-unified-fdcc--forms-engine-prod--hdfc-forms.aem.live/digital/unified-fixed-deposit-cc
     kind: official
 ---
-Getting an HDFC credit card used to mean income proof and a good credit score. Now there's another way in: put money in a fixed deposit and HDFC gives you a card against it, with 90% of the FD as your limit.
+Got an HDFC Bank account but no credit card? Put money in a fixed deposit and HDFC gives you a card against it, with 90% of the FD as your limit. Even Regalia Gold and Marriott Bonvoy are on the list.
 
-What surprised me is the list. It's not just starter cards. Regalia Gold, Marriott Bonvoy and Diners Privilege are all on HDFC's FD card page.
+If you already hold an HDFC credit card, check your eligibility before you apply.
 
-You need an HDFC Bank account for this; HDFC's page says it's only for account holders. It's mainly meant for people who don't have an HDFC credit card yet. If you already have one, check your eligibility before you apply.
+## The cards
 
-## The cards and the FD you need
-
-| Card | Minimum FD | Joining fee |
+| Card | Min FD | Max limit |
 |---|---|---|
-| **Pixel Go** | ₹11,111 | Lifetime free |
-| **Freedom** | ₹11,111 | ₹500 |
-| **IndianOil** | ₹16,667 | ₹500 |
-| **Swiggy Ornge** | ₹27,778 | ₹500 |
-| **MoneyBack+** | ₹33,333 | ₹500 |
-| **Pixel Play** | ₹55,556 | Lifetime free |
-| **Millennia** | ₹1,11,111 | ₹1,000 |
-| **Diners Privilege** | ₹1,66,667 | ₹1,000 |
-| **Regalia Gold** | ₹3,33,333 | ₹2,500 |
-| **Marriott Bonvoy** | ₹3,33,333 | ₹3,000 |
+| ![Pixel Go card](/assets/updates/hdfc-fd/pixel-go.webp) **Pixel Go** _Lifetime free · 10% off via Swiggy Dineout_ | ₹11,111 | ₹49,000 |
+| ![Freedom card](/assets/updates/hdfc-fd/freedom.webp) **Freedom** _Fee ₹500 · 10X on Swiggy, Uber, BigBasket_ | ₹11,111 | ₹49,000 |
+| ![IndianOil card](/assets/updates/hdfc-fd/indianoil.webp) **IndianOil** _Fee ₹500 · up to 50 L free fuel a year_ | ₹16,667 | ₹8 lakh |
+| ![Swiggy Ornge card](/assets/updates/hdfc-fd/swiggy-ornge.webp) **Swiggy Ornge** _Fee ₹500 · 5% back on Swiggy_ | ₹27,778 | ₹1.5 lakh |
+| ![MoneyBack+ card](/assets/updates/hdfc-fd/moneyback-plus.webp) **MoneyBack+** _Fee ₹500 · 10X on Amazon, Flipkart_ | ₹33,333 | ₹3 lakh |
+| ![Pixel Play card](/assets/updates/hdfc-fd/pixel-play.webp) **Pixel Play** _Lifetime free · managed in PayZapp_ | ₹55,556 | ₹8 lakh |
+| ![Millennia card](/assets/updates/hdfc-fd/millennia.webp) **Millennia** _Fee ₹1,000 · 5% on top apps, 1% elsewhere_ | ₹1,11,111 | ₹8 lakh |
+| ![Diners Privilege card](/assets/updates/hdfc-fd/diners-privilege.webp) **Diners Privilege** _Fee ₹1,000 · buy 1 get 1 movie tickets_ | ₹1,66,667 | ₹8 lakh |
+| ![Regalia Gold card](/assets/updates/hdfc-fd/regalia-gold.webp) **Regalia Gold** _Fee ₹2,500 · 4 points per ₹150_ | ₹3,33,333 | ₹8 lakh |
+| ![Marriott Bonvoy card](/assets/updates/hdfc-fd/marriott-bonvoy.webp) **Marriott Bonvoy** _Fee ₹3,000 · Bonvoy points on travel_ | ₹3,33,333 | ₹8 lakh |
 
-Business owners get two more under the Business Cards tab:
+For business owners:
 
-| Card | Minimum FD | Joining fee |
+| Card | Min FD | Max limit |
 |---|---|---|
-| **Biz First** | ₹27,778 | ₹500 |
-| **Giga Business** | ₹27,778 | ₹500 |
+| ![Biz First card](/assets/updates/hdfc-fd/biz-first.webp) **Biz First** _Fee ₹500 · 55 days interest-free_ | ₹27,778 | ₹5 lakh |
+| ![Giga Business card](/assets/updates/hdfc-fd/giga-business.webp) **Giga Business** _Fee ₹500 · 3X on tax and GST payments_ | ₹27,778 | ₹8 lakh |
+
+Max limit is the most a card can go up to, not what you get on day one.
 
 {{limit-checker}}
 
-## What each card gives you
-
-The limit here is the most the card can go up to. It isn't what you'll get on day one.
-
-- **Pixel Go**, up to ₹49,000: you run it from PayZapp, and get a flat 10% off at restaurants through Swiggy Dineout.
-- **Freedom**, up to ₹49,000: 10X CashPoints on BigBasket, BookMyShow, OYO, Swiggy and Uber; 1 CashPoint per ₹150 elsewhere.
-- **IndianOil**, up to ₹8 lakh: up to 50 litres of free fuel a year, with 5% back as Fuel Points at IndianOil, on groceries and on bills. It's a RuPay card.
-- **Swiggy Ornge**, up to ₹1.5 lakh: 5% cashback on Swiggy food, Instamart and Dineout, and on online stores like Amazon, Flipkart, Myntra and Uber.
-- **MoneyBack+**, up to ₹3 lakh: 10X CashPoints (3.3% back) on Amazon, Flipkart, BigBasket, Reliance Smart and Swiggy; 2 CashPoints per ₹150 elsewhere.
-- **Pixel Play**, up to ₹8 lakh: also run from PayZapp, with the same 10% Dineout discount.
-- **Millennia**, up to ₹8 lakh: 5% cashback on Amazon, Flipkart, Myntra, Swiggy, Zomato, Uber and a few more; 1% on other spends.
-- **Diners Privilege**, up to ₹8 lakh: buy one get one on weekend BookMyShow tickets (up to ₹250 a ticket, 2 free tickets a month) and 5X points on Swiggy and Zomato.
-- **Regalia Gold**, up to ₹8 lakh: 4 reward points per ₹150, plus Swiggy One and MMT Black Elite as welcome benefits.
-- **Marriott Bonvoy**, up to ₹8 lakh: 4 Bonvoy points per ₹150 on travel, dining and entertainment, 2 on everything else.
-- **Biz First**, up to ₹5 lakh: up to 55 days of interest-free credit, and up to 5% off restaurant bills through Swiggy Dineout.
-- **Giga Business**, up to ₹8 lakh: 3X CashPoints on business digital spends like tax, GST and SmartPay bills, plus 800 CashPoints a month when you spend ₹50,000.
-
 ## How to apply
 
-Apply on HDFC's official page: [applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc](https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc). You pick a card there and book a new FD or link one you already have.
+Apply on [HDFC's FD credit card page](https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc): pick a card, then book a new FD or link one you have.
 
-Already have an HDFC FD? Open the HDFC Bank app, go to **Fixed Deposits**, pick your FD and open **FD Details**. If you see **Credit Card on FD**, you can apply right there.
+Already have an HDFC FD? In the HDFC Bank app, open **Fixed Deposits**, pick your FD, then **FD Details**, and look for **Credit Card on FD**.
 
 ## What I'd do
 
-- Only use money you won't need for a while. HDFC says you can't break the FD while your card is linked to it.
-- Update your PAN with HDFC first. Without it, you can only book an FD of up to ₹49,999.
-- Pick the card whose rewards match how you spend, not the one with the biggest limit. Pixel Go and Pixel Play cost nothing to join.
-- Approval, rewards and fees are still HDFC's call, so read the card's terms on the application page before you pay.
-- Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card. It'll show everyone how approvals actually go.
+- Use money you won't need for a while. You can't break the FD while the card is linked to it.
+- Update your PAN with HDFC first. Without it, the FD can't go above ₹49,999.
+- Pick the card that fits how you spend, not the biggest limit.
+- Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card.
 
-**Correction, 13 November:** the first version of this post used a list that was going around, with Diners Club Black Metal, BizBlack, BizPower and BizGrow. HDFC's own page doesn't show those cards, and its FD amounts and limits are different, so I've rewritten the post from HDFC's page.
+**Correction, 13 November:** the first version of this post used a list going around with Diners Club Black Metal, BizBlack, BizPower and BizGrow. HDFC's own page doesn't show those cards, so I've rewritten it from HDFC's page.

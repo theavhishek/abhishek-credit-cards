@@ -144,6 +144,13 @@ function safeUrl(url) {
 export function inline(text, problems) {
   const codes = [];
   let out = esc(text).replace(/`([^`]+)`/g, (_, code) => { codes.push(`<code>${code}</code>`); return `\u0000${codes.length - 1}\u0000`; });
+  // Small inline image, like a card thumbnail in a table: ![alt](/assets/...)
+  out = out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_, alt, src) => {
+    if (!src.startsWith("/assets/")) { problems?.push(`Image "${src}" must be a file under /assets/.`); return ""; }
+    if (!fs.existsSync(path.join(ROOT, src))) { problems?.push(`Image ${src} doesn't exist.`); return ""; }
+    if (!alt.trim()) problems?.push(`Image ${src} needs alt text: ![What it shows](${src}).`);
+    return `<img class="up-inline-img" src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
+  });
   out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => {
     const raw = href.replace(/&amp;/g, "&");
     if (!safeUrl(raw)) { problems?.push(`Link "${raw}" must start with https://, /, # or tel:.`); return label; }
