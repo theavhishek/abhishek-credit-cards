@@ -16,7 +16,7 @@ sources:
     url: https://www.amazon.in/gp/help/customer/display.html?nodeId=GMEPD5NLAENJEC9H
     kind: official
 ---
-Good news for once. Amazon has raised how much you can spend on Amazon Pay Gift Cards with a credit or debit card. If you load gift cards to earn card cashback or reward points, you now get a lot more room. Bookmark this one.
+Good news for once. Amazon has raised how much you can spend on Amazon Pay Gift Cards with a credit or debit card. If you load gift cards to earn card cashback or reward points, you now get a lot more room.
 
 ## What's changing
 
