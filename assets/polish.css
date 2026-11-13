@@ -172,7 +172,7 @@ html[data-theme] .sp-title-foil {
   bottom: 0;
   height: 72px;
   pointer-events: none;
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--page, #f5f5f7) 28%, transparent));
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--page, #fafafa) 28%, transparent));
   transform: translateZ(0);
 }
 .pl-edge-blur > span { position: absolute; inset: 0; }
