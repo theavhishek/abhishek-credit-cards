@@ -451,6 +451,7 @@ function buildArticle(item) {
   };
 
   const seoTitles = {
+    "amazon-pay-gift-card-limits-raised-2026": "Amazon Pay Gift Card Limits 2026: ₹50K a Month | Avhishek",
     "hdfc-credit-cards-against-fixed-deposit-2026": "HDFC Credit Cards Against FD: 12 Cards | Avhishek",
     "bobcard-airport-lounge-list-33": "BOBCARD Lounge List 2026: 83 to 33 Lounges | Full List",
     "icici-credit-card-changes-december-2026": "ICICI Card Changes Dec 2026: INOX, Fees | Avhishek",
