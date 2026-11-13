@@ -96,6 +96,10 @@ Max limit is the most a card can go up to, not what you get on day one.
 
 {{limit-checker}}
 
+## Where did Diners Black Metal and BizBlack go?
+
+When HDFC first opened this, the FD list also showed Diners Club Black Metal and BizBlack. So many people applied that HDFC pulled both from the list, and those applications got Regalia Gold instead. HDFC never planned FD versions of these two cards; they showed up by mistake.
+
 ## How to apply
 
 Apply on [HDFC's FD credit card page](https://applyonline.hdfc.bank.in/digital/unified-fixed-deposit-cc): pick a card, then book a new FD or link one you have.
@@ -108,5 +112,3 @@ Already have an HDFC FD? In the HDFC Bank app, open **Fixed Deposits**, pick you
 - Update your PAN with HDFC first. Without it, the FD can't go above ₹49,999.
 - Pick the card that fits how you spend, not the biggest limit.
 - Applied already? Tell me on [X](https://x.com/the_avhishek): which card, your FD amount, and whether you already had an HDFC card.
-
-**Correction, 13 November:** the first version of this post used a list going around with Diners Club Black Metal, BizBlack, BizPower and BizGrow. HDFC's own page doesn't show those cards, so I've rewritten it from HDFC's page.
