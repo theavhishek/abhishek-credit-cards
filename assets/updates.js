@@ -243,6 +243,7 @@
     ["devaluation", "Devaluation"],
     ["launch", "Card launch"],
     ["spend-offer", "Spend offer"],
+    ["announcement", "Announcement"],
     ["cashback", "Cashback"],
     ["news", "Other news"],
     ["offer", "Other offer"],
