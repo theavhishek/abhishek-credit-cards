@@ -41,6 +41,7 @@ const CATEGORY_COLOURS = {
   launch: ["#4f46e5", "#818cf8"],
   cashback: ["#15803d", "#22c55e"],
   "spend-offer": ["#1d4ed8", "#3b82f6"],
+  announcement: ["#7e22ce", "#a855f7"],
 };
 const DEFAULT_COLOURS = ["#b45309", "#f2a24a"];
 
