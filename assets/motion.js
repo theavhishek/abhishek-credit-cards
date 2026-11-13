@@ -110,6 +110,70 @@
     }
   }
 
+  // Shotcraft "digit roll": a running total rolls up like an odometer the first time it
+  // scrolls into view, digit by digit from the left. Screen readers get the plain value.
+  if ("IntersectionObserver" in window && !reduceMotion.matches) {
+    document.querySelectorAll(".lp-total-v").forEach((el) => {
+      const value = el.textContent.trim();
+      if (!/\d/.test(value)) return;
+      const roll = document.createElement("span");
+      roll.className = "mo-roll";
+      roll.setAttribute("aria-hidden", "true");
+      const strips = [];
+      for (const ch of value) {
+        if (/\d/.test(ch)) {
+          const cell = document.createElement("span");
+          cell.className = "mo-roll-d";
+          const strip = document.createElement("span");
+          strip.className = "mo-roll-s";
+          for (let n = 0; n < 20; n += 1) {
+            const digit = document.createElement("span");
+            digit.textContent = n % 10;
+            strip.appendChild(digit);
+          }
+          strip.style.setProperty("--d", strips.length);
+          strip.dataset.to = ch;
+          cell.appendChild(strip);
+          roll.appendChild(cell);
+          strips.push(strip);
+        } else {
+          roll.appendChild(document.createTextNode(ch));
+        }
+      }
+      const label = document.createElement("span");
+      label.className = "sr-only";
+      label.textContent = value;
+      el.replaceChildren(label, roll);
+      const seen = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        seen.disconnect();
+        strips.forEach((strip) => strip.style.setProperty("--to", 10 + Number(strip.dataset.to)));
+      }, { threshold: 0.6 });
+      seen.observe(el);
+    });
+  }
+
+  // Shotcraft "sheen": one soft band of light crosses the review card image once,
+  // once the hero has settled and the card is on screen. Never repeats; skipped with reduced motion.
+  const sheenCard = document.querySelector(".rv-hero-card");
+  if (sheenCard?.querySelector("img") && !reduceMotion.matches) {
+    const sheen = document.createElement("span");
+    sheen.className = "mo-sheen";
+    sheen.setAttribute("aria-hidden", "true");
+    sheenCard.appendChild(sheen);
+    sheen.addEventListener("animationend", () => sheen.remove());
+    const play = () => setTimeout(() => sheen.classList.add("is-on"), Math.max(250, 1100 - performance.now()));
+    if ("IntersectionObserver" in window) {
+      // On phones the card sits below the fold: wait until it is actually seen.
+      const seen = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        seen.disconnect();
+        play();
+      }, { threshold: 0.6 });
+      seen.observe(sheen);
+    } else play();
+  }
+
   // Bottom-edge blur band (styled in polish.css): decorative, so hidden from assistive tech.
   const edge = document.createElement("div");
   edge.className = "pl-edge-blur";
