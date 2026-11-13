@@ -106,7 +106,7 @@ html[data-theme="dark"] .bank-group { box-shadow: none; }
   .legend-items > span { font-size: 11px; }
 
   #card-reviews-root { padding-top: 56px; }
-  #card-reviews-root h1 { font-size: clamp(29px, 7.5vw, 38px); }
+  #card-reviews-root h1 { font-size: clamp(44px, 14vw, 56px); }
 
   .support-hero-intro { padding-top: 14px; padding-bottom: 16px; }
   .support-intro-title { font-size: clamp(30px, 8vw, 38px); }

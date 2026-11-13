@@ -13,6 +13,8 @@ import styles from "./blog-grid.module.css";
 export type { BlogAuthor, BlogPost } from "./blog-grid-data";
 
 export interface BlogGridProps {
+  /** Small orange label above the title, as on the /updates hero. */
+  eyebrow?: string;
   title?: string;
   description?: string;
   posts?: BlogPost[];
@@ -95,6 +97,7 @@ function Byline({ post }: { post: BlogPost }) {
 }
 
 export function BlogGrid({
+  eyebrow,
   title = "Journal",
   description = "Product news, design notes and engineering deep dives from the team.",
   posts = blogPosts,
@@ -171,6 +174,9 @@ export function BlogGrid({
     });
   }
 
+  const titleWords = title.split(" ");
+  const titleLast = titleWords.pop();
+  const titleLead = titleWords.join(" ");
   const enterFade = (on: boolean) => ({ initial: on ? { opacity: 0 } : false as const, animate: { opacity: 1 }, transition: { duration: motionTokens.duration.standard, ease: standard } });
 
   const renderCard = (post: BlogPost, isFeatured = false) => {
@@ -216,7 +222,8 @@ export function BlogGrid({
             </motion.div>
           </motion.article> : <motion.div key="index" className={styles.index} exit={{ opacity: 0, transition: { duration: motionTokens.duration.exit, ease: standard } }}>
             <motion.header className={styles.header} {...enterFade(back)}>
-              <h1 className={styles.title}>{title}</h1>
+              {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+              <h1 className={styles.title}>{titleLead && <>{titleLead} </>}<span className={`${styles.foil} sp-title-foil`}>{titleLast}.</span></h1>
               {description && <p className={styles.description}>{description}</p>}
             </motion.header>
 
