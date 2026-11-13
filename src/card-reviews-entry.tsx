@@ -10,6 +10,13 @@ if (root) {
   createRoot(root).render(
     <BlogGrid
       eyebrow="Reviews and guides"
+      heroCards={[
+        "/assets/hero/marquee/slice-business-credit-card.webp",
+        "/assets/hero/marquee/eternal-sbi-card.webp",
+        "/assets/hero/marquee/hsbc-live-plus.webp",
+        "/assets/hero/marquee/idfc-first-hello-cashback.webp",
+        "/assets/hero/marquee/swiggy-hdfc.webp",
+      ]}
       title="Card reviews"
       description="Independent notes on rewards, fees and the fine print that decides whether a card deserves space in your wallet."
       categories={blogCategories}
