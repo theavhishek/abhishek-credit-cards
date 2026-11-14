@@ -1,0 +1,40 @@
+/* Stickers from stick-it-up, baked to assets/stickers/*.svg by scripts/stickers/bake.mjs.
+   .sticker is the package's "peel" hover rebuilt in CSS: it lifts and tilts like vinyl
+   coming off the page. Decorative only: every sticker is alt="" / aria-hidden. */
+.sticker {
+  display: inline-block;
+  width: var(--sticker-size, 96px);
+  height: auto;
+  rotate: var(--sticker-tilt, 0deg);
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.08));
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+html[data-theme="dark"] .sticker { filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.45)); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .sticker:hover {
+    transform: perspective(600px) rotateX(10deg) rotateY(-10deg) translateY(-8px) scale(1.08);
+    filter: drop-shadow(0 20px 25px rgb(0 0 0 / 0.3));
+  }
+}
+
+/* 404: a lost globe stuck beside the message */
+.not-found-sticker {
+  align-self: flex-start;
+  margin: 0 0 20px -8px;
+  --sticker-size: 112px;
+  --sticker-tilt: -8deg;
+}
+@media (max-width: 560px) { .not-found-sticker { --sticker-size: 84px; } }
+
+/* Homepage: a small sparkle stuck just past the "Latest reviews." heading (after its orange dot) */
+#latest-title { position: relative; }
+.hm-head-sticker {
+  position: absolute;
+  left: calc(100% + 6px);
+  top: -14px;
+  --sticker-size: 46px;
+  --sticker-tilt: 12deg;
+}
+@media (max-width: 640px) { .hm-head-sticker { --sticker-size: 34px; top: -10px; left: calc(100% + 2px); } }

@@ -197,3 +197,31 @@ html[data-theme="dark"] .gf-mark { color: color-mix(in srgb, var(--text) 9%, tra
 @media print {
   .gf-socials, .gf-mark-wrap, .gf-totop { display: none; }
 }
+
+/* ---------- Stickers on the big wordmark (stick-it-up, baked SVGs) ---------- */
+.gf-mark-wrap { position: relative; }
+.gf-mark-wrap::before,
+.gf-mark-wrap::after {
+  content: "";
+  position: absolute;
+  aspect-ratio: 1;
+  background: center / contain no-repeat;
+  filter: drop-shadow(0 2px 4px rgb(0 0 0 / 0.08));
+  pointer-events: none;
+}
+.gf-mark-wrap::before {
+  left: 1.5%;
+  top: -6%;
+  width: clamp(44px, 9%, 110px);
+  background-image: url("/assets/stickers/sparkles.svg");
+  rotate: -12deg;
+}
+.gf-mark-wrap::after {
+  right: 6%;
+  top: -14%;
+  width: clamp(48px, 10%, 120px);
+  background-image: url("/assets/stickers/heart.svg");
+  rotate: 14deg;
+}
+html[data-theme="dark"] .gf-mark-wrap::before,
+html[data-theme="dark"] .gf-mark-wrap::after { filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.45)); }
