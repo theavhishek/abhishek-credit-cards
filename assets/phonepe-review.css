@@ -36,3 +36,27 @@ html[data-theme="dark"] .pp-chip--uno { background: #6a52c9; }
 @media (max-width: 560px) {
   .pp-start { padding: 18px 16px; }
 }
+
+/* PhonePe icon on the Apply button */
+.pp-btn-icon { inline-size: 22px; block-size: 22px; border-radius: 50%; flex: none; }
+
+/* The seven online brands: PhonePe's animated logo tile */
+.pp-brands {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px;
+  border-radius: var(--rv-radius-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.pp-brands picture { flex: none; }
+.pp-brands img {
+  display: block;
+  inline-size: 96px;
+  block-size: 96px;
+  border-radius: 16px;
+  background: #f5f5f5;
+}
+.pp-brands figcaption { font-size: var(--rv-fs-small); line-height: 1.5; color: var(--muted); }
+.pp-brands figcaption strong { display: block; margin-block-end: 2px; font-size: 1rem; font-weight: 600; color: var(--text); }
