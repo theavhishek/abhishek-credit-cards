@@ -120,6 +120,7 @@ const shortName = (p) => ({
   "sbi-debit-card-rewardz":"SBI Rewardz guide",
   "boi-rupay-select-debit-card":"BOI RuPay Select guide",
   "swiggy-hdfc-ornge-blck-credit-card":"Swiggy HDFC Ornge and BLCK",
+  "phonepe-hdfc-ultimo-uno-credit-card":"PhonePe HDFC Ultimo and Uno",
   "unity-bank-vibe-zero-credit-card":"Unity Bank Vibe and Zero",
   "idfc-first-hello-cashback-credit-card":"IDFC FIRST Hello Cashback"
 }[p.id] || p.title.replace(/ Credit Card$/," Card"));

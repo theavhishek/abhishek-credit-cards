@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "phonepe-hdfc-ultimo-uno-credit-card",
+    "title": "PhonePe HDFC Ultimo and Uno Credit Cards",
+    "excerpt": "Two RuPay cards from HDFC Bank, sold only through PhonePe. Ultimo (₹999) pays 10% in reward points on recharges, bills and travel booked in the PhonePe app, 5% at seven online brands and 1% on UPI Scan & Pay. Uno…",
+    "category": "Cashback",
+    "date": "2026-11-14",
+    "readTime": 10,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/phonepe-hdfc-ultimo-uno-credit-card.jpg",
+      "alt": "PhonePe HDFC Ultimo and Uno Credit Cards credit card",
+      "srcset": "/assets/reviews/phonepe-hdfc-ultimo-uno-credit-card-800.webp 800w, /assets/reviews/phonepe-hdfc-ultimo-uno-credit-card-1200.webp 1200w, /assets/reviews/phonepe-hdfc-ultimo-uno-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "hsbc-live-plus",
     "title": "HSBC Live+ Credit Card",
     "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
