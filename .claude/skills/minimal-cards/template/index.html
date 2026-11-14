@@ -1,0 +1,88 @@
+<!doctype html>
+<!-- Minimal cards scene. Recreated for this repo: the uploaded skill shipped only SKILL.md, so this template is an
+     original equivalent that follows the SKILL.md spec (4x3 bento, one accent, dot-matrix motif, draw(t) is pure). -->
+<html><head><meta charset="utf-8">
+<style>
+  :root { --A: #fc6e20; --off: #EBEBEE; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 900px; overflow: hidden; background: #ECECEB; font-family: Inter, "Geist", system-ui, sans-serif; }
+  #stage { position: absolute; inset: 0; overflow: hidden; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  #cam { position: absolute; left: 50%; top: 50%; width: 842px; height: 628px; margin: -314px 0 0 -421px; transform-origin: 50% 50%; }
+  .card { position: absolute; background: #fff; border-radius: 22px; padding: 16px 18px; overflow: hidden; color: #1d1d1f;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.05), 0 24px 48px -28px rgba(0,0,0,.22); will-change: transform, filter, opacity; }
+  .hd { display: flex; align-items: center; gap: 7px; font-size: 12px; color: #8a8a90; font-weight: 500; position: relative; z-index: 2; }
+  .hd i { width: 5px; height: 5px; border-radius: 50%; background: var(--A); }
+  .pill { margin-left: auto; padding: 2px 8px; border-radius: 99px; background: #F2F2F4; font-size: 11px; }
+  .big { font-size: 34px; font-weight: 600; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .sub { font-size: 12px; color: #8a8a90; }
+  .dot { position: absolute; border-radius: 50%; transform-origin: 50% 50%; }
+  .dg { display: inline-block; height: 1em; overflow: hidden; vertical-align: top; }
+  .dg.roll > span { display: flex; flex-direction: column; }
+  .dg b { font-weight: inherit; height: 1em; line-height: 1; }
+  .xf { display: inline-grid; } .xf > span { grid-area: 1 / 1; }
+</style></head>
+<body><div id="stage"></div>
+<script src="core.js"></script>
+<script>
+const A = "#fc6e20", OFF = "#EBEBEE";
+const T_TRACK = 6.2, T_NIGHT = 8.6, T_STREAK = 10.4, TRAIN = [1.5, 12.5], DUR = 14;
+const CELL = 200, GAP = 14;
+// dot(x, y, size, color, scale, opacity): one circle placed by its centre.
+const dot = (x, y, s, c, k = 1, o = 1) => `<span class="dot" style="left:${x - s / 2}px;top:${y - s / 2}px;width:${s}px;height:${s}px;background:${c};opacity:${o};transform:translate3d(0,0,0) scale(${k})"></span>`;
+const head = (label, pill = "") => `<div class="hd"><i></i>${label}${pill ? `<span class="pill">${pill}</span>` : ""}</div>`;
+// 5x7 dot font for 0-9 and the colon.
+const G = { 0:["01110","10001","10011","10101","11001","10001","01110"],1:["00100","01100","00100","00100","00100","00100","01110"],2:["01110","10001","00001","00010","00100","01000","11111"],3:["11110","00001","00001","01110","00001","00001","11110"],4:["00010","00110","01010","10010","11111","00010","00010"],5:["11111","10000","11110","00001","00001","10001","01110"],6:["00110","01000","10000","11110","10001","10001","01110"],7:["11111","00001","00010","00100","01000","01000","01000"],8:["01110","10001","10001","01110","10001","10001","01110"],9:["01110","10001","10001","01111","00001","00010","01100"],":":["00000","00100","00100","00000","00100","00100","00000"] };
+// A glyph that re-lights: each column crossfades from old to new with a small stagger.
+const glyph = (x, y, from, to, s, pitch) => { let h = ""; for (let c = 0; c < 5; c++) { const p = clamp((s - c * .05) / .25); for (let r = 0; r < 7; r++) { const a = +G[from][r][c], b = +G[to][r][c], v = lerp(a, b, p); h += dot(x + c * pitch, y + r * pitch, pitch * .78, v > .5 ? A : OFF, .55 + .45 * v); } } return h; };
+
+const W = {};
+W.clock = (t) => { // the clock runs a minute every 4.5 s, so its digits re-light three times
+  const now = 9 * 60 + 41 + Math.floor(t / 4.5), was = now - (t >= 4.5 ? 1 : 0), since = t % 4.5;
+  const f = v => [String(Math.floor(v / 60)).padStart(2, "0"), String(v % 60).padStart(2, "0")].join(":");
+  const a = f(was), b = f(now); let h = head("Local time", "Mon"); [...b].forEach((ch, i) => h += glyph(22 + i * 72, 58, a[i], ch, t >= 4.5 ? since : 9, 11));
+  const fill = Math.floor((t % 4.5) / 4.5 * 60); for (let i = 0; i < 60; i++) h += dot(24 + i * 6.6, 178, 3.4, i < fill ? A : OFF, i < fill ? 1 : .7); return h; };
+W.air = (t) => { let h = head("Air quality") + `<div style="position:absolute;left:0;right:0;top:92px;text-align:center"><div class="big">${rollL(t, [42, 38, 45, 41], 3, 1.5)}</div><div class="sub">Good</div></div>`;
+  const v = kf(t, [[0, 0], [1.6, .55], [5, .48], [9, .6], [14, .52]]); for (let i = 0; i < 19; i++) { const a = Math.PI * (1.1 - i / 18 * 1.2); h += dot(100 + Math.cos(a) * 66, 112 - Math.sin(a) * 66, 7, i / 18 <= v ? A : OFF, i / 18 <= v ? 1 : .7); } return h; };
+W.night = (t, ctx) => { const p = tw(t, T_NIGHT, T_NIGHT + .7); ctx.bg = `rgb(${255 - 230 * p},${255 - 230 * p},${255 - 228 * p})`; const k = spring(t - T_NIGHT + .1, .6);
+  let h = `<div class="hd" style="color:${p > .5 ? "#9a9aa0" : ""}"><i></i>Night shift</div>`; for (let r = 0; r < 10; r++) for (let c = 0; c < 10; c++) if (c + r >= 9) { const d = clamp(p * 2.2 - (18 - c - r) * .08); if (d > 0) h += dot(108 + c * 9, 108 + r * 9, 6, A, d, d * .9); }
+  h += `<div style="position:absolute;left:18px;bottom:18px;width:52px;height:30px;border-radius:99px;background:${k > .5 ? A : OFF}"><span style="position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transform:translate3d(${22 * clamp(k, 0, 1.1)}px,0,0)"></span></div>`;
+  return h + `<div class="sub" style="position:absolute;left:18px;bottom:56px;color:${p > .5 ? "#bbb" : ""}">${xf("Off", "On", p)}</div>`; };
+W.focus = (t) => { const left = Math.max(0, 25 * 60 - t * 60 / 4.5 * 2); const m = Math.floor(left / 60), s = Math.floor(left % 60); const frac = (left % 60) / 60;
+  let h = head("Focus"); for (let i = 0; i < 48; i++) { const a = -Math.PI / 2 + i / 48 * Math.PI * 2, on = i / 48 < frac; h += dot(100 + Math.cos(a) * 60, 112 + Math.sin(a) * 60, 5, on ? A : OFF, on ? 1 : .7); }
+  return h + `<div class="big" style="position:absolute;left:0;right:0;top:96px;text-align:center;font-size:26px">${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}</div>`; };
+W.music = (t) => { const ch = tw(t, T_TRACK, T_TRACK + .8); let h = head("Now playing", "1 of 12");
+  for (let r = 0; r < 12; r++) for (let c = 0; c < 12; c++) { const d1 = .5 + .5 * Math.sin((c + r) * .55 - t * 2.2), dx = c - 5.5, dy = r - 5.5, d2 = .5 + .5 * Math.sin(Math.hypot(dx, dy) * .9 - t * 2.6); const v = lerp(d1, d2, ch); h += dot(30 + c * 12, 56 + r * 12, 9, A, .25 + .75 * v, .35 + .65 * v); }
+  const prog = ch < .5 ? clamp(t / 30 + .35) : clamp((t - T_TRACK) / 30); for (let i = 0; i < 26; i++) h += dot(198 + i * 8, 170, 4, i / 26 < prog ? A : OFF);
+  const press = 1 - .12 * Math.sin(Math.PI * tw(t, T_TRACK - .25, T_TRACK + .05, x => x));
+  return h + `<div style="position:absolute;left:196px;top:66px"><div style="font-size:18px;font-weight:600">${xf("Paper Lanterns", "Slow Orbit", ch)}</div><div class="sub">${xf("The Quiet Rooms", "Low Tide Club", ch)}</div></div><div style="position:absolute;right:20px;top:118px;width:34px;height:34px;border-radius:50%;background:#1d1d1f;transform:scale(${press})"></div>`; };
+W.heart = (t) => { let h = head("Heart rate") + `<div class="big" style="position:absolute;left:18px;bottom:18px">${rollL(t, [72, 74, 71, 73], 2.6, 1)}<span class="sub"> bpm</span></div>`;
+  let row = ""; for (let i = 0; i < 40; i++) { const ph = (i % 10), y = ph === 4 ? -26 : ph === 5 ? 14 : ph === 3 ? -6 : 0; row += dot(i * 8, 90 + y, 4.5, y ? A : "#CFCFD4"); }
+  return h + `<div style="position:absolute;left:0;top:0;width:640px;height:200px;transform:translate3d(${-(t * 26 % 80)}px,0,0) rotate(.0002deg)">${row}${row.replace(/left:(\d+\.?\d*)px/g, (_, x) => `left:${+x + 320}px`)}</div>`; };
+W.streak = (t) => { let h = head("Streak", "Nov"); const days = 30, done = 22, fill = cnt(t, 0, done - 1, .8, 4), chk = tw(t, T_STREAK, T_STREAK + .4);
+  for (let i = 0; i < days; i++) { const x = 30 + (i % 7) * 22, y = 56 + Math.floor(i / 7) * 22; const today = i === done - 1; const on = i < fill || (today && chk > 0);
+    h += today ? `<span class="dot" style="left:${x - 8}px;top:${y - 8}px;width:16px;height:16px;box-shadow:inset 0 0 0 2px ${A};transform:scale(${1 + .12 * Math.sin(t * 5) * (1 - chk)})"></span>` + (chk ? dot(x, y, 10, A, spring(t - T_STREAK)) : "") : dot(x, y, 10, on ? A : OFF, on ? 1 : .7); }
+  return h + `<div class="sub" style="position:absolute;right:18px;top:16px"></div><div class="big" style="position:absolute;right:18px;bottom:14px;font-size:24px">${stepRoll(t, [[0, 21], [T_STREAK + .2, 22]])}</div>`; };
+W.steps = (t) => { const v = cnt(t, 3200, 6480, .6, 13); let h = head("Steps") + `<div class="big" style="position:absolute;left:18px;top:44px;font-size:28px">${v.toLocaleString("en-US")}</div>`;
+  const cols = [5, 7, 4, 8, 6, 3, Math.round(lerp(2, 6, tw(t, .6, 13)))]; cols.forEach((n, c) => { for (let r = 0; r < 8; r++) h += dot(30 + c * 22, 178 - r * 11, 7, r < n ? (c === 6 ? A : "#1d1d1f") : OFF, r < n ? 1 : .7, c === 6 || r >= n ? 1 : .18); }); return h; };
+W.train = (t) => { const p = tw(t, TRAIN[0], TRAIN[1], ease3); let h = head("Next train", "Line 4"); const n = 34;
+  for (let i = 0; i < n; i++) { const x = 30 + i * 10.8, lit = i / (n - 1) <= p; h += dot(x, 140, i % 11 === 0 ? 10 : 5, lit ? A : OFF, lit ? 1 : .8); }
+  const mins = Math.max(1, Math.round(lerp(9, 2, p)));
+  return h + `<div style="position:absolute;left:0;top:0;transform:translate3d(${30 + p * 356 - 14}px,0,0) rotate(.0002deg)"><span style="position:absolute;top:130px;width:28px;height:20px;border-radius:7px;background:#1d1d1f"></span></div><div class="big" style="position:absolute;left:18px;top:52px">${stepRoll(t, [[0, 9], ...[8, 7, 6, 5, 4, 3, 2].map((m, i) => [TRAIN[0] + (i + 1) * (TRAIN[1] - TRAIN[0]) / 8, m])])}<span class="sub"> min</span></div><div class="sub" style="position:absolute;left:18px;bottom:18px">Harbour Square → Old Mill</div>`; };
+
+// Layout: [name, col, row, span]. One wide card per row, stepping right row by row.
+const L = [["clock", 0, 0, 2], ["air", 2, 0, 1], ["night", 3, 0, 1], ["focus", 0, 1, 1], ["music", 1, 1, 2], ["heart", 3, 1, 1], ["streak", 0, 2, 1], ["steps", 1, 2, 1], ["train", 2, 2, 2]];
+const ORDER = ["clock", "music", "train", "air", "focus", "streak", "night", "heart", "steps"];
+
+function draw(t) {
+  const cam = 1.2 - .2 * ease3(t / DUR), rise = 14 * ease3(t / DUR);
+  let h = `<div class="glow" style="left:${700 + 60 * Math.sin(t * .3)}px;top:${520 + 40 * Math.cos(t * .25)}px;width:520px;height:420px;background:${A};opacity:.10"></div><div class="glow" style="left:-120px;top:-140px;width:560px;height:460px;background:#fff;opacity:.9"></div><div id="cam" style="transform:translate3d(0,${-rise}px,0) scale(${cam}) rotate(.0002deg)">`;
+  for (const [name, c, r, span] of L) {
+    const ctx = { bg: "#fff" }, inner = W[name](t, ctx), s = t - .12 - ORDER.indexOf(name) * .09, p = tw(s, 0, .6, expo), k = .94 + .06 * spring(s, .8);
+    h += `<div class="card" style="left:${c * (CELL + GAP)}px;top:${r * (CELL + GAP)}px;width:${span * CELL + (span - 1) * GAP}px;height:${CELL}px;background:${ctx.bg};opacity:${p};filter:blur(${10 * (1 - p)}px);transform:translate3d(0,${16 * (1 - p)}px,0) scale(${k}) rotate(.0002deg)">${inner}</div>`;
+  }
+  document.getElementById("stage").innerHTML = h + "</div>";
+}
+window.draw = draw;
+draw(new URLSearchParams(location.search).has("t") ? +new URLSearchParams(location.search).get("t") : 3);
+</script></body></html>
