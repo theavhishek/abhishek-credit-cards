@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "phonepe-hdfc-ultimo-uno-credit-card.jpg",
+    alt: "PhonePe HDFC Bank Ultimo and Uno credit card review by Abhishek Meena: 10% or 2% on PhonePe categories, 2,000 or 1,500 points a month, ₹999 or ₹499 fee",
+    eyebrow: "Card review",
+    title: "PhonePe HDFC Ultimo vs Uno",
+    subtitle: "10% or 2% on PhonePe bills and travel. Nothing on other spends.",
+    stats: [["10%", "PhonePe categories on Ultimo"], ["2,000", "Ultimo points a month"], ["₹499", "Uno fee + GST"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/phonepe-hdfc-ultimo-uno-credit-card.jpg" },
+  },
+  {
     file: "idfc-first-hello-cashback-credit-card.jpg",
     alt: "IDFC FIRST Hello Cashback credit card review by Abhishek Meena: 3% then 5% online, ₹1,000 online cap, 0% forex, FD from ₹10,000",
     eyebrow: "Card review",
