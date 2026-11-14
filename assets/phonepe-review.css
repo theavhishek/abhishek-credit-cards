@@ -116,8 +116,16 @@ html[data-theme="dark"] .pp-offer { background: #111915; box-shadow: inset 0 0 0
 .pp-offer-art { align-self: end; padding-inline-end: 28px; }
 .pp-offer-art img { display: block; inline-size: 100%; block-size: auto; filter: drop-shadow(0 22px 30px rgb(0 0 0 / .55)); }
 
+/* Phones: one centred column. Cards sit inside the panel, the three facts are equal tiles, Apply is full width. */
 @media (max-width: 640px) {
-  .pp-offer { grid-template-columns: 1fr; margin-block-start: 70px; }
-  .pp-offer-art { order: -1; justify-self: center; inline-size: 210px; margin-block-start: -70px; padding: 0; }
-  .pp-offer-copy { padding: 8px 18px 24px; }
+  .pp-offer { grid-template-columns: 1fr; text-align: center; }
+  .pp-offer-art { order: -1; justify-self: center; inline-size: min(200px, 58%); padding: 24px 0 0; }
+  .pp-offer-copy { justify-items: center; gap: 12px; padding: 16px 18px 22px; }
+  .pp-offer h2 { font-size: 1.6rem; }
+  .pp-offer-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; inline-size: 100%; }
+  .pp-offer-facts li { flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 10px 4px; border-radius: 14px; }
+  .pp-offer-facts strong { font-size: 1.15rem; }
+  .pp-offer-facts span { font-size: .75rem; line-height: 1.25; }
+  .pp-offer-text { text-align: center; text-wrap: balance; }
+  .pp-offer-btn { justify-self: stretch; }
 }
