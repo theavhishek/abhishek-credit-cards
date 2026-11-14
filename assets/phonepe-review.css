@@ -37,9 +37,6 @@ html[data-theme="dark"] .pp-chip--uno { background: #6a52c9; }
   .pp-start { padding: 18px 16px; }
 }
 
-/* PhonePe icon on the Apply button */
-.pp-btn-icon { inline-size: 22px; block-size: 22px; border-radius: 50%; flex: none; }
-
 /* The seven online brands: PhonePe's animated logo tile */
 .pp-brands {
   display: flex;
