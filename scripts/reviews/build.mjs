@@ -136,7 +136,7 @@ write("home.html", home);
 // The static review listing remains useful to crawlers and before React boots.
 let listing = read("card-reviews.html");
 const staticList = '        <ul class="reviews-static-list">\n' +
-  posts.map(p => '          <li>\n            <article>\n              <p class="reviews-static-meta">' + escape(p.category) + '</p>\n              <h2><a href="/card-reviews/' + escape(p.id) + '">' + escape(p.title) + '</a></h2>\n              <p>' + escape(p.excerpt) + '</p>\n              <p class="reviews-static-byline"><strong>Abhishek Meena</strong><span><time datetime="' + p.date + '">' + longDate(p.date) + '</time> · ' + p.readTime + ' min read</span></p>\n            </article>\n          </li>').join("\n") +
+  posts.map(p => '          <li>\n            <article>\n              <p class="reviews-static-meta">' + escape(p.category) + '</p>\n              <h2><a href="/card-reviews/' + escape(p.id) + '">' + escape(p.title) + '</a></h2>\n              <p>' + escape(p.excerpt) + '</p>\n              <p class="reviews-static-byline"><time datetime="' + p.date + '">' + longDate(p.date) + '</time> · ' + p.readTime + ' min read</p>\n            </article>\n          </li>').join("\n") +
   '\n        </ul>';
 const staticRegex = /^[ \t]*<ul class="reviews-static-list">[\s\S]*?<\/ul>/gm;
 if ([...listing.matchAll(staticRegex)].length!==1) throw new Error("Expected exactly one static listing");

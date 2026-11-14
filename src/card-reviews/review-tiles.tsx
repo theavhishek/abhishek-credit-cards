@@ -1,4 +1,5 @@
-/* Card reviews index: boxed tiles, every review on one page, the newest spanning two columns. */
+/* Card reviews index: boxed tiles, every review on one page, the newest spanning the full row.
+   The author appears once, in the page tagline, so tiles carry only the date and read time. */
 import type { MouseEvent } from "react";
 import { ArrowRight } from "lucide-react";
 import type { BlogPost } from "./blog-grid-data";
@@ -12,14 +13,8 @@ function Badge({ post }: { post: BlogPost }) {
   return <span className={styles.badge} data-tone={toneOf(post.category)}>{post.category}</span>;
 }
 
-function Byline({ post, avatar = true }: { post: BlogPost; avatar?: boolean }) {
-  return <span className={styles.byline}>
-    {avatar && post.author.avatar && <img className={styles.avatar} src={post.author.avatar} alt="" width={28} height={28} loading="lazy" />}
-    <span className={styles.bylineCopy}>
-      <strong>{post.author.name}</strong>
-      <span><time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readTime} min read</span>
-    </span>
-  </span>;
+function Meta({ post }: { post: BlogPost }) {
+  return <span className={styles.meta}><time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readTime} min read</span>;
 }
 
 function Art({ post, sizes, eager = false, className }: { post: BlogPost; sizes: string; eager?: boolean; className?: string }) {
@@ -38,7 +33,7 @@ export function TilesLayout({ posts, href, onOpen }: { posts: BlogPost[]; href: 
           <Badge post={post} />
           <h2 className={index === 0 ? styles.tileTitleWide : styles.tileTitle}>{post.title}</h2>
           <span className={styles.excerpt}>{post.excerpt}</span>
-          <span className={styles.tileFoot}><Byline post={post} /><span className={styles.readArrow} aria-hidden="true"><ArrowRight /></span></span>
+          <span className={styles.tileFoot}><Meta post={post} /><span className={styles.readArrow} aria-hidden="true"><ArrowRight /></span></span>
         </span>
       </a>
     </li>)}
