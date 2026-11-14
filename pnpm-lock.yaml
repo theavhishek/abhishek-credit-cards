@@ -32,6 +32,9 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.3.0(react@19.3.0)
+      stick-it-up:
+        specifier: 0.4.0
+        version: 0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     devDependencies:
       esbuild:
         specifier: ^0.25.10
@@ -419,6 +422,12 @@ packages:
   scheduler@0.28.0:
     resolution: {integrity: sha512-juorfCmIkIw8tT+p5BXSm6PJjQF/ycEYmKyzURCIt/RaZIhL+PulbQ9Yu2z1HdOJDdqDTlxA1+xKBmHXJsczAw==}
 
+  stick-it-up@0.4.0:
+    resolution: {integrity: sha512-8AEXUvylrKM8ZzuX4c+ia98YNeQ/3f7XcsIegybtt+qS6S0OTh4fmAjfMivcvw7n0GP2s+tJvtQUtnw7FZKzVw==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -675,6 +684,11 @@ snapshots:
   react@19.3.0: {}
 
   scheduler@0.28.0: {}
+
+  stick-it-up@0.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+    dependencies:
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
 
   tslib@2.8.1: {}
 
