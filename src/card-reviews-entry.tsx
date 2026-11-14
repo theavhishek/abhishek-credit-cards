@@ -13,8 +13,6 @@ if (root) {
       title="Card reviews"
       description="Independent notes on rewards, fees and the fine print that decides whether a card deserves space in your wallet."
       categories={blogCategories}
-      pageSize={6}
-      showFeatured
       getHref={(post) => "/card-reviews/" + post.id}
     />,
   );
