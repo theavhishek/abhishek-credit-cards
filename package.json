@@ -19,8 +19,7 @@
     "build:og": "node scripts/og/build.mjs",
     "check:og": "node scripts/og/build.mjs --check",
     "test:newsletter": "node --test scripts/newsletter/subscribe.test.mjs",
-    "build:stageshow": "esbuild src/stageshow/site-demos.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --loader:.svg=dataurl --define:process.env.NODE_ENV='\"production\"' --outfile=assets/stageshow-demos.js && cat src/stageshow/layout.css >> assets/stageshow-demos.css",
-    "build:stickers": "node scripts/stickers/bake.mjs"
+    "build:stageshow": "esbuild src/stageshow/site-demos.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --loader:.svg=dataurl --define:process.env.NODE_ENV='\"production\"' --outfile=assets/stageshow-demos.js && cat src/stageshow/layout.css >> assets/stageshow-demos.css"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",
@@ -30,8 +29,7 @@
     "motion": "^12.23.24",
     "qrcode-generator": "2.0.4",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "stick-it-up": "0.4.0"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "esbuild": "^0.25.10",
