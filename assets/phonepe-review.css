@@ -80,6 +80,28 @@ html[data-theme="dark"] .pp-offer { background: #111915; box-shadow: inset 0 0 0
   font-size: var(--rv-fs-small);
   font-weight: 600;
 }
+/* Gift box shakes every few seconds; the label shimmers continuously. Both stop for reduced motion. */
+.pp-offer-gift { flex: none; transform-origin: 50% 85%; }
+.pp-offer-shine { color: var(--pp-green); }
+@media (prefers-reduced-motion: no-preference) {
+  .pp-offer-gift { animation: pp-gift-shake 2.6s cubic-bezier(.36, .07, .19, .97) infinite; }
+  .pp-offer-shine {
+    background: linear-gradient(100deg, var(--pp-green) 0%, var(--pp-green) 38%, #eafff1 50%, var(--pp-green) 62%, var(--pp-green) 100%) 0 0 / 250% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    animation: pp-shine 2.2s linear infinite;
+  }
+}
+@keyframes pp-gift-shake {
+  0%, 52%, 100% { transform: scale(1) rotate(0); }
+  56% { transform: scale(1.25) rotate(-14deg); }
+  62% { transform: scale(1.25) rotate(12deg); }
+  68% { transform: scale(1.2) rotate(-10deg); }
+  74% { transform: scale(1.15) rotate(6deg); }
+  80% { transform: scale(1.05) rotate(-2deg); }
+  86% { transform: scale(1) rotate(0); }
+}
+@keyframes pp-shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
 .pp-offer h2 { margin: 0; color: #fff; font-size: clamp(1.6rem, 1.15rem + 1.6vw, 2.2rem); font-weight: 700; letter-spacing: -.025em; line-height: 1.1; text-wrap: balance; }
 .pp-offer-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .pp-offer-facts li { display: flex; align-items: baseline; gap: 6px; padding: 7px 12px; border-radius: 999px; background: rgb(255 255 255 / .06); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .1); }
