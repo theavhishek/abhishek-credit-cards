@@ -146,3 +146,10 @@
   section.classList.add("is-tabbed");
   show(buttons.find((b) => b.getAttribute("aria-pressed") === "true")?.dataset.panel || panels[0].id);
 })();
+
+// Offer banner: drop it once the offer window has closed (it stays in the HTML for no-JS readers).
+(() => {
+  const offer = document.getElementById("offer");
+  const ends = offer && Date.parse(offer.dataset.ends);
+  if (ends && Date.now() >= ends) offer.remove();
+})();
