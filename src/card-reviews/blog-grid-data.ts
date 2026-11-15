@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "sbi-debit-card-rewardz",
+    "title": "SBI Rewardz on Debit Cards: 2026 Guide",
+    "excerpt": "Turn your credit card bill payments into SBI Rewardz points using a physical or virtual SBI debit card. Earn 0.25% to 1.25% in value back through tier-based rewards, the ₹1 lakh monthly milestone and birthday-month…",
+    "category": "Guide",
+    "date": "2026-11-15",
+    "readTime": 12,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/sbi-debit-card-rewardz.jpg",
+      "alt": "SBI debit card earning SBI Rewardz points",
+      "srcset": "/assets/reviews/sbi-debit-card-rewardz-800.webp 800w, /assets/reviews/sbi-debit-card-rewardz-1200.webp 1200w, /assets/reviews/sbi-debit-card-rewardz.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "phonepe-hdfc-ultimo-uno-credit-card",
     "title": "PhonePe HDFC Ultimo and Uno Credit Cards",
     "excerpt": "Two RuPay cards from HDFC Bank, sold only through PhonePe. Ultimo (₹999) pays 10% in reward points on recharges, bills and travel booked in the PhonePe app, 5% at seven online brands and 1% on UPI Scan & Pay. Uno…",
@@ -137,25 +156,6 @@ export const blogPosts: BlogPost[] = [
       "src": "/assets/reviews/boi-rupay-select-debit-card.jpg",
       "alt": "Bank of India RuPay Select debit card earning Star Points",
       "srcset": "/assets/reviews/boi-rupay-select-debit-card-800.webp 800w, /assets/reviews/boi-rupay-select-debit-card-1200.webp 1200w, /assets/reviews/boi-rupay-select-debit-card.jpg 1600w"
-    },
-    "featured": false
-  },
-  {
-    "id": "sbi-debit-card-rewardz",
-    "title": "SBI Rewardz on Debit Cards: 2026 Guide",
-    "excerpt": "Turn your credit card bill payments into SBI Rewardz points using a physical or virtual SBI debit card. Earn 0.25% to 1% in value back through tier-based rewards, the ₹1 lakh monthly milestone and birthday-month…",
-    "category": "Guide",
-    "date": "2026-10-29",
-    "readTime": 12,
-    "author": {
-      "name": "Abhishek Meena",
-      "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face-96.jpg"
-    },
-    "image": {
-      "src": "/assets/reviews/sbi-debit-card-rewardz.jpg",
-      "alt": "SBI debit card earning SBI Rewardz points",
-      "srcset": "/assets/reviews/sbi-debit-card-rewardz-800.webp 800w, /assets/reviews/sbi-debit-card-rewardz-1200.webp 1200w, /assets/reviews/sbi-debit-card-rewardz.jpg 1600w"
     },
     "featured": false
   },

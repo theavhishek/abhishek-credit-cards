@@ -13,6 +13,8 @@
 .rz .rv-meter-scale { min-height: 2.8em; }
 .rz #rz-cap-label,
 .rz .rz-mark-label { inset-block-start: 1.4em; }
+.rz .rz-scale-stack { min-height: 4.2em; }
+.rz .rz-scale-stack #rz-cap-label { inset-block-start: 2.8em; }
 .rz [hidden] { display: none !important; }
 .rz-scale-note { font-size: var(--rv-fs-caption); line-height: 1.45; color: var(--muted); }
 
