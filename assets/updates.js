@@ -154,12 +154,17 @@
       (list.length > 1 ? '<button type="button" class="up-clear" data-clear>Clear all</button>' : "");
   }
 
+  function emptyIcon(name) {
+    return `<img class="i3d" src="/assets/icons-3d/${name}.webp" width="80" height="80" alt="" decoding="async">`;
+  }
+
   function emptyState(now) {
     if (!items.length) {
-      return `<div class="up-empty"><h2>Nothing new right now</h2><p>New card launches, devaluations and offers appear here once they’re checked against their source.</p></div>`;
+      return `<div class="up-empty">${emptyIcon("bell")}<h2>Nothing new right now</h2><p>New card launches, devaluations and offers appear here once they’re checked against their source.</p></div>`;
     }
     const wider = state.show === "current" && items.some((item) => matchesAll(item, { ...state, show: "all" }, now));
     return `<div class="up-empty">
+      ${emptyIcon(state.view === "offers" ? "gift" : "bell")}
       <h2>No ${state.view === "offers" ? "offers" : state.view === "news" ? "news" : state.view === "devaluations" ? "devaluations" : "updates"} match</h2>
       <p>${wider ? "Nothing current matches, but some ended or unverified items do." : state.from ? "Nothing was posted on these dates. Days with a dot in the calendar have updates." : "Try a bank, card or merchant name, or clear the filters."}</p>
       ${wider ? '<button type="button" class="up-btn up-btn-solid" data-show-all>Include ended offers</button>' : ""}

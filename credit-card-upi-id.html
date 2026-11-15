@@ -60,10 +60,11 @@
   <link rel="stylesheet" href="/assets/upi-id.css?v=3">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/icons-3d.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=5">
   <link rel="stylesheet" href="/assets/motion.css?v=6">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=2">
-  <link rel="stylesheet" href="/assets/site-search.css?v=2">
+  <link rel="stylesheet" href="/assets/site-search.css?v=3">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it safe to type my card number here?","acceptedAnswer":{"@type":"Answer","text":"The UPI ID is put together in your browser. What you type isn’t saved, sent anywhere or added to the page link. ICICI Bank, Axis Bank and AU Bank use the last 4 card digits in their published formats; Equitas Bank uses the last 6. SBI Card, IDFC FIRST Bank and American Express require the full card number for their UPI IDs. All details stay in your browser."}},{"@type":"Question","name":"Which UPI app can I use?","acceptedAnswer":{"@type":"Answer","text":"Use a UPI app that supports paying to a UPI ID from your bank account. Before authorizing the transaction, confirm that the recipient details match your card issuer. If they do not, stop and use the bank’s official payment channel."}},{"@type":"Question","name":"How long until the payment shows on my card?","acceptedAnswer":{"@type":"Answer","text":"UPI payments often reach the issuer quickly, but the time to reflect on your credit card account can vary by bank. Check the posting information shown below the QR code and avoid paying at the last minute."}},{"@type":"Question","name":"Can I share the QR code with someone who pays for me?","acceptedAnswer":{"@type":"Answer","text":"The QR only receives money into your card, but it contains your mobile number and part or all of your card number. Share it only with people you trust. Amex accepts payments only from the primary Cardmember’s own account."}},{"@type":"Question","name":"Why isn’t my bank listed?","acceptedAnswer":{"@type":"Answer","text":"This tool only uses UPI IDs that the bank itself publishes. UPI ID formats shared on forums aren’t added until the bank confirms them, because money sent to a wrong ID can be hard to get back."}}]}</script>
 </head>
 <body class="calc-page upi-page unified-navbar">
@@ -114,6 +115,7 @@
 
     <section class="sp-hero ce-hero has-demo" aria-labelledby="page-title">
       <div class="sp-hero-copy">
+        <img class="i3d i3d-phone" src="/assets/icons-3d/rupee.webp" width="76" height="76" alt="" decoding="async">
         <p class="sp-verified"><span class="sp-verified-dot" aria-hidden="true"></span>UPI ID formats from each bank’s own website, checked <time datetime="2026-10-14">13–14 Oct 2026</time></p>
         <h1 id="page-title" class="sp-title"><span class="sp-title-ink">Your card’s</span> <span class="sp-title-foil">UPI ID.</span></h1>
         <p class="sp-lead">Pay your credit card bill from any UPI app. Pick your bank, add your mobile number and card digits, and get the exact UPI ID your bank publishes, with a QR code to scan.</p>
@@ -308,7 +310,7 @@
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>
   <script src="/assets/motion.js?v=7" defer></script>
-  <script src="/assets/site-search.js?v=2" defer></script>
+  <script src="/assets/site-search.js?v=3" defer></script>
 <script src="/assets/diwali.js?v=1" defer></script>
   <script type="module">/* Hero demo shows only at 900px and wider: phones skip the download */ const ssq = matchMedia("(min-width: 900px)"); const ssLoad = () => { if (ssq.matches) { import("/assets/stageshow-demos.js?v=3"); ssq.removeEventListener("change", ssLoad); } }; ssLoad(); ssq.addEventListener("change", ssLoad);</script>
 </body>

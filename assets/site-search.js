@@ -324,7 +324,7 @@
       const found = search(query);
       count = found.length;
       html = found.map((e, i) => optionHTML(e, i, query)).join("") ||
-        `<p class="ss-note">Nothing found for “${esc(query)}”. Try a bank, a card name or a tool, like “HDFC” or “EMI”.</p>`;
+        `<p class="ss-note ss-empty"><img class="ss-empty-icon" src="/assets/icons-3d/target.webp" width="56" height="56" alt="" decoding="async">Nothing found for “${esc(query)}”. Try a bank, a card name or a tool, like “HDFC” or “EMI”.</p>`;
       status.textContent = count ? `${count} result${count === 1 ? "" : "s"}` : "No results";
     }
     list.innerHTML = html;

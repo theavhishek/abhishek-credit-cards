@@ -328,6 +328,8 @@ html[data-theme="dark"] .ss-dialog::backdrop { background: rgb(0 0 0 / 0.5); }
 .ss-kind[data-cat="devaluation"] { color: #dc2626; font-weight: 600; }
 html[data-theme="dark"] .ss-kind[data-cat="devaluation"] { color: #f87171; }
 .ss-note { margin: 0; padding: 22px 14px; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
+.ss-empty-icon { display: block; width: 56px; height: 56px; margin: 0 auto 10px; object-fit: contain; pointer-events: none; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12)); }
+html[data-theme="dark"] .ss-empty-icon { filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5)); }
 
 /* Phones: the dialog drops from the top, clear of the keyboard, and closes with an X. */
 @media (max-width: 640px) {

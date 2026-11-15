@@ -1,0 +1,48 @@
+/* 3D icons (3dicons.co by realvjy, CC0, "premium" style, dynamic angle).
+   One per page, only in empty space: page heroes, empty states, 404, newsletter.
+   Markup: <img class="i3d" src="/assets/icons-3d/<name>.webp" width="88" height="88" alt="">.
+   Not for navbar, badges, FAQ rows or anything under 48px. */
+.i3d {
+  display: block;
+  width: var(--i3d-size, 88px);
+  height: var(--i3d-size, 88px);
+  object-fit: contain;
+  flex: none;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.12));
+}
+html[data-theme="dark"] .i3d { filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.5)); }
+
+/* Page heroes (bank support, pay bill): icon sits above the date pill */
+.sp-hero-copy > .i3d { margin-block-end: 14px; }
+
+/* Calculator and UPI ID heroes: the Stageshow demo covers >=900px, so the icon shows on smaller screens only */
+.ce-hero .sp-hero-copy > .i3d-phone { --i3d-size: 76px; }
+@media (min-width: 900px) {
+  .i3d-phone { display: none; }
+}
+
+/* 404 */
+.not-found > .i3d { --i3d-size: 120px; margin-block-end: 8px; }
+
+/* /updates empty filter state */
+.up-empty > .i3d { --i3d-size: 80px; margin-block-end: 2px; }
+
+/* Newsletter box on /updates */
+.nl > .i3d { --i3d-size: 64px; margin-block-end: 10px; }
+
+@media (max-width: 640px) {
+  .i3d { --i3d-size: 72px; }
+  .not-found > .i3d { --i3d-size: 104px; }
+  .nl > .i3d { --i3d-size: 56px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .i3d { animation: i3d-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes i3d-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.94) rotate(-4deg); }
+    to { opacity: 1; transform: none; }
+  }
+}

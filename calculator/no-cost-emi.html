@@ -59,10 +59,11 @@
   <link rel="stylesheet" href="/assets/stageshow-demos.css?v=4">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
   <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/icons-3d.css?v=1">
   <link rel="stylesheet" href="/assets/polish.css?v=5">
   <link rel="stylesheet" href="/assets/motion.css?v=6">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=2">
-  <link rel="stylesheet" href="/assets/site-search.css?v=2">
+  <link rel="stylesheet" href="/assets/site-search.css?v=3">
 </head>
 <body class="calc-page unified-navbar">
   <a class="skip-link" href="#calculator">Skip to the calculator</a>
@@ -111,6 +112,7 @@
 
     <section class="sp-hero ce-hero has-demo" aria-labelledby="page-title">
       <div class="sp-hero-copy">
+        <img class="i3d i3d-phone" src="/assets/icons-3d/calendar.webp" width="76" height="76" alt="" decoding="async">
         <p class="sp-verified"><span class="sp-verified-dot" aria-hidden="true"></span>Bank EMI terms checked against official sources on <time datetime="2026-10-18">18 Oct 2026</time></p>
         <h1 id="page-title" class="sp-title"><span class="sp-title-ink">No-Cost EMI</span> <span class="sp-title-foil">Calculator</span></h1>
         <p class="sp-lead">Find out how much your No-Cost EMI really costs after bank interest, processing fees, GST, discounts, and other charges.</p>
@@ -517,7 +519,7 @@
   <script type="module" src="/assets/arc-tabs.js?v=7"></script>
   <script type="module" src="/assets/glass-buttons.js?v=2"></script>
   <script src="/assets/motion.js?v=7" defer></script>
-  <script src="/assets/site-search.js?v=2" defer></script>
+  <script src="/assets/site-search.js?v=3" defer></script>
 <script src="/assets/diwali.js?v=1" defer></script>
   <script type="module">/* Hero demo shows only at 900px and wider: phones skip the download */ const ssq = matchMedia("(min-width: 900px)"); const ssLoad = () => { if (ssq.matches) { import("/assets/stageshow-demos.js?v=3"); ssq.removeEventListener("change", ssLoad); } }; ssLoad(); ssq.addEventListener("change", ssLoad);</script>
 </body>
