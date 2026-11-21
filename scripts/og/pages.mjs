@@ -97,6 +97,16 @@ export const PAGES = [
     visual: { photo: "/assets/reviews/eternal-sbi-card.jpg" },
   },
   {
+    file: "kotak-zepto-credit-card.jpg",
+    alt: "Kotak × Zepto credit card review by Abhishek Meena: 10% on Zepto, 15% with Club, ₹1,500 cap on other cashback, ₹899 fee",
+    eyebrow: "Card review",
+    title: "Kotak × Zepto Credit Card",
+    subtitle: "10% back on Zepto, 15% with Zepto Club, and a free movie ticket a month.",
+    stats: [["10%", "Zepto orders"], ["₹1,500", "cap on 5%, 1%, 0.5%"], ["₹899", "a year, waived at ₹3L"]],
+    glass: true,
+    visual: { photo: "/assets/reviews/kotak-zepto-credit-card.jpg" },
+  },
+  {
     file: "phonepe-hdfc-ultimo-uno-credit-card.jpg",
     alt: "PhonePe HDFC Bank Ultimo and Uno credit card review by Abhishek Meena: 10% or 2% on PhonePe categories, 2,000 or 1,500 points a month, ₹999 or ₹499 fee",
     eyebrow: "Card review",

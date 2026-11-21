@@ -9,6 +9,25 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "kotak-zepto-credit-card",
+    "title": "Kotak × Zepto Credit Card",
+    "excerpt": "A Kotak Mahindra Bank card built for Zepto: 10% cashback on Zepto orders, 15% with Zepto Club, 5% on top partner brands, 1% on other spends and 0.5% on UPI, plus a free PVR INOX ticket every month you spend ₹5,000.…",
+    "category": "Launched",
+    "date": "2026-11-21",
+    "readTime": 7,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/kotak-zepto-credit-card.jpg",
+      "alt": "Kotak × Zepto credit card",
+      "srcset": "/assets/reviews/kotak-zepto-credit-card-800.webp 800w, /assets/reviews/kotak-zepto-credit-card-1200.webp 1200w, /assets/reviews/kotak-zepto-credit-card.jpg 1600w"
+    },
+    "featured": false
+  },
+  {
     "id": "sbi-debit-card-rewardz",
     "title": "SBI Rewardz on Debit Cards: 2026 Guide",
     "excerpt": "Turn your credit card bill payments into SBI Rewardz points using a physical or virtual SBI debit card. Earn 0.25% to 1.25% in value back through tier-based rewards, the ₹1 lakh monthly milestone and birthday-month…",
