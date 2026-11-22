@@ -9,6 +9,24 @@ export type BlogPost = {
 export const blogCategories = ["Cashback","Launched","Pre-launch","Guide"];
 export const blogPosts: BlogPost[] = [
   {
+    "id": "hsbc-live-plus",
+    "title": "HSBC Live+ Credit Card",
+    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
+    "category": "Cashback",
+    "date": "2026-11-22",
+    "readTime": 6,
+    "author": {
+      "name": "Abhishek Meena",
+      "role": "Independent card reviewer",
+      "avatar": "/assets/abhishek-face-96.jpg"
+    },
+    "image": {
+      "src": "/assets/reviews/hsbc-live-plus.jpg",
+      "alt": "HSBC Live+ credit card"
+    },
+    "featured": false
+  },
+  {
     "id": "kotak-zepto-credit-card",
     "title": "Kotak × Zepto Credit Card",
     "excerpt": "A Kotak Mahindra Bank card built for Zepto: 10% cashback on Zepto orders, 15% with Zepto Club, 5% on top partner brands, 1% on other spends and 0.5% on UPI, plus a free PVR INOX ticket every month you spend ₹5,000.…",
@@ -62,24 +80,6 @@ export const blogPosts: BlogPost[] = [
       "src": "/assets/reviews/phonepe-hdfc-ultimo-uno-credit-card.jpg",
       "alt": "PhonePe HDFC Ultimo and Uno Credit Cards credit card",
       "srcset": "/assets/reviews/phonepe-hdfc-ultimo-uno-credit-card-800.webp 800w, /assets/reviews/phonepe-hdfc-ultimo-uno-credit-card-1200.webp 1200w, /assets/reviews/phonepe-hdfc-ultimo-uno-credit-card.jpg 1600w"
-    },
-    "featured": false
-  },
-  {
-    "id": "hsbc-live-plus",
-    "title": "HSBC Live+ Credit Card",
-    "excerpt": "10% cashback on everyday categories sounds generous. The catch is one ₹1,200 cap shared across all of them, every billing cycle. Here is when that works for you, and when it doesn’t.",
-    "category": "Cashback",
-    "date": "2026-11-12",
-    "readTime": 6,
-    "author": {
-      "name": "Abhishek Meena",
-      "role": "Independent card reviewer",
-      "avatar": "/assets/abhishek-face-96.jpg"
-    },
-    "image": {
-      "src": "/assets/reviews/hsbc-live-plus.jpg",
-      "alt": "HSBC Live+ credit card"
     },
     "featured": false
   },

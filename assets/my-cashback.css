@@ -45,3 +45,9 @@
 /* Month labels under the bars when every bar sits in one year. */
 .lp-mos li { padding-inline: 0; border: 0; text-align: center; }
 @media (min-width: 640px) { .lp-few .lp-bars, .lp-few .lp-yrs { gap: 14px; } }
+
+/* HSBC Live+ complimentary benefits: brand tile from HSBC's offer art beside the claim link. */
+.lp-perks { display: flex; align-items: center; gap: 18px; margin-block-end: 16px; padding: 14px; border: 1px solid var(--line); border-radius: var(--rv-radius-md); background: var(--surface); }
+.lp-perks img { display: block; flex: none; inline-size: 112px; block-size: 112px; border-radius: 16px; background: #0b0508; }
+.lp-perks figcaption { font-size: var(--rv-fs-small); line-height: 1.5; color: var(--muted); }
+.lp-perks figcaption strong { display: block; margin-block-end: 2px; font-size: 1rem; font-weight: 600; color: var(--text); }
