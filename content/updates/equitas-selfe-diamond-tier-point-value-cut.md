@@ -40,6 +40,10 @@ The spend is counted net of refunds, every month of one calendar quarter, and th
 
 The other Diamond perks stay: 0% forex markup (refunded as cashback), three ₹250 movie vouchers, three ₹500 Amazon vouchers and golf green fees each quarter.
 
+## Overnight, with no notice
+
+Banks can't change terms like this overnight. Under RBI's credit card rules, they have to give at least 30 days' notice before a change. I use the SELFE card myself, so I've mailed Equitas about this. I'll update this post when they reply.
+
 ## What I'd do
 
 - If you're in the top tier with points saved up, redeem on flights, hotels or vouchers, not cashback. That still gets you ₹0.50 a point against ₹0.30.
