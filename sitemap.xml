@@ -159,9 +159,15 @@
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>
-    <lastmod>2026-11-13</lastmod>
+    <lastmod>2026-11-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avhishek.in/updates/equitas-selfe-diamond-tier-point-value-cut</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avhishek.in/updates/amazon-pay-gift-card-limits-raised-2026</loc>
