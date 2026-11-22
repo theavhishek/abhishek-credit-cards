@@ -14,6 +14,12 @@ tile:
 image: /assets/updates/equitas-selfe-diamond-tier-point-value-cut.jpg
 imageAlt: Equitas Xchange Rewards page showing the Diamond tier, The Pinnacle of Luxury, with flights, hotels, bus, merchandise and vouchers at ₹0.50 a point and cashback at ₹0.30
 sources:
+  - label: Equitas Bank, Privilege Program T&C, 19 Nov 2026 (PDF)
+    url: https://equitas.bank.in/strapi-dev/uploads/Privilege_Program_T_and_C_19_Nov_26_6693aa8344.pdf
+    kind: official
+  - label: Equitas Xchange Rewards, Privileges page
+    url: https://xchange.equitas.bank.in/privileges
+    kind: official
   - label: Equitas Bank, SELFE credit card page
     url: https://equitas.bank.in/personal-banking/pay/credit-cards/selfe-credit-card
     kind: official
