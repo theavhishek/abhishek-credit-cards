@@ -11,12 +11,14 @@ tile:
   figure: 50%
   caption: less per point
   logo: /assets/bank-logos/esfb.svg
+image: /assets/updates/equitas-selfe-diamond-tier-point-value-cut.jpg
+imageAlt: Equitas Xchange Rewards page showing the Diamond tier, The Pinnacle of Luxury, with flights, hotels, bus, merchandise and vouchers at ₹0.50 a point and cashback at ₹0.30
 sources:
   - label: Equitas Bank, SELFE credit card page
     url: https://equitas.bank.in/personal-banking/pay/credit-cards/selfe-credit-card
     kind: official
 ---
-Equitas has quietly changed its top Xchange Rewards tier on the SELFE card. Points are now worth half what they used to be, so the top tier drops from about 10% valueback to 5%. The new values are in Equitas's Privilege Program T&C dated November 2026.
+Equitas has quietly changed its top Xchange Rewards tier on the SELFE card. Diamond is now called "The Pinnacle of Luxury" on the rewards portal. Points are now worth half what they used to be, so the top tier drops from about 10% valueback to 5%. The new values are in Equitas's Privilege Program T&C dated November 2026.
 
 ## What's changing
 
@@ -39,6 +41,8 @@ The spend is counted net of refunds, every month of one calendar quarter, and th
 | Diamond (₹1L+) | ₹0.50 | ₹0.30 |
 
 The other Diamond perks stay: 0% forex markup (refunded as cashback), three ₹250 movie vouchers, three ₹500 Amazon vouchers and golf green fees each quarter.
+
+The portal also says the MakeMyTrip one-way flight and room night vouchers for Diamond are out of stock. Equitas says fresh stock comes in December 2026, and you'll get 10 days to claim once it tells you.
 
 ## Overnight, with no notice
 
