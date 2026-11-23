@@ -159,9 +159,15 @@
   <!-- updates:start -->
   <url>
     <loc>https://avhishek.in/updates</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://avhishek.in/updates/rbl-credit-card-utility-rent-rewards-december-2026</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://avhishek.in/updates/equitas-selfe-diamond-tier-point-value-cut</loc>
