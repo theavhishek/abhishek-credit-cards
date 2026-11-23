@@ -66,6 +66,9 @@ related: [another-update-file-name]        # optional: pin related updates
 reviews: [eternal-sbi-card]                 # optional: card reviews this affects; shows under "Latest on this card" there
 image: /assets/updates/infinia.webp        # optional, with imageAlt; shown at the top of the article
 imageAlt: What the image shows
+cta:                            # optional button under the byline, opens in a new tab
+  label: Notify me on slice     # not for affiliate links (those go only on review Apply buttons)
+  url: https://...
 tile:                           # the fact tile beside the headline in the feed
   figure: 2.5%                  # the one number or date the item is about, up to 6 characters
   caption: extra valueback      # a few words under it, up to 20 characters

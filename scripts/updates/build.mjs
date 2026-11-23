@@ -393,7 +393,14 @@ function buildArticle(item) {
         <p class="rv-byline">
           <img src="/assets/abhishek-face-96.jpg" alt="" width="44" height="44">
           <span class="rv-byline-copy">${byline}</span>
-        </p>
+        </p>${item.cta ? `
+        <div class="rv-actions">
+          <a class="rv-btn rv-btn-primary" href="${esc(item.cta.url)}" target="_blank" rel="noopener noreferrer">
+            ${esc(item.cta.label)}
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>` : ""}
       </div>
     </header>
     ${figure}
