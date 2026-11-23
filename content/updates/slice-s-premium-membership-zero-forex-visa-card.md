@@ -11,8 +11,8 @@ tags: [slice, slice s, slice atom, premium membership, zero forex, visa signatur
 tile:
   figure: 0%
   caption: forex markup
-image: /assets/updates/slice-s-premium-membership-zero-forex-visa-card.jpg
-imageAlt: slice S teaser in the slice app listing 115% repo on savings set aside, 0 forex Visa credit card and 5x monies on travel bookings, next to the card render, a pink card marked Visa Signature
+image: /assets/updates/slice-s-premium-membership-official.jpg
+imageAlt: "slice S poster: a pink Visa Signature credit card with the slice S mascot, and the tagline Get more from your money with 115% repo on savings set aside, 0 forex Visa credit card and 5x monies on travel bookings"
 cta:
   label: Notify me on slice
   url: https://slice.bank.in/t?c=slice-s
@@ -34,7 +34,7 @@ slice has started teasing slice S, its upcoming premium membership. I asked slic
 
 ## The card
 
-The card render in slice's teaser is a pink card with **Visa Signature** printed on it, so it looks like a Visa Signature variant. It may be backed by a fixed deposit, but that's my guess, not something slice has confirmed.
+The card in slice's poster is a pink card with **Visa Signature** printed on it, so it looks like a Visa Signature variant. It may be backed by a fixed deposit, but that's my guess, not something slice has confirmed.
 
 ## Still unknown
 
