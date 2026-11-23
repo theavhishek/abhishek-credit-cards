@@ -184,7 +184,7 @@
     d: item.summary,
     u: item.page ? `${SITE}/updates/${item.slug}` : `${SITE}/updates#${item.slug}`,
     w: [item.issuer, ...(item.cards || []), ...(item.tags || []), item.category, item.type].filter(Boolean).join(" "),
-    label: item.category === "devaluation" ? "Devaluation" : item.type === "offer" ? "Offer" : "News",
+    label: item.category === "devaluation" ? "Devaluation" : item.category === "revaluation" ? "Revaluation" : item.type === "offer" ? "Offer" : "News",
     date: item.published || "",
   });
   const prepare = (entry, order) => ({ ...entry, order, nt: norm(entry.t).split(" "), nw: norm(entry.w).split(" "), nd: norm(entry.d).split(" ") });
@@ -296,7 +296,7 @@
     return `<a class="ss-option" role="option" id="ss-opt-${index}" href="${esc(entry.u)}" tabindex="-1" aria-selected="false">
       <span class="ss-icon" data-kind="${esc(entry.k)}">${svg(icon)}</span>
       <span class="ss-text"><span class="ss-title">${highlight(entry.t, query)}</span><span class="ss-desc">${esc(entry.d || "")}</span></span>
-      <span class="ss-kind"${entry.label === "Devaluation" ? ' data-cat="devaluation"' : ""}>${esc(label)}</span>
+      <span class="ss-kind"${entry.label === "Devaluation" ? ' data-cat="devaluation"' : entry.label === "Revaluation" ? ' data-cat="revaluation"' : ""}>${esc(label)}</span>
     </a>`;
   };
 
