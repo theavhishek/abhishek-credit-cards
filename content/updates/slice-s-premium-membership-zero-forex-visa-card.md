@@ -13,6 +13,9 @@ tile:
   caption: forex markup
 image: /assets/updates/slice-s-premium-membership-zero-forex-visa-card.jpg
 imageAlt: slice S teaser in the slice app listing 115% repo on savings set aside, 0 forex Visa credit card and 5x monies on travel bookings, next to the card render, a pink card marked Visa Signature
+cta:
+  label: Notify me on slice
+  url: https://slice.bank.in/t?c=slice-s
 sources:
   - label: slice, slice S coming soon page
     url: https://slice.bank.in/t?c=slice-s

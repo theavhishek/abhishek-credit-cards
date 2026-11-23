@@ -20,7 +20,7 @@ const MIN_PAGE_WORDS = 150;
 
 const TOP_KEYS = new Set([
   "type", "title", "summary", "category", "published", "updated", "issuer", "merchant", "cards", "tags",
-  "confirmation", "sources", "link", "related", "image", "imageAlt", "tile", "page", "archived", "draft", "offer",
+  "confirmation", "sources", "link", "related", "image", "imageAlt", "cta", "tile", "page", "archived", "draft", "offer",
   "calculator", "limitChecker", "reviews",
 ]);
 const OFFER_KEYS = new Set(["value", "cap", "minSpend", "starts", "ends", "eligibility", "code", "link", "terms", "verified"]);
@@ -415,6 +415,13 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       if (d.link.startsWith("/")) { if (!localFileFor(d.link)) fail(`"link" points to ${d.link}, which doesn't exist in the repo.`); }
       else if (!isHttps(d.link)) fail(`"link" must be a site path like /card-reviews/hsbc-live-plus or an https:// URL.`);
     }
+    // Optional call-to-action button under the byline (e.g. a waitlist or "Notify me" page).
+    let cta = null;
+    if (d.cta != null) {
+      if (typeof d.cta !== "object" || typeof d.cta.label !== "string" || !d.cta.label.trim()) fail(`"cta" needs a label, like "Notify me on slice".`);
+      else if (!isHttps(d.cta.url)) fail(`"cta.url" must be an https:// link.`);
+      else cta = { label: d.cta.label.trim(), url: d.cta.url };
+    }
     let image = null;
     if (d.image != null) {
       if (typeof d.image !== "string" || !d.image.startsWith("/assets/")) fail(`"image" must be a file under /assets/, like /assets/updates/my-image.webp.`);
@@ -563,6 +570,7 @@ export function loadItems({ fixtures = false, drafts = false, now = Date.now() }
       related: d.related || [],
       reviews: Array.isArray(d.reviews) ? d.reviews : [],
       image,
+      cta,
       tile,
       page,
       archived: !!d.archived,
