@@ -99,7 +99,7 @@ offer:
 
 ### Categories
 
-News: `launch`, `devaluation`, `banking`, `regulatory` (RBI and regulation),
+News: `launch`, `devaluation`, `revaluation` (a change in cardholders' favour), `banking`, `regulatory` (RBI and regulation),
 `rewards` (rewards and benefits changes), `announcement`.
 
 Offers: `card-offer`, `gift-card`, `cashback`, `spend-offer` (spend a target, earn a bonus), `shopping`, `travel`,

@@ -241,6 +241,7 @@
   // list it has); any other kinds posted that day show as small dots under the number.
   const KINDS = [
     ["devaluation", "Devaluation"],
+    ["revaluation", "Revaluation"],
     ["launch", "Card launch"],
     ["spend-offer", "Spend offer"],
     ["announcement", "Announcement"],

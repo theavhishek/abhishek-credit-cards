@@ -327,6 +327,8 @@ html[data-theme="dark"] .ss-dialog::backdrop { background: rgb(0 0 0 / 0.5); }
 }
 .ss-kind[data-cat="devaluation"] { color: #dc2626; font-weight: 600; }
 html[data-theme="dark"] .ss-kind[data-cat="devaluation"] { color: #f87171; }
+.ss-kind[data-cat="revaluation"] { color: #047857; font-weight: 600; }
+html[data-theme="dark"] .ss-kind[data-cat="revaluation"] { color: #34d399; }
 .ss-note { margin: 0; padding: 22px 14px; color: var(--muted); font-size: 14px; line-height: 1.5; text-align: center; }
 
 /* Phones: the dialog drops from the top, clear of the keyboard, and closes with an X. */

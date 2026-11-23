@@ -38,6 +38,7 @@ const TEMPLATE_VERSION = hash(fs.readFileSync(new URL(import.meta.url)));
 // Category colours match the /updates badges (assets/updates.css).
 const CATEGORY_COLOURS = {
   devaluation: ["#dc2626", "#ef4444"],
+  revaluation: ["#047857", "#10b981"],
   launch: ["#4f46e5", "#818cf8"],
   cashback: ["#15803d", "#22c55e"],
   "spend-offer": ["#1d4ed8", "#3b82f6"],

@@ -2,7 +2,7 @@
 type: news
 title: "RBL Bank revaluation: rent and utility bills now earn rewards, 1% fee goes"
 summary: From 1 December 2026, utility (MCC 4900) and rent (MCC 6513) spends on RBL Bank credit cards earn reward points or cashback, count toward milestones, spend-based lounge access and fee waivers, and the 1% fee on them is dropped.
-category: rewards
+category: revaluation
 confirmation: official
 published: 2026-11-23
 issuer: RBL Bank
