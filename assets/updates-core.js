@@ -25,6 +25,7 @@
   var CATEGORIES = {
     launch: { label: "Card launch", plural: "Card launches", type: "news" },
     devaluation: { label: "Devaluation", plural: "Devaluations", type: "news" },
+    revaluation: { label: "Revaluation", plural: "Revaluations", type: "news" },
     banking: { label: "Banking update", plural: "Banking updates", type: "news" },
     regulatory: { label: "RBI and regulation", plural: "RBI and regulation", type: "news" },
     rewards: { label: "Rewards change", plural: "Rewards and benefits changes", type: "news" },
