@@ -28,23 +28,13 @@ sources:
     url: https://www.getonecard.app/
     kind: official
 ---
-OneCard is offering an additional 2.5% valueback on eligible spends during its Festive Bonanza campaign.
-
-## Offer at a glance
-
-| Detail | What you get |
-| --- | --- |
-| Spend target | ₹50,000 (personalised) |
-| Bonus | Extra 2.5% valueback on total eligible spends |
-| Maximum reward | 15,000 points = ₹1,500 |
-| Offer period | 25 to 31 October 2026 |
-| Reward credit | 15 December 2026 |
+This one only works if the OneCard app showed it to you. The spend target is set per user; on the poster in this post it was ₹50,000.
 
 ## How it works
 
 1. **Spend:** use your OneCard for your purchases between 25 and 31 October 2026. No activation is needed.
 2. **Achieve:** complete your spend target (₹50,000 in total spends on this offer).
-3. **Earn:** the bonus points are credited on 15 December 2026.
+3. **Earn:** the bonus points, up to 15,000 (worth ₹1,500), are credited on 15 December 2026.
 
 ## Reward examples
 
@@ -53,12 +43,12 @@ OneCard is offering an additional 2.5% valueback on eligible spends during its F
 | ₹50,000 | ₹1,250 |
 | ₹60,000 | ₹1,500 (maximum) |
 
-## Important points
+The bonus is paid as points, and 15,000 points are worth ₹1,500. So the cap is reached at ₹60,000 of eligible spend; anything above that earns no extra bonus.
 
-- No activation required.
+## What counts and what doesn't
+
 - Wallet loads, transfers and rent payments are also eligible as per the offer T&C.
 - Refunded, cancelled or reversed transactions won't qualify.
-- This is a targeted offer, available only to selected OneCard users.
 
 The offer appears inside the OneCard app, not on a public offer page. Check your OneCard app to see whether you've received this offer.
 

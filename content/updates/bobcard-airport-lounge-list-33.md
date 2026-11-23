@@ -1,7 +1,7 @@
 ---
 type: news
-title: BOBCARD Cuts Airport Lounge Network from 83 to 33 Lounges
-summary: BOBCARD's airport lounge network has reportedly shrunk from 83 to 33 lounges. Check the updated city-wise list, terminals and official PDF.
+title: BOBCARD’s airport lounge list drops from 83 to 33
+summary: BOBCARD's airport lounge list now has 33 domestic lounges. Reports say it had 83 before. The full list by city and terminal is below.
 category: devaluation
 confirmation: reported
 published: 2026-11-04
@@ -58,7 +58,7 @@ BOBCARD's revised participation list has only domestic departure lounges.
 
 Kolkata's Travel Club appears twice in BOBCARD's list with the same terminal; both entries are kept as published.
 
-## Good to know
+## What changed and what didn't
 
 - **The cut:** NDTV Profit, citing LoungeInsider, reported that the list had 83 lounges before. That is 50 fewer, a cut of about 60%.
 - **Bengaluru:** reports say premium lounges at Bengaluru Airport were dropped.

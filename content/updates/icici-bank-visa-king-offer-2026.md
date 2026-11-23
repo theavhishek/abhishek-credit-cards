@@ -1,6 +1,6 @@
 ---
 type: offer
-title: "ICICI Bank Visa KING Offer 2026: Spend ₹2 Lakh to Meet Bollywood Stars?"
+title: "ICICI Visa KING offer: ₹2 lakh gets you in, only the top 505 spenders win"
 summary: Register by missed call and spend at least ₹2 lakh on one eligible ICICI Bank Visa credit card from 1 to 30 November 2026. The top 5 spenders get to meet Bollywood stars; the next 500 get two red-carpet screening tickets each.
 category: spend-offer
 published: 2026-10-27
@@ -29,27 +29,17 @@ sources:
     url: https://www.redchillies.com/movies/king
     kind: official
 ---
-Spend ₹2 lakh or more on one ICICI Bank Visa credit card in November 2026. The **top 5 spenders** meet Bollywood stars. The **next 500** get two movie screening tickets each.
+## How winners are picked
 
-## At a glance
-
-| Detail | What it says |
-| --- | --- |
-| Offer period | 1 to 30 November 2026 |
-| Minimum spend | ₹2,00,000 on one card |
-| Top 5 | Meet Bollywood stars (own travel cost) |
-| Next 500 | 2 red-carpet screening tickets each |
-| Register | Missed call to [**02269445464**](tel:02269445464) from your registered mobile |
-| Winners contacted | 7 to 20 December 2026 |
-| Not eligible | Amazon Pay ICICI card, ICICI employees and family |
-
-## Good to know
-
+- **Register first:** missed call to [**02269445464**](tel:02269445464) from your registered mobile.
 - **Not a lucky draw.** Highest spends win. ₹2 lakh only gets you in the race.
+- **Top 5** meet the stars but pay their own travel.
 - **One card only.** Spends on two cards aren't added up.
 - **Doesn't count:** EMI, cash withdrawals, and reversed, refunded, disputed or cancelled transactions.
 - **Tie:** whoever reached the spend first ranks higher.
 - **Screening cities:** Delhi NCR, Mumbai, Pune, Hyderabad, Bengaluru, Kolkata, Ahmedabad, Jaipur, Lucknow, Panipat. The bank picks your city.
+- **Winners are contacted** from 7 to 20 December 2026.
+- **Not eligible:** Amazon Pay ICICI card, ICICI employees and their family.
 - Rewards can't be transferred or swapped for cash.
 
 ## Is it SRK's KING?
