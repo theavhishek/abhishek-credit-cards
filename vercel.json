@@ -139,6 +139,17 @@
       "permanent": true
     },
     {
+      "source": "/movie-offers",
+      "has": [
+        {
+          "type": "host",
+          "value": "cards\\.avhishek\\.in"
+        }
+      ],
+      "destination": "https://avhishek.in/movie-offers",
+      "permanent": true
+    },
+    {
       "source": "/updates",
       "has": [
         {

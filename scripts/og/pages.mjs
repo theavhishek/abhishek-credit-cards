@@ -53,6 +53,15 @@ export const PAGES = [
     visual: { logos: ["sbin.svg", "hdfc.svg", "icic.svg", "utib.svg", "americanexpress.svg", "idfb.svg", "aubl.svg", "kkbk.svg", "ratn.svg"] },
   },
   {
+    file: "movie-offers.jpg",
+    alt: "Credit card movie ticket offers on BookMyShow, District and PVR INOX",
+    eyebrow: "Movie offers",
+    title: "Every card’s movie ticket offer.",
+    subtitle: "Credit and debit card offers on BookMyShow, District and PVR INOX, with caps, limits and each offer’s terms.",
+    stats: [["74", "offers with terms checked"], ["3", "platforms"]],
+    visual: { logos: ["hdfc.svg", "icic.svg", "utib.svg", "sbin.svg", "hsbc.svg", "yesb.svg", "ratn.svg", "indb.svg", "scbl.svg"] },
+  },
+  {
     file: "loan-emi-calculator.jpg",
     alt: "Loan EMI Calculator on avhishek.in: EMI, interest, fees and prepayments",
     eyebrow: "Calculators",
