@@ -219,4 +219,5 @@ html:not(.mo-js) :is(.mo-toolbar, .mo-count) { display: none; }
 @media (max-width: 640px) {
   .mo-field { flex: 1 1 calc(50% - 5px); }
   .mo-field--bank { flex-basis: 100%; }
+  .mo-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

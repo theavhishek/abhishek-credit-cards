@@ -32,8 +32,10 @@
   function itemHTML(o, data) {
     const p = data.platforms[o.platform];
     const until = o.validTill ? fmtDate(o.validTill) : null;
+    const inr = (n) => n && `₹${Number(n).toLocaleString("en-IN")}`;
     const facts = [
-      ["How often", o.limit], ["Min. tickets", o.minTickets], ["Days", o.days], ["Promo code", o.code],
+      ["How often", o.limit], ["Min. tickets", o.minTickets], ["Min. booking", inr(o.minOrder)], ["Max a month", inr(o.monthCap)],
+      ["Spend needed", o.spend], ["Days", o.days], ["Promo code", o.code],
       ["Valid", o.validFrom && until ? `${fmtDate(o.validFrom)} to ${until}` : until && `Till ${until}`],
     ].filter(([, v]) => v);
     const factsHTML = facts.length
@@ -41,7 +43,7 @@
       : "";
     const cards = o.cards.join(", ");
     const words = [o.bank, cards, o.benefit, p.name, o.cardType].join(" ").toLowerCase();
-    const where = host(o.source) || o.bank;
+    const where = o.sourceLabel ? `in ${o.sourceLabel}` : `on ${host(o.source) || o.bank}`;
     const label = o.status === "checked" ? "Terms checked" : "Listed, terms not checked yet";
     return `<li class="mo-item" data-platform="${o.platform}" data-type="${o.type}" data-card="${o.cardType}" data-bank="${esc(o.bank)}"${o.validTill ? ` data-until="${o.validTill}"` : ""} data-words="${esc(words)}">
       ${logoHTML(o.bank)}
@@ -51,7 +53,7 @@
         <p class="mo-benefit">${esc(o.benefit)}</p>
         ${factsHTML}
         ${o.note ? `<p class="mo-note">${esc(o.note)}</p>` : ""}
-        <p class="mo-src"><a href="${esc(o.source)}" target="_blank" rel="noopener noreferrer">Terms on ${esc(where)}<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true">·</span>${label} ${fmtDate(o.checked)}</p>
+        <p class="mo-src"><a href="${esc(o.source)}" target="_blank" rel="noopener noreferrer">Terms ${esc(where)}<span class="sr-only"> (opens in a new tab)</span></a><span aria-hidden="true">·</span>${label} ${fmtDate(o.checked)}</p>
       </div>
     </li>`;
   }
