@@ -162,6 +162,28 @@ html[data-theme="dark"] .gf-tag { color: var(--gf-orange-text); }
 }
 .gf-bottom-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
 .gf-bottom-links a { font-size: 0.8125rem; min-height: 32px; }
+/* Sound on/off switch, added by assets/ui-sounds.js */
+.gf-sound {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: color 150ms ease-out;
+}
+.gf-sound svg { flex: none; }
+.gf-sound[aria-pressed="true"] .gf-sound-mute,
+.gf-sound[aria-pressed="false"] .gf-sound-wave { display: none; }
+@media (hover: hover) { .gf-sound:hover { color: var(--text); } }
+.gf-sound:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
 .gf-totop svg { flex: none; margin-inline-start: 6px; }
 
 /* ---------- Closing wordmark ---------- */
