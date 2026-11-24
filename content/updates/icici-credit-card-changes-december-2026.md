@@ -47,7 +47,7 @@ So if you lose your card, that's ₹354 once GST is added.
 
 ## What I'd do
 
-- If you have INOX offers left on your card, use them before 15 December.
+- If you have INOX offers left on your card, use them before 15 December. After that, [my movie offers list](/movie-offers) shows which other cards still get you cheaper tickets.
 - If you were counting on the card's air accident cover, look at a standalone policy or another card that still gives one.
 - Paying a foreign merchant with an ICICI business card? Always pick the local currency at checkout, not rupees.
 - Your card isn't listed here? Then nothing changes for you. ICICI's notice has the full list if you want to double-check.
