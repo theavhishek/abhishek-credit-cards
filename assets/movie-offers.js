@@ -9,6 +9,8 @@
     "ICICI Bank": "icic.svg", "IDFC FIRST Bank": "idfb.svg", "Indian Bank": "idib.svg", "IndusInd Bank": "indb.svg",
     "Kotak Mahindra Bank": "kkbk.svg", "Punjab National Bank": "punb.svg", "RBL Bank": "ratn.svg",
     "SBM Bank": "sbm.png", "Standard Chartered": "scbl.svg", "Union Bank of India": "ubin.svg", "YES Bank": "yesb.svg",
+    "Bandhan Bank": "bdbl.svg", "City Union Bank": "ciub.svg", "DCB Bank": "dcbl.svg", "IDBI Bank": "ibkl.svg",
+    "Indian Overseas Bank": "ioba.svg", "J&K Bank": "jaka.svg", "Visa": "visa.svg",
   };
   // A network is shown only when every card the offer names carries it in its name
   // (e.g. "Sapphiro Visa", "Tiara RuPay"); otherwise the offer isn't tied to one network.
