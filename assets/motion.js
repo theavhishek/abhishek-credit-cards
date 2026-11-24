@@ -4,6 +4,16 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const easeOut = "cubic-bezier(0.23, 1, 0.32, 1)";
 
+  // UI sounds (assets/ui-sounds.js, cuelume): loaded once the page is idle, so they
+  // never hold up first paint. Nothing plays until the visitor clicks or types.
+  const loadSounds = () => import("/assets/ui-sounds.js?v=1").catch(() => {});
+  if (!navigator.connection?.saveData) {
+    addEventListener("load", () => {
+      if ("requestIdleCallback" in window) requestIdleCallback(loadSounds, { timeout: 3000 });
+      else setTimeout(loadSounds, 1200);
+    }, { once: true });
+  }
+
   // Theme switch: each page applies the theme in its own change handler. Catch the
   // change first and replay it inside a view transition, so the new theme grows out
   // of the switch instead of snapping.

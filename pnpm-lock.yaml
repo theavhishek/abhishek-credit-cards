@@ -17,6 +17,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cuelume:
+        specifier: 0.2.8
+        version: 0.2.8
       lucide-react:
         specifier: ^0.545.0
         version: 0.545.0(react@19.3.0)
@@ -360,6 +363,9 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
+  cuelume@0.2.8:
+    resolution: {integrity: sha512-jnwAdMMUK4emaUWRd9l2RjpfixAMFOFrVkjoVK59FIfk7D3Vuvt+vBBJvU/J+2EiXrDlduialwDKJZorS5Nxqg==}
+
   esbuild@0.25.12:
     resolution: {integrity: sha512-bbPBYYrtZbkt6Os6FiTLCTFxvq4tt3JKall1vRwshA3fdVztsLAatFaZobhkBC8/BrPetoa0oksYoKXoG4ryJg==}
     engines: {node: '>=18'}
@@ -608,6 +614,8 @@ snapshots:
       react: 19.3.0
 
   clsx@2.1.1: {}
+
+  cuelume@0.2.8: {}
 
   esbuild@0.25.12:
     optionalDependencies:
