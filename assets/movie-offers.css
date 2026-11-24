@@ -205,3 +205,18 @@ html:not(.mo-js) :is(.mo-toolbar, .mo-count) { display: none; }
   .mo-logo img { width: 22px; height: 22px; }
   .mo-card { font-size: 1.0625rem; }
 }
+
+/* ---------- v2: checked / listed groups, notes, codes ---------- */
+.mo-group { margin-block-start: 28px; }
+.mo-group[hidden] { display: none; }
+.mo-group-title { margin: 0 !important; font-size: 1.25rem; font-weight: 650; letter-spacing: -0.015em; }
+.mo-group-lead { margin: 6px 0 4px !important; max-width: 62ch; color: var(--muted); font-size: 0.9375rem; line-height: 1.5; }
+.mo-bank { color: var(--muted); font-weight: 500; }
+.mo-note { margin: 10px 0 0 !important; max-width: 70ch; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+.mo-code { font-family: var(--site-mono); letter-spacing: 0.02em; }
+.mo-facts { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.mo-type--rewards { color: var(--mo-percent); }
+@media (max-width: 640px) {
+  .mo-field { flex: 1 1 calc(50% - 5px); }
+  .mo-field--bank { flex-basis: 100%; }
+}

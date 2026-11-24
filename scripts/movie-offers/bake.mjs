@@ -20,7 +20,8 @@ const fill = (name, body) => {
   if (!re.test(html)) throw new Error(`Marker movies:${name} not found in ${page}`);
   html = html.replace(re, (_, a, b) => a + body + b);
 };
-fill("list", listHTML(data));
+fill("checked", listHTML(data, "checked"));
+fill("listed", listHTML(data, "listed"));
 fill("banks", banksHTML(data));
 
 if (process.argv.includes("--check")) {

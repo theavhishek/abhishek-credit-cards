@@ -57,8 +57,8 @@ export const PAGES = [
     alt: "Credit card movie ticket offers on BookMyShow, District and PVR INOX",
     eyebrow: "Movie offers",
     title: "Every card’s movie ticket offer.",
-    subtitle: "Buy 1 Get 1, % off and free tickets on BookMyShow, District and PVR INOX, with each offer’s terms.",
-    stats: [["60", "card offers"]],
+    subtitle: "Credit and debit card offers on BookMyShow, District and PVR INOX, with caps, limits and each offer’s terms.",
+    stats: [["51", "offers with terms checked"], ["3", "platforms"]],
     visual: { logos: ["hdfc.svg", "icic.svg", "utib.svg", "sbin.svg", "hsbc.svg", "yesb.svg", "ratn.svg", "indb.svg", "scbl.svg"] },
   },
   {
