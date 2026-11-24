@@ -14,6 +14,7 @@
     "build:glass": "esbuild src/glass-buttons-entry.ts --bundle --format=esm --target=es2020 --minify --outfile=assets/glass-buttons.js",
     "build:upi": "esbuild node_modules/qrcode-generator/dist/qrcode.js --minify --banner:js=\"/*! qrcode-generator 2.0.4 (c) 2009 Kazuhiko Arase, MIT license */\" --outfile=assets/qrcode.js && node scripts/upi/bake.mjs",
     "check:upi": "node scripts/upi/bake.mjs --check",
+    "build:movies": "node scripts/movie-offers/bake.mjs",
     "build:search": "node scripts/search/build.mjs",
     "check:search": "node scripts/search/build.mjs --check",
     "build:og": "node scripts/og/build.mjs",

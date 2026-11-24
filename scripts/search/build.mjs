@@ -26,6 +26,7 @@ const meta = (html, page) => {
 const pages = [
   { file: "pay-credit-card-bill.html", t: "Pay your card bill", u: "/pay-credit-card-bill", k: "tool", w: "neft imps ifsc upi bill payment pay" },
   { file: "credit-card-upi-id.html", t: "Card bill UPI ID", u: "/credit-card-upi-id", k: "tool", w: "upi id vpa qr code generator bill payment" },
+  { file: "movie-offers.html", t: "Movie ticket offers", u: "/movie-offers", k: "tool", w: "movie ticket offers bookmyshow district pvr inox buy 1 get 1 bogo cinema" },
   { file: "calculator/loan-emi.html", t: "Loan EMI calculator", u: "/calculator/loan-emi", k: "tool", w: "emi loan interest prepayment amortization calculator" },
   { file: "calculator/no-cost-emi.html", t: "No-Cost EMI calculator", u: "/calculator/no-cost-emi", k: "tool", w: "no cost emi interest gst processing fee calculator" },
   { file: "support.html", t: "Bank support", u: "/bank-support", k: "page", w: "customer care helpline phone number email complaint nodal officer ombudsman" },
