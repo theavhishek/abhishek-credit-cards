@@ -221,3 +221,11 @@ html:not(.mo-js) :is(.mo-toolbar, .mo-count) { display: none; }
   .mo-field--bank { flex-basis: 100%; }
   .mo-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------- v3: network filter; the four selects get their own row ---------- */
+.mo-selects { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; flex: 1 1 100%; }
+.mo-selects .mo-field { min-width: 0; }
+@media (max-width: 640px) {
+  .mo-selects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mo-selects .mo-field--bank, .mo-selects .mo-field:last-child { grid-column: 1 / -1; }
+}
