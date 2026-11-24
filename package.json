@@ -21,7 +21,8 @@
     "check:og": "node scripts/og/build.mjs --check",
     "test:newsletter": "node --test scripts/newsletter/subscribe.test.mjs",
     "build:stageshow": "esbuild src/stageshow/site-demos.tsx --bundle --format=esm --target=es2020 --jsx=automatic --minify --loader:.svg=dataurl --define:process.env.NODE_ENV='\"production\"' --outfile=assets/stageshow-demos.js && cat src/stageshow/layout.css >> assets/stageshow-demos.css",
-    "build:sounds": "esbuild src/ui-sounds-entry.js --bundle --format=esm --target=es2020 --minify --legal-comments=none --banner:js=\"/*! UI sounds by cuelume 0.2.8 (c) 2026 Daniel Belyi, MIT license */\" --outfile=assets/ui-sounds.js"
+    "build:sounds": "esbuild src/ui-sounds-entry.js --bundle --format=esm --target=es2020 --minify --legal-comments=none --banner:js=\"/*! UI sounds by cuelume 0.2.8 (c) 2026 Daniel Belyi, MIT license */\" --outfile=assets/ui-sounds.js",
+    "test:movies": "node --test scripts/movie-offers/movie-offers.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.5.0",
