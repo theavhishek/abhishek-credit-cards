@@ -113,7 +113,17 @@
     return norm([t, ...extra].join(" ").replace(/\+/g, " plus ")).replace(/\s+/g, " ").trim();
   }
   /** Query terms, normalised the same way as searchWords. Every term must match. */
-  const queryTerms = (q) => norm(q).replace(/\+/g, " plus ").split(/\s+/).filter(Boolean);
+  const queryTerms = (q) => {
+    const digits = binQuery(q);
+    return digits ? [digits] : norm(q).replace(/\+/g, " plus ").split(/\s+/).filter(Boolean);
+  };
+  /** A search made only of digits (spaces and dashes allowed) is a BIN search: returns its first 9 digits, or "" if fewer than 6. */
+  function binQuery(q) {
+    const s = String(q || "").replace(/[\s-]/g, "");
+    return /^\d{6,}$/.test(s) ? s.slice(0, 9) : "";
+  }
+  /** True when a card starting with `digits` is in the offer's BIN list. */
+  const binMatch = (bins, digits) => !!digits && (bins || []).some((b) => digits.startsWith(b) || b.startsWith(digits));
 
   /**
    * Savings for one offer on one booking.
@@ -244,6 +254,10 @@
           if (o[k] != null) E(o, `listed offers can’t carry figures (${k})`);
         if (o.verified) E(o, "listed offers have no verified date");
       }
+      if (o.bins != null) {
+        if (!Array.isArray(o.bins) || !o.bins.length || o.bins.some((b) => typeof b !== "string" || !/^\d{6,9}$/.test(b))) E(o, "bins must be a list of 6 to 9 digit strings");
+        else if (new Set(o.bins).size !== o.bins.length) E(o, "bins has duplicates");
+      }
       if (o.kind === "percent" && isChecked(o.status) && o.percent == null) E(o, "percent offer without percent");
       if (o.kind === "flat" && isChecked(o.status) && o.flat == null) E(o, "flat offer without flat amount");
       if (o.kind === "flat" && o.capTxn != null && o.flat != null && o.capTxn !== o.flat) E(o, "flat and capTxn conflict");
@@ -269,7 +283,7 @@
   const api = {
     KINDS, CATEGORIES, NETWORKS, STATUSES, DAY_LONG, ENDING_SOON_DAYS, INSTANT,
     inr, esc, norm, fmtDate, todayIST, addDays, weekday, effectiveStatus, isChecked, isShown, endingSoon,
-    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, evaluate, rank, validate,
+    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, binQuery, binMatch, evaluate, rank, validate,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.MovieOffersCore = api;

@@ -252,6 +252,8 @@ html[data-theme="dark"] .mo { --mo-warn: #fbbf24; --mo-ok: #4ade80; }
 
 .mo-status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 14px; }
 .mo-status-row .mo-count { margin: 0 !important; }
+.mo-bin-note { margin: 8px 0 0 !important; max-width: 70ch; color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
+.mo-bin-note[hidden] { display: none; }
 .mo-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .mo-chips[hidden] { display: none; }
 .mo-chip {
@@ -291,6 +293,8 @@ html[data-theme="dark"] .mo { --mo-warn: #fbbf24; --mo-ok: #4ade80; }
 .mo-more-body p { margin: 4px 0 0 !important; }
 .mo-more-body a { color: var(--text); font-weight: 500; }
 .mo-src { margin-top: 6px !important; }
+.mo-bins { line-height: 1.9; }
+.mo-bin { display: inline-block; padding: 0 7px; border-radius: 6px; background: var(--mo-fill); color: var(--text); font-family: var(--site-mono, var(--site-font)); font-size: 0.8125rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mo-status { font-weight: 500; }
 .mo-status--verified, .mo-status--app { color: var(--mo-ok); }
 .mo-status--listed, .mo-status--upcoming { color: var(--muted); }

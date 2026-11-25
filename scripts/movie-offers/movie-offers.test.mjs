@@ -173,3 +173,27 @@ test("search matches aliases and spellings", () => {
   assert.ok(words((o) => o.issuer === "sc").includes("stanchart"));
   assert.equal(C.queryTerms("  Live+  HSBC ").join(","), "live,plus,hsbc");
 });
+
+test("BIN search: first 6 to 9 digits, spaces allowed, prefix either way", () => {
+  assert.equal(C.binQuery("4114 6061 2345 6789"), "411460612");
+  assert.equal(C.binQuery("41114-606"), "41114606");
+  assert.equal(C.binQuery("12345"), "");
+  assert.equal(C.binQuery("Axis 411146"), "");
+  assert.ok(C.binMatch(["41114606"], "411146061"));
+  assert.ok(C.binMatch(["532113993"], "532113"));
+  assert.ok(!C.binMatch(["41114606"], "41114607"));
+  assert.ok(!C.binMatch([], "411146"));
+  const hit = data.offers.filter((o) => C.binMatch(o.bins, C.binQuery("4111 4606 0000 0000")));
+  assert.deepEqual(JSON.stringify(hit.map((o) => o.id)), JSON.stringify(["district-axis-select-bogo"]));
+  const html = [...new Set(data.offers.map((o) => o.platform))].map((p) => ui.listHTML(data, p, TODAY)).join("");
+  assert.ok(html.includes('data-bins="41114606"'), "BINs baked into list data");
+  assert.ok(/Only cards whose number starts with this BIN: <span class="mo-bin">41114606<\/span>/.test(html), "BINs shown under Full terms");
+});
+
+test("validation rejects bad BINs", () => {
+  const bad = { ...data, offers: [offer({ id: "x", kind: "bogo", bins: ["12345"] }), offer({ id: "y", kind: "bogo", cards: ["Y"], bins: ["411146", "411146"] }), offer({ id: "z", kind: "bogo", cards: ["Z"], bins: [] })] };
+  const { errors } = C.validate(bad, TODAY);
+  assert.ok(errors.some((e) => /^x:.*6 to 9 digit/.test(e)));
+  assert.ok(errors.some((e) => /^y:.*duplicates/.test(e)));
+  assert.ok(errors.some((e) => /^z:.*6 to 9 digit/.test(e)));
+});
