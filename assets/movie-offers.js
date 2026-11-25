@@ -16,18 +16,19 @@
   function factsHTML(o, today) {
     const per = C.maxPerMonth(o);
     const facts = [
-      ["Max off", (o.kind === "percent" || o.kind === "cashback") && o.capTxn != null ? `${inr(o.capTxn)} a booking` : null],
-      ["Per ticket", o.kind === "free" && o.capTicket != null ? `Up to ${inr(o.capTicket)}` : null],
+      ["Max off a booking", (o.kind === "percent" || o.kind === "cashback") && o.capTxn != null ? inr(o.capTxn) : null],
+      ["Per free ticket", o.kind === "free" && o.capTicket != null ? `Up to ${inr(o.capTicket)}` : null],
       ["How often", C.usesText(o)],
-      ["Min. tickets", o.minTickets],
-      ["Min. booking", o.minAmount && inr(o.minAmount)],
-      ["Max a month", per != null && !(o.uses && o.uses.per === "month" && o.uses.count === 1 && per === C.maxPerBooking(o)) ? inr(per) : null],
+      ["Monthly benefit", per != null && !(o.uses && o.uses.per === "month" && o.uses.count === 1 && per === C.maxPerBooking(o)) ? `Up to ${inr(per)}` : null],
+      ["Minimum tickets", o.minTickets && `${o.minTickets} ${o.minTickets === 1 ? "ticket" : "tickets"}`],
+      ["Minimum booking", o.minAmount && inr(o.minAmount)],
       ["Spend needed", o.spend && o.spend.text],
       ["Days", C.daysText(o.days)],
       ["Valid till", o.end && fmtDate(o.end)],
     ].filter(([, v]) => v != null && v !== "");
     if (!facts.length) return "";
-    return `<dl class="mo-facts">${facts.map(([k, v]) => `<div${k === "Spend needed" ? ' class="mo-fact--warn"' : ""}${k === "Valid till" && C.endingSoon(o, today) ? ' class="mo-fact--soon"' : ""}><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`;
+    const cls = (k) => (k === "Spend needed" ? "mo-fact--warn mo-fact--wide" : k === "Valid till" && C.endingSoon(o, today) ? "mo-fact--soon" : "");
+    return `<dl class="mo-facts">${facts.map(([k, v]) => `<div${cls(k) ? ` class="${cls(k)}"` : ""}><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`;
   }
 
   function sourceText(o, data) {
@@ -44,7 +45,7 @@
     const cats = (o.category || []).map((c) => C.CATEGORIES[c]).join(", ");
     const cardLine = [CARD_TYPE[o.cardType], o.network && C.NETWORKS[o.network]].filter(Boolean).join(" · ");
     const changes = (o.changes || []).map((c) => `<p class="mo-change"><strong>From ${fmtDate(c.date)}:</strong> ${esc(c.text)}${c.url ? ` <a href="${esc(c.url)}">What’s changing</a>` : ""}</p>`).join("");
-    const code = o.code ? `<p class="mo-code-row"><span class="mo-code-label">Code</span><code class="mo-code">${esc(o.code)}</code><button type="button" class="mo-copy" data-code="${esc(o.code)}" aria-label="Copy promo code ${esc(o.code)}" hidden>Copy</button></p>` : "";
+    const code = o.code ? `<div class="mo-code-row"><p><span class="mo-code-label">Promo code</span><code class="mo-code">${esc(o.code)}</code></p><button type="button" class="mo-copy" data-code="${esc(o.code)}" aria-label="Copy promo code ${esc(o.code)}" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span class="mo-copy-t">Copy</span></button></div>` : "";
     const more = [
       o.terms && `<p>${esc(o.terms)}</p>`,
       o.cinemas && `<p>Cinemas: ${esc(o.cinemas)}</p>`,
@@ -54,7 +55,7 @@
       (o.reviews || []).map((s) => `<p><a href="/card-reviews/${esc(s)}">Read my review of this card</a></p>`).join(""),
       st === "listed" && `<p>Only the headline is listed so far. Check the full terms ${sourceText(o, data)} before you book.</p>`,
     ].filter(Boolean).join("");
-    const statusText = st === "listed" ? `Seen ${fmtDate(o.accessed)}` : st === "upcoming" ? `Starts ${fmtDate(o.start)}` : `${C.STATUSES[st]} ${fmtDate(o.verified)}`;
+    const statusText = st === "listed" ? `Seen ${fmtDate(o.accessed)}` : st === "upcoming" ? `Starts ${fmtDate(o.start)}` : `Checked ${fmtDate(o.verified)}`;
     const maxB = C.maxPerBooking(o), maxM = C.maxPerMonth(o);
     const attrs = {
       id: o.id, platform: o.platform, kind: o.kind, card: o.cardType, network: o.network || "", issuer: o.issuer,
@@ -63,19 +64,27 @@
       max: maxB ?? "", month: maxM ?? "", checked: o.verified || "", sort: `${iss.name} ${o.cards[0]}`.toLowerCase(),
       words: C.searchWords(o, data),
     };
+    const pill = { verified: "Verified terms", app: "Terms from the app", listed: "Headline only", upcoming: "Upcoming" }[st] || C.STATUSES[st];
+    const sub = [CARD_TYPE[o.cardType], o.network && C.NETWORKS[o.network], p.name, cats !== "Movies" && cats, o.scope === "welcome" && "Welcome gift"].filter(Boolean).join(" · ");
     return `<li class="mo-item" ${Object.entries(attrs).map(([k, v]) => `data-${k}="${esc(v)}"`).join(" ")}>
-      ${logoHTML(iss)}
-      <div class="mo-body">
-        <p class="mo-meta"><span class="mo-type mo-type--${o.kind}">${esc(C.KINDS[o.kind])}</span><span>${esc(p.name)}</span><span>${esc(cardLine)}</span>${cats !== "Movies" ? `<span>${esc(cats)}</span>` : ""}${o.scope === "welcome" ? "<span>Welcome gift</span>" : ""}</p>
-        <h3 class="mo-card"><span class="mo-bank">${esc(iss.name)}</span> ${esc(o.cards.join(", "))}</h3>
-        ${head ? `<p class="mo-save">${esc(head)}</p>` : ""}
+      <article class="mo-offer">
+        <header class="mo-head">
+          ${logoHTML(iss)}
+          <div class="mo-head-text">
+            <h3 class="mo-card"><span class="mo-bank">${esc(iss.name)}</span> ${esc(o.cards.join(", "))}</h3>
+            <p class="mo-meta">${esc(sub)}</p>
+          </div>
+          <span class="mo-pill mo-pill--${st}">${esc(pill)}</span>
+        </header>
+        <p class="mo-type mo-type--${o.kind}">${esc(C.KINDS[o.kind])}</p>
+        ${head ? `<p class="mo-save mo-save--${o.kind}">${esc(head)}</p>` : ""}
         <p class="mo-benefit">${esc(o.benefit)}</p>
         ${factsHTML(o, today)}
         ${code}
         ${changes}
         ${more ? `<details class="mo-more"><summary>Full terms</summary><div class="mo-more-body">${more}</div></details>` : ""}
-        <p class="mo-src"><span class="mo-status mo-status--${st}">${esc(statusText)}</span><span aria-hidden="true">·</span><a href="${esc(o.source.url)}" target="_blank" rel="noopener noreferrer">Terms ${esc(sourceText(o, data))}<span class="sr-only"> (opens in a new tab)</span></a></p>
-      </div>
+        <footer class="mo-src"><span class="mo-status mo-status--${st}">${esc(statusText)}</span><a href="${esc(o.source.url)}" target="_blank" rel="noopener noreferrer">Terms ${esc(sourceText(o, data))}<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a></footer>
+      </article>
     </li>`;
   }
 
@@ -272,10 +281,11 @@
       if (!b) return;
       try {
         await navigator.clipboard.writeText(b.dataset.code);
-        b.textContent = "Copied";
+        const t = b.querySelector(".mo-copy-t");
+        t.textContent = "Copied";
         b.classList.add("is-done");
-        setTimeout(() => { b.textContent = "Copy"; b.classList.remove("is-done"); }, 1600);
-      } catch { b.textContent = "Couldn’t copy"; }
+        setTimeout(() => { t.textContent = "Copy"; b.classList.remove("is-done"); }, 1600);
+      } catch { b.querySelector(".mo-copy-t").textContent = "Couldn’t copy"; }
     });
 
     /* ---------- Savings calculator ---------- */
