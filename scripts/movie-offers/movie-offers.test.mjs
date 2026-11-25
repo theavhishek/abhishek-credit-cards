@@ -236,3 +236,15 @@ test("re-audit data fixes", () => {
   assert.equal(C.maxPerMonth(by["bms-hdfc-diners-club-privilege-bogo"]), 500);
   assert.ok(by["bms-indusind-duo-bogo"].conflict);
 });
+
+test("GoSats prepaid: prepaid card type, calculator, BIN, categories and expiry", () => {
+  const o = data.offers.find((x) => x.id === "bms-gosats-prepaid-bogo");
+  assert.equal(o.cardType, "prepaid");
+  const r = C.evaluate(o, booking({ price: 300, tickets: 2, platform: "bms", today: "2026-11-25" }));
+  assert.equal(r.discount, 250);
+  assert.ok(C.evaluate(o, booking({ price: 300, tickets: 2, category: "events", today: "2026-11-25" })), "events count");
+  assert.equal(C.evaluate(o, booking({ price: 300, tickets: 1, today: "2026-11-25" })).eligible, false);
+  assert.equal(C.evaluate(o, booking({ price: 300, tickets: 2, today: "2026-12-01" })), null, "gone after 30 Nov");
+  assert.ok(C.binExact(o.bins, C.binQuery("4832 9306 1111")));
+  assert.ok(C.validate({ ...data, offers: [offer({ id: "p", kind: "bogo", cardType: "gift" })] }, TODAY).errors.some((e) => /cardType/.test(e)));
+});
