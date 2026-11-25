@@ -34,6 +34,7 @@ From `detail`, also:
 - `redemptionOutletArr`: `Box Office`, `Website`, `Concession`, `InCinema F&B`.
 - The day flags `mon` to `sun`.
 - `validToDateTime`: epoch ms, the last valid moment in IST.
+- `voucherStatus`: some running offers show `INACTIVE` here (Kotak Cashback+ 15433 does, though Kotak's PDF runs it till 31 Mar 2027), so don't treat it as "ended".
 
 ## Dates
 
@@ -44,3 +45,4 @@ From `detail`, also:
 - Use only card offers: credit, debit and prepaid cards, plus RuPay credit cards on UPI. Leave out plain wallet and UPI offers (Paytm, MobiKwik, CRED) and cinema price promotions such as Blockbuster Tuesdays and ₹99 mornings.
 - If PVR INOX's terms contradict themselves, or disagree with the bank's page, record it in `conflict` and don't pick one silently.
 - Leave out offers whose own terms say they have ended, even when the listing still shows them. On 25 Nov 2026 that was the HDFC Millennia combo, whose terms say it ran for 6 months from 8 Oct 2025.
+- Do the same when the bank's own terms have ended. On 25 Nov 2026 that was Kotak Solitaire BOGO (offer 14279): the PDF on Kotak's Solitaire page runs it from 1 Jul to 30 Sep 2026, while PVR INOX still lists it till 31 Mar 2027.
