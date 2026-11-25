@@ -294,6 +294,7 @@ html[data-theme="dark"] .mo { --mo-warn: #fbbf24; --mo-ok: #4ade80; }
 .mo-more-body a { color: var(--text); font-weight: 500; }
 .mo-src { margin-top: 6px !important; }
 .mo-bins { line-height: 1.9; }
+.mo-conflict strong { color: var(--text); font-weight: 600; }
 .mo-bin { display: inline-block; padding: 0 7px; border-radius: 6px; background: var(--mo-fill); color: var(--text); font-family: var(--site-mono, var(--site-font)); font-size: 0.8125rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .mo-status { font-weight: 500; }
 .mo-status--verified, .mo-status--app { color: var(--mo-ok); }

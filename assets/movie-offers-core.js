@@ -13,7 +13,7 @@
     upcoming: "Starts soon", expired: "Expired", needs: "Needs checking",
   };
   const PER = { month: "a month", "billing-cycle": "a billing cycle", quarter: "a quarter", "half-year": "every 6 months", year: "a year", campaign: "in the offer period" };
-  const SPEND_PERIODS = new Set(["prev-month", "month", "billing-cycle", "prev-quarter", "half-year", "year"]);
+  const SPEND_PERIODS = new Set(["prev-month", "month", "billing-cycle", "prev-quarter", "prev-3-months", "half-year", "year"]);
   const ENDING_SOON_DAYS = 30;
 
   // Search aliases: extra words added to an offer when its text contains the key.
@@ -84,6 +84,7 @@
   }
   /** Most you can get in one month, when the terms make that clear. */
   function maxPerMonth(o) {
+    if (o.conflict) return null;
     if (o.monthCap != null) return o.monthCap;
     const per = maxPerBooking(o);
     if (per == null || !o.uses) return null;
@@ -95,7 +96,9 @@
   function headline(o) {
     const max = maxPerBooking(o);
     switch (o.kind) {
-      case "bogo": return max != null ? `Up to ${inr(max)} off` : "1 ticket free";
+      case "bogo":
+        if (o.capTicket != null && o.capTxn == null && (o.freeTickets || 1) > 1) return `Up to ${inr(o.capTicket)} off a free ticket`;
+        return max != null ? `Up to ${inr(max)} off` : "1 ticket free";
       case "percent": return o.percent != null ? `${o.percent}% off` : null;
       case "flat": return o.flat != null ? `${inr(o.flat)} off` : null;
       case "free": { const n = o.tiers?.length ? Math.max(...o.tiers.map((t) => t.freeTickets)) : o.freeTickets || 1; return `${n} free ticket${n > 1 ? "s" : ""}`; }
@@ -122,8 +125,12 @@
     const s = String(q || "").replace(/[\s-]/g, "");
     return /^\d{6,}$/.test(s) ? s.slice(0, 9) : "";
   }
-  /** True when a card starting with `digits` is in the offer's BIN list. */
+  /** True when a card starting with `digits` is in the offer's BIN list (exact) or could be (the typed digits are shorter than a listed BIN). */
   const binMatch = (bins, digits) => !!digits && (bins || []).some((b) => digits.startsWith(b) || b.startsWith(digits));
+  /** True only when the typed digits cover a whole listed BIN, so the card is certainly in the list. */
+  const binExact = (bins, digits) => !!digits && (bins || []).some((b) => digits.startsWith(b));
+  /** More digits than a BIN needs (10 or more): likely a full card number. */
+  const binTooLong = (q) => /^\d{10,}$/.test(String(q || "").replace(/[\s-]/g, ""));
 
   /**
    * Savings for one offer on one booking.
@@ -160,6 +167,7 @@
         d = free * price;
         if (o.capTicket != null) d = Math.min(d, free * o.capTicket);
         if (o.capTxn != null) d = Math.min(d, o.capTxn);
+        if (o.capTicket == null && o.capTxn == null) { out.conditional = true; out.conditions.push("No cap on the free ticket stated in the terms"); }
         break;
       }
       case "percent":
@@ -205,7 +213,8 @@
     if (o.cinemas) out.conditions.push(o.cinemas);
     if (o.channel === "online") out.conditions.push("Online bookings only");
     if (o.channel === "counter") out.conditions.push("At the cinema counter only");
-    if (/BIN/.test(o.terms || "")) { out.conditional = true; out.conditions.push("Only some card BIN ranges"); }
+    if (o.bins?.length || /BIN/.test(o.terms || "")) { out.conditional = true; out.conditions.push("Only some card BIN ranges"); }
+    if (o.conflict) { out.conditional = true; out.conditions.push("The terms contradict each other, see Full terms"); }
     if (!out.instant) out.conditions.push(o.kind === "cashback" ? "Paid back later, not taken off the price" : "Points, not a discount");
     return out;
   }
@@ -268,6 +277,7 @@
         if (per != null && per * o.uses.count < o.monthCap) E(o, `monthCap ${o.monthCap} is more than ${o.uses.count} × ${per}`);
       }
       if (o.uses && (!(o.uses.count > 0) || !PER[o.uses.per])) E(o, "uses needs a positive count and a known period");
+      if (o.conflict != null && (typeof o.conflict !== "string" || !o.conflict.trim())) E(o, "conflict must be a sentence");
       if (o.spend && o.spend.period && !SPEND_PERIODS.has(o.spend.period)) E(o, `unknown spend period ${o.spend.period}`);
       if (o.spend && !o.spend.text) E(o, "spend needs text");
       if (o.days && (!o.days.length || o.days.some((d) => !(d >= 0 && d <= 6)))) E(o, "days must be 0-6");
@@ -283,7 +293,7 @@
   const api = {
     KINDS, CATEGORIES, NETWORKS, STATUSES, DAY_LONG, ENDING_SOON_DAYS, INSTANT,
     inr, esc, norm, fmtDate, todayIST, addDays, weekday, effectiveStatus, isChecked, isShown, endingSoon,
-    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, binQuery, binMatch, evaluate, rank, validate,
+    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, binQuery, binMatch, binExact, binTooLong, evaluate, rank, validate,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.MovieOffersCore = api;
