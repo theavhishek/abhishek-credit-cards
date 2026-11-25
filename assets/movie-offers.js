@@ -6,7 +6,7 @@
   const C = typeof module !== "undefined" && module.exports ? require("./movie-offers-core.js") : window.MovieOffersCore;
   const { esc, inr, fmtDate } = C;
   const PLATFORM_ORDER = { bms: 0, district: 1, pvr: 2 };
-  const CARD_TYPE = { credit: "Credit card", debit: "Debit card" };
+  const CARD_TYPE = { credit: "Credit card", debit: "Debit card", prepaid: "Prepaid card" };
 
   function logoHTML(iss) {
     if (iss.logo) return `<span class="mo-logo" aria-hidden="true"><img src="/assets/bank-logos/${iss.logo}" alt="" width="28" height="28" loading="lazy" decoding="async"></span>`;

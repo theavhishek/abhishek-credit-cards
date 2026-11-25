@@ -23,7 +23,7 @@
  *   platform*  bms | district | pvr
  *   issuer*    key of `issuers` below
  *   cards*     card variants, without the bank name ("Sapphiro", not "ICICI Sapphiro")
- *   cardType*  credit | debit
+ *   cardType*  credit | debit | prepaid
  *   network    visa | mastercard | rupay | amex | diners, only when the offer is limited to that network
  *   kind*      bogo | percent | flat | free (free tickets) | cashback | rewards (points) | voucher
  *   scope      "welcome" for one-time welcome gifts (left out of the savings calculator)
@@ -67,6 +67,7 @@ window.MOVIE_OFFERS = {
     "cub":{"name":"City Union Bank","logo":"ciub.svg","aliases":["cub"]},
     "dbs":{"name":"DBS Bank","logo":"dbs.svg"},
     "dcb":{"name":"DCB Bank","logo":"dcbl.svg"},
+    "gosats":{"name":"GoSats","aliases":["gosats","go sats"]},
     "federal":{"name":"Federal Bank","logo":"fdrl.svg"},
     "hdfc":{"name":"HDFC Bank","logo":"hdfc.svg","aliases":["hdfc"]},
     "hsbc":{"name":"HSBC","logo":"hsbc.svg"},
@@ -183,6 +184,7 @@ window.MOVIE_OFFERS = {
     {"id":"bms-dbs-spark-bogo","platform":"bms","issuer":"dbs","cards":["Spark"],"cardType":"credit","kind":"bogo","category":["movies"],"benefit":"Buy 1 ticket, get 1 free, up to ₹200","status":"listed","source":{"url":"https://in.bookmyshow.com/offers","type":"platform"},"accessed":"2026-11-24"},
     {"id":"bms-dcb-novio-bogo","platform":"bms","issuer":"dcb","cards":["novio"],"cardType":"credit","kind":"bogo","category":["movies"],"benefit":"Buy 1 ticket, get 1 free","status":"listed","source":{"url":"https://in.bookmyshow.com/offers","type":"platform"},"accessed":"2026-11-24"},
     {"id":"bms-federal-credit-cards-percent","platform":"bms","issuer":"federal","cards":["Credit cards"],"cardType":"credit","kind":"percent","category":["movies"],"benefit":"10% off, up to ₹200","status":"listed","source":{"url":"https://in.bookmyshow.com/offers","type":"platform"},"accessed":"2026-11-24"},
+    {"id":"bms-gosats-prepaid-bogo","platform":"bms","issuer":"gosats","cards":["Prepaid Card"],"cardType":"prepaid","network":"visa","kind":"bogo","category":["movies","events","activities"],"benefit":"Buy 1 ticket, get 1 free, up to ₹250 off","capTxn":250,"uses":{"count":1,"per":"month"},"minTickets":2,"end":"2026-11-30","status":"verified","bins":["48329306"],"source":{"url":"https://in.bookmyshow.com/offers/gosats-prepaid-cards-(debit-card)-offer-(gsats1126)/GSATS1126","type":"platform"},"accessed":"2026-11-25","verified":"2026-11-25","terms":"Once a calendar month per card. All days. Covers movies, events, concerts, plays, sports and activities; not BMS Stream or food. Limited quota; processing and convenience fees apply."},
     {"id":"bms-hdfc-diners-club-privilege-bogo","platform":"bms","issuer":"hdfc","cards":["Diners Club Privilege"],"cardType":"credit","network":"diners","kind":"bogo","category":["movies","events","activities"],"benefit":"Buy 1 ticket, get 1 free, up to ₹250 off, for Friday to Sunday shows","capTicket":250,"monthCap":500,"uses":{"count":2,"per":"month"},"minTickets":2,"days":[5,6,0],"end":"2027-03-31","status":"verified","bins":["361010","361170"],"source":{"url":"https://in.bookmyshow.com/offers/hdfc-bank-diners-club-privilege-credit-card-offer/HDFCDZ0623","type":"platform"},"accessed":"2026-11-25","verified":"2026-11-25","terms":"Up to 2 free tickets a calendar month, twice per card. The day rule is about the show date, whatever day you book. Covers movies, events, concerts, plays, sports and activities; not BMS Stream or food."},
     {"id":"bms-hdfc-pixel-times-percent","platform":"bms","issuer":"hdfc","cards":["PIXEL Times"],"cardType":"credit","kind":"percent","category":["movies"],"benefit":"25% off movie tickets","status":"listed","source":{"url":"https://in.bookmyshow.com/offers","type":"platform"},"accessed":"2026-11-24"},
     {"id":"bms-hdfc-times-card-percent","platform":"bms","issuer":"hdfc","cards":["Times Card"],"cardType":"credit","kind":"percent","category":["movies"],"benefit":"25% off movie tickets, 50% on some Times Card variants","status":"listed","source":{"url":"https://in.bookmyshow.com/offers","type":"platform"},"accessed":"2026-11-24"},

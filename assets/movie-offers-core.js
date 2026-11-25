@@ -243,7 +243,7 @@
       if (sigs.has(sig)) E(o, `duplicate of ${sigs.get(sig)}`); else sigs.set(sig, o.id);
       if (!data.platforms[o.platform]) E(o, `unknown platform ${o.platform}`);
       if (!data.issuers[o.issuer]) E(o, `unknown issuer ${o.issuer}`);
-      if (!["credit", "debit"].includes(o.cardType)) E(o, "cardType must be credit or debit");
+      if (!["credit", "debit", "prepaid"].includes(o.cardType)) E(o, "cardType must be credit, debit or prepaid");
       if (o.network && !NETWORKS[o.network]) E(o, `unknown network ${o.network}`);
       if (!KINDS[o.kind]) E(o, `unknown kind ${o.kind}`);
       for (const c of o.category || []) if (!CATEGORIES[c]) E(o, `unknown category ${c}`);
