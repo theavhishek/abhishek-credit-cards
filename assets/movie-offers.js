@@ -48,6 +48,7 @@
     const code = o.code ? `<div class="mo-code-row"><p><span class="mo-code-label">Promo code</span><code class="mo-code">${esc(o.code)}</code></p><button type="button" class="mo-copy" data-code="${esc(o.code)}" aria-label="Copy promo code ${esc(o.code)}" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span class="mo-copy-t">Copy</span></button></div>` : "";
     const more = [
       o.terms && `<p>${esc(o.terms)}</p>`,
+      o.conflict && `<p class="mo-conflict"><strong>Terms don’t agree:</strong> ${esc(o.conflict)}</p>`,
       o.bins && `<p class="mo-bins">Only cards whose number starts with ${o.bins.length === 1 ? "this BIN" : "one of these BINs"}: ${o.bins.map((b) => `<span class="mo-bin">${esc(b)}</span>`).join(" ")}</p>`,
       o.cinemas && `<p>Cinemas: ${esc(o.cinemas)}</p>`,
       o.channel && `<p>Booking: ${{ online: "online only", counter: "at the cinema counter only", both: "online or at the cinema counter" }[o.channel]}</p>`,
@@ -127,7 +128,7 @@
     const seen = new Set();
     const pool = data.offers
       .filter((o) => ["verified", "app"].includes(C.effectiveStatus(o, today)) && ["bogo", "percent", "flat", "free"].includes(o.kind)
-        && o.scope !== "welcome" && !o.spend && (o.category || []).includes("movies") && C.maxPerBooking(o) != null && !C.endingSoon(o, today))
+        && o.scope !== "welcome" && !o.spend && (o.category || []).includes("movies") && C.maxPerBooking(o) != null && !o.conflict && !C.endingSoon(o, today))
       .sort((a, b) => C.maxPerBooking(b) - C.maxPerBooking(a) || a.id.localeCompare(b.id));
     const picks = [];
     for (const p of Object.keys(data.platforms)) {
@@ -243,9 +244,19 @@
       }
       count.textContent = `${total} ${total === 1 ? "offer" : "offers"}`;
       empty.hidden = total !== 0;
-      const binOn = !!C.binQuery(val("q"));
-      if (binNote) binNote.hidden = !binOn;
-      if (binOn) document.querySelectorAll("li.mo-item:not([hidden]) details.mo-more").forEach((d) => { d.open = true; });
+      const bin = C.binQuery(val("q"));
+      if (binNote) {
+        binNote.hidden = !bin;
+        if (bin) {
+          const shownEls = [...document.querySelectorAll("li.mo-item:not([hidden])")];
+          const partial = shownEls.filter((el) => !C.binExact(el.dataset.bins ? el.dataset.bins.split(" ") : [], bin)).length;
+          binNote.textContent = (C.binTooLong(val("q")) ? "Only the first 6 to 9 digits are needed, so there’s no need to type your full card number. " : "")
+            + "Showing offers whose terms list this BIN. "
+            + (partial ? `${partial === 1 ? "One of these lists" : `${partial} of these list`} a longer BIN than you typed, so check the full BIN under Full terms. ` : "")
+            + "Most offers don’t list BINs and work on every card of that variant, so search by card name too. Card digits stay on this page and never go into the link.";
+          shownEls.forEach((el) => { const d = el.querySelector("details.mo-more"); if (d) d.open = true; });
+        }
+      }
       renderChips();
       if (write) writeURL();
     }
@@ -282,7 +293,7 @@
     function writeURL() {
       const u = new URLSearchParams();
       if (platform !== "all") u.set("platform", platform);
-      for (const [k] of FILTERS) if (val(k)) u.set(k, k === "q" && C.binQuery(val(k)) ? C.binQuery(val(k)).slice(0, 8) : val(k));
+      for (const [k] of FILTERS) if (val(k)) if (!(k === "q" && C.binQuery(val(k)))) u.set(k, val(k));
       if (sortEl.value !== "default") u.set("sort", sortEl.value);
       const qs = u.toString();
       history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);

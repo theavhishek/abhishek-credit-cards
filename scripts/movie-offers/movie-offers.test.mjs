@@ -197,3 +197,42 @@ test("validation rejects bad BINs", () => {
   assert.ok(errors.some((e) => /^y:.*duplicates/.test(e)));
   assert.ok(errors.some((e) => /^z:.*6 to 9 digit/.test(e)));
 });
+
+test("BIN search: exact vs possible matches, full card numbers flagged", () => {
+  assert.ok(C.binExact(["404652618"], "404652618"));
+  assert.ok(!C.binExact(["404652618"], "404652"), "6 typed digits is only a possible match for a 9-digit BIN");
+  assert.ok(C.binMatch(["404652618"], "404652"));
+  assert.ok(C.binTooLong("4046 5261 8000 0000"));
+  assert.ok(!C.binTooLong("404652618"));
+});
+
+test("calculator edge cases from the re-audit", () => {
+  const ev = (o, b) => C.evaluate(offer(o), booking(b));
+  assert.equal(ev({ kind: "bogo", capTxn: 500 }, { price: 300, tickets: 1 }).eligible, false);
+  assert.equal(ev({ kind: "bogo", capTxn: 500 }, { price: 150, tickets: 2 }).discount, 150);
+  assert.equal(ev({ kind: "bogo", capTxn: 250 }, { price: 700, tickets: 2 }).discount, 250);
+  assert.equal(ev({ kind: "bogo", capTicket: 250 }, { price: 300, tickets: 4 }).discount, 250, "one free ticket per booking by default");
+  assert.equal(ev({ kind: "bogo", capTicket: 800, freeTickets: 3 }, { price: 300, tickets: 4 }).discount, 600, "two pairs, two free tickets");
+  assert.equal(ev({ kind: "flat", flat: 100, minAmount: 500 }, { price: 200, tickets: 2 }).eligible, false);
+  assert.equal(ev({ kind: "percent", percent: 25, capTxn: 100 }, { price: 400, tickets: 2 }).discount, 100);
+  assert.equal(ev({ kind: "bogo", capTxn: 200, start: "2099-01-01" }, {}), null, "future campaign left out");
+  const nocap = ev({ kind: "bogo" }, {});
+  assert.ok(nocap.conditional && nocap.conditions.some((c) => /No cap/.test(c)), "missing cap is flagged, not assumed");
+  const conf = ev({ kind: "bogo", capTxn: 200, uses: { count: 2, per: "month" }, conflict: "Two figures." }, {});
+  assert.ok(conf.conditional && conf.conditions.some((c) => /contradict/.test(c)));
+  assert.equal(C.maxPerMonth(offer({ kind: "bogo", capTxn: 200, uses: { count: 2, per: "month" }, conflict: "x" })), null, "no monthly total when terms conflict");
+  const bins = ev({ kind: "bogo", capTxn: 200, bins: ["411146"] }, {});
+  assert.ok(bins.conditional, "BIN-limited offers are conditional");
+  const pts = ev({ kind: "rewards" }, {});
+  assert.ok(!pts || !pts.instant, "points never reduce the price");
+});
+
+test("re-audit data fixes", () => {
+  const by = Object.fromEntries(data.offers.map((o) => [o.id, o]));
+  for (const id of ["district-axis-my-zone-bogo", "district-axis-select-bogo", "district-axis-privilege-bogo"]) assert.equal(by[id].spend.period, "prev-3-months");
+  assert.equal(by["pvr-sbi-aurum-rewards"].kind, "rewards");
+  assert.ok(by["bms-rbl-platinum-shopgain-bogo"].conflict);
+  assert.equal(C.maxPerMonth(by["bms-yes-marquee-bogo"]), 2400);
+  assert.equal(C.maxPerMonth(by["bms-hdfc-diners-club-privilege-bogo"]), 500);
+  assert.ok(by["bms-indusind-duo-bogo"].conflict);
+});
