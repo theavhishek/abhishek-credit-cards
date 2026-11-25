@@ -1,0 +1,54 @@
+/* Compact movie-offer cards on the homepage and card reviews. Baked by scripts/movie-offers/bake.mjs
+   (pnpm build:movies) from assets/movie-offers-data.js; markup from miniHTML() in assets/movie-offers.js. */
+:root { --mox-ok: #15803d; --mox-fill: color-mix(in srgb, var(--text) 6%, transparent); }
+html[data-theme="dark"] { --mox-ok: #4ade80; }
+
+.hm-movies { margin-top: 112px; }
+.mox-lead { margin: 8px 0 0 !important; max-width: 62ch; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.mox-list {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+  margin: 24px 0 0 !important; padding: 0; list-style: none;
+}
+.mox-list--review { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: 16px !important; }
+.mox-item { min-width: 0; }
+.mox-item[hidden] { display: none; }
+.mox-card {
+  display: flex; flex-direction: column; gap: 4px; height: 100%;
+  padding: 18px; border: 1px solid var(--line); border-radius: var(--radius-lg, 20px);
+  background: var(--surface); color: var(--text); text-decoration: none;
+  transition: border-color 150ms ease-out, transform 150ms ease-out;
+}
+.rv-article a.mox-card { text-decoration: none; }
+@media (hover: hover) { .mox-card:hover { border-color: var(--line-strong); } }
+.mox-card:active { transform: scale(0.99); }
+.mox-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.mox-head { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 10px; }
+.mox-logo {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+  background: #fff; box-shadow: 0 0 0 1px var(--line); color: #1d1d1f; font-weight: 650;
+}
+.mox-logo img { width: 26px; height: 26px; object-fit: contain; }
+.mox-name { display: grid; min-width: 0; }
+.mox-name strong { overflow: hidden; font-size: 0.9375rem; font-weight: 600; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
+.mox-name span { color: var(--muted); font-size: 0.8125rem; }
+.mox-save { color: var(--mox-ok); font-size: 1.625rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.mox-save--plain { color: var(--text); font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
+.mox-facts { color: var(--muted); font-size: 0.8125rem; line-height: 1.45; }
+.mox-code { margin-top: 8px; color: var(--muted); font-size: 0.8125rem; }
+.mox-code code { margin-inline-start: 4px; padding: 2px 8px; border-radius: 6px; background: var(--mox-fill); color: var(--text); font-family: var(--site-font); font-weight: 600; }
+.mox-all { margin: 16px 0 0 !important; }
+.mox-all a { font-weight: 600; }
+
+@media (max-width: 900px) { .mox-list:not(.mox-list--review) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .hm-movies { margin-top: 80px; }
+  .mox-list:not(.mox-list--review) {
+    grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 82%;
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: -20px !important; padding-inline: 20px; scroll-padding-inline: 20px;
+  }
+  .mox-list:not(.mox-list--review)::-webkit-scrollbar { display: none; }
+  .mox-list:not(.mox-list--review) .mox-item { scroll-snap-align: start; }
+  .mox-list--review { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .mox-card { transition: none; } .mox-card:active { transform: none; } }

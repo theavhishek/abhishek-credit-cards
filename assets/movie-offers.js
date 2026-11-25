@@ -107,7 +107,42 @@
       .map(([id, i]) => `<option value="${esc(id)}">${esc(i.name)}</option>`).join("");
   }
 
-  if (typeof module !== "undefined" && module.exports) module.exports = { listHTML, banksHTML, itemHTML };
+  /** Compact offer card for the homepage and card reviews (styles in movie-offers-embed.css). Links to the filtered offers page. */
+  function miniHTML(o, data, today = C.todayIST()) {
+    const iss = data.issuers[o.issuer];
+    const st = C.effectiveStatus(o, today);
+    const head = st === "listed" ? null : C.headline(o);
+    const facts = st === "listed" ? ["Headline only, terms not checked yet"] : [(o.kind === "percent" || o.kind === "cashback") && o.capTxn != null && `Up to ${inr(o.capTxn)} a booking`, C.usesText(o), o.minAmount && `Min. booking ${inr(o.minAmount)}`, o.minTickets > 1 && `${o.minTickets} tickets min.`, o.spend && "Spend condition", o.end && `Till ${fmtDate(o.end)}`].filter(Boolean);
+    const href = `/movie-offers?platform=${encodeURIComponent(o.platform)}&bank=${encodeURIComponent(o.issuer)}`;
+    return `<li class="mox-item"${o.end ? ` data-end="${esc(o.end)}"` : ""}><a class="mox-card" href="${href}">
+      <span class="mox-head">${logoHTML(iss).replace('class="mo-logo', 'class="mox-logo')}<span class="mox-name"><strong>${esc(iss.name)} ${esc(o.cards.join(", "))}</strong><span>${esc([data.platforms[o.platform].name, C.KINDS[o.kind], ...(o.category || []).filter((c) => c !== "movies").map((c) => C.CATEGORIES[c])].join(" · "))}</span></span></span>
+      <span class="mox-save${head ? "" : " mox-save--plain"}">${esc(head || o.benefit)}</span>
+      <span class="mox-facts">${facts.map(esc).join(" · ")}</span>
+      ${o.code ? `<span class="mox-code">Code <code>${esc(o.code)}</code></span>` : ""}
+    </a></li>`;
+  }
+  /** Homepage pick: per platform, the biggest checked instant movie offers with no spend condition, one per bank (2 each). */
+  function homePicks(data, today = C.todayIST(), perPlatform = 2) {
+    const seen = new Set();
+    const pool = data.offers
+      .filter((o) => ["verified", "app"].includes(C.effectiveStatus(o, today)) && ["bogo", "percent", "flat", "free"].includes(o.kind)
+        && o.scope !== "welcome" && !o.spend && (o.category || []).includes("movies") && C.maxPerBooking(o) != null && !C.endingSoon(o, today))
+      .sort((a, b) => C.maxPerBooking(b) - C.maxPerBooking(a) || a.id.localeCompare(b.id));
+    const picks = [];
+    for (const p of Object.keys(data.platforms)) {
+      let n = 0;
+      for (const o of pool) {
+        if (n === perPlatform) break;
+        if (o.platform !== p || seen.has(o.issuer)) continue;
+        seen.add(o.issuer); picks.push(o); n++;
+      }
+    }
+    return picks;
+  }
+  const reviewOffers = (data, slug, today = C.todayIST()) =>
+    data.offers.filter((o) => (o.reviews || []).includes(slug) && C.isShown(C.effectiveStatus(o, today))).sort(byDefault(data));
+
+  if (typeof module !== "undefined" && module.exports) module.exports = { listHTML, banksHTML, itemHTML, miniHTML, homePicks, reviewOffers };
   if (typeof document === "undefined") return;
 
   /* ---------------- Browser ---------------- */
