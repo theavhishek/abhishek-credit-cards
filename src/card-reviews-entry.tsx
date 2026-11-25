@@ -2,19 +2,23 @@ import { createRoot } from "react-dom/client";
 import { BlogGrid } from "./card-reviews/blog-grid";
 import { blogCategories } from "./card-reviews/blog-grid-data";
 import "./card-reviews/review-shell.css";
+import { SiteBreadcrumb } from "./components/ui/breadcrumb";
 import { mountArcTabs } from "./arc-tabs-mount";
 
 const root = document.querySelector("#card-reviews-root");
 
 if (root) {
   createRoot(root).render(
-    <BlogGrid
-      eyebrow="Reviews and guides"
-      title="Card reviews"
-      description="Independent notes by Abhishek Meena on rewards, fees and the fine print that decides whether a card deserves space in your wallet."
-      categories={blogCategories}
-      getHref={(post) => "/card-reviews/" + post.id}
-    />,
+    <>
+      <SiteBreadcrumb items={[{ label: "Card reviews" }]} />
+      <BlogGrid
+        eyebrow="Reviews and guides"
+        title="Card reviews"
+        description="Independent notes by Abhishek Meena on rewards, fees and the fine print that decides whether a card deserves space in your wallet."
+        categories={blogCategories}
+        getHref={(post) => "/card-reviews/" + post.id}
+      />
+    </>,
   );
 }
 

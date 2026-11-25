@@ -233,6 +233,27 @@ function offerPanel(item) {
         </section>`;
 }
 
+const HOME_ICON_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`;
+const CHEVRON_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>`;
+const breadcrumbHtml = (trail, indent = "    ") => {
+  const parts = [
+    `${indent}  <li data-slot="breadcrumb-item">`,
+    `${indent}    <a href="/" aria-label="Home" data-slot="breadcrumb-link">${HOME_ICON_SVG}</a>`,
+    `${indent}  </li>`,
+  ];
+  for (let i = 0; i < trail.length; i += 1) {
+    const [label, href] = trail[i];
+    const isLast = i === trail.length - 1 || !href;
+    parts.push(`${indent}  <li aria-hidden="true" role="presentation" data-slot="breadcrumb-separator">${CHEVRON_SVG}</li>`);
+    parts.push(
+      isLast
+        ? `${indent}  <li data-slot="breadcrumb-item"><span aria-current="page" data-slot="breadcrumb-page">${esc(label)}</span></li>`
+        : `${indent}  <li data-slot="breadcrumb-item"><a href="${esc(href)}" data-slot="breadcrumb-link">${esc(label)}</a></li>`,
+    );
+  }
+  return `${indent}<nav class="site-crumbs" aria-label="Breadcrumb" data-slot="breadcrumb">\n${indent}  <ol data-slot="breadcrumb-list">\n${parts.join("\n")}\n${indent}  </ol>\n${indent}</nav>`;
+};
+
 /* ---------- Fee calculator (calculator: in the frontmatter) ---------- */
 // Same maths and wording as assets/updates-calc.js, so the page reads right before (or without) JavaScript.
 const inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
@@ -377,13 +398,7 @@ function buildArticle(item) {
         </section>` : "";
 
   const main = `<main id="article" class="rv up-article" tabindex="-1">
-    <nav class="site-crumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="/">Home</a></li>
-        <li><a href="/updates">Updates</a></li>
-        <li><span aria-current="page">${esc(core.categoryLabel(item.category))}</span></li>
-      </ol>
-    </nav>
+${breadcrumbHtml([["Updates", "/updates"], [core.categoryLabel(item.category)]])}
 
     <header class="rv-hero">
       <div class="rv-hero-copy">
@@ -482,7 +497,7 @@ function buildArticle(item) {
     articleMeta: `  <meta property="article:published_time" content="${articleDateTime(item.published)}">\n  <meta property="article:modified_time" content="${articleDateTime(modified)}">\n`,
     title: esc(title),
     jsonld: json(graph),
-    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=21">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">\n',
+    styles: '  <link rel="stylesheet" href="/assets/review-page.css?v=21">\n  <link rel="stylesheet" href="/assets/follow.css?v=4">\n  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=2">\n',
     cssVersion: assetVersions.css,
     bodyClass: "reviews-page up-page",
     skipTarget: "article",
@@ -512,6 +527,7 @@ function buildArchive() {
     ],
   };
   const main = `<main id="archive" class="up" tabindex="-1">
+${breadcrumbHtml([["Updates", "/updates"], ["Archive"]])}
     <header class="up-hero">
       <p class="up-eyebrow"><a href="/updates">News and offers</a></p>
       <h1>Every update<span class="up-dot">.</span></h1>
@@ -535,7 +551,7 @@ function buildArchive() {
     articleMeta: "",
     title: "Updates archive: credit card news and offers | Avhishek",
     jsonld: json(graph),
-    styles: "",
+    styles: '  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=2">\n',
     cssVersion: assetVersions.css,
     bodyClass: "up-page",
     skipTarget: "up-feed",

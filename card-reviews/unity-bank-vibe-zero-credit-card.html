@@ -64,7 +64,7 @@
   <link rel="stylesheet" href="/assets/backdrop.css?v=10">
   <link rel="stylesheet" href="/assets/header.css?v=10">
   <link rel="stylesheet" href="/assets/arc-tabs.css?v=5">
-  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=1">
+  <link rel="stylesheet" href="/assets/breadcrumbs.css?v=2">
   <link rel="stylesheet" href="/assets/polish.css?v=5">
   <link rel="stylesheet" href="/assets/motion.css?v=6">
   <link rel="stylesheet" href="/assets/glass-buttons.css?v=2">
@@ -105,11 +105,15 @@
   </header>
 
 <main id="reviews" class="rv" tabindex="-1">
-  <nav class="site-crumbs" aria-label="Breadcrumb">
-    <ol>
-      <li><a href="/">Home</a></li>
-      <li><a href="/card-reviews">Card reviews</a></li>
-      <li><span aria-current="page">Unity Bank Vibe and Zero</span></li>
+  <nav class="site-crumbs" aria-label="Breadcrumb" data-slot="breadcrumb">
+    <ol data-slot="breadcrumb-list">
+      <li data-slot="breadcrumb-item">
+        <a href="/" aria-label="Home" data-slot="breadcrumb-link"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></a>
+      </li>
+      <li aria-hidden="true" role="presentation" data-slot="breadcrumb-separator"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+      <li data-slot="breadcrumb-item"><a href="/card-reviews" data-slot="breadcrumb-link">Card reviews</a></li>
+      <li aria-hidden="true" role="presentation" data-slot="breadcrumb-separator"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></li>
+      <li data-slot="breadcrumb-item"><span aria-current="page" data-slot="breadcrumb-page">Unity Bank Vibe and Zero</span></li>
     </ol>
   </nav>
 

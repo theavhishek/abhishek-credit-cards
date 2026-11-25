@@ -1,78 +1,199 @@
-/* ---------- Breadcrumb ----------
-   One breadcrumb for every page that has one (card reviews, guides, /updates
-   articles, calculators, UPI ID tool). Markup:
+/* ==========================================================================
+   Sitewide Breadcrumb (@coss/p-breadcrumb-3)
+   Minimal unboxed inline navigation placed at the top of <main> across every
+   subpage, article, review, tool, and error page.
 
-   <nav class="site-crumbs" aria-label="Breadcrumb">
-     <ol>
-       <li><a href="/">Home</a></li>
-       <li><span aria-current="page">Page name</span></li>
+   <nav class="site-crumbs" aria-label="Breadcrumb" data-slot="breadcrumb">
+     <ol data-slot="breadcrumb-list">
+       <li data-slot="breadcrumb-item">
+         <a href="/" aria-label="Home" data-slot="breadcrumb-link">...</a>
+       </li>
+       <li aria-hidden="true" role="presentation" data-slot="breadcrumb-separator">...</li>
+       <li data-slot="breadcrumb-item">
+         <span aria-current="page" data-slot="breadcrumb-page">Current page</span>
+       </li>
      </ol>
    </nav>
-
-   Placed as the first child of <main>, directly above the hero. A fitted pill,
-   left-aligned with the page content, on one line at every width; on phones a
-   long current-page name is shortened with an ellipsis instead of wrapping. */
+   ========================================================================== */
 
 :root {
-  --crumbs-top: 32px;    /* page top (below the navbar) to the pill */
-  --crumbs-after: 36px;  /* pill to the hero */
+  --crumbs-top: 32px;
+  --crumbs-after: 20px;
 }
 
-/* Same distance from the navbar on every page, whatever padding the page's own <main> has. */
-main:has(> .site-crumbs) { padding-block-start: var(--crumbs-top); }
+@media (max-width: 639.98px) {
+  :root {
+    --crumbs-top: 24px;
+    --crumbs-after: 16px;
+  }
+}
+
+/* Keep a uniform distance below the sticky topbar regardless of page padding. */
+main:has(> .site-crumbs) {
+  padding-block-start: var(--crumbs-top);
+}
+
+/* Cards portfolio (cards.avhishek.in): match .ch-hero measure and tighten hero offset. */
+.cards-home .site-crumbs {
+  width: min(1180px, 100% - 2 * var(--ch-gutter, 20px));
+  margin-inline: auto;
+}
+.cards-home main:has(> .site-crumbs) .ch-hero {
+  padding-block-start: 4px;
+}
+
+/* Card reviews (/card-reviews): align inside #card-reviews-root and static fallback. */
+html body #card-reviews-root:has(> .site-crumbs) {
+  padding-top: var(--crumbs-top);
+}
+#card-reviews-root > .site-crumbs {
+  width: min(1180px, 100%);
+  margin: 0 auto var(--crumbs-after);
+  padding-inline: 24px;
+  box-sizing: border-box;
+}
+.reviews-static:has(> .site-crumbs) {
+  margin-block-start: 0;
+  padding-block-start: var(--crumbs-top);
+}
+#card-reviews-root > .site-crumbs + section > div:first-child {
+  padding-block-start: 8px;
+}
+#card-reviews-root > .site-crumbs + .reviews-static {
+  width: min(1180px, 100%);
+  margin: 0 auto 80px;
+  padding: 8px 24px 0;
+  box-sizing: border-box;
+}
+
+/* 404 page: keep breadcrumb pinned below navbar while centering the error copy. */
+html body.not-found-page main.not-found:has(> .site-crumbs) {
+  padding-block-start: var(--crumbs-top);
+}
+html body.not-found-page main.not-found > .site-crumbs {
+  margin-bottom: auto;
+}
+html body.not-found-page main.not-found > .not-found-actions {
+  margin-bottom: auto;
+}
 
 .site-crumbs {
   display: flex;
   margin: 0 0 var(--crumbs-after);
   min-width: 0;
+  max-width: 100%;
 }
+
 .site-crumbs ol {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  min-width: 0;
   max-width: 100%;
-  box-sizing: border-box;
   margin: 0;
-  padding: 7px 14px;
+  padding: 0;
   list-style: none;
-  border: 1px solid color-mix(in srgb, var(--line-strong) 70%, transparent);
-  border-radius: var(--radius-full);
-  background: var(--page);
-  box-shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px -1px rgba(0,0,0,.1);
-  font-size: 14px;
-  line-height: 20px;
+  font-family: var(--site-font, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   color: var(--muted);
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
+
+@media (min-width: 640px) {
+  .site-crumbs ol {
+    gap: 10px;
+  }
+}
+
 .site-crumbs li {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: none;
-  min-width: 0;
+  white-space: nowrap;
 }
-/* The current page is the one that gives way when space runs out. */
-.site-crumbs li:last-child { flex: 0 1 auto; overflow: hidden; }
-.site-crumbs li:not(:last-child)::after {
+
+.site-crumbs li:last-child {
+  min-width: 0;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+
+.site-crumbs li[data-slot="breadcrumb-separator"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 0;
+  color: currentColor;
+  opacity: 0.8;
+  user-select: none;
+  pointer-events: none;
+}
+
+.site-crumbs li[data-slot="breadcrumb-separator"] svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* Fallback separator if markup uses plain <li> items without explicit separators. */
+.site-crumbs ol:not(:has(> [data-slot="breadcrumb-separator"])) li:not(:last-child)::after {
   content: "";
   flex: none;
-  width: 14px;
-  height: 14px;
-  background: var(--soft);
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  opacity: 0.8;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
+
 .site-crumbs a {
-  color: var(--muted);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: inherit;
+  font-weight: 400;
   text-decoration: none;
-  border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.site-crumbs a svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+/* Expand hit area comfortably around icon and text links without inflating layout height. */
+.site-crumbs a::before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px;
+}
+
+@media (hover: hover) {
+  .site-crumbs a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+}
+
 .site-crumbs a:focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 3px;
+  border-radius: 4px;
 }
-.site-crumbs [aria-current="page"] {
+
+.site-crumbs [aria-current="page"],
+.site-crumbs [data-slot="breadcrumb-page"] {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -80,15 +201,38 @@ main:has(> .site-crumbs) { padding-block-start: var(--crumbs-top); }
   font-weight: 400;
 }
 
-@media (max-width: 640px) {
-  :root {
-    --crumbs-top: 24px;
-    --crumbs-after: 28px;
+.site-crumbs [data-slot="breadcrumb-ellipsis"] {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.site-crumbs [data-slot="breadcrumb-ellipsis"] svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 680px) {
+  #card-reviews-root > .site-crumbs {
+    padding-inline: 16px;
   }
+  #card-reviews-root > .site-crumbs + .reviews-static {
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 639.98px) {
   .site-crumbs ol {
-    gap: 6px;
-    padding: 7px 12px;
-    font-size: 13px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
-  .site-crumbs li { gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-crumbs a {
+    transition: none;
+  }
 }
