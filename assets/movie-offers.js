@@ -48,6 +48,7 @@
     const code = o.code ? `<div class="mo-code-row"><p><span class="mo-code-label">Promo code</span><code class="mo-code">${esc(o.code)}</code></p><button type="button" class="mo-copy" data-code="${esc(o.code)}" aria-label="Copy promo code ${esc(o.code)}" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span class="mo-copy-t">Copy</span></button></div>` : "";
     const more = [
       o.terms && `<p>${esc(o.terms)}</p>`,
+      o.bins && `<p class="mo-bins">Only cards whose number starts with ${o.bins.length === 1 ? "this BIN" : "one of these BINs"}: ${o.bins.map((b) => `<span class="mo-bin">${esc(b)}</span>`).join(" ")}</p>`,
       o.cinemas && `<p>Cinemas: ${esc(o.cinemas)}</p>`,
       o.channel && `<p>Booking: ${{ online: "online only", counter: "at the cinema counter only", both: "online or at the cinema counter" }[o.channel]}</p>`,
       o.start && `<p>Starts ${fmtDate(o.start)}</p>`,
@@ -59,7 +60,7 @@
     const maxB = C.maxPerBooking(o), maxM = C.maxPerMonth(o);
     const attrs = {
       id: o.id, platform: o.platform, kind: o.kind, card: o.cardType, network: o.network || "", issuer: o.issuer,
-      cat: (o.category || []).join(" "), status: st, one: o.minTickets === 1 && o.kind !== "bogo" ? "1" : "",
+      cat: (o.category || []).join(" "), bins: (o.bins || []).join(" "), status: st, one: o.minTickets === 1 && o.kind !== "bogo" ? "1" : "",
       spend: o.spend ? "1" : "", days: o.days ? o.days.join(" ") : "", channel: o.channel || "", end: o.end || "",
       max: maxB ?? "", month: maxM ?? "", checked: o.verified || "", sort: `${iss.name} ${o.cards[0]}`.toLowerCase(),
       words: C.searchWords(o, data),
@@ -177,7 +178,7 @@
     const tabs = [...root.querySelectorAll(".mo-tab")];
     const els = Object.fromEntries(FILTERS.map(([k, id]) => [k, $(id)]));
     const sortEl = $("mo-sort");
-    const count = $("mo-count"), chips = $("mo-chips"), empty = $("mo-empty"), moreBtn = $("mo-more-btn"), morePanel = $("mo-more-panel");
+    const count = $("mo-count"), chips = $("mo-chips"), empty = $("mo-empty"), moreBtn = $("mo-more-btn"), morePanel = $("mo-more-panel"), binNote = $("mo-bin-note");
     const calc = {
       form: $("mo-calc-form"), price: $("mo-c-price"), tickets: $("mo-c-tickets"), platform: $("mo-c-platform"),
       cat: $("mo-c-cat"), date: $("mo-c-date"), later: $("mo-c-later"), cond: $("mo-c-cond"), out: $("mo-calc-out"),
@@ -218,6 +219,8 @@
       if (val("nospend") && d.spend === "1") return false;
       if (val("checked") && d.status === "listed") return false;
       if (val("soon") && !(d.end && d.end >= today && d.end <= C.addDays(today, C.ENDING_SOON_DAYS))) return false;
+      const bin = C.binQuery(val("q"));
+      if (bin) return C.binMatch(d.bins ? d.bins.split(" ") : [], bin);
       return C.queryTerms(val("q")).every((t) => d.words.includes(t));
     }
 
@@ -240,6 +243,9 @@
       }
       count.textContent = `${total} ${total === 1 ? "offer" : "offers"}`;
       empty.hidden = total !== 0;
+      const binOn = !!C.binQuery(val("q"));
+      if (binNote) binNote.hidden = !binOn;
+      if (binOn) document.querySelectorAll("li.mo-item:not([hidden]) details.mo-more").forEach((d) => { d.open = true; });
       renderChips();
       if (write) writeURL();
     }
@@ -276,7 +282,7 @@
     function writeURL() {
       const u = new URLSearchParams();
       if (platform !== "all") u.set("platform", platform);
-      for (const [k] of FILTERS) if (val(k)) u.set(k, val(k));
+      for (const [k] of FILTERS) if (val(k)) u.set(k, k === "q" && C.binQuery(val(k)) ? C.binQuery(val(k)).slice(0, 8) : val(k));
       if (sortEl.value !== "default") u.set("sort", sortEl.value);
       const qs = u.toString();
       history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
