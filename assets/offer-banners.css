@@ -1,8 +1,32 @@
-/* Card offer banners on the homepage. Each banner is one affiliate link (rel="sponsored"), styled after the
+/* Card offer banners: a section on the homepage and a band above the footer on most other pages
+   (markup from scripts/offers/build.mjs, data in scripts/offers/cards.mjs). Each banner is one affiliate link (rel="sponsored"), styled after the
    banks' own promo strips: the card's colours as a gradient, official card art on the left, a name pill,
    a headline and two facts. No button or arrow: the whole banner is the link (Abhishek, 2026-11-26).
    Colours come from --ofs-a / --ofs-b set inline on each banner. Facts are checked on the bank's site. */
 .hm-offers { margin-top: 112px; }
+
+/* Band on other pages: same width as the page content (.sp/.rv/.up), sits between </main> and the footer. */
+.ofs-band {
+  --ofs-gutter: 20px;
+  inline-size: min(1180px, 100% - 2 * var(--ofs-gutter));
+  margin: 0 auto; padding-block: 8px 96px;
+}
+@media (min-width: 720px) { .ofs-band { --ofs-gutter: 32px; } }
+.ofs-band :where(h2, p, ul) { margin: 0; }
+.ofs-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; }
+.ofs-title { font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem); font-weight: 650; line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
+.ofs-title::after { content: ""; display: inline-block; inline-size: .17em; block-size: .17em; margin-inline-start: .06em; background: #fc6e20; }
+.ofs-btns { display: flex; gap: 8px; }
+.ofs-btns[hidden] { display: none; }
+.ofs-btn {
+  display: grid; place-items: center; inline-size: 44px; block-size: 44px; padding: 0;
+  border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer;
+  transition: border-color 200ms ease-out, opacity 200ms ease-out, scale 160ms var(--ease);
+}
+.ofs-btn:disabled { opacity: .35; cursor: default; }
+.ofs-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .ofs-btn:not(:disabled):hover { border-color: var(--muted); } }
+@media (prefers-reduced-motion: no-preference) { .ofs-btn:not(:disabled):active { scale: .94; } }
 .ofs-lead { margin: 8px 0 0 !important; max-width: 62ch; color: var(--muted); font-size: 1rem; line-height: 1.5; }
 .ofs-row {
   display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 16px) / 2); gap: 16px;
@@ -64,6 +88,7 @@
 @media (max-width: 860px) { .ofs-row { grid-auto-columns: 88%; } }
 @media (max-width: 640px) {
   .hm-offers { margin-top: 80px; }
+  .ofs-band { padding-block-end: 72px; }
   .ofs { grid-template-columns: 84px minmax(0, 1fr); gap: 16px; padding: 18px 16px 18px 18px; align-items: start; }
   .ofs-art { padding-top: 6px; }
   .ofs-art img, .ofs-art--logo span { inline-size: 76px; border-radius: 7px; }

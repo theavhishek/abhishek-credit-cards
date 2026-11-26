@@ -15,7 +15,7 @@
 
 ## Affiliate Links
 - Every affiliate link must use `rel="sponsored noopener noreferrer"`. Abhishek decided on 2026-11-01 not to show a visible "Affiliate link" label next to new Apply buttons (the `.aff-tag` style in `assets/header.css` stays for pages that still use it).
-- The disclaimer page says "Apply" buttons on card reviews and the card offer banners on the homepage may be affiliate links, and that sources, bank websites and internal links earn nothing. Only use affiliate links on "Apply" buttons and on those offer banners (Abhishek, 2026-11-26: the whole banner is the link, with no button or arrow; facts checked on the bank's own site), and update the disclaimer if that ever changes.
+- The disclaimer page says "Apply" buttons on card reviews and the banners in the "Card offers" rows (homepage section, and a band above the footer on most other pages) may be affiliate links, and that sources, bank websites and internal links earn nothing. Only use affiliate links on "Apply" buttons and on those offer banners (Abhishek, 2026-11-26: the whole banner is the link, with no button or arrow; facts checked on the bank's own site; 2026-11-27: show the row on almost every page, data in `scripts/offers/cards.mjs`, run `pnpm build:offers`), and update the disclaimer if that ever changes.
 
 ## Site Architecture and SEO
 - This checkout is a static HTML site on Vercel, not a Next.js app. `vercel.json` maps clean URLs and serves `/` from `home.html` on avhishek.in and `portfolio.html` on cards.avhishek.in. Do not add Next.js metadata routes unless the project is actually migrated.
