@@ -1,0 +1,75 @@
+/* Card offer banners on the homepage. Each banner is one affiliate link (rel="sponsored"), styled after the
+   banks' own promo strips: the card's colours as a gradient, official card art on the left, a name pill,
+   a headline and two facts. No button or arrow: the whole banner is the link (Abhishek, 2026-11-26).
+   Colours come from --ofs-a / --ofs-b set inline on each banner. Facts are checked on the bank's site. */
+.hm-offers { margin-top: 112px; }
+.ofs-lead { margin: 8px 0 0 !important; max-width: 62ch; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.ofs-row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 16px) / 2); gap: 16px;
+  margin: 24px 0 0 !important; padding: 0 0 6px; list-style: none;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.ofs-row::-webkit-scrollbar { display: none; }
+.ofs-row > li { display: flex; min-width: 0; scroll-snap-align: start; }
+
+.ofs {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 22px; align-items: center;
+  inline-size: 100%; padding: 22px 24px 22px 26px; border-radius: 20px;
+  background: linear-gradient(105deg, var(--ofs-a) 0%, var(--ofs-b) 100%);
+  color: #fff; text-decoration: none;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.ofs::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(70% 120% at 12% 50%, rgb(255 255 255 / .18), transparent 60%);
+}
+.ofs:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.ofs-art { display: grid; place-items: center; }
+.ofs-art img {
+  display: block; inline-size: 104px; block-size: auto; border-radius: 9px; transform: rotate(-8deg);
+  box-shadow: 0 18px 30px -8px rgb(0 0 0 / .55), 0 0 0 1px rgb(255 255 255 / .12);
+  transition: transform .35s var(--ease);
+}
+.ofs-art--wide img { inline-size: 132px; border-radius: 8px; }
+.ofs-art--logo span {
+  display: grid; place-items: center; inline-size: 104px; aspect-ratio: 400 / 634; border-radius: 9px;
+  background: #fff; transform: rotate(-8deg); box-shadow: 0 18px 30px -8px rgb(0 0 0 / .55);
+}
+.ofs-art--logo img { inline-size: 56px; border-radius: 0; transform: none; box-shadow: none; }
+.ofs-copy { display: grid; justify-items: start; gap: 12px; min-inline-size: 0; }
+.ofs-pill {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 6px 12px; border-radius: 999px;
+  background: rgb(255 255 255 / .14); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .26);
+  color: rgb(255 255 255 / .82); font-size: 12.5px; line-height: 1.3;
+}
+.ofs-pill b { color: #fff; font-weight: 650; }
+.ofs-pill i { inline-size: 1px; block-size: 12px; background: rgb(255 255 255 / .4); }
+.ofs-h { display: block; color: #fff; font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+.ofs-facts { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.ofs-facts > span { position: relative; display: block; padding-inline-start: 13px; color: rgb(255 255 255 / .85); font-size: 14.5px; line-height: 1.4; }
+.ofs-facts > span::before { content: ""; position: absolute; inset-inline-start: 0; top: 8px; inline-size: 5px; block-size: 5px; border-radius: 50%; background: #fff; }
+.ofs-facts b { color: #fff; font-weight: 650; }
+
+@media (hover: hover) {
+  .ofs:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -18px rgb(0 0 0 / .5); }
+  .ofs:hover .ofs-art img, .ofs:hover .ofs-art--logo span { transform: rotate(-4deg) scale(1.03); }
+}
+.ofs:active { transform: scale(.99); }
+@media (prefers-reduced-motion: reduce) {
+  .ofs, .ofs-art img, .ofs-art--logo span { transition: none; }
+  .ofs:hover, .ofs:active { transform: none; }
+}
+
+@media (max-width: 860px) { .ofs-row { grid-auto-columns: 88%; } }
+@media (max-width: 640px) {
+  .hm-offers { margin-top: 80px; }
+  .ofs { grid-template-columns: 84px minmax(0, 1fr); gap: 16px; padding: 18px 16px 18px 18px; align-items: start; }
+  .ofs-art { padding-top: 6px; }
+  .ofs-art img, .ofs-art--logo span { inline-size: 76px; border-radius: 7px; }
+  .ofs-art--wide img { inline-size: 84px; }
+  .ofs-art--logo img { inline-size: 42px; }
+  .ofs-pill i, .ofs-pill > span { display: none; }
+  .ofs-h { font-size: 18px; }
+  .ofs-facts > span { font-size: 13.5px; }
+}
