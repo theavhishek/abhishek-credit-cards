@@ -122,7 +122,7 @@ pnpm build:reviews   # writes assets/card-reviews-react.js; commit it with your 
 
 ## Independence and accuracy
 
-avhishek.in is maintained independently by Abhishek Meena. It is not affiliated with, endorsed by or sponsored by any bank, card issuer or payment network it mentions, and nothing on it is financial advice. Some pages may carry affiliate links on their "Apply" buttons, as explained in the [disclaimer](https://avhishek.in/disclaimer).
+avhishek.in is maintained independently by Abhishek Meena. It is not affiliated with, endorsed by or sponsored by any bank, card issuer or payment network it mentions, and nothing on it is financial advice. Some pages may carry affiliate links on their "Apply" buttons and the "Card offers" banners shown across the site, as explained in the [disclaimer](https://avhishek.in/disclaimer).
 
 Contact details, card terms and payment instructions change. Check anything important with the issuer's official website or app before you act on it. Bank names, logos and trademarks belong to their owners.
 

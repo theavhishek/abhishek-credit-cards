@@ -15,6 +15,8 @@
     "build:upi": "esbuild node_modules/qrcode-generator/dist/qrcode.js --minify --banner:js=\"/*! qrcode-generator 2.0.4 (c) 2009 Kazuhiko Arase, MIT license */\" --outfile=assets/qrcode.js && node scripts/upi/bake.mjs",
     "check:upi": "node scripts/upi/bake.mjs --check",
     "build:movies": "node scripts/movie-offers/bake.mjs",
+    "build:offers": "node scripts/offers/build.mjs && node scripts/updates/build.mjs",
+    "check:offers": "node scripts/offers/build.mjs --check",
     "build:search": "node scripts/search/build.mjs",
     "check:search": "node scripts/search/build.mjs --check",
     "build:og": "node scripts/og/build.mjs",
