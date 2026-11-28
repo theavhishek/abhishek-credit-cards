@@ -34,7 +34,7 @@
   if (marquee && reviews.length) {
     const fig = (r) => `<span class="bt-review">${r.src ? `<img src="${esc(r.src)}" alt="" width="160" height="90" loading="lazy" decoding="async">` : ""}<span class="bt-review-title">${esc(r.title)}</span><span class="bt-review-meta">${esc(r.tag)}${r.read ? ` · ${esc(r.read)} min read` : ""}</span></span>`;
     const track = reviews.map(fig).join("");
-    marquee.innerHTML = `<span class="bt-marquee-track">${track}</span><span class="bt-marquee-track">${track}</span>`;
+    marquee.innerHTML = `<span class="bt-marquee-inner"><span class="bt-marquee-track">${track}</span><span class="bt-marquee-track">${track}</span></span>`;
     marquee.style.setProperty("--bt-duration", `${Math.max(24, reviews.length * 5)}s`);
   }
 
