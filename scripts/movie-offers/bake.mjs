@@ -3,7 +3,7 @@
 // year in the page title into movie-offers.html, using the same render code as the browser
 // (assets/movie-offers-core.js + assets/movie-offers.js), so the page reads without JavaScript.
 // Run after any change to the data or renderer: pnpm build:movies (add --check to only compare).
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import vm from "node:vm";
 
 const root = new URL("../../", import.meta.url);
@@ -29,6 +29,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const asOf = data.updated;
   const { errors, warnings } = core.validate(data, core.todayIST());
   for (const w of warnings) console.warn(`warning: ${w}`);
+  for (const [k, a] of Object.entries(data.cardArt || {}))
+    if (a && a.file && !existsSync(new URL(`assets/movie-offers/cards/${a.file}`, root))) errors.push(`cardArt ${k}: assets/movie-offers/cards/${a.file} is missing`);
   if (errors.length) {
     for (const e of errors) console.error(`error: ${e}`);
     console.error(`${errors.length} data error(s) in assets/movie-offers-data.js`);

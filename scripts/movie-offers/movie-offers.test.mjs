@@ -248,3 +248,12 @@ test("GoSats prepaid: prepaid card type, calculator, BIN, categories and expiry"
   assert.ok(C.binExact(o.bins, C.binQuery("4832 9306 1111")));
   assert.ok(C.validate({ ...data, offers: [offer({ id: "p", kind: "bogo", cardType: "gift" })] }, TODAY).errors.some((e) => /cardType/.test(e)));
 });
+
+test("card images: only the offer's first card, matched on bank and card type", () => {
+  const art = (o) => C.cardArt(offer(o), data);
+  assert.equal(art({ issuer: "sbi", cards: ["AURUM", "ELITE"] }).src, "/assets/movie-offers/cards/sbi-aurum.webp");
+  assert.equal(art({ issuer: "icici", cards: ["HPCL Titanium", "Coral"] }), null);
+  assert.equal(art({ issuer: "icici", cardType: "debit", cards: ["Coral"] }), null);
+  const bad = { ...data, cardArt: { "nobank|credit|X": { file: "x.png", shape: "square" } } };
+  assert.equal(C.validate(bad, TODAY).errors.filter((e) => e.startsWith("cardArt")).length, 3);
+});

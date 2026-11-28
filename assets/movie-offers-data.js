@@ -48,6 +48,12 @@
  *   terms      secondary conditions, shown under "Full terms"
  *   changes    [{date, text, url}] announced changes, shown on the offer
  *   reviews    review slugs on avhishek.in (card-reviews/<slug>)
+ *
+ * CARD IMAGES (`cardArt`)
+ * - Official card art only (the bank's own image, as already used in assets/hero/marquee/ or assets/offers/); never an
+ *   illustration, mock-up or cropped photo. Files live in assets/movie-offers/cards/ (320×202 landscape, 202×320 portrait).
+ * - Key: "issuer|cardType|card". An offer shows the image of its FIRST card only, so a list led by another card
+ *   (e.g. "HPCL Titanium / … / Coral") never borrows a different card's picture. No image: the bank logo stays alone.
  */
 window.MOVIE_OFFERS = {
   updated: "2026-11-25",
@@ -92,6 +98,26 @@ window.MOVIE_OFFERS = {
     "yes":{"name":"YES Bank","logo":"yesb.svg","aliases":["yes"]},
     "zagg":{"name":"Zagg"},
     "zet":{"name":"ZET"}
+  },
+  cardArt: {
+    "au|credit|Zenith+": { file: "au-zenith-plus.webp", shape: "landscape" },
+    "axis|credit|Airtel Axis": { file: "airtel-axis.webp", shape: "landscape" },
+    "axis|credit|Flipkart Axis": { file: "flipkart-axis.webp", shape: "landscape" },
+    "axis|credit|Privilege": { file: "axis-privilege.webp", shape: "landscape" },
+    "axis|credit|Reserve": { file: "axis-reserve.webp", shape: "portrait" },
+    "axis|credit|SELECT": { file: "axis-select.webp", shape: "landscape" },
+    "hsbc|credit|Live+": { file: "hsbc-live-plus.webp", shape: "portrait" },
+    "hsbc|credit|TravelOne": { file: "hsbc-travelone.webp", shape: "portrait" },
+    "icici|credit|Coral": { file: "icici-coral.webp", shape: "portrait" },
+    "icici|credit|Emeralde Private": { file: "icici-emeralde-private.webp", shape: "landscape" },
+    "icici|credit|Emeralde Private Metal": { file: "icici-emeralde-private.webp", shape: "landscape" },
+    "idfc|credit|FIRST Millennia": { file: "idfc-first-millennia.webp", shape: "portrait" },
+    "idfc|credit|FIRST Wealth": { file: "idfc-first-wealth.webp", shape: "portrait" },
+    "kotak|credit|Cashback+": { file: "kotak-cashback-plus.webp", shape: "landscape" },
+    "sbi|credit|AURUM": { file: "sbi-aurum.webp", shape: "landscape" },
+    "sbi|credit|ELITE": { file: "sbi-elite.webp", shape: "landscape" },
+    "sbi|credit|Eternal SBI": { file: "eternal-sbi.webp", shape: "portrait" },
+    "sbi|credit|Flipkart SBI": { file: "flipkart-sbi.webp", shape: "portrait" },
   },
   offers: [
     {"id":"bms-sbi-aurum-free","platform":"bms","issuer":"sbi","cards":["AURUM"],"cardType":"credit","kind":"free","category":["movies"],"benefit":"Free movie tickets, up to ₹250 each","capTicket":250,"freeTickets":4,"uses":{"count":1,"per":"month"},"status":"verified","source":{"url":"https://www.sbicard.com/en/personal/credit-cards/lifestyle/aurum-card.page","type":"bank"},"accessed":"2026-11-25","verified":"2026-11-25","terms":"Up to ₹500 per booking and ₹1,000 a month."},

@@ -229,6 +229,12 @@
   }
 
   /** Data checks. Returns { errors: [], warnings: [] }; errors fail the build. */
+  /** Official card image for an offer's first card, or null. */
+  function cardArt(o, data) {
+    const a = data.cardArt && o.cards && data.cardArt[`${o.issuer}|${o.cardType}|${o.cards[0]}`];
+    return a ? { src: `/assets/movie-offers/cards/${a.file}`, shape: a.shape } : null;
+  }
+
   function validate(data, today = todayIST()) {
     const errors = [], warnings = [];
     const E = (o, m) => errors.push(`${o.id || "(no id)"}: ${m}`);
@@ -287,13 +293,21 @@
       if (o.status === "upcoming" && !(o.start > today)) W(o, "upcoming but start is not in the future");
       if (isChecked(o.status) && o.verified && o.verified < addDays(today, -90)) W(o, `terms last checked ${o.verified}, over 90 days ago`);
     }
+    for (const [k, a] of Object.entries(data.cardArt || {})) {
+      const [iss, type, card] = k.split("|");
+      const bad = (m) => errors.push(`cardArt ${k}: ${m}`);
+      if (!data.issuers[iss]) bad(`unknown issuer ${iss}`);
+      if (!["credit", "debit", "prepaid"].includes(type) || !card) bad("key must be issuer|cardType|card");
+      if (!a || !/^[a-z0-9-]+\.webp$/.test(a.file || "")) bad("file must be a .webp name");
+      if (!a || !["landscape", "portrait"].includes(a.shape)) bad("shape must be landscape or portrait");
+    }
     return { errors, warnings };
   }
 
   const api = {
     KINDS, CATEGORIES, NETWORKS, STATUSES, DAY_LONG, ENDING_SOON_DAYS, INSTANT,
     inr, esc, norm, fmtDate, todayIST, addDays, weekday, effectiveStatus, isChecked, isShown, endingSoon,
-    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, binQuery, binMatch, binExact, binTooLong, evaluate, rank, validate,
+    daysText, usesText, maxPerBooking, maxPerMonth, headline, searchWords, queryTerms, binQuery, binMatch, binExact, binTooLong, evaluate, rank, validate, cardArt,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.MovieOffersCore = api;

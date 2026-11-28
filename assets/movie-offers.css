@@ -418,6 +418,16 @@ html[data-theme="dark"] .mo .mo-code-row { background: #000; }
 .mo .mo-offer > :nth-last-child(2) { margin-bottom: 16px; }
 .mo .mo-src { border-top: 1px solid var(--line); }
 .mo .mo-src a { display: inline-flex; align-items: center; gap: 4px; text-decoration: underline dotted; text-underline-offset: 4px; }
+/* Official card image beside the saving (data.cardArt). Offers without one keep the plain layout. */
+.mo-hero--art { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; margin-top: 18px; }
+.mo-hero--art .mo-type { margin-top: 0 !important; }
+.mo-art {
+  display: block; height: auto; border-radius: 8px;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), 0 10px 22px -12px rgb(0 0 0 / 0.45);
+}
+.mo-art--landscape { width: 144px; }
+.mo-art--portrait { width: 76px; border-radius: 6px; }
+html[data-theme="dark"] .mo-art { box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1), 0 10px 22px -12px rgb(0 0 0 / 0.8); }
 @media (max-width: 900px) { .mo .mo-list { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 640px) {
   .mo-offer { padding: 16px; }
@@ -426,4 +436,7 @@ html[data-theme="dark"] .mo .mo-code-row { background: #000; }
   .mo .mo-logo img { width: 26px; height: 26px; }
   .mo-pill { grid-column: 2; justify-self: start; margin-top: -4px; }
   .mo .mo-facts { gap: 12px 16px; }
+  .mo-hero--art { gap: 12px; }
+  .mo-art--landscape { width: 112px; }
+  .mo-art--portrait { width: 60px; }
 }
