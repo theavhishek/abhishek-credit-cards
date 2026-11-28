@@ -13,6 +13,14 @@
     return `<span class="mo-logo mo-logo--text" aria-hidden="true">${esc(iss.name.charAt(0))}</span>`;
   }
 
+  /** Official card image for the offer's first card (data.cardArt), or "". */
+  function artHTML(o, data, cls) {
+    const a = C.cardArt(o, data);
+    if (!a) return "";
+    const [w, h] = a.shape === "portrait" ? [202, 320] : [320, 202];
+    return `<img class="${cls} ${cls}--${a.shape}" src="${esc(a.src)}" alt="" width="${w}" height="${h}" loading="lazy" decoding="async">`;
+  }
+
   function factsHTML(o, today) {
     const per = C.maxPerMonth(o);
     const facts = [
@@ -66,6 +74,7 @@
       max: maxB ?? "", month: maxM ?? "", checked: o.verified || "", sort: `${iss.name} ${o.cards[0]}`.toLowerCase(),
       words: C.searchWords(o, data),
     };
+    const art = artHTML(o, data, "mo-art");
     const pill = { verified: "Verified terms", app: "Terms from the app", listed: "Headline only", upcoming: "Upcoming" }[st] || C.STATUSES[st];
     const sub = [CARD_TYPE[o.cardType], o.network && C.NETWORKS[o.network], p.name, cats !== "Movies" && cats, o.scope === "welcome" && "Welcome gift"].filter(Boolean).join(" · ");
     return `<li class="mo-item" ${Object.entries(attrs).map(([k, v]) => `data-${k}="${esc(v)}"`).join(" ")}>
@@ -78,9 +87,13 @@
           </div>
           <span class="mo-pill mo-pill--${st}">${esc(pill)}</span>
         </header>
-        <p class="mo-type mo-type--${o.kind}">${esc(C.KINDS[o.kind])}</p>
-        ${head ? `<p class="mo-save mo-save--${o.kind}">${esc(head)}</p>` : ""}
-        <p class="mo-benefit">${esc(o.benefit)}</p>
+        <div class="mo-hero${art ? " mo-hero--art" : ""}">
+          <div class="mo-hero-text">
+            <p class="mo-type mo-type--${o.kind}">${esc(C.KINDS[o.kind])}</p>
+            ${head ? `<p class="mo-save mo-save--${o.kind}">${esc(head)}</p>` : ""}
+            <p class="mo-benefit">${esc(o.benefit)}</p>
+          </div>${art}
+        </div>
         ${factsHTML(o, today)}
         ${code}
         ${changes}
