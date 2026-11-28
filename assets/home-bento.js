@@ -38,6 +38,43 @@
     marquee.style.setProperty("--bt-duration", `${Math.max(24, reviews.length * 5)}s`);
   }
 
+  /* 5. Movie offers deck, built from the baked "Movie and show offers" row (pnpm build:movies keeps it current). */
+  const deck = root.querySelector("[data-bt-deck]");
+  const today = new Date().toISOString().slice(0, 10);
+  const offers = [...document.querySelectorAll(".hm-movies .mox-item")]
+    .filter((li) => !li.dataset.end || li.dataset.end >= today)
+    .map((li) => ({
+      logo: (li.querySelector(".mox-logo img") || {}).src || "",
+      name: (li.querySelector(".mox-name strong") || {}).textContent || "",
+      where: (li.querySelector(".mox-name span") || {}).textContent || "",
+      save: (li.querySelector(".mox-save") || {}).textContent || "",
+      facts: (li.querySelector(".mox-facts") || {}).textContent || "",
+    }))
+    .filter((o) => o.name && o.save);
+  if (deck && offers.length) {
+    const ticket = (o) => `<span class="bt-ticket">${o.logo ? `<img src="${esc(o.logo)}" alt="" width="28" height="28" loading="lazy" decoding="async">` : ""}<span class="bt-ticket-name"><b>${esc(o.name)}</b><span>${esc(o.where)}</span></span><span class="bt-ticket-save">${esc(o.save.trim())}</span><span class="bt-ticket-facts">${esc(o.facts.trim())}</span></span>`;
+    deck.innerHTML = offers.map(ticket).join("");
+    const cards = [...deck.children];
+    let front = 0, timer = 0;
+    const place = () => cards.forEach((el, k) => {
+      const pos = (k - front + cards.length) % cards.length;
+      el.dataset.pos = pos < 3 ? String(pos) : "rest";
+    });
+    place();
+    if (!reduce.matches && cards.length > 1) {
+      const tick = () => {
+        clearTimeout(timer);
+        if (!visible || document.hidden) return;
+        front = (front + 1) % cards.length;
+        place();
+        timer = setTimeout(tick, 2600);
+      };
+      onShow.push(() => { timer = setTimeout(tick, 1600); });
+      document.addEventListener("visibilitychange", () => { if (!document.hidden && visible) tick(); });
+      if (visible) timer = setTimeout(tick, 1600);
+    }
+  }
+
   /* 2-4 need the updates index (same file the site search uses). */
   fetch("/assets/updates-index.json", { credentials: "same-origin" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
