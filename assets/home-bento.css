@@ -149,19 +149,31 @@
 }
 html[data-theme="dark"] .bt-note { background: var(--surface-soft); box-shadow: none; }
 .bt-note.is-new { opacity: 0; translate: 0 -12px; scale: 0.96; }
-.bt-note[data-cat="devaluation"] { --dot: #dc2626; }
-.bt-note[data-cat="revaluation"] { --dot: #047857; }
-.bt-note[data-cat="launch"] { --dot: #4f46e5; }
-.bt-note[data-cat="cashback"] { --dot: #15803d; }
-.bt-note[data-cat="spend-offer"] { --dot: #1d4ed8; }
-.bt-note[data-cat="announcement"] { --dot: #7e22ce; }
+.bt-note[data-cat="devaluation"] { --dot: #dc2626; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="revaluation"] { --dot: #047857; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 7l-8.5 8.5-5-5L2 17'/%3E%3Cpath d='M16 7h6v6'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="launch"] { --dot: #4f46e5; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 2l2.4 7.1L21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.9z'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="cashback"] { --dot: #15803d; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='2.5'/%3E%3Ccircle cx='17' cy='17' r='2.5'/%3E%3Cpath d='M19 5L5 19'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="spend-offer"] { --dot: #1d4ed8; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8h14l-1 13H6z'/%3E%3Cpath d='M9 10V6a3 3 0 0 1 6 0v4'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="announcement"] { --dot: #7e22ce; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5L6 9H2v6h4l5 4z' fill='black'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7'/%3E%3Cpath d='M19 5a10 10 0 0 1 0 14'/%3E%3C/svg%3E"); }
 .bt-note-dot {
+  display: grid;
+  place-items: center;
   flex: none;
   width: 36px;
   height: 36px;
   border-radius: 12px;
   background: var(--dot);
 }
+/* Same category icons as the Latest updates badges, in white on the colour square. */
+.bt-note-dot::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  -webkit-mask: var(--icon, none) center / contain no-repeat;
+  mask: var(--icon, none) center / contain no-repeat;
+}
+.bt-note[data-cat="news"] .bt-note-dot::after { content: none; }
 .bt-note-body { display: grid; gap: 3px; min-width: 0; }
 .bt-note-head { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; font-size: 0.75rem; line-height: 1.3; }
 .bt-note-head b { color: var(--dot); font-weight: 650; }
