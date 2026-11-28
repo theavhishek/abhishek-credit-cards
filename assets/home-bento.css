@@ -1,0 +1,315 @@
+/* Homepage "What's new" bento (home.html only). Visuals are built by home-bento.js. */
+.hm-bento { margin-top: 112px; }
+.bt-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 28px 0 0 !important;
+  padding: 0;
+  list-style: none;
+}
+.bt-card { min-width: 0; }
+.bt-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  min-height: 380px;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
+}
+.bt-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+@media (hover: hover) {
+  .bt-link:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.03), 0 18px 40px -22px rgb(0 0 0 / 0.22);
+  }
+}
+
+/* Visual area: fills the card, fades out behind the copy. */
+.bt-visual {
+  position: absolute;
+  inset: 0 0 0 0;
+  z-index: -1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to top, transparent 34%, #000 62%);
+  mask-image: linear-gradient(to top, transparent 34%, #000 62%);
+}
+
+/* Copy: Magic UI style, lifts on hover to reveal the link line. */
+.bt-copy {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  transition: translate 300ms var(--hm-ease);
+}
+.bt-icon { color: var(--text); transform-origin: left center; transition: scale 300ms var(--hm-ease); }
+.bt-icon svg { display: block; width: 40px; height: 40px; stroke-width: 1.5; }
+.bt-title { font-size: 1.375rem; font-weight: 650; line-height: 1.2; letter-spacing: -0.02em; }
+.bt-text { max-width: 42ch; color: var(--muted); font-size: 0.9375rem; line-height: 1.5; text-wrap: pretty; }
+.bt-text [data-count] { font-variant-numeric: tabular-nums; }
+.bt-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: opacity 300ms var(--hm-ease);
+}
+.bt-go svg { flex: none; transition: translate 200ms var(--hm-ease); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bt-copy { translate: 0 38px; }
+  .bt-go { opacity: 0; }
+  .bt-link:hover .bt-copy,
+  .bt-link:focus-visible .bt-copy { translate: 0 0; }
+  .bt-link:hover .bt-go,
+  .bt-link:focus-visible .bt-go { opacity: 1; }
+  .bt-link:hover .bt-icon { scale: 0.8; }
+  .bt-link:hover .bt-go svg { translate: 3px 0; }
+}
+
+/* 1. Reviews marquee */
+.bt-marquee {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  display: flex;
+  gap: 14px;
+  width: max-content;
+}
+.bt-marquee-track {
+  display: flex;
+  flex: none;
+  gap: 14px;
+  animation: bt-marquee var(--bt-duration, 40s) linear infinite;
+  animation-play-state: paused;
+}
+.hm-bento.is-live .bt-marquee-track { animation-play-state: running; }
+@media (hover: hover) { .bt-link:hover .bt-marquee-track { animation-play-state: paused; } }
+@keyframes bt-marquee { to { translate: calc(-100% - 14px) 0; } }
+.bt-review {
+  display: grid;
+  gap: 6px;
+  width: 168px;
+  padding: 8px 8px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  filter: blur(1px);
+  transition: filter 300ms ease-out, background-color 300ms ease-out;
+}
+@media (hover: hover) { .bt-link:hover .bt-review { filter: none; } }
+.bt-review img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 10px;
+  background: var(--surface-muted);
+}
+.bt-review-title { padding: 0 4px; font-size: 0.8125rem; font-weight: 600; line-height: 1.3; }
+.bt-review-meta { padding: 0 4px; color: var(--muted); font-size: 0.75rem; line-height: 1.3; }
+
+/* 2. Animated updates list */
+.bt-list {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(440px, calc(100% - 32px));
+  translate: -50% 0;
+  scale: 0.92;
+  transform-origin: top center;
+  transition: scale 300ms var(--hm-ease);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .bt-link:hover .bt-list { scale: 0.98; } }
+.bt-note {
+  --dot: var(--hm-orange);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 24px -16px rgb(0 0 0 / 0.18);
+  transition: opacity 420ms var(--hm-ease), translate 420ms var(--hm-ease), scale 420ms var(--hm-ease);
+}
+html[data-theme="dark"] .bt-note { background: var(--surface-soft); box-shadow: none; }
+.bt-note.is-new { opacity: 0; translate: 0 -12px; scale: 0.96; }
+.bt-note[data-cat="devaluation"] { --dot: #dc2626; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 17l-8.5-8.5-5 5L2 7'/%3E%3Cpath d='M16 17h6v-6'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="revaluation"] { --dot: #047857; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 7l-8.5 8.5-5-5L2 17'/%3E%3Cpath d='M16 7h6v6'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="launch"] { --dot: #4f46e5; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 2l2.4 7.1L21.5 12l-7.1 2.4L12 21.5l-2.4-7.1L2.5 12l7.1-2.9z'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="cashback"] { --dot: #15803d; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='7' cy='7' r='2.5'/%3E%3Ccircle cx='17' cy='17' r='2.5'/%3E%3Cpath d='M19 5L5 19'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="spend-offer"] { --dot: #1d4ed8; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 8h14l-1 13H6z'/%3E%3Cpath d='M9 10V6a3 3 0 0 1 6 0v4'/%3E%3C/svg%3E"); }
+.bt-note[data-cat="announcement"] { --dot: #7e22ce; --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11l18-5v12L3 14z' fill='black'/%3E%3Cpath d='M11.6 16.8a3 3 0 1 1-5.8-1.6'/%3E%3C/svg%3E"); }
+.bt-note-dot {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--dot);
+}
+/* Same category icons as the Latest updates badges, in white on the colour square. */
+.bt-note-dot::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  -webkit-mask: var(--icon, none) center / contain no-repeat;
+  mask: var(--icon, none) center / contain no-repeat;
+}
+.bt-note[data-cat="news"] .bt-note-dot::after { content: none; }
+.bt-note-body { display: grid; gap: 3px; min-width: 0; }
+.bt-note-head { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; font-size: 0.75rem; line-height: 1.3; }
+.bt-note-head b { color: var(--dot); font-weight: 650; }
+html[data-theme="dark"] .bt-note-head b { color: color-mix(in srgb, var(--dot) 55%, white); }
+.bt-note-head span { color: var(--muted); }
+.bt-note-title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 0.875rem;
+  font-weight: 550;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* 3. Support beam */
+.bt-beam {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(460px, calc(100% - 48px));
+  height: 236px;
+  translate: -50% 0;
+  transition: scale 300ms var(--hm-ease);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .bt-link:hover .bt-beam { scale: 1.04; } }
+.bt-beam-lines { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.bt-beam-col { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
+.bt-node {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 0 18px -10px rgb(0 0 0 / 0.5);
+}
+.bt-node img { width: 26px; height: 26px; object-fit: contain; }
+.bt-node-hub { width: 68px; height: 68px; border-radius: 20px; padding: 0; background: transparent; border: 0; }
+.bt-node-hub img { width: 68px; height: 68px; border-radius: 18px; }
+.bt-node-you { background: var(--surface); }
+html[data-theme="dark"] .bt-node-you { background: var(--surface-soft); }
+.bt-beam-base { fill: none; stroke: var(--line-strong); stroke-width: 2; }
+.bt-beam-pulse {
+  fill: none;
+  stroke: var(--hm-orange);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 18 200;
+  stroke-dashoffset: 18;
+  opacity: 0;
+  animation: bt-pulse 3s var(--hm-ease) infinite;
+  animation-play-state: paused;
+}
+.hm-bento.is-live .bt-beam-pulse { animation-play-state: running; }
+@keyframes bt-pulse {
+  0% { stroke-dashoffset: 18; opacity: 0; }
+  8% { opacity: 1; }
+  60% { stroke-dashoffset: -100; opacity: 1; }
+  61%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+
+/* 4. Updates calendar */
+.bt-cal {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  display: grid;
+  gap: 8px;
+  width: 268px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  translate: -50% 0;
+  scale: 0.8;
+  transform-origin: top center;
+  font-variant-numeric: tabular-nums;
+  transition: scale 300ms var(--hm-ease);
+}
+html[data-theme="dark"] .bt-cal { background: var(--surface-soft); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .bt-link:hover .bt-cal { scale: 0.88; } }
+.bt-cal-head { font-size: 0.875rem; font-weight: 600; text-align: center; }
+.bt-cal-week,
+.bt-cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.bt-cal-week { color: var(--muted); font-size: 0.6875rem; }
+.bt-cal-days span {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 32px;
+  border-radius: 9px;
+  font-size: 0.8125rem;
+}
+.bt-cal-days .has-dot::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--hm-orange);
+}
+.bt-cal-days .is-sel { background: var(--text); color: var(--page); font-weight: 600; }
+.bt-cal-days .is-sel::after { background: var(--page); }
+
+/* Layout */
+@media (min-width: 720px) {
+  .bt-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bt-card-updates,
+  .bt-card-support { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+  .bt-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .bt-card-reviews,
+  .bt-card-calendar { grid-column: span 1; }
+  .bt-card-updates,
+  .bt-card-support { grid-column: span 2; }
+  .bt-link { min-height: 400px; }
+  .bt-copy { padding: 30px; }
+}
+@media (max-width: 640px) {
+  .hm-bento { margin-top: 80px; }
+  .bt-link { min-height: 400px; border-radius: 24px; }
+  .bt-copy { padding: 22px; }
+  .bt-beam { top: 18px; width: calc(100% - 40px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt-marquee-track,
+  .bt-beam-pulse { animation: none; }
+  .bt-marquee-track + .bt-marquee-track { display: none; }
+  .bt-note { transition: none; }
+}
